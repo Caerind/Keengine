@@ -38,8 +38,8 @@ class SceneComponent : public Component
 		void detachComponent(SceneComponent* component);
 
 	protected:
-		void onChangedTransform();
-		void onChangedZ();
+		virtual void onChangedTransform();
+		virtual void onChangedZ();
 
 	private:
 		sf::Transformable mTransformable;

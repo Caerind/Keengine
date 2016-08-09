@@ -179,6 +179,10 @@ void Application::run()
             update(timePerFrame);
         }
 
+		auto mouse = getMousePosition2i();
+		setDebugInfo("MouseX", mouse.x);
+		setDebugInfo("MouseY", mouse.y);
+
         ImGui::SFML::Update(dt);
 
         render();

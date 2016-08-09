@@ -18,9 +18,7 @@ MyActor::MyActor()
 
 	registerComponent(&mC);
 	mB.attachComponent(&mC);
-	mC.setTexture("sfml");
 	mC.setPosition(sf::Vector2f(-100.f, -100.f));
-	mC.setZ(100.f);
 }
 
 MyActor::~MyActor()

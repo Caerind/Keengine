@@ -36,6 +36,7 @@
     <ClCompile Include="Sources\Application\Application.cpp" />
     <ClCompile Include="Sources\Application\AudioManager.cpp" />
     <ClCompile Include="Sources\Application\Window.cpp" />
+    <ClCompile Include="Sources\Components\CameraComponent.cpp" />
     <ClCompile Include="Sources\Components\PointComponent.cpp" />
     <ClCompile Include="Sources\Components\SpriteComponent.cpp" />
     <ClCompile Include="Sources\Core\Actor.cpp" />
@@ -105,6 +106,7 @@
     <ClInclude Include="Sources\Application\ResourceManager.hpp" />
     <ClInclude Include="Sources\Application\StateManager.hpp" />
     <ClInclude Include="Sources\Application\Window.hpp" />
+    <ClInclude Include="Sources\Components\CameraComponent.hpp" />
     <ClInclude Include="Sources\Components\PointComponent.hpp" />
     <ClInclude Include="Sources\Components\SpriteComponent.hpp" />
     <ClInclude Include="Sources\Core\Actor.hpp" />

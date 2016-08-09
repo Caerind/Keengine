@@ -13,6 +13,8 @@
 #include "Effect.hpp"
 #include "PrimitiveComponent.hpp"
 
+#include "../Components/CameraComponent.hpp"
+
 class World
 {
 	public:
@@ -62,6 +64,10 @@ class World
 
 		void removeEffect(std::size_t const& order);
 
+		sf::View& getView();
+		void registerCamera(CameraComponent* camera);
+		void unregisterCamera(CameraComponent* camera);
+
 	private:
 		std::size_t mIdCounter;
 		std::vector<Actor::Ptr> mActors;
@@ -71,6 +77,9 @@ class World
 		sf::VertexArray mVertices;
 
 		sf::Clock mClockCreation;
+
+		CameraComponent* mCamera;
+		sf::View mWorldView;
 
 		std::map<std::size_t, std::shared_ptr<Effect>> mEffects;
 };

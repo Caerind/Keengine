@@ -32,6 +32,9 @@ World::World()
 	, mSceneTexture()
 	, mVertices(sf::Triangles, 6)
 	, mClockCreation()
+	, mCamera(nullptr)
+	, mWorldView(getApplication().getDefaultView())
+	, mEffects()
 {
 }
 
@@ -119,6 +122,7 @@ void World::render(sf::RenderTarget& target)
 	});
 
 	// Draw
+	mSceneTexture.setView(getView());
 	mSceneTexture.clear();
 	for (PrimitiveComponent* primitive : mPrimitives)
 	{
@@ -221,4 +225,26 @@ void World::removeEffect(std::size_t const & order)
 	{
 		mEffects.erase(itr);
 	}
+}
+
+sf::View& World::getView()
+{
+	if (mCamera == nullptr)
+	{
+		return mWorldView;
+	}
+	else
+	{
+		return mCamera->getView();
+	}
+}
+
+void World::registerCamera(CameraComponent* camera)
+{
+	mCamera = camera;
+}
+
+void World::unregisterCamera(CameraComponent* camera)
+{
+	mCamera = nullptr;
 }

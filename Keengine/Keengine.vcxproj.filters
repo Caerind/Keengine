@@ -257,6 +257,9 @@
     <ClCompile Include="Sources\Core\Effect.cpp">
       <Filter>Sources\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Components\CameraComponent.cpp">
+      <Filter>Sources\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -555,6 +558,9 @@
     </ClInclude>
     <ClInclude Include="Example\Blur.hpp">
       <Filter>Example</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Components\CameraComponent.hpp">
+      <Filter>Sources\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
