@@ -7,9 +7,6 @@
     <Filter Include="Sources">
       <UniqueIdentifier>{f24c51f3-fc07-4f8f-8891-b533a90e360a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Doc">
-      <UniqueIdentifier>{913334fa-3e0e-40d8-87f2-fad0c5bfa92c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Application">
       <UniqueIdentifier>{59c1c7dd-1e26-4b64-90d8-d3deae9649ca}</UniqueIdentifier>
     </Filter>
@@ -37,6 +34,9 @@
     <Filter Include="Sources\System">
       <UniqueIdentifier>{27d82983-3090-4770-8ce2-3cde45161bec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Doc">
+      <UniqueIdentifier>{a6989ad2-ebe5-4bcb-add6-a9b0951986cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Example\script.lua">
@@ -51,7 +51,7 @@
     <Image Include="Example\sfml.png">
       <Filter>Example</Filter>
     </Image>
-    <Image Include="Doc\MainArchitecture.png">
+    <Image Include="..\Doc\MainArchitecture.png">
       <Filter>Doc</Filter>
     </Image>
   </ItemGroup>

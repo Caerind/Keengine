@@ -24,7 +24,7 @@
     <None Include="Example\script.lua" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Doc\MainArchitecture.png" />
+    <Image Include="..\Doc\MainArchitecture.png" />
     <Image Include="Example\sfml.png" />
   </ItemGroup>
   <ItemGroup>
