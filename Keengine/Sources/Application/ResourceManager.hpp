@@ -160,8 +160,44 @@ class Shader : public sf::Shader, public Resource
             return mFloats[name];
         }
 
+		void setUniform(std::string const& name, sf::Vector2f const& vector)
+		{
+			sf::Shader::setParameter(name, vector);
+			mVectors2f[name] = vector;
+		}
+
+		sf::Vector2f getUniformVector2f(std::string const& name)
+		{
+			return mVectors2f[name];
+		}
+
+		void setUniform(std::string const& name, sf::Vector3f const& vector)
+		{
+			sf::Shader::setParameter(name, vector);
+			mVectors3f[name] = vector;
+		}
+
+		sf::Vector3f getUniformVector3f(std::string const& name)
+		{
+			return mVectors3f[name];
+		}
+
+		void setUniform(std::string const& name, sf::Color const& color)
+		{
+			sf::Shader::setParameter(name, color);
+			mColors[name] = color;
+		}
+
+		sf::Color getUniformColor(std::string const& name)
+		{
+			return mColors[name];
+		}
+
     protected:
-        std::map<std::string,float> mFloats;
+        std::map<std::string, float> mFloats;
+		std::map<std::string, sf::Vector2f> mVectors2f;
+		std::map<std::string, sf::Vector3f> mVectors3f;
+		std::map<std::string, sf::Color> mColors;
 };
 
 #endif // RESOURCEMANAGER_HPP

@@ -111,28 +111,6 @@ sf::Vector3f toVector3f(sf::Vector2f const& vector)
     return sf::Vector3f(vector.x, vector.y, 0.f);
 }
 
-std::string toString(sf::Vector2f const& vector)
-{
-    std::ostringstream oss;
-    oss << vector.x << "," << vector.y;
-    return oss.str();
-}
-
-sf::Vector2f toVector2f(std::string const& str)
-{
-    sf::Vector2f vector;
-    std::size_t found = str.find_first_of(',');
-    if (found != std::string::npos)
-    {
-        std::istringstream iss(str.substr(0, found));
-        iss >> vector.x;
-        iss.clear();
-        iss.str(str.substr(found + 1));
-        iss >> vector.y;
-    }
-    return vector;
-}
-
 sf::Vector2f lerp(sf::Vector2f const& start, sf::Vector2f const& end, float percent)
 {
     return (start + percent * (end - start));

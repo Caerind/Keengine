@@ -2,6 +2,7 @@
 #define WORLD_HPP
 
 #include <cassert>
+#include <memory>
 #include <vector>
 
 #include <SFML/System/Time.hpp>
@@ -9,6 +10,7 @@
 #include "../Application/Application.hpp"
 
 #include "Actor.hpp"
+#include "Effect.hpp"
 #include "PrimitiveComponent.hpp"
 
 class World
@@ -52,6 +54,14 @@ class World
 
 		sf::Time getTimeSinceCreation() const;
 
+		template <typename T>
+		void setEffect(std::size_t const& order);
+
+		template <typename T>
+		std::shared_ptr<T> getEffect(std::size_t const& order);
+
+		void removeEffect(std::size_t const& order);
+
 	private:
 		std::size_t mIdCounter;
 		std::vector<Actor::Ptr> mActors;
@@ -61,15 +71,34 @@ class World
 		sf::VertexArray mVertices;
 
 		sf::Clock mClockCreation;
+
+		std::map<std::size_t, std::shared_ptr<Effect>> mEffects;
 };
 
 #endif // WORLD_HPP
 
-template<typename T, typename ... Args>
-inline std::shared_ptr<T> World::createActor(Args&& ...args)
+template <typename T, typename ... Args>
+std::shared_ptr<T> World::createActor(Args&& ...args)
 {
 	std::shared_ptr<T> actor = std::make_shared<T>(std::forward<Args>(args)...);
 	instance().mActors.push_back(actor);
 	actor->onCreated();
 	return actor;
+}
+
+template <typename T>
+void World::setEffect(std::size_t const& order)
+{
+	mEffects[order] = std::make_shared<T>();
+}
+
+template <typename T>
+std::shared_ptr<T> World::getEffect(std::size_t const& order)
+{
+	auto itr = mEffects.find(order);
+	if (itr != mEffects.end())
+	{
+		return static_cast<std::shared_ptr<T>>(itr->second);
+	}
+	return nullptr;
 }

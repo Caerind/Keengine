@@ -56,3 +56,106 @@ int getYear()
 {
     return std::stoi(getTime("%y"));
 }
+
+Timer::Timer()
+{
+    mDuration = sf::Time::Zero;
+    mRemaining = sf::Time::Zero;
+    mElapsed = sf::Time::Zero;
+    mRunning = false;
+    mRepeat = false;
+}
+
+Timer::~Timer()
+{
+}
+
+void Timer::setCallback(Timer::Callback callback)
+{
+    mCallback = callback;
+}
+
+sf::Time Timer::getRemaining() const
+{
+    return mRemaining;
+}
+
+sf::Time Timer::getElapsedTime() const
+{
+    return mElapsed;
+}
+
+sf::Time Timer::getDuration() const
+{
+    return mDuration;
+}
+
+void Timer::setRepeat(bool repeat)
+{
+    mRepeat = repeat;
+}
+
+bool Timer::isRepeated() const
+{
+    return mRepeat;
+}
+
+bool Timer::isRunning() const
+{
+    return mRunning;
+}
+
+void Timer::update(sf::Time dt)
+{
+    if (mRunning)
+    {
+        mElapsed += dt;
+
+        if (mDuration != sf::Time::Zero)
+        {
+            mRemaining -= dt;
+            if (mRemaining <= sf::Time::Zero)
+            {
+                if (mCallback)
+                {
+                    mCallback();
+                }
+
+                if (mRepeat)
+                {
+                    reset(mDuration);
+                }
+                else
+                {
+                    stop();
+                }
+            }
+        }
+    }
+}
+
+void Timer::play()
+{
+    mRunning = true;
+}
+
+void Timer::pause()
+{
+    mRunning = false;
+}
+
+void Timer::reset(sf::Time duration)
+{
+    mDuration = duration;
+    mRemaining = duration;
+    mElapsed = sf::Time::Zero;
+    mRunning = true;
+}
+
+void Timer::stop()
+{
+    mRunning = false;
+    mRemaining = sf::Time::Zero;
+    mDuration = sf::Time::Zero;
+    mElapsed = sf::Time::Zero;
+}

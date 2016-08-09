@@ -36,8 +36,6 @@ sf::Vector2f cwiseQuotient(sf::Vector2f const& l, sf::Vector2f const& r);
 sf::Vector2f projectedVector(sf::Vector2f const& vector, sf::Vector2f const& axis);
 
 sf::Vector3f toVector3f(sf::Vector2f const& vector);
-std::string toString(sf::Vector2f const& vector);
-sf::Vector2f toVector2f(std::string const& str);
 
 sf::Vector2f lerp(sf::Vector2f const& start, sf::Vector2f const& end, float percent);
 sf::Vector2f slerp(sf::Vector2f const& start, sf::Vector2f const& end, float percent);

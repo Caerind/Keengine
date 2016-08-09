@@ -46,12 +46,21 @@
       <Filter>Example</Filter>
     </None>
     <None Include="..\README.md" />
+    <None Include="Example\pixelate.frag">
+      <Filter>Example</Filter>
+    </None>
+    <None Include="Example\blur.frag">
+      <Filter>Example</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Example\sfml.png">
       <Filter>Example</Filter>
     </Image>
-    <Image Include="..\Doc\MainArchitecture.png">
+    <Image Include="..\Doc\ApplicationArchitecture.jpg">
+      <Filter>Doc</Filter>
+    </Image>
+    <Image Include="..\Doc\CoreArchitecture.jpg">
       <Filter>Doc</Filter>
     </Image>
   </ItemGroup>
@@ -218,9 +227,6 @@
     <ClCompile Include="Sources\Maths\Distribution.cpp">
       <Filter>Sources\Maths</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Maths\Generics.cpp">
-      <Filter>Sources\Maths</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Maths\Random.cpp">
       <Filter>Sources\Maths</Filter>
     </ClCompile>
@@ -232,6 +238,24 @@
     </ClCompile>
     <ClCompile Include="Sources\System\HttpThread.cpp">
       <Filter>Sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\System\Packet.cpp">
+      <Filter>Sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\System\String.cpp">
+      <Filter>Sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\System\ParallelTask.cpp">
+      <Filter>Sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\System\ClockedTask.cpp">
+      <Filter>Sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\gzstream.cpp">
+      <Filter>Sources\ExtLibs</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Core\Effect.cpp">
+      <Filter>Sources\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -495,6 +519,42 @@
     </ClInclude>
     <ClInclude Include="Sources\System\Log.hpp">
       <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\Container.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\String.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\SmartPool.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\ParallelTask.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\ClockedTask.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\Packet.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\gzstream.hpp">
+      <Filter>Sources\ExtLibs</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\assume.hpp">
+      <Filter>Sources\ExtLibs</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\cocoa.hpp">
+      <Filter>Sources\ExtLibs</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Core\Effect.hpp">
+      <Filter>Sources\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Example\Pixelate.hpp">
+      <Filter>Example</Filter>
+    </ClInclude>
+    <ClInclude Include="Example\Blur.hpp">
+      <Filter>Example</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

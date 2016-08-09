@@ -83,7 +83,7 @@ void World::render(sf::RenderTarget& target)
 		mSceneTexture.create(size.x, size.y);
 		mVertices[0] = sf::Vertex(sf::Vector2f(0, 0), sf::Vector2f(0, 0));
 		mVertices[1] = sf::Vertex(sf::Vector2f(static_cast<float>(size.x), 0), sf::Vector2f(static_cast<float>(size.x), 0));
-		mVertices[2] = sf::Vertex(sf::Vector2f(static_cast<float>(size.x), static_cast<float>(size.y)), sf::Vector2f(static_cast<float>(size.x), static_cast<float>(size.y)));
+		mVertices[2] = sf::Vertex(static_cast<sf::Vector2f>(size), static_cast<sf::Vector2f>(size));
 		mVertices[3] = mVertices[2];
 		mVertices[4] = sf::Vertex(sf::Vector2f(0, static_cast<float>(size.y)), sf::Vector2f(0, static_cast<float>(size.y)));
 		mVertices[5] = mVertices[0];
@@ -130,7 +130,10 @@ void World::render(sf::RenderTarget& target)
 	mSceneTexture.display();
 
 	// Post effects
-	// TODO : Post effects
+	for (auto itr = mEffects.begin(); itr != mEffects.end(); itr++)
+	{
+		itr->second->apply(mSceneTexture, mSceneTexture);
+	}
 
 	// Apply to the window
 	target.draw(mVertices, sf::RenderStates(&mSceneTexture.getTexture()));
@@ -209,4 +212,13 @@ std::size_t World::getActualId()
 sf::Time World::getTimeSinceCreation() const
 {
 	return mClockCreation.getElapsedTime();
+}
+
+void World::removeEffect(std::size_t const & order)
+{
+	auto itr = mEffects.find(order);
+	if (itr != mEffects.end())
+	{
+		mEffects.erase(itr);
+	}
 }

@@ -21,10 +21,13 @@
   <ItemGroup>
     <None Include="..\README.md" />
     <None Include="Example\application_settings.ini" />
+    <None Include="Example\blur.frag" />
+    <None Include="Example\pixelate.frag" />
     <None Include="Example\script.lua" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Doc\MainArchitecture.png" />
+    <Image Include="..\Doc\ApplicationArchitecture.jpg" />
+    <Image Include="..\Doc\CoreArchitecture.jpg" />
     <Image Include="Example\sfml.png" />
   </ItemGroup>
   <ItemGroup>
@@ -37,9 +40,11 @@
     <ClCompile Include="Sources\Components\SpriteComponent.cpp" />
     <ClCompile Include="Sources\Core\Actor.cpp" />
     <ClCompile Include="Sources\Core\Component.cpp" />
+    <ClCompile Include="Sources\Core\Effect.cpp" />
     <ClCompile Include="Sources\Core\PrimitiveComponent.cpp" />
     <ClCompile Include="Sources\Core\SceneComponent.cpp" />
     <ClCompile Include="Sources\Core\World.cpp" />
+    <ClCompile Include="Sources\ExtLibs\gzstream.cpp" />
     <ClCompile Include="Sources\ExtLibs\imgui\imgui-SFML.cpp" />
     <ClCompile Include="Sources\ExtLibs\imgui\imgui.cpp" />
     <ClCompile Include="Sources\ExtLibs\imgui\imgui_draw.cpp" />
@@ -79,17 +84,22 @@
     <ClCompile Include="Sources\ExtLibs\Lua\wmain.c" />
     <ClCompile Include="Sources\ExtLibs\pugixml.cpp" />
     <ClCompile Include="Sources\Maths\Distribution.cpp" />
-    <ClCompile Include="Sources\Maths\Generics.cpp" />
     <ClCompile Include="Sources\Maths\Random.cpp" />
     <ClCompile Include="Sources\Maths\Trigonometry.cpp" />
     <ClCompile Include="Sources\Maths\Vector2.cpp" />
     <ClCompile Include="Sources\Maths\Vector3.cpp" />
+    <ClCompile Include="Sources\System\ClockedTask.cpp" />
     <ClCompile Include="Sources\System\Compression.cpp" />
     <ClCompile Include="Sources\System\HttpThread.cpp" />
+    <ClCompile Include="Sources\System\Packet.cpp" />
+    <ClCompile Include="Sources\System\ParallelTask.cpp" />
+    <ClCompile Include="Sources\System\String.cpp" />
     <ClCompile Include="Sources\System\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Example\Blur.hpp" />
     <ClInclude Include="Example\MyActor.hpp" />
+    <ClInclude Include="Example\Pixelate.hpp" />
     <ClInclude Include="Sources\Application\Application.hpp" />
     <ClInclude Include="Sources\Application\AudioManager.hpp" />
     <ClInclude Include="Sources\Application\ResourceManager.hpp" />
@@ -99,9 +109,13 @@
     <ClInclude Include="Sources\Components\SpriteComponent.hpp" />
     <ClInclude Include="Sources\Core\Actor.hpp" />
     <ClInclude Include="Sources\Core\Component.hpp" />
+    <ClInclude Include="Sources\Core\Effect.hpp" />
     <ClInclude Include="Sources\Core\PrimitiveComponent.hpp" />
     <ClInclude Include="Sources\Core\SceneComponent.hpp" />
     <ClInclude Include="Sources\Core\World.hpp" />
+    <ClInclude Include="Sources\ExtLibs\assume.hpp" />
+    <ClInclude Include="Sources\ExtLibs\cocoa.hpp" />
+    <ClInclude Include="Sources\ExtLibs\gzstream.hpp" />
     <ClInclude Include="Sources\ExtLibs\imgui\imconfig.h" />
     <ClInclude Include="Sources\ExtLibs\imgui\imgui-SFML.h" />
     <ClInclude Include="Sources\ExtLibs\imgui\imgui.h" />
@@ -169,11 +183,17 @@
     <ClInclude Include="Sources\Maths\Trigonometry.hpp" />
     <ClInclude Include="Sources\Maths\Vector2.hpp" />
     <ClInclude Include="Sources\Maths\Vector3.hpp" />
+    <ClInclude Include="Sources\System\ClockedTask.hpp" />
     <ClInclude Include="Sources\System\Compression.hpp" />
+    <ClInclude Include="Sources\System\Container.hpp" />
     <ClInclude Include="Sources\System\HttpThread.hpp" />
     <ClInclude Include="Sources\System\IniParser.hpp" />
     <ClInclude Include="Sources\System\Log.hpp" />
+    <ClInclude Include="Sources\System\Packet.hpp" />
+    <ClInclude Include="Sources\System\ParallelTask.hpp" />
     <ClInclude Include="Sources\System\ScriptManager.hpp" />
+    <ClInclude Include="Sources\System\SmartPool.hpp" />
+    <ClInclude Include="Sources\System\String.hpp" />
     <ClInclude Include="Sources\System\Theme.hpp" />
     <ClInclude Include="Sources\System\Time.hpp" />
   </ItemGroup>
