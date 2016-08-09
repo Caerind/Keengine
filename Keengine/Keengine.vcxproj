@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
+    <None Include="Example\application_settings.ini" />
+    <None Include="Example\script.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Doc\MainArchitecture.png" />
+    <Image Include="Example\sfml.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Example\main.cpp" />
+    <ClCompile Include="Example\MyActor.cpp" />
+    <ClCompile Include="Sources\Application\Application.cpp" />
+    <ClCompile Include="Sources\Application\AudioManager.cpp" />
+    <ClCompile Include="Sources\Application\Window.cpp" />
+    <ClCompile Include="Sources\Components\PointComponent.cpp" />
+    <ClCompile Include="Sources\Components\SpriteComponent.cpp" />
+    <ClCompile Include="Sources\Core\Actor.cpp" />
+    <ClCompile Include="Sources\Core\Component.cpp" />
+    <ClCompile Include="Sources\Core\PrimitiveComponent.cpp" />
+    <ClCompile Include="Sources\Core\SceneComponent.cpp" />
+    <ClCompile Include="Sources\Core\World.cpp" />
+    <ClCompile Include="Sources\ExtLibs\imgui\imgui-SFML.cpp" />
+    <ClCompile Include="Sources\ExtLibs\imgui\imgui.cpp" />
+    <ClCompile Include="Sources\ExtLibs\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lapi.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lauxlib.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lbaselib.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lbitlib.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lcode.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lcorolib.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lctype.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\ldblib.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\ldebug.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\ldo.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\ldump.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lfunc.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lgc.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\linit.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\liolib.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\llex.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lmathlib.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lmem.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\loadlib.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lobject.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lopcodes.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\loslib.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lparser.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lstate.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lstring.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lstrlib.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\ltable.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\ltablib.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\ltm.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lundump.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lutf8lib.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lvm.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\lzio.c" />
+    <ClCompile Include="Sources\ExtLibs\Lua\wmain.c" />
+    <ClCompile Include="Sources\ExtLibs\pugixml.cpp" />
+    <ClCompile Include="Sources\Maths\Distribution.cpp" />
+    <ClCompile Include="Sources\Maths\Generics.cpp" />
+    <ClCompile Include="Sources\Maths\Random.cpp" />
+    <ClCompile Include="Sources\Maths\Trigonometry.cpp" />
+    <ClCompile Include="Sources\Maths\Vector2.cpp" />
+    <ClCompile Include="Sources\Maths\Vector3.cpp" />
+    <ClCompile Include="Sources\System\Compression.cpp" />
+    <ClCompile Include="Sources\System\HttpThread.cpp" />
+    <ClCompile Include="Sources\System\Time.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Example\MyActor.hpp" />
+    <ClInclude Include="Sources\Application\Application.hpp" />
+    <ClInclude Include="Sources\Application\AudioManager.hpp" />
+    <ClInclude Include="Sources\Application\ResourceManager.hpp" />
+    <ClInclude Include="Sources\Application\StateManager.hpp" />
+    <ClInclude Include="Sources\Application\Window.hpp" />
+    <ClInclude Include="Sources\Components\PointComponent.hpp" />
+    <ClInclude Include="Sources\Components\SpriteComponent.hpp" />
+    <ClInclude Include="Sources\Core\Actor.hpp" />
+    <ClInclude Include="Sources\Core\Component.hpp" />
+    <ClInclude Include="Sources\Core\PrimitiveComponent.hpp" />
+    <ClInclude Include="Sources\Core\SceneComponent.hpp" />
+    <ClInclude Include="Sources\Core\World.hpp" />
+    <ClInclude Include="Sources\ExtLibs\imgui\imconfig.h" />
+    <ClInclude Include="Sources\ExtLibs\imgui\imgui-SFML.h" />
+    <ClInclude Include="Sources\ExtLibs\imgui\imgui.h" />
+    <ClInclude Include="Sources\ExtLibs\imgui\imgui_internal.h" />
+    <ClInclude Include="Sources\ExtLibs\imgui\stb_rect_pack.h" />
+    <ClInclude Include="Sources\ExtLibs\imgui\stb_textedit.h" />
+    <ClInclude Include="Sources\ExtLibs\imgui\stb_truetype.h" />
+    <ClInclude Include="Sources\ExtLibs\json.hpp" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lapi.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lauxlib.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lcode.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lctype.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\ldebug.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\ldo.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lfunc.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lgc.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\llex.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\llimits.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lmem.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lobject.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lopcodes.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lparser.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lprefix.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lstate.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lstring.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\ltable.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\ltm.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lua.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lua.hpp" />
+    <ClInclude Include="Sources\ExtLibs\Lua\luaconf.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lualib.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lundump.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lvm.h" />
+    <ClInclude Include="Sources\ExtLibs\Lua\lzio.h" />
+    <ClInclude Include="Sources\ExtLibs\pugixml.hpp" />
+    <ClInclude Include="Sources\ExtLibs\Selene\BaseFun.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\Class.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\ClassFun.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\Ctor.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\Dtor.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\ExceptionHandler.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\ExceptionTypes.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\Fun.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\function.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\LuaName.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\LuaRef.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\MetatableRegistry.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\Obj.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\ObjFun.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\primitives.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\references.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\Registry.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\ResourceHandler.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\Selector.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\selene.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\State.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\traits.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\Tuple.h" />
+    <ClInclude Include="Sources\ExtLibs\Selene\util.h" />
+    <ClInclude Include="Sources\ExtLibs\smartenum.hpp" />
+    <ClInclude Include="Sources\Maths\Distribution.hpp" />
+    <ClInclude Include="Sources\Maths\Generics.hpp" />
+    <ClInclude Include="Sources\Maths\Math.hpp" />
+    <ClInclude Include="Sources\Maths\Random.hpp" />
+    <ClInclude Include="Sources\Maths\Trigonometry.hpp" />
+    <ClInclude Include="Sources\Maths\Vector2.hpp" />
+    <ClInclude Include="Sources\Maths\Vector3.hpp" />
+    <ClInclude Include="Sources\System\Compression.hpp" />
+    <ClInclude Include="Sources\System\HttpThread.hpp" />
+    <ClInclude Include="Sources\System\IniParser.hpp" />
+    <ClInclude Include="Sources\System\Log.hpp" />
+    <ClInclude Include="Sources\System\ScriptManager.hpp" />
+    <ClInclude Include="Sources\System\Theme.hpp" />
+    <ClInclude Include="Sources\System\Time.hpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2fc9c7b4-4c0c-421b-9fe9-54e7947d8769}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Keengine</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>Keengine</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\C++\Lib\SFML-2.3.2-VC14\include;D:\C++\Lib\zlib-1.2.8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\C++\Lib\SFML-2.3.2-VC14\lib;D:\C++\Lib\zlib-1.2.8\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies);zdll.lib;opengl32.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\C++\Lib\SFML-2.3.2-VC14\include;D:\C++\Lib\zlib-1.2.8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\C++\Lib\SFML-2.3.2-VC14\lib;D:\C++\Lib\zlib-1.2.8\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main.lib;sfml-audio.lib;sfml-network.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies);zdll.lib;opengl32.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

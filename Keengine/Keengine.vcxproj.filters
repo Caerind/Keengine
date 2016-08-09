@@ -1,0 +1,500 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Example">
+      <UniqueIdentifier>{75a85f9f-21f0-462f-95e2-71bd31e3498b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{f24c51f3-fc07-4f8f-8891-b533a90e360a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Doc">
+      <UniqueIdentifier>{913334fa-3e0e-40d8-87f2-fad0c5bfa92c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Application">
+      <UniqueIdentifier>{59c1c7dd-1e26-4b64-90d8-d3deae9649ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Core">
+      <UniqueIdentifier>{2e61917f-0def-495b-9940-4d8f2ad2ac9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Components">
+      <UniqueIdentifier>{104ba9db-7e87-4e63-ab72-e5c4204c0304}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ExtLibs">
+      <UniqueIdentifier>{9cc34823-b476-4313-9fa0-b21452ec1f36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ExtLibs\imgui">
+      <UniqueIdentifier>{1a021fd6-e731-4e22-a7eb-b96fd3386053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ExtLibs\Lua">
+      <UniqueIdentifier>{d77f1185-55bb-4658-a7e6-297bcbb45b39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ExtLibs\Selene">
+      <UniqueIdentifier>{25046619-7c3a-4292-871f-40ebcea2a16c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Maths">
+      <UniqueIdentifier>{00d4d57f-2be6-40d7-a7c2-aa100db8ab69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\System">
+      <UniqueIdentifier>{27d82983-3090-4770-8ce2-3cde45161bec}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Example\script.lua">
+      <Filter>Example</Filter>
+    </None>
+    <None Include="Example\application_settings.ini">
+      <Filter>Example</Filter>
+    </None>
+    <None Include="..\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Example\sfml.png">
+      <Filter>Example</Filter>
+    </Image>
+    <Image Include="Doc\MainArchitecture.png">
+      <Filter>Doc</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Example\main.cpp">
+      <Filter>Example</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\MyActor.cpp">
+      <Filter>Example</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Application\Window.cpp">
+      <Filter>Sources\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Application\Application.cpp">
+      <Filter>Sources\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Application\AudioManager.cpp">
+      <Filter>Sources\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Core\SceneComponent.cpp">
+      <Filter>Sources\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Core\World.cpp">
+      <Filter>Sources\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Core\Actor.cpp">
+      <Filter>Sources\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Core\Component.cpp">
+      <Filter>Sources\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Core\PrimitiveComponent.cpp">
+      <Filter>Sources\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Components\PointComponent.cpp">
+      <Filter>Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Components\SpriteComponent.cpp">
+      <Filter>Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\pugixml.cpp">
+      <Filter>Sources\ExtLibs</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\imgui\imgui.cpp">
+      <Filter>Sources\ExtLibs\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\imgui\imgui_draw.cpp">
+      <Filter>Sources\ExtLibs\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\imgui\imgui-SFML.cpp">
+      <Filter>Sources\ExtLibs\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lundump.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lutf8lib.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lvm.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lzio.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\wmain.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lapi.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lauxlib.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lbaselib.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lbitlib.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lcode.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lcorolib.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lctype.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\ldblib.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\ldebug.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\ldo.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\ldump.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lfunc.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lgc.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\linit.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\liolib.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\llex.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lmathlib.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lmem.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\loadlib.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lobject.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lopcodes.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\loslib.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lparser.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lstate.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lstring.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\lstrlib.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\ltable.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\ltablib.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Lua\ltm.c">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Maths\Trigonometry.cpp">
+      <Filter>Sources\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Maths\Vector2.cpp">
+      <Filter>Sources\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Maths\Vector3.cpp">
+      <Filter>Sources\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Maths\Distribution.cpp">
+      <Filter>Sources\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Maths\Generics.cpp">
+      <Filter>Sources\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Maths\Random.cpp">
+      <Filter>Sources\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\System\Time.cpp">
+      <Filter>Sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\System\Compression.cpp">
+      <Filter>Sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\System\HttpThread.cpp">
+      <Filter>Sources\System</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Example\MyActor.hpp">
+      <Filter>Example</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Application\StateManager.hpp">
+      <Filter>Sources\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Application\Window.hpp">
+      <Filter>Sources\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Application\Application.hpp">
+      <Filter>Sources\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Application\AudioManager.hpp">
+      <Filter>Sources\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Application\ResourceManager.hpp">
+      <Filter>Sources\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Core\SceneComponent.hpp">
+      <Filter>Sources\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Core\World.hpp">
+      <Filter>Sources\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Core\Actor.hpp">
+      <Filter>Sources\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Core\Component.hpp">
+      <Filter>Sources\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Core\PrimitiveComponent.hpp">
+      <Filter>Sources\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Components\SpriteComponent.hpp">
+      <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Components\PointComponent.hpp">
+      <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\pugixml.hpp">
+      <Filter>Sources\ExtLibs</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\smartenum.hpp">
+      <Filter>Sources\ExtLibs</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\json.hpp">
+      <Filter>Sources\ExtLibs</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\imgui\imgui-SFML.h">
+      <Filter>Sources\ExtLibs\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\imgui\stb_rect_pack.h">
+      <Filter>Sources\ExtLibs\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\imgui\stb_textedit.h">
+      <Filter>Sources\ExtLibs\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\imgui\stb_truetype.h">
+      <Filter>Sources\ExtLibs\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\imgui\imconfig.h">
+      <Filter>Sources\ExtLibs\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\imgui\imgui.h">
+      <Filter>Sources\ExtLibs\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\imgui\imgui_internal.h">
+      <Filter>Sources\ExtLibs\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\luaconf.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lualib.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lundump.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lvm.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lzio.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lapi.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lauxlib.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lcode.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lctype.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\ldebug.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\ldo.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lfunc.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lgc.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\llex.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\llimits.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lmem.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lobject.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lopcodes.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lparser.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lprefix.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lstate.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lstring.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\ltable.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\ltm.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lua.h">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Lua\lua.hpp">
+      <Filter>Sources\ExtLibs\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\ResourceHandler.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\Selector.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\selene.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\State.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\traits.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\Tuple.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\util.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\BaseFun.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\Class.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\ClassFun.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\Ctor.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\Dtor.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\ExceptionHandler.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\ExceptionTypes.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\Fun.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\function.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\LuaName.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\LuaRef.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\MetatableRegistry.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\Obj.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\ObjFun.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\primitives.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\references.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Selene\Registry.h">
+      <Filter>Sources\ExtLibs\Selene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Maths\Random.hpp">
+      <Filter>Sources\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Maths\Trigonometry.hpp">
+      <Filter>Sources\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Maths\Vector2.hpp">
+      <Filter>Sources\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Maths\Vector3.hpp">
+      <Filter>Sources\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Maths\Distribution.hpp">
+      <Filter>Sources\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Maths\Generics.hpp">
+      <Filter>Sources\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Maths\Math.hpp">
+      <Filter>Sources\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\ScriptManager.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\Theme.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\Time.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\Compression.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\HttpThread.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\IniParser.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\Log.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
