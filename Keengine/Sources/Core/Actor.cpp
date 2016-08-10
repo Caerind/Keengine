@@ -108,12 +108,17 @@ void Actor::moveZ(float z)
 	mRoot.moveZ(z);
 }
 
-void Actor::update(float dt)
+void Actor::update(sf::Time dt)
 {
 }
 
-void Actor::updateComponents(float dt)
+void Actor::updateComponents(sf::Time dt)
 {
+	std::size_t size = mComponents.size();
+	for (std::size_t i = 0; i < size; i++)
+	{
+		mComponents[i]->update(dt);
+	}
 }
 
 void Actor::attachComponent(SceneComponent* component)

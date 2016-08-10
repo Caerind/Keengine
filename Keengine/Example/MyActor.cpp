@@ -9,16 +9,19 @@ MyActor::MyActor()
     registerComponent(&mA);
 	attachComponent(&mA);
 	mA.setZ(1000.f);
-	mA.setPosition(sf::Vector2f(-100.f, -100.f));
 
 	registerComponent(&mB);
 	attachComponent(&mB);
+	mB.setZ(100.f);
 	mB.setTexture("sfml");
-	mB.setPosition(sf::Vector2f(-100.f, -100.f));
 
 	registerComponent(&mC);
-	mB.attachComponent(&mC);
-	mC.setPosition(sf::Vector2f(-100.f, -100.f));
+	attachComponent(&mC);
+	mC.setTexture("particle");
+	mC.setEmissionRate(30.f);
+	mC.setParticleLifetime(sf::seconds(5.f));
+	mC.setParticlePosition(sf::Vector2f(0.f, 0.f));
+	mC.setParticleVelocity(sf::Vector2f(10.f, 10.f));
 }
 
 MyActor::~MyActor()

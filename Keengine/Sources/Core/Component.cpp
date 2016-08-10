@@ -56,7 +56,7 @@ bool Component::isUpdatable() const
 	return mUpdatable;
 }
 
-void Component::update(float dt)
+void Component::update(sf::Time dt)
 {
 }
 

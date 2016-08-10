@@ -28,6 +28,7 @@
   <ItemGroup>
     <Image Include="..\Doc\ApplicationArchitecture.jpg" />
     <Image Include="..\Doc\CoreArchitecture.jpg" />
+    <Image Include="Example\particle.png" />
     <Image Include="Example\sfml.png" />
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +38,7 @@
     <ClCompile Include="Sources\Application\AudioManager.cpp" />
     <ClCompile Include="Sources\Application\Window.cpp" />
     <ClCompile Include="Sources\Components\CameraComponent.cpp" />
+    <ClCompile Include="Sources\Components\ParticleComponent.cpp" />
     <ClCompile Include="Sources\Components\PointComponent.cpp" />
     <ClCompile Include="Sources\Components\SpriteComponent.cpp" />
     <ClCompile Include="Sources\Core\Actor.cpp" />
@@ -107,6 +109,7 @@
     <ClInclude Include="Sources\Application\StateManager.hpp" />
     <ClInclude Include="Sources\Application\Window.hpp" />
     <ClInclude Include="Sources\Components\CameraComponent.hpp" />
+    <ClInclude Include="Sources\Components\ParticleComponent.hpp" />
     <ClInclude Include="Sources\Components\PointComponent.hpp" />
     <ClInclude Include="Sources\Components\SpriteComponent.hpp" />
     <ClInclude Include="Sources\Core\Actor.hpp" />

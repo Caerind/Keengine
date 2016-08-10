@@ -59,11 +59,10 @@ void World::handleEvent(sf::Event const & event)
 
 void World::update(sf::Time dt)
 {
-	float delta = dt.asSeconds();
 	for (auto& actor : mActors)
 	{
-		actor->updateComponents(delta);
-		actor->update(delta);
+		actor->updateComponents(dt);
+		actor->update(dt);
 	}
 
 	mActors.erase(std::remove_if(mActors.begin(), mActors.end(), [](Actor::Ptr actor) 

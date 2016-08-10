@@ -1,6 +1,7 @@
 #ifndef COMPONENT_HPP
 #define COMPONENT_HPP
 
+#include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
@@ -20,7 +21,7 @@ class Component
 		virtual void onUnregister();
 
 		bool isUpdatable() const;
-		virtual void update(float dt);
+		virtual void update(sf::Time dt);
 
 		sf::Vector2f getActorPosition() const;
 		void setActorPosition(sf::Vector2f const& position);

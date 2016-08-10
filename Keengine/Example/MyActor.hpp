@@ -5,6 +5,7 @@
 #include "../Sources/Components/PointComponent.hpp"
 #include "../Sources/Components/SpriteComponent.hpp"
 #include "../Sources/Components/CameraComponent.hpp"
+#include "../Sources/Components/ParticleComponent.hpp"
 
 class MyActor : public Actor
 {
@@ -17,7 +18,7 @@ class MyActor : public Actor
     private:
         PointComponent mA;
         SpriteComponent mB;
-		CameraComponent mC;
+		ParticleComponent mC;
 };
 
 #endif // MYACTOR_HPP

@@ -5,6 +5,7 @@
 #include <vector>
 #include <sstream>
 
+#include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
 
 #include "Component.hpp"
@@ -44,8 +45,8 @@ class Actor
 		void setZ(float z);
 		void moveZ(float z);
 
-		virtual void update(float dt);
-		void updateComponents(float dt);
+		virtual void update(sf::Time dt);
+		void updateComponents(sf::Time dt);
 
 		void attachComponent(SceneComponent* component);
 		void detachComponent(SceneComponent* component);

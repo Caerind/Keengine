@@ -11,10 +11,11 @@ int main()
 	Application::init("Example/");
 
 	Application::createResource<Texture>("sfml", "Example/sfml.png");
+	Application::createResource<Texture>("particle", "Example/particle.png");
 
 	World::createInstance();
 
-	World::instance().createActor<MyActor>();
+	World::instance().createActor<MyActor>()->setPosition(sf::Vector2f(300.f, 300.f));
 
 	Application::setEventDefaultFunction([&](sf::Event const& event)
 	{

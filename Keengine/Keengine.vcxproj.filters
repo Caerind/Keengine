@@ -63,6 +63,9 @@
     <Image Include="..\Doc\CoreArchitecture.jpg">
       <Filter>Doc</Filter>
     </Image>
+    <Image Include="Example\particle.png">
+      <Filter>Example</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Example\main.cpp">
@@ -258,6 +261,9 @@
       <Filter>Sources\Core</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Components\CameraComponent.cpp">
+      <Filter>Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Components\ParticleComponent.cpp">
       <Filter>Sources\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -560,6 +566,9 @@
       <Filter>Example</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Components\CameraComponent.hpp">
+      <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Components\ParticleComponent.hpp">
       <Filter>Sources\Components</Filter>
     </ClInclude>
   </ItemGroup>
