@@ -1,0 +1,81 @@
+ADO : This just sets up an include path to a set of libs included by windows for database acccess
+ANGLE : Replicates the graphics feature set provided by many mobile devices ( including HTML ) on windows
+Android/cxa_demangle : We need callstack printing when running on Android devices and we need this function to convert a mangled function name into a human-readable one.  We link with cxx-stl from stlport, but that doesn’t include the abi::__cxa_demangle function in the library. The gnu-libstdc++ libraries also included with the NDK do include this function, but we don’t link against gnu-libstdc++ and I don’t want to do so just for this function. The easiest solution is to compile the __cxa_demangle source code file and link it manually.
+Box2d : 2D Physics Engine, used for 2D gameplay support
+CEF3 : Allows for embedded web browser in applications
+Crypto++ : Provides a C++ class library of cryptographic schemes including encryption functions, hashing functions, cryptographically secure RNG's, and other helper classes to support encryption and hashing
+DirectShow : Captures rendered frames and assembles them into movies
+DotNetZip : In the UDK installer and the iPhonePackager
+FBX : C++ library for reading and writing FBX files (graphics interchange file format.)
+Facebook : Allows users to intergate Facebook Login, Sharing etc into their game/app
+FakeIt : It allows the programmer to create a light-weight 'mock' implementation of an interface or object which can be used in writing unit tests.
+ForsythTriOO : Replace existing mesh processing algorithm that preprocessed mesh data on import with a faster one (much faster import times, slightly more efficient results).
+FreeType2 : Font rendering
+GooglePlay/gpg-cpp-sdk : Provides a C++ interface to Google Play online features
+GoogleVR : Google VR
+HACD : Used in the editor, library decomposes a 3D surface
+HTML5 : Emscripten SDK
+HarfBuzz : OpenType text shaping engine
+ICU : ICU is a mature, widely used set of C/C++ and Java libraries providing Unicode and Globalization support for software applications
+Bolts : Support library for the facebook SDK
+IntelEmbree : high performance ray tracing kernels
+IntelISPCTexComp : Compresses images into various DirectX formats, in particular BC6H and BC7
+IntelTBB : Used in the engine as an optimised 64 bit memory allocator
+Kiss_FFT : Editor tool for removing high frequency element/or various filtering in frequency domain
+Leap : Integration with the Leap Motion controller hardware for UE4
+LinuxNativeDialogs : Linux file dialog implementations dedicated for Unreal Engine
+MCPP : Preprocesses GLSL source code into a compact ?distilled? version
+MikkTSpace : Save performance and memory
+NVIDIA/nvapi : Allows the display of 3D images from Nvidia graphics cards on capable monitors
+OSVRClientKit : OSVR SDK - Open source API and Unreal plugin for virtual reality headsets and various VR related input devices.
+Oculus : Reads sensor data from Oculus Rifts
+Ogg : To play sounds in the engine
+OneSky : Crowd sourcing the translation process for the editor and engine
+OpenAL : Provides a cross platform abstraction over audio devices. 
+OpenGL : An interface to a rendering API that is used on platforms other than the PC (but can also be used on the PC)
+OpenSSL : OpenSSL is an optional library used by libcurl
+OpenSubdiv : OpenSubdiv is a set of open source libraries that implement high-performance subdivision surface (subdiv) evaluation on massively parallel CPU and GPU architectures.
+OpenVR : Valve's OpenVR SDK - API for SteamVR, including their HMD and Controllers as well as their support for DK2, etc.
+PLCrashReporter : (Apple's platform only)
+Perforce : It's used to talk to Perforce with C or C++
+PhysX : To enhance the stock physics solution
+Qualcomm : Compresses texture
+SDL2 : Cross-platform library abstracting audio, video and input
+SSF : 
+Simplygon : Simplygon SDK
+SpeedTree : 
+Steamworks : SDK for connecting with the Steamworks platform
+VHACD : Decomposes tri mesh into convex hull approximation for collision, Currently we use HACD which doesn't work that well, this is an improvement.
+Vorbis : see Ogg
+Vulkan : Is a new rendering interface with its own drivers. 
+WebRTC : Real-time communicate with XMPP server Required for social features in all of our games as well the Launcher 
+WinRT/WinRTSDK : 
+Windows : 
+coremod : Plays audio .mod, .it, and XM files… it’s a self-contained music sequencer and sample playback engine for playing back generative music files
+elftoolchain : a set of libraries to read ELF/DWARF (i.e. debugging info attached to executables)
+glslang : Validates that GLSL shader code conforms to the standard
+hlslcc : An HLSL Cross Compiler
+jemalloc : Memory allocator
+libJPG : Allows JPEG compression and decompression.
+libOpus : Opus is a codec for interactive speech and audio transmission over the Internet.
+libPNG : For lossless compression of images
+libWebSockets : Translate requests coming from a browser ( our HTML5 client ) to something UE servers can understand
+libcurl : Implements HTTP protocol
+llvm : used to compile our code to LLVM-compatible object files using the Clang C++ compiler frontend
+nvTextureTools : Compresses textures to BC7
+nvTriStrip : Rearranges vertices in a model so it reanders faster
+nvtesslib : Generates index buffers with adjacency information for PN-AEN tessellation. Provides adjacency information which is later used to render crack free displacement mapping in DX11
+openexr : Provides support for ILM’s OpenEXR image format. It allows loading and saving of compressed lossless full range HDR images.
+portmidi : Allows content creators to tune any numerical property of any Object in UE4 at runtime using standard off-the-shelf Midi hardware
+sqlite : 
+zlib : A compression library used by the engine and several other third party items
+
+
+
+
+
+
+
+
+
+

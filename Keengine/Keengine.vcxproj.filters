@@ -37,6 +37,21 @@
     <Filter Include="Doc">
       <UniqueIdentifier>{a6989ad2-ebe5-4bcb-add6-a9b0951986cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Doc\TODO">
+      <UniqueIdentifier>{46519504-7315-4851-a8e6-e3c229b11d2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Doc\TODO\2 - Input">
+      <UniqueIdentifier>{9bb806ff-2f38-4d7f-9a0f-e81ae25e7e11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Doc\TODO\3 - Maps">
+      <UniqueIdentifier>{228724c8-f9dd-4035-ac6f-a4fb0495fc43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Doc\TODO\4 - GUI">
+      <UniqueIdentifier>{02aa9d6e-efa5-4b5e-b657-6b0836d76a36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Doc\TODO\5 - Physics">
+      <UniqueIdentifier>{107e0b1a-1b83-4a2a-857b-3418821987f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Example\script.lua">
@@ -52,6 +67,9 @@
     <None Include="Example\blur.frag">
       <Filter>Example</Filter>
     </None>
+    <None Include="..\Doc\TODO\5 - Physics\QuadTree.inl">
+      <Filter>Doc\TODO\5 - Physics</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Example\sfml.png">
@@ -65,6 +83,9 @@
     </Image>
     <Image Include="Example\particle.png">
       <Filter>Example</Filter>
+    </Image>
+    <Image Include="..\Doc\TODO\2 - Input\InputFlow.jpg">
+      <Filter>Doc\TODO\2 - Input</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +286,72 @@
     </ClCompile>
     <ClCompile Include="Sources\Components\ParticleComponent.cpp">
       <Filter>Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\2 - Input\Joystick.cpp">
+      <Filter>Doc\TODO\2 - Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\2 - Input\KeyBinding.cpp">
+      <Filter>Doc\TODO\2 - Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\2 - Input\Input.cpp">
+      <Filter>Doc\TODO\2 - Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\2 - Input\InputString.cpp">
+      <Filter>Doc\TODO\2 - Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\2 - Input\InputSystem.cpp">
+      <Filter>Doc\TODO\2 - Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\3 - Maps\Orthogonal.cpp">
+      <Filter>Doc\TODO\3 - Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\3 - Maps\Hexagonal.cpp">
+      <Filter>Doc\TODO\3 - Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\3 - Maps\Isometric.cpp">
+      <Filter>Doc\TODO\3 - Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\3 - Maps\LayerComponent.cpp">
+      <Filter>Doc\TODO\3 - Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\4 - GUI\ValueContainer.cpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\4 - GUI\LangManager.cpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\Slider.cpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\Sprite.cpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\Widget.cpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\Button.cpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\Callback.cpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\CheckBox.cpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\Container.cpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\Joystick.cpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\LineEdit.cpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\5 - Physics\BoxComponent.cpp">
+      <Filter>Doc\TODO\5 - Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Doc\TODO\5 - Physics\CollisionComponent.cpp">
+      <Filter>Doc\TODO\5 - Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -570,6 +657,81 @@
     </ClInclude>
     <ClInclude Include="Sources\Components\ParticleComponent.hpp">
       <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\2 - Input\Joystick.hpp">
+      <Filter>Doc\TODO\2 - Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\2 - Input\KeyBinding.hpp">
+      <Filter>Doc\TODO\2 - Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\2 - Input\Input.hpp">
+      <Filter>Doc\TODO\2 - Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\2 - Input\InputString.hpp">
+      <Filter>Doc\TODO\2 - Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\2 - Input\InputSystem.hpp">
+      <Filter>Doc\TODO\2 - Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\3 - Maps\Map.hpp">
+      <Filter>Doc\TODO\3 - Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\3 - Maps\Orthogonal.hpp">
+      <Filter>Doc\TODO\3 - Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\3 - Maps\Hexagonal.hpp">
+      <Filter>Doc\TODO\3 - Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\3 - Maps\Isometric.hpp">
+      <Filter>Doc\TODO\3 - Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\3 - Maps\LayerComponent.hpp">
+      <Filter>Doc\TODO\3 - Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\4 - GUI\ValueContainer.hpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\4 - GUI\LangManager.hpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\LineEdit.hpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\SimpleGui.hpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\Slider.hpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\Sprite.hpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\Widget.hpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\Button.hpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\Callback.hpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\CheckBox.hpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\Container.hpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\Joystick.hpp">
+      <Filter>Doc\TODO\4 - GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\5 - Physics\CollisionComponent.hpp">
+      <Filter>Doc\TODO\5 - Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\5 - Physics\QuadTree.hpp">
+      <Filter>Doc\TODO\5 - Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Doc\TODO\5 - Physics\BoxComponent.hpp">
+      <Filter>Doc\TODO\5 - Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

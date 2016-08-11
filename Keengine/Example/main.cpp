@@ -14,8 +14,9 @@ int main()
 	Application::createResource<Texture>("particle", "Example/particle.png");
 
 	World::createInstance();
+	World::instance().getView().setCenter(sf::Vector2f(0.f, 0.f));
 
-	World::instance().createActor<MyActor>()->setPosition(sf::Vector2f(300.f, 300.f));
+	World::instance().createActor<MyActor>()->setPosition(sf::Vector2f(100.f, 100.f));
 
 	Application::setEventDefaultFunction([&](sf::Event const& event)
 	{

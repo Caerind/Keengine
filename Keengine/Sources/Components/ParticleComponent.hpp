@@ -9,6 +9,7 @@
 
 #include "../Core/PrimitiveComponent.hpp"
 
+// TODO : Make it work
 class ParticleComponent : public PrimitiveComponent
 {
     public:
