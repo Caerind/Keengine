@@ -16,6 +16,11 @@ int main()
 	World::createInstance();
 	World::instance().getView().setCenter(sf::Vector2f(0.f, 0.f));
 
+	World::instance().getInputs().setKeyboardMapping("MoveUp", sf::Keyboard::Z, InputType::Hold);
+	World::instance().getInputs().setKeyboardMapping("MoveLeft", sf::Keyboard::Q, InputType::Hold);
+	World::instance().getInputs().setKeyboardMapping("MoveDown", sf::Keyboard::S, InputType::Hold);
+	World::instance().getInputs().setKeyboardMapping("MoveRight", sf::Keyboard::D, InputType::Hold);
+
 	World::instance().createActor<MyActor>()->setPosition(sf::Vector2f(100.f, 100.f));
 
 	Application::setEventDefaultFunction([&](sf::Event const& event)

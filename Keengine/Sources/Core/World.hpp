@@ -11,6 +11,7 @@
 
 #include "Actor.hpp"
 #include "Effect.hpp"
+#include "InputSystem.hpp"
 #include "PrimitiveComponent.hpp"
 
 #include "../Components/CameraComponent.hpp"
@@ -30,6 +31,7 @@ class World
 
 	public:
 		Application& getApplication();
+		InputSystem& getInputs();
 		Log& getLog();
 
 		virtual void handleEvent(sf::Event const& event);
@@ -82,6 +84,8 @@ class World
 		sf::View mWorldView;
 
 		std::map<std::size_t, std::shared_ptr<Effect>> mEffects;
+
+		InputSystem mInputs;
 };
 
 #endif // WORLD_HPP

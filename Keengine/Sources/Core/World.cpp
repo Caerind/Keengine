@@ -47,6 +47,11 @@ Application& World::getApplication()
 	return Application::instance();
 }
 
+InputSystem& World::getInputs()
+{
+	return mInputs;
+}
+
 Log& World::getLog()
 {
 	return Application::getLog();
@@ -54,11 +59,13 @@ Log& World::getLog()
 
 void World::handleEvent(sf::Event const & event)
 {
-	// TODO : World::handleEvent
+	mInputs.handleEvent(event);
 }
 
 void World::update(sf::Time dt)
 {
+	mInputs.update(dt);
+
 	for (auto& actor : mActors)
 	{
 		actor->updateComponents(dt);

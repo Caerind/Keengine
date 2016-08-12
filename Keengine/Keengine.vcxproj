@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Doc\TODO\5 - Physics\QuadTree.inl" />
     <None Include="..\README.md" />
     <None Include="Example\application_settings.ini" />
     <None Include="Example\blur.frag" />
@@ -29,45 +28,24 @@
   <ItemGroup>
     <Image Include="..\Doc\ApplicationArchitecture.jpg" />
     <Image Include="..\Doc\CoreArchitecture.jpg" />
-    <Image Include="..\Doc\TODO\2 - Input\InputFlow.jpg" />
     <Image Include="Example\particle.png" />
     <Image Include="Example\sfml.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Doc\TODO\2 - Input\Input.cpp" />
-    <ClCompile Include="..\Doc\TODO\2 - Input\InputString.cpp" />
-    <ClCompile Include="..\Doc\TODO\2 - Input\InputSystem.cpp" />
-    <ClCompile Include="..\Doc\TODO\2 - Input\Joystick.cpp" />
-    <ClCompile Include="..\Doc\TODO\2 - Input\KeyBinding.cpp" />
-    <ClCompile Include="..\Doc\TODO\3 - Maps\Hexagonal.cpp" />
-    <ClCompile Include="..\Doc\TODO\3 - Maps\Isometric.cpp" />
-    <ClCompile Include="..\Doc\TODO\3 - Maps\LayerComponent.cpp" />
-    <ClCompile Include="..\Doc\TODO\3 - Maps\Orthogonal.cpp" />
-    <ClCompile Include="..\Doc\TODO\4 - GUI\LangManager.cpp" />
-    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\Button.cpp" />
-    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\Callback.cpp" />
-    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\CheckBox.cpp" />
-    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\Container.cpp" />
-    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\Joystick.cpp" />
-    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\LineEdit.cpp" />
-    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\Slider.cpp" />
-    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\Sprite.cpp" />
-    <ClCompile Include="..\Doc\TODO\4 - GUI\SimpleGui\Widget.cpp" />
-    <ClCompile Include="..\Doc\TODO\4 - GUI\ValueContainer.cpp" />
-    <ClCompile Include="..\Doc\TODO\5 - Physics\BoxComponent.cpp" />
-    <ClCompile Include="..\Doc\TODO\5 - Physics\CollisionComponent.cpp" />
     <ClCompile Include="Example\main.cpp" />
     <ClCompile Include="Example\MyActor.cpp" />
     <ClCompile Include="Sources\Application\Application.cpp" />
     <ClCompile Include="Sources\Application\AudioManager.cpp" />
     <ClCompile Include="Sources\Application\Window.cpp" />
     <ClCompile Include="Sources\Components\CameraComponent.cpp" />
+    <ClCompile Include="Sources\Components\InputComponent.cpp" />
     <ClCompile Include="Sources\Components\ParticleComponent.cpp" />
     <ClCompile Include="Sources\Components\PointComponent.cpp" />
     <ClCompile Include="Sources\Components\SpriteComponent.cpp" />
     <ClCompile Include="Sources\Core\Actor.cpp" />
     <ClCompile Include="Sources\Core\Component.cpp" />
     <ClCompile Include="Sources\Core\Effect.cpp" />
+    <ClCompile Include="Sources\Core\InputSystem.cpp" />
     <ClCompile Include="Sources\Core\PrimitiveComponent.cpp" />
     <ClCompile Include="Sources\Core\SceneComponent.cpp" />
     <ClCompile Include="Sources\Core\World.cpp" />
@@ -124,31 +102,6 @@
     <ClCompile Include="Sources\System\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Doc\TODO\2 - Input\Input.hpp" />
-    <ClInclude Include="..\Doc\TODO\2 - Input\InputString.hpp" />
-    <ClInclude Include="..\Doc\TODO\2 - Input\InputSystem.hpp" />
-    <ClInclude Include="..\Doc\TODO\2 - Input\Joystick.hpp" />
-    <ClInclude Include="..\Doc\TODO\2 - Input\KeyBinding.hpp" />
-    <ClInclude Include="..\Doc\TODO\3 - Maps\Hexagonal.hpp" />
-    <ClInclude Include="..\Doc\TODO\3 - Maps\Isometric.hpp" />
-    <ClInclude Include="..\Doc\TODO\3 - Maps\LayerComponent.hpp" />
-    <ClInclude Include="..\Doc\TODO\3 - Maps\Map.hpp" />
-    <ClInclude Include="..\Doc\TODO\3 - Maps\Orthogonal.hpp" />
-    <ClInclude Include="..\Doc\TODO\4 - GUI\LangManager.hpp" />
-    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\Button.hpp" />
-    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\Callback.hpp" />
-    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\CheckBox.hpp" />
-    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\Container.hpp" />
-    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\Joystick.hpp" />
-    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\LineEdit.hpp" />
-    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\SimpleGui.hpp" />
-    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\Slider.hpp" />
-    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\Sprite.hpp" />
-    <ClInclude Include="..\Doc\TODO\4 - GUI\SimpleGui\Widget.hpp" />
-    <ClInclude Include="..\Doc\TODO\4 - GUI\ValueContainer.hpp" />
-    <ClInclude Include="..\Doc\TODO\5 - Physics\BoxComponent.hpp" />
-    <ClInclude Include="..\Doc\TODO\5 - Physics\CollisionComponent.hpp" />
-    <ClInclude Include="..\Doc\TODO\5 - Physics\QuadTree.hpp" />
     <ClInclude Include="Example\Blur.hpp" />
     <ClInclude Include="Example\MyActor.hpp" />
     <ClInclude Include="Example\Pixelate.hpp" />
@@ -158,12 +111,14 @@
     <ClInclude Include="Sources\Application\StateManager.hpp" />
     <ClInclude Include="Sources\Application\Window.hpp" />
     <ClInclude Include="Sources\Components\CameraComponent.hpp" />
+    <ClInclude Include="Sources\Components\InputComponent.hpp" />
     <ClInclude Include="Sources\Components\ParticleComponent.hpp" />
     <ClInclude Include="Sources\Components\PointComponent.hpp" />
     <ClInclude Include="Sources\Components\SpriteComponent.hpp" />
     <ClInclude Include="Sources\Core\Actor.hpp" />
     <ClInclude Include="Sources\Core\Component.hpp" />
     <ClInclude Include="Sources\Core\Effect.hpp" />
+    <ClInclude Include="Sources\Core\InputSystem.hpp" />
     <ClInclude Include="Sources\Core\PrimitiveComponent.hpp" />
     <ClInclude Include="Sources\Core\SceneComponent.hpp" />
     <ClInclude Include="Sources\Core\World.hpp" />
