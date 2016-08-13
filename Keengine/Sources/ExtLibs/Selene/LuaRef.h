@@ -5,11 +5,7 @@
 #include "primitives.h"
 #include "ResourceHandler.h"
 
-extern "C" {
-#include <lua.h>
-#include <lauxlib.h>
-#include <lualib.h>
-}
+#include "../Lua/lua.hpp"
 
 namespace sel {
 namespace detail {

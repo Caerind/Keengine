@@ -4,11 +4,7 @@
 #include <iostream>
 #include <utility>
 
-extern "C" {
-#include <lua.h>
-#include <lauxlib.h>
-#include <lualib.h>
-}
+#include "../Lua/lua.hpp"
 
 namespace sel {
 inline std::ostream &operator<<(std::ostream &os, lua_State *l) {

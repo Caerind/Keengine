@@ -3,10 +3,7 @@
 #include "primitives.h"
 #include <string>
 
-extern "C" {
-#include <lua.h>
-#include <lauxlib.h>
-}
+#include "../Lua/lua.hpp"
 
 namespace sel {
 

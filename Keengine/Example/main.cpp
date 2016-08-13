@@ -8,6 +8,8 @@
 
 #include "../Sources/ExtLibs/TGUI/TGUI.hpp"
 
+#include "../Sources/System/ScriptManager.hpp"
+
 int main()
 {
 	Application::init("Example/");
@@ -21,6 +23,15 @@ int main()
 	button->setSize(150, 50);
 	button->setText("Test");
 	button->connect("pressed", [&]() { std::cout << "test" << std::endl; });
+
+	ScriptManager script;
+	script.setPath("Example/");
+	// TODO : Lua Library
+	script.addLibrary([](sel::State& state)
+	{
+		state["info"] = Application::getLog().info;
+	});
+	script["script.lua"]["test"]();
 
 	World::createInstance();
 

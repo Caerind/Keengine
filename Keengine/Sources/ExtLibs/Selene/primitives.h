@@ -6,11 +6,7 @@
 #include <type_traits>
 #include "MetatableRegistry.h"
 
-extern "C" {
-#include <lua.h>
-#include <lauxlib.h>
-#include <lualib.h>
-}
+#include "../Lua/lua.hpp"
 
 /* The purpose of this header is to handle pushing and retrieving
  * primitives from the stack

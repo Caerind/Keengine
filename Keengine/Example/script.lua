@@ -1,2 +1,3 @@
-test = function()
+test = function ()
+	info("noob")
 end

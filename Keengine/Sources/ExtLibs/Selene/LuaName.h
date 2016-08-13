@@ -2,9 +2,7 @@
 
 #include <string>
 
-extern "C" {
-#include <lua.h>
-}
+#include "../Lua/lua.hpp"
 
 namespace sel {
 /*
