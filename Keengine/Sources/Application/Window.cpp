@@ -246,35 +246,35 @@ sf::Vector2f Window::getTouchPositionView(sf::View const& view, unsigned int tou
 
 void Window::setPointerPosition2i(sf::Vector2i const& position)
 {
-    #ifndef N_MOBILE_PLATFORM
+    #ifndef SFML_SYSTEM_ANDROID
     sf::Mouse::setPosition(position,*this);
     #endif
 }
 
 void Window::setPointerPosition(sf::Vector2f const& position)
 {
-    #ifndef N_MOBILE_PLATFORM
+    #ifndef SFML_SYSTEM_ANDROID
     sf::Mouse::setPosition(static_cast<sf::Vector2i>(position),*this);
     #endif
 }
 
 void Window::setPointerPositionMap(sf::Vector2f const& position)
 {
-    #ifndef N_MOBILE_PLATFORM
+    #ifndef SFML_SYSTEM_ANDROID
     sf::Mouse::setPosition(mapCoordsToPixel(position));
     #endif
 }
 
 void Window::setPointerPositionView(sf::Vector2f const& position, sf::View const& view)
 {
-    #ifndef N_MOBILE_PLATFORM
+    #ifndef SFML_SYSTEM_ANDROID
     sf::Mouse::setPosition(mapCoordsToPixel(position,view));
     #endif
 }
 
 sf::Vector2i Window::getPointerPosition2i(unsigned int touchIndex) const
 {
-    #ifdef N_MOBILE_PLATFORM
+    #ifdef SFML_SYSTEM_ANDROID
     return getTouchPosition2i(touchIndex);
     #else
     return getMousePosition2i();
@@ -283,7 +283,7 @@ sf::Vector2i Window::getPointerPosition2i(unsigned int touchIndex) const
 
 sf::Vector2f Window::getPointerPosition(unsigned int touchIndex) const
 {
-    #ifdef N_MOBILE_PLATFORM
+    #ifdef SFML_SYSTEM_ANDROID
     return getTouchPosition(touchIndex);
     #else
     return getMousePosition();
@@ -292,7 +292,7 @@ sf::Vector2f Window::getPointerPosition(unsigned int touchIndex) const
 
 sf::Vector2f Window::getPointerPositionMap(unsigned int touchIndex) const
 {
-    #ifdef N_MOBILE_PLATFORM
+    #ifdef SFML_SYSTEM_ANDROID
     return getTouchPositionMap(touchIndex);
     #else
     return getMousePositionMap();
@@ -301,7 +301,7 @@ sf::Vector2f Window::getPointerPositionMap(unsigned int touchIndex) const
 
 sf::Vector2f Window::getPointerPositionView(sf::View const& view, unsigned int touchIndex)
 {
-    #ifdef N_MOBILE_PLATFORM
+    #ifdef SFML_SYSTEM_ANDROID
     return getTouchPositionView(view,touchIndex);
     #else
     return getMousePositionView(view);

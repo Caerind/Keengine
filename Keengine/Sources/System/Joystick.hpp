@@ -1,22 +1,18 @@
-#ifndef SGUI_JOYSTICK_HPP
-#define SGUI_JOYSTICK_HPP
+#ifndef JOYSTICK_HPP
+#define JOYSTICK_HPP
 
 #include <cmath>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
+#include <SFML/Graphics/Transformable.hpp>
 
-#include "Widget.hpp"
-
-namespace SGUI
-{
-
-class Joystick : public Widget
+class Joystick : public sf::Transformable
 {
     public:
         Joystick();
-
+		
         void setButtonTexture(sf::Texture& texture);
         void setButtonRect(sf::IntRect const& rect);
 
@@ -44,6 +40,4 @@ class Joystick : public Widget
         bool mMouse;
 };
 
-} // namespace SGUI
-
-#endif // SGUI_JOYSTICK_HPP
+#endif // JOYSTICK_HPP

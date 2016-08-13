@@ -37,6 +37,21 @@
     <Filter Include="Doc">
       <UniqueIdentifier>{a6989ad2-ebe5-4bcb-add6-a9b0951986cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\ExtLibs\TGUI">
+      <UniqueIdentifier>{83e38313-0e37-4bd7-85b5-2cb57cfe9306}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ExtLibs\TGUI\Loading">
+      <UniqueIdentifier>{316af369-5b1e-46ae-8b80-ef0c8c1afe69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ExtLibs\TGUI\Widgets">
+      <UniqueIdentifier>{5051be56-844c-4c68-b7d9-9c6aec1a5fc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ExtLibs\TGUI\Widgets\devel">
+      <UniqueIdentifier>{e291aeb7-5c1b-4a12-affa-5cd15a488121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ExtLibs\TGUI\Android">
+      <UniqueIdentifier>{de0e63cb-36a6-421a-bf33-4ab918f3407b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Example\script.lua">
@@ -52,6 +67,9 @@
     <None Include="Example\blur.frag">
       <Filter>Example</Filter>
     </None>
+    <None Include="Example\widgets.css">
+      <Filter>Example</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Example\sfml.png">
@@ -64,6 +82,18 @@
       <Filter>Doc</Filter>
     </Image>
     <Image Include="Example\particle.png">
+      <Filter>Example</Filter>
+    </Image>
+    <Image Include="Example\widgets.png">
+      <Filter>Example</Filter>
+    </Image>
+    <Image Include="Example\ortho.png">
+      <Filter>Example</Filter>
+    </Image>
+    <Image Include="Example\hexa.png">
+      <Filter>Example</Filter>
+    </Image>
+    <Image Include="Example\iso.png">
       <Filter>Example</Filter>
     </Image>
   </ItemGroup>
@@ -271,6 +301,174 @@
     </ClCompile>
     <ClCompile Include="Sources\Components\InputComponent.cpp">
       <Filter>Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\ConcaveShape.cpp">
+      <Filter>Sources\ExtLibs</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\TextureManager.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Transformable.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\VerticalLayout.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widget.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Animation.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\BoxLayout.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Clipboard.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Color.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Container.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Font.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Global.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Gui.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\HorizontalLayout.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Layout.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Signal.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Texture.cpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\SpinButton.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\Tab.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\TextBox.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\ToolTip.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\Button.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\Canvas.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\ChatBox.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\CheckBox.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\ChildWindow.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\ClickableWidget.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\ComboBox.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\EditBox.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\Grid.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\Knob.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\Label.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\ListBox.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\MenuBar.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\MessageBox.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\Panel.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\Picture.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\ProgressBar.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\RadioButton.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\Scrollbar.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\Slider.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\devel\TableRow.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets\devel</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\devel\RichTextLabel.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets\devel</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\devel\Table.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets\devel</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Widgets\devel\TableItem.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets\devel</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Loading\WidgetConverter.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Loading\WidgetLoader.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Loading\WidgetSaver.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Loading\DataIO.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Loading\Deserializer.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Loading\ObjectConverter.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Loading\Serializer.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Loading\Theme.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Loading\ThemeLoader.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\TGUI\Android\TGUIActivity.cpp">
+      <Filter>Sources\ExtLibs\TGUI\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\System\Joystick.cpp">
+      <Filter>Sources\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -582,6 +780,192 @@
     </ClInclude>
     <ClInclude Include="Sources\Components\InputComponent.hpp">
       <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\ConcaveShape.hpp">
+      <Filter>Sources\ExtLibs</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\TextureManager.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\TGUI.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Transformable.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\VerticalLayout.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widget.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Animation.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Borders.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\BoxLayout.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Callback.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Clipboard.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Color.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Config.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Container.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\DefaultFont.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Exception.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Font.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Global.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Gui.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\HorizontalLayout.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Layout.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Signal.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Texture.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\TextureData.hpp">
+      <Filter>Sources\ExtLibs\TGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\SpinButton.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\Tab.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\TextBox.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\ToolTip.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\Button.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\Canvas.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\ChatBox.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\CheckBox.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\ChildWindow.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\ClickableWidget.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\ComboBox.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\EditBox.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\Grid.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\Knob.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\Label.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\ListBox.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\MenuBar.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\MessageBox.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\Panel.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\Picture.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\ProgressBar.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\RadioButton.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\Scrollbar.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\Slider.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\devel\TableItem.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets\devel</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\devel\TableRow.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets\devel</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\devel\RichTextLabel.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets\devel</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Widgets\devel\Table.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Widgets\devel</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Loading\WidgetConverter.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Loading\WidgetLoader.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Loading\WidgetSaver.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Loading\DataIO.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Loading\Deserializer.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Loading\ObjectConverter.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Loading\Serializer.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Loading\Theme.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\TGUI\Loading\ThemeLoader.hpp">
+      <Filter>Sources\ExtLibs\TGUI\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\Joystick.hpp">
+      <Filter>Sources\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,20 +6,29 @@
 
 #include <iostream>
 
+#include "../Sources/ExtLibs/TGUI/TGUI.hpp"
+
 int main()
 {
 	Application::init("Example/");
 
 	Application::createResource<Texture>("sfml", "Example/sfml.png");
 	Application::createResource<Texture>("particle", "Example/particle.png");
+	Application::createResource<Theme>("css", "Example/widgets.css");
+
+	tgui::Button::Ptr button = Application::createGui<tgui::Button>("Button", "css");
+	button->setPosition(350, 50);
+	button->setSize(150, 50);
+	button->setText("Test");
+	button->connect("pressed", [&]() { std::cout << "test" << std::endl; });
 
 	World::createInstance();
-	World::instance().getView().setCenter(sf::Vector2f(0.f, 0.f));
 
 	World::instance().getInputs().setKeyboardMapping("MoveUp", sf::Keyboard::Z, InputType::Hold);
 	World::instance().getInputs().setKeyboardMapping("MoveLeft", sf::Keyboard::Q, InputType::Hold);
 	World::instance().getInputs().setKeyboardMapping("MoveDown", sf::Keyboard::S, InputType::Hold);
 	World::instance().getInputs().setKeyboardMapping("MoveRight", sf::Keyboard::D, InputType::Hold);
+	World::instance().getInputs().loadFromFile("Example/inputs.cfg");
 
 	World::instance().createActor<MyActor>()->setPosition(sf::Vector2f(100.f, 100.f));
 
@@ -39,6 +48,8 @@ int main()
 	});
 
 	Application::runDefault();
+
+	World::instance().getInputs().saveToFile("Example/inputs.cfg");
 
 	World::destroyInstance();
 

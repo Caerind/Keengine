@@ -8,6 +8,7 @@ class Theme : public Resource
 {
     public:
         Theme() {}
+		Theme(std::string const& filename) { loadFromFile(filename); }
 
         bool loadFromFile(std::string const& filename)
         {

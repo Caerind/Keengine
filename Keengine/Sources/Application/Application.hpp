@@ -13,6 +13,7 @@
 #include "../System/Log.hpp"
 #include "../System/IniParser.hpp"
 #include "../System/Theme.hpp"
+#include "../ExtLibs/TGUI/TGUI.hpp"
 
 class Application
 {
@@ -42,8 +43,9 @@ class Application
 
         static Application& instance();
         static Log& getLog();
-
-		static Window& getWindow(); // Dont use it unless really needed
+		static tgui::Gui& getGui();
+		template <typename T>
+		static std::shared_ptr<T> createGui(std::string const& name, std::string const& theme);
 
         //
         // Audio
@@ -182,6 +184,7 @@ class Application
         ResourceManager mResources;
         StateManager mStates;
         Window mWindow;
+		tgui::Gui mGui;
 
         std::string mPathToSettings;
         sf::Time mRunningTime;
@@ -195,6 +198,14 @@ class Application
         UpdateFunction mUpdateDefaultFunction;
         RenderFunction mRenderDefaultFunction;
 };
+
+template<typename T>
+std::shared_ptr<T> Application::createGui(std::string const& name, std::string const& theme)
+{
+	std::shared_ptr<T> widget = Application::getResource<Theme>(theme).create(name);
+	instance().mGui.add(widget);
+	return widget;
+}
 
 template <typename T, typename ... Args>
 T& Application::createResource(std::string const& id, Args&& ... args)

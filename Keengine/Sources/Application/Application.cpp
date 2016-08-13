@@ -75,6 +75,7 @@ void Application::init(std::string const& pathToSettings)
     releaseResource("application_settings");
 
     create();
+	instance().mGui.setWindow(instance().mWindow);
     ImGui::SFML::Init(instance().mWindow);
     Log::instance() << Log::Info << "NodeEngine::Application started";
     Log::instance() << Log::Info << std::string("Current time is " + getTime("%b %d, %Y %I:%M:%S %p"));
@@ -204,6 +205,7 @@ void Application::handleEvent()
     while (pollEvent(event))
     {
         ImGui::SFML::ProcessEvent(event);
+		instance().mGui.handleEvent(event);
 
         if (instance().mStateMode)
         {
@@ -288,6 +290,7 @@ void Application::render()
         }
         ImGui::End();
     }
+	instance().mGui.draw();
     ImGui::Render();
     display();
 }
@@ -318,9 +321,9 @@ Log& Application::getLog()
     return Log::instance();
 }
 
-Window& Application::getWindow()
+tgui::Gui& Application::getGui()
 {
-	return instance().mWindow;
+	return instance().mGui;
 }
 
 void Application::registerMusicFile(std::string const& id, std::string const& filename)

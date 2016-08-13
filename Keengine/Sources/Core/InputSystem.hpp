@@ -1,6 +1,7 @@
 #ifndef INPUTSYSTEM_HPP
 #define INPUTSYSTEM_HPP
 
+#include <fstream>
 #include <functional>
 #include <map>
 #include <sstream>
@@ -82,7 +83,6 @@ class InputSystem
         void unbindAction(std::string const& key);
         bool hasAction(std::string const& key) const;
 
-		// TODO : I/O File
 		bool loadFromFile(std::string const& filename);
 		bool saveToFile(std::string const& filename);
 

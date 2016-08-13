@@ -296,11 +296,56 @@ bool InputSystem::hasAction(std::string const& key) const
 
 bool InputSystem::loadFromFile(std::string const & filename)
 {
+	std::ifstream file(filename);
+	if (file)
+	{
+		std::string line;
+		while (std::getline(file, line))
+		{
+			std::string key;
+			std::string content;
+			std::size_t found = line.find_first_of(":");
+			if (found != std::string::npos)
+			{
+				key = line.substr(0, found);
+				content = line.substr(found + 1);
+				if (content.find("Mouse") != std::string::npos)
+				{
+					mMouseMapping[key].fromString(content);
+				}
+				else if (content.find("Keyboard") != std::string::npos)
+				{
+					mKeyboardMapping[key].fromString(content);
+				}
+				else
+				{
+					mEventMapping[key] = stringToEventType(content);
+				}
+			}
+		}
+	}
 	return false;
 }
 
 bool InputSystem::saveToFile(std::string const & filename)
 {
+	std::ofstream file(filename);
+	if (file)
+	{
+		for (auto itr = mEventMapping.begin(); itr != mEventMapping.end(); itr++)
+		{
+			file << itr->first << ":" << eventTypeToString(itr->second) << std::endl;
+		}
+		for (auto itr = mKeyboardMapping.begin(); itr != mKeyboardMapping.end(); itr++)
+		{
+			file << itr->first << ":" << itr->second.toString() << std::endl;
+		}
+		for (auto itr = mMouseMapping.begin(); itr != mMouseMapping.end(); itr++)
+		{
+			file << itr->first << ":" << itr->second.toString() << std::endl;
+		}
+		return true;
+	}
 	return false;
 }
 
