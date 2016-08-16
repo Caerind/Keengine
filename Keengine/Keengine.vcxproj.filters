@@ -479,8 +479,14 @@
     <ClCompile Include="Sources\Application\ResourceManager.cpp">
       <Filter>Sources\Application</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Application\ValueContainer.cpp">
+    <ClCompile Include="Sources\Application\PropertiesHolder.cpp">
       <Filter>Sources\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Core\Map.cpp">
+      <Filter>Sources\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Components\LayerComponent.cpp">
+      <Filter>Sources\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -979,11 +985,17 @@
     <ClInclude Include="Sources\Core\PhysicSystem.hpp">
       <Filter>Sources\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Application\ValueContainer.hpp">
-      <Filter>Sources\Application</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\System\Variant.hpp">
       <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Application\PropertiesHolder.hpp">
+      <Filter>Sources\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Core\Map.hpp">
+      <Filter>Sources\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Components\LayerComponent.hpp">
+      <Filter>Sources\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

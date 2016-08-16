@@ -43,10 +43,11 @@
     <ClCompile Include="Sources\Application\AudioManager.cpp" />
     <ClCompile Include="Sources\Application\ResourceManager.cpp" />
     <ClCompile Include="Sources\Application\StateManager.cpp" />
-    <ClCompile Include="Sources\Application\ValueContainer.cpp" />
+    <ClCompile Include="Sources\Application\PropertiesHolder.cpp" />
     <ClCompile Include="Sources\Application\Window.cpp" />
     <ClCompile Include="Sources\Components\CameraComponent.cpp" />
     <ClCompile Include="Sources\Components\InputComponent.cpp" />
+    <ClCompile Include="Sources\Components\LayerComponent.cpp" />
     <ClCompile Include="Sources\Components\ParticleComponent.cpp" />
     <ClCompile Include="Sources\Components\PointComponent.cpp" />
     <ClCompile Include="Sources\Components\SpriteComponent.cpp" />
@@ -54,6 +55,7 @@
     <ClCompile Include="Sources\Core\Component.cpp" />
     <ClCompile Include="Sources\Core\Effect.cpp" />
     <ClCompile Include="Sources\Core\InputSystem.cpp" />
+    <ClCompile Include="Sources\Core\Map.cpp" />
     <ClCompile Include="Sources\Core\PhysicSystem.cpp" />
     <ClCompile Include="Sources\Core\PrimitiveComponent.cpp" />
     <ClCompile Include="Sources\Core\SceneComponent.cpp" />
@@ -174,10 +176,11 @@
     <ClInclude Include="Sources\Application\AudioManager.hpp" />
     <ClInclude Include="Sources\Application\ResourceManager.hpp" />
     <ClInclude Include="Sources\Application\StateManager.hpp" />
-    <ClInclude Include="Sources\Application\ValueContainer.hpp" />
+    <ClInclude Include="Sources\Application\PropertiesHolder.hpp" />
     <ClInclude Include="Sources\Application\Window.hpp" />
     <ClInclude Include="Sources\Components\CameraComponent.hpp" />
     <ClInclude Include="Sources\Components\InputComponent.hpp" />
+    <ClInclude Include="Sources\Components\LayerComponent.hpp" />
     <ClInclude Include="Sources\Components\ParticleComponent.hpp" />
     <ClInclude Include="Sources\Components\PointComponent.hpp" />
     <ClInclude Include="Sources\Components\SpriteComponent.hpp" />
@@ -185,6 +188,7 @@
     <ClInclude Include="Sources\Core\Component.hpp" />
     <ClInclude Include="Sources\Core\Effect.hpp" />
     <ClInclude Include="Sources\Core\InputSystem.hpp" />
+    <ClInclude Include="Sources\Core\Map.hpp" />
     <ClInclude Include="Sources\Core\PhysicSystem.hpp" />
     <ClInclude Include="Sources\Core\PrimitiveComponent.hpp" />
     <ClInclude Include="Sources\Core\SceneComponent.hpp" />

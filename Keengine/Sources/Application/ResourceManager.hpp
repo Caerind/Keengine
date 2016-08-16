@@ -12,6 +12,7 @@
 #include <SFML/Graphics/Shader.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
+#include "PropertiesHolder.hpp"
 #include "../System/Log.hpp"
 #include "../ExtLibs/TGUI/Loading/Theme.hpp"
 
@@ -160,6 +161,69 @@ public:
 
 private:
 	tgui::Theme::Ptr mTheme;
+};
+
+class Tileset : public Resource, public PropertiesHolder
+{
+	public:
+		Tileset();
+
+		// TODO : Load From File / Node
+		// TODO : Save To File / Node
+
+		unsigned int getFirstGid() const;
+		const std::string& getSource() const;
+		const std::string& getName() const;
+		const sf::Vector2i& getTileSize() const;
+		unsigned int getSpacing() const;
+		unsigned int getMargin() const;
+		unsigned int getTileCount() const;
+		unsigned int getColumns() const;
+		const sf::Vector2f& getTileOffset() const;
+		const std::string& getImageData() const;
+		const std::string& getImageFormat() const;
+		const std::string& getImageSource() const;
+		sf::Color getImageTransparent() const;
+		const sf::Vector2i& getImageSize() const;
+
+		void setFirstGid(unsigned int id);
+		void setSource(std::string const& source);
+		void setName(std::string const& name);
+		void setTileSize(sf::Vector2i const& tileSize);
+		void setSpacing(unsigned int spacing);
+		void setMargin(unsigned int margin);
+		void setTileCount(unsigned int tileCount);
+		void setColumns(unsigned int columns);
+		void setOffset(sf::Vector2f const& offset);
+		void setImageData(std::string const& data);
+		void setImageFormat(std::string const& format);
+		void setImageSource(std::string const& source);
+		void setImageTransparent(sf::Color const& color);
+		void setImageSize(sf::Vector2i const& size);
+
+		sf::Texture& getTexture();
+		sf::Vector2i toPos(unsigned int gid);
+		sf::IntRect toRect(unsigned int gid);
+		unsigned int toId(sf::Vector2i const& pos);
+
+		// TODO : Add Terrain and Tile
+
+	private:
+		unsigned int mFirstGid;
+		std::string mSource;
+		std::string mName;
+		sf::Vector2i mTileSize;
+		unsigned int mSpacing;
+		unsigned int mMargin;
+		unsigned int mTileCount;
+		unsigned int mColumns;
+		sf::Vector2f mTileOffset;
+
+		std::string mImageData;
+		std::string mImageFormat;
+		std::string mImageSource;
+		sf::Color mImageTransparent;
+		sf::Vector2i mImageSize;
 };
 
 #endif // RESOURCEMANAGER_HPP

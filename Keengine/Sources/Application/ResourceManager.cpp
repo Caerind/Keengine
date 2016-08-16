@@ -1,4 +1,5 @@
 #include "ResourceManager.hpp"
+#include "Application.hpp"
 
 Resource::Resource()
 { 
@@ -294,4 +295,213 @@ bool Theme::loadFromFile(std::string const& filename)
 tgui::WidgetConverter Theme::create(std::string const& className)
 {
 	return mTheme->load(className);
+}
+
+Tileset::Tileset()
+	: mFirstGid(1)
+	, mSource()
+	, mName()
+	, mTileSize()
+	, mSpacing(0)
+	, mMargin(0)
+	, mTileCount(0)
+	, mColumns(0)
+	, mTileOffset()
+	, mImageData()
+	, mImageFormat()
+	, mImageSource()
+	, mImageTransparent(sf::Color::Transparent)
+	, mImageSize()
+	, mTexture()
+{
+}
+
+unsigned int Tileset::getFirstGid() const
+{
+	return mFirstGid;
+}
+
+const std::string& Tileset::getSource() const
+{
+	return mSource;
+}
+
+const std::string& Tileset::getName() const
+{
+	return mName;
+}
+
+const sf::Vector2i& Tileset::getTileSize() const
+{
+	return mTileSize;
+}
+
+unsigned int Tileset::getSpacing() const
+{
+	return mSpacing;
+}
+
+unsigned int Tileset::getMargin() const
+{
+	return mMargin;
+}
+
+unsigned int Tileset::getTileCount() const
+{
+	return mTileCount;
+}
+
+unsigned int Tileset::getColumns() const
+{
+	return mColumns;
+}
+
+const sf::Vector2f& Tileset::getTileOffset() const
+{
+	return mTileOffset;
+}
+
+const std::string& Tileset::getImageData() const
+{
+	return mImageData;
+}
+
+const std::string& Tileset::getImageFormat() const
+{
+	return mImageFormat;
+}
+
+const std::string& Tileset::getImageSource() const
+{
+	return mImageSource;
+}
+
+sf::Color Tileset::getImageTransparent() const
+{
+	return mImageTransparent;
+}
+
+const sf::Vector2i& Tileset::getImageSize() const
+{
+	return mImageSize;
+}
+
+void Tileset::setFirstGid(unsigned int id)
+{
+	mFirstGid = id;
+}
+
+void Tileset::setSource(std::string const& source)
+{
+	mSource = source;
+}
+
+void Tileset::setName(std::string const& name)
+{
+	mName = name;
+}
+
+void Tileset::setTileSize(sf::Vector2i const& tileSize)
+{
+	mTileSize = tileSize;
+}
+
+void Tileset::setSpacing(unsigned int spacing)
+{
+	mSpacing = spacing;
+}
+
+void Tileset::setMargin(unsigned int margin)
+{
+	mMargin = margin;
+}
+
+void Tileset::setTileCount(unsigned int tileCount)
+{
+	mTileCount = tileCount;
+}
+
+void Tileset::setColumns(unsigned int columns)
+{
+	mColumns = columns;
+}
+
+void Tileset::setOffset(sf::Vector2f const& offset)
+{
+	mTileOffset = offset;
+}
+
+void Tileset::setImageData(std::string const& data)
+{
+	mImageData = data;
+}
+
+void Tileset::setImageFormat(std::string const& format)
+{
+	mImageFormat = format;
+}
+
+void Tileset::setImageSource(std::string const& source)
+{
+	mImageSource = source;
+}
+
+void Tileset::setImageTransparent(sf::Color const& color)
+{
+	mImageTransparent = color;
+}
+
+void Tileset::setImageSize(sf::Vector2i const& size)
+{
+	mImageSize = size;
+}
+
+sf::Texture& Tileset::getTexture()
+{
+	return Application::getResource<Texture>(mSource);
+}
+
+sf::Vector2i Tileset::toPos(unsigned int gid)
+{
+	if (gid < mFirstGid || gid >= mFirstGid + mTileCount)
+	{
+		return sf::Vector2i();
+	}
+
+	gid -= mFirstGid; // Local id
+	sf::Vector2i pos;
+	if (mColumns > 0) // Avoid div 0
+	{
+		pos.x = (gid % mColumns) * (mTileSize.x + mSpacing) + mMargin;
+		pos.y = (gid / mColumns) * (mTileSize.y + mSpacing) + mMargin;
+	}
+	return pos;
+}
+
+sf::IntRect Tileset::toRect(unsigned int gid)
+{
+	if (gid < mFirstGid || gid >= mFirstGid + mTileCount)
+	{
+		return sf::IntRect();
+	}
+
+	gid -= mFirstGid;
+	sf::IntRect rect;
+	if (mColumns > 0) // Avoid div 0
+	{
+		rect.left = (gid % mColumns) * (mTileSize.x + mSpacing) + mMargin;
+		rect.top = (gid / mColumns) * (mTileSize.y + mSpacing) + mMargin;
+		rect.width = mTileSize.x;
+		rect.height = mTileSize.y;
+	}
+	return rect;
+}
+
+unsigned int Tileset::toId(sf::Vector2i const& pos)
+{
+	if (mTileSize != sf::Vector2i())
+	{
+		return 1 + (pos.x - mMargin) / (mTileSize.x + mSpacing) + (pos.y - mMargin) / (mTileSize.y + mSpacing) * mColumns;
+	}
+	return 0;
 }
