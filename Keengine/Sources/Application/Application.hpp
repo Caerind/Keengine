@@ -12,7 +12,6 @@
 #include "../ExtLibs/imgui/imgui.h"
 #include "../ExtLibs/imgui/imgui-SFML.h"
 #include "../System/Log.hpp"
-#include "../System/Theme.hpp"
 #include "../ExtLibs/TGUI/TGUI.hpp"
 #include "../Maths/Math.hpp"
 

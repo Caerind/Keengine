@@ -8,31 +8,18 @@
 class ValueContainer
 {
     public:
-		ValueContainer() {}
+		ValueContainer();
 
 		template <typename T> void set(std::string const& id, T const& value)
 		{
 			mValues[id] = Variant(value);
 		}
 
-		Variant get(std::string const& id)
-		{
-			return mValues[id];
-		}
+		Variant get(std::string const& id);
 
-		bool exist(std::string const& id) const
-		{
-			return (mValues.find(id) != mValues.end());
-		}
+		bool exist(std::string const& id) const;
 
-		void remove(std::string const& id)
-		{
-			auto itr = mValues.find(id);
-			if (itr != mValues.end())
-			{
-				mValues.erase(itr);
-			}
-		}
+		void remove(std::string const& id);
 
     protected:
         std::map<std::string,Variant> mValues;

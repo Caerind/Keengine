@@ -124,6 +124,8 @@ class World
 		std::map<std::size_t, std::shared_ptr<Effect>> mEffects;
 
 		InputSystem mInputs;
+
+		sf::RectangleShape mBackground;
 };
 
 #endif // WORLD_HPP

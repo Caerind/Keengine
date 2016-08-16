@@ -21,54 +21,29 @@ class State
         typedef std::unique_ptr<State> Ptr;
 
     public:
-        State()
-        {
-        }
+		State();
 
-        virtual ~State()
-        {
-        }
+		virtual ~State();
 
-        virtual bool handleEvent(sf::Event const& event)
-        {
-            return true;
-        }
+		virtual bool handleEvent(sf::Event const& event);
 
-        virtual bool update(sf::Time dt)
-        {
-            return true;
-        }
+		virtual bool update(sf::Time dt);
 
-        virtual void render(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates::Default)
-        {
-        }
+		virtual void render(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates::Default);
 
-        virtual void onActivate()
-        {
-        }
+		virtual void onActivate();
 
-        virtual void onDeactivate()
-        {
-        }
+		virtual void onDeactivate();
 };
 
 class StateManager
 {
     public:
-		StateManager()
-		{
-		}
+		StateManager();
 
-		~StateManager()
-		{
-		    for (auto itr = mStates.begin(); itr != mStates.end(); itr++)
-            {
-                (*itr)->onDeactivate();
-            }
-            mStates.clear();
-		}
+		~StateManager();
 
-		template<typename T>
+		template <typename T>
 		void registerState(std::string const& className)
         {
             mFactories[className] = [this]()
@@ -77,57 +52,23 @@ class StateManager
             };
         }
 
-        void handleEvent(sf::Event const& event)
-        {
-            for (auto itr = mStates.rbegin(); itr != mStates.rend(); itr++)
-            {
-                if (!(*itr)->handleEvent(event))
-                {
-                    break;
-                }
-            }
-            applyPendingChanges();
-        }
+		void handleEvent(sf::Event const& event);
 
-		void update(sf::Time dt = sf::Time::Zero)
-        {
-            for (auto itr = mStates.rbegin(); itr != mStates.rend(); itr++)
-            {
-                if (!(*itr)->update(dt))
-                {
-                    break;
-                }
-            }
-            applyPendingChanges();
-        }
+		void update(sf::Time dt);
 
-		void render(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates::Default)
-		{
-            for (auto itr = mStates.begin(); itr != mStates.end(); itr++)
-            {
-                (*itr)->render(target,states);
-            }
-        }
+		void render(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates::Default);
 
-		void pushState(std::string const& className)
-        {
-            mPendingList.push_back(PendingChange(Push, className));
-        }
+		void pushState(std::string const& className);
 
-		void popState()
-        {
-            mPendingList.push_back(PendingChange(Pop));
-        }
+		void popState();
 
-		void clearStates()
-        {
-            mPendingList.push_back(PendingChange(Clear));
-        }
+		void clearStates();
 
-		std::size_t stateCount() const
-        {
-            return mStates.size();
-        }
+		std::size_t stateCount() const;
+
+		std::vector<std::string> getStateOrder() const;
+
+		std::string getActualState() const;
 
 	protected:
 		enum Action
@@ -139,68 +80,19 @@ class StateManager
 
 		struct PendingChange
 		{
-			explicit PendingChange(Action action, std::string const& id = "")
-			: action(action)
-            , id(id)
-            {
-            }
+			explicit PendingChange(Action action, std::string const& id = "");
 
 			Action action;
 			std::string id;
 		};
 
-		void applyPendingChanges()
-        {
-            for (PendingChange change : mPendingList)
-            {
-                switch (change.action)
-                {
-                    case Action::Push:
-                        if (!mStates.empty())
-                        {
-                            mStates.back()->onDeactivate();
-                        }
-                        mStates.push_back(createState(change.id));
-                        mStates.back()->onActivate();
-                        break;
+		void applyPendingChanges();
 
-                    case Action::Pop:
-                        if (!mStates.empty())
-                        {
-                            mStates.back()->onDeactivate();
-							mStates.pop_back();
-                        }
-                        if (!mStates.empty())
-                        {
-                            mStates.back()->onActivate();
-                        }
-                        break;
-
-                    case Action::Clear:
-                        if (!mStates.empty())
-                        {
-                            mStates.back()->onDeactivate();
-                        }
-                        mStates.clear();
-                        break;
-                }
-            }
-            mPendingList.clear();
-        }
-
-		State::Ptr createState(std::string const& id)
-		{
-            auto found = mFactories.find(id);
-            if (found == mFactories.end())
-            {
-                std::cerr << "State : " << id << " : cant be loaded" << std::endl;
-                assert(false);
-            }
-            return found->second();
-        }
+		State::Ptr createState(std::string const& id);
 
 	protected:
 		std::vector<State::Ptr> mStates;
+		std::vector<std::string> mStateOrder;
 		std::vector<PendingChange> mPendingList;
 
 		std::map<std::string, std::function<State::Ptr()>> mFactories;

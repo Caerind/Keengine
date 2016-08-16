@@ -36,6 +36,19 @@ World::World()
 	, mWorldView(getApplication().getDefaultView())
 	, mEffects()
 {
+	std::string bgTexture = Application::getBackgroundTexture();
+	sf::IntRect bgRect = Application::getBackgroundTextureRect();
+	sf::Color bgColor = Application::getBackgroundColor();
+	if (bgTexture == "")
+	{
+		mBackground.setFillColor(bgColor);
+	}
+	else
+	{
+		mBackground.setFillColor(sf::Color::White);
+		mBackground.setTexture(&Application::getResource<Texture>(bgTexture));
+		mBackground.setTextureRect(bgRect);
+	}
 }
 
 World::~World()
@@ -89,6 +102,7 @@ void World::render(sf::RenderTarget& target)
 	if (target.getSize() != mSceneTexture.getSize())
 	{
 		sf::Vector2u size = target.getSize();
+		mBackground.setSize(static_cast<sf::Vector2f>(size));
 		mSceneTexture.create(size.x, size.y);
 		mVertices[0] = sf::Vertex(sf::Vector2f(0, 0), sf::Vector2f(0, 0));
 		mVertices[1] = sf::Vertex(sf::Vector2f(static_cast<float>(size.x), 0), sf::Vector2f(static_cast<float>(size.x), 0));
@@ -130,11 +144,7 @@ void World::render(sf::RenderTarget& target)
 	// Draw
 	mSceneTexture.setView(getView());
 	mSceneTexture.clear();
-	// TODO : BACKGROUND COLOR
-	sf::RectangleShape s;
-	s.setSize({ 800,600 });
-	s.setFillColor({ 75,75,75 });
-	mSceneTexture.draw(s);
+	mSceneTexture.draw(mBackground);
 	for (PrimitiveComponent* primitive : mPrimitives)
 	{
 		if (primitive->isRegistered() && primitive->isRenderable())

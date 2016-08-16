@@ -16,6 +16,15 @@
     <Filter Include="Sources\Components">
       <UniqueIdentifier>{104ba9db-7e87-4e63-ab72-e5c4204c0304}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Maths">
+      <UniqueIdentifier>{00d4d57f-2be6-40d7-a7c2-aa100db8ab69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\System">
+      <UniqueIdentifier>{27d82983-3090-4770-8ce2-3cde45161bec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Doc">
+      <UniqueIdentifier>{a6989ad2-ebe5-4bcb-add6-a9b0951986cf}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Sources\ExtLibs">
       <UniqueIdentifier>{9cc34823-b476-4313-9fa0-b21452ec1f36}</UniqueIdentifier>
     </Filter>
@@ -27,15 +36,6 @@
     </Filter>
     <Filter Include="Sources\ExtLibs\Selene">
       <UniqueIdentifier>{25046619-7c3a-4292-871f-40ebcea2a16c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Maths">
-      <UniqueIdentifier>{00d4d57f-2be6-40d7-a7c2-aa100db8ab69}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\System">
-      <UniqueIdentifier>{27d82983-3090-4770-8ce2-3cde45161bec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Doc">
-      <UniqueIdentifier>{a6989ad2-ebe5-4bcb-add6-a9b0951986cf}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\ExtLibs\TGUI">
       <UniqueIdentifier>{83e38313-0e37-4bd7-85b5-2cb57cfe9306}</UniqueIdentifier>
@@ -473,6 +473,15 @@
     <ClCompile Include="Sources\Core\PhysicSystem.cpp">
       <Filter>Sources\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Application\StateManager.cpp">
+      <Filter>Sources\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Application\ResourceManager.cpp">
+      <Filter>Sources\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Application\ValueContainer.cpp">
+      <Filter>Sources\Application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -716,9 +725,6 @@
       <Filter>Sources\Maths</Filter>
     </ClInclude>
     <ClInclude Include="Sources\System\ScriptManager.hpp">
-      <Filter>Sources\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\System\Theme.hpp">
       <Filter>Sources\System</Filter>
     </ClInclude>
     <ClInclude Include="Sources\System\Time.hpp">
@@ -972,6 +978,12 @@
     </ClInclude>
     <ClInclude Include="Sources\Core\PhysicSystem.hpp">
       <Filter>Sources\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Application\ValueContainer.hpp">
+      <Filter>Sources\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\Variant.hpp">
+      <Filter>Sources\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

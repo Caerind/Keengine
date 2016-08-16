@@ -3,7 +3,7 @@
 namespace ne
 {
 
-	float pi() { return 3,141592653589793f; }
+	float pi() { return 3.141592653589793f; }
 	float radToDeg(float rad) { return 0.01745329251994f * rad; }
 	float degToRad(float deg) { return 57.29577951308233f * deg; }
 	float cos(float deg) { return std::cos(degToRad(deg)); }

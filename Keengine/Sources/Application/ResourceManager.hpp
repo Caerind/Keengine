@@ -13,14 +13,15 @@
 #include <SFML/Graphics/Texture.hpp>
 
 #include "../System/Log.hpp"
+#include "../ExtLibs/TGUI/Loading/Theme.hpp"
 
 class Resource
 {
     public:
-        Resource() { mLoaded = false; }
-        virtual ~Resource() {}
+		Resource();
+		virtual ~Resource();
 
-        bool isLoaded() const { return mLoaded; }
+		bool isLoaded() const;
 
     protected:
         bool mLoaded;
@@ -29,14 +30,9 @@ class Resource
 class ResourceManager
 {
     public:
-        ResourceManager()
-        {
-        }
+		ResourceManager();
 
-        ~ResourceManager()
-        {
-            releaseAllResources();
-        }
+		~ResourceManager();
 
         template <typename T, typename ... Args>
         T& createResource(std::string const& id, Args&& ... args)
@@ -56,34 +52,13 @@ class ResourceManager
             return *dynamic_cast<T*>(mResources[id]);
         }
 
-        bool hasResource(std::string const& id) const
-        {
-            auto itr = mResources.find(id);
-            return (itr != mResources.end() && itr->second != nullptr);
-        }
+		bool hasResource(std::string const& id) const;
 
-        bool isResourceLoaded(std::string const& id) const
-        {
-            return (hasResource(id) && mResources.find(id)->second->isLoaded());
-        }
+		bool isResourceLoaded(std::string const& id) const;
 
-        void releaseResource(std::string const& id)
-        {
-            if (mResources.find(id) != mResources.end())
-            {
-                delete mResources[id];
-                mResources.erase(mResources.find(id));
-            }
-        }
+		void releaseResource(std::string const& id);
 
-        void releaseAllResources()
-        {
-            for (auto itr = mResources.begin(); itr != mResources.end(); itr++)
-            {
-                delete itr->second;
-            }
-            mResources.clear();
-        }
+		void releaseAllResources();
 
     protected:
         std::map<std::string,Resource*> mResources;
@@ -92,47 +67,47 @@ class ResourceManager
 class Texture : public sf::Texture, public Resource
 {
     public:
-        Texture() {}
-		Texture(std::string const& filename) { loadFromFile(filename); }
+		Texture();
+		Texture(std::string const& filename);
 
-        bool loadFromFile(std::string const& filename, sf::IntRect const& area = sf::IntRect()) { bool r = sf::Texture::loadFromFile(filename, area); mLoaded = r; return r; }
-        bool loadFromMemory(void const* data, std::size_t size, sf::IntRect const& area = sf::IntRect()) { bool r = sf::Texture::loadFromMemory(data, size, area); mLoaded = r; return r; }
-        bool loadFromStream(sf::InputStream& stream, sf::IntRect const& area = sf::IntRect()) { bool r = sf::Texture::loadFromStream(stream, area); mLoaded = r; return r; }
-        bool loadFromImage(sf::Image const& image, sf::IntRect const& area = sf::IntRect()) { bool r = sf::Texture::loadFromImage(image, area); mLoaded = r; return r; }
+		bool loadFromFile(std::string const& filename, sf::IntRect const& area = sf::IntRect());
+		bool loadFromMemory(void const* data, std::size_t size, sf::IntRect const& area = sf::IntRect());
+		bool loadFromStream(sf::InputStream& stream, sf::IntRect const& area = sf::IntRect());
+		bool loadFromImage(sf::Image const& image, sf::IntRect const& area = sf::IntRect());
 };
 
 class Image : public sf::Image, public Resource
 {
     public:
-        Image() {}
-		Image(std::string const& filename) { loadFromFile(filename); }
+		Image();
+		Image(std::string const& filename);
 
-        bool loadFromFile(std::string const& filename) { bool r = sf::Image::loadFromFile(filename); mLoaded = r; return r; }
-        bool loadFromMemory(void const* data, std::size_t size) { bool r = sf::Image::loadFromMemory(data, size); mLoaded = r; return r; }
-        bool loadFromStream(sf::InputStream& stream) { bool r = sf::Image::loadFromStream(stream); mLoaded = r; return r; }
+		bool loadFromFile(std::string const& filename);
+		bool loadFromMemory(void const* data, std::size_t size);
+		bool loadFromStream(sf::InputStream& stream);
 };
 
 class Font : public sf::Font, public Resource
 {
     public:
-        Font() {}
-		Font(std::string const& filename) { loadFromFile(filename); }
+		Font();
+		Font(std::string const& filename);
 
-        bool loadFromFile(std::string const& filename) { bool r = sf::Font::loadFromFile(filename); mLoaded = r; return r; }
-        bool loadFromMemory(void const* data, std::size_t size) { bool r = sf::Font::loadFromMemory(data, size); mLoaded = r; return r; }
-        bool loadFromStream(sf::InputStream& stream) { bool r = sf::Font::loadFromStream(stream); mLoaded = r; return r; }
+		bool loadFromFile(std::string const& filename);
+		bool loadFromMemory(void const* data, std::size_t size);
+		bool loadFromStream(sf::InputStream& stream);
 };
 
 class SoundBuffer : public sf::SoundBuffer, public Resource
 {
     public:
-        SoundBuffer() {}
-		SoundBuffer(std::string const& filename) { loadFromFile(filename); }
+		SoundBuffer();
+		SoundBuffer(std::string const& filename);
 
-        bool loadFromFile(std::string const& filename) { bool r = sf::SoundBuffer::loadFromFile(filename); mLoaded = r; return r; }
-        bool loadFromMemory(void const* data, std::size_t size) { bool r = sf::SoundBuffer::loadFromMemory(data, size); mLoaded = r; return r; }
-        bool loadFromStream(sf::InputStream& stream) { bool r = sf::SoundBuffer::loadFromStream(stream); mLoaded = r; return r; }
-        bool loadFromSamples(sf::Int16 const* samples, sf::Uint64 sampleCount, unsigned int channelCount, unsigned int sampleRate) { bool r = sf::SoundBuffer::loadFromSamples(samples, sampleCount, channelCount, sampleRate); mLoaded = r; return r; }
+		bool loadFromFile(std::string const& filename);
+		bool loadFromMemory(void const* data, std::size_t size);
+		bool loadFromStream(sf::InputStream& stream);
+		bool loadFromSamples(sf::Int16 const* samples, sf::Uint64 sampleCount, unsigned int channelCount, unsigned int sampleRate);
 };
 
 // Improvements
@@ -140,64 +115,51 @@ class SoundBuffer : public sf::SoundBuffer, public Resource
 class Shader : public sf::Shader, public Resource
 {
     public:
-        Shader() {}
+		Shader();
 
-        bool loadFromFile(std::string const& filename, sf::Shader::Type type) { bool r = sf::Shader::loadFromFile(filename, type); mLoaded = r; return r; }
-        bool loadFromFile(std::string const& vertexShaderFilename, std::string const& fragmentShaderFilename) { bool r = sf::Shader::loadFromFile(vertexShaderFilename, fragmentShaderFilename); mLoaded = r; return r; }
-        bool loadFromMemory(std::string const& shader, sf::Shader::Type type) { bool r = sf::Shader::loadFromMemory(shader, type); mLoaded = r; return r; }
-        bool loadFromMemory(std::string const& vertexShader, std::string const& fragmentShader) { bool r = sf::Shader::loadFromMemory(vertexShader, fragmentShader); mLoaded = r; return r; }
-        bool loadFromStream(sf::InputStream& stream, sf::Shader::Type type) { bool r = sf::Shader::loadFromStream(stream, type); mLoaded = r; return r; }
-        bool loadFromStream(sf::InputStream& vertexShaderStream, sf::InputStream& fragmentShaderStream) { bool r = sf::Shader::loadFromStream(vertexShaderStream, fragmentShaderStream); mLoaded = r; return r; }
+		bool loadFromFile(std::string const& filename, sf::Shader::Type type);
+		bool loadFromFile(std::string const& vertexShaderFilename, std::string const& fragmentShaderFilename);
+		bool loadFromMemory(std::string const& shader, sf::Shader::Type type);
+		bool loadFromMemory(std::string const& vertexShader, std::string const& fragmentShader);
+		bool loadFromStream(sf::InputStream& stream, sf::Shader::Type type);
+		bool loadFromStream(sf::InputStream& vertexShaderStream, sf::InputStream& fragmentShaderStream);
 
-        void setUniform(std::string const& name, float x)
-        {
-            sf::Shader::setParameter(name,x);
-            mFloats[name] = x;
-        }
+		void setUniform(std::string const& name, float x);
 
-        float getUniformFloat(std::string const& name)
-        {
-            return mFloats[name];
-        }
+		float getUniformFloat(std::string const& name);
 
-		void setUniform(std::string const& name, sf::Vector2f const& vector)
-		{
-			sf::Shader::setParameter(name, vector);
-			mVectors2f[name] = vector;
-		}
+		void setUniform(std::string const& name, sf::Vector2f const& vector);
 
-		sf::Vector2f getUniformVector2f(std::string const& name)
-		{
-			return mVectors2f[name];
-		}
+		sf::Vector2f getUniformVector2f(std::string const& name);
 
-		void setUniform(std::string const& name, sf::Vector3f const& vector)
-		{
-			sf::Shader::setParameter(name, vector);
-			mVectors3f[name] = vector;
-		}
+		void setUniform(std::string const& name, sf::Vector3f const& vector);
 
-		sf::Vector3f getUniformVector3f(std::string const& name)
-		{
-			return mVectors3f[name];
-		}
+		sf::Vector3f getUniformVector3f(std::string const& name);
 
-		void setUniform(std::string const& name, sf::Color const& color)
-		{
-			sf::Shader::setParameter(name, color);
-			mColors[name] = color;
-		}
+		void setUniform(std::string const& name, sf::Color const& color);
 
-		sf::Color getUniformColor(std::string const& name)
-		{
-			return mColors[name];
-		}
+		sf::Color getUniformColor(std::string const& name);
 
     protected:
         std::map<std::string, float> mFloats;
 		std::map<std::string, sf::Vector2f> mVectors2f;
 		std::map<std::string, sf::Vector3f> mVectors3f;
 		std::map<std::string, sf::Color> mColors;
+};
+
+class Theme : public Resource
+{
+public:
+	Theme();
+
+	Theme(std::string const& filename);
+
+	bool loadFromFile(std::string const& filename);
+
+	tgui::WidgetConverter create(std::string const& className);
+
+private:
+	tgui::Theme::Ptr mTheme;
 };
 
 #endif // RESOURCEMANAGER_HPP

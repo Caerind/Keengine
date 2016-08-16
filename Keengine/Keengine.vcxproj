@@ -41,6 +41,9 @@
     <ClCompile Include="Example\MyActor.cpp" />
     <ClCompile Include="Sources\Application\Application.cpp" />
     <ClCompile Include="Sources\Application\AudioManager.cpp" />
+    <ClCompile Include="Sources\Application\ResourceManager.cpp" />
+    <ClCompile Include="Sources\Application\StateManager.cpp" />
+    <ClCompile Include="Sources\Application\ValueContainer.cpp" />
     <ClCompile Include="Sources\Application\Window.cpp" />
     <ClCompile Include="Sources\Components\CameraComponent.cpp" />
     <ClCompile Include="Sources\Components\InputComponent.cpp" />
@@ -171,6 +174,7 @@
     <ClInclude Include="Sources\Application\AudioManager.hpp" />
     <ClInclude Include="Sources\Application\ResourceManager.hpp" />
     <ClInclude Include="Sources\Application\StateManager.hpp" />
+    <ClInclude Include="Sources\Application\ValueContainer.hpp" />
     <ClInclude Include="Sources\Application\Window.hpp" />
     <ClInclude Include="Sources\Components\CameraComponent.hpp" />
     <ClInclude Include="Sources\Components\InputComponent.hpp" />
@@ -328,8 +332,8 @@
     <ClInclude Include="Sources\System\ScriptManager.hpp" />
     <ClInclude Include="Sources\System\SmartPool.hpp" />
     <ClInclude Include="Sources\System\String.hpp" />
-    <ClInclude Include="Sources\System\Theme.hpp" />
     <ClInclude Include="Sources\System\Time.hpp" />
+    <ClInclude Include="Sources\System\Variant.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2fc9c7b4-4c0c-421b-9fe9-54e7947d8769}</ProjectGuid>
