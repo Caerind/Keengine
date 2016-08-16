@@ -27,6 +27,7 @@ class Actor
 		virtual void onCreated();
 		virtual void onDestroyed();
 
+		void setId(std::string const& id);
 		std::string getId() const;
 
 		const sf::Vector2f& getPosition() const;
@@ -40,6 +41,8 @@ class Actor
 		const sf::Vector2f& getScale() const;
 		void setScale(sf::Vector2f const& scale);
 		void scale(sf::Vector2f const& scale);
+
+		const sf::Transform& getTransform();
 
 		float getZ() const;
 		void setZ(float z);
@@ -55,7 +58,8 @@ class Actor
 		void unregisterComponent(Component* component);
 
 		World& getWorld() const;
-		
+
+
 	private:
 		SceneComponent mRoot;
 		std::vector<Component*> mComponents;

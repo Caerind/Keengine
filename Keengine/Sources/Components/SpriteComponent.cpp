@@ -47,3 +47,13 @@ void SpriteComponent::render(sf::RenderTarget& target)
 {
     target.draw(mSprite, sf::RenderStates(getWorldTransform()));
 }
+
+sf::FloatRect SpriteComponent::getLocalBounds()
+{
+	return getTransform().transformRect(mSprite.getLocalBounds());
+}
+
+sf::FloatRect SpriteComponent::getGlobalBounds()
+{
+	return getWorldTransform().transformRect(mSprite.getLocalBounds());
+}

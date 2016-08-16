@@ -1,4 +1,5 @@
 #include "Application.hpp"
+#include "../System/IniParser.hpp"
 
 void Application::init(std::string const& pathToSettings)
 {
@@ -8,12 +9,10 @@ void Application::init(std::string const& pathToSettings)
         if (!parser.loadFromFile(instance().mPathToSettings + "application_settings.ini"))
         {
             Log::instance() << Log::Warning << "Application Settings can't be loaded, at : " + pathToSettings + "application_settings.ini";
-            Log::instance() << Log::Warning << "At : " + pathToSettings + "application_settings.ini";
 
             parser["log_console"] = true;
             parser["log_file"] = "";
             parser["log_url"] = "";
-            parser["log_uri"] = "";
             parser["global_volume"] = 100.f;
             parser["music_volume"] = 100.f;
             parser["sound_volume"] = 100.f;
@@ -50,7 +49,7 @@ void Application::init(std::string const& pathToSettings)
 		// TODO : Still bugs here ?
         Log::instance().useConsole(parser["log_console"].asBool());
         Log::instance().openLog(parser["log_file"]);
-        Log::instance().setOnline(parser["log_url"], parser["log_uri"]);
+        Log::instance().setOnline(parser["log_url"]);
         setGlobalVolume(parser["global_volume"].asFloat());
         setMusicVolume(parser["music_volume"].asFloat());
         setSoundVolume(parser["sound_volume"].asFloat());
@@ -91,7 +90,6 @@ void Application::quit()
     parser["log_console"] = Log::instance().usingConsole();
     parser["log_file"] = Log::instance().getFilename();
     parser["log_url"] = Log::instance().getUrl();
-    parser["log_uri"] = Log::instance().getUri();
     parser["global_volume"] = getGlobalVolume();
     parser["music_volume"] = getMusicVolume();
     parser["sound_volume"] = getSoundVolume();
@@ -321,9 +319,19 @@ Log& Application::getLog()
     return Log::instance();
 }
 
+Window& Application::getWindow()
+{
+	return instance().mWindow;
+}
+
 tgui::Gui& Application::getGui()
 {
 	return instance().mGui;
+}
+
+ValueContainer& Application::getValues()
+{
+	return instance().mValues;
 }
 
 void Application::registerMusicFile(std::string const& id, std::string const& filename)

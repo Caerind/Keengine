@@ -7,6 +7,7 @@
 #include <SFML/Network/IpAddress.hpp>
 #include <SFML/Network/Http.hpp>
 #include <SFML/System/Thread.hpp>
+#include <SFML/System/Sleep.hpp>
 
 // Improvements :
 // - Thread-safe
@@ -14,13 +15,17 @@ class HttpThread
 {
     public:
         HttpThread();
-        HttpThread(std::string const& url, std::string const& uri);
+        HttpThread(std::string const& url);
         ~HttpThread();
 
         void run();
 
-        void setAddress(std::string const& url, std::string const& uri);
+        void setAddress(std::string const& url);
         void setMessage(std::string const& message);
+
+		static void splitUrl(std::string const& longurl, std::string& url, std::string& uri);
+
+		static bool sendHttpRequest(std::string const& url, std::string const& request, std::string& response = std::string());
 
     private:
         sf::Thread mThread;
@@ -30,7 +35,6 @@ class HttpThread
         std::vector<std::string> mMessages;
 
         std::string mUrl;
-        std::string mUri;
 };
 
 #endif // HTTPTHREAD_HPP

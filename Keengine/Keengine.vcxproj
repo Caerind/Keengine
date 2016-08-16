@@ -51,6 +51,7 @@
     <ClCompile Include="Sources\Core\Component.cpp" />
     <ClCompile Include="Sources\Core\Effect.cpp" />
     <ClCompile Include="Sources\Core\InputSystem.cpp" />
+    <ClCompile Include="Sources\Core\PhysicSystem.cpp" />
     <ClCompile Include="Sources\Core\PrimitiveComponent.cpp" />
     <ClCompile Include="Sources\Core\SceneComponent.cpp" />
     <ClCompile Include="Sources\Core\World.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="Sources\Core\Component.hpp" />
     <ClInclude Include="Sources\Core\Effect.hpp" />
     <ClInclude Include="Sources\Core\InputSystem.hpp" />
+    <ClInclude Include="Sources\Core\PhysicSystem.hpp" />
     <ClInclude Include="Sources\Core\PrimitiveComponent.hpp" />
     <ClInclude Include="Sources\Core\SceneComponent.hpp" />
     <ClInclude Include="Sources\Core\World.hpp" />

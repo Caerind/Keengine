@@ -12,6 +12,7 @@
 #include "Actor.hpp"
 #include "Effect.hpp"
 #include "InputSystem.hpp"
+#include "PhysicSystem.hpp"
 #include "PrimitiveComponent.hpp"
 
 #include "../Components/CameraComponent.hpp"
@@ -42,7 +43,13 @@ class World
 		void unregisterPrimitive(PrimitiveComponent* component);
 
 		template <typename T, typename ... Args>
-		std::shared_ptr<T> createActor(Args&& ... args);
+		std::shared_ptr<T> createActor(Args&& ... args)
+		{
+			std::shared_ptr<T> actor = std::make_shared<T>(std::forward<Args>(args)...);
+			instance().mActors.push_back(actor);
+			actor->onCreated();
+			return actor;
+		}
 
 		void removeActor(std::string const& id);
 		void removeActor(std::size_t index);
@@ -51,6 +58,26 @@ class World
 
 		Actor::Ptr getActor(std::string const& id) const;
 		Actor::Ptr getActor(std::size_t index) const;
+		template <typename T>
+		std::shared_ptr<T> getTypedActor(std::string const& id) const
+		{
+			Actor::Ptr actor = getActor(id);
+			if (actor == nullptr)
+			{
+				return nullptr;
+			}
+			return std::dynamic_pointer_cast<T>(actor);
+		}
+		template <typename T>
+		std::shared_ptr<T> getTypedActor(std::size_t index) const
+		{
+			Actor::Ptr actor = getActor(index);
+			if (actor == nullptr)
+			{
+				return nullptr;
+			}
+			return std::dynamic_pointer_cast<T>(actor);
+		}
 
 		std::size_t getActorCount() const;
 
@@ -59,10 +86,21 @@ class World
 		sf::Time getTimeSinceCreation() const;
 
 		template <typename T>
-		void setEffect(std::size_t const& order);
+		void setEffect(std::size_t const& order)
+		{
+			mEffects[order] = std::make_shared<T>();
+		}
 
 		template <typename T>
-		std::shared_ptr<T> getEffect(std::size_t const& order);
+		std::shared_ptr<T> getEffect(std::size_t const& order)
+		{
+			auto itr = mEffects.find(order);
+			if (itr != mEffects.end())
+			{
+				return static_cast<std::shared_ptr<T>>(itr->second);
+			}
+			return nullptr;
+		}
 
 		void removeEffect(std::size_t const& order);
 
@@ -89,29 +127,3 @@ class World
 };
 
 #endif // WORLD_HPP
-
-template <typename T, typename ... Args>
-std::shared_ptr<T> World::createActor(Args&& ...args)
-{
-	std::shared_ptr<T> actor = std::make_shared<T>(std::forward<Args>(args)...);
-	instance().mActors.push_back(actor);
-	actor->onCreated();
-	return actor;
-}
-
-template <typename T>
-void World::setEffect(std::size_t const& order)
-{
-	mEffects[order] = std::make_shared<T>();
-}
-
-template <typename T>
-std::shared_ptr<T> World::getEffect(std::size_t const& order)
-{
-	auto itr = mEffects.find(order);
-	if (itr != mEffects.end())
-	{
-		return static_cast<std::shared_ptr<T>>(itr->second);
-	}
-	return nullptr;
-}

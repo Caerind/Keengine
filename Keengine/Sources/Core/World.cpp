@@ -130,6 +130,11 @@ void World::render(sf::RenderTarget& target)
 	// Draw
 	mSceneTexture.setView(getView());
 	mSceneTexture.clear();
+	// TODO : BACKGROUND COLOR
+	sf::RectangleShape s;
+	s.setSize({ 800,600 });
+	s.setFillColor({ 75,75,75 });
+	mSceneTexture.draw(s);
 	for (PrimitiveComponent* primitive : mPrimitives)
 	{
 		if (primitive->isRegistered() && primitive->isRenderable())
@@ -216,7 +221,7 @@ std::size_t World::getActorCount() const
 
 std::size_t World::getActualId()
 {
-	return mIdCounter;
+	return mIdCounter++;
 }
 
 sf::Time World::getTimeSinceCreation() const

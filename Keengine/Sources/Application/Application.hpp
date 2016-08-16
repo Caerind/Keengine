@@ -4,6 +4,7 @@
 #include "AudioManager.hpp"
 #include "ResourceManager.hpp"
 #include "StateManager.hpp"
+#include "ValueContainer.hpp"
 #include "Window.hpp"
 
 #include <SFML/Graphics.hpp>
@@ -11,9 +12,9 @@
 #include "../ExtLibs/imgui/imgui.h"
 #include "../ExtLibs/imgui/imgui-SFML.h"
 #include "../System/Log.hpp"
-#include "../System/IniParser.hpp"
 #include "../System/Theme.hpp"
 #include "../ExtLibs/TGUI/TGUI.hpp"
+#include "../Maths/Math.hpp"
 
 class Application
 {
@@ -43,9 +44,12 @@ class Application
 
         static Application& instance();
         static Log& getLog();
+		static Window& getWindow();
 		static tgui::Gui& getGui();
-		template <typename T>
-		static std::shared_ptr<T> createGui(std::string const& name, std::string const& theme);
+		static ValueContainer& getValues();
+
+		template <typename T> static std::shared_ptr<T> createGui(std::string const& name, std::string const& theme);
+		// TODO : Create Gui without theme
 
         //
         // Audio
@@ -81,7 +85,7 @@ class Application
         // States
         //
         template <typename T>
-        static void registerState();
+        static void registerState(std::string const& className);
         static void pushState(std::string const& id);
         static void popState();
         static void clearStates();
@@ -185,6 +189,7 @@ class Application
         StateManager mStates;
         Window mWindow;
 		tgui::Gui mGui;
+		ValueContainer mValues;
 
         std::string mPathToSettings;
         sf::Time mRunningTime;
@@ -220,9 +225,9 @@ T& Application::getResource(std::string const& id)
 }
 
 template <typename T>
-void Application::registerState()
+void Application::registerState(std::string const& className)
 {
-    instance().mStates.registerState<T>();
+    instance().mStates.registerState<T>(className);
 }
 
 template <typename T>

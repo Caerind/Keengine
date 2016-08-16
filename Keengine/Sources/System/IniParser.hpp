@@ -6,86 +6,14 @@
 #include <map>
 
 #include "../Application/ResourceManager.hpp"
+#include "Variant.hpp"
 
-namespace ini
-{
-
-class Variant : public std::string
-{
-    public:
-        template <typename T>
-        Variant(const T &t) : std::string(std::to_string(t))
-        {}
-
-        Variant(bool boolean) : std::string((boolean) ? "true" : "false")
-        {}
-
-        template <size_t N>
-        Variant(const char (&s)[N]) : std::string(s, N)
-        {}
-
-        Variant(const char *cstr) : std::string(cstr)
-        {}
-
-        Variant(const std::string &other = std::string()) : std::string(other)
-        {}
-
-        template <typename T>
-        operator T() const
-        {
-            T t;
-            std::stringstream ss;
-            return ss << *this && ss >> t ? t : T();
-        }
-
-        template <typename T> bool operator==(const T &t) const
-        {
-            return 0 == this->compare(Variant(t));
-        }
-
-        bool operator==(const char *t) const
-        {
-            return this->compare(t) == 0;
-        }
-
-        inline bool asBool()
-        {
-            return (*this == "true");
-        }
-
-        inline int asInt()
-        {
-			std::stringstream iss(*this);
-			int value;
-			iss >> value;
-			return value;
-        }
-
-        inline unsigned int asUint()
-        {
-			std::stringstream iss(*this);
-			unsigned int value;
-			iss >> value;
-			return value;
-        }
-
-        inline float asFloat()
-        {
-			std::stringstream iss(*this);
-			float value;
-			iss >> value;
-			return value;
-        }
-};
-
-}
-
-class IniParser : public std::map<std::string,ini::Variant>, public Resource
+class IniParser : public std::map<std::string,Variant>, public Resource
 {
     public:
         IniParser() {}
 
-        ini::Variant& operator[](std::string const& id)
+        Variant& operator[](std::string const& id)
         {
             for (std::size_t i = 0; i < mPairs.size(); i++)
             {
@@ -94,7 +22,7 @@ class IniParser : public std::map<std::string,ini::Variant>, public Resource
                     return mPairs[i].second;
                 }
             }
-            mPairs.push_back(std::pair<std::string,ini::Variant>(id,std::string()));
+            mPairs.push_back(std::pair<std::string, Variant>(id, std::string()));
             return mPairs.back().second;
         }
 
@@ -120,7 +48,7 @@ class IniParser : public std::map<std::string,ini::Variant>, public Resource
                     std::size_t found = line.find_first_of('=');
                     std::string key = trim(line.substr(0, found));
                     std::string value = (found == std::string::npos) ? std::string() : trim(line.substr(found + 1));
-                    mPairs.push_back(std::pair<std::string,ini::Variant>(key,value));
+                    mPairs.push_back(std::pair<std::string, Variant>(key, value));
                 }
             }
             mLoaded = true;
@@ -143,7 +71,7 @@ class IniParser : public std::map<std::string,ini::Variant>, public Resource
         }
 
     private:
-        std::vector<std::pair<std::string,ini::Variant>> mPairs;
+        std::vector<std::pair<std::string, Variant>> mPairs;
 };
 
 #endif // INIPARSER_HPP

@@ -26,6 +26,8 @@ class SceneComponent : public Component
 		void setScale(sf::Vector2f const& scale);
 		void scale(sf::Vector2f const& scale);
 
+		const sf::Transform& getTransform() const;
+
 		float getZ() const;
 		void setZ(float z);
 		void moveZ(float z);

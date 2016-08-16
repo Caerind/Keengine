@@ -168,8 +168,8 @@ class StateManager
                         if (!mStates.empty())
                         {
                             mStates.back()->onDeactivate();
+							mStates.pop_back();
                         }
-                        mStates.pop_back();
                         if (!mStates.empty())
                         {
                             mStates.back()->onActivate();

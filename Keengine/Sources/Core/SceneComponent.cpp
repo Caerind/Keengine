@@ -67,6 +67,11 @@ void SceneComponent::scale(sf::Vector2f const& scale)
 	onChangedTransform();
 }
 
+const sf::Transform& SceneComponent::getTransform() const
+{
+	return mTransformable.getTransform();
+}
+
 float SceneComponent::getZ() const
 {
 	return mZ;

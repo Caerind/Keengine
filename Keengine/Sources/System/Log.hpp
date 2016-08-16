@@ -150,13 +150,12 @@ class Log
             return instance().mConsole;
         }
 
-		static void setOnline(std::string const& url, std::string const& uri = "")
+		static void setOnline(std::string const& url)
 		{
 		    instance().mUrl = url;
-		    instance().mUri = uri;
             if (url != "")
             {
-                instance().mThread.setAddress(url, uri);
+                instance().mThread.setAddress(url);
                 instance().mOnline = true;
             }
             else
@@ -168,11 +167,6 @@ class Log
         static std::string getUrl()
         {
             return instance().mUrl;
-        }
-
-        static std::string getUri()
-        {
-            return instance().mUri;
         }
 
 		static bool isOnline()
@@ -197,7 +191,6 @@ class Log
 		bool mOnline;
 		HttpThread mThread;
 		std::string mUrl;
-		std::string mUri;
 };
 
 #endif // LOG_HPP

@@ -21,6 +21,8 @@ class SpriteComponent : public PrimitiveComponent
         sf::Color getColor() const;
 
         void render(sf::RenderTarget& target);
+		sf::FloatRect getLocalBounds();
+		sf::FloatRect getGlobalBounds();
 
     private:
         sf::Sprite mSprite;

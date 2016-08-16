@@ -470,6 +470,9 @@
     <ClCompile Include="Sources\System\Joystick.cpp">
       <Filter>Sources\System</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Core\PhysicSystem.cpp">
+      <Filter>Sources\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -966,6 +969,9 @@
     </ClInclude>
     <ClInclude Include="Sources\System\Joystick.hpp">
       <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Core\PhysicSystem.hpp">
+      <Filter>Sources\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

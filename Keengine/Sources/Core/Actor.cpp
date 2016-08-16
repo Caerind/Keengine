@@ -43,6 +43,11 @@ void Actor::onDestroyed()
 {
 }
 
+void Actor::setId(std::string const & id)
+{
+	mId = id;
+}
+
 std::string Actor::getId() const
 {
 	return mId;
@@ -91,6 +96,11 @@ void Actor::setScale(sf::Vector2f const & scale)
 void Actor::scale(sf::Vector2f const & scale)
 {
 	mRoot.scale(scale);
+}
+
+const sf::Transform& Actor::getTransform()
+{
+	return mRoot.getWorldTransform();
 }
 
 float Actor::getZ() const
