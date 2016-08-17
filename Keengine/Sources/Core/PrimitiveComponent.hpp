@@ -11,11 +11,13 @@ class PrimitiveComponent : public SceneComponent
         PrimitiveComponent();
         virtual ~PrimitiveComponent();
 		
-		bool isRenderable() const;
+		void setVisible(bool visible);
+		bool isVisible() const;
+
 		virtual void render(sf::RenderTarget& target);
 		
 	protected:
-		bool mRenderable;
+		bool mVisible;
 };
 
 #endif // PRIMITIVECOMPONENT_HPP

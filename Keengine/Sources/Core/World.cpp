@@ -147,7 +147,7 @@ void World::render(sf::RenderTarget& target)
 	mSceneTexture.draw(mBackground);
 	for (PrimitiveComponent* primitive : mPrimitives)
 	{
-		if (primitive->isRegistered() && primitive->isRenderable())
+		if (primitive->isRegistered() && primitive->isVisible())
 		{
 			primitive->render(mSceneTexture);
 		}
@@ -268,4 +268,24 @@ void World::registerCamera(CameraComponent* camera)
 void World::unregisterCamera(CameraComponent* camera)
 {
 	mCamera = nullptr;
+}
+
+bool World::hasResource(std::string const& id)
+{
+	return Application::hasResource(id);
+}
+
+bool World::isResourceLoaded(std::string const& id)
+{
+	return Application::isResourceLoaded(id);
+}
+
+void World::releaseResource(std::string const& id)
+{
+	Application::releaseResource(id);
+}
+
+void World::releaseAllResources()
+{
+	Application::releaseAllResources();
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" name="test" tilewidth="16" tileheight="16" tilecount="104" columns="8">
+  <image source="ortho.png" width="128" height="208"/>
+ </tileset>
+ <layer name="Calque de Tile 1" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmDsSwjAMRN0AFVABx0gFVEAF3P9GbJ3YY2ktyWTGxSslxdbq40wppWlQ5Apu4O5sw7IBW7BT2DzAE7wCvm8PDuCosHmDD/gG3PEJnMHF+NyRd8wgueN/pZZ7K22wfmq5t9IG66eWeyttrFljgyXMrIn0zcwaaVzG9xxm1kjjes2xljNp+2dr39baa/tna9/W2mv7Z2u/9ejXkbuwd056nEWTk7FzLvGcWRZ4zqw5jH4tZ1YtfpR+S2eqxe+9z7bGj3o35ZBoNurdlENSh1Hvphy99rs10mNOa2JKdWz571FTO1IdM/VYsvGoHcZn7x4/iOUHCB0nRA==
+  </data>
+ </layer>
+</map>

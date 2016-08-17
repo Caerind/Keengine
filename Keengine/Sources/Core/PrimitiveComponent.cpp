@@ -2,7 +2,7 @@
 #include "World.hpp"
 
 PrimitiveComponent::PrimitiveComponent()
-	: mRenderable(true)
+	: mVisible(true)
 {
     getWorld().registerPrimitive(this);
 }
@@ -11,10 +11,15 @@ PrimitiveComponent::~PrimitiveComponent()
 {
     getWorld().unregisterPrimitive(this);
 }
-		
-bool PrimitiveComponent::isRenderable() const
+
+void PrimitiveComponent::setVisible(bool visible)
 {
-	return mRenderable;
+	mVisible = visible;
+}
+
+bool PrimitiveComponent::isVisible() const
+{
+	return mVisible;
 }
 
 void PrimitiveComponent::render(sf::RenderTarget& target)

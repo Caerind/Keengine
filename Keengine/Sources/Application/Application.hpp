@@ -4,7 +4,7 @@
 #include "AudioManager.hpp"
 #include "ResourceManager.hpp"
 #include "StateManager.hpp"
-#include "ValueContainer.hpp"
+#include "PropertiesHolder.hpp"
 #include "Window.hpp"
 
 #include <SFML/Graphics.hpp>
@@ -45,7 +45,7 @@ class Application
         static Log& getLog();
 		static Window& getWindow();
 		static tgui::Gui& getGui();
-		static ValueContainer& getValues();
+		static PropertiesHolder& getValues();
 
 		template <typename T> static std::shared_ptr<T> createGui(std::string const& name, std::string const& theme);
 		// TODO : Create Gui without theme
@@ -188,7 +188,7 @@ class Application
         StateManager mStates;
         Window mWindow;
 		tgui::Gui mGui;
-		ValueContainer mValues;
+		PropertiesHolder mProperties;
 
         std::string mPathToSettings;
         sf::Time mRunningTime;

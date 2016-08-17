@@ -10,6 +10,8 @@
 
 #include "../Sources/System/ScriptManager.hpp"
 
+#include "../Sources/Core/Map.hpp"
+
 int main()
 {
 	Application::init("Example/");
@@ -41,7 +43,10 @@ int main()
 	World::instance().getInputs().setKeyboardMapping("MoveRight", sf::Keyboard::D, InputType::Hold);
 	World::instance().getInputs().loadFromFile("Example/inputs.cfg");
 
-	World::instance().createActor<MyActor>()->setPosition(sf::Vector2f(100.f, 100.f));
+	{
+		Map::Ptr map = World::instance().createActor<Map>();
+		map->loadTmxFile("Example/map.tmx");
+	}
 
 	Application::setEventDefaultFunction([&](sf::Event const& event)
 	{

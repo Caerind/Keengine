@@ -329,9 +329,9 @@ tgui::Gui& Application::getGui()
 	return instance().mGui;
 }
 
-ValueContainer& Application::getValues()
+PropertiesHolder& Application::getValues()
 {
-	return instance().mValues;
+	return instance().mProperties;
 }
 
 void Application::registerMusicFile(std::string const& id, std::string const& filename)

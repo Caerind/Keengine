@@ -20,6 +20,9 @@ class LayerComponent : public PrimitiveComponent, public PropertiesHolder
 
 		void render(sf::RenderTarget& target);
 
+		bool loadFromNode(pugi::xml_node const& node, Tileset* tileset, sf::Vector2i const& size, sf::Vector2i const& tileSize, std::string const& orientation, std::string const& staggerAxis, std::string const& staggerIndex, unsigned int hexSideLength);
+		void saveToNode(pugi::xml_node& node);
+
 		unsigned int getTileId(sf::Vector2i const& coords);
 		void setTileId(sf::Vector2i const& coords, unsigned int id);
 
@@ -61,13 +64,11 @@ class LayerComponent : public PrimitiveComponent, public PropertiesHolder
 		unsigned int getHexSizeLength() const;
 		void setHexSideLength(unsigned int hexSideLength);
 
-	private:
 		void updateRender();
-		sf::Vector2f getVertexPosition(sf::Vector2i const& coords);	
+		sf::Vector2f getVertexPosition(sf::Vector2i const& coords);
 
 	private:
 		sf::VertexArray mVertices;
-		sf::Texture* mTexture;
 
 		Tileset* mTileset;
 		float mOpacity;

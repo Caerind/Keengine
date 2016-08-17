@@ -108,6 +108,21 @@ class World
 		void registerCamera(CameraComponent* camera);
 		void unregisterCamera(CameraComponent* camera);
 
+		template <typename T, typename ... Args>
+		T& createResource(std::string const& id, Args&& ... args)
+		{
+			return Application::createResource<T>(id, std::forward<Args>(args)...);
+		}
+		template <typename T>
+		T& getResource(std::string const& id)
+		{
+			return Application::getResource<T>(id);
+		}
+		bool hasResource(std::string const& id);
+		bool isResourceLoaded(std::string const& id);
+		void releaseResource(std::string const& id);
+		void releaseAllResources();
+
 	private:
 		std::size_t mIdCounter;
 		std::vector<Actor::Ptr> mActors;

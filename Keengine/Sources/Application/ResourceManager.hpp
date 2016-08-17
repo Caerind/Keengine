@@ -15,6 +15,7 @@
 #include "PropertiesHolder.hpp"
 #include "../System/Log.hpp"
 #include "../ExtLibs/TGUI/Loading/Theme.hpp"
+#include "../ExtLibs/pugixml.hpp"
 
 class Resource
 {
@@ -167,9 +168,12 @@ class Tileset : public Resource, public PropertiesHolder
 {
 	public:
 		Tileset();
+		Tileset(pugi::xml_node const& node, std::string const& mapPath);
 
-		// TODO : Load From File / Node
-		// TODO : Save To File / Node
+		bool loadFromNode(pugi::xml_node const& node, std::string const& mapPath, bool fromTsx = false);
+		bool loadFromFile(std::string const& filename);
+		bool saveToNode(pugi::xml_node& node, bool fromTsx = false);
+		bool saveToFile(std::string const& filename);
 
 		unsigned int getFirstGid() const;
 		const std::string& getSource() const;
@@ -209,6 +213,8 @@ class Tileset : public Resource, public PropertiesHolder
 		// TODO : Add Terrain and Tile
 
 	private:
+		sf::Texture mTexture;
+
 		unsigned int mFirstGid;
 		std::string mSource;
 		std::string mName;
@@ -224,6 +230,9 @@ class Tileset : public Resource, public PropertiesHolder
 		std::string mImageSource;
 		sf::Color mImageTransparent;
 		sf::Vector2i mImageSize;
+
+		bool mImageChanged;
+		std::string mMapPath;
 };
 
 #endif // RESOURCEMANAGER_HPP

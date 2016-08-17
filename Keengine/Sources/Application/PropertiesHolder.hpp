@@ -1,7 +1,7 @@
 #ifndef PROPERTIESHOLDER_HPP
 #define PROPERTIESHOLDER_HPP
 
-#include <map>
+#include <unordered_map>
 #include <string>
 #include "../System/Variant.hpp"
 
@@ -12,7 +12,7 @@ class PropertiesHolder
 
 		template <typename T> void setProperty(std::string const& id, T const& value)
 		{
-			mValues[id] = Variant(value);
+			mProperties[id] = Variant(value);
 		}
 
 		Variant getProperty(std::string const& id);
@@ -22,7 +22,7 @@ class PropertiesHolder
 		void removeProperty(std::string const& id);
 
     protected:
-        std::map<std::string, Variant> mProperties;
+		std::unordered_map<std::string, Variant> mProperties;
 };
 
 #endif // PROPERTIESHOLDER_HPP

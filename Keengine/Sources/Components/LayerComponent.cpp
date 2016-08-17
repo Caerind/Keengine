@@ -1,8 +1,8 @@
 #include "LayerComponent.hpp"
 
 LayerComponent::LayerComponent()
-	: mVertices()
-	, mTexture(nullptr)
+	: mVertices(sf::Triangles)
+	, mTileset(nullptr)
 	, mSize()
 	, mTileSize()
 	, mOrientation("orthogonal")
@@ -18,8 +18,8 @@ LayerComponent::LayerComponent()
 }
 
 LayerComponent::LayerComponent(Tileset* tileset, sf::Vector2i const& size, sf::Vector2i const& tileSize, std::string const& orientation, std::string const& staggerAxis, std::string const& staggerIndex, unsigned int hexSideLength)
-	: mVertices()
-	, mTexture(nullptr)
+	: mVertices(sf::Triangles)
+	, mTileset(nullptr)
 	, mSize()
 	, mTileSize()
 	, mOrientation("orthogonal")
@@ -40,12 +40,246 @@ void LayerComponent::render(sf::RenderTarget& target)
 	states.transform *= getWorldTransform();
 	if (mTileset != nullptr)
 	{
-		if (mTexture != nullptr)
-		{
-			states.texture = mTexture;
-		}
+		states.texture = &mTileset->getTexture();
 	}
 	target.draw(mVertices, states);
+}
+
+bool LayerComponent::loadFromNode(pugi::xml_node const& node, Tileset* tileset, sf::Vector2i const& size, sf::Vector2i const& tileSize, std::string const& orientation, std::string const& staggerAxis, std::string const& staggerIndex, unsigned int hexSideLength)
+{
+	if (!node)
+	{
+		return false;
+	}
+	for (const pugi::xml_attribute& attr : node.attributes())
+	{
+		if (attr.name() == std::string("name"))
+		{
+			mName = attr.as_string();
+		}
+		// TODO : Handle offset as position
+		if (attr.name() == std::string("opacity"))
+		{
+			mOpacity = attr.as_float();
+		}
+		// TODO : Handle visible
+	}
+
+	pugi::xml_node prop = node.child("properties");
+	if (prop)
+	{
+		for (const pugi::xml_node& property : prop.children("property"))
+		{
+			std::string name = property.attribute("name").as_string();
+			std::string value = property.attribute("value").as_string();
+			setProperty(name, value);
+		}
+	}
+
+	pugi::xml_node dataNode = node.child("data");
+	if (!dataNode)
+	{
+		return false;
+	}
+	for (pugi::xml_attribute attr = dataNode.first_attribute(); attr; attr = attr.next_attribute())
+	{
+		if (attr.name() == std::string("encoding"))
+		{
+			mEncoding = attr.as_string();
+		}
+		if (attr.name() == std::string("compression"))
+		{
+			mCompression = attr.as_string();
+		}
+	}
+
+	mTileset = tileset;
+	mSize = size;
+	mTileSize = tileSize;
+	mOrientation = orientation;
+	mStaggerAxis = staggerAxis;
+	mStaggerIndex = staggerIndex;
+	mHexSideLength = hexSideLength;
+
+	updateRender();
+
+	sf::Vector2i coords;
+	const unsigned int FLIPPED_HORIZONTALLY_FLAG = 0x80000000;
+	const unsigned int FLIPPED_VERTICALLY_FLAG = 0x40000000;
+	const unsigned int FLIPPED_DIAGONALLY_FLAG = 0x20000000;
+	if (mEncoding == "base64")
+	{
+		std::string data;
+		std::stringstream ss;
+		ss << dataNode.text().get();
+		ss >> data;
+		if (!base64_decode(data))
+		{
+			return false;
+		}
+		if (mCompression != "")
+		{
+			if (!decompressString(data))
+			{
+				return false;
+			}
+		}
+		std::vector<unsigned char> byteVector;
+		byteVector.reserve(mSize.x * mSize.y * 4);
+		for (std::string::iterator i = data.begin(); i != data.end(); ++i)
+		{
+			byteVector.push_back(*i);
+		}
+		for (std::size_t i = 0; i < byteVector.size() - 3; i += 4)
+		{
+			unsigned int gid = byteVector[i] | byteVector[i + 1] << 8 | byteVector[i + 2] << 16 | byteVector[i + 3] << 24;
+			gid &= ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG);
+			setTileId(coords, gid);
+			coords.x = (coords.x + 1) % mSize.x;
+			if (coords.x == 0)
+			{
+				coords.y++;
+			}
+		}
+	}
+	else if (mEncoding == "csv")
+	{
+		std::string temp(dataNode.text().get());
+		std::stringstream data(temp);
+		unsigned int gid;
+		while (data >> gid)
+		{
+			if (data.peek() == ',')
+			{
+				data.ignore();
+			}
+			gid &= ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG);
+			setTileId(coords, gid);
+			coords.x = (coords.x + 1) % mSize.x;
+			if (coords.x == 0)
+			{
+				coords.y++;
+			}
+		}
+	}
+	else
+	{
+		for (pugi::xml_node tile = dataNode.child("tile"); tile; tile = tile.next_sibling("tile"))
+		{
+			unsigned int gid = tile.attribute("gid").as_uint();
+			gid &= ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG);
+			setTileId(coords, gid);
+			coords.x = (coords.x + 1) % mSize.x;
+			if (coords.x == 0)
+			{
+				coords.y++;
+			}
+		}
+	}
+
+	return true;
+}
+
+void LayerComponent::saveToNode(pugi::xml_node & node)
+{
+	if (!node)
+	{
+		return;
+	}
+	if (mName != "")
+	{
+		node.append_attribute("name") = mName.c_str();
+	}
+	// TODO : Save offset
+	if (mOpacity != 1.f)
+	{
+		node.append_attribute("opacity") = mOpacity;
+	}
+	// TODO : Save visibility
+	if (mProperties.size() > 0)
+	{
+		pugi::xml_node properties = node.append_child("properties");
+		for (auto itr = mProperties.begin(); itr != mProperties.end(); itr++)
+		{
+			pugi::xml_node property = properties.append_child("property");
+			property.append_attribute("name") = itr->first.c_str();
+			property.append_attribute("value") = itr->second.c_str();
+		}
+	}
+	node.append_attribute("width") = mSize.x;
+	node.append_attribute("height") = mSize.y;
+	pugi::xml_node dataNode = node.append_child("data");
+	if (!dataNode)
+	{
+		return;
+	}
+	if (mEncoding != "")
+	{
+		dataNode.append_attribute("encoding") = mEncoding.c_str();
+	}
+	if (mCompression != "")
+	{
+		dataNode.append_attribute("compression") = mCompression.c_str();
+	}
+
+	std::string data;
+	sf::Vector2i coords;
+	if (mEncoding == "base64")
+	{
+		data.reserve(mSize.x * mSize.y * 4);
+		for (coords.y = 0; coords.y < mSize.y; coords.y++)
+		{
+			for (coords.x = 0; coords.x < mSize.x; coords.x++)
+			{
+				const std::size_t id = getTileId(coords);
+				data.push_back((char)(id));
+				data.push_back((char)(id >> 8));
+				data.push_back((char)(id >> 16));
+				data.push_back((char)(id >> 24));
+			}
+		}
+		if (mCompression != "")
+		{
+			if (!compressString(data))
+			{
+				return;
+			}
+		}
+		if (!base64_encode(data))
+		{
+			return;
+		}
+		std::string out = "\n   " + data + "\n  ";
+		dataNode.text().set(out.c_str());
+	}
+	else if (mEncoding == "csv")
+	{
+		data += "\n";
+		for (coords.y = 0; coords.y < mSize.y; coords.y++)
+		{
+			for (coords.x = 0; coords.x < mSize.x; coords.x++)
+			{
+				data += std::to_string(getTileId(coords)) + ",";
+			}
+			data += "\n";
+		}
+		if (data.size() > 2)
+		{
+			data.erase(data.size() - 2);
+			data += "\n  ";
+		}
+		dataNode.text().set(data.c_str());
+	}
+	else
+	{
+		for (coords.y = 0; coords.y < mSize.y; coords.y++)
+		{
+			for (coords.x = 0; coords.x < mSize.x; coords.x++)
+			{
+				dataNode.append_child("tile").append_attribute("gid") = getTileId(coords);
+			}
+		}
+	}
 }
 
 unsigned int LayerComponent::getTileId(sf::Vector2i const& coords)
@@ -55,7 +289,7 @@ unsigned int LayerComponent::getTileId(sf::Vector2i const& coords)
 		sf::Vertex* vertex = &mVertices[(coords.x + coords.y * mSize.x) * 6];
 		if (vertex[0].texCoords != vertex[2].texCoords && mTileset != nullptr)
 		{
-			return mTileset->toId(sf::Vector2i(vertex->texCoords.x, vertex->texCoords.y));
+			return mTileset->toId(static_cast<sf::Vector2i>(vertex->texCoords));
 		}
 	}
 	return 0;
@@ -68,8 +302,8 @@ void LayerComponent::setTileId(sf::Vector2i const& coords, unsigned int id)
 		sf::Vertex* vertex = &mVertices[(coords.x + coords.y * mSize.x) * 6];
 		if (mTileset != nullptr)
 		{
-			sf::Vector2i pos = mTileset->toPos(id);
-			vertex[0].texCoords = sf::Vector2f(pos.x, pos.y);
+			sf::Vector2f pos = static_cast<sf::Vector2f>(mTileset->toPos(id));
+			vertex[0].texCoords = pos;
 			vertex[1].texCoords = sf::Vector2f(pos.x + mTileSize.x, pos.y);
 			vertex[2].texCoords = sf::Vector2f(pos.x + mTileSize.x, pos.y + mTileSize.y);
 			vertex[4].texCoords = sf::Vector2f(pos.x, pos.y + mTileSize.y);
@@ -155,7 +389,6 @@ void LayerComponent::setTileset(Tileset* tileset)
 	mTileset = tileset;
 	if (mTileset != nullptr)
 	{
-		mTexture = &mTileset->getTexture();
 		updateRender();
 	}
 }
@@ -302,7 +535,7 @@ void LayerComponent::updateRender()
 	sf::Vector2i coords;
 	for (coords.x = 0; coords.x < mSize.x; coords.x++)
 	{
-		for (coords.y = 0; coords.y < mSize.y; coords.y)
+		for (coords.y = 0; coords.y < mSize.y; coords.y++)
 		{
 			sf::Vector2f pos = getVertexPosition(coords);
 			sf::Vertex* vertex = &mVertices[(coords.x + coords.y * mSize.x) * 6];
