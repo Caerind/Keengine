@@ -95,7 +95,7 @@ void Joystick::handleEvent(sf::Event const& event)
         }
     }
     #else
-    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && Joystick::contains(sf::Vector2f(event.mouseButton.x,event.mouseButton.y)))
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && Joystick::contains(sf::Vector2f((float)event.mouseButton.x, (float)event.mouseButton.y)))
     {
         mHeld = true;
         mButton.setPosition(0,0);
@@ -107,7 +107,7 @@ void Joystick::handleEvent(sf::Event const& event)
     }
     if (event.type == sf::Event::MouseMoved && mHeld)
     {
-        sf::Vector2f p = sf::Vector2f(event.mouseMove.x,event.mouseMove.y) - getPosition();
+        sf::Vector2f p = sf::Vector2f((float)event.mouseMove.x, (float)event.mouseMove.y) - getPosition();
         float r = std::sqrt(p.x*p.x + p.y*p.y);
         if (r >= mDeltaMax)
         {

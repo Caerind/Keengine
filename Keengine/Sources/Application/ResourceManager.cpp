@@ -234,7 +234,7 @@ bool Shader::loadFromStream(sf::InputStream& vertexShaderStream, sf::InputStream
 
 void Shader::setUniform(std::string const& name, float x)
 {
-	sf::Shader::setParameter(name, x);
+	sf::Shader::setUniform(name, x);
 	mFloats[name] = x;
 }
 
@@ -245,7 +245,7 @@ float Shader::getUniformFloat(std::string const& name)
 
 void Shader::setUniform(std::string const& name, sf::Vector2f const& vector)
 {
-	sf::Shader::setParameter(name, vector);
+	sf::Shader::setUniform(name, vector);
 	mVectors2f[name] = vector;
 }
 
@@ -256,7 +256,7 @@ sf::Vector2f Shader::getUniformVector2f(std::string const& name)
 
 void Shader::setUniform(std::string const& name, sf::Vector3f const& vector)
 {
-	sf::Shader::setParameter(name, vector);
+	sf::Shader::setUniform(name, vector);
 	mVectors3f[name] = vector;
 }
 
@@ -267,7 +267,7 @@ sf::Vector3f Shader::getUniformVector3f(std::string const& name)
 
 void Shader::setUniform(std::string const& name, sf::Color const& color)
 {
-	sf::Shader::setParameter(name, color);
+	sf::Shader::setUniform(name, sf::Glsl::Vec4(color));
 	mColors[name] = color;
 }
 

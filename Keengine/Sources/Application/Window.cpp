@@ -397,7 +397,9 @@ void Window::screenshot()
 {
     std::string file = mScreenshotPath + getTime("%Y-%m-%d_%H-%M-%S") + ".png";
     Log::instance() << Log::Info << std::string("Screenshot : " + file);
-    capture().saveToFile(file);
+	sf::Texture texture;
+	texture.update(*this);
+	texture.copyToImage().saveToFile(file);
 }
 
 void Window::setScreenshotPath(std::string const& screenshotPath)

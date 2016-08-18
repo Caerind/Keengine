@@ -457,11 +457,11 @@ namespace tgui
 
         getRenderer()->m_backgroundTexture.setColor({getRenderer()->m_backgroundTexture.getColor().r, getRenderer()->m_backgroundTexture.getColor().g, getRenderer()->m_backgroundTexture.getColor().b, static_cast<sf::Uint8>(m_opacity * 255)});
 
-        m_textBeforeSelection.setColor(calcColorOpacity(getRenderer()->m_textColor, getOpacity()));
-        m_textAfterSelection1.setColor(calcColorOpacity(getRenderer()->m_textColor, getOpacity()));
-        m_textAfterSelection2.setColor(calcColorOpacity(getRenderer()->m_textColor, getOpacity()));
-        m_textSelection1.setColor(calcColorOpacity(getRenderer()->m_selectedTextColor, getOpacity()));
-        m_textSelection2.setColor(calcColorOpacity(getRenderer()->m_selectedTextColor, getOpacity()));
+        m_textBeforeSelection.setFillColor(calcColorOpacity(getRenderer()->m_textColor, getOpacity()));
+        m_textAfterSelection1.setFillColor(calcColorOpacity(getRenderer()->m_textColor, getOpacity()));
+        m_textAfterSelection2.setFillColor(calcColorOpacity(getRenderer()->m_textColor, getOpacity()));
+        m_textSelection1.setFillColor(calcColorOpacity(getRenderer()->m_selectedTextColor, getOpacity()));
+        m_textSelection2.setFillColor(calcColorOpacity(getRenderer()->m_selectedTextColor, getOpacity()));
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1983,9 +1983,9 @@ namespace tgui
     void TextBoxRenderer::setTextColor(const Color& color)
     {
         m_textColor = color;
-        m_textBox->m_textBeforeSelection.setColor(calcColorOpacity(m_textColor, m_textBox->getOpacity()));
-        m_textBox->m_textAfterSelection1.setColor(calcColorOpacity(m_textColor, m_textBox->getOpacity()));
-        m_textBox->m_textAfterSelection2.setColor(calcColorOpacity(m_textColor, m_textBox->getOpacity()));
+        m_textBox->m_textBeforeSelection.setFillColor(calcColorOpacity(m_textColor, m_textBox->getOpacity()));
+        m_textBox->m_textAfterSelection1.setFillColor(calcColorOpacity(m_textColor, m_textBox->getOpacity()));
+        m_textBox->m_textAfterSelection2.setFillColor(calcColorOpacity(m_textColor, m_textBox->getOpacity()));
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1993,8 +1993,8 @@ namespace tgui
     void TextBoxRenderer::setSelectedTextColor(const Color& color)
     {
         m_selectedTextColor = color;
-        m_textBox->m_textSelection1.setColor(calcColorOpacity(m_selectedTextColor, m_textBox->getOpacity()));
-        m_textBox->m_textSelection2.setColor(calcColorOpacity(m_selectedTextColor, m_textBox->getOpacity()));
+        m_textBox->m_textSelection1.setFillColor(calcColorOpacity(m_selectedTextColor, m_textBox->getOpacity()));
+        m_textBox->m_textSelection2.setFillColor(calcColorOpacity(m_selectedTextColor, m_textBox->getOpacity()));
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

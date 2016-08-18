@@ -293,7 +293,7 @@ namespace tgui
         for (std::size_t i = 0; i < chunks.size(); ++i)
         {
             sf::Text tempText;
-            tempText.setColor(chunks[i].color);
+            tempText.setFillColor(chunks[i].color);
             tempText.setString(chunks[i].text);
             tempText.setStyle(chunks[i].style);
             tempText.setCharacterSize(m_textSize);

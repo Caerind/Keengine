@@ -127,19 +127,15 @@ class Shader : public sf::Shader, public Resource
 		bool loadFromStream(sf::InputStream& vertexShaderStream, sf::InputStream& fragmentShaderStream);
 
 		void setUniform(std::string const& name, float x);
-
 		float getUniformFloat(std::string const& name);
 
 		void setUniform(std::string const& name, sf::Vector2f const& vector);
-
 		sf::Vector2f getUniformVector2f(std::string const& name);
 
 		void setUniform(std::string const& name, sf::Vector3f const& vector);
-
 		sf::Vector3f getUniformVector3f(std::string const& name);
 
 		void setUniform(std::string const& name, sf::Color const& color);
-
 		sf::Color getUniformColor(std::string const& name);
 
     protected:

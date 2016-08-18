@@ -271,7 +271,7 @@ namespace tgui
 
         sf::Color textColor = calcColorOpacity(getRenderer()->m_textColor, getOpacity());
         for (auto& line : m_lines)
-            line.setColor(textColor);
+            line.setFillColor(textColor);
 
         m_background.setFillColor(calcColorOpacity(getRenderer()->m_backgroundColor, getOpacity()));
     }
@@ -431,7 +431,7 @@ namespace tgui
             m_lines.back().setFont(*getFont());
             m_lines.back().setCharacterSize(getTextSize());
             m_lines.back().setStyle(getTextStyle());
-            m_lines.back().setColor(calcColorOpacity(getRenderer()->m_textColor, getOpacity()));
+            m_lines.back().setFillColor(calcColorOpacity(getRenderer()->m_textColor, getOpacity()));
 
             if ((index < m_string.getSize()) && (m_string[index-1] != '\n'))
                 m_lines.back().setString(m_string.substring(oldIndex, index - oldIndex) + "\n");
@@ -628,7 +628,7 @@ namespace tgui
 
         sf::Color textColor = calcColorOpacity(m_textColor, m_label->getOpacity());
         for (auto& line : m_label->m_lines)
-            line.setColor(textColor);
+            line.setFillColor(textColor);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

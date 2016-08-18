@@ -156,7 +156,7 @@ namespace tgui
         if (line.font == nullptr)
             line.font = getFont();
 
-        line.text.setColor(color);
+        line.text.setFillColor(color);
         line.text.setCharacterSize(textSize);
         line.text.setString(text);
         if (line.font != nullptr)
@@ -199,7 +199,7 @@ namespace tgui
     {
         if (lineIndex < m_lines.size())
         {
-            return m_lines[lineIndex].text.getColor();
+            return m_lines[lineIndex].text.getFillColor();
         }
         else // Index too high
             return m_textColor;
@@ -395,7 +395,7 @@ namespace tgui
         Widget::setOpacity(opacity);
 
         for (auto& line : m_lines)
-            line.text.setColor({line.text.getColor().r, line.text.getColor().g, line.text.getColor().b, static_cast<sf::Uint8>(opacity * 255)});
+            line.text.setFillColor({line.text.getFillColor().r, line.text.getFillColor().g, line.text.getFillColor().b, static_cast<sf::Uint8>(opacity * 255)});
 
         if (m_scroll != nullptr)
             m_scroll->setOpacity(m_opacity);
