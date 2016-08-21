@@ -1,28 +1,24 @@
 #include "MyActor.hpp"
+#include "../Sources/Core/World.hpp"
 
 MyActor::MyActor()
 	: Actor()
 	, mA()
-	, mB()
 	, mC()
 	, mD()
 {
     registerComponent(&mA);
 	attachComponent(&mA);
-	mA.setZ(1000.f);
-
-	registerComponent(&mB);
-	attachComponent(&mB);
-	mB.setZ(100.f);
-	mB.setTexture("sfml");
 
 	registerComponent(&mC);
 	attachComponent(&mC);
 	mC.setTexture("particle");
-	mC.setEmissionRate(30.f);
 	mC.setParticleLifetime(sf::seconds(5.f));
-	mC.setParticlePosition(sf::Vector2f(0.f, 0.f));
-	mC.setParticleVelocity(sf::Vector2f(10.f, 10.f));
+	mC.setParticleColor(sf::Color::Green);
+	mC.setParticleLifetime(Distributions::uniform(sf::seconds(1.f), sf::seconds(5.f)));
+	mC.setParticleVelocity(Distributions::deflect(sf::Vector2f(0.f, 100.f), 30.f));
+	mC.setParticleRotation(Distributions::uniform(0.f, 360.f));
+	mC.setParticleRotationSpeed(Distributions::uniform(0.f, 10.f));
 
 	registerComponent(&mD);
 	mD.bindAction("MoveUp", [&](std::vector<std::string> const& data)
@@ -63,6 +59,12 @@ MyActor::MyActor()
 			float speed = 100.f * dt;
 			move(sf::Vector2f(1.f, 0.f) * speed);
 		}
+		return false;
+	});
+	mD.bindAction("Emit", [&](std::vector<std::string> const& data)
+	{
+		getWorld().getLog() << "Actor Emit";
+		mC.emitParticle();
 		return false;
 	});
 }

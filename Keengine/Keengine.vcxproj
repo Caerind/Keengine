@@ -22,6 +22,7 @@
     <None Include="..\README.md" />
     <None Include="Example\application_settings.ini" />
     <None Include="Example\blur.frag" />
+    <None Include="Example\inputs.cfg" />
     <None Include="Example\pixelate.frag" />
     <None Include="Example\script.lua" />
     <None Include="Example\widgets.css" />

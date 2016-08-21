@@ -41,11 +41,16 @@ int main()
 	World::instance().getInputs().setKeyboardMapping("MoveLeft", sf::Keyboard::Q, InputType::Hold);
 	World::instance().getInputs().setKeyboardMapping("MoveDown", sf::Keyboard::S, InputType::Hold);
 	World::instance().getInputs().setKeyboardMapping("MoveRight", sf::Keyboard::D, InputType::Hold);
+	World::instance().getInputs().setKeyboardMapping("Emit", sf::Keyboard::A, InputType::Pressed);
 	World::instance().getInputs().loadFromFile("Example/inputs.cfg");
 
 	{
 		Map::Ptr map = World::instance().createActor<Map>();
 		map->loadTmxFile("Example/map.tmx");
+
+		MyActor::Ptr actor = World::instance().createActor<MyActor>();
+		actor->setZ(100.f);
+		actor->setPosition({ 400.f, 300.f });
 	}
 
 	Application::setEventDefaultFunction([&](sf::Event const& event)

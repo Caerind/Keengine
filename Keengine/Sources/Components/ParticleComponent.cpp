@@ -6,7 +6,7 @@ ParticleComponent::ParticleComponent()
 	, mAffectors()
 	, mTexture(nullptr)
 	, mTextureRects()
-	, mVertices()
+	, mVertices(sf::Triangles)
 	, mNeedsVertexUpdate(true)
 	, mQuads()
 	, mNeedsQuadUpdate(true)
@@ -26,6 +26,8 @@ ParticleComponent::ParticleComponent()
 
 void ParticleComponent::setTexture(std::string const& id)
 {
+	assert(World::instance().getApplication().hasResource(id));
+	assert(World::instance().getApplication().isResourceLoaded(id));
 	ParticleComponent::setTexture(World::instance().getApplication().getResource<Texture>(id));
 }
 
@@ -37,6 +39,7 @@ void ParticleComponent::setTexture(sf::Texture& texture)
 std::size_t ParticleComponent::addTextureRect(sf::IntRect const& rect)
 {
 	mTextureRects.push_back(rect);
+	mNeedsQuadUpdate = true;
 	return mTextureRects.size() - 1;
 }
 
@@ -67,9 +70,9 @@ void ParticleComponent::update(sf::Time dt)
 		{
 			for (std::size_t j = 0; j < mAffectors.size(); ++j)
 			{
-				if (mAffectors[i])
+				if (mAffectors[j])
 				{
-					mAffectors[i](mParticles[i], dt);
+					mAffectors[j](mParticles[i], dt);
 				}
 			}
 			++i;
@@ -99,7 +102,6 @@ void ParticleComponent::render(sf::RenderTarget& target)
 
 		sf::RenderStates states;
 		states.texture = mTexture;
-		states.transform = getWorldTransform();
 		target.draw(mVertices, states);
 	}
 }
@@ -129,57 +131,60 @@ void ParticleComponent::setEmissionRate(float particlesPerSecond)
 	mEmissionRate = particlesPerSecond;
 }
 
-void ParticleComponent::setParticleLifetime(sf::Time lifetime)
+void ParticleComponent::setParticleLifetime(Distribution<sf::Time> lifetime)
 {
 	mParticleLifetime = lifetime;
 }
 
-void ParticleComponent::setParticlePosition(sf::Vector2f position)
+void ParticleComponent::setParticlePosition(Distribution<sf::Vector2f> position)
 {
 	mParticlePosition = position;
 }
 
-void ParticleComponent::setParticleVelocity(sf::Vector2f velocity)
+void ParticleComponent::setParticleVelocity(Distribution<sf::Vector2f> velocity)
 {
 	mParticleVelocity = velocity;
 }
 
-void ParticleComponent::setParticleRotation(float rotation)
+void ParticleComponent::setParticleRotation(Distribution<float> rotation)
 {
 	mParticleRotation = rotation;
 }
 
-void ParticleComponent::setParticleRotationSpeed(float rotationSpeed)
+void ParticleComponent::setParticleRotationSpeed(Distribution<float> rotationSpeed)
 {
 	mParticleRotationSpeed = rotationSpeed;
 }
 
-void ParticleComponent::setParticleScale(sf::Vector2f scale)
+void ParticleComponent::setParticleScale(Distribution<sf::Vector2f> scale)
 {
 	mParticleScale = scale;
 }
 
-void ParticleComponent::setParticleColor(sf::Color color)
+void ParticleComponent::setParticleColor(Distribution<sf::Color> color)
 {
 	mParticleColor = color;
 }
 
-void ParticleComponent::setParticleTextureIndex(std::size_t textureIndex)
+void ParticleComponent::setParticleTextureIndex(Distribution<std::size_t> textureIndex)
 {
 	mParticleTextureIndex = textureIndex;
 }
 
 void ParticleComponent::emitParticle()
 {
-	Particle particle(mParticleLifetime);
-	particle.position = mParticlePosition;
-	particle.velocity = mParticleVelocity;
-	particle.rotation = mParticleRotation;
-	particle.rotationSpeed = mParticleRotationSpeed;
-	particle.scale = mParticleScale;
-	particle.color = mParticleColor;
-	particle.textureIndex = mParticleTextureIndex;
+	Particle particle(mParticleLifetime());
+	particle.position = mParticlePosition() + getWorldPosition();
+	particle.velocity = mParticleVelocity();
+	particle.rotation = mParticleRotation();
+	particle.rotationSpeed = mParticleRotationSpeed();
+	particle.scale = mParticleScale();
+	particle.color = mParticleColor();
+	particle.textureIndex = mParticleTextureIndex();
 	mParticles.push_back(particle);
+	std::cout << "New particle !" << std::endl;
+	std::cout << particle.totalLifetime.asSeconds() << std::endl << particle.position.x << ":" << particle.position.y << std::endl;
+	std::cout << particle.velocity.x << ":" << particle.velocity.y << std::endl << particle.rotation << " " << particle.rotationSpeed << std::endl;
 }
 
 void ParticleComponent::emitParticles(std::size_t particleAmount)
@@ -221,12 +226,12 @@ void ParticleComponent::computeVertices()
 
 		assert(mParticles[i].textureIndex == 0 || mParticles[i].textureIndex < mTextureRects.size());
 
-		std::size_t tex = mParticles[i].textureIndex;
-		for (std::size_t j = 0; j < 4; ++j)
+		const auto& quad = mQuads[mParticles[i].textureIndex];
+		for (std::size_t j = 0; j < 6; ++j)
 		{
 			sf::Vertex v;
-			v.position = t.transformPoint(mQuads[tex][j].position);
-			v.texCoords = mQuads[tex][j].texCoords;
+			v.position = t.transformPoint(quad[j].position);
+			v.texCoords = quad[j].texCoords;
 			v.color = mParticles[i].color;
 
 			mVertices.append(v);
@@ -260,10 +265,14 @@ void ParticleComponent::computeQuad(Quad& quad, sf::IntRect const& tRect)
 	quad[0].texCoords = sf::Vector2f(rect.left, rect.top);
 	quad[1].texCoords = sf::Vector2f(rect.left + rect.width, rect.top);
 	quad[2].texCoords = sf::Vector2f(rect.left + rect.width, rect.top + rect.height);
-	quad[3].texCoords = sf::Vector2f(rect.left, rect.top + rect.height);
+	quad[4].texCoords = sf::Vector2f(rect.left, rect.top + rect.height);
+	quad[3].texCoords = quad[2].texCoords;
+	quad[5].texCoords = quad[0].texCoords;
 
-	quad[0].position = sf::Vector2f(-rect.width, -rect.height) * 0.5f;
-	quad[1].position = sf::Vector2f(rect.width, -rect.height) * 0.5f;
-	quad[2].position = sf::Vector2f(rect.width, rect.height) * 0.5f;
-	quad[3].position = sf::Vector2f(-rect.width, rect.height) * 0.5f;
+	quad[0].position = sf::Vector2f(-rect.width, -rect.height) / 2.f;
+	quad[1].position = sf::Vector2f(rect.width, -rect.height) / 2.f;
+	quad[2].position = sf::Vector2f(rect.width, rect.height) / 2.f;
+	quad[4].position = sf::Vector2f(-rect.width, rect.height) / 2.f;
+	quad[3].position = quad[2].position;
+	quad[5].position = quad[0].position;
 }

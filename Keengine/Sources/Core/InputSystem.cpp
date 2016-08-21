@@ -168,7 +168,7 @@ void InputSystem::update(sf::Time dt)
 		{
 			if (itr->second == mEvents[i].type)
 			{
-				mData.push_back(std::pair<std::string, std::vector<std::string>>(itr->first, data));
+				emitData(itr->first, data);
 			}
 		}
 		// Key pressed/released event
@@ -186,7 +186,7 @@ void InputSystem::update(sf::Time dt)
 					}
 					if (mEvents[i].key.code == itr->second.key && type)
 					{
-						mData.push_back(std::pair<std::string, std::vector<std::string>>(itr->first, data));
+						emitData(itr->first, data);
 					}
 				}
 			}
@@ -206,7 +206,7 @@ void InputSystem::update(sf::Time dt)
 					}
 					if (mEvents[i].mouseButton.button == itr->second.button && type)
 					{
-						mData.push_back(std::pair<std::string, std::vector<std::string>>(itr->first, data));
+						emitData(itr->first, data);
 					}
 				}
 			}
@@ -222,7 +222,7 @@ void InputSystem::update(sf::Time dt)
 	{
 		if (sf::Keyboard::isKeyPressed(itr->second.key) && itr->second.type == InputType::Hold)
 		{
-			mData.push_back(std::pair<std::string, std::vector<std::string>>(itr->first, realtimeData));
+			emitData(itr->first, realtimeData);
 		}
 	}
 
@@ -231,7 +231,7 @@ void InputSystem::update(sf::Time dt)
 	{
 		if (sf::Mouse::isButtonPressed(itr->second.button) && itr->second.type == InputType::Hold)
 		{
-			mData.push_back(std::pair<std::string, std::vector<std::string>>(itr->first, realtimeData));
+			emitData(itr->first, realtimeData);
 		}
 	}
 

@@ -6,6 +6,7 @@
 #include <map>
 #include <sstream>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 #include <SFML/Window/Event.hpp>
@@ -109,9 +110,9 @@ class InputSystem
         std::vector<Input*> mInputs;
         std::vector<sf::Event> mEvents;
 		std::vector<std::pair<std::string,std::vector<std::string>>> mData;
-        std::map<std::string,sf::Event::EventType> mEventMapping;
-        std::map<std::string,KeyboardPair> mKeyboardMapping;
-        std::map<std::string,MousePair> mMouseMapping;
+        std::unordered_map<std::string,sf::Event::EventType> mEventMapping;
+        std::unordered_map<std::string,KeyboardPair> mKeyboardMapping;
+        std::unordered_map<std::string,MousePair> mMouseMapping;
 };
 
 #endif // INPUTSYSTEM_HPP

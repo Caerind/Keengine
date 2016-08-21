@@ -11,12 +11,31 @@
 #include "Random.hpp"
 #include "Vector2.hpp"
 
+namespace priv
+{
+	template <typename T>
+	struct Constant
+	{
+		explicit Constant(T value)
+			: value(value)
+		{
+		}
+
+		T operator() () const
+		{
+			return value;
+		}
+
+		T value;
+	};
+} // namespace priv
+
 template <typename T>
 class Distribution
 {
 	public:
         Distribution(T constant)
-        : mFactory([&constant](){ return constant; })
+        : mFactory(priv::Constant<T>(constant))
 		{
 		}
 

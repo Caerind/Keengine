@@ -55,6 +55,9 @@
     <None Include="Example\widgets.css">
       <Filter>Example</Filter>
     </None>
+    <None Include="Example\inputs.cfg">
+      <Filter>Example</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Example\sfml.png">
