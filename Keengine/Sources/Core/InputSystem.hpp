@@ -37,6 +37,18 @@ struct MousePair
 	void fromString(std::string const& str);
 };
 
+struct TouchPair
+{
+	TouchPair() {}
+	TouchPair(unsigned int i, InputType t) : index(i), type(t) {}
+
+	unsigned int index;
+	InputType type;
+
+	std::string toString();
+	void fromString(std::string const& str);
+};
+
 class Input
 {
 	public:
@@ -71,6 +83,9 @@ class InputSystem
 
         void setMouseMapping(std::string const& index, sf::Mouse::Button button, InputType type);
         MousePair getMouseMapping(std::string const& index);
+
+		void setTouchMapping(std::string const& index, unsigned int touchIndex, InputType type);
+		TouchPair getTouchMapping(std::string const& index);
 
         void handleEvent(sf::Event const& event);
         void update(sf::Time dt);
@@ -109,10 +124,11 @@ class InputSystem
 		Input mDefaultInput;
         std::vector<Input*> mInputs;
         std::vector<sf::Event> mEvents;
-		std::vector<std::pair<std::string,std::vector<std::string>>> mData;
-        std::unordered_map<std::string,sf::Event::EventType> mEventMapping;
-        std::unordered_map<std::string,KeyboardPair> mKeyboardMapping;
-        std::unordered_map<std::string,MousePair> mMouseMapping;
+		std::vector<std::pair<std::string, std::vector<std::string>>> mData;
+        std::unordered_map<std::string, sf::Event::EventType> mEventMapping;
+        std::unordered_map<std::string, KeyboardPair> mKeyboardMapping;
+        std::unordered_map<std::string, MousePair> mMouseMapping;
+		std::unordered_map<std::string, TouchPair> mTouchMapping;
 };
 
 #endif // INPUTSYSTEM_HPP

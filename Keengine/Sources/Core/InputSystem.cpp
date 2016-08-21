@@ -1,4 +1,5 @@
 #include "InputSystem.hpp"
+#include "../Application/Application.hpp"
 
 std::string KeyboardPair::toString()
 {
@@ -46,6 +47,34 @@ void MousePair::fromString(std::string const& str)
 			if (i == 1)
 			{
 				button = InputSystem::stringToButton(temp.substr(p + 1));
+			}
+			if (i == 2)
+			{
+				type = InputSystem::stringToInputType(temp.substr(p + 1));
+			}
+		}
+		i++;
+	}
+}
+
+std::string TouchPair::toString()
+{
+	return "type=Touch&index=" + std::to_string(index) + "&input=" + InputSystem::inputTypeToString(type);
+}
+
+void TouchPair::fromString(std::string const& str)
+{
+	std::stringstream ss(str);
+	std::string temp;
+	std::size_t i = 0;
+	while (std::getline(ss, temp, '&'))
+	{
+		std::size_t p = temp.find('=');
+		if (p != std::string::npos)
+		{
+			if (i == 1)
+			{
+				index = (temp.substr(p + 1) == "0") ? 0 : 1;
 			}
 			if (i == 2)
 			{
@@ -127,7 +156,7 @@ sf::Event::EventType InputSystem::getEventMapping(std::string const& index)
 
 void InputSystem::setKeyboardMapping(std::string const& index, sf::Keyboard::Key key, InputType type)
 {
-    mKeyboardMapping[index] = KeyboardPair(key,type);
+    mKeyboardMapping[index] = KeyboardPair(key, type);
 }
 
 KeyboardPair InputSystem::getKeyboardMapping(std::string const& index)
@@ -137,12 +166,22 @@ KeyboardPair InputSystem::getKeyboardMapping(std::string const& index)
 
 void InputSystem::setMouseMapping(std::string const& index, sf::Mouse::Button button, InputType type)
 {
-    mMouseMapping[index] = MousePair(button,type);
+    mMouseMapping[index] = MousePair(button, type);
 }
 
 MousePair InputSystem::getMouseMapping(std::string const& index)
 {
     return mMouseMapping[index];
+}
+
+void InputSystem::setTouchMapping(std::string const& index, unsigned int touchIndex, InputType type)
+{
+	mTouchMapping[index] = TouchPair(touchIndex, type);
+}
+
+TouchPair InputSystem::getTouchMapping(std::string const & index)
+{
+	return mTouchMapping[index];
 }
 
 void InputSystem::handleEvent(sf::Event const& event)
@@ -211,6 +250,27 @@ void InputSystem::update(sf::Time dt)
 				}
 			}
 		}
+
+		// Touch began/ended event
+		if (mEvents[i].type == sf::Event::TouchBegan || mEvents[i].type == sf::Event::TouchEnded)
+		{
+			for (auto itr = mTouchMapping.begin(); itr != mTouchMapping.end(); itr++)
+			{
+				if (itr->second.type != InputType::Hold)
+				{
+					bool type = false;
+					if ((itr->second.type == InputType::Pressed && mEvents[i].type == sf::Event::TouchBegan)
+						|| (itr->second.type == InputType::Released && mEvents[i].type == sf::Event::TouchEnded))
+					{
+						type = true;
+					}
+					if (mEvents[i].touch.finger == itr->second.index && type)
+					{
+						emitData(itr->first, data);
+					}
+				}
+			}
+		}
 	}
 	mEvents.clear();
 
@@ -229,9 +289,26 @@ void InputSystem::update(sf::Time dt)
 	// Mouse realtime
 	for (auto itr = mMouseMapping.begin(); itr != mMouseMapping.end(); itr++)
 	{
+		auto mouseData = realtimeData;
+		auto mousePos = Application::getMousePosition();
+		mouseData.push_back(std::to_string(mousePos.x));
+		mouseData.push_back(std::to_string(mousePos.y));
 		if (sf::Mouse::isButtonPressed(itr->second.button) && itr->second.type == InputType::Hold)
 		{
-			emitData(itr->first, realtimeData);
+			emitData(itr->first, mouseData);
+		}
+	}
+
+	// Touch realtime
+	for (auto itr = mTouchMapping.begin(); itr != mTouchMapping.end(); itr++)
+	{
+		auto touchData = realtimeData;
+		auto touchPos = Application::getTouchPosition();
+		touchData.push_back(std::to_string(touchPos.x));
+		touchData.push_back(std::to_string(touchPos.y));
+		if (sf::Touch::isDown(itr->second.index) && itr->second.type == InputType::Hold)
+		{
+			emitData(itr->first, touchData);
 		}
 	}
 
