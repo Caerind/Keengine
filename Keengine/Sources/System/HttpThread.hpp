@@ -25,7 +25,7 @@ class HttpThread
 
 		static void splitUrl(std::string const& longurl, std::string& url, std::string& uri);
 
-		static bool sendHttpRequest(std::string const& url, std::string const& request, std::string& response = std::string());
+		static bool sendHttpRequest(std::string const& url, std::string const& request, std::string* response = nullptr);
 
     private:
         sf::Thread mThread;

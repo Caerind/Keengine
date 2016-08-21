@@ -1,6 +1,6 @@
 #include "Trigonometry.hpp"
 
-namespace ne
+namespace ke
 {
 
 	float pi() { return 3.141592653589793f; }
@@ -14,4 +14,4 @@ namespace ne
 	float atan(float value) { return radToDeg(std::atan(value)); }
 	float atan2(float valY, float valX) { return radToDeg(std::atan2(valY, valX)); }
 
-} // namespace ne
+} // namespace ke

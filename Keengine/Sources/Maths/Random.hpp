@@ -69,7 +69,7 @@ int random(int min, int max);
 
 unsigned int random(unsigned int min, unsigned int max);
 
-bool random();
+bool randomBool();
 
 float random(float min, float max);
 

@@ -11,10 +11,10 @@
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/Shader.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <TGUI/Loading/Theme.hpp>
 
 #include "PropertiesHolder.hpp"
 #include "../System/Log.hpp"
-#include "../ExtLibs/TGUI/Loading/Theme.hpp"
 #include "../ExtLibs/pugixml.hpp"
 
 class Resource

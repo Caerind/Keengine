@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-#include "../Sources/ExtLibs/TGUI/TGUI.hpp"
+#include <TGUI/TGUI.hpp>
 
 #include "../Sources/System/ScriptManager.hpp"
 

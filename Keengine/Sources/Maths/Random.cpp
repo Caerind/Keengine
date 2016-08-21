@@ -12,7 +12,7 @@ unsigned int random(unsigned int min, unsigned int max)
     return Random::instance()(min, max);
 }
 
-bool random()
+bool randomBool()
 {
     return (Random::instance()(0, 1) == 1);
 }

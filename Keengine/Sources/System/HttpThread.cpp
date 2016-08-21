@@ -71,7 +71,7 @@ void HttpThread::splitUrl(std::string const& longurl, std::string& url, std::str
 	}
 }
 
-bool HttpThread::sendHttpRequest(std::string const& url, std::string const& body, std::string& response)
+bool HttpThread::sendHttpRequest(std::string const& url, std::string const& body, std::string* response)
 {
 	std::string tempUrl, tempUri;
 	splitUrl(url, tempUrl, tempUri);
@@ -79,6 +79,10 @@ bool HttpThread::sendHttpRequest(std::string const& url, std::string const& body
 	sf::Http::Request request(tempUri, sf::Http::Request::Post);
 	request.setBody(body);
 	sf::Http::Response rep = http.sendRequest(request);
-	response = rep.getBody();
+	if (response != nullptr)
+	{
+		std::string tmp = rep.getBody();
+		*response = tmp;
+	}
 	return rep.getStatus() == sf::Http::Response::Ok;
 }

@@ -65,22 +65,22 @@ float getPolarAngle(sf::Vector3f const& vector)
 void setPolarAngle(sf::Vector3f& vector, float polarAngle)
 {
     float length = getLength(vector);
-    vector.x = length * cos(polarAngle);
-    vector.y = length * sin(polarAngle);
+    vector.x = length * ke::cos(polarAngle);
+    vector.y = length * ke::sin(polarAngle);
 }
 
 /*
 void rotate(sf::Vector3f& vector, float polarAngle)
 {
-    float c = cos(polarAngle);
-	float s = sin(polarAngle);
+    float c = ke::cos(polarAngle);
+	float s = ke::sin(polarAngle);
     vector = sf::Vector3f(c * vector.x - s * vector.y, s * vector.x + c * vector.y);
 }
 
 sf::Vector3f rotated(sf::Vector3f const& vector, float polarAngle)
 {
-    float c = cos(polarAngle);
-	float s = sin(polarAngle);
+    float c = ke::cos(polarAngle);
+	float s = ke::sin(polarAngle);
     return sf::Vector3f(c * vector.x - s * vector.y, s * vector.x + c * vector.y, vector.z);
 }
 */
@@ -164,13 +164,13 @@ sf::Vector3f slerp(sf::Vector3f const& start, sf::Vector3f const& end, float per
     {
         return end;
     }
-    float theta = acos(dotProduct(start, end) / (getLength(start) * getLength(end)));
+    float theta = ke::acos(dotProduct(start, end) / (getLength(start) * getLength(end)));
     if (theta == 0.f)
     {
         return end;
     }
-    float sinTheta = sin(theta);
-    return (start * (sin((1 - percent) * theta) / sinTheta)) + (end * (sin(percent * theta) / sinTheta));
+    float sinTheta = ke::sin(theta);
+    return ((ke::sin((1 - percent) * theta) / sinTheta) * start)  + ((ke::sin(percent * theta) / sinTheta) * end);
 }
 
 sf::Vector3f nlerp(sf::Vector3f const& start, sf::Vector3f const& end, float percent)

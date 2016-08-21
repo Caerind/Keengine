@@ -46,7 +46,6 @@ void Application::init(std::string const& pathToSettings)
             parser["imgui_filename"] = "";
         }
 
-		// TODO : Still bugs here ?
         Log::instance().useConsole(parser["log_console"].asBool());
         Log::instance().openLog(parser["log_file"]);
         Log::instance().setOnline(parser["log_url"]);
@@ -68,15 +67,22 @@ void Application::init(std::string const& pathToSettings)
         showDebugInfo(parser["show_debug"].asBool());
         setBackgroundColor(sf::Color(parser["background_color_r"].asUint(), parser["background_color_g"].asUint(), parser["background_color_b"].asUint()));
         setBackgroundTexture(parser["background_texture"], sf::IntRect(parser["background_rect_left"].asInt(), parser["background_rect_top"].asInt(), parser["background_rect_width"].asInt(), parser["background_rect_height"].asInt()));
-        ImGui::GetIO().IniFilename = (parser["imgui_filename"] != "") ? parser["imgui_filename"].c_str() : nullptr;
+        
+		#ifndef SFML_SYSTEM_ANDROID
+		ImGui::GetIO().IniFilename = (parser["imgui_filename"] != "") ? parser["imgui_filename"].c_str() : nullptr;
+		#endif
     }
 
     releaseResource("application_settings");
 
     create();
 	instance().mGui.setWindow(instance().mWindow);
+	
+	#ifndef SFML_SYSTEM_ANDROID
     ImGui::SFML::Init(instance().mWindow);
-    Log::instance() << Log::Info << "NodeEngine::Application started";
+	#endif
+
+	Log::instance() << Log::Info << "NodeEngine::Application started";
     Log::instance() << Log::Info << std::string("Current time is " + getTime("%b %d, %Y %I:%M:%S %p"));
 }
 
@@ -124,10 +130,13 @@ void Application::quit()
     parser["background_rect_top"] = bRect.top;
     parser["background_rect_width"] = bRect.width;
     parser["background_rect_height"] = bRect.height;
-    parser["imgui_filename"] = (ImGui::GetIO().IniFilename != nullptr) ? ImGui::GetIO().IniFilename : std::string();
-    parser.saveToFile(instance().mPathToSettings + "application_settings.ini");
-
+    #ifndef SFML_SYSTEM_ANDROID
+	parser["imgui_filename"] = (ImGui::GetIO().IniFilename != nullptr) ? ImGui::GetIO().IniFilename : std::string();
     ImGui::SFML::Shutdown();
+	#else
+	parser["imgui_filename"] = "";
+	#endif
+    parser.saveToFile(instance().mPathToSettings + "application_settings.ini");
 }
 
 void Application::runState(std::string const& startState)
@@ -178,11 +187,9 @@ void Application::run()
             update(timePerFrame);
         }
 
-		auto mouse = getMousePosition2i();
-		setDebugInfo("MouseX", mouse.x);
-		setDebugInfo("MouseY", mouse.y);
-
-        ImGui::SFML::Update(dt);
+		#ifndef SFML_SYSTEM_ANDROID
+			ImGui::SFML::Update(dt);
+		#endif
 
         render();
 
@@ -202,7 +209,10 @@ void Application::handleEvent()
     sf::Event event;
     while (pollEvent(event))
     {
+		#ifndef SFML_SYSTEM_ANDROID
         ImGui::SFML::ProcessEvent(event);
+		#endif
+		
 		instance().mGui.handleEvent(event);
 
         if (instance().mStateMode)
@@ -255,6 +265,10 @@ void Application::update(sf::Time dt)
             instance().mUpdateDefaultFunction(dt);
         }
     }
+	
+	auto mouse = getMousePosition2i();
+	setDebugInfo("MouseX", mouse.x);
+	setDebugInfo("MouseY", mouse.y);
 
     instance().mAudio.update();
 }
@@ -276,6 +290,10 @@ void Application::render()
             instance().mRenderDefaultFunction(instance().mWindow);
         }
     }
+	
+	instance().mGui.draw();
+	
+	#ifndef SFML_SYSTEM_ANDROID
     if (isDebugInfoVisible())
     {
         ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_FirstUseEver);
@@ -288,8 +306,9 @@ void Application::render()
         }
         ImGui::End();
     }
-	instance().mGui.draw();
-    ImGui::Render();
+	ImGui::Render();
+	#endif
+	
     display();
 }
 

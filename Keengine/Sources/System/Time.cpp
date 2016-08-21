@@ -6,7 +6,11 @@ std::string getTime(std::string const& timeFormat)
     tm timeinfo;
     char buffer[80];
     time(&rawtime);
+	#ifndef SFML_SYSTEM_ANDROID
     localtime_s(&timeinfo, &rawtime);
+	#else
+	localtime(&rawtime);
+	#endif
     strftime(buffer, 80, timeFormat.c_str(), &timeinfo);
     return std::string(buffer);
 }

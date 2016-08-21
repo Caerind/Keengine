@@ -12,7 +12,7 @@ bool isZero(sf::Vector2f const& vector)
 
 sf::Vector2f polarVector(float length, float angle)
 {
-    return sf::Vector2f(length * cos(angle), length * sin(angle));
+    return sf::Vector2f(length * ke::cos(angle), length * ke::sin(angle));
 }
 
 float getLength(sf::Vector2f const& vector)
@@ -61,21 +61,21 @@ float getPolarAngle(sf::Vector2f const& vector)
 void setPolarAngle(sf::Vector2f& vector, float angle)
 {
     float length = getLength(vector);
-    vector.x = length * cos(angle);
-    vector.y = length * sin(angle);
+    vector.x = length * ke::cos(angle);
+    vector.y = length * ke::sin(angle);
 }
 
 void rotate(sf::Vector2f& vector, float angle)
 {
-    float c = cos(angle);
-	float s = sin(angle);
+    float c = ke::cos(angle);
+	float s = ke::sin(angle);
     vector = sf::Vector2f(c * vector.x - s * vector.y, s * vector.x + c * vector.y);
 }
 
 sf::Vector2f rotated(sf::Vector2f const& vector, float angle)
 {
-    float c = cos(angle);
-	float s = sin(angle);
+    float c = ke::cos(angle);
+	float s = ke::sin(angle);
     return sf::Vector2f(c * vector.x - s * vector.y, s * vector.x + c * vector.y);
 }
 
@@ -126,13 +126,13 @@ sf::Vector2f slerp(sf::Vector2f const& start, sf::Vector2f const& end, float per
     {
         return end;
     }
-    float theta = acos(dotProduct(start, end) / (getLength(start) * getLength(end)));
+    float theta = ke::acos(dotProduct(start, end) / (getLength(start) * getLength(end)));
     if (theta == 0.f)
     {
         return end;
     }
     float sinTheta = sin(theta);
-    return (start * (sin((1 - percent) * theta) / sinTheta)) + (end * (sin(percent * theta) / sinTheta));
+    return ((ke::sin((1 - percent) * theta) / sinTheta) * start)  + ((ke::sin(percent * theta) / sinTheta) * end);
 }
 
 sf::Vector2f nlerp(sf::Vector2f const& start, sf::Vector2f const& end, float percent)

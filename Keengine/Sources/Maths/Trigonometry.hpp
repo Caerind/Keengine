@@ -1,9 +1,9 @@
-#ifndef TRIGONOMETRY_HPP
-#define TRIGONOMETRY_HPP
+#ifndef KE_TRIGONOMETRY_HPP
+#define KE_TRIGONOMETRY_HPP
 
 #include <cmath>
 
-namespace ne
+namespace ke
 {
 
 	float pi();
@@ -17,6 +17,6 @@ namespace ne
 	float atan(float value);
 	float atan2(float valY, float valX);
 
-} // namespace ne
+} // namespace ke
 
-#endif // TRIGONOMETRY_HPP
+#endif // KE_TRIGONOMETRY_HPP

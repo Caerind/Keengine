@@ -8,11 +8,14 @@
 #include "Window.hpp"
 
 #include <SFML/Graphics.hpp>
+#include <TGUI/TGUI.hpp>
 
+#ifndef SFML_SYSTEM_ANDROID // Dont use imgui on Android
 #include "../ExtLibs/imgui/imgui.h"
 #include "../ExtLibs/imgui/imgui-SFML.h"
+#endif
+
 #include "../System/Log.hpp"
-#include "../ExtLibs/TGUI/TGUI.hpp"
 #include "../Maths/Math.hpp"
 
 class Application
