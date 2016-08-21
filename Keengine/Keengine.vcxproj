@@ -46,6 +46,7 @@
     <ClCompile Include="Sources\Application\StateManager.cpp" />
     <ClCompile Include="Sources\Application\PropertiesHolder.cpp" />
     <ClCompile Include="Sources\Application\Window.cpp" />
+    <ClCompile Include="Sources\Components\AnimatorComponent.cpp" />
     <ClCompile Include="Sources\Components\CameraComponent.cpp" />
     <ClCompile Include="Sources\Components\InputComponent.cpp" />
     <ClCompile Include="Sources\Components\LayerComponent.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="Sources\Application\StateManager.hpp" />
     <ClInclude Include="Sources\Application\PropertiesHolder.hpp" />
     <ClInclude Include="Sources\Application\Window.hpp" />
+    <ClInclude Include="Sources\Components\AnimatorComponent.hpp" />
     <ClInclude Include="Sources\Components\CameraComponent.hpp" />
     <ClInclude Include="Sources\Components\InputComponent.hpp" />
     <ClInclude Include="Sources\Components\LayerComponent.hpp" />

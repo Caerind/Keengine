@@ -3,7 +3,7 @@
 
 #include "../Sources/Core/Actor.hpp"
 #include "../Sources/Components/PointComponent.hpp"
-#include "../Sources/Components/ParticleComponent.hpp"
+#include "../Sources/Components/AnimatorComponent.hpp"
 #include "../Sources/Components/InputComponent.hpp"
 
 class MyActor : public Actor
@@ -14,10 +14,14 @@ class MyActor : public Actor
 
         typedef std::shared_ptr<MyActor> Ptr;
 
+		void update(sf::Time dt);
+
     private:
         PointComponent mA;
-		ParticleComponent mC;
+		AnimatorComponent mB;
 		InputComponent mD;
+
+		bool mRunning;
 };
 
 #endif // MYACTOR_HPP

@@ -18,6 +18,7 @@ int main()
 
 	Application::createResource<Texture>("sfml", "Example/sfml.png");
 	Application::createResource<Texture>("particle", "Example/particle.png");
+	Application::createResource<Texture>("cat", "Example/cat.png");
 	Application::createResource<Theme>("css", "Example/widgets.css");
 
 	tgui::Button::Ptr button = Application::createGui<tgui::Button>("Button", "css");
@@ -37,11 +38,8 @@ int main()
 
 	World::createInstance();
 
-	World::instance().getInputs().setKeyboardMapping("MoveUp", sf::Keyboard::Z, InputType::Hold);
-	World::instance().getInputs().setKeyboardMapping("MoveLeft", sf::Keyboard::Q, InputType::Hold);
-	World::instance().getInputs().setKeyboardMapping("MoveDown", sf::Keyboard::S, InputType::Hold);
-	World::instance().getInputs().setKeyboardMapping("MoveRight", sf::Keyboard::D, InputType::Hold);
-	World::instance().getInputs().setKeyboardMapping("Emit", sf::Keyboard::A, InputType::Pressed);
+	World::instance().getInputs().setKeyboardMapping("MoveRight", sf::Keyboard::D, InputType::Pressed);
+	World::instance().getInputs().setKeyboardMapping("Stop", sf::Keyboard::D, InputType::Released);
 	World::instance().getInputs().loadFromFile("Example/inputs.cfg");
 
 	{
@@ -50,7 +48,7 @@ int main()
 
 		MyActor::Ptr actor = World::instance().createActor<MyActor>();
 		actor->setZ(100.f);
-		actor->setPosition({ 400.f, 300.f });
+		actor->setPosition({ 10.f, 100.f });
 	}
 
 	Application::setEventDefaultFunction([&](sf::Event const& event)

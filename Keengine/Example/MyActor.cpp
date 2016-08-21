@@ -4,71 +4,61 @@
 MyActor::MyActor()
 	: Actor()
 	, mA()
-	, mC()
+	, mB()
 	, mD()
+	, mRunning(false)
 {
     registerComponent(&mA);
 	attachComponent(&mA);
 
-	registerComponent(&mC);
-	attachComponent(&mC);
-	mC.setTexture("particle");
-	mC.setParticleLifetime(sf::seconds(5.f));
-	mC.setParticleColor(sf::Color::Green);
-	mC.setParticleLifetime(Distributions::uniform(sf::seconds(1.f), sf::seconds(5.f)));
-	mC.setParticleVelocity(Distributions::deflect(sf::Vector2f(0.f, 100.f), 30.f));
-	mC.setParticleRotation(Distributions::uniform(0.f, 360.f));
-	mC.setParticleRotationSpeed(Distributions::uniform(0.f, 10.f));
+	registerComponent(&mB);
+	attachComponent(&mB);
+	Animation& idle = mB.getAnimation("idle");
+	idle.addFrame("cat", { 0, 0, 64, 64 }, sf::seconds(0.15f));
+	idle.addFrame("cat", { 64, 0, 64, 64 }, sf::seconds(0.15f));
+	idle.addFrame("cat", { 128, 0, 64, 64 }, sf::seconds(0.15f));
+	idle.addFrame("cat", { 192, 0, 64, 64 }, sf::seconds(0.15f));
+	Animation& run = mB.getAnimation("run");
+	run.addFrame("cat", { 0, 64, 64, 64 }, sf::seconds(0.15f));
+	run.addFrame("cat", { 64, 64, 64, 64 }, sf::seconds(0.15f));
+	run.addFrame("cat", { 128, 64, 64, 64 }, sf::seconds(0.15f));
+	run.addFrame("cat", { 192, 64, 64, 64 }, sf::seconds(0.15f));
+	run.addFrame("cat", { 256, 64, 64, 64 }, sf::seconds(0.15f));
+	run.addFrame("cat", { 320, 64, 64, 64 }, sf::seconds(0.15f));
+	run.addFrame("cat", { 384, 64, 64, 64 }, sf::seconds(0.15f));
+	run.addFrame("cat", { 448, 64, 64, 64 }, sf::seconds(0.15f));
 
 	registerComponent(&mD);
-	mD.bindAction("MoveUp", [&](std::vector<std::string> const& data)
-	{
-		if (data.size() > 0)
-		{
-			float dt = std::stof(data[0]);
-			float speed = 100.f * dt;
-			move(sf::Vector2f(0.f, -1.f) * speed);
-		}
-		return false;
-	});
-	mD.bindAction("MoveLeft", [&](std::vector<std::string> const& data)
-	{
-		if (data.size() > 0)
-		{
-			float dt = std::stof(data[0]);
-			float speed = 100.f * dt;
-			move(sf::Vector2f(-1.f, 0.f) * speed);
-		}
-		return false;
-	});
-	mD.bindAction("MoveDown", [&](std::vector<std::string> const& data)
-	{
-		if (data.size() > 0)
-		{
-			float dt = std::stof(data[0]);
-			float speed = 100.f * dt;
-			move(sf::Vector2f(0.f, 1.f) * speed);
-		}
-		return false;
-	});
 	mD.bindAction("MoveRight", [&](std::vector<std::string> const& data)
 	{
-		if (data.size() > 0)
+		if (!mRunning)
 		{
-			float dt = std::stof(data[0]);
-			float speed = 100.f * dt;
-			move(sf::Vector2f(1.f, 0.f) * speed);
+			mB.stopAnimation();
+			mB.playAnimation("run");
+			mRunning = true;
 		}
 		return false;
 	});
-	mD.bindAction("Emit", [&](std::vector<std::string> const& data)
+	mD.bindAction("Stop", [&](std::vector<std::string> const& data)
 	{
-		getWorld().getLog() << "Actor Emit";
-		mC.emitParticle();
+		if (mRunning)
+		{
+			mB.stopAnimation();
+			mB.playAnimation("idle");
+			mRunning = false;
+		}
 		return false;
 	});
 }
 
 MyActor::~MyActor()
 {
+}
+
+void MyActor::update(sf::Time dt)
+{
+	if (mRunning)
+	{
+		move(sf::Vector2f(1.f, 0.f) * 100.f * dt.asSeconds());
+	}
 }

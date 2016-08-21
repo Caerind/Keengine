@@ -314,6 +314,9 @@
     <ClCompile Include="Sources\Components\LayerComponent.cpp">
       <Filter>Sources\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Components\AnimatorComponent.cpp">
+      <Filter>Sources\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -641,6 +644,9 @@
       <Filter>Sources\Core</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Components\LayerComponent.hpp">
+      <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Components\AnimatorComponent.hpp">
       <Filter>Sources\Components</Filter>
     </ClInclude>
   </ItemGroup>
