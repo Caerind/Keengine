@@ -233,4 +233,51 @@ class Tileset : public Resource, public PropertiesHolder
 		std::string mMapPath;
 };
 
+class Lang : public Resource
+{
+	public:
+		Lang();
+		Lang(std::string const& filename);
+
+		bool loadFromFile(std::string const& filename);
+
+		std::string operator() (std::string const& id) const
+		{
+			if (mLang.find(id) != mLang.end())
+			{
+				return mLang.at(id);
+			}
+			return "";
+		}
+
+	protected:
+		std::unordered_map<std::string, std::string> mLang;
+};
+
+class IniParser : public std::map<std::string, Variant>, public Resource
+{
+	public:
+		IniParser() {}
+		IniParser(std::string const& filename);
+
+		Variant& operator[](std::string const& id)
+		{
+			for (std::size_t i = 0; i < mPairs.size(); i++)
+			{
+				if (mPairs[i].first == id)
+				{
+					return mPairs[i].second;
+				}
+			}
+			mPairs.push_back(std::pair<std::string, Variant>(id, std::string()));
+			return mPairs.back().second;
+		}
+
+		bool loadFromFile(std::string const& filename);
+		bool saveToFile(std::string const& filename) const;
+
+	private:
+		std::vector<std::pair<std::string, Variant>> mPairs;
+};
+
 #endif // RESOURCEMANAGER_HPP

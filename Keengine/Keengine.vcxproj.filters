@@ -73,6 +73,9 @@
     <None Include="Example\lightOverShapeShader.vert">
       <Filter>Example</Filter>
     </None>
+    <None Include="Example\English.lang">
+      <Filter>Example</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Example\sfml.png">
@@ -625,9 +628,6 @@
     <ClInclude Include="Sources\System\HttpThread.hpp">
       <Filter>Sources\System</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\System\IniParser.hpp">
-      <Filter>Sources\System</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\System\Log.hpp">
       <Filter>Sources\System</Filter>
     </ClInclude>
@@ -739,5 +739,10 @@
     <ClInclude Include="Sources\Components\DirectionLightComponent.hpp">
       <Filter>Sources\Components</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Example\French.lang">
+      <Filter>Example</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

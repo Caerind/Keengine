@@ -1,5 +1,4 @@
 #include "Application.hpp"
-#include "../System/IniParser.hpp"
 
 void Application::init(std::string const& pathToSettings)
 {
@@ -368,6 +367,29 @@ tgui::Gui& Application::getGui()
 PropertiesHolder& Application::getValues()
 {
 	return instance().mProperties;
+}
+
+void Application::setLang(std::string const & lang)
+{
+	instance().mLang = lang;
+}
+
+std::string Application::getLang()
+{
+	return instance().mLang;
+}
+
+std::string Application::inLang(std::string const& id)
+{
+	if (hasResource(instance().mLang))
+	{
+		std::string token = getResource<Lang>(instance().mLang)(id);
+		if (token != "")
+		{
+			return token;
+		}
+	}
+	return id;
 }
 
 void Application::registerMusicFile(std::string const& id, std::string const& filename)

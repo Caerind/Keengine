@@ -99,6 +99,13 @@ class Application
         static void clearStates();
         static std::size_t stateCount();
 
+		//
+		// Lang
+		//
+		static void setLang(std::string const& lang);
+		static std::string getLang();
+		static std::string inLang(std::string const& id);
+
         //
         // Window
         //
@@ -202,6 +209,7 @@ class Application
 
         std::string mPathToSettings;
 		std::string mScriptPath;
+		std::string mLang;
         sf::Time mRunningTime;
         unsigned int mFps;
         bool mStateMode; // Default Mode Or State Mode

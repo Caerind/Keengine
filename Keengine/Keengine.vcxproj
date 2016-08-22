@@ -22,6 +22,7 @@
     <None Include="..\README.md" />
     <None Include="Example\application_settings.ini" />
     <None Include="Example\blur.frag" />
+    <None Include="Example\English.lang" />
     <None Include="Example\inputs.cfg" />
     <None Include="Example\lightOverShapeShader.frag" />
     <None Include="Example\lightOverShapeShader.vert" />
@@ -246,7 +247,6 @@
     <ClInclude Include="Sources\System\Compression.hpp" />
     <ClInclude Include="Sources\System\Container.hpp" />
     <ClInclude Include="Sources\System\HttpThread.hpp" />
-    <ClInclude Include="Sources\System\IniParser.hpp" />
     <ClInclude Include="Sources\System\Joystick.hpp" />
     <ClInclude Include="Sources\System\Log.hpp" />
     <ClInclude Include="Sources\System\Packet.hpp" />
@@ -256,6 +256,9 @@
     <ClInclude Include="Sources\System\String.hpp" />
     <ClInclude Include="Sources\System\Time.hpp" />
     <ClInclude Include="Sources\System\Variant.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Example\French.lang" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2fc9c7b4-4c0c-421b-9fe9-54e7947d8769}</ProjectGuid>

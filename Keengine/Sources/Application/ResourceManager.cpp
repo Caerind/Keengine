@@ -805,3 +805,76 @@ unsigned int Tileset::toId(sf::Vector2i const& pos)
 	}
 	return 0;
 }
+
+Lang::Lang()
+{
+}
+
+Lang::Lang(std::string const& filename)
+{
+	loadFromFile(filename);
+}
+
+bool Lang::loadFromFile(std::string const& filename)
+{
+	pugi::xml_document doc;
+	if (!doc.load_file(filename.c_str()))
+	{
+		return false;
+	}
+	for (pugi::xml_node token = doc.child("Token"); token; token = token.next_sibling("Token"))
+	{
+		mLang[token.attribute("name").as_string()] = token.text().get();
+	}
+	mLoaded = true;
+	return true;
+}
+
+IniParser::IniParser(std::string const& filename)
+{
+	loadFromFile(filename);
+}
+
+bool IniParser::loadFromFile(std::string const & filename)
+{
+	std::ifstream file(filename);
+	if (!file)
+	{
+		return false;
+	}
+	auto trim = [](std::string line)
+	{
+		while (line.size() && (line.back() == '\t' || line.back() == ' ')) line.pop_back();
+		while (line.size() && (line.front() == '\t' || line.front() == ' ')) line = line.substr(1);
+		return line;
+	};
+	std::string line;
+	while (std::getline(file, line))
+	{
+		line = trim(line);
+		if (line.size() >= 1 && line.front() != ';')
+		{
+			std::size_t found = line.find_first_of('=');
+			std::string key = trim(line.substr(0, found));
+			std::string value = (found == std::string::npos) ? std::string() : trim(line.substr(found + 1));
+			mPairs.push_back(std::pair<std::string, Variant>(key, value));
+		}
+	}
+	mLoaded = true;
+	return true;
+}
+
+bool IniParser::saveToFile(std::string const & filename) const
+{
+	std::ofstream file(filename);
+	if (!file)
+	{
+		return false;
+	}
+	for (std::size_t i = 0; i < mPairs.size(); i++)
+	{
+		file << mPairs[i].first << "=" << mPairs[i].second << std::endl;
+	}
+	file.close();
+	return true;
+}

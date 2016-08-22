@@ -14,11 +14,16 @@ int main()
 	Application::createResource<Texture>("cat", "Example/cat.png");
 	Application::createResource<Theme>("css", "Example/widgets.css");
 
+	Application::createResource<Lang>("english", "Example/English.lang");
+	Application::createResource<Lang>("french", "Example/French.lang");
+
+	Application::setLang("french");
+
 	tgui::Button::Ptr button = Application::createGui<tgui::Button>("Button", "css");
 	button->setPosition(350, 50);
 	button->setSize(150, 50);
-	button->setText("Test");
-	button->connect("pressed", []() { Application::script("script.lua")["test"](); });
+	button->setText("Hello");
+	button->connect("pressed", []() { Application::getLog() << Application::inLang("hello"); });
 
 	World::createInstance();
 
