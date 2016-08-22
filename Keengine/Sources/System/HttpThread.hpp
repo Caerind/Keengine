@@ -1,5 +1,5 @@
-#ifndef HTTPTHREAD_HPP
-#define HTTPTHREAD_HPP
+#ifndef KE_HTTPTHREAD_HPP
+#define KE_HTTPTHREAD_HPP
 
 #include <functional>
 #include <vector>
@@ -8,6 +8,9 @@
 #include <SFML/Network/Http.hpp>
 #include <SFML/System/Thread.hpp>
 #include <SFML/System/Sleep.hpp>
+
+namespace ke
+{
 
 // TODO : Thread-safe
 class HttpThread
@@ -36,4 +39,6 @@ class HttpThread
         std::string mUrl;
 };
 
-#endif // HTTPTHREAD_HPP
+} // namespace ke
+
+#endif // KE_HTTPTHREAD_HPP

@@ -109,7 +109,7 @@ DynamicQuadtree::DynamicQuadtree()
 DynamicQuadtree::DynamicQuadtree(const sf::FloatRect & rootRegion)
 	: _minOutsideRoot(1), _maxOutsideRoot(8)
 {
-	_pRootNode = std::make_unique<QuadtreeNode>(rootRegion, 0, nullptr, this);
+	_pRootNode = std::unique_ptr<QuadtreeNode>(new QuadtreeNode(rootRegion, 0, nullptr, this));
 }
 
 DynamicQuadtree::DynamicQuadtree(const DynamicQuadtree & other) : Quadtree(other) {
@@ -125,7 +125,7 @@ void DynamicQuadtree::operator=(const DynamicQuadtree & other)
 
 void DynamicQuadtree::create(const sf::FloatRect & rootRegion)
 {
-	_pRootNode = std::make_unique<QuadtreeNode>(rootRegion, 0, nullptr, this);
+	_pRootNode = std::unique_ptr<QuadtreeNode>(new QuadtreeNode(rootRegion, 0, nullptr, this));
 }
 
 void DynamicQuadtree::add(QuadtreeOccupant * oc)

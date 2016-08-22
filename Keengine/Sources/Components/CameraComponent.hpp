@@ -1,8 +1,11 @@
-#ifndef CAMERACOMPONENT_HPP
-#define CAMERACOMPONENT_HPP
+#ifndef KE_CAMERACOMPONENT_HPP
+#define KE_CAMERACOMPONENT_HPP
 
 #include "../Core/SceneComponent.hpp"
 #include <SFML/Graphics/View.hpp>
+
+namespace ke
+{
 
 class CameraComponent : public SceneComponent
 {
@@ -18,4 +21,6 @@ class CameraComponent : public SceneComponent
 		sf::View mCamera;
 };
 
-#endif // NCAMERACOMPONENT_HPP
+} // namespace ke
+
+#endif // KE_CAMERACOMPONENT_HPP

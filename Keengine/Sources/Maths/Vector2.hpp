@@ -1,11 +1,14 @@
-#ifndef VECTOR2_HPP
-#define VECTOR2_HPP
+#ifndef KE_VECTOR2_HPP
+#define KE_VECTOR2_HPP
 
 #include <cassert>
 #include <sstream>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/System/Vector3.hpp>
 #include "Trigonometry.hpp"
+
+namespace ke
+{
 
 float distance(sf::Vector2f const& l, sf::Vector2f const& r);
 
@@ -41,4 +44,6 @@ sf::Vector2f lerp(sf::Vector2f const& start, sf::Vector2f const& end, float perc
 sf::Vector2f slerp(sf::Vector2f const& start, sf::Vector2f const& end, float percent);
 sf::Vector2f nlerp(sf::Vector2f const& start, sf::Vector2f const& end, float percent);
 
-#endif // VECTOR2_HPP
+} // namespace ke
+
+#endif // KE_VECTOR2_HPP

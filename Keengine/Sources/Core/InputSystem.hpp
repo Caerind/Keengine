@@ -1,5 +1,5 @@
-#ifndef INPUTSYSTEM_HPP
-#define INPUTSYSTEM_HPP
+#ifndef KE_INPUTSYSTEM_HPP
+#define KE_INPUTSYSTEM_HPP
 
 #include <fstream>
 #include <functional>
@@ -10,6 +10,9 @@
 #include <vector>
 
 #include <SFML/Window/Event.hpp>
+
+namespace ke
+{
 
 enum InputType { Pressed, Released, Hold };
 
@@ -131,4 +134,6 @@ class InputSystem
 		std::unordered_map<std::string, TouchPair> mTouchMapping;
 };
 
-#endif // INPUTSYSTEM_HPP
+} // namespace ke
+
+#endif // KE_INPUTSYSTEM_HPP

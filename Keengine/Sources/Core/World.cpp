@@ -1,5 +1,8 @@
 #include "World.hpp"
 
+namespace ke
+{
+
 World* World::mWorld = nullptr;
 bool World::mInstantiated = false;
 
@@ -357,3 +360,5 @@ void World::releaseAllResources()
 {
 	Application::releaseAllResources();
 }
+
+} // namespace ke

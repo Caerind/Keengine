@@ -1,6 +1,9 @@
 #include "Effect.hpp"
 #include "World.hpp"
 
+namespace ke
+{
+
 Effect::~Effect()
 {
 }
@@ -94,3 +97,5 @@ void Pixelate::apply(sf::RenderTexture const& input, sf::RenderTarget& output)
 	shader.setUniform("texture", input.getTexture());
 	applyShader(shader, output);
 }
+
+} // namespace ke

@@ -1,5 +1,5 @@
-#ifndef MATH_HPP
-#define MATH_HPP
+#ifndef KE_MATH_HPP
+#define KE_MATH_HPP
 
 #include "Distribution.hpp"
 #include "Generics.hpp"
@@ -10,4 +10,4 @@
 
 // TODO : Matrix / Quaternion / Vector3
 
-#endif // MATH_HPP
+#endif // KE_MATH_HPP

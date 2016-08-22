@@ -1,11 +1,17 @@
-#ifndef TIME_HPP
-#define TIME_HPP
+#ifndef KE_TIME_HPP
+#define KE_TIME_HPP
 
 #include <ctime>
 #include <functional>
 #include <memory>
 #include <string>
+
 #include <SFML/System/Time.hpp>
+
+#include "../Config.hpp"
+
+namespace ke
+{
 
 std::string getTime(std::string const& timeFormat = "[%x][%X]");
 double getTimeAsSeconds();
@@ -54,4 +60,6 @@ class Timer
         sf::Time mDuration;
 };
 
-#endif // TIME_HPP
+} // namespace ke
+
+#endif // KE_TIME_HPP

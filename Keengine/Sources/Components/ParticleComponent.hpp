@@ -1,5 +1,5 @@
-#ifndef PARTICLECOMPONENT_HPP
-#define PARTICLECOMPONENT_HPP
+#ifndef KE_PARTICLECOMPONENT_HPP
+#define KE_PARTICLECOMPONENT_HPP
 
 #include <array>
 #include <functional>
@@ -10,6 +10,9 @@
 
 #include "../Core/PrimitiveComponent.hpp"
 #include "../Maths/Distribution.hpp"
+
+namespace ke
+{
 
 class ParticleComponent : public PrimitiveComponent
 {
@@ -101,4 +104,6 @@ class ParticleComponent : public PrimitiveComponent
 		Distribution<std::size_t> mParticleTextureIndex;
 };
 
-#endif // PARTICLECOMPONENT_HPP
+} // namespace ke
+
+#endif // KE_PARTICLECOMPONENT_HPP

@@ -1,5 +1,5 @@
-#ifndef CONFIG_HPP
-#define CONFIG_HPP
+#ifndef KE_CONFIG_HPP
+#define KE_CONFIG_HPP
 
 #include <SFML/Config.hpp>
 
@@ -24,7 +24,13 @@
 	#define KEENGINE_API
 #endif
 
+#ifdef SFML_SYSTEM_ANDROID
+#define KEENGINE_ANDROID
+#else
+#define KEENGINE_DESKTOP
+#endif
+
 #define KEENGINE_VERSION_MAJOR 0
 #define KEENGINE_VERSION_MINOR 1
 
-#endif // CONFIG_HPP
+#endif // KE_CONFIG_HPP

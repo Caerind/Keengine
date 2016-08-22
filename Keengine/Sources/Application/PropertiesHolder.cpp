@@ -1,5 +1,8 @@
 #include "PropertiesHolder.hpp"
 
+namespace ke
+{
+
 PropertiesHolder::PropertiesHolder()
 {
 }
@@ -50,3 +53,5 @@ void PropertiesHolder::removeProperty(std::string const& id)
 		mProperties.erase(itr);
 	}
 }
+
+} // namespace ke

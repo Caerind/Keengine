@@ -1,5 +1,8 @@
 #include "Application.hpp"
 
+namespace ke
+{
+
 void Application::init(std::string const& pathToSettings)
 {
     instance().mPathToSettings = pathToSettings;
@@ -69,13 +72,13 @@ void Application::init(std::string const& pathToSettings)
         setBackgroundColor(sf::Color(parser["background_color_r"].asUint(), parser["background_color_g"].asUint(), parser["background_color_b"].asUint()));
         setBackgroundTexture(parser["background_texture"], sf::IntRect(parser["background_rect_left"].asInt(), parser["background_rect_top"].asInt(), parser["background_rect_width"].asInt(), parser["background_rect_height"].asInt()));
         
-		#ifndef SFML_SYSTEM_ANDROID
+		#ifndef KEENGINE_ANDROID
 		ImGui::GetIO().IniFilename = (parser["imgui_filename"] != "") ? parser["imgui_filename"].c_str() : nullptr;
 		#endif
     }
-
     releaseResource("application_settings");
 
+	#ifndef KEENGINE_ANDROID
 	instance().mScripts.setPath(instance().mScriptPath);
 	instance().mScripts.addLibrary([](sel::State& state)
 	{
@@ -89,11 +92,12 @@ void Application::init(std::string const& pathToSettings)
 		state["getPointerY"] = []() -> int { return Application::getPointerPosition2i().y; };
 		state["screenshot"] = Application::screenshot;
 	});
+	#endif
 
     create();
 	instance().mGui.setWindow(instance().mWindow);
 	
-	#ifndef SFML_SYSTEM_ANDROID
+	#ifndef KEENGINE_ANDROID
     ImGui::SFML::Init(instance().mWindow);
 	#endif
 
@@ -146,7 +150,7 @@ void Application::quit()
     parser["background_rect_top"] = bRect.top;
     parser["background_rect_width"] = bRect.width;
     parser["background_rect_height"] = bRect.height;
-    #ifndef SFML_SYSTEM_ANDROID
+    #ifndef KEENGINE_ANDROID
 	parser["imgui_filename"] = (ImGui::GetIO().IniFilename != nullptr) ? ImGui::GetIO().IniFilename : std::string();
     ImGui::SFML::Shutdown();
 	#else
@@ -203,7 +207,7 @@ void Application::run()
             update(timePerFrame);
         }
 
-		#ifndef SFML_SYSTEM_ANDROID
+		#ifndef KEENGINE_ANDROID
 			ImGui::SFML::Update(dt);
 		#endif
 
@@ -225,7 +229,7 @@ void Application::handleEvent()
     sf::Event event;
     while (pollEvent(event))
     {
-		#ifndef SFML_SYSTEM_ANDROID
+		#ifndef KEENGINE_ANDROID
         ImGui::SFML::ProcessEvent(event);
 		#endif
 		
@@ -309,7 +313,7 @@ void Application::render()
 	
 	instance().mGui.draw();
 	
-	#ifndef SFML_SYSTEM_ANDROID
+	#ifndef KEENGINE_ANDROID
     if (isDebugInfoVisible())
     {
         ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiSetCond_FirstUseEver);
@@ -492,10 +496,12 @@ std::string Application::getScriptPath()
 	return instance().mScriptPath;
 }
 
+#ifndef KEENGINE_ANDROID
 sel::State& Application::script(std::string const & name)
 {
 	return instance().mScripts[name];
 }
+#endif
 
 void Application::pushState(std::string const& id)
 {
@@ -950,3 +956,5 @@ Application::~Application()
 {
     mResources.releaseAllResources();
 }
+
+} // namespace ke

@@ -1,6 +1,174 @@
 #include "Map.hpp"
 #include "World.hpp"
 
+namespace ke
+{
+
+std::vector<sf::Vector2i> Map::getNeighboors(sf::Vector2i const & coords, std::string const & orientation, bool diag, std::string const& staggerIndex , std::string const& staggerAxis)
+{
+	if (orientation == "orthogonal")
+	{
+		std::vector<sf::Vector2i> n;
+		n.push_back({ coords.x, coords.y - 1 });
+		n.push_back({ coords.x, coords.y + 1 });
+		n.push_back({ coords.x - 1, coords.y });
+		n.push_back({ coords.x + 1, coords.y });
+		if (diag)
+		{
+			n.push_back({ coords.x + 1, coords.y - 1 });
+			n.push_back({ coords.x + 1, coords.y + 1 });
+			n.push_back({ coords.x - 1, coords.y + 1 });
+			n.push_back({ coords.x - 1, coords.y - 1 });
+		}
+		return n;
+	}
+	else if (orientation == "isometric")
+	{
+		// TODO : Conversion
+		std::vector<sf::Vector2i> n;
+		return n;
+	}
+	else if (orientation == "staggered")
+	{
+		// TODO : Use stagger
+		std::vector<sf::Vector2i> n;
+		if (coords.y % 2 == 0)
+		{
+			n.push_back({ coords.x - 1, coords.y - 1 });
+			n.push_back({ coords.x, coords.y - 1 });
+			n.push_back({ coords.x, coords.y + 1 });
+			n.push_back({ coords.x - 1, coords.y + 1 });
+		}
+		else
+		{
+			n.push_back({ coords.x, coords.y - 1 });
+			n.push_back({ coords.x + 1, coords.y - 1 });
+			n.push_back({ coords.x + 1, coords.y + 1 });
+			n.push_back({ coords.x, coords.y + 1 });
+		}
+		if (diag)
+		{
+			n.push_back({ coords.x, coords.y - 1 });
+			n.push_back({ coords.x + 1, coords.y });
+			n.push_back({ coords.x, coords.y + 1 });
+			n.push_back({ coords.x - 1, coords.y });
+		}
+		return n;
+	}
+	else if (orientation == "hexagonal")
+	{
+		// TODO : Conversion
+		std::vector<sf::Vector2i> n;
+		return n;
+	}
+	else
+	{
+		// Unknown
+		return std::vector<sf::Vector2i>();
+	}
+}
+
+sf::Vector2i Map::worldToCoords(sf::Vector2f const & world, std::string const & orientation, sf::Vector2i const & tileSize, std::string const & staggerIndex, std::string const & staggerAxis, unsigned int hexSide)
+{
+	if (orientation == "orthogonal")
+	{
+		return sf::Vector2i((int)world.x / tileSize.x, (int)world.y / tileSize.y);
+	}
+	else if (orientation == "isometric")
+	{
+		// TODO : Conversion isometric
+		return sf::Vector2i();
+	}
+	else if (orientation == "staggered")
+	{
+		sf::Vector2f s = sf::Vector2f(tileSize.x * 0.5f, tileSize.y * 0.5f);
+		sf::Vector2f mc = sf::Vector2f(floor(world.x / s.x), floor(world.y / s.y));
+		sf::Vector2f p = world - sf::Vector2f(mc.x * s.x, mc.y * s.y);
+		const float rad = 0.523599f; // = 30 degrees
+		int indexInt = (staggerIndex == "odd") ? 0 : 1;
+		if (staggerAxis == "y")
+		{
+			if (((int)mc.x + (int)mc.y) % 2 == indexInt)
+			{
+				if (std::atan2(s.y - p.y, p.x) > rad)
+				{
+					mc.x--;
+					mc.y--;
+				}
+			}
+			else
+			{
+				(std::atan2(-p.y, p.x) > -rad) ? mc.y-- : mc.x--;
+			}
+			return sf::Vector2i((int)floor(mc.x * 0.5f), (int)mc.y);
+		}
+		else
+		{
+			if (((int)mc.x + (int)mc.y) % 2 == indexInt)
+			{
+				if (std::atan2(s.x - p.x, p.y) > rad)
+				{
+					mc.x--;
+					mc.y--;
+				}
+			}
+			else
+			{
+				(std::atan2(-p.x, p.y) > -rad) ? mc.x-- : mc.y--;
+			}
+			return sf::Vector2i((int)mc.x, (int)floor(mc.y * 0.5f));
+		}
+	}
+	else if (orientation == "hexagonal")
+	{
+		// TODO : Conversion hexagonal
+		return sf::Vector2i();
+	}
+	else
+	{
+		// Unknown
+		return sf::Vector2i();
+	}
+}
+
+sf::Vector2f Map::coordsToWorld(sf::Vector2i const & coords, std::string const & orientation, sf::Vector2i const & tileSize, std::string const & staggerIndex, std::string const & staggerAxis, unsigned int hexSide)
+{
+	if (orientation == "orthogonal")
+	{
+		return { coords.x * tileSize.x + 0.5f * tileSize.x, coords.y * tileSize.y + 0.5f * tileSize.y };
+	}
+	else if (orientation == "isometric")
+	{
+		// TODO : Conversion
+		return sf::Vector2f();
+	}
+	else if (orientation == "staggered")
+	{
+		// TODO : Use stagger
+		sf::Vector2f ret;
+		ret.y = coords.y * tileSize.y * 0.5f + tileSize.y * 0.5f;
+		if (coords.y % 2 == 0)
+		{
+			ret.x = coords.x * tileSize.x + tileSize.x * 0.5f;
+		}
+		else
+		{
+			ret.x = static_cast<float>(coords.x * tileSize.x + tileSize.x);
+		}
+		return ret;
+	}
+	else if (orientation == "hexagonal")
+	{
+		// TODO : Conversion
+		return sf::Vector2f();
+	}
+	else
+	{
+		// Unknown
+		return sf::Vector2f();
+	}
+}
+
 Map::Map()
 	: mLayers()
 	, mTileset(nullptr)
@@ -210,79 +378,12 @@ bool Map::saveTmxFile(std::string const & filename)
 
 sf::Vector2i Map::worldToCoords(sf::Vector2f const & world)
 {
-	if (mOrientation == "orthogonal")
-	{
-		return sf::Vector2i((int)world.x / mTileSize.x, (int)world.y / mTileSize.y);
-	}
-	else if (mOrientation == "isometric")
-	{
-		// TODO : Conversion isometric
-		return sf::Vector2i();
-	}
-	else if (mOrientation == "staggered")
-	{
-		sf::Vector2f s = sf::Vector2f(mTileSize.x * 0.5f, mTileSize.y * 0.5f);
-		sf::Vector2f mc = sf::Vector2f(floor(world.x / s.x), floor(world.y / s.y));
-		sf::Vector2f p = world - sf::Vector2f(mc.x * s.x, mc.y * s.y);
-		const float rad = 0.523599f; // = 30 degrees
-		int indexInt = (mStaggerIndex == "odd") ? 0 : 1;
-		if (mStaggerAxis == "y")
-		{
-			if (((int)mc.x + (int)mc.y) % 2 == indexInt)
-			{
-				if (std::atan2(s.y - p.y, p.x) > rad)
-				{
-					mc.x--;
-					mc.y--;
-				}
-			}
-			else
-			{
-				if (std::atan2(-p.y, p.x) > -rad)
-				{
-					mc.y--;
-				}
-				else
-				{
-					mc.x--;
-				}
-			}
-			return sf::Vector2i((int)floor(mc.x * 0.5f), (int)mc.y);
-		}
-		else
-		{
-			if (((int)mc.x + (int)mc.y) % 2 == indexInt)
-			{
-				if (std::atan2(s.x - p.x, p.y) > rad)
-				{
-					mc.x--;
-					mc.y--;
-				}
-			}
-			else
-			{
-				if (std::atan2(-p.x, p.y) > -rad)
-				{
-					mc.x--;
-				}
-				else
-				{
-					mc.y--;
-				}
-			}
-			return sf::Vector2i((int)mc.x, (int)floor(mc.y * 0.5f));
-		}
-	}
-	else if (mOrientation == "hexagonal")
-	{
-		// TODO : Conversion hexagonal
-		return sf::Vector2i();
-	}
-	else
-	{
-		// Unknown
-		return sf::Vector2i();
-	}
+	return Map::worldToCoords(world, mOrientation, mTileSize, mStaggerIndex, mStaggerAxis, mHexSideLength);
+}
+
+sf::Vector2f Map::coordsToWorld(sf::Vector2i const & coords)
+{
+	return Map::coordsToWorld(coords, mOrientation, mTileSize, mStaggerIndex, mStaggerAxis, mHexSideLength);
 }
 
 std::shared_ptr<SpriteComponent> Map::addImage()
@@ -500,3 +601,5 @@ void Map::setHexSideLength(unsigned int hexSideLength)
 		mLayers[i]->setHexSideLength(hexSideLength);
 	}
 }
+
+} // namespace ke

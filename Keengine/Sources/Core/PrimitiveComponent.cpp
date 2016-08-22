@@ -1,6 +1,9 @@
 #include "PrimitiveComponent.hpp"
 #include "World.hpp"
 
+namespace ke
+{
+
 PrimitiveComponent::PrimitiveComponent()
 	: mVisible(true)
 {
@@ -25,3 +28,5 @@ bool PrimitiveComponent::isVisible() const
 void PrimitiveComponent::render(sf::RenderTarget& target)
 {
 }
+
+} // namespace ke

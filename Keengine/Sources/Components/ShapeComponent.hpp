@@ -1,9 +1,12 @@
-#ifndef SHAPECOMPONENT_HPP
-#define SHAPECOMPONENT_HPP
+#ifndef KE_SHAPECOMPONENT_HPP
+#define KE_SHAPECOMPONENT_HPP
 
 #include "../Core/PrimitiveComponent.hpp"
 
 #include "../ExtLibs/LTBL2/LightShape.hpp"
+
+namespace ke
+{
 
 class ShapeComponent : public PrimitiveComponent
 {
@@ -35,4 +38,6 @@ class ShapeComponent : public PrimitiveComponent
 		ltbl::LightShape::Ptr mLightShape;
 };
 
-#endif // SHAPECOMPONENT_HPP
+} // namespace ke
+
+#endif // KE_SHAPECOMPONENT_HPP

@@ -24,8 +24,8 @@
 //
 ////////////////////////////////////////////////////////////
 
-#ifndef COMPRESSION_HPP
-#define COMPRESSION_HPP
+#ifndef KE_COMPRESSION_HPP
+#define KE_COMPRESSION_HPP
 
 #include <cstring>
 #include <string>
@@ -36,6 +36,9 @@
 #include <zlib.h>
 
 #include "../ExtLibs/pugixml.hpp"
+
+namespace ke
+{
 
 bool base64_encode(std::string& data);
 bool base64_decode(std::string& data);
@@ -50,4 +53,6 @@ bool is_valid_base64(unsigned char c);
 void loadCompressedXml(std::string const& filename, pugi::xml_document& doc);
 void saveCompressedXml(std::string const& filename, pugi::xml_document const& doc);
 
-#endif // COMPRESSION_HPP
+} // namespace ke
+
+#endif // KE_COMPRESSION_HPP

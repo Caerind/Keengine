@@ -1,8 +1,11 @@
-#ifndef CLOCKEDTASK_HPP
-#define CLOCKEDTASK_HPP
+#ifndef KE_CLOCKEDTASK_HPP
+#define KE_CLOCKEDTASK_HPP
 
 #include <functional>
 #include <SFML/System/Clock.hpp>
+
+namespace ke
+{
 
 class ClockedTask
 {
@@ -17,4 +20,6 @@ class ClockedTask
         std::function<void()> mFunction;
 };
 
-#endif // CLOCKEDTASK_HPP
+} // namespace ke
+
+#endif // KE_CLOCKEDTASK_HPP

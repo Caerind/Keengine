@@ -1,6 +1,9 @@
 #include "CameraComponent.hpp"
 #include "../Core/World.hpp"
 
+namespace ke
+{
+
 CameraComponent::CameraComponent() : SceneComponent()
 {
 	mCamera = getWorld().getView();
@@ -22,3 +25,5 @@ void CameraComponent::onPositionChanged()
 	mCamera.setCenter(getWorldPosition());
 	mCamera.setRotation(getRotation());
 }
+
+} // namespace ke

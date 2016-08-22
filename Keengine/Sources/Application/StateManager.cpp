@@ -1,6 +1,9 @@
 #include "StateManager.hpp"
 #include "Application.hpp"
 
+namespace ke
+{
+
 State::State() : mGui(Application::getWindow())
 {
 }
@@ -168,3 +171,5 @@ std::unique_ptr<State> StateManager::createState(std::string const& id)
 	}
 	return found->second();
 }
+
+} // namespace ke

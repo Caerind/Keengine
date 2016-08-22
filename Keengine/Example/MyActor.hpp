@@ -7,7 +7,7 @@
 #include "../Sources/Components/InputComponent.hpp"
 #include "../Sources/Components/PointLightComponent.hpp"
 
-class MyActor : public Actor
+class MyActor : public ke::Actor
 {
     public:
         MyActor();
@@ -18,10 +18,10 @@ class MyActor : public Actor
 		void update(sf::Time dt);
 
     private:
-        PointComponent mA;
-		AnimatorComponent mB;
-		PointLightComponent mC;
-		InputComponent mD;
+		ke::PointComponent mA;
+		ke::AnimatorComponent mB;
+		ke::PointLightComponent mC;
+		ke::InputComponent mD;
 
 		bool mRunning;
 };

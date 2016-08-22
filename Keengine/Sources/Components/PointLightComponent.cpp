@@ -1,6 +1,9 @@
 #include "PointLightComponent.hpp"
 #include "../Core/World.hpp"
 
+namespace ke
+{
+
 PointLightComponent::PointLightComponent()
 {
 	mLight = getWorld().getLights().createLightPoint();
@@ -56,3 +59,5 @@ void PointLightComponent::onPositionChanged()
 {
 	mLight->_emissionSprite.setPosition(getWorldPosition());
 }
+
+} // namespace ke

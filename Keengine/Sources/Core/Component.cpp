@@ -3,6 +3,9 @@
 #include "Actor.hpp"
 #include "World.hpp"
 
+namespace ke
+{
+
 Component::Component()
 	: mRegistered(false)
 	, mActor(nullptr)
@@ -212,3 +215,5 @@ World& Component::getWorld() const
 {
 	return World::instance();
 }
+
+} // namespace ke

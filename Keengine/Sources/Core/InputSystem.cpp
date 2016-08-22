@@ -1,6 +1,9 @@
 #include "InputSystem.hpp"
 #include "../Application/Application.hpp"
 
+namespace ke
+{
+
 std::string KeyboardPair::toString()
 {
 	return "type=Keyboard&key=" + InputSystem::keyToString(key) + "&input=" + InputSystem::inputTypeToString(type);
@@ -837,3 +840,5 @@ std::string InputSystem::unicodeToString(sf::Uint32 unicode)
 	s.push_back(static_cast<char>(unicode));
 	return s;
 }
+
+} // namespace ke

@@ -2,6 +2,9 @@
 #include "../Core/World.hpp"
 #include "../Maths/Vector2.hpp"
 
+namespace ke
+{
+
 DirectionLightComponent::DirectionLightComponent()
 {
 	mLight = getWorld().getLights().createLightDirection();
@@ -71,3 +74,4 @@ void DirectionLightComponent::onPositionChanged()
 	mLight->_emissionSprite.setPosition(getWorldPosition());
 }
 
+} // namespace ke

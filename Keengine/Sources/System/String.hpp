@@ -1,5 +1,5 @@
-#ifndef STRING_HPP
-#define STRING_HPP
+#ifndef KE_STRING_HPP
+#define KE_STRING_HPP
 
 #include <iostream>
 #include <algorithm>
@@ -11,7 +11,8 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
 
-
+namespace ke
+{
 
 void toLower(std::string& str);
 void toUpper(std::string& str);
@@ -36,4 +37,6 @@ sf::Color toColor(std::string str);
 sf::Vector2f toVector2f(std::string str);
 sf::Vector2i toVector2i(std::string str);
 
-#endif // STRING_HPP
+} // namespace ke
+
+#endif // KE_STRING_HPP

@@ -1,5 +1,5 @@
-#ifndef APPLICATION_HPP
-#define APPLICATION_HPP
+#ifndef KE_APPLICATION_HPP
+#define KE_APPLICATION_HPP
 
 #include "AudioManager.hpp"
 #include "ResourceManager.hpp"
@@ -7,17 +7,22 @@
 #include "PropertiesHolder.hpp"
 #include "Window.hpp"
 
+#include "../Config.hpp"
+
 #include <SFML/Graphics.hpp>
 #include <TGUI/TGUI.hpp>
 
-#ifndef SFML_SYSTEM_ANDROID // Dont use imgui on Android
+#ifndef KEENGINE_ANDROID // Dont use imgui and Lua on Android
 #include "../ExtLibs/imgui/imgui.h"
 #include "../ExtLibs/imgui/imgui-SFML.h"
+#include "../System/ScriptManager.hpp"
 #endif
 
 #include "../System/Log.hpp"
 #include "../Maths/Math.hpp"
-#include "../System/ScriptManager.hpp"
+
+namespace ke
+{
 
 class Application
 {
@@ -84,7 +89,9 @@ class Application
 		// Script
 		static void setScriptPath(std::string const& scriptPath);
 		static std::string getScriptPath();
+		#ifndef KEENGINE_ANDROID
 		static sel::State& script(std::string const& name);
+		#endif
 
         //
         // States
@@ -202,7 +209,9 @@ class Application
         Window mWindow;
 		tgui::Gui mGui;
 		PropertiesHolder mProperties;
+		#ifndef KEENGINE_ANDROID
 		ScriptManager mScripts;
+		#endif
 
         std::string mPathToSettings;
 		std::string mScriptPath;
@@ -243,4 +252,6 @@ void Application::setDebugInfo(std::string const& id, T value)
     instance().mWindow.setDebugInfo<T>(id, value);
 }
 
-#endif // APPLICATION_HPP
+} // namespace ke
+
+#endif // KE_APPLICATION_HPP

@@ -368,6 +368,9 @@
     <ClCompile Include="Example\MyObject.cpp">
       <Filter>Example</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Core\Pathfinding.cpp">
+      <Filter>Sources\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -738,6 +741,9 @@
     </ClInclude>
     <ClInclude Include="Sources\Config.hpp">
       <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Core\Pathfinding.hpp">
+      <Filter>Sources\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

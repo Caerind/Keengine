@@ -1,11 +1,14 @@
-#ifndef LP_PACKET_HPP
-#define LP_PACKET_HPP
+#ifndef KE_PACKET_HPP
+#define KE_PACKET_HPP
 
 #include <SFML/Network/Packet.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/System/Vector3.hpp>
+
+namespace ke
+{
 
 // Vector2
 template<typename T> sf::Packet& operator <<(sf::Packet& packet, const sf::Vector2<T>& v);
@@ -47,4 +50,6 @@ template<typename T> sf::Packet& operator >>(sf::Packet& packet, sf::Rect<T>& r)
     return packet >> r.left >> r.top >> r.width >> r.height;
 }
 
-#endif // SES_PACKET_HPP
+} // namespace ke
+
+#endif // KE_PACKET_HPP

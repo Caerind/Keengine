@@ -13,12 +13,12 @@ MyActor::MyActor()
 
 	registerComponent(&mB);
 	attachComponent(&mB);
-	Animation& idle = mB.getAnimation("idle");
+	ke::Animation& idle = mB.getAnimation("idle");
 	idle.addFrame("cat", { 0, 0, 64, 64 }, sf::seconds(0.15f));
 	idle.addFrame("cat", { 64, 0, 64, 64 }, sf::seconds(0.15f));
 	idle.addFrame("cat", { 128, 0, 64, 64 }, sf::seconds(0.15f));
 	idle.addFrame("cat", { 192, 0, 64, 64 }, sf::seconds(0.15f));
-	Animation& run = mB.getAnimation("run");
+	ke::Animation& run = mB.getAnimation("run");
 	run.addFrame("cat", { 0, 64, 64, 64 }, sf::seconds(0.15f));
 	run.addFrame("cat", { 64, 64, 64, 64 }, sf::seconds(0.15f));
 	run.addFrame("cat", { 128, 64, 64, 64 }, sf::seconds(0.15f));

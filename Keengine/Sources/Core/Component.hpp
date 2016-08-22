@@ -1,9 +1,12 @@
-#ifndef COMPONENT_HPP
-#define COMPONENT_HPP
+#ifndef KE_COMPONENT_HPP
+#define KE_COMPONENT_HPP
 
 #include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
+
+namespace ke
+{
 
 class Actor;
 class World;
@@ -49,4 +52,6 @@ class Component
 		bool mUpdatable;
 };
 
-#endif // COMPONENT_HPP
+} // namespace ke
+
+#endif // KE_COMPONENT_HPP

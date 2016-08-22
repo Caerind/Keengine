@@ -1,9 +1,12 @@
-#ifndef PHYSICSYSTEM_HPP
-#define PHYSICSYSTEM_HPP
+#ifndef KE_PHYSICSYSTEM_HPP
+#define KE_PHYSICSYSTEM_HPP
 
 #include <SFML/System/Time.hpp>
 
 //#include "../ExtLibs/Box2D/Box2D.hpp"
+
+namespace ke
+{
 
 class PhysicSystem
 {
@@ -22,4 +25,6 @@ class PhysicSystem
 		int mPositionIterations;
 };
 
-#endif // PHYSICSYSTEM_HPP
+} // namespace ke
+
+#endif // KE_PHYSICSYSTEM_HPP

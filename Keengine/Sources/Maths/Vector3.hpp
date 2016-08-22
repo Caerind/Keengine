@@ -1,11 +1,14 @@
-#ifndef VECTOR3_HPP
-#define VECTOR3_HPP
+#ifndef KE_VECTOR3_HPP
+#define KE_VECTOR3_HPP
 
 #include <cassert>
 #include <sstream>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/System/Vector3.hpp>
 #include "Trigonometry.hpp"
+
+namespace ke
+{
 
 float distance(sf::Vector3f const& l, sf::Vector3f const& r);
 
@@ -42,4 +45,6 @@ sf::Vector3f lerp(sf::Vector3f const& start, sf::Vector3f const& end, float perc
 sf::Vector3f slerp(sf::Vector3f const& start, sf::Vector3f const& end, float percent);
 sf::Vector3f nlerp(sf::Vector3f const& start, sf::Vector3f const& end, float percent);
 
-#endif // VECTOR3_HPP
+} // namespace ke
+
+#endif // KE_VECTOR3_HPP

@@ -1,5 +1,7 @@
-#ifndef WINDOW_HPP
-#define WINDOW_HPP
+#ifndef KE_WINDOW_HPP
+#define KE_WINDOW_HPP
+
+#include "../Config.hpp"
 
 #include <unordered_map>
 
@@ -12,6 +14,9 @@
 
 #include "../System/Log.hpp"
 #include "../System/Time.hpp"
+
+namespace ke
+{
 
 class Window : public sf::RenderWindow
 {
@@ -199,4 +204,6 @@ inline void Window::setDebugInfo<bool>(std::string const& id, bool value)
     mDebugInfo[id] = (value) ? "true" : "false";
 }
 
-#endif // WINDOW_HPP
+} // namespace ke
+
+#endif // KE_WINDOW_HPP

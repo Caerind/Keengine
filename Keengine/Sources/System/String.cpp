@@ -1,5 +1,8 @@
 #include "String.hpp"
 
+namespace ke
+{
+
 void toLower(std::string& str)
 {
     std::transform(str.begin(), str.end(),str.begin(), tolower);
@@ -143,3 +146,5 @@ sf::Vector2i toVector2i(std::string str)
     v.y = std::stoi(str);
     return v;
 }
+
+} // namespace ke

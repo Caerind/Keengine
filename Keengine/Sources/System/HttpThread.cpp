@@ -1,5 +1,8 @@
 #include "HttpThread.hpp"
 
+namespace ke
+{
+
 HttpThread::HttpThread()
 : mThread(std::bind(&HttpThread::run,this))
 {
@@ -86,3 +89,5 @@ bool HttpThread::sendHttpRequest(std::string const& url, std::string const& body
 	}
 	return rep.getStatus() == sf::Http::Response::Ok;
 }
+
+} // namespace ke

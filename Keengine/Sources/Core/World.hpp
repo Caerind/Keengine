@@ -1,5 +1,7 @@
-#ifndef WORLD_HPP
-#define WORLD_HPP
+#ifndef KE_WORLD_HPP
+#define KE_WORLD_HPP
+
+#include "../Config.hpp"
 
 #include <cassert>
 #include <memory>
@@ -19,8 +21,11 @@
 
 #include "../Components/CameraComponent.hpp"
 
-class World
+namespace ke
 {
+
+	class World
+	{
 	public:
 		static World& createInstance();
 		static World& instance();
@@ -147,6 +152,8 @@ class World
 
 		bool mUseLights;
 		ltbl::LightSystem mLights;
-};
+	};
 
-#endif // WORLD_HPP
+} // namespace ke
+
+#endif // KE_WORLD_HPP

@@ -1,5 +1,5 @@
-#ifndef RESOURCEMANAGER_HPP
-#define RESOURCEMANAGER_HPP
+#ifndef KE_RESOURCEMANAGER_HPP
+#define KE_RESOURCEMANAGER_HPP
 
 #include <cassert>
 #include <iostream>
@@ -16,6 +16,9 @@
 #include "PropertiesHolder.hpp"
 #include "../System/Log.hpp"
 #include "../ExtLibs/pugixml.hpp"
+
+namespace ke
+{
 
 class Resource
 {
@@ -281,4 +284,6 @@ class IniParser : public std::map<std::string, Variant>, public Resource
 		std::vector<std::pair<std::string, Variant>> mPairs;
 };
 
-#endif // RESOURCEMANAGER_HPP
+} // namespace ke
+
+#endif // KE_RESOURCEMANAGER_HPP

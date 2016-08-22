@@ -1,5 +1,8 @@
 #include "Compression.hpp"
 
+namespace ke
+{
+
 const std::string base64_table = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                                  "abcdefghijklmnopqrstuvwxyz"
                                  "0123456789+/";
@@ -214,3 +217,5 @@ void saveCompressedXml(std::string const& filename, pugi::xml_document const& do
 
     remove(".temp");
 }
+
+} // namespace ke

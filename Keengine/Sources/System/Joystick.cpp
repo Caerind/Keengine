@@ -1,4 +1,8 @@
 #include "Joystick.hpp"
+#include "../Config.hpp"
+
+namespace ke
+{
 
 Joystick::Joystick()
 {
@@ -69,7 +73,7 @@ void Joystick::update(sf::Time dt)
 
 void Joystick::handleEvent(sf::Event const& event)
 {
-    #ifdef SFML_SYSTEM_ANDROID
+    #ifdef ANDROID
     if (event.type == sf::Event::TouchBegan && Joystick::contains(sf::Vector2f(event.touch.x,event.touch.y)))
     {
         mHeld = true;
@@ -127,3 +131,5 @@ void Joystick::render(sf::RenderTarget& target, sf::RenderStates states)
     target.draw(mBackground,states);
     target.draw(mButton,states);
 }
+
+} // namespace ke

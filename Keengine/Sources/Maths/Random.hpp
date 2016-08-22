@@ -1,10 +1,13 @@
-#ifndef RANDOM_HPP
-#define RANDOM_HPP
+#ifndef KE_RANDOM_HPP
+#define KE_RANDOM_HPP
 
 #include <cassert>
 #include <chrono>
 #include <random>
 #include <sstream>
+
+namespace ke
+{
 
 class Random
 {
@@ -79,4 +82,6 @@ void setRandomSeed(std::string const& seed);
 
 std::string getRandomSeed();
 
-#endif // RANDOM_HPP
+} // namespace ke
+
+#endif // KE_RANDOM_HPP

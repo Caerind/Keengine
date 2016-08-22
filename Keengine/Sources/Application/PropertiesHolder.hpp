@@ -1,11 +1,14 @@
-#ifndef PROPERTIESHOLDER_HPP
-#define PROPERTIESHOLDER_HPP
+#ifndef KE_PROPERTIESHOLDER_HPP
+#define KE_PROPERTIESHOLDER_HPP
 
 #include <string>
 #include <unordered_map>
 
 #include "../ExtLibs/pugixml.hpp"
 #include "../System/Variant.hpp"
+
+namespace ke
+{
 
 class PropertiesHolder
 {
@@ -30,4 +33,6 @@ class PropertiesHolder
 		std::unordered_map<std::string, Variant> mProperties;
 };
 
-#endif // PROPERTIESHOLDER_HPP
+} // namespace ke
+
+#endif // KE_PROPERTIESHOLDER_HPP

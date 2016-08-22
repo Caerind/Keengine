@@ -1,12 +1,15 @@
-#ifndef NARRAY_HPP
-#define NARRAY_HPP
+#ifndef KE_CONTAINER_HPP
+#define KE_CONTAINER_HPP
 
 #include <algorithm>
 #include <functional>
 #include <map>
 #include <vector>
 
-#include "Math.hpp"
+#include "../Maths/Random.hpp"
+
+namespace ke
+{
 
 ///
 ///
@@ -157,4 +160,6 @@ const T& randomElement(std::vector<T> const& vector)
     return vector.at(NMath::random(0, static_cast<int>(vector.size() - 1)));
 }
 
-#endif // NARRAY_HPP
+} // namespace ke
+
+#endif // KE_CONTAINER_HPP

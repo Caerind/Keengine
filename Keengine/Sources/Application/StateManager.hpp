@@ -1,5 +1,5 @@
-#ifndef STATEMANAGER_HPP
-#define STATEMANAGER_HPP
+#ifndef KE_STATEMANAGER_HPP
+#define KE_STATEMANAGER_HPP
 
 #include <functional>
 #include <map>
@@ -16,6 +16,9 @@
 #include <SFML/Window/Event.hpp>
 
 #include <TGUI/TGUI.hpp>
+
+namespace ke
+{
 
 class State
 {
@@ -103,4 +106,6 @@ class StateManager
 		std::map<std::string, std::function<State::Ptr()>> mFactories;
 };
 
-#endif // STATEMANAGER_HPP
+} // namespace ke
+
+#endif // KE_STATEMANAGER_HPP

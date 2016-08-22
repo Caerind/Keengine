@@ -1,8 +1,11 @@
-#ifndef DIRECTIONLIGHTCOMPONENT_HPP
-#define DIRECTIONLIGHTCOMPONENT_HPP
+#ifndef KE_DIRECTIONLIGHTCOMPONENT_HPP
+#define KE_DIRECTIONLIGHTCOMPONENT_HPP
 
 #include "../Core/SceneComponent.hpp"
 #include "../ExtLibs/LTBL2/LightDirectionEmission.hpp"
+
+namespace ke
+{
 
 class DirectionLightComponent : public SceneComponent
 {
@@ -28,4 +31,6 @@ class DirectionLightComponent : public SceneComponent
 		ltbl::LightDirectionEmission::Ptr mLight;
 };
 
-#endif // DIRECTIONLIGHTCOMPONENT_HPP
+} // namespace ke
+
+#endif // KE_DIRECTIONLIGHTCOMPONENT_HPP

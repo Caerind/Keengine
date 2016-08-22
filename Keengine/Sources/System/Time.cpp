@@ -1,12 +1,15 @@
 #include "Time.hpp"
 
+namespace ke
+{
+
 std::string getTime(std::string const& timeFormat)
 {
     time_t rawtime;
     tm timeinfo;
     char buffer[80];
     time(&rawtime);
-	#ifndef SFML_SYSTEM_ANDROID
+	#ifndef ANDROID
     localtime_s(&timeinfo, &rawtime);
 	#else
 	localtime(&rawtime);
@@ -163,3 +166,5 @@ void Timer::stop()
     mDuration = sf::Time::Zero;
     mElapsed = sf::Time::Zero;
 }
+
+} // namespace ke

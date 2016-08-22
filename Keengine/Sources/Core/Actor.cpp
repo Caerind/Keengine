@@ -3,6 +3,9 @@
 #include "World.hpp"
 #include "../Maths/Generics.hpp"
 
+namespace ke
+{
+
 Actor::Actor(std::string const& id)
 	: mRoot()
 	, mComponents()
@@ -168,3 +171,5 @@ World& Actor::getWorld() const
 {
 	return World::instance();
 }
+
+} // namespace ke

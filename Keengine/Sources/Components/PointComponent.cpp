@@ -1,6 +1,9 @@
 #include "PointComponent.hpp"
 #include "../Core/World.hpp"
 
+namespace ke
+{
+
 PointComponent::PointComponent()
 {
     setRadius(2.f);
@@ -32,3 +35,5 @@ void PointComponent::render(sf::RenderTarget& target)
 {
     target.draw(mPoint, sf::RenderStates(getWorldTransform()));
 }
+
+} // namespace ke

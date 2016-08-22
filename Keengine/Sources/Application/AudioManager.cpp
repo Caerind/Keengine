@@ -1,6 +1,9 @@
 #include "AudioManager.hpp"
 #include "Application.hpp"
 
+namespace ke
+{
+
 AudioManager::AudioManager()
 {
     mStatus = sf::SoundSource::Playing;
@@ -194,3 +197,5 @@ sf::SoundSource::Status AudioManager::getStatus() const
 {
     return mStatus;
 }
+
+} // namespace ke

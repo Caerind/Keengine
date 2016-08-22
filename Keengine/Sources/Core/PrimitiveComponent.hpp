@@ -1,9 +1,12 @@
-#ifndef PRIMITIVECOMPONENT_HPP
-#define PRIMITIVECOMPONENT_HPP
+#ifndef KE_PRIMITIVECOMPONENT_HPP
+#define KE_PRIMITIVECOMPONENT_HPP
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
 #include "SceneComponent.hpp"
+
+namespace ke
+{
 
 class PrimitiveComponent : public SceneComponent
 {
@@ -20,4 +23,6 @@ class PrimitiveComponent : public SceneComponent
 		bool mVisible;
 };
 
-#endif // PRIMITIVECOMPONENT_HPP
+} // namespace ke
+
+#endif // KE_PRIMITIVECOMPONENT_HPP

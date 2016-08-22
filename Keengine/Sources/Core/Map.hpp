@@ -1,5 +1,5 @@
-#ifndef MAP_HPP
-#define MAP_HPP
+#ifndef KE_MAP_HPP
+#define KE_MAP_HPP
 
 #include "Actor.hpp"
 
@@ -7,10 +7,17 @@
 #include "../Components/SpriteComponent.hpp"
 #include "../Components/ShapeComponent.hpp"
 
+namespace ke
+{
+
 class Map : public Actor, public PropertiesHolder
 {
 	public:
 		typedef std::shared_ptr<Map> Ptr;
+
+		static std::vector<sf::Vector2i> getNeighboors(sf::Vector2i const& coords, std::string const& orientation, bool diag = false, std::string const& staggerIndex = "odd", std::string const& staggerAxis = "y");
+		static sf::Vector2i worldToCoords(sf::Vector2f const& world, std::string const& orientation, sf::Vector2i const& tileSize, std::string const& staggerIndex = "odd", std::string const& staggerAxis = "y", unsigned int hexSide = 0);
+		static sf::Vector2f coordsToWorld(sf::Vector2i const& coords, std::string const& orientation, sf::Vector2i const& tileSize, std::string const& staggerIndex = "odd", std::string const& staggerAxis = "y", unsigned int hexSide = 0);
 
 		Map();
 
@@ -18,6 +25,7 @@ class Map : public Actor, public PropertiesHolder
 		bool saveTmxFile(std::string const& filename);
 
 		sf::Vector2i worldToCoords(sf::Vector2f const& world);
+		sf::Vector2f coordsToWorld(sf::Vector2i const& coords);
 
 		std::shared_ptr<SpriteComponent> addImage();
 		std::size_t getImageCount();
@@ -70,4 +78,6 @@ class Map : public Actor, public PropertiesHolder
 		unsigned int mHexSideLength;
 };
 
-#endif // MAP_HPP
+} // namespace ke
+
+#endif // KE_MAP_HPP

@@ -1,9 +1,12 @@
-#ifndef POINTCOMPONENT_HPP
-#define POINTCOMPONENT_HPP
+#ifndef KE_POINTCOMPONENT_HPP
+#define KE_POINTCOMPONENT_HPP
 
 #include <SFML/Graphics/CircleShape.hpp>
 
 #include "../Core/PrimitiveComponent.hpp"
+
+namespace ke
+{
 
 class PointComponent : public PrimitiveComponent
 {
@@ -22,4 +25,6 @@ class PointComponent : public PrimitiveComponent
         sf::CircleShape mPoint;
 };
 
-#endif // POINTCOMPONENT_HPP
+} // namespace ke
+
+#endif // KE_POINTCOMPONENT_HPP

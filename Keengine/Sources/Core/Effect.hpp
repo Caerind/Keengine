@@ -1,10 +1,13 @@
-#ifndef EFFECT_HPP
-#define EFFECT_HPP
+#ifndef KE_EFFECT_HPP
+#define KE_EFFECT_HPP
 
 #include <SFML/Graphics/Shader.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
+
+namespace ke
+{
 
 class World;
 class Effect
@@ -38,4 +41,6 @@ class Pixelate : public Effect
 		void apply(sf::RenderTexture const& input, sf::RenderTarget& output);
 };
 
-#endif // EFFECT_HPP
+} // namespace ke
+
+#endif // KE_EFFECT_HPP

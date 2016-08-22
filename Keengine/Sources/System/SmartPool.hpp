@@ -1,9 +1,12 @@
-#ifndef SMARTPOOL_HPP_INCLUDED
-#define SMARTPOOL_HPP_INCLUDED
+#ifndef KE_SMARTPOOL_HPP
+#define KE_SMARTPOOL_HPP
 
 #include <functional>
 #include <memory>
 #include <vector>
+
+namespace ke
+{
 
 template <typename T>
 class SmartPool
@@ -196,4 +199,6 @@ class SmartPool
 
 };
 
-#endif // SMARTPOOL_HPP_INCLUDED
+} // namespace ke
+
+#endif // KE_SMARTPOOL_HPP

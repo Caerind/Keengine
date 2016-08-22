@@ -1,5 +1,8 @@
 #include "ClockedTask.hpp"
 
+namespace ke
+{
+
 ClockedTask::ClockedTask(std::function<void()> function)
 : mFunction(function)
 {
@@ -23,3 +26,5 @@ sf::Time ClockedTask::execute()
         return sf::Time::Zero;
     }
 }
+
+} // namespace ke

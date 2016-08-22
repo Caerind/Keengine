@@ -1,5 +1,5 @@
-#ifndef LOG_HPP
-#define LOG_HPP
+#ifndef KE_LOG_HPP
+#define KE_LOG_HPP
 
 #include <ctime>
 #include <fstream>
@@ -12,6 +12,9 @@
 
 #include "HttpThread.hpp"
 #include "Time.hpp"
+
+namespace ke
+{
 
 class Log
 {
@@ -193,4 +196,6 @@ class Log
 		std::string mUrl;
 };
 
-#endif // LOG_HPP
+} // namespace ke
+
+#endif // KE_LOG_HPP

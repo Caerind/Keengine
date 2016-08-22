@@ -1,5 +1,5 @@
-#ifndef JOYSTICK_HPP
-#define JOYSTICK_HPP
+#ifndef KE_JOYSTICK_HPP
+#define KE_JOYSTICK_HPP
 
 #include <cmath>
 #include <SFML/Graphics/Sprite.hpp>
@@ -7,6 +7,9 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/Transformable.hpp>
+
+namespace ke
+{
 
 class Joystick : public sf::Transformable
 {
@@ -40,4 +43,6 @@ class Joystick : public sf::Transformable
         bool mMouse;
 };
 
-#endif // JOYSTICK_HPP
+} // namespace ke
+
+#endif // KE_JOYSTICK_HPP

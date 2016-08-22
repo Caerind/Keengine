@@ -1,11 +1,14 @@
-#ifndef AUDIOMANAGER_HPP
-#define AUDIOMANAGER_HPP
+#ifndef KE_AUDIOMANAGER_HPP
+#define KE_AUDIOMANAGER_HPP
 
 #include <map>
 #include <memory>
 #include <vector>
 
 #include <SFML/Audio.hpp>
+
+namespace ke
+{
 
 class AudioManager
 {
@@ -50,4 +53,6 @@ class AudioManager
         float mSoundVolume;
 };
 
-#endif // AUDIOMANAGER_HPP
+} // namespace ke
+
+#endif // KE_AUDIOMANAGER_HPP

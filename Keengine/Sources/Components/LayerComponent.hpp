@@ -1,5 +1,5 @@
-#ifndef LAYERCOMPONENT_HPP
-#define LAYERCOMPONENT_HPP
+#ifndef KE_LAYERCOMPONENT_HPP
+#define KE_LAYERCOMPONENT_HPP
 
 #include <map>
 
@@ -12,6 +12,9 @@
 #include "../System/Compression.hpp"
 #include "../System/Variant.hpp"
 
+namespace ke
+{
+
 class LayerComponent : public PrimitiveComponent, public PropertiesHolder
 {
 	public:
@@ -19,6 +22,7 @@ class LayerComponent : public PrimitiveComponent, public PropertiesHolder
 		LayerComponent(Tileset* tileset, sf::Vector2i const& size = sf::Vector2i(), sf::Vector2i const& tileSize = sf::Vector2i(), std::string const& orientation = "orthogonal", std::string const& staggerAxis = "y", std::string const& staggerIndex = "odd", unsigned int hexSideLength = 0);
 
 		sf::Vector2i worldToCoords(sf::Vector2f const& world);
+		sf::Vector2f coordsToWorld(sf::Vector2i const& coords);
 
 		void render(sf::RenderTarget& target);
 
@@ -86,4 +90,6 @@ class LayerComponent : public PrimitiveComponent, public PropertiesHolder
 		unsigned int mHexSideLength;
 };
 
-#endif // LAYERCOMPONENT_HPP
+} // namespace ke
+
+#endif // KE_LAYERCOMPONENT_HPP

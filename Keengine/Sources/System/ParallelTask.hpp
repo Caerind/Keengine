@@ -1,10 +1,13 @@
-#ifndef PARALLELTASK_HPP
-#define PARALLELTASK_HPP
+#ifndef KE_PARALLELTASK_HPP
+#define KE_PARALLELTASK_HPP
 
 #include <SFML/System/Thread.hpp>
 #include <SFML/System/Mutex.hpp>
 #include <SFML/System/Lock.hpp>
 #include <SFML/System/Clock.hpp>
+
+namespace ke
+{
 
 class ParallelTask
 {
@@ -25,4 +28,6 @@ class ParallelTask
 		sf::Mutex mMutex;
 };
 
-#endif // PARALLELTASK_HPP
+} // namespace ke
+
+#endif // KE_PARALLELTASK_HPP

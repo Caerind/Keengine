@@ -1,5 +1,5 @@
-#ifndef ANIMATIONCOMPONENT_HPP
-#define ANIMATIONCOMPONENT_HPP
+#ifndef KE_ANIMATIONCOMPONENT_HPP
+#define KE_ANIMATIONCOMPONENT_HPP
 
 #include <string>
 #include <unordered_map>
@@ -10,6 +10,9 @@
 #include <SFML/System/Time.hpp>
 
 #include "../Core/PrimitiveComponent.hpp"
+
+namespace ke
+{
 
 struct Frame
 {
@@ -75,4 +78,6 @@ class AnimatorComponent : public PrimitiveComponent
 		sf::Time mTimeElapsed;
 };
 
-#endif // ANIMATIORCOMPONENT_HPP
+} // namespace ke
+
+#endif // KE_ANIMATIORCOMPONENT_HPP

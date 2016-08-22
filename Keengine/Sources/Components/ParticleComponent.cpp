@@ -1,6 +1,9 @@
 #include "ParticleComponent.hpp"
 #include "../Core/World.hpp"
 
+namespace ke
+{
+
 ParticleComponent::ParticleComponent()
 	: mParticles()
 	, mAffectors()
@@ -276,3 +279,5 @@ void ParticleComponent::computeQuad(Quad& quad, sf::IntRect const& tRect)
 	quad[3].position = quad[2].position;
 	quad[5].position = quad[0].position;
 }
+
+} // namespace ke

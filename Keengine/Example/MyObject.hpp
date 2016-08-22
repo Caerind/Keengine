@@ -5,7 +5,7 @@
 
 #include "../Sources/Components/ShapeComponent.hpp"
 
-class MyObject : public Actor
+class MyObject : public ke::Actor
 {
 	public:
 		typedef std::shared_ptr<MyObject> Ptr;
@@ -15,7 +15,7 @@ class MyObject : public Actor
 		void setSize(int x, int y);
 
 	private:
-		ShapeComponent mShape;
+		ke::ShapeComponent mShape;
 };
 
 #endif // MYOBJECT_HPP

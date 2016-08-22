@@ -1,6 +1,9 @@
 #include "ResourceManager.hpp"
 #include "../System/Log.hpp"
 
+namespace ke
+{
+
 Resource::Resource()
 { 
 	mLoaded = false; 
@@ -865,3 +868,5 @@ bool IniParser::saveToFile(std::string const & filename) const
 	file.close();
 	return true;
 }
+
+} // namespace ke

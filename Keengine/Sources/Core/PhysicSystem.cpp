@@ -1,5 +1,8 @@
 #include "PhysicSystem.hpp"
 
+namespace ke
+{
+
 PhysicSystem::PhysicSystem()
 	//: mWorld(b2::Vec2(0.f, 0.f))
 {
@@ -28,3 +31,5 @@ void PhysicSystem::update(sf::Time dt)
 {
 	//mWorld.Step(dt.asSeconds(), mVelocityIterations, mPositionIterations);
 }
+
+} // namespace ke

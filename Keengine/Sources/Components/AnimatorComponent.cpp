@@ -1,6 +1,9 @@
 #include "AnimatorComponent.hpp"
 #include "../Core/World.hpp"
 
+namespace ke
+{
+
 Animation::Animation()
 {
 }
@@ -147,3 +150,5 @@ sf::FloatRect AnimatorComponent::getGlobalBounds()
 {
 	return getWorldTransform().transformRect(mSprite.getLocalBounds());
 }
+
+} // namespace ke

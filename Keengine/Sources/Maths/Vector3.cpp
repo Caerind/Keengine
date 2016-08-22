@@ -1,5 +1,8 @@
 #include "Vector3.hpp"
 
+namespace ke
+{
+
 float distance(sf::Vector3f const& l, sf::Vector3f const& r)
 {
     return getLength(l-r);
@@ -177,3 +180,5 @@ sf::Vector3f nlerp(sf::Vector3f const& start, sf::Vector3f const& end, float per
 {
     return normalized(lerp(start,end,percent));
 }
+
+} // namespace ke

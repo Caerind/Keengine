@@ -1,6 +1,9 @@
 #include "SpriteComponent.hpp"
 #include "../Core/World.hpp"
 
+namespace ke
+{
+
 SpriteComponent::SpriteComponent() : mTexture("")
 {
 }
@@ -62,3 +65,5 @@ sf::FloatRect SpriteComponent::getGlobalBounds()
 {
 	return getWorldTransform().transformRect(mSprite.getLocalBounds());
 }
+
+} // namespace ke

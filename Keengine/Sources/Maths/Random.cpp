@@ -1,5 +1,8 @@
 #include "Random.hpp"
 
+namespace ke
+{
+
 Random Random::mRandom;
 
 int random(int min, int max)
@@ -40,3 +43,5 @@ std::string getRandomSeed()
 {
     return Random::instance().getSeed();
 }
+
+} // namespace ke

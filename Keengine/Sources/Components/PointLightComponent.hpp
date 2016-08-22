@@ -1,8 +1,11 @@
-#ifndef POINTLIGHTCOMPONENT_HPP
-#define POINTLIGHTCOMPONENT_HPP
+#ifndef KE_POINTLIGHTCOMPONENT_HPP
+#define KE_POINTLIGHTCOMPONENT_HPP
 
 #include "../Core/SceneComponent.hpp"
 #include "../ExtLibs/LTBL2/LightPointEmission.hpp"
+
+namespace ke
+{
 
 class PointLightComponent : public SceneComponent
 {
@@ -23,4 +26,6 @@ class PointLightComponent : public SceneComponent
 		ltbl::LightPointEmission::Ptr mLight;
 };
 
-#endif // POINTLIGHTCOMPONENT_HPP
+} // namespace ke
+
+#endif // KE_POINTLIGHTCOMPONENT_HPP

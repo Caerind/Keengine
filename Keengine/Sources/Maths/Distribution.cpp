@@ -1,5 +1,8 @@
 #include "Distribution.hpp"
 
+namespace ke
+{
+
 namespace Distributions
 {
 
@@ -61,3 +64,5 @@ Distribution<sf::Vector2f> deflect(sf::Vector2f direction, float maxRotation)
 }
 
 } // namespace Distributions
+
+} // namespace ke

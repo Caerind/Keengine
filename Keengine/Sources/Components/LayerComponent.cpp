@@ -1,4 +1,8 @@
 #include "LayerComponent.hpp"
+#include "../Core/Map.hpp"
+
+namespace ke
+{
 
 LayerComponent::LayerComponent()
 	: mVertices(sf::Triangles)
@@ -36,80 +40,12 @@ LayerComponent::LayerComponent(Tileset* tileset, sf::Vector2i const& size, sf::V
 
 sf::Vector2i LayerComponent::worldToCoords(sf::Vector2f const& world)
 {
-	sf::Vector2f pos = world - getWorldPosition();
-	if (mOrientation == "orthogonal")
-	{
-		return sf::Vector2i((int)pos.x / mTileSize.x, (int)pos.y / mTileSize.y);
-	}
-	else if (mOrientation == "isometric")
-	{
-		// TODO : Conversion isometric
-		return sf::Vector2i();
-	}
-	else if (mOrientation == "staggered")
-	{
-		sf::Vector2f s = sf::Vector2f(mTileSize.x * 0.5f, mTileSize.y * 0.5f);
-		sf::Vector2f mc = sf::Vector2f(floor(pos.x / s.x), floor(pos.y / s.y));
-		sf::Vector2f p = pos - sf::Vector2f(mc.x * s.x, mc.y * s.y);
-		const float rad = 0.523599f; // = 30 degrees
-		int indexInt = (mStaggerIndex == "odd") ? 0 : 1;
-		if (mStaggerAxis == "y")
-		{
-			if (((int)mc.x + (int)mc.y) % 2 == indexInt)
-			{
-				if (std::atan2(s.y - p.y, p.x) > rad)
-				{
-					mc.x--;
-					mc.y--;
-				}
-			}
-			else
-			{
-				if (std::atan2(-p.y, p.x) > -rad)
-				{
-					mc.y--;
-				}
-				else
-				{
-					mc.x--;
-				}
-			}
-			return sf::Vector2i((int)floor(mc.x * 0.5f), (int)mc.y);
-		}
-		else
-		{
-			if (((int)mc.x + (int)mc.y) % 2 == indexInt)
-			{
-				if (std::atan2(s.x - p.x, p.y) > rad)
-				{
-					mc.x--;
-					mc.y--;
-				}
-			}
-			else
-			{
-				if (std::atan2(-p.x, p.y) > -rad)
-				{
-					mc.x--;
-				}
-				else
-				{
-					mc.y--;
-				}
-			}
-			return sf::Vector2i((int)mc.x, (int)floor(mc.y * 0.5f));
-		}
-	}
-	else if (mOrientation == "hexagonal")
-	{
-		// TODO : Conversion hexagonal
-		return sf::Vector2i();
-	}
-	else
-	{
-		// Unknown
-		return sf::Vector2i();
-	}
+	return Map::worldToCoords(world - getWorldPosition(), mOrientation, mTileSize, mStaggerIndex, mStaggerAxis, mHexSideLength);
+}
+
+sf::Vector2f LayerComponent::coordsToWorld(sf::Vector2i const & coords)
+{
+	return  Map::coordsToWorld(coords, mOrientation, mTileSize, mStaggerIndex, mStaggerAxis, mHexSideLength) + getWorldPosition();
 }
 
 void LayerComponent::render(sf::RenderTarget& target)
@@ -713,3 +649,5 @@ sf::Vector2f LayerComponent::getVertexPosition(sf::Vector2i const & coords)
 	}
 	return pos;
 }
+
+} // namespace ke

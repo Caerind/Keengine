@@ -1,5 +1,8 @@
 #include "ParallelTask.hpp"
 
+namespace ke
+{
+
 ParallelTask::ParallelTask()
 : mThread(&ParallelTask::runTask, this)
 , mFinished(false)
@@ -48,3 +51,5 @@ void ParallelTask::runTask()
 		mFinished = true;
 	}
 }
+
+} // namespace ke

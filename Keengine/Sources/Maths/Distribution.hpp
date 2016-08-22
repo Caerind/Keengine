@@ -1,5 +1,5 @@
-#ifndef DISTRIBUTION_HPP
-#define DISTRIBUTION_HPP
+#ifndef KE_DISTRIBUTION_HPP
+#define KE_DISTRIBUTION_HPP
 
 #include <cassert>
 #include <functional>
@@ -10,6 +10,9 @@
 
 #include "Random.hpp"
 #include "Vector2.hpp"
+
+namespace ke
+{
 
 namespace priv
 {
@@ -77,4 +80,6 @@ Distribution<T> uniformT(T min, T max)
 
 } // namespace Distributions
 
-#endif // DISTRIBUTION_HPP
+} // namespace ke
+
+#endif // KE_DISTRIBUTION_HPP

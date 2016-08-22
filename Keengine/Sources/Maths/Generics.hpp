@@ -1,8 +1,11 @@
-#ifndef GENERICS_HPP
-#define GENERICS_HPP
+#ifndef KE_GENERICS_HPP
+#define KE_GENERICS_HPP
 
 #include <algorithm>
 #include <sstream>
+
+namespace ke
+{
 
 template <typename T>
 T clamp(T const& value, T const& min, T const& max)
@@ -88,4 +91,6 @@ T binToDec(std::string const& binary)
     return decimal;
 }
 
-#endif // GENERICS_HPP
+} // namespace ke
+
+#endif // KE_GENERICS_HPP

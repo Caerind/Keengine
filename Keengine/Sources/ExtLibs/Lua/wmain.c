@@ -1,3 +1,5 @@
+#if defined(_WIN32) || defined(__WIN32__)
+
 #include <windows.h>
 #include <stdlib.h> /* declaration of __argc and __argv */
 
@@ -14,3 +16,5 @@ int PASCAL WinMain(HINSTANCE hinst, HINSTANCE hprev, LPSTR cmdline, int ncmdshow
   
   return rc;
 }
+
+#endif

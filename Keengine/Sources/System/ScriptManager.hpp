@@ -1,11 +1,18 @@
-#ifndef SCRIPTMANAGER_HPP
-#define SCRIPTMANAGER_HPP
+#ifndef KE_SCRIPTMANAGER_HPP
+#define KE_SCRIPTMANAGER_HPP
+
+#include "../Config.hpp"
+
+#ifndef ANDROID
 
 #include <functional>
 #include <unordered_map>
 #include <vector>
 
 #include "../ExtLibs/Selene/selene.h"
+
+namespace ke
+{
 
 class ScriptManager
 {
@@ -84,4 +91,8 @@ class ScriptManager
         std::vector<std::function<void(sel::State& state)>> mLibraries;
 };
 
-#endif // SCRIPTMANAGER_HPP
+} // namespace ke
+
+#endif
+
+#endif // KE_SCRIPTMANAGER_HPP

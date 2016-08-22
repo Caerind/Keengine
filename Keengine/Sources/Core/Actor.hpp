@@ -1,5 +1,5 @@
-#ifndef ACTOR_HPP
-#define ACTOR_HPP
+#ifndef KE_ACTOR_HPP
+#define KE_ACTOR_HPP
 
 #include <memory>
 #include <vector>
@@ -10,6 +10,9 @@
 
 #include "Component.hpp"
 #include "SceneComponent.hpp"
+
+namespace ke
+{
 
 class World;
 class Actor
@@ -68,4 +71,6 @@ class Actor
 		std::string mId;
 };
 
-#endif // ACTOR_HPP
+} // namespace ke
+
+#endif // KE_ACTOR_HPP

@@ -1,5 +1,5 @@
-#ifndef SCENECOMPONENT_HPP
-#define SCENECOMPONENT_HPP
+#ifndef KE_SCENECOMPONENT_HPP
+#define KE_SCENECOMPONENT_HPP
 
 #include <vector>
 
@@ -7,6 +7,9 @@
 #include <SFML/Graphics/Transformable.hpp>
 
 #include "Component.hpp"
+
+namespace ke
+{
 
 class SceneComponent : public Component
 {
@@ -59,4 +62,6 @@ class SceneComponent : public Component
 		std::vector<SceneComponent*> mChildren;
 };
 
-#endif // SCENECOMPONENT_HPP
+} // namespace ke
+
+#endif // KE_SCENECOMPONENT_HPP

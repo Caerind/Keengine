@@ -1,6 +1,9 @@
 #include "ShapeComponent.hpp"
 #include "../Core/World.hpp"
 
+namespace ke
+{
+
 ShapeComponent::ShapeComponent()
 {
 	mLightShape = getWorld().getLights().createShape();
@@ -80,3 +83,5 @@ sf::FloatRect ShapeComponent::getGlobalBounds()
 {
 	return getWorldTransform().transformRect(mShape.getLocalBounds());
 }
+
+} // namespace ke

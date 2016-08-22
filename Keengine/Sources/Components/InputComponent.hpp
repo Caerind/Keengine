@@ -1,8 +1,11 @@
-#ifndef INPUTCOMPONENT_HPP
-#define INPUTCOMPONENT_HPP
+#ifndef KE_INPUTCOMPONENT_HPP
+#define KE_INPUTCOMPONENT_HPP
 
 #include "../Core/Component.hpp"
 #include "../Core/InputSystem.hpp"
+
+namespace ke
+{
 
 class InputComponent : public Input, public Component
 {
@@ -11,4 +14,6 @@ class InputComponent : public Input, public Component
         ~InputComponent();
 };
 
-#endif // INPUTCOMPONENT_HPP
+} // namespace ke
+
+#endif // KE_INPUTCOMPONENT_HPP

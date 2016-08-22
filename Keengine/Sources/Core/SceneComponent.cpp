@@ -1,5 +1,8 @@
 #include "SceneComponent.hpp"
 
+namespace ke
+{
+
 SceneComponent::SceneComponent()
 	: mTransformable()
 	, mZ(0.f)
@@ -174,3 +177,5 @@ void SceneComponent::onChangedZ()
 		mChildren[i]->onChangedZ();
 	}
 }
+
+} // namespace ke
