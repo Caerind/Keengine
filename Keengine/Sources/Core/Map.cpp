@@ -123,7 +123,7 @@ bool Map::saveTmxFile(std::string const & filename)
 	for (std::size_t i = 0; i < mLayers.size(); i++)
 	{
 		pugi::xml_node layer = map.append_child("layer");
-		mLayers[i].saveToNode(layer);
+		mLayers[i]->saveToNode(layer);
 	}
 
 	doc.save_file(filename.c_str(), " ");
@@ -140,17 +140,18 @@ void Map::setTileset(Tileset * tileset)
 	mTileset = tileset;
 }
 
-LayerComponent* Map::addLayer()
+std::shared_ptr<LayerComponent> Map::addLayer()
 {
-	mLayers.emplace_back();
-	registerComponent(&mLayers.back());
-	attachComponent(&mLayers.back());
-	return &mLayers.back();
+	std::shared_ptr<LayerComponent> layer = std::make_shared<LayerComponent>();
+	mLayers.push_back(layer);
+	registerComponent(layer.get());
+	attachComponent(layer.get());
+	return layer;
 }
 
-LayerComponent* Map::createLayer(std::string const& tilesetName, sf::Vector2i const& size, sf::Vector2i const& tileSize, std::string const& orientation, std::string const& staggerAxis, std::string const& staggerIndex, unsigned int hexSideLength)
+std::shared_ptr<LayerComponent> Map::createLayer(std::string const& tilesetName, sf::Vector2i const& size, sf::Vector2i const& tileSize, std::string const& orientation, std::string const& staggerAxis, std::string const& staggerIndex, unsigned int hexSideLength)
 {
-	LayerComponent* layer = addLayer();
+	std::shared_ptr<LayerComponent> layer = addLayer();
 	if (layer != nullptr)
 	{
 		layer->create(&getWorld().getResource<Tileset>(tilesetName), size, tileSize, staggerAxis, staggerIndex, orientation, hexSideLength);
@@ -163,23 +164,23 @@ std::size_t Map::getLayerCount()
 	return mLayers.size();
 }
 
-LayerComponent* Map::getLayer(std::size_t index)
+std::shared_ptr<LayerComponent> Map::getLayer(std::size_t index)
 {
 	if (0 <= index && index < mLayers.size())
 	{
-		return &mLayers[index];
+		return mLayers[index];
 	}
 	return nullptr;
 }
 
-LayerComponent* Map::getLayer(std::string const& name)
+std::shared_ptr<LayerComponent> Map::getLayer(std::string const& name)
 {
 	std::size_t size = mLayers.size();
 	for (std::size_t i = 0; i < size; i++)
 	{
-		if (mLayers[i].getName() == name)
+		if (mLayers[i]->getName() == name)
 		{
-			return &mLayers[i];
+			return mLayers[i];
 		}
 	}
 	return nullptr;
@@ -190,7 +191,7 @@ bool Map::hasLayer(std::string const& name)
 	std::size_t size = mLayers.size();
 	for (std::size_t i = 0; i < size; i++)
 	{
-		if (mLayers[i].getName() == name)
+		if (mLayers[i]->getName() == name)
 		{
 			return true;
 		}
@@ -202,8 +203,8 @@ void Map::removeLayer(std::size_t index)
 {
 	if (0 <= index && index < mLayers.size())
 	{
-		unregisterComponent(&mLayers[index]);
-		detachComponent(&mLayers[index]);
+		unregisterComponent(mLayers[index].get());
+		detachComponent(mLayers[index].get());
 		mLayers.erase(mLayers.begin() + index);
 	}
 }
@@ -213,10 +214,10 @@ void Map::removeLayer(std::string const & name)
 	std::size_t size = mLayers.size();
 	for (std::size_t i = 0; i < size; i++)
 	{
-		if (mLayers[i].getName() == name)
+		if (mLayers[i]->getName() == name)
 		{
-			unregisterComponent(&mLayers[i]);
-			detachComponent(&mLayers[i]);
+			unregisterComponent(mLayers[i].get());
+			detachComponent(mLayers[i].get());
 			mLayers.erase(mLayers.begin() + i);
 			size--;
 		}
@@ -242,7 +243,7 @@ void Map::setSize(sf::Vector2i const& size)
 	mSize = size;
 	for (std::size_t i = 0; i < mLayers.size(); i++)
 	{
-		mLayers[i].setSize(size);
+		mLayers[i]->setSize(size);
 	}
 }
 
@@ -256,7 +257,7 @@ void Map::setTileSize(sf::Vector2i const& tileSize)
 	mTileSize = tileSize;
 	for (std::size_t i = 0; i < mLayers.size(); i++)
 	{
-		mLayers[i].setTileSize(tileSize);
+		mLayers[i]->setTileSize(tileSize);
 	}
 }
 
@@ -270,7 +271,7 @@ void Map::setOrientation(std::string const& orientation)
 	mOrientation = orientation;
 	for (std::size_t i = 0; i < mLayers.size(); i++)
 	{
-		mLayers[i].setOrientation(orientation);
+		mLayers[i]->setOrientation(orientation);
 	}
 }
 
@@ -284,7 +285,7 @@ void Map::setStaggerAxis(std::string const& axis)
 	mStaggerAxis = axis;
 	for (std::size_t i = 0; i < mLayers.size(); i++)
 	{
-		mLayers[i].setStaggerAxis(axis);
+		mLayers[i]->setStaggerAxis(axis);
 	}
 }
 
@@ -298,7 +299,7 @@ void Map::setStaggerIndex(std::string const& index)
 	mStaggerIndex = index;
 	for (std::size_t i = 0; i < mLayers.size(); i++)
 	{
-		mLayers[i].setStaggerIndex(index);
+		mLayers[i]->setStaggerIndex(index);
 	}
 }
 
@@ -312,6 +313,6 @@ void Map::setHexSideLength(unsigned int hexSideLength)
 	mHexSideLength = hexSideLength;
 	for (std::size_t i = 0; i < mLayers.size(); i++)
 	{
-		mLayers[i].setHexSideLength(hexSideLength);
+		mLayers[i]->setHexSideLength(hexSideLength);
 	}
 }

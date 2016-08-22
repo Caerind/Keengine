@@ -58,11 +58,17 @@ bool LayerComponent::loadFromNode(pugi::xml_node const& node, Tileset* tileset, 
 			mName = attr.as_string();
 		}
 		// TODO : Handle offset as position
+		if (attr.name() == std::string("offset"))
+		{
+		}
 		if (attr.name() == std::string("opacity"))
 		{
 			mOpacity = attr.as_float();
 		}
 		// TODO : Handle visible
+		if (attr.name() == std::string("visible"))
+		{
+		}
 	}
 
 	pugi::xml_node prop = node.child("properties");

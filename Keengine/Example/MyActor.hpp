@@ -5,6 +5,7 @@
 #include "../Sources/Components/PointComponent.hpp"
 #include "../Sources/Components/AnimatorComponent.hpp"
 #include "../Sources/Components/InputComponent.hpp"
+#include "../Sources/Components/PointLightComponent.hpp"
 
 class MyActor : public Actor
 {
@@ -19,6 +20,7 @@ class MyActor : public Actor
     private:
         PointComponent mA;
 		AnimatorComponent mB;
+		PointLightComponent mC;
 		InputComponent mD;
 
 		bool mRunning;

@@ -49,31 +49,16 @@
       <Filter>Example</Filter>
     </None>
     <None Include="..\README.md" />
-    <None Include="Example\pixelate.frag">
-      <Filter>Example</Filter>
-    </None>
-    <None Include="Example\blur.frag">
-      <Filter>Example</Filter>
-    </None>
     <None Include="Example\widgets.css">
       <Filter>Example</Filter>
     </None>
     <None Include="Example\inputs.cfg">
       <Filter>Example</Filter>
     </None>
-    <None Include="Example\unshadowShader.frag">
-      <Filter>Example</Filter>
-    </None>
-    <None Include="Example\unshadowShader.vert">
-      <Filter>Example</Filter>
-    </None>
-    <None Include="Example\lightOverShapeShader.frag">
-      <Filter>Example</Filter>
-    </None>
-    <None Include="Example\lightOverShapeShader.vert">
-      <Filter>Example</Filter>
-    </None>
     <None Include="Example\English.lang">
+      <Filter>Example</Filter>
+    </None>
+    <None Include="Example\map.tmx">
       <Filter>Example</Filter>
     </None>
   </ItemGroup>
@@ -373,6 +358,15 @@
     </ClCompile>
     <ClCompile Include="Sources\Components\DirectionLightComponent.cpp">
       <Filter>Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\MyMap.cpp">
+      <Filter>Example</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Components\ShapeComponent.cpp">
+      <Filter>Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\MyObject.cpp">
+      <Filter>Example</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -737,6 +731,15 @@
       <Filter>Sources\Components</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Components\DirectionLightComponent.hpp">
+      <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Example\MyMap.hpp">
+      <Filter>Example</Filter>
+    </ClInclude>
+    <ClInclude Include="Example\MyObject.hpp">
+      <Filter>Example</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Components\ShapeComponent.hpp">
       <Filter>Sources\Components</Filter>
     </ClInclude>
   </ItemGroup>

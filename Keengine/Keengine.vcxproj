@@ -21,15 +21,10 @@
   <ItemGroup>
     <None Include="..\README.md" />
     <None Include="Example\application_settings.ini" />
-    <None Include="Example\blur.frag" />
     <None Include="Example\English.lang" />
     <None Include="Example\inputs.cfg" />
-    <None Include="Example\lightOverShapeShader.frag" />
-    <None Include="Example\lightOverShapeShader.vert" />
-    <None Include="Example\pixelate.frag" />
+    <None Include="Example\map.tmx" />
     <None Include="Example\script.lua" />
-    <None Include="Example\unshadowShader.frag" />
-    <None Include="Example\unshadowShader.vert" />
     <None Include="Example\widgets.css" />
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +43,8 @@
   <ItemGroup>
     <ClCompile Include="Example\main.cpp" />
     <ClCompile Include="Example\MyActor.cpp" />
+    <ClCompile Include="Example\MyMap.cpp" />
+    <ClCompile Include="Example\MyObject.cpp" />
     <ClCompile Include="Sources\Application\Application.cpp" />
     <ClCompile Include="Sources\Application\AudioManager.cpp" />
     <ClCompile Include="Sources\Application\ResourceManager.cpp" />
@@ -62,6 +59,7 @@
     <ClCompile Include="Sources\Components\ParticleComponent.cpp" />
     <ClCompile Include="Sources\Components\PointComponent.cpp" />
     <ClCompile Include="Sources\Components\PointLightComponent.cpp" />
+    <ClCompile Include="Sources\Components\ShapeComponent.cpp" />
     <ClCompile Include="Sources\Components\SpriteComponent.cpp" />
     <ClCompile Include="Sources\Core\Actor.cpp" />
     <ClCompile Include="Sources\Core\Component.cpp" />
@@ -137,6 +135,8 @@
   <ItemGroup>
     <ClInclude Include="Example\Blur.hpp" />
     <ClInclude Include="Example\MyActor.hpp" />
+    <ClInclude Include="Example\MyMap.hpp" />
+    <ClInclude Include="Example\MyObject.hpp" />
     <ClInclude Include="Example\Pixelate.hpp" />
     <ClInclude Include="Sources\Application\Application.hpp" />
     <ClInclude Include="Sources\Application\AudioManager.hpp" />
@@ -152,6 +152,7 @@
     <ClInclude Include="Sources\Components\ParticleComponent.hpp" />
     <ClInclude Include="Sources\Components\PointComponent.hpp" />
     <ClInclude Include="Sources\Components\PointLightComponent.hpp" />
+    <ClInclude Include="Sources\Components\ShapeComponent.hpp" />
     <ClInclude Include="Sources\Components\SpriteComponent.hpp" />
     <ClInclude Include="Sources\Core\Actor.hpp" />
     <ClInclude Include="Sources\Core\Component.hpp" />

@@ -10,7 +10,7 @@ PointLightComponent::PointLightComponent()
 	mLight->_emissionSprite.setOrigin(sf::Vector2f(texture.getSize().x * 0.5f, texture.getSize().y * 0.5f));
 	mLight->_emissionSprite.setTexture(texture);
 
-	mLight->_emissionSprite.setPosition(getWorldPosition()); // TODO : Position
+	mLight->_emissionSprite.setPosition(getWorldPosition());
 }
 
 PointLightComponent::~PointLightComponent()
@@ -50,4 +50,9 @@ float PointLightComponent::getIntensity() const
 		return mLight->_emissionSprite.getScale().x;
 	}
 	return 1.f;
+}
+
+void PointLightComponent::onPositionChanged()
+{
+	mLight->_emissionSprite.setPosition(getWorldPosition());
 }

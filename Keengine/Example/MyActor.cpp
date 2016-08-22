@@ -28,6 +28,11 @@ MyActor::MyActor()
 	run.addFrame("cat", { 384, 64, 64, 64 }, sf::seconds(0.15f));
 	run.addFrame("cat", { 448, 64, 64, 64 }, sf::seconds(0.15f));
 
+	registerComponent(&mC);
+	attachComponent(&mC);
+	mC.setColor(sf::Color::Blue);
+	mC.setIntensity(10.f);
+
 	registerComponent(&mD);
 	mD.bindAction("MoveRight", [&](std::vector<std::string> const& data)
 	{

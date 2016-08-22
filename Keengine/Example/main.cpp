@@ -1,9 +1,9 @@
 #include "../Sources/Application/Application.hpp"
 
 #include "../Sources/Core/World.hpp"
-#include "../Sources/Core/Map.hpp"
 
 #include "MyActor.hpp"
+#include "MyMap.hpp"
 
 int main()
 {
@@ -32,7 +32,7 @@ int main()
 	World::instance().getInputs().loadFromFile("Example/inputs.cfg");
 
 	{
-		Map::Ptr map = World::instance().createActor<Map>();
+		MyMap::Ptr map = World::instance().createActor<MyMap>();
 		map->loadTmxFile("Example/map.tmx");
 
 		MyActor::Ptr actor = World::instance().createActor<MyActor>();

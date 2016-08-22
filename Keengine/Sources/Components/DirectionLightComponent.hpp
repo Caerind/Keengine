@@ -13,6 +13,17 @@ class DirectionLightComponent : public SceneComponent
 		void setColor(sf::Color color);
 		sf::Color getColor() const;
 
+		void setIntensity(float intensity);
+		float getIntensity() const;
+
+		void setAngle(float angle);
+		float getAngle() const;
+		void setDirection(sf::Vector2f const& vector);
+		sf::Vector2f getDirection() const;
+
+	protected:
+		void onPositionChanged();
+
 	protected:
 		ltbl::LightDirectionEmission::Ptr mLight;
 };

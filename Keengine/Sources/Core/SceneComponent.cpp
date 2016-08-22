@@ -101,6 +101,7 @@ const sf::Transform& SceneComponent::getWorldTransform()
 		mWorldTransform = (mParent != nullptr) ? mParent->getWorldTransform() : sf::Transform();
 		mWorldTransform *= mTransformable.getTransform();
 		mTransformChanged = false;
+		onPositionChanged();
 	}
 	return mWorldTransform;
 }
@@ -148,6 +149,10 @@ void SceneComponent::detachComponent(SceneComponent* component)
 		}
 
 	}
+}
+
+void SceneComponent::onPositionChanged()
+{
 }
 
 void SceneComponent::onChangedTransform()

@@ -17,6 +17,9 @@ class PointLightComponent : public SceneComponent
 		float getIntensity() const;
 
 	protected:
+		void onPositionChanged();
+
+	protected:
 		ltbl::LightPointEmission::Ptr mLight;
 };
 

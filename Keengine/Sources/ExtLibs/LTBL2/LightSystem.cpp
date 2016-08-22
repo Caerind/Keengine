@@ -719,21 +719,27 @@ LightDirectionEmission::Ptr LightSystem::createLightDirection()
 	return directionEmissionLight;
 }
 
-void LightSystem::removeLight(const std::shared_ptr<LightPointEmission> &pointEmissionLight) {
-	std::unordered_set<std::shared_ptr<LightPointEmission>>::iterator it = _pointEmissionLights.find(pointEmissionLight);
-
-	if (it != _pointEmissionLights.end()) {
-		(*it)->quadtreeRemove();
-
-		_pointEmissionLights.erase(it);
+void LightSystem::removeLight(const std::shared_ptr<LightPointEmission> &pointEmissionLight) 
+{
+	if (pointEmissionLight != nullptr)
+	{
+		auto it = _pointEmissionLights.find(pointEmissionLight);
+		if (it != _pointEmissionLights.end())
+		{
+			(*it)->quadtreeRemove();
+			_pointEmissionLights.erase(it);
+		}
 	}
 }
 
-void LightSystem::removeLight(const std::shared_ptr<LightDirectionEmission> &directionEmissionLight) {
-	std::unordered_set<std::shared_ptr<LightDirectionEmission>>::iterator it = _directionEmissionLights.find(directionEmissionLight);
-
-	if (it != _directionEmissionLights.end())
-		_directionEmissionLights.erase(it);
+void LightSystem::removeLight(const std::shared_ptr<LightDirectionEmission> &directionEmissionLight) 
+{
+	if (directionEmissionLight != nullptr)
+	{
+		auto it = _directionEmissionLights.find(directionEmissionLight);
+		if (it != _directionEmissionLights.end())
+			_directionEmissionLights.erase(it);
+	}
 }
 
 } // namespace ltbl

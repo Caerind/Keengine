@@ -65,16 +65,18 @@ World::World()
 	Texture& penumbra = getResource<Texture>("penumbraTexture");
 	if (!hasResource("unshadowShader"))
 	{
-		createResource<Shader>("unshadowShader", "Example/unshadowShader.vert", "Example/unshadowShader.frag");
+		const std::string v = "void main() { gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex; gl_TexCoord[0] = gl_MultiTexCoord0; gl_FrontColor = gl_Color; }";
+		const std::string f = "uniform sampler2D penumbraTexture; uniform float lightBrightness; uniform float darkBrightness; void main()  { float penumbra = texture2D(penumbraTexture, gl_TexCoord[0].xy).x; float shadow = (lightBrightness - darkBrightness) * penumbra + darkBrightness; gl_FragColor = vec4(vec3(1.0 - shadow), 1.0); }";
+		createResource<Shader>("unshadowShader").loadFromMemory(v, f);
 	}
-	Shader& unshadow = getResource<Shader>("unshadowShader");
 	if (!hasResource("lightOverShapeShader"))
 	{
-		createResource<Shader>("lightOverShapeShader", "Example/lightOverShapeShader.vert", "Example/lightOverShapeShader.frag");
+		const std::string v = "void main() { gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex; gl_TexCoord[0] = gl_MultiTexCoord0; }";
+		const std::string f = "uniform sampler2D emissionTexture; uniform vec2 targetSizeInv; void main() { vec2 targetCoords = gl_FragCoord.xy * targetSizeInv; vec4 emissionColor = texture2D(emissionTexture, targetCoords); gl_FragColor = vec4(emissionColor.rgb, 1.0); }";
+		createResource<Shader>("lightOverShapeShader").loadFromMemory(v, f);
 	}
-	Shader& lightOverShape = getResource<Shader>("lightOverShapeShader");
 
-	mLights.create({ -1000.f, -1000.f, 2000.f, 2000.f }, getApplication().getSize(), penumbra, unshadow, lightOverShape);
+	mLights.create({ -1000.f, -1000.f, 2000.f, 2000.f }, getApplication().getSize(), penumbra, getResource<Shader>("unshadowShader"), getResource<Shader>("lightOverShapeShader"));
 }
 
 World::~World()

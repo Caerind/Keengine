@@ -40,6 +40,7 @@ class SceneComponent : public Component
 		void detachComponent(SceneComponent* component);
 
 	protected:
+		virtual void onPositionChanged();
 		virtual void onChangedTransform();
 		virtual void onChangedZ();
 
