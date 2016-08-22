@@ -20,7 +20,7 @@ void Application::init(std::string const& pathToSettings)
             parser["width"] = 800;
             parser["height"] = 600;
             parser["style"] = static_cast<int>(sf::Style::Close);
-            parser["title"] = "NodeEngine";
+            parser["title"] = "Keengine";
             parser["vsync"] = false;
             parser["key_repeat"] = false;
             parser["joystick_threshold"] = 0.1f;
@@ -34,6 +34,7 @@ void Application::init(std::string const& pathToSettings)
             parser["cursor_origin_x"] = 0.f;
             parser["cursor_origin_y"] = 0.f;
             parser["screenshot_path"] = "";
+			parser["script_path"] = "";
             parser["show_debug"] = false;
             parser["background_color_r"] = 0;
             parser["background_color_g"] = 0;
@@ -64,6 +65,7 @@ void Application::init(std::string const& pathToSettings)
         setMouseCursorTexture(parser["cursor_texture"], sf::IntRect(parser["cursor_rect_left"].asInt(), parser["cursor_rect_top"].asInt(), parser["cursor_rect_width"].asInt(), parser["cursor_rect_height"].asInt()));
         setMouseCursorOrigin(sf::Vector2f(parser["cursor_origin_x"].asFloat(), parser["cursor_origin_y"].asFloat()));
         setScreenshotPath(parser["screenshot_path"]);
+		setScriptPath(parser["script_path"]);
         showDebugInfo(parser["show_debug"].asBool());
         setBackgroundColor(sf::Color(parser["background_color_r"].asUint(), parser["background_color_g"].asUint(), parser["background_color_b"].asUint()));
         setBackgroundTexture(parser["background_texture"], sf::IntRect(parser["background_rect_left"].asInt(), parser["background_rect_top"].asInt(), parser["background_rect_width"].asInt(), parser["background_rect_height"].asInt()));
@@ -75,6 +77,20 @@ void Application::init(std::string const& pathToSettings)
 
     releaseResource("application_settings");
 
+	instance().mScripts.setPath(instance().mScriptPath);
+	instance().mScripts.addLibrary([](sel::State& state)
+	{
+		state["info"] = Application::getLog().info;
+		state["warning"] = Application::getLog().warning;
+		state["error"] = Application::getLog().error;
+		state["playSound"] = [](std::string const& id) { Application::playSound(id); };
+		state["pushState"] = Application::pushState;
+		state["popState"] = Application::popState;
+		state["getPointerX"] = []() -> int { return Application::getPointerPosition2i().x; };
+		state["getPointerY"] = []() -> int { return Application::getPointerPosition2i().y; };
+		state["screenshot"] = Application::screenshot;
+	});
+
     create();
 	instance().mGui.setWindow(instance().mWindow);
 	
@@ -82,7 +98,7 @@ void Application::init(std::string const& pathToSettings)
     ImGui::SFML::Init(instance().mWindow);
 	#endif
 
-	Log::instance() << Log::Info << "NodeEngine::Application started";
+	Log::instance() << Log::Info << "Keengine::Application started";
     Log::instance() << Log::Info << std::string("Current time is " + getTime("%b %d, %Y %I:%M:%S %p"));
 }
 
@@ -119,6 +135,7 @@ void Application::quit()
     parser["cursor_origin_x"] = origin.x;
     parser["cursor_origin_y"] = origin.y;
     parser["screenshot_path"] = getScreenshotPath();
+	parser["script_path"] = getScriptPath();
     parser["show_debug"] = isDebugInfoVisible();
     sf::Color bColor = getBackgroundColor();
     parser["background_color_r"] = bColor.r;
@@ -441,6 +458,21 @@ void Application::releaseResource(std::string const& id)
 void Application::releaseAllResources()
 {
     instance().mResources.releaseAllResources();
+}
+
+void Application::setScriptPath(std::string const& scriptPath)
+{
+	instance().mScriptPath = scriptPath;
+}
+
+std::string Application::getScriptPath()
+{
+	return instance().mScriptPath;
+}
+
+sel::State& Application::script(std::string const & name)
+{
+	return instance().mScripts[name];
 }
 
 void Application::pushState(std::string const& id)

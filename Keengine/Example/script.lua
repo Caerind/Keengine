@@ -1,3 +1,6 @@
 test = function ()
-	info("noob")
+	info ("noob")
+	warning ("troll")
+	error ("kikou")
+	screenshot ()
 end

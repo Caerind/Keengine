@@ -1,16 +1,9 @@
 #include "../Sources/Application/Application.hpp"
 
 #include "../Sources/Core/World.hpp"
+#include "../Sources/Core/Map.hpp"
 
 #include "MyActor.hpp"
-
-#include <iostream>
-
-#include <TGUI/TGUI.hpp>
-
-#include "../Sources/System/ScriptManager.hpp"
-
-#include "../Sources/Core/Map.hpp"
 
 int main()
 {
@@ -25,16 +18,7 @@ int main()
 	button->setPosition(350, 50);
 	button->setSize(150, 50);
 	button->setText("Test");
-	button->connect("pressed", [&]() { std::cout << "test" << std::endl; });
-
-	ScriptManager script;
-	script.setPath("Example/");
-	// TODO : Lua Library
-	script.addLibrary([](sel::State& state)
-	{
-		state["info"] = Application::getLog().info;
-	});
-	script["script.lua"]["test"]();
+	button->connect("pressed", []() { Application::script("script.lua")["test"](); });
 
 	World::createInstance();
 

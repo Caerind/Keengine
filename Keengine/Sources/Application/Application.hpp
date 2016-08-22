@@ -17,6 +17,7 @@
 
 #include "../System/Log.hpp"
 #include "../Maths/Math.hpp"
+#include "../System/ScriptManager.hpp"
 
 class Application
 {
@@ -82,6 +83,11 @@ class Application
         static bool isResourceLoaded(std::string const& id);
         static void releaseResource(std::string const& id);
         static void releaseAllResources();
+
+		// Script
+		static void setScriptPath(std::string const& scriptPath);
+		static std::string getScriptPath();
+		static sel::State& script(std::string const& name);
 
         //
         // States
@@ -192,8 +198,10 @@ class Application
         Window mWindow;
 		tgui::Gui mGui;
 		PropertiesHolder mProperties;
+		ScriptManager mScripts;
 
         std::string mPathToSettings;
+		std::string mScriptPath;
         sf::Time mRunningTime;
         unsigned int mFps;
         bool mStateMode; // Default Mode Or State Mode
