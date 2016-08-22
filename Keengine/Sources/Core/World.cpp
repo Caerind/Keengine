@@ -49,6 +49,32 @@ World::World()
 		mBackground.setTexture(&Application::getResource<Texture>(bgTexture));
 		mBackground.setTextureRect(bgRect);
 	}
+
+	if (!hasResource("pointLightTexture"))
+	{
+		createResource<Texture>("pointLightTexture", "Example/pointLightTexture.png").setSmooth(true);
+	}
+	if (!hasResource("directionLightTexture"))
+	{
+		createResource<Texture>("directionLightTexture", "Example/directionLightTexture.png").setSmooth(true);
+	}
+	if (!hasResource("penumbraTexture"))
+	{
+		createResource<Texture>("penumbraTexture", "Example/penumbraTexture.png").setSmooth(true);
+	}
+	Texture& penumbra = getResource<Texture>("penumbraTexture");
+	if (!hasResource("unshadowShader"))
+	{
+		createResource<Shader>("unshadowShader", "Example/unshadowShader.vert", "Example/unshadowShader.frag");
+	}
+	Shader& unshadow = getResource<Shader>("unshadowShader");
+	if (!hasResource("lightOverShapeShader"))
+	{
+		createResource<Shader>("lightOverShapeShader", "Example/lightOverShapeShader.vert", "Example/lightOverShapeShader.frag");
+	}
+	Shader& lightOverShape = getResource<Shader>("lightOverShapeShader");
+
+	mLights.create({ -1000.f, -1000.f, 2000.f, 2000.f }, getApplication().getSize(), penumbra, unshadow, lightOverShape);
 }
 
 World::~World()
@@ -68,6 +94,11 @@ InputSystem& World::getInputs()
 Log& World::getLog()
 {
 	return Application::getLog();
+}
+
+ltbl::LightSystem & World::getLights()
+{
+	return mLights;
 }
 
 void World::handleEvent(sf::Event const & event)
@@ -142,9 +173,18 @@ void World::render(sf::RenderTarget& target)
 	});
 
 	// Draw
-	mSceneTexture.setView(getView());
 	mSceneTexture.clear();
+
+	mSceneTexture.setView(mSceneTexture.getDefaultView());
 	mSceneTexture.draw(mBackground);
+
+	mSceneTexture.setView(getView());
+	mLights.render(getView(), getResource<Shader>("unshadowShader"), getResource<Shader>("lightOverShapeShader"));
+
+	mSceneTexture.setView(mSceneTexture.getDefaultView());
+	mSceneTexture.draw(sf::Sprite(mLights.getLightingTexture()), sf::RenderStates(sf::BlendMultiply));
+
+	mSceneTexture.setView(getView());
 	for (PrimitiveComponent* primitive : mPrimitives)
 	{
 		if (primitive->isRegistered() && primitive->isVisible())

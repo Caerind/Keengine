@@ -118,6 +118,8 @@ class Shader : public sf::Shader, public Resource
 {
     public:
 		Shader();
+		Shader(std::string const& filename, sf::Shader::Type type);
+		Shader(std::string const& vertexShaderFilename, std::string const& fragmentShaderFilename);
 
 		bool loadFromFile(std::string const& filename, sf::Shader::Type type);
 		bool loadFromFile(std::string const& vertexShaderFilename, std::string const& fragmentShaderFilename);

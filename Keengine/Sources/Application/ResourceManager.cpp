@@ -190,6 +190,16 @@ Shader::Shader()
 {
 }
 
+Shader::Shader(std::string const& filename, sf::Shader::Type type)
+{
+	loadFromFile(filename, type);
+}
+
+Shader::Shader(std::string const& vertexShaderFilename, std::string const& fragmentShaderFilename)
+{
+	loadFromFile(vertexShaderFilename, fragmentShaderFilename);
+}
+
 bool Shader::loadFromFile(std::string const& filename, sf::Shader::Type type)
 { 
 	bool r = sf::Shader::loadFromFile(filename, type); 

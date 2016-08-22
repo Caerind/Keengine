@@ -15,6 +15,8 @@
 #include "PhysicSystem.hpp"
 #include "PrimitiveComponent.hpp"
 
+#include "../ExtLibs/LTBL2/LightSystem.hpp"
+
 #include "../Components/CameraComponent.hpp"
 
 class World
@@ -34,6 +36,7 @@ class World
 		Application& getApplication();
 		InputSystem& getInputs();
 		Log& getLog();
+		ltbl::LightSystem& getLights();
 
 		virtual void handleEvent(sf::Event const& event);
 		virtual void update(sf::Time dt);
@@ -141,6 +144,8 @@ class World
 		InputSystem mInputs;
 
 		sf::RectangleShape mBackground;
+
+		ltbl::LightSystem mLights;
 };
 
 #endif // WORLD_HPP

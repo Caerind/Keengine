@@ -23,17 +23,24 @@
     <None Include="Example\application_settings.ini" />
     <None Include="Example\blur.frag" />
     <None Include="Example\inputs.cfg" />
+    <None Include="Example\lightOverShapeShader.frag" />
+    <None Include="Example\lightOverShapeShader.vert" />
     <None Include="Example\pixelate.frag" />
     <None Include="Example\script.lua" />
+    <None Include="Example\unshadowShader.frag" />
+    <None Include="Example\unshadowShader.vert" />
     <None Include="Example\widgets.css" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Doc\ApplicationArchitecture.jpg" />
     <Image Include="..\Doc\CoreArchitecture.jpg" />
+    <Image Include="Example\directionLightTexture.png" />
     <Image Include="Example\hexa.png" />
     <Image Include="Example\iso.png" />
     <Image Include="Example\ortho.png" />
     <Image Include="Example\particle.png" />
+    <Image Include="Example\penumbraTexture.png" />
+    <Image Include="Example\pointLightTexture.png" />
     <Image Include="Example\sfml.png" />
     <Image Include="Example\widgets.png" />
   </ItemGroup>
@@ -48,10 +55,12 @@
     <ClCompile Include="Sources\Application\Window.cpp" />
     <ClCompile Include="Sources\Components\AnimatorComponent.cpp" />
     <ClCompile Include="Sources\Components\CameraComponent.cpp" />
+    <ClCompile Include="Sources\Components\DirectionLightComponent.cpp" />
     <ClCompile Include="Sources\Components\InputComponent.cpp" />
     <ClCompile Include="Sources\Components\LayerComponent.cpp" />
     <ClCompile Include="Sources\Components\ParticleComponent.cpp" />
     <ClCompile Include="Sources\Components\PointComponent.cpp" />
+    <ClCompile Include="Sources\Components\PointLightComponent.cpp" />
     <ClCompile Include="Sources\Components\SpriteComponent.cpp" />
     <ClCompile Include="Sources\Core\Actor.cpp" />
     <ClCompile Include="Sources\Core\Component.cpp" />
@@ -67,6 +76,14 @@
     <ClCompile Include="Sources\ExtLibs\imgui\imgui-SFML.cpp" />
     <ClCompile Include="Sources\ExtLibs\imgui\imgui.cpp" />
     <ClCompile Include="Sources\ExtLibs\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LightDirectionEmission.cpp" />
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LightPointEmission.cpp" />
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LightSystem.cpp" />
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LTBL_DynamicQuadtree.cpp" />
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LTBL_Quadtree.cpp" />
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LTBL_QuadtreeNode.cpp" />
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LTBL_QuadtreeOccupant.cpp" />
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LTBL_StaticQuadtree.cpp" />
     <ClCompile Include="Sources\ExtLibs\Lua\lapi.c" />
     <ClCompile Include="Sources\ExtLibs\Lua\lauxlib.c" />
     <ClCompile Include="Sources\ExtLibs\Lua\lbaselib.c" />
@@ -128,10 +145,12 @@
     <ClInclude Include="Sources\Application\Window.hpp" />
     <ClInclude Include="Sources\Components\AnimatorComponent.hpp" />
     <ClInclude Include="Sources\Components\CameraComponent.hpp" />
+    <ClInclude Include="Sources\Components\DirectionLightComponent.hpp" />
     <ClInclude Include="Sources\Components\InputComponent.hpp" />
     <ClInclude Include="Sources\Components\LayerComponent.hpp" />
     <ClInclude Include="Sources\Components\ParticleComponent.hpp" />
     <ClInclude Include="Sources\Components\PointComponent.hpp" />
+    <ClInclude Include="Sources\Components\PointLightComponent.hpp" />
     <ClInclude Include="Sources\Components\SpriteComponent.hpp" />
     <ClInclude Include="Sources\Core\Actor.hpp" />
     <ClInclude Include="Sources\Core\Component.hpp" />
@@ -154,6 +173,16 @@
     <ClInclude Include="Sources\ExtLibs\imgui\stb_textedit.h" />
     <ClInclude Include="Sources\ExtLibs\imgui\stb_truetype.h" />
     <ClInclude Include="Sources\ExtLibs\json.hpp" />
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LightDirectionEmission.hpp" />
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LightPointEmission.hpp" />
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LightShape.hpp" />
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LightSystem.hpp" />
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LTBL_DynamicQuadtree.hpp" />
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LTBL_Math.hpp" />
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LTBL_Quadtree.hpp" />
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LTBL_QuadtreeNode.hpp" />
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LTBL_QuadtreeOccupant.hpp" />
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LTBL_StaticQuadtree.hpp" />
     <ClInclude Include="Sources\ExtLibs\Lua\lapi.h" />
     <ClInclude Include="Sources\ExtLibs\Lua\lauxlib.h" />
     <ClInclude Include="Sources\ExtLibs\Lua\lcode.h" />

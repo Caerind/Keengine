@@ -37,6 +37,9 @@
     <Filter Include="Sources\ExtLibs\Selene">
       <UniqueIdentifier>{25046619-7c3a-4292-871f-40ebcea2a16c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\ExtLibs\LTBL2">
+      <UniqueIdentifier>{70a2467c-84df-4687-aa0b-4a04f744eecf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Example\script.lua">
@@ -56,6 +59,18 @@
       <Filter>Example</Filter>
     </None>
     <None Include="Example\inputs.cfg">
+      <Filter>Example</Filter>
+    </None>
+    <None Include="Example\unshadowShader.frag">
+      <Filter>Example</Filter>
+    </None>
+    <None Include="Example\unshadowShader.vert">
+      <Filter>Example</Filter>
+    </None>
+    <None Include="Example\lightOverShapeShader.frag">
+      <Filter>Example</Filter>
+    </None>
+    <None Include="Example\lightOverShapeShader.vert">
       <Filter>Example</Filter>
     </None>
   </ItemGroup>
@@ -82,6 +97,15 @@
       <Filter>Example</Filter>
     </Image>
     <Image Include="Example\iso.png">
+      <Filter>Example</Filter>
+    </Image>
+    <Image Include="Example\penumbraTexture.png">
+      <Filter>Example</Filter>
+    </Image>
+    <Image Include="Example\pointLightTexture.png">
+      <Filter>Example</Filter>
+    </Image>
+    <Image Include="Example\directionLightTexture.png">
       <Filter>Example</Filter>
     </Image>
   </ItemGroup>
@@ -315,6 +339,36 @@
       <Filter>Sources\Components</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Components\AnimatorComponent.cpp">
+      <Filter>Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LTBL_DynamicQuadtree.cpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LTBL_Quadtree.cpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LTBL_QuadtreeNode.cpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LTBL_QuadtreeOccupant.cpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LTBL_StaticQuadtree.cpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LightDirectionEmission.cpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LightPointEmission.cpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\LTBL2\LightSystem.cpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Components\PointLightComponent.cpp">
+      <Filter>Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Components\DirectionLightComponent.cpp">
       <Filter>Sources\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -647,6 +701,42 @@
       <Filter>Sources\Components</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Components\AnimatorComponent.hpp">
+      <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LightSystem.hpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LTBL_DynamicQuadtree.hpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LTBL_Math.hpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LTBL_Quadtree.hpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LTBL_QuadtreeNode.hpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LTBL_QuadtreeOccupant.hpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LTBL_StaticQuadtree.hpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LightDirectionEmission.hpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LightPointEmission.hpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\LTBL2\LightShape.hpp">
+      <Filter>Sources\ExtLibs\LTBL2</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Components\PointLightComponent.hpp">
+      <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Components\DirectionLightComponent.hpp">
       <Filter>Sources\Components</Filter>
     </ClInclude>
   </ItemGroup>
