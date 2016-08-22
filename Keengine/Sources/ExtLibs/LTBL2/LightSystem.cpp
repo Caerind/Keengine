@@ -3,7 +3,177 @@
 namespace ltbl
 {
 
-void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vector<int> &innerBoundaryIndices, std::vector<sf::Vector2f> &innerBoundaryVectors, std::vector<int> &outerBoundaryIndices, std::vector<sf::Vector2f> &outerBoundaryVectors, const sf::ConvexShape &shape, const sf::Vector2f &sourceCenter, float sourceRadius) {
+LightSystem::LightSystem()
+	: _directionEmissionRange(10000.0f)
+	, _directionEmissionRadiusMultiplier(1.1f)
+	, _ambientColor(sf::Color(16, 16, 16))
+{
+}
+
+void LightSystem::create(const sf::FloatRect &rootRegion, const sf::Vector2u &imageSize, const sf::Texture &penumbraTexture, sf::Shader &unshadowShader, sf::Shader &lightOverShapeShader) 
+{
+	mUnshadowShader = &unshadowShader;
+	mLightOverShapeShader = &lightOverShapeShader;
+
+	if (mUnshadowShader != nullptr)
+		mUnshadowShader->setUniform("penumbraTexture", penumbraTexture);
+	
+	_shapeQuadtree.create(rootRegion);
+	_lightPointEmissionQuadtree.create(rootRegion);
+
+	updateTextureSize(imageSize);
+}
+
+void LightSystem::render(sf::RenderTarget& target)
+{
+	sf::View view = target.getView();
+	if (target.getSize() != _lightTempTexture.getSize())
+	{
+		updateTextureSize(target.getSize());
+	}
+
+	clear(_compositionTexture, _ambientColor);
+
+	_compositionTexture.setView(_compositionTexture.getDefaultView());
+
+	_lightTempTexture.setView(view);
+	sf::FloatRect viewBounds = sf::FloatRect(view.getCenter().x, view.getCenter().y, 0.0f, 0.0f);
+	viewBounds = rectExpand(viewBounds, _lightTempTexture.mapPixelToCoords(sf::Vector2i(0, 0)));
+	viewBounds = rectExpand(viewBounds, _lightTempTexture.mapPixelToCoords(sf::Vector2i(_lightTempTexture.getSize().x, 0)));
+	viewBounds = rectExpand(viewBounds, _lightTempTexture.mapPixelToCoords(sf::Vector2i(_lightTempTexture.getSize().x, _lightTempTexture.getSize().y)));
+	viewBounds = rectExpand(viewBounds, _lightTempTexture.mapPixelToCoords(sf::Vector2i(0, _lightTempTexture.getSize().y)));
+
+	std::vector<QuadtreeOccupant*> viewPointEmissionLights;
+	_lightPointEmissionQuadtree.queryRegion(viewPointEmissionLights, viewBounds);
+	for (unsigned int l = 0; l < viewPointEmissionLights.size(); l++)
+	{
+		LightPointEmission* pPointEmissionLight = static_cast<LightPointEmission*>(viewPointEmissionLights[l]);
+		std::vector<QuadtreeOccupant*> lightShapes; // Query shapes this light is affected by
+		_shapeQuadtree.queryRegion(lightShapes, pPointEmissionLight->getAABB());
+		pPointEmissionLight->render(view, _lightTempTexture, _emissionTempTexture, _antumbraTempTexture, lightShapes, *mUnshadowShader, *mLightOverShapeShader);
+		_compositionTexture.draw(sf::Sprite(_lightTempTexture.getTexture()), sf::RenderStates(sf::BlendAdd));
+	}
+
+	for (std::unordered_set<std::shared_ptr<LightDirectionEmission>>::iterator it = _directionEmissionLights.begin(); it != _directionEmissionLights.end(); it++)
+	{
+		LightDirectionEmission::Ptr pDirectionEmissionLight = *it;
+		sf::FloatRect centeredViewBounds = rectRecenter(viewBounds, sf::Vector2f(0.0f, 0.0f));
+		float maxDim = std::max(centeredViewBounds.width, centeredViewBounds.height);
+		sf::FloatRect extendedViewBounds = rectFromBounds(sf::Vector2f(-maxDim, -maxDim) * _directionEmissionRadiusMultiplier, sf::Vector2f(maxDim, maxDim) * _directionEmissionRadiusMultiplier + sf::Vector2f(_directionEmissionRange, 0.0f));
+		float shadowExtension = vectorMagnitude(rectLowerBound(centeredViewBounds)) * _directionEmissionRadiusMultiplier * 2.0f;
+		sf::ConvexShape directionShape = shapeFromRect(extendedViewBounds);
+		directionShape.setPosition(view.getCenter());
+		sf::Vector2f normalizedCastDirection = vectorNormalize(pDirectionEmissionLight->_castDirection);
+		directionShape.setRotation(_radToDeg * std::atan2(normalizedCastDirection.y, normalizedCastDirection.x));
+		std::vector<QuadtreeOccupant*> viewLightShapes;
+		_shapeQuadtree.queryShape(viewLightShapes, directionShape);
+		pDirectionEmissionLight->render(view, _lightTempTexture, _antumbraTempTexture, viewLightShapes, *mUnshadowShader, shadowExtension);
+		_compositionTexture.draw(sf::Sprite(_lightTempTexture.getTexture()), sf::RenderStates(sf::BlendAdd));
+	}
+
+	_compositionTexture.display();
+
+	target.setView(target.getDefaultView());
+	target.draw(sf::Sprite(_compositionTexture.getTexture()), sf::RenderStates(sf::BlendMultiply));
+	target.setView(view);
+}
+
+LightShape::Ptr LightSystem::createShape()
+{
+	LightShape::Ptr lightShape = std::make_shared<LightShape>();
+	_shapeQuadtree.add(lightShape.get());
+	_lightShapes.insert(lightShape);
+	return lightShape;
+}
+
+void LightSystem::removeShape(const std::shared_ptr<LightShape> &lightShape) 
+{
+	if (lightShape != nullptr)
+	{
+		auto it = _lightShapes.find(lightShape);
+		if (it != _lightShapes.end())
+		{
+			(*it)->quadtreeRemove();
+			_lightShapes.erase(it);
+		}
+	}
+}
+
+LightPointEmission::Ptr LightSystem::createLightPoint()
+{
+	LightPointEmission::Ptr pointEmissionLight = std::make_shared<LightPointEmission>();
+	_lightPointEmissionQuadtree.add(pointEmissionLight.get());
+	_pointEmissionLights.insert(pointEmissionLight);
+	return pointEmissionLight;
+}
+
+void LightSystem::removeLight(LightPointEmission::Ptr pointEmissionLight)
+{
+	if (pointEmissionLight != nullptr)
+	{
+		auto it = _pointEmissionLights.find(pointEmissionLight);
+		if (it != _pointEmissionLights.end())
+		{
+			(*it)->quadtreeRemove();
+			_pointEmissionLights.erase(it);
+		}
+	}
+}
+
+LightDirectionEmission::Ptr LightSystem::createLightDirection()
+{
+	LightDirectionEmission::Ptr directionEmissionLight = std::make_shared<LightDirectionEmission>();
+	_directionEmissionLights.insert(directionEmissionLight);
+	return directionEmissionLight;
+}
+
+void LightSystem::removeLight(LightDirectionEmission::Ptr directionEmissionLight) 
+{
+	if (directionEmissionLight != nullptr)
+	{
+		auto it = _directionEmissionLights.find(directionEmissionLight);
+		if (it != _directionEmissionLights.end())
+			_directionEmissionLights.erase(it);
+	}
+}
+
+void LightSystem::trimLightPointEmissionQuadtree()
+{
+	_lightPointEmissionQuadtree.trim();
+}
+
+void LightSystem::trimShapeQuadtree() 
+{
+	_shapeQuadtree.trim();
+}
+
+void LightSystem::updateTextureSize(sf::Vector2u const & size)
+{
+	_lightTempTexture.create(size.x, size.y);
+	_emissionTempTexture.create(size.x, size.y);
+	_antumbraTempTexture.create(size.x, size.y);
+	_compositionTexture.create(size.x, size.y);
+
+	if (mLightOverShapeShader != nullptr)
+	{
+		mLightOverShapeShader->setUniform("emissionTexture", _emissionTempTexture.getTexture());
+		mLightOverShapeShader->setUniform("targetSizeInv", sf::Vector2f(1.0f / size.x, 1.0f / size.y));
+	}
+}
+
+void LightSystem::clear(sf::RenderTarget& target, sf::Color const& color)
+{
+	sf::RectangleShape shape;
+	shape.setSize(static_cast<sf::Vector2f>(target.getSize()));
+	shape.setFillColor(color);
+	sf::View v = target.getView();
+	target.setView(target.getDefaultView());
+	target.draw(shape);
+	target.setView(v);
+}
+
+void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vector<int> &innerBoundaryIndices, std::vector<sf::Vector2f> &innerBoundaryVectors, std::vector<int> &outerBoundaryIndices, std::vector<sf::Vector2f> &outerBoundaryVectors, const sf::ConvexShape &shape, const sf::Vector2f &sourceCenter, float sourceRadius)
+{
 	const int numPoints = shape.getPointCount();
 
 	std::vector<bool> bothEdgesBoundaryWindings;
@@ -19,7 +189,8 @@ void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vecto
 	std::vector<bool> facingFrontOneEdge;
 	facingFrontOneEdge.reserve(numPoints);
 
-	for (int i = 0; i < numPoints; i++) {
+	for (int i = 0; i < numPoints; i++)
+	{
 		sf::Vector2f point = shape.getTransform().transformPoint(shape.getPoint(i));
 
 		sf::Vector2f nextPoint;
@@ -69,32 +240,37 @@ void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vecto
 
 	// Go through front/back facing list. Where the facing direction switches, there is a boundary
 	for (int i = 1; i < numPoints; i++)
-		if (facingFrontBothEdges[i] != facingFrontBothEdges[i - 1]) {
+		if (facingFrontBothEdges[i] != facingFrontBothEdges[i - 1])
+		{
 			innerBoundaryIndices.push_back(i);
 			bothEdgesBoundaryWindings.push_back(facingFrontBothEdges[i]);
 		}
 
 	// Check looping indices separately
-	if (facingFrontBothEdges[0] != facingFrontBothEdges[numPoints - 1]) {
+	if (facingFrontBothEdges[0] != facingFrontBothEdges[numPoints - 1])
+	{
 		innerBoundaryIndices.push_back(0);
 		bothEdgesBoundaryWindings.push_back(facingFrontBothEdges[0]);
 	}
 
 	// Go through front/back facing list. Where the facing direction switches, there is a boundary
 	for (int i = 1; i < numPoints; i++)
-		if (facingFrontOneEdge[i] != facingFrontOneEdge[i - 1]) {
+		if (facingFrontOneEdge[i] != facingFrontOneEdge[i - 1])
+		{
 			outerBoundaryIndices.push_back(i);
 			oneEdgeBoundaryWindings.push_back(facingFrontOneEdge[i]);
 		}
 
 	// Check looping indices separately
-	if (facingFrontOneEdge[0] != facingFrontOneEdge[numPoints - 1]) {
+	if (facingFrontOneEdge[0] != facingFrontOneEdge[numPoints - 1])
+	{
 		outerBoundaryIndices.push_back(0);
 		oneEdgeBoundaryWindings.push_back(facingFrontOneEdge[0]);
 	}
 
 	// Compute outer boundary vectors
-	for (unsigned int bi = 0; bi < outerBoundaryIndices.size(); bi++) {
+	for (unsigned int bi = 0; bi < outerBoundaryIndices.size(); bi++)
+	{
 		int penumbraIndex = outerBoundaryIndices[bi];
 		bool winding = oneEdgeBoundaryWindings[bi];
 
@@ -114,7 +290,8 @@ void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vecto
 		outerBoundaryVectors.push_back(winding ? firstEdgeRay : secondEdgeRay);
 	}
 
-	for (unsigned int bi = 0; bi < innerBoundaryIndices.size(); bi++) {
+	for (unsigned int bi = 0; bi < innerBoundaryIndices.size(); bi++)
+	{
 		int penumbraIndex = innerBoundaryIndices[bi];
 		bool winding = bothEdgesBoundaryWindings[bi];
 
@@ -146,11 +323,13 @@ void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vecto
 
 		int counter = 0;
 
-		while (penumbraIndex != -1) {
+		while (penumbraIndex != -1)
+		{
 			sf::Vector2f nextPoint;
 			int nextPointIndex;
 
-			if (penumbraIndex < numPoints - 1) {
+			if (penumbraIndex < numPoints - 1)
+			{
 				nextPointIndex = penumbraIndex + 1;
 				nextPoint = shape.getTransform().transformPoint(shape.getPoint(penumbraIndex + 1));
 			}
@@ -164,11 +343,13 @@ void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vecto
 			sf::Vector2f prevPoint;
 			int prevPointIndex;
 
-			if (penumbraIndex > 0) {
+			if (penumbraIndex > 0)
+			{
 				prevPointIndex = penumbraIndex - 1;
 				prevPoint = shape.getTransform().transformPoint(shape.getPoint(penumbraIndex - 1));
 			}
-			else {
+			else
+			{
 				prevPointIndex = numPoints - 1;
 				prevPoint = shape.getTransform().transformPoint(shape.getPoint(numPoints - 1));
 			}
@@ -179,7 +360,8 @@ void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vecto
 
 			penumbra._source = point;
 
-			if (!winding) {
+			if (!winding)
+			{
 				if (hasPrevPenumbra)
 					penumbra._lightEdge = prevPenumbraLightEdgeVector;
 				else
@@ -193,7 +375,8 @@ void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vecto
 				float intersectionAngle = std::acos(vectorDot(vectorNormalize(penumbra._lightEdge), vectorNormalize(pointToNextPoint)));
 				float penumbraAngle = std::acos(vectorDot(vectorNormalize(penumbra._lightEdge), vectorNormalize(penumbra._darkEdge)));
 
-				if (intersectionAngle < penumbraAngle) {
+				if (intersectionAngle < penumbraAngle)
+				{
 					prevBrightness = penumbra._darkBrightness = intersectionAngle / penumbraAngle;
 
 					assert(prevBrightness >= 0.0f && prevBrightness <= 1.0f);
@@ -202,7 +385,8 @@ void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vecto
 
 					penumbraIndex = nextPointIndex;
 
-					if (hasPrevPenumbra) {
+					if (hasPrevPenumbra)
+					{
 						std::swap(penumbra._darkBrightness, penumbras.back()._darkBrightness);
 						std::swap(penumbra._lightBrightness, penumbras.back()._lightBrightness);
 					}
@@ -225,22 +409,26 @@ void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vecto
 
 					outerBoundaryVector = secondEdgeRay;
 
-					if (!outerBoundaryVectors.empty()) {
+					if (!outerBoundaryVectors.empty())
+					{
 						outerBoundaryVectors[0] = penumbra._darkEdge;
 						outerBoundaryIndices[0] = penumbraIndex;
 					}
 				}
-				else {
+				else
+				{
 					penumbra._darkBrightness = 0.0f;
 
-					if (hasPrevPenumbra) {
+					if (hasPrevPenumbra)
+					{
 						std::swap(penumbra._darkBrightness, penumbras.back()._darkBrightness);
 						std::swap(penumbra._lightBrightness, penumbras.back()._lightBrightness);
 					}
 
 					hasPrevPenumbra = false;
 
-					if (!outerBoundaryVectors.empty()) {
+					if (!outerBoundaryVectors.empty())
+					{
 						outerBoundaryVectors[0] = penumbra._darkEdge;
 						outerBoundaryIndices[0] = penumbraIndex;
 					}
@@ -248,7 +436,8 @@ void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vecto
 					penumbraIndex = -1;
 				}
 			}
-			else {
+			else
+			{
 				if (hasPrevPenumbra)
 					penumbra._lightEdge = prevPenumbraLightEdgeVector;
 				else
@@ -262,7 +451,8 @@ void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vecto
 				float intersectionAngle = std::acos(vectorDot(vectorNormalize(penumbra._lightEdge), vectorNormalize(pointToPrevPoint)));
 				float penumbraAngle = std::acos(vectorDot(vectorNormalize(penumbra._lightEdge), vectorNormalize(penumbra._darkEdge)));
 
-				if (intersectionAngle < penumbraAngle) {
+				if (intersectionAngle < penumbraAngle)
+				{
 					prevBrightness = penumbra._darkBrightness = intersectionAngle / penumbraAngle;
 
 					assert(prevBrightness >= 0.0f && prevBrightness <= 1.0f);
@@ -271,7 +461,8 @@ void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vecto
 
 					penumbraIndex = prevPointIndex;
 
-					if (hasPrevPenumbra) {
+					if (hasPrevPenumbra)
+					{
 						std::swap(penumbra._darkBrightness, penumbras.back()._darkBrightness);
 						std::swap(penumbra._lightBrightness, penumbras.back()._lightBrightness);
 					}
@@ -294,22 +485,26 @@ void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vecto
 
 					outerBoundaryVector = firstEdgeRay;
 
-					if (!outerBoundaryVectors.empty()) {
+					if (!outerBoundaryVectors.empty())
+					{
 						outerBoundaryVectors[1] = penumbra._darkEdge;
 						outerBoundaryIndices[1] = penumbraIndex;
 					}
 				}
-				else {
+				else
+				{
 					penumbra._darkBrightness = 0.0f;
 
-					if (hasPrevPenumbra) {
+					if (hasPrevPenumbra)
+					{
 						std::swap(penumbra._darkBrightness, penumbras.back()._darkBrightness);
 						std::swap(penumbra._lightBrightness, penumbras.back()._lightBrightness);
 					}
 
 					hasPrevPenumbra = false;
 
-					if (!outerBoundaryVectors.empty()) {
+					if (!outerBoundaryVectors.empty())
+					{
 						outerBoundaryVectors[1] = penumbra._darkEdge;
 						outerBoundaryIndices[1] = penumbraIndex;
 					}
@@ -325,7 +520,8 @@ void LightSystem::getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vecto
 	}
 }
 
-void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::vector<int> &innerBoundaryIndices, std::vector<sf::Vector2f> &innerBoundaryVectors, std::vector<int> &outerBoundaryIndices, std::vector<sf::Vector2f> &outerBoundaryVectors, const sf::ConvexShape &shape, const sf::Vector2f &sourceDirection, float sourceRadius, float sourceDistance) {
+void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::vector<int> &innerBoundaryIndices, std::vector<sf::Vector2f> &innerBoundaryVectors, std::vector<int> &outerBoundaryIndices, std::vector<sf::Vector2f> &outerBoundaryVectors, const sf::ConvexShape &shape, const sf::Vector2f &sourceDirection, float sourceRadius, float sourceDistance)
+{
 	const int numPoints = shape.getPointCount();
 
 	innerBoundaryIndices.reserve(2);
@@ -342,7 +538,8 @@ void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::v
 	std::vector<bool> facingFrontOneEdge;
 	facingFrontOneEdge.reserve(numPoints);
 
-	for (int i = 0; i < numPoints; i++) {
+	for (int i = 0; i < numPoints; i++)
+	{
 		sf::Vector2f point = shape.getTransform().transformPoint(shape.getPoint(i));
 
 		sf::Vector2f nextPoint;
@@ -379,13 +576,15 @@ void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::v
 
 	// Go through front/back facing list. Where the facing direction switches, there is a boundary
 	for (int i = 1; i < numPoints; i++)
-		if (facingFrontBothEdges[i] != facingFrontBothEdges[i - 1]) {
+		if (facingFrontBothEdges[i] != facingFrontBothEdges[i - 1])
+		{
 			innerBoundaryIndices.push_back(i);
 			bothEdgesBoundaryWindings.push_back(facingFrontBothEdges[i]);
 		}
 
 	// Check looping indices separately
-	if (facingFrontBothEdges[0] != facingFrontBothEdges[numPoints - 1]) {
+	if (facingFrontBothEdges[0] != facingFrontBothEdges[numPoints - 1])
+	{
 		innerBoundaryIndices.push_back(0);
 		bothEdgesBoundaryWindings.push_back(facingFrontBothEdges[0]);
 	}
@@ -399,7 +598,8 @@ void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::v
 	if (facingFrontOneEdge[0] != facingFrontOneEdge[numPoints - 1])
 		outerBoundaryIndices.push_back(0);
 
-	for (unsigned int bi = 0; bi < innerBoundaryIndices.size(); bi++) {
+	for (unsigned int bi = 0; bi < innerBoundaryIndices.size(); bi++)
+	{
 		int penumbraIndex = innerBoundaryIndices[bi];
 		bool winding = bothEdgesBoundaryWindings[bi];
 
@@ -428,15 +628,18 @@ void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::v
 
 		int counter = 0;
 
-		while (penumbraIndex != -1) {
+		while (penumbraIndex != -1)
+		{
 			sf::Vector2f nextPoint;
 			int nextPointIndex;
 
-			if (penumbraIndex < numPoints - 1) {
+			if (penumbraIndex < numPoints - 1)
+			{
 				nextPointIndex = penumbraIndex + 1;
 				nextPoint = shape.getTransform().transformPoint(shape.getPoint(penumbraIndex + 1));
 			}
-			else {
+			else
+			{
 				nextPointIndex = 0;
 				nextPoint = shape.getTransform().transformPoint(shape.getPoint(0));
 			}
@@ -446,11 +649,13 @@ void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::v
 			sf::Vector2f prevPoint;
 			int prevPointIndex;
 
-			if (penumbraIndex > 0) {
+			if (penumbraIndex > 0)
+			{
 				prevPointIndex = penumbraIndex - 1;
 				prevPoint = shape.getTransform().transformPoint(shape.getPoint(penumbraIndex - 1));
 			}
-			else {
+			else
+			{
 				prevPointIndex = numPoints - 1;
 				prevPoint = shape.getTransform().transformPoint(shape.getPoint(numPoints - 1));
 			}
@@ -461,7 +666,8 @@ void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::v
 
 			penumbra._source = point;
 
-			if (!winding) {
+			if (!winding)
+			{
 				if (hasPrevPenumbra)
 					penumbra._lightEdge = prevPenumbraLightEdgeVector;
 				else
@@ -475,7 +681,8 @@ void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::v
 				float intersectionAngle = std::acos(vectorDot(vectorNormalize(penumbra._lightEdge), vectorNormalize(pointToNextPoint)));
 				float penumbraAngle = std::acos(vectorDot(vectorNormalize(penumbra._lightEdge), vectorNormalize(penumbra._darkEdge)));
 
-				if (intersectionAngle < penumbraAngle) {
+				if (intersectionAngle < penumbraAngle)
+				{
 					prevBrightness = penumbra._darkBrightness = intersectionAngle / penumbraAngle;
 
 					assert(prevBrightness >= 0.0f && prevBrightness <= 1.0f);
@@ -484,7 +691,8 @@ void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::v
 
 					penumbraIndex = nextPointIndex;
 
-					if (hasPrevPenumbra) {
+					if (hasPrevPenumbra)
+					{
 						std::swap(penumbra._darkBrightness, penumbras.back()._darkBrightness);
 						std::swap(penumbra._lightBrightness, penumbras.back()._lightBrightness);
 					}
@@ -505,10 +713,12 @@ void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::v
 
 					outerBoundaryVector = secondEdgeRay;
 				}
-				else {
+				else
+				{
 					penumbra._darkBrightness = 0.0f;
 
-					if (hasPrevPenumbra) {
+					if (hasPrevPenumbra)
+					{
 						std::swap(penumbra._darkBrightness, penumbras.back()._darkBrightness);
 						std::swap(penumbra._lightBrightness, penumbras.back()._lightBrightness);
 					}
@@ -518,7 +728,8 @@ void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::v
 					penumbraIndex = -1;
 				}
 			}
-			else {
+			else
+			{
 				if (hasPrevPenumbra)
 					penumbra._lightEdge = prevPenumbraLightEdgeVector;
 				else
@@ -532,7 +743,8 @@ void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::v
 				float intersectionAngle = std::acos(vectorDot(vectorNormalize(penumbra._lightEdge), vectorNormalize(pointToPrevPoint)));
 				float penumbraAngle = std::acos(vectorDot(vectorNormalize(penumbra._lightEdge), vectorNormalize(penumbra._darkEdge)));
 
-				if (intersectionAngle < penumbraAngle) {
+				if (intersectionAngle < penumbraAngle)
+				{
 					prevBrightness = penumbra._darkBrightness = intersectionAngle / penumbraAngle;
 
 					assert(prevBrightness >= 0.0f && prevBrightness <= 1.0f);
@@ -541,7 +753,8 @@ void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::v
 
 					penumbraIndex = prevPointIndex;
 
-					if (hasPrevPenumbra) {
+					if (hasPrevPenumbra)
+					{
 						std::swap(penumbra._darkBrightness, penumbras.back()._darkBrightness);
 						std::swap(penumbra._lightBrightness, penumbras.back()._lightBrightness);
 					}
@@ -562,10 +775,12 @@ void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::v
 
 					outerBoundaryVector = firstEdgeRay;
 				}
-				else {
+				else
+				{
 					penumbra._darkBrightness = 0.0f;
 
-					if (hasPrevPenumbra) {
+					if (hasPrevPenumbra)
+					{
 						std::swap(penumbra._darkBrightness, penumbras.back()._darkBrightness);
 						std::swap(penumbra._lightBrightness, penumbras.back()._lightBrightness);
 					}
@@ -580,165 +795,6 @@ void LightSystem::getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::v
 
 			counter++;
 		}
-	}
-}
-void LightSystem::clear(sf::RenderTarget &rt, const sf::Color &color) {
-	sf::RectangleShape shape;
-	shape.setSize(sf::Vector2f((float)rt.getSize().x, (float)rt.getSize().y));
-	shape.setFillColor(color);
-	sf::View v = rt.getView();
-	rt.setView(rt.getDefaultView());
-	rt.draw(shape);
-	rt.setView(v);
-}
-
-void LightSystem::create(const sf::FloatRect &rootRegion, const sf::Vector2u &imageSize, const sf::Texture &penumbraTexture, sf::Shader &unshadowShader, sf::Shader &lightOverShapeShader) {
-	_shapeQuadtree.create(rootRegion);
-	_lightPointEmissionQuadtree.create(rootRegion);
-
-	_lightTempTexture.create(imageSize.x, imageSize.y);
-	_emissionTempTexture.create(imageSize.x, imageSize.y);
-	_antumbraTempTexture.create(imageSize.x, imageSize.y);
-	_compositionTexture.create(imageSize.x, imageSize.y);
-
-	sf::Vector2f targetSizeInv = sf::Vector2f(1.0f / imageSize.x, 1.0f / imageSize.y);
-
-	unshadowShader.setUniform("penumbraTexture", penumbraTexture);
-
-	lightOverShapeShader.setUniform("emissionTexture", _emissionTempTexture.getTexture());
-	lightOverShapeShader.setUniform("targetSizeInv", targetSizeInv);
-}
-
-void LightSystem::render(const sf::View &view, sf::Shader &unshadowShader, sf::Shader &lightOverShapeShader) {
-	clear(_compositionTexture, _ambientColor);
-	_compositionTexture.setView(_compositionTexture.getDefaultView());
-
-	// Get bounding rectangle of view
-	sf::FloatRect viewBounds = sf::FloatRect(view.getCenter().x, view.getCenter().y, 0.0f, 0.0f);
-
-	_lightTempTexture.setView(view);
-
-	viewBounds = rectExpand(viewBounds, _lightTempTexture.mapPixelToCoords(sf::Vector2i(0, 0)));
-	viewBounds = rectExpand(viewBounds, _lightTempTexture.mapPixelToCoords(sf::Vector2i(_lightTempTexture.getSize().x, 0)));
-	viewBounds = rectExpand(viewBounds, _lightTempTexture.mapPixelToCoords(sf::Vector2i(_lightTempTexture.getSize().x, _lightTempTexture.getSize().y)));
-	viewBounds = rectExpand(viewBounds, _lightTempTexture.mapPixelToCoords(sf::Vector2i(0, _lightTempTexture.getSize().y)));
-
-	std::vector<QuadtreeOccupant*> viewPointEmissionLights;
-
-	_lightPointEmissionQuadtree.queryRegion(viewPointEmissionLights, viewBounds);
-
-	for (unsigned int l = 0; l < viewPointEmissionLights.size(); l++) {
-		LightPointEmission* pPointEmissionLight = static_cast<LightPointEmission*>(viewPointEmissionLights[l]);
-
-		// Query shapes this light is affected by
-		std::vector<QuadtreeOccupant*> lightShapes;
-
-		_shapeQuadtree.queryRegion(lightShapes, pPointEmissionLight->getAABB());
-
-		pPointEmissionLight->render(view, _lightTempTexture, _emissionTempTexture, _antumbraTempTexture, lightShapes, unshadowShader, lightOverShapeShader);
-
-		sf::Sprite sprite;
-
-		sprite.setTexture(_lightTempTexture.getTexture());
-
-		sf::RenderStates compoRenderStates;
-		compoRenderStates.blendMode = sf::BlendAdd;
-
-		_compositionTexture.draw(sprite, compoRenderStates);
-	}
-	
-	for (std::unordered_set<std::shared_ptr<LightDirectionEmission>>::iterator it = _directionEmissionLights.begin(); it != _directionEmissionLights.end(); it++) {
-		LightDirectionEmission* pDirectionEmissionLight = static_cast<LightDirectionEmission*>(it->get());
-
-		sf::FloatRect centeredViewBounds = rectRecenter(viewBounds, sf::Vector2f(0.0f, 0.0f));
-
-		float maxDim = std::max(centeredViewBounds.width, centeredViewBounds.height);
-
-		sf::FloatRect extendedViewBounds = rectFromBounds(sf::Vector2f(-maxDim, -maxDim) * _directionEmissionRadiusMultiplier,
-			sf::Vector2f(maxDim, maxDim) * _directionEmissionRadiusMultiplier + sf::Vector2f(_directionEmissionRange, 0.0f));
-
-		float shadowExtension = vectorMagnitude(rectLowerBound(centeredViewBounds)) * _directionEmissionRadiusMultiplier * 2.0f;
-
-		sf::ConvexShape directionShape = shapeFromRect(extendedViewBounds);
-
-		directionShape.setPosition(view.getCenter());
-
-		sf::Vector2f normalizedCastDirection = vectorNormalize(pDirectionEmissionLight->_castDirection);
-
-		directionShape.setRotation(_radToDeg * std::atan2(normalizedCastDirection.y, normalizedCastDirection.x));
-
-		std::vector<QuadtreeOccupant*> viewLightShapes;
-
-		_shapeQuadtree.queryShape(viewLightShapes, directionShape);
-
-		pDirectionEmissionLight->render(view, _lightTempTexture, _antumbraTempTexture, viewLightShapes, unshadowShader, shadowExtension);
-
-		sf::Sprite sprite;
-
-		sprite.setTexture(_lightTempTexture.getTexture());
-
-		sf::RenderStates compoRenderStates;
-		compoRenderStates.blendMode = sf::BlendAdd;
-
-		_compositionTexture.draw(sprite, compoRenderStates);
-	}
-
-	_compositionTexture.display();
-}
-
-LightShape::Ptr LightSystem::createShape()
-{
-	LightShape::Ptr lightShape = std::make_shared<LightShape>();
-	_shapeQuadtree.add(lightShape.get());
-	_lightShapes.insert(lightShape);
-	return lightShape;
-}
-
-void LightSystem::removeShape(const std::shared_ptr<LightShape> &lightShape) {
-	std::unordered_set<std::shared_ptr<LightShape>>::iterator it = _lightShapes.find(lightShape);
-
-	if (it != _lightShapes.end()) {
-		(*it)->quadtreeRemove();
-
-		_lightShapes.erase(it);
-	}
-}
-
-LightPointEmission::Ptr LightSystem::createLightPoint()
-{
-	LightPointEmission::Ptr pointEmissionLight = std::make_shared<LightPointEmission>();
-	_lightPointEmissionQuadtree.add(pointEmissionLight.get());
-	_pointEmissionLights.insert(pointEmissionLight);
-	return pointEmissionLight;
-}
-
-LightDirectionEmission::Ptr LightSystem::createLightDirection()
-{
-	LightDirectionEmission::Ptr directionEmissionLight = std::make_shared<LightDirectionEmission>();
-	_directionEmissionLights.insert(directionEmissionLight);
-	return directionEmissionLight;
-}
-
-void LightSystem::removeLight(const std::shared_ptr<LightPointEmission> &pointEmissionLight) 
-{
-	if (pointEmissionLight != nullptr)
-	{
-		auto it = _pointEmissionLights.find(pointEmissionLight);
-		if (it != _pointEmissionLights.end())
-		{
-			(*it)->quadtreeRemove();
-			_pointEmissionLights.erase(it);
-		}
-	}
-}
-
-void LightSystem::removeLight(const std::shared_ptr<LightDirectionEmission> &directionEmissionLight) 
-{
-	if (directionEmissionLight != nullptr)
-	{
-		auto it = _directionEmissionLights.find(directionEmissionLight);
-		if (it != _directionEmissionLights.end())
-			_directionEmissionLights.erase(it);
 	}
 }
 

@@ -19,11 +19,12 @@ int main()
 
 	Application::setLang("french");
 
-	tgui::Button::Ptr button = Application::createGui<tgui::Button>("Button", "css");
+	tgui::Button::Ptr button = Application::getResource<Theme>("css").create("Button");
 	button->setPosition(350, 50);
 	button->setSize(150, 50);
 	button->setText("Hello");
-	button->connect("pressed", []() { Application::getLog() << Application::inLang("hello"); });
+	button->connect("pressed", []() { Application::getLog() << Application::inLang("hello"); Application::close(); });
+	Application::getGui().add(button);
 
 	World::createInstance();
 
@@ -31,10 +32,11 @@ int main()
 	World::instance().getInputs().setKeyboardMapping("Stop", sf::Keyboard::D, InputType::Released);
 	World::instance().getInputs().loadFromFile("Example/inputs.cfg");
 
-	{
-		MyMap::Ptr map = World::instance().createActor<MyMap>();
-		map->loadTmxFile("Example/map.tmx");
+	MyMap::Ptr map = World::instance().createActor<MyMap>();
+	map->loadTmxFile("Example/map.tmx");
+	auto layer = map->getLayer(0);
 
+	{
 		MyActor::Ptr actor = World::instance().createActor<MyActor>();
 		actor->setZ(100.f);
 		actor->setPosition({ 10.f, 100.f });
@@ -43,6 +45,12 @@ int main()
 	Application::setEventDefaultFunction([&](sf::Event const& event)
 	{
 		World::instance().handleEvent(event);
+		if (event.type == sf::Event::MouseButtonPressed)
+		{
+			sf::Vector2f mPos = Application::getMousePositionView(World::instance().getView());
+			sf::Vector2i coords = layer->worldToCoords(mPos);
+			layer->setTileId(coords, 3);
+		}
 	});
 
 	Application::setUpdateDefaultFunction([&](sf::Time dt)

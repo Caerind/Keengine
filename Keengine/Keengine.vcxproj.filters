@@ -655,12 +655,6 @@
     <ClInclude Include="Sources\Core\Effect.hpp">
       <Filter>Sources\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Example\Pixelate.hpp">
-      <Filter>Example</Filter>
-    </ClInclude>
-    <ClInclude Include="Example\Blur.hpp">
-      <Filter>Example</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Components\CameraComponent.hpp">
       <Filter>Sources\Components</Filter>
     </ClInclude>
@@ -741,6 +735,9 @@
     </ClInclude>
     <ClInclude Include="Sources\Components\ShapeComponent.hpp">
       <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Config.hpp">
+      <Filter>Sources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

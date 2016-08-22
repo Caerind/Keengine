@@ -17,10 +17,8 @@ sf::View& CameraComponent::getView()
 	return mCamera;
 }
 
-void CameraComponent::onChangedTransform()
+void CameraComponent::onPositionChanged()
 {
-	SceneComponent::onChangedTransform();
 	mCamera.setCenter(getWorldPosition());
 	mCamera.setRotation(getRotation());
-	// TODO : Camera Zoom
 }

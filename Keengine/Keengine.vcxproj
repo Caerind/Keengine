@@ -133,11 +133,9 @@
     <ClCompile Include="Sources\System\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Example\Blur.hpp" />
     <ClInclude Include="Example\MyActor.hpp" />
     <ClInclude Include="Example\MyMap.hpp" />
     <ClInclude Include="Example\MyObject.hpp" />
-    <ClInclude Include="Example\Pixelate.hpp" />
     <ClInclude Include="Sources\Application\Application.hpp" />
     <ClInclude Include="Sources\Application\AudioManager.hpp" />
     <ClInclude Include="Sources\Application\ResourceManager.hpp" />
@@ -154,6 +152,7 @@
     <ClInclude Include="Sources\Components\PointLightComponent.hpp" />
     <ClInclude Include="Sources\Components\ShapeComponent.hpp" />
     <ClInclude Include="Sources\Components\SpriteComponent.hpp" />
+    <ClInclude Include="Sources\Config.hpp" />
     <ClInclude Include="Sources\Core\Actor.hpp" />
     <ClInclude Include="Sources\Core\Component.hpp" />
     <ClInclude Include="Sources\Core\Effect.hpp" />

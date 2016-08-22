@@ -1,6 +1,7 @@
 #include "StateManager.hpp"
+#include "Application.hpp"
 
-State::State()
+State::State() : mGui(Application::getWindow())
 {
 }
 

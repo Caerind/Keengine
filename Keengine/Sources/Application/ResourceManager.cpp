@@ -286,6 +286,11 @@ sf::Color Shader::getUniformColor(std::string const& name)
 	return mColors[name];
 }
 
+void Shader::setUniform(std::string const& name, sf::Texture const& texture)
+{
+	sf::Shader::setUniform(name, texture);
+}
+
 Theme::Theme()
 {
 }
@@ -450,16 +455,7 @@ bool Tileset::loadFromNode(pugi::xml_node const& node, std::string const& mapPat
 		}
 	}
 
-	pugi::xml_node prop = node.child("properties");
-	if (prop)
-	{
-		for (const pugi::xml_node& property : prop.children("property"))
-		{
-			std::string name = property.attribute("name").as_string();
-			std::string value = property.attribute("value").as_string();
-			setProperty(name, value);
-		}
-	}
+	loadProperties(node);
 
 	getTexture();
 
@@ -540,16 +536,7 @@ bool Tileset::saveToNode(pugi::xml_node& node, bool fromTsx)
 		data.text().set(mImageData.data());
 	}
 
-	if (mProperties.size() > 0)
-	{
-		pugi::xml_node properties = node.append_child("properties");
-		for (auto itr = mProperties.begin(); itr != mProperties.end(); itr++)
-		{
-			pugi::xml_node property = properties.append_child("property");
-			property.append_attribute("name") = itr->first.c_str();
-			property.append_attribute("value") = itr->second.c_str();
-		}
-	}
+	saveProperties(node);
 
 	return true;
 }

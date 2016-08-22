@@ -15,6 +15,8 @@
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
 
+#include <TGUI/TGUI.hpp>
+
 class State
 {
     public:
@@ -34,6 +36,9 @@ class State
 		virtual void onActivate();
 
 		virtual void onDeactivate();
+
+	protected:
+		tgui::Gui mGui;
 };
 
 class StateManager

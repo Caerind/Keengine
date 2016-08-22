@@ -145,6 +145,7 @@ class World
 
 		sf::RectangleShape mBackground;
 
+		bool mUseLights;
 		ltbl::LightSystem mLights;
 };
 

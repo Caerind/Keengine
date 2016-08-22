@@ -11,8 +11,6 @@ class MyMap : public Map
 
 		MyMap();
 
-		bool loadTmxFile(std::string const& filename);
-
 	private:
 		DirectionLightComponent mSun;
 };

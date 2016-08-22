@@ -27,14 +27,43 @@ class LightSystem : sf::NonCopyable
 			float _distance;
 		};
 
+	public:
+		float _directionEmissionRange;
+		float _directionEmissionRadiusMultiplier;
+		sf::Color _ambientColor;
+
+		LightSystem();
+
+		void create(const sf::FloatRect &rootRegion, const sf::Vector2u &imageSize, const sf::Texture &penumbraTexture, sf::Shader &unshadowShader, sf::Shader &lightOverShapeShader);
+
+		void render(sf::RenderTarget& target);
+
+		LightShape::Ptr createShape();
+		void removeShape(const std::shared_ptr<LightShape> &lightShape);
+	
+		LightPointEmission::Ptr createLightPoint();
+		void removeLight(LightPointEmission::Ptr pointEmissionLight);
+
+		LightDirectionEmission::Ptr createLightDirection();
+		void removeLight(LightDirectionEmission::Ptr directionEmissionLight);
+
+		void trimLightPointEmissionQuadtree();
+		void trimShapeQuadtree();
+
+		friend class LightPointEmission;
+		friend class LightDirectionEmission;
+		friend class LightShape;
+
 	private:
-		sf::RenderTexture _lightTempTexture, _emissionTempTexture, _antumbraTempTexture, _compositionTexture;
+		void updateTextureSize(sf::Vector2u const& size);
+
+		static void clear(sf::RenderTarget& target, sf::Color const& color);
 
 		static void getPenumbrasPoint(std::vector<Penumbra> &penumbras, std::vector<int> &innerBoundaryIndices, std::vector<sf::Vector2f> &innerBoundaryVectors, std::vector<int> &outerBoundaryIndices, std::vector<sf::Vector2f> &outerBoundaryVectors, const sf::ConvexShape &shape, const sf::Vector2f &sourceCenter, float sourceRadius);
 		static void getPenumbrasDirection(std::vector<Penumbra> &penumbras, std::vector<int> &innerBoundaryIndices, std::vector<sf::Vector2f> &innerBoundaryVectors, std::vector<int> &outerBoundaryIndices, std::vector<sf::Vector2f> &outerBoundaryVectors, const sf::ConvexShape &shape, const sf::Vector2f &sourceDirection, float sourceRadius, float sourceDistance);
 
-		static void clear(sf::RenderTarget &rt, const sf::Color &color);
-		
+	private:
+		sf::RenderTexture _lightTempTexture, _emissionTempTexture, _antumbraTempTexture, _compositionTexture;
 		DynamicQuadtree _shapeQuadtree;
 		DynamicQuadtree _lightPointEmissionQuadtree;
 
@@ -42,43 +71,8 @@ class LightSystem : sf::NonCopyable
 		std::unordered_set<LightDirectionEmission::Ptr> _directionEmissionLights;
 		std::unordered_set<LightShape::Ptr> _lightShapes;
 
-	public:
-		float _directionEmissionRange;
-		float _directionEmissionRadiusMultiplier;
-		sf::Color _ambientColor;
-
-		LightSystem()
-			: _directionEmissionRange(10000.0f), _directionEmissionRadiusMultiplier(1.1f), _ambientColor(sf::Color(16, 16, 16))
-		{}
-
-		void create(const sf::FloatRect &rootRegion, const sf::Vector2u &imageSize, const sf::Texture &penumbraTexture, sf::Shader &unshadowShader, sf::Shader &lightOverShapeShader);
-
-		void render(const sf::View &view, sf::Shader &unshadowShader, sf::Shader &lightOverShapeShader);
-
-		LightShape::Ptr createShape();
-		void removeShape(const std::shared_ptr<LightShape> &lightShape);
-	
-		LightPointEmission::Ptr createLightPoint();
-		LightDirectionEmission::Ptr createLightDirection();
-
-		void removeLight(const std::shared_ptr<LightPointEmission> &pointEmissionLight);
-		void removeLight(const std::shared_ptr<LightDirectionEmission> &directionEmissionLight);
-
-		void trimLightPointEmissionQuadtree() {
-			_lightPointEmissionQuadtree.trim();
-		}
-
-		void trimShapeQuadtree() {
-			_shapeQuadtree.trim();
-		}
-
-		const sf::Texture &getLightingTexture() const {
-			return _compositionTexture.getTexture();
-		}
-
-		friend class LightPointEmission;
-		friend class LightDirectionEmission;
-		friend class LightShape;
+		sf::Shader* mUnshadowShader;
+		sf::Shader* mLightOverShapeShader;
 };
 
 } // namespace ltbl

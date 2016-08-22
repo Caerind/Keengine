@@ -4,6 +4,8 @@
 #include "Actor.hpp"
 
 #include "../Components/LayerComponent.hpp"
+#include "../Components/SpriteComponent.hpp"
+#include "../Components/ShapeComponent.hpp"
 
 class Map : public Actor, public PropertiesHolder
 {
@@ -15,7 +17,13 @@ class Map : public Actor, public PropertiesHolder
 		bool loadTmxFile(std::string const& filename);
 		bool saveTmxFile(std::string const& filename);
 
-		// TODO : Conversion of coordinates
+		sf::Vector2i worldToCoords(sf::Vector2f const& world);
+
+		std::shared_ptr<SpriteComponent> addImage();
+		std::size_t getImageCount();
+		std::shared_ptr<SpriteComponent> getImage(std::size_t index);
+		void removeImage(std::size_t index);
+		void clearImages();
 
 		Tileset* getTileset();
 		void setTileset(Tileset* tileset);
@@ -49,6 +57,8 @@ class Map : public Actor, public PropertiesHolder
 		void setHexSideLength(unsigned int hexSideLength);
 
 	protected:
+		std::vector<std::shared_ptr<SpriteComponent>> mImages;
+
 		std::vector<std::shared_ptr<LayerComponent>> mLayers;
 		Tileset* mTileset;
 

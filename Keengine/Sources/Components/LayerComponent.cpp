@@ -34,6 +34,84 @@ LayerComponent::LayerComponent(Tileset* tileset, sf::Vector2i const& size, sf::V
 	create(tileset, size, tileSize, orientation, staggerAxis, staggerIndex, hexSideLength);
 }
 
+sf::Vector2i LayerComponent::worldToCoords(sf::Vector2f const& world)
+{
+	sf::Vector2f pos = world - getWorldPosition();
+	if (mOrientation == "orthogonal")
+	{
+		return sf::Vector2i((int)pos.x / mTileSize.x, (int)pos.y / mTileSize.y);
+	}
+	else if (mOrientation == "isometric")
+	{
+		// TODO : Conversion isometric
+		return sf::Vector2i();
+	}
+	else if (mOrientation == "staggered")
+	{
+		sf::Vector2f s = sf::Vector2f(mTileSize.x * 0.5f, mTileSize.y * 0.5f);
+		sf::Vector2f mc = sf::Vector2f(floor(pos.x / s.x), floor(pos.y / s.y));
+		sf::Vector2f p = pos - sf::Vector2f(mc.x * s.x, mc.y * s.y);
+		const float rad = 0.523599f; // = 30 degrees
+		int indexInt = (mStaggerIndex == "odd") ? 0 : 1;
+		if (mStaggerAxis == "y")
+		{
+			if (((int)mc.x + (int)mc.y) % 2 == indexInt)
+			{
+				if (std::atan2(s.y - p.y, p.x) > rad)
+				{
+					mc.x--;
+					mc.y--;
+				}
+			}
+			else
+			{
+				if (std::atan2(-p.y, p.x) > -rad)
+				{
+					mc.y--;
+				}
+				else
+				{
+					mc.x--;
+				}
+			}
+			return sf::Vector2i((int)floor(mc.x * 0.5f), (int)mc.y);
+		}
+		else
+		{
+			if (((int)mc.x + (int)mc.y) % 2 == indexInt)
+			{
+				if (std::atan2(s.x - p.x, p.y) > rad)
+				{
+					mc.x--;
+					mc.y--;
+				}
+			}
+			else
+			{
+				if (std::atan2(-p.x, p.y) > -rad)
+				{
+					mc.x--;
+				}
+				else
+				{
+					mc.y--;
+				}
+			}
+			return sf::Vector2i((int)mc.x, (int)floor(mc.y * 0.5f));
+		}
+	}
+	else if (mOrientation == "hexagonal")
+	{
+		// TODO : Conversion hexagonal
+		return sf::Vector2i();
+	}
+	else
+	{
+		// Unknown
+		return sf::Vector2i();
+	}
+}
+
 void LayerComponent::render(sf::RenderTarget& target)
 {
 	sf::RenderStates states;
@@ -51,35 +129,37 @@ bool LayerComponent::loadFromNode(pugi::xml_node const& node, Tileset* tileset, 
 	{
 		return false;
 	}
+	sf::Vector2f offset;
 	for (const pugi::xml_attribute& attr : node.attributes())
 	{
 		if (attr.name() == std::string("name"))
 		{
 			mName = attr.as_string();
 		}
-		// TODO : Handle offset as position
-		if (attr.name() == std::string("offset"))
+		if (attr.name() == std::string("offsetx"))
 		{
+			offset.x = attr.as_float();
+		}
+		if (attr.name() == std::string("offsety"))
+		{
+			offset.y = attr.as_float();
 		}
 		if (attr.name() == std::string("opacity"))
 		{
 			mOpacity = attr.as_float();
 		}
-		// TODO : Handle visible
 		if (attr.name() == std::string("visible"))
 		{
+			mVisible = (attr.as_string() == "true");
 		}
 	}
 
-	pugi::xml_node prop = node.child("properties");
-	if (prop)
+	setPosition(offset);
+
+	loadProperties(node);
+	if (propertyExist("z"))
 	{
-		for (const pugi::xml_node& property : prop.children("property"))
-		{
-			std::string name = property.attribute("name").as_string();
-			std::string value = property.attribute("value").as_string();
-			setProperty(name, value);
-		}
+		setZ(getProperty("z").asFloat());
 	}
 
 	pugi::xml_node dataNode = node.child("data");
@@ -196,22 +276,26 @@ void LayerComponent::saveToNode(pugi::xml_node & node)
 	{
 		node.append_attribute("name") = mName.c_str();
 	}
-	// TODO : Save offset
+	if (getPosition() != sf::Vector2f())
+	{
+		node.append_attribute("offsetx") = getPosition().x;
+		node.append_attribute("offsety") = getPosition().y;
+	}
 	if (mOpacity != 1.f)
 	{
 		node.append_attribute("opacity") = mOpacity;
 	}
-	// TODO : Save visibility
-	if (mProperties.size() > 0)
+	if (!mVisible)
 	{
-		pugi::xml_node properties = node.append_child("properties");
-		for (auto itr = mProperties.begin(); itr != mProperties.end(); itr++)
-		{
-			pugi::xml_node property = properties.append_child("property");
-			property.append_attribute("name") = itr->first.c_str();
-			property.append_attribute("value") = itr->second.c_str();
-		}
+		node.append_attribute("visible") = "false";
 	}
+
+	if (getZ() != 0.f)
+	{
+		setProperty("z", getZ());
+	}
+	saveProperties(node);
+
 	node.append_attribute("width") = mSize.x;
 	node.append_attribute("height") = mSize.y;
 	pugi::xml_node dataNode = node.append_child("data");

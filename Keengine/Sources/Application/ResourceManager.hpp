@@ -112,8 +112,7 @@ class SoundBuffer : public sf::SoundBuffer, public Resource
 		bool loadFromSamples(sf::Int16 const* samples, sf::Uint64 sampleCount, unsigned int channelCount, unsigned int sampleRate);
 };
 
-// Improvements
-// - Add uniform types
+// TODO : Add uniform types
 class Shader : public sf::Shader, public Resource
 {
     public:
@@ -139,6 +138,8 @@ class Shader : public sf::Shader, public Resource
 
 		void setUniform(std::string const& name, sf::Color const& color);
 		sf::Color getUniformColor(std::string const& name);
+
+		void setUniform(std::string const& name, sf::Texture const& texture);
 
     protected:
         std::map<std::string, float> mFloats;

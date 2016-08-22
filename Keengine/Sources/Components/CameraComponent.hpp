@@ -12,7 +12,7 @@ class CameraComponent : public SceneComponent
 
         sf::View& getView();
 
-		void onChangedTransform();
+		void onPositionChanged();
 
 	protected:
 		sf::View mCamera;

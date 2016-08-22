@@ -22,4 +22,20 @@ class Effect
 		World& getWorld();
 };
 
+class Blur : public Effect
+{
+	public:
+		Blur();
+
+		void apply(sf::RenderTexture const& input, sf::RenderTarget& output);
+};
+
+class Pixelate : public Effect
+{
+	public:
+		Pixelate();
+
+		void apply(sf::RenderTexture const& input, sf::RenderTarget& output);
+};
+
 #endif // EFFECT_HPP

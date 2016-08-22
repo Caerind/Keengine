@@ -18,6 +18,8 @@ class LayerComponent : public PrimitiveComponent, public PropertiesHolder
 		LayerComponent();
 		LayerComponent(Tileset* tileset, sf::Vector2i const& size = sf::Vector2i(), sf::Vector2i const& tileSize = sf::Vector2i(), std::string const& orientation = "orthogonal", std::string const& staggerAxis = "y", std::string const& staggerIndex = "odd", unsigned int hexSideLength = 0);
 
+		sf::Vector2i worldToCoords(sf::Vector2f const& world);
+
 		void render(sf::RenderTarget& target);
 
 		bool loadFromNode(pugi::xml_node const& node, Tileset* tileset, sf::Vector2i const& size, sf::Vector2i const& tileSize, std::string const& orientation, std::string const& staggerAxis, std::string const& staggerIndex, unsigned int hexSideLength);

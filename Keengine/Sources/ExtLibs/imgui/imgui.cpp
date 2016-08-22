@@ -28,7 +28,7 @@
    - How can I load multiple fonts?
    - How can I display and input non-latin characters such as Chinese, Japanese, Korean, Cyrillic?
    - How can I use the drawing facilities without an ImGui window? (using ImDrawList API)
- - ISSUES & TODO-LIST
+ - ISSUES & TO DO-LIST
  - CODE
 
 
@@ -261,7 +261,7 @@
  ======================================
 
  Q: How can I help?
- A: - If you are experienced enough with ImGui and with C/C++, look at the todo list and see how you want/can help!
+ A: - If you are experienced enough with ImGui and with C/C++, look at the to do list and see how you want/can help!
     - Become a Patron/donate. Convince your company to become a Patron or provide serious funding for development time.
 
  Q: How do I update to a newer version of ImGui?
@@ -455,7 +455,7 @@
  - tip: call and read the ShowTestWindow() code in imgui_demo.cpp for more example of how to use ImGui!
 
 
- ISSUES & TODO-LIST
+ ISSUES & TO DO-LIST
  ==================
  Issue numbers (#) refer to github issues listed at https://github.com/ocornut/imgui/issues
  The list below consist mostly of notes of things to do before they are requested/discussed by users (at that point it usually happens on the github)

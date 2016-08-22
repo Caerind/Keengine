@@ -8,9 +8,6 @@
 #include "Vector2.hpp"
 #include "Vector3.hpp"
 
-// Improvements :
-// - Matrix
-// - Quaternion
-// - Full Vector3D
+// TODO : Matrix / Quaternion / Vector3
 
 #endif // MATH_HPP

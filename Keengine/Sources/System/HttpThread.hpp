@@ -9,8 +9,7 @@
 #include <SFML/System/Thread.hpp>
 #include <SFML/System/Sleep.hpp>
 
-// Improvements :
-// - Thread-safe
+// TODO : Thread-safe
 class HttpThread
 {
     public:

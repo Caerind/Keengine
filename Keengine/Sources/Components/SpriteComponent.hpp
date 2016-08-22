@@ -13,6 +13,7 @@ class SpriteComponent : public PrimitiveComponent
 
         void setTexture(std::string const& textureName, sf::IntRect const& rect = sf::IntRect());
         void setTexture(sf::Texture& texture, sf::IntRect const& rect = sf::IntRect());
+		std::string getTextureName() const;
 
         void setTextureRect(sf::IntRect const& rect);
         sf::IntRect getTextureRect() const;

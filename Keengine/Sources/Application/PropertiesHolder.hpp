@@ -1,8 +1,10 @@
 #ifndef PROPERTIESHOLDER_HPP
 #define PROPERTIESHOLDER_HPP
 
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
+
+#include "../ExtLibs/pugixml.hpp"
 #include "../System/Variant.hpp"
 
 class PropertiesHolder
@@ -16,6 +18,9 @@ class PropertiesHolder
 		}
 
 		Variant getProperty(std::string const& id);
+
+		void loadProperties(pugi::xml_node const& node);
+		void saveProperties(pugi::xml_node& node);
 
 		bool propertyExist(std::string const& id) const;
 

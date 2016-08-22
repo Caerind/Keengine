@@ -51,9 +51,6 @@ class Application
 		static tgui::Gui& getGui();
 		static PropertiesHolder& getValues();
 
-		template <typename T> static std::shared_ptr<T> createGui(std::string const& name, std::string const& theme);
-		// TODO : Create Gui without theme
-
         //
         // Audio
         //
@@ -221,14 +218,6 @@ class Application
         UpdateFunction mUpdateDefaultFunction;
         RenderFunction mRenderDefaultFunction;
 };
-
-template<typename T>
-std::shared_ptr<T> Application::createGui(std::string const& name, std::string const& theme)
-{
-	std::shared_ptr<T> widget = Application::getResource<Theme>(theme).create(name);
-	instance().mGui.add(widget);
-	return widget;
-}
 
 template <typename T, typename ... Args>
 T& Application::createResource(std::string const& id, Args&& ... args)

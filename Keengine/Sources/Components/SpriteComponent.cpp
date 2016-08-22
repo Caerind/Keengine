@@ -23,6 +23,11 @@ void SpriteComponent::setTexture(sf::Texture& texture, sf::IntRect const& rect)
     }
 }
 
+std::string SpriteComponent::getTextureName() const
+{
+	return mTexture;
+}
+
 void SpriteComponent::setTextureRect(sf::IntRect const& rect)
 {
     mSprite.setTextureRect(rect);
