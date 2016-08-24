@@ -42,6 +42,8 @@ namespace ke
 		InputSystem& getInputs();
 		Log& getLog();
 		ltbl::LightSystem& getLights();
+		PhysicSystem& getPhysic();
+		b2World* getPhysicWorld();
 
 		virtual void handleEvent(sf::Event const& event);
 		virtual void update(sf::Time dt);
@@ -147,6 +149,9 @@ namespace ke
 		std::map<std::size_t, std::shared_ptr<Effect>> mEffects;
 
 		InputSystem mInputs;
+
+		bool mUsePhysic;
+		PhysicSystem mPhysic;
 
 		sf::RectangleShape mBackground;
 

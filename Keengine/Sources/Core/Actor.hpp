@@ -7,6 +7,7 @@
 
 #include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <Box2D\Dynamics\b2Body.h>
 
 #include "Component.hpp"
 #include "SceneComponent.hpp"
@@ -62,6 +63,34 @@ class Actor
 
 		World& getWorld() const;
 
+		b2Body* getBody();
+
+		std::size_t getActualId();
+		std::size_t getComponentCount() const;
+		Component* getComponent(std::size_t index);
+		Component* getComponent(std::string const& id);
+
+		template <typename T>
+		T* getTypedComponent(std::size_t index)
+		{
+			Component* c = getComponent(index);
+			if (c == nullptr)
+			{
+				return nullptr;
+			}
+			return std::dynamic_cast<T*>(c);
+		}
+
+		template <typename T>
+		T* getTypedComponent(std::string const& id)
+		{
+			Component* c = getComponent(id);
+			if (c == nullptr)
+			{
+				return nullptr;
+			}
+			return std::dynamic_cast<T*>(c);
+		}
 
 	private:
 		SceneComponent mRoot;
@@ -69,6 +98,10 @@ class Actor
 
 		bool mMarkedForRemoval;
 		std::string mId;
+
+		b2Body* mBody;
+
+		std::size_t mIdCounter;
 };
 
 } // namespace ke

@@ -334,13 +334,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\C++\Lib\SFML-2.4.0-VC14\include;D:\C++\Lib\zlib-1.2.8\include;D:\C++\Lib\TGUI-0.7.1-VC14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++\Lib\SFML-2.4.0-VC14\include;D:\C++\Lib\zlib-1.2.8\include;D:\C++\Lib\TGUI-0.7.1-VC14\include;D:\C++\Lib\Box2D;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\C++\Lib\SFML-2.4.0-VC14\lib;D:\C++\Lib\zlib-1.2.8\lib;D:\C++\Lib\TGUI-0.7.1-VC14\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-main-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;tgui-d.lib;%(AdditionalDependencies);zdll.lib;opengl32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\C++\Lib\SFML-2.4.0-VC14\lib;D:\C++\Lib\zlib-1.2.8\lib;D:\C++\Lib\TGUI-0.7.1-VC14\lib;D:\C++\Lib\Box2D;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;tgui-d.lib;%(AdditionalDependencies);zdll.lib;opengl32.lib;Box2D.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -367,15 +367,15 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\C++\Lib\SFML-2.4.0-VC14\include;D:\C++\Lib\zlib-1.2.8\include;D:\C++\Lib\TGUI-0.7.1-VC14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++\Lib\SFML-2.4.0-VC14\include;D:\C++\Lib\zlib-1.2.8\include;D:\C++\Lib\TGUI-0.7.1-VC14\include;D:\C++\Lib\Box2D;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\C++\Lib\SFML-2.4.0-VC14\lib;D:\C++\Lib\zlib-1.2.8\lib;D:\C++\Lib\TGUI-0.7.1-VC14\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-main.lib;sfml-audio.lib;sfml-network.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;tgui.lib;%(AdditionalDependencies);zdll.lib;opengl32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\C++\Lib\SFML-2.4.0-VC14\lib;D:\C++\Lib\zlib-1.2.8\lib;D:\C++\Lib\TGUI-0.7.1-VC14\lib;D:\C++\Lib\Box2D;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main.lib;sfml-audio.lib;sfml-network.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;tgui.lib;%(AdditionalDependencies);zdll.lib;opengl32.lib;Box2D.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

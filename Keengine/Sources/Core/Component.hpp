@@ -1,6 +1,8 @@
 #ifndef KE_COMPONENT_HPP
 #define KE_COMPONENT_HPP
 
+#include <string>
+
 #include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
@@ -43,9 +45,13 @@ class Component
 		void moveActorZ(float z);
 
 		World& getWorld() const;
+
+		std::string getId() const;
+		void setId(std::string const& id);
 		
 	private:
 		bool mRegistered;
+		std::string mId;
 
 	protected:
 		Actor* mActor;

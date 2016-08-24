@@ -8,6 +8,7 @@ namespace ke
 
 Component::Component()
 	: mRegistered(false)
+	, mId("")
 	, mActor(nullptr)
 	, mUpdatable(true)
 {
@@ -23,6 +24,12 @@ void Component::registerComponent(Actor* actor)
 	{
 		mActor = actor;
 		mRegistered = true;
+		if (mActor != nullptr)
+		{
+			std::ostringstream oss;
+			oss << std::hex << mActor->getActualId();
+			mId = oss.str();
+		}
 		onRegister();
 	}
 }
@@ -214,6 +221,16 @@ void Component::moveActorZ(float z)
 World& Component::getWorld() const
 {
 	return World::instance();
+}
+
+std::string Component::getId() const
+{
+	return mId;
+}
+
+void Component::setId(std::string const & id)
+{
+	mId = id;
 }
 
 } // namespace ke

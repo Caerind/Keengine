@@ -39,6 +39,7 @@ World::World()
 	, mWorldView(getApplication().getDefaultView())
 	, mEffects()
 {
+	mUsePhysic = true;
 	//mUseLights = true;
 
 	std::string bgTexture = Application::getBackgroundTexture();
@@ -132,6 +133,16 @@ ltbl::LightSystem & World::getLights()
 	return mLights;
 }
 
+PhysicSystem& World::getPhysic()
+{
+	return mPhysic;
+}
+
+b2World* World::getPhysicWorld()
+{
+	return mPhysic.getWorld();
+}
+
 void World::handleEvent(sf::Event const & event)
 {
 	mInputs.handleEvent(event);
@@ -145,6 +156,11 @@ void World::update(sf::Time dt)
 	{
 		actor->updateComponents(dt);
 		actor->update(dt);
+	}
+
+	if (mUsePhysic)
+	{
+		mPhysic.update(dt);
 	}
 
 	mActors.erase(std::remove_if(mActors.begin(), mActors.end(), [](Actor::Ptr actor) 
@@ -223,7 +239,6 @@ void World::render(sf::RenderTarget& target)
 			primitive->render(mSceneTexture);
 		}
 	}
-	mSceneTexture.display();
 
 	// Post effects
 	for (auto itr = mEffects.begin(); itr != mEffects.end(); itr++)
@@ -231,8 +246,15 @@ void World::render(sf::RenderTarget& target)
 		itr->second->apply(mSceneTexture, mSceneTexture);
 	}
 
+	mSceneTexture.display();
+
 	// Apply to the window
 	target.draw(mVertices, sf::RenderStates(&mSceneTexture.getTexture()));
+
+	if (mUsePhysic)
+	{
+		mPhysic.render(target);
+	}
 }
 
 void World::registerPrimitive(PrimitiveComponent* component)

@@ -22,6 +22,10 @@ Actor::Actor(std::string const& id)
 	{
 		mId = id;
 	}
+
+	b2BodyDef bDef;
+	bDef.type = b2_dynamicBody;
+	mBody = getWorld().getPhysic().createBody(&bDef);
 }
 
 Actor::~Actor()
@@ -170,6 +174,45 @@ void Actor::unregisterComponent(Component* component)
 World& Actor::getWorld() const
 {
 	return World::instance();
+}
+
+b2Body* Actor::getBody()
+{
+	return mBody;
+}
+
+std::size_t Actor::getActualId()
+{
+	return mIdCounter++;
+}
+
+std::size_t Actor::getComponentCount() const
+{
+	return mComponents.size();
+}
+
+Component* Actor::getComponent(std::size_t index)
+{
+	if (index <= 0 && index < mComponents.size())
+	{
+		return mComponents[index];
+	}
+	return nullptr;
+}
+
+Component* Actor::getComponent(std::string const& id)
+{
+	for (std::size_t i = 0; i < mComponents.size(); i++)
+	{
+		if (mComponents[i] != nullptr)
+		{
+			if (mComponents[i]->getId() == id)
+			{
+				return mComponents[i];
+			}
+		}
+	}
+	return nullptr;
 }
 
 } // namespace ke
