@@ -34,12 +34,11 @@ World::World()
 	, mPrimitives()
 	, mSceneTexture()
 	, mVertices(sf::Triangles, 6)
-	, mClockCreation()
 	, mCamera(nullptr)
-	, mWorldView(getApplication().getDefaultView())
+	, mWorldView(getApplication().getView())
 	, mEffects()
 {
-	mUsePhysic = true;
+	//mUsePhysic = true;
 	//mUseLights = true;
 
 	std::string bgTexture = Application::getBackgroundTexture();
@@ -59,7 +58,7 @@ World::World()
 	if (!hasResource("pointLightTexture"))
 	{
 		Texture& texture = createResource<Texture>("pointLightTexture");
-		if (!texture.loadFromFile("Example/pointLightTexture.png"))
+		if (!texture.loadFromMemory(pointLightTexture, (sizeof(pointLightTexture) / sizeof(*pointLightTexture))))
 		{
 			getLog() << "World - Can't load pointLightTexture";
 		}
@@ -68,7 +67,7 @@ World::World()
 	if (!hasResource("directionLightTexture"))
 	{
 		Texture& texture = createResource<Texture>("directionLightTexture");
-		if (!texture.loadFromFile("Example/directionLightTexture.png"))
+		if (!texture.loadFromMemory(directionLightTexture, (sizeof(directionLightTexture) / sizeof(*directionLightTexture))))
 		{
 			getLog() << "World - Can't load directionLightTexture";
 		}
@@ -77,7 +76,7 @@ World::World()
 	if (!hasResource("penumbraTexture"))
 	{
 		Texture& texture = createResource<Texture>("penumbraTexture");
-		if (!texture.loadFromFile("Example/penumbraTexture.png"))
+		if (!texture.loadFromMemory(penumbraTexture, (sizeof(penumbraTexture) / sizeof(*penumbraTexture))))
 		{
 			getLog() << "World - Can't load penumbraTexture";
 		}
@@ -133,14 +132,9 @@ ltbl::LightSystem & World::getLights()
 	return mLights;
 }
 
-PhysicSystem& World::getPhysic()
+TimeSystem& World::getTime()
 {
-	return mPhysic;
-}
-
-b2World* World::getPhysicWorld()
-{
-	return mPhysic.getWorld();
+	return mTime;
 }
 
 void World::handleEvent(sf::Event const & event)
@@ -150,25 +144,34 @@ void World::handleEvent(sf::Event const & event)
 
 void World::update(sf::Time dt)
 {
+	dt *= mTime.getTimeFactor();
+
 	mInputs.update(dt);
+	mTime.update(dt);
 
-	for (auto& actor : mActors)
+	for (std::size_t i = 0; i < mActors.size(); i++)
 	{
-		actor->updateComponents(dt);
-		actor->update(dt);
-	}
-
-	if (mUsePhysic)
-	{
-		mPhysic.update(dt);
+		mActors[i]->updateComponents(dt);
+		mActors[i]->update(dt);
 	}
 
 	mActors.erase(std::remove_if(mActors.begin(), mActors.end(), [](Actor::Ptr actor) 
 	{ 
 		bool ret = (actor == nullptr || actor->isMarkedForRemoval());
-		if (ret && actor != nullptr)
+		if (actor->isMarkedForRemoval() && actor != nullptr)
 		{
 			actor->onDestroyed();
+			/*
+			TODO : Fix
+			for (std::size_t i = 0; i < actor->getComponentCount(); i++)
+			{
+				Component* component = actor->getComponent(i)->onUnregister();
+				if (component != nullptr)
+				{
+					component->onUnregister();
+				}
+			}
+			*/
 		}
 		return ret;
 	}), mActors.end());
@@ -182,12 +185,6 @@ void World::render(sf::RenderTarget& target)
 		sf::Vector2u size = target.getSize();
 		mBackground.setSize(static_cast<sf::Vector2f>(size));
 		mSceneTexture.create(size.x, size.y);
-		mVertices[0] = sf::Vertex(sf::Vector2f(0, 0), sf::Vector2f(0, 0));
-		mVertices[1] = sf::Vertex(sf::Vector2f(static_cast<float>(size.x), 0), sf::Vector2f(static_cast<float>(size.x), 0));
-		mVertices[2] = sf::Vertex(static_cast<sf::Vector2f>(size), static_cast<sf::Vector2f>(size));
-		mVertices[3] = mVertices[2];
-		mVertices[4] = sf::Vertex(sf::Vector2f(0, static_cast<float>(size.y)), sf::Vector2f(0, static_cast<float>(size.y)));
-		mVertices[5] = mVertices[0];
 	}
 
 	// Update rendering order
@@ -227,11 +224,6 @@ void World::render(sf::RenderTarget& target)
 
 	mSceneTexture.setView(getView());
 
-	if (mUseLights)
-	{
-		mLights.render(mSceneTexture);
-	}
-
 	for (PrimitiveComponent* primitive : mPrimitives)
 	{
 		if (primitive->isRegistered() && primitive->isVisible())
@@ -249,12 +241,7 @@ void World::render(sf::RenderTarget& target)
 	mSceneTexture.display();
 
 	// Apply to the window
-	target.draw(mVertices, sf::RenderStates(&mSceneTexture.getTexture()));
-
-	if (mUsePhysic)
-	{
-		mPhysic.render(target);
-	}
+	target.draw(sf::Sprite(mSceneTexture.getTexture()));
 }
 
 void World::registerPrimitive(PrimitiveComponent* component)
@@ -325,11 +312,6 @@ std::size_t World::getActorCount() const
 std::size_t World::getActualId()
 {
 	return mIdCounter++;
-}
-
-sf::Time World::getTimeSinceCreation() const
-{
-	return mClockCreation.getElapsedTime();
 }
 
 void World::removeEffect(std::size_t const & order)

@@ -165,7 +165,9 @@ class Window : public sf::RenderWindow
         bool mDebugInfoVisible;
         std::unordered_map<std::string,std::string> mDebugInfo;
 
-        sf::RectangleShape mBackground;
+		bool mUseBackgroundColor;
+        sf::RectangleShape mBackgroundRect;
+		sf::Sprite mBackgroundSprite;
 };
 
 template <typename T>

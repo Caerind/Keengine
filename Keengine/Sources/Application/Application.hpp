@@ -102,6 +102,8 @@ class Application
         static void popState();
         static void clearStates();
         static std::size_t stateCount();
+		template <typename T>
+		static std::shared_ptr<T> getActualState();
 
 		//
 		// Lang
@@ -241,9 +243,15 @@ T& Application::getResource(std::string const& id)
 }
 
 template <typename T>
+std::shared_ptr<T> Application::getActualState()
+{
+	return instance().mStates.getActualTypedState<T>();
+}
+
+template <typename T>
 void Application::registerState(std::string const& className)
 {
-    instance().mStates.registerState<T>(className);
+	instance().mStates.registerState<T>(className);
 }
 
 template <typename T>

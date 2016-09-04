@@ -53,6 +53,7 @@
     <ClCompile Include="Sources\Application\Window.cpp" />
     <ClCompile Include="Sources\Components\AnimatorComponent.cpp" />
     <ClCompile Include="Sources\Components\CameraComponent.cpp" />
+    <ClCompile Include="Sources\Components\CollisionComponent.cpp" />
     <ClCompile Include="Sources\Components\DirectionLightComponent.cpp" />
     <ClCompile Include="Sources\Components\InputComponent.cpp" />
     <ClCompile Include="Sources\Components\LayerComponent.cpp" />
@@ -61,6 +62,8 @@
     <ClCompile Include="Sources\Components\PointLightComponent.cpp" />
     <ClCompile Include="Sources\Components\ShapeComponent.cpp" />
     <ClCompile Include="Sources\Components\SpriteComponent.cpp" />
+    <ClCompile Include="Sources\Components\TextComponent.cpp" />
+    <ClCompile Include="Sources\Components\TriggerComponent.cpp" />
     <ClCompile Include="Sources\Core\Actor.cpp" />
     <ClCompile Include="Sources\Core\Component.cpp" />
     <ClCompile Include="Sources\Core\Effect.cpp" />
@@ -70,6 +73,7 @@
     <ClCompile Include="Sources\Core\PhysicSystem.cpp" />
     <ClCompile Include="Sources\Core\PrimitiveComponent.cpp" />
     <ClCompile Include="Sources\Core\SceneComponent.cpp" />
+    <ClCompile Include="Sources\Core\TimeSystem.cpp" />
     <ClCompile Include="Sources\Core\World.cpp" />
     <ClCompile Include="Sources\ExtLibs\ConcaveShape.cpp" />
     <ClCompile Include="Sources\ExtLibs\gzstream.cpp" />
@@ -145,6 +149,7 @@
     <ClInclude Include="Sources\Application\Window.hpp" />
     <ClInclude Include="Sources\Components\AnimatorComponent.hpp" />
     <ClInclude Include="Sources\Components\CameraComponent.hpp" />
+    <ClInclude Include="Sources\Components\CollisionComponent.hpp" />
     <ClInclude Include="Sources\Components\DirectionLightComponent.hpp" />
     <ClInclude Include="Sources\Components\InputComponent.hpp" />
     <ClInclude Include="Sources\Components\LayerComponent.hpp" />
@@ -153,16 +158,20 @@
     <ClInclude Include="Sources\Components\PointLightComponent.hpp" />
     <ClInclude Include="Sources\Components\ShapeComponent.hpp" />
     <ClInclude Include="Sources\Components\SpriteComponent.hpp" />
+    <ClInclude Include="Sources\Components\TextComponent.hpp" />
+    <ClInclude Include="Sources\Components\TriggerComponent.hpp" />
     <ClInclude Include="Sources\Config.hpp" />
     <ClInclude Include="Sources\Core\Actor.hpp" />
     <ClInclude Include="Sources\Core\Component.hpp" />
     <ClInclude Include="Sources\Core\Effect.hpp" />
     <ClInclude Include="Sources\Core\InputSystem.hpp" />
+    <ClInclude Include="Sources\Core\LightTextures.hpp" />
     <ClInclude Include="Sources\Core\Map.hpp" />
     <ClInclude Include="Sources\Core\Pathfinding.hpp" />
     <ClInclude Include="Sources\Core\PhysicSystem.hpp" />
     <ClInclude Include="Sources\Core\PrimitiveComponent.hpp" />
     <ClInclude Include="Sources\Core\SceneComponent.hpp" />
+    <ClInclude Include="Sources\Core\TimeSystem.hpp" />
     <ClInclude Include="Sources\Core\World.hpp" />
     <ClInclude Include="Sources\ExtLibs\assume.hpp" />
     <ClInclude Include="Sources\ExtLibs\cocoa.hpp" />

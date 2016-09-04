@@ -14,10 +14,11 @@
 #include "Actor.hpp"
 #include "Effect.hpp"
 #include "InputSystem.hpp"
-#include "PhysicSystem.hpp"
+#include "TimeSystem.hpp"
 #include "PrimitiveComponent.hpp"
 
 #include "../ExtLibs/LTBL2/LightSystem.hpp"
+#include "LightTextures.hpp"
 
 #include "../Components/CameraComponent.hpp"
 
@@ -42,8 +43,7 @@ namespace ke
 		InputSystem& getInputs();
 		Log& getLog();
 		ltbl::LightSystem& getLights();
-		PhysicSystem& getPhysic();
-		b2World* getPhysicWorld();
+		TimeSystem& getTime();
 
 		virtual void handleEvent(sf::Event const& event);
 		virtual void update(sf::Time dt);
@@ -93,8 +93,6 @@ namespace ke
 
 		std::size_t getActualId();
 
-		sf::Time getTimeSinceCreation() const;
-
 		template <typename T>
 		void setEffect(std::size_t const& order)
 		{
@@ -141,8 +139,6 @@ namespace ke
 		sf::RenderTexture mSceneTexture;
 		sf::VertexArray mVertices;
 
-		sf::Clock mClockCreation;
-
 		CameraComponent* mCamera;
 		sf::View mWorldView;
 
@@ -150,13 +146,12 @@ namespace ke
 
 		InputSystem mInputs;
 
-		bool mUsePhysic;
-		PhysicSystem mPhysic;
-
 		sf::RectangleShape mBackground;
 
 		bool mUseLights;
 		ltbl::LightSystem mLights;
+
+		TimeSystem mTime;
 	};
 
 } // namespace ke

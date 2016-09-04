@@ -59,6 +59,8 @@ class AnimatorComponent : public PrimitiveComponent
 		void playAnimation(std::string const& name);
 		void stopAnimation();
 
+		void setElapsedTime(sf::Time elapsed);
+
 		Animation& getActualAnimation();
 		Frame& getActualFrame();
 

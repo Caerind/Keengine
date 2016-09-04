@@ -106,6 +106,16 @@ void AnimatorComponent::stopAnimation()
 	mPlaying = false;
 }
 
+void AnimatorComponent::setElapsedTime(sf::Time elapsed)
+{
+	mTimeElapsed = elapsed;
+	std::size_t size = getActualAnimation().getFrameCount();
+	for (std::size_t i = 0; i < size; i++)
+	{
+		update(sf::Time::Zero);
+	}
+}
+
 Animation& AnimatorComponent::getActualAnimation()
 {
 	return mAnimations[mActualAnimation];

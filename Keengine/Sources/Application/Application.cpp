@@ -262,11 +262,25 @@ void Application::handleEvent()
         {
             showDebugInfo(!isDebugInfoVisible());
         }
+		if (event.type == sf::Event::LostFocus && isAndroid())
+		{
+			instance().mAudio.pause();
+		}
+		if (event.type == sf::Event::GainedFocus && isAndroid())
+		{
+			instance().mAudio.play();
+		}
     }
 }
 
 void Application::update(sf::Time dt)
 {
+	instance().mAudio.update();
+
+	auto mouse = getMousePosition2i();
+	setDebugInfo("MouseX", mouse.x);
+	setDebugInfo("MouseY", mouse.y);
+
     if (instance().mStateMode)
     {
         if (stateCount() > 0)
@@ -285,17 +299,12 @@ void Application::update(sf::Time dt)
             instance().mUpdateDefaultFunction(dt);
         }
     }
-	
-	auto mouse = getMousePosition2i();
-	setDebugInfo("MouseX", mouse.x);
-	setDebugInfo("MouseY", mouse.y);
-
-    instance().mAudio.update();
 }
 
 void Application::render()
 {
     clear();
+
     if (instance().mStateMode)
     {
         if (stateCount() > 0)
@@ -536,6 +545,7 @@ bool Application::isOpen()
 void Application::close()
 {
     instance().mWindow.close();
+	instance().mAudio.stop();
 }
 
 bool Application::pollEvent(sf::Event& event)

@@ -7,7 +7,6 @@
 
 #include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
-#include <Box2D\Dynamics\b2Body.h>
 
 #include "Component.hpp"
 #include "SceneComponent.hpp"
@@ -63,8 +62,6 @@ class Actor
 
 		World& getWorld() const;
 
-		b2Body* getBody();
-
 		std::size_t getActualId();
 		std::size_t getComponentCount() const;
 		Component* getComponent(std::size_t index);
@@ -78,7 +75,7 @@ class Actor
 			{
 				return nullptr;
 			}
-			return std::dynamic_cast<T*>(c);
+			return static_cast<T*>(c);
 		}
 
 		template <typename T>
@@ -89,7 +86,7 @@ class Actor
 			{
 				return nullptr;
 			}
-			return std::dynamic_cast<T*>(c);
+			return static_cast<T*>(c);
 		}
 
 	private:
@@ -98,8 +95,6 @@ class Actor
 
 		bool mMarkedForRemoval;
 		std::string mId;
-
-		b2Body* mBody;
 
 		std::size_t mIdCounter;
 };

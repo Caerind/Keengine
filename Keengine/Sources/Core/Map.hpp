@@ -5,7 +5,6 @@
 
 #include "../Components/LayerComponent.hpp"
 #include "../Components/SpriteComponent.hpp"
-#include "../Components/ShapeComponent.hpp"
 
 namespace ke
 {
@@ -66,7 +65,6 @@ class Map : public Actor, public PropertiesHolder
 
 	protected:
 		std::vector<std::shared_ptr<SpriteComponent>> mImages;
-
 		std::vector<std::shared_ptr<LayerComponent>> mLayers;
 		Tileset* mTileset;
 

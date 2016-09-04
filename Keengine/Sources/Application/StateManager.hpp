@@ -20,10 +20,11 @@
 namespace ke
 {
 
+class Application;
 class State
 {
     public:
-        typedef std::unique_ptr<State> Ptr;
+        typedef std::shared_ptr<State> Ptr;
 
     public:
 		State();
@@ -39,6 +40,12 @@ class State
 		virtual void onActivate();
 
 		virtual void onDeactivate();
+
+		Application& getApplication();
+
+		void popState();
+		void pushState(std::string const& state);
+		void clearStates();
 
 	protected:
 		tgui::Gui mGui;
@@ -77,6 +84,12 @@ class StateManager
 		std::vector<std::string> getStateOrder() const;
 
 		std::string getActualState() const;
+
+		template <typename T>
+		std::shared_ptr<T> getActualTypedState()
+		{
+			return std::dynamic_pointer_cast<T>(mStates.back());
+		}
 
 	protected:
 		enum Action

@@ -22,10 +22,6 @@ Actor::Actor(std::string const& id)
 	{
 		mId = id;
 	}
-
-	b2BodyDef bDef;
-	bDef.type = b2_dynamicBody;
-	mBody = getWorld().getPhysic().createBody(&bDef);
 }
 
 Actor::~Actor()
@@ -174,11 +170,6 @@ void Actor::unregisterComponent(Component* component)
 World& Actor::getWorld() const
 {
 	return World::instance();
-}
-
-b2Body* Actor::getBody()
-{
-	return mBody;
 }
 
 std::size_t Actor::getActualId()
