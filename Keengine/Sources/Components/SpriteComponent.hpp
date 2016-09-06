@@ -4,12 +4,12 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-#include "../Core/PrimitiveComponent.hpp"
+#include "../Core/SceneComponent.hpp"
 
 namespace ke
 {
 
-class SpriteComponent : public PrimitiveComponent
+class SpriteComponent : public SceneComponent
 {
 	public:
 		SpriteComponent();
@@ -24,9 +24,11 @@ class SpriteComponent : public PrimitiveComponent
 		void setColor(sf::Color const& color);
 		sf::Color getColor() const;
 
-		void render(sf::RenderTarget& target);
 		sf::FloatRect getLocalBounds();
 		sf::FloatRect getGlobalBounds();
+
+	private:
+		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);
 
 	private:
 		sf::Sprite mSprite;

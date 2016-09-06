@@ -69,10 +69,8 @@ bool contains(std::map<K,T> const& map, K const& key)
 ///
 
 
-/*
 template <typename T>
 void sort(std::vector<T>& vector, std::function<bool(T const& a, T const& b)> function);
-*/
 
 template <typename T>
 void add(std::vector<T>& vector, T const& element);
@@ -97,13 +95,11 @@ const T& randomElement(std::vector<T> const& vector);
 
 // --------------------------------------------------------------
 
-/*
 template <typename T>
 void sort(std::vector<T>& vector, std::function<bool(T const& a, T const& b)> function)
 {
     std::sort(vector.begin(),vector.end(),function);
 }
-*/
 
 template <typename T>
 void add(std::vector<T>& vector, T const& element)

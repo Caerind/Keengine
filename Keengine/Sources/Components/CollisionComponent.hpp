@@ -1,7 +1,7 @@
 #ifndef KE_COLLISIONCOMPONENT_HPP
 #define KE_COLLISIONCOMPONENT_HPP
 
-#include <Box2D\Box2D.h>
+#include "../ExtLibs/Box2D/Box2D.h"
 
 #include "../Core/SceneComponent.hpp"
 

@@ -13,12 +13,9 @@ class CameraComponent : public SceneComponent
         CameraComponent();
 		~CameraComponent();
 
-        sf::View& getView();
+        sf::View* getView();
 
-		void onPositionChanged();
-
-	protected:
-		sf::View mCamera;
+		void onTransformUpdated();
 };
 
 } // namespace ke

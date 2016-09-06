@@ -87,28 +87,6 @@ void ParticleComponent::update(sf::Time dt)
 	}
 }
 
-void ParticleComponent::render(sf::RenderTarget& target)
-{
-	if (mTexture != nullptr)
-	{
-		if (mNeedsQuadUpdate)
-		{
-			computeQuads();
-			mNeedsQuadUpdate = false;
-		}
-
-		if (mNeedsVertexUpdate)
-		{
-			computeVertices();
-			mNeedsVertexUpdate = false;
-		}
-
-		sf::RenderStates states;
-		states.texture = mTexture;
-		target.draw(mVertices, states);
-	}
-}
-
 std::size_t ParticleComponent::getParticleCount() const
 {
 	return mParticles.size();
@@ -278,6 +256,27 @@ void ParticleComponent::computeQuad(Quad& quad, sf::IntRect const& tRect)
 	quad[4].position = sf::Vector2f(-rect.width, rect.height) / 2.f;
 	quad[3].position = quad[2].position;
 	quad[5].position = quad[0].position;
+}
+
+void ParticleComponent::renderCurrent(sf::RenderTarget & target, sf::RenderStates states)
+{
+	if (mTexture != nullptr)
+	{
+		if (mNeedsQuadUpdate)
+		{
+			computeQuads();
+			mNeedsQuadUpdate = false;
+		}
+
+		if (mNeedsVertexUpdate)
+		{
+			computeVertices();
+			mNeedsVertexUpdate = false;
+		}
+
+		states.texture = mTexture;
+		target.draw(mVertices, states);
+	}
 }
 
 } // namespace ke

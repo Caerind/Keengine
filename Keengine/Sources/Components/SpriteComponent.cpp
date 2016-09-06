@@ -10,10 +10,14 @@ SpriteComponent::SpriteComponent() : mTexture("")
 
 void SpriteComponent::setTexture(std::string const& textureName, sf::IntRect const& rect)
 {
-	if (getWorld().getApplication().hasResource(textureName))
+	World* world = getWorld();
+	if (world != nullptr)
 	{
-		setTexture(getWorld().getApplication().getResource<Texture>(textureName), rect);
-		mTexture = textureName;
+		if (world->hasResource(textureName))
+		{
+			mTexture = textureName;
+			setTexture(world->getResource<Texture>(textureName), rect);
+		}
 	}
 }
 
@@ -22,7 +26,7 @@ void SpriteComponent::setTexture(sf::Texture& texture, sf::IntRect const& rect)
     mSprite.setTexture(texture);
     if (rect != sf::IntRect())
     {
-        setTextureRect(rect);
+        mSprite.setTextureRect(rect);
     }
 }
 
@@ -51,11 +55,6 @@ sf::Color SpriteComponent::getColor() const
     return mSprite.getColor();
 }
 
-void SpriteComponent::render(sf::RenderTarget& target)
-{
-    target.draw(mSprite, sf::RenderStates(getWorldTransform()));
-}
-
 sf::FloatRect SpriteComponent::getLocalBounds()
 {
 	return getTransform().transformRect(mSprite.getLocalBounds());
@@ -64,6 +63,11 @@ sf::FloatRect SpriteComponent::getLocalBounds()
 sf::FloatRect SpriteComponent::getGlobalBounds()
 {
 	return getWorldTransform().transformRect(mSprite.getLocalBounds());
+}
+
+void SpriteComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)
+{
+	target.draw(mSprite, states);
 }
 
 } // namespace ke

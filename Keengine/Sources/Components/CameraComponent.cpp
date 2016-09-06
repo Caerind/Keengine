@@ -6,24 +6,30 @@ namespace ke
 
 CameraComponent::CameraComponent() : SceneComponent()
 {
-	mCamera = getWorld().getView();
-	getWorld().registerCamera(this);
 }
 
 CameraComponent::~CameraComponent()
 {
-	getWorld().unregisterCamera(this);
 }
 
-sf::View& CameraComponent::getView()
+sf::View* CameraComponent::getView()
 {
-	return mCamera;
+	World* world = getWorld();
+	if (world != nullptr)
+	{
+		return world->getView();
+	}
+	return nullptr;
 }
 
-void CameraComponent::onPositionChanged()
+void CameraComponent::onTransformUpdated()
 {
-	mCamera.setCenter(getWorldPosition());
-	mCamera.setRotation(getRotation());
+	sf::View* view = getView();
+	if (view != nullptr)
+	{
+		view->setCenter(getWorldPosition());
+		view->setRotation(getRotation());
+	}
 }
 
 } // namespace ke

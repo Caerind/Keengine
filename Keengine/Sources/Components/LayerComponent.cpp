@@ -48,17 +48,6 @@ sf::Vector2f LayerComponent::coordsToWorld(sf::Vector2i const & coords)
 	return  Map::coordsToWorld(coords, mOrientation, mTileSize, mStaggerIndex, mStaggerAxis, mHexSideLength) + getWorldPosition();
 }
 
-void LayerComponent::render(sf::RenderTarget& target)
-{
-	sf::RenderStates states;
-	states.transform *= getWorldTransform();
-	if (mTileset != nullptr)
-	{
-		states.texture = &mTileset->getTexture();
-	}
-	target.draw(mVertices, states);
-}
-
 bool LayerComponent::loadFromNode(pugi::xml_node const& node, Tileset* tileset, sf::Vector2i const& size, sf::Vector2i const& tileSize, std::string const& orientation, std::string const& staggerAxis, std::string const& staggerIndex, unsigned int hexSideLength)
 {
 	if (!node)
@@ -648,6 +637,15 @@ sf::Vector2f LayerComponent::getVertexPosition(sf::Vector2i const & coords)
 		}
 	}
 	return pos;
+}
+
+void LayerComponent::renderCurrent(sf::RenderTarget & target, sf::RenderStates states)
+{
+	if (mTileset != nullptr)
+	{
+		states.texture = &mTileset->getTexture();
+	}
+	target.draw(mVertices, states);
 }
 
 } // namespace ke

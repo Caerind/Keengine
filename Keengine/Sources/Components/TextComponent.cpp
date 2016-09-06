@@ -8,14 +8,17 @@ TextComponent::TextComponent()
 {
 }
 
-void TextComponent::render(sf::RenderTarget & target)
-{
-	target.draw(mText, getWorldTransform());
-}
-
 void TextComponent::setFont(std::string const& font)
 {
-	mText.setFont(getWorld().getResource<ke::Font>(font));
+	World* world = getWorld();
+	if (world != nullptr)
+	{
+		if (world->hasResource(font))
+		{
+			mFont = font;
+			mText.setFont(getWorld()->getResource<ke::Font>(font));
+		}
+	}
 }
 
 void TextComponent::setFont(sf::Font& font)
@@ -71,6 +74,11 @@ sf::Color TextComponent::getOutlineColor() const
 float TextComponent::getOutlineThickness() const
 {
 	return mText.getOutlineThickness();
+}
+
+void TextComponent::renderCurrent(sf::RenderTarget & target, sf::RenderStates states)
+{
+	target.draw(mText, states);
 }
 
 } // namespace ke

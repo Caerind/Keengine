@@ -3,12 +3,12 @@
 
 #include <SFML/Graphics/CircleShape.hpp>
 
-#include "../Core/PrimitiveComponent.hpp"
+#include "../Core/SceneComponent.hpp"
 
 namespace ke
 {
 
-class PointComponent : public PrimitiveComponent
+class PointComponent : public SceneComponent
 {
     public:
         PointComponent();
@@ -19,7 +19,8 @@ class PointComponent : public PrimitiveComponent
         void setRadius(float radius);
         float getRadius() const;
 
-        void render(sf::RenderTarget& target);
+	private:
+        virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);
 
     private:
         sf::CircleShape mPoint;

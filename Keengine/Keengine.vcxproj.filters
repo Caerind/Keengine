@@ -40,6 +40,9 @@
     <Filter Include="Sources\ExtLibs\LTBL2">
       <UniqueIdentifier>{70a2467c-84df-4687-aa0b-4a04f744eecf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\ExtLibs\Box2D">
+      <UniqueIdentifier>{5ccacc81-2fb7-4663-8735-e53161f4922b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Example\script.lua">
@@ -87,15 +90,6 @@
     <Image Include="Example\iso.png">
       <Filter>Example</Filter>
     </Image>
-    <Image Include="Example\penumbraTexture.png">
-      <Filter>Example</Filter>
-    </Image>
-    <Image Include="Example\pointLightTexture.png">
-      <Filter>Example</Filter>
-    </Image>
-    <Image Include="Example\directionLightTexture.png">
-      <Filter>Example</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Example\main.cpp">
@@ -123,9 +117,6 @@
       <Filter>Sources\Core</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Core\Component.cpp">
-      <Filter>Sources\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Core\PrimitiveComponent.cpp">
       <Filter>Sources\Core</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Components\PointComponent.cpp">
@@ -383,6 +374,147 @@
     <ClCompile Include="Sources\Core\TimeSystem.cpp">
       <Filter>Sources\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2BlockAllocator.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Body.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2BroadPhase.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2ChainAndCircleContact.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2ChainAndPolygonContact.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2ChainShape.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2CircleContact.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2CircleShape.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2CollideCircle.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2CollideEdge.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2CollidePolygon.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Collision.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Contact.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2ContactManager.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2ContactSolver.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Distance.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2DistanceJoint.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Draw.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2DynamicTree.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2EdgeAndCircleContact.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2EdgeAndPolygonContact.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2EdgeShape.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Fixture.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2FrictionJoint.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2GearJoint.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Island.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Joint.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Math.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2MotorJoint.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2MouseJoint.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2PolygonAndCircleContact.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2PolygonContact.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2PolygonShape.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2PrismaticJoint.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2PulleyJoint.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2RevoluteJoint.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Rope.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2RopeJoint.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Settings.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2StackAllocator.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2TimeOfImpact.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Timer.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2WeldJoint.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2WheelJoint.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2World.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2WorldCallbacks.cpp">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Core\Scene.cpp">
+      <Filter>Sources\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -413,9 +545,6 @@
       <Filter>Sources\Core</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Core\Component.hpp">
-      <Filter>Sources\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Core\PrimitiveComponent.hpp">
       <Filter>Sources\Core</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Components\SpriteComponent.hpp">
@@ -770,6 +899,150 @@
       <Filter>Sources\Core</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Core\TimeSystem.hpp">
+      <Filter>Sources\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2BlockAllocator.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Body.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2BroadPhase.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2ChainAndCircleContact.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2ChainAndPolygonContact.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2ChainShape.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2CircleContact.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2CircleShape.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Collision.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Contact.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2ContactManager.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2ContactSolver.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Distance.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2DistanceJoint.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Draw.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2DynamicTree.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2EdgeAndCircleContact.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2EdgeAndPolygonContact.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2EdgeShape.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Fixture.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2FrictionJoint.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2GearJoint.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2GrowableStack.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Island.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Joint.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Math.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2MotorJoint.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2MouseJoint.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2PolygonAndCircleContact.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2PolygonContact.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2PolygonShape.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2PrismaticJoint.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2PulleyJoint.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2RevoluteJoint.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Rope.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2RopeJoint.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Settings.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Shape.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2StackAllocator.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2TimeOfImpact.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Timer.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2TimeStep.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2WeldJoint.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2WheelJoint.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2World.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2WorldCallbacks.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\Box2D\Box2D.h">
+      <Filter>Sources\ExtLibs\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Core\Scene.hpp">
       <Filter>Sources\Core</Filter>
     </ClInclude>
   </ItemGroup>

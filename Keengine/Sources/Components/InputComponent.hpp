@@ -12,6 +12,9 @@ class InputComponent : public Input, public Component
     public:
         InputComponent();
         ~InputComponent();
+
+		void onRegister();
+		void onUnregister();
 };
 
 } // namespace ke

@@ -7,19 +7,35 @@ namespace ke
 
 DirectionLightComponent::DirectionLightComponent()
 {
-	mLight = getWorld().getLights().createLightDirection();
-
-	Texture& texture = getWorld().getResource<Texture>("directionLightTexture");
-
-	mLight->_emissionSprite.setOrigin(sf::Vector2f(texture.getSize().x * 0.5f, texture.getSize().y * 0.5f));
-	mLight->_emissionSprite.setTexture(texture);
-
-	mLight->_emissionSprite.setPosition(getWorldPosition());
 }
 
 DirectionLightComponent::~DirectionLightComponent()
 {
-	getWorld().getLights().removeLight(mLight);
+}
+
+void DirectionLightComponent::onRegister()
+{
+	World* world = getWorld();
+	if (world != nullptr)
+	{
+		mLight = world->getLights().createLightDirection();
+
+		Texture& texture = world->getResource<Texture>("directionLightTexture");
+
+		mLight->_emissionSprite.setOrigin(sf::Vector2f(texture.getSize().x * 0.5f, texture.getSize().y * 0.5f));
+		mLight->_emissionSprite.setTexture(texture);
+
+		mLight->_emissionSprite.setPosition(getWorldPosition());
+	}
+}
+
+void DirectionLightComponent::onUnregister()
+{
+	World* world = getWorld();
+	if (world != nullptr)
+	{
+		world->getLights().removeLight(mLight);
+	}
 }
 
 void DirectionLightComponent::setColor(sf::Color color)
@@ -69,7 +85,7 @@ sf::Vector2f DirectionLightComponent::getDirection() const
 	return mLight->_castDirection;
 }
 
-void DirectionLightComponent::onPositionChanged()
+void DirectionLightComponent::onTransformUpdated()
 {
 	mLight->_emissionSprite.setPosition(getWorldPosition());
 }

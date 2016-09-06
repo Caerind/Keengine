@@ -3,7 +3,7 @@
 
 #include "../Config.hpp"
 
-#ifndef ANDROID
+#ifndef KEENGINE_ANDROID
 
 #include <functional>
 #include <unordered_map>
@@ -93,6 +93,6 @@ class ScriptManager
 
 } // namespace ke
 
-#endif
+#endif // KEENGINE_ANDROID
 
 #endif // KE_SCRIPTMANAGER_HPP

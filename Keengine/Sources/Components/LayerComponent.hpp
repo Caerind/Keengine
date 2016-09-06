@@ -7,7 +7,7 @@
 
 #include "../Application/PropertiesHolder.hpp"
 #include "../Application/ResourceManager.hpp"
-#include "../Core/PrimitiveComponent.hpp"
+#include "../Core/SceneComponent.hpp"
 #include "../ExtLibs/pugixml.hpp"
 #include "../System/Compression.hpp"
 #include "../System/Variant.hpp"
@@ -15,7 +15,7 @@
 namespace ke
 {
 
-class LayerComponent : public PrimitiveComponent, public PropertiesHolder
+class LayerComponent : public SceneComponent, public PropertiesHolder
 {
 	public:
 		LayerComponent();
@@ -23,8 +23,6 @@ class LayerComponent : public PrimitiveComponent, public PropertiesHolder
 
 		sf::Vector2i worldToCoords(sf::Vector2f const& world);
 		sf::Vector2f coordsToWorld(sf::Vector2i const& coords);
-
-		void render(sf::RenderTarget& target);
 
 		bool loadFromNode(pugi::xml_node const& node, Tileset* tileset, sf::Vector2i const& size, sf::Vector2i const& tileSize, std::string const& orientation, std::string const& staggerAxis, std::string const& staggerIndex, unsigned int hexSideLength);
 		void saveToNode(pugi::xml_node& node);
@@ -72,6 +70,9 @@ class LayerComponent : public PrimitiveComponent, public PropertiesHolder
 
 		void updateRender();
 		sf::Vector2f getVertexPosition(sf::Vector2i const& coords);
+
+	private:
+		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);
 
 	private:
 		sf::VertexArray mVertices;

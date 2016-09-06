@@ -9,7 +9,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/System/Time.hpp>
 
-#include "../Core/PrimitiveComponent.hpp"
+#include "../Core/SceneComponent.hpp"
 
 namespace ke
 {
@@ -43,7 +43,7 @@ private:
 	std::vector<Frame> mFrames;
 };
 
-class AnimatorComponent : public PrimitiveComponent
+class AnimatorComponent : public SceneComponent
 {
 	public:
 		AnimatorComponent();
@@ -65,10 +65,12 @@ class AnimatorComponent : public PrimitiveComponent
 		Frame& getActualFrame();
 
 		void update(sf::Time dt);
-		void render(sf::RenderTarget& target);
 		
 		sf::FloatRect getLocalBounds();
 		sf::FloatRect getGlobalBounds();
+
+	private:
+		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);
 
 	private:
 		bool mPlaying;

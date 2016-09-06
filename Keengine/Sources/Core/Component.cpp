@@ -24,12 +24,6 @@ void Component::registerComponent(Actor* actor)
 	{
 		mActor = actor;
 		mRegistered = true;
-		if (mActor != nullptr)
-		{
-			std::ostringstream oss;
-			oss << std::hex << mActor->getActualId();
-			mId = oss.str();
-		}
 		onRegister();
 	}
 }
@@ -76,10 +70,6 @@ sf::Vector2f Component::getActorPosition() const
 	{
 		return mActor->getPosition();
 	}
-	else
-	{
-		getWorld().getLog() << "Invalid actor";
-	}
 	return sf::Vector2f();
 }
 
@@ -89,10 +79,11 @@ void Component::setActorPosition(sf::Vector2f const& position)
 	{
 		mActor->setPosition(position);
 	}
-	else
-	{
-		getWorld().getLog() << "Invalid actor";
-	}
+}
+
+void Component::setActorPosition(float x, float y)
+{
+	setActorPosition(sf::Vector2f(x, y));
 }
 
 void Component::moveActor(sf::Vector2f const& movement)
@@ -101,10 +92,11 @@ void Component::moveActor(sf::Vector2f const& movement)
 	{
 		mActor->move(movement);
 	}
-	else
-	{
-		getWorld().getLog() << "Invalid actor";
-	}
+}
+
+void Component::moveActor(float x, float y)
+{
+	moveActor(sf::Vector2f(x, y));
 }
 
 float Component::getActorRotation() const
@@ -112,10 +104,6 @@ float Component::getActorRotation() const
 	if (mActor != nullptr)
 	{
 		return mActor->getRotation();
-	}
-	else
-	{
-		getWorld().getLog() << "Invalid actor";
 	}
 	return 0.f;
 }
@@ -126,10 +114,6 @@ void Component::setActorRotation(float rotation)
 	{
 		mActor->setRotation(rotation);
 	}
-	else
-	{
-		getWorld().getLog() << "Invalid actor";
-	}
 }
 
 void Component::rotateActor(float rotation)
@@ -138,10 +122,6 @@ void Component::rotateActor(float rotation)
 	{
 		mActor->rotate(rotation);
 	}
-	else
-	{
-		getWorld().getLog() << "Invalid actor";
-	}
 }
 
 sf::Vector2f Component::getActorScale() const
@@ -149,10 +129,6 @@ sf::Vector2f Component::getActorScale() const
 	if (mActor != nullptr)
 	{
 		return mActor->getScale();
-	}
-	else
-	{
-		getWorld().getLog() << "Invalid actor";
 	}
 	return sf::Vector2f();
 }
@@ -163,10 +139,11 @@ void Component::setActorScale(sf::Vector2f const& scale)
 	{
 		mActor->setScale(scale);
 	}
-	else
-	{
-		getWorld().getLog() << "Invalid actor";
-	}
+}
+
+void Component::setActorScale(float x, float y)
+{
+	setActorScale(sf::Vector2f(x, y));
 }
 
 void Component::scaleActor(sf::Vector2f const& scale)
@@ -175,10 +152,11 @@ void Component::scaleActor(sf::Vector2f const& scale)
 	{
 		mActor->scale(scale);
 	}
-	else
-	{
-		getWorld().getLog() << "Invalid actor";
-	}
+}
+
+void Component::scaleActor(float x, float y)
+{
+	scaleActor(sf::Vector2f(x, y));
 }
 
 float Component::getActorZ() const
@@ -186,10 +164,6 @@ float Component::getActorZ() const
 	if (mActor != nullptr)
 	{
 		return mActor->getZ();
-	}
-	else
-	{
-		getWorld().getLog() << "Invalid actor";
 	}
 	return 0.f;
 }
@@ -200,10 +174,6 @@ void Component::setActorZ(float z)
 	{
 		mActor->setZ(z);
 	}
-	else
-	{
-		getWorld().getLog() << "Invalid actor";
-	}
 }
 
 void Component::moveActorZ(float z)
@@ -212,15 +182,11 @@ void Component::moveActorZ(float z)
 	{
 		mActor->moveZ(z);
 	}
-	else
-	{
-		getWorld().getLog() << "Invalid actor";
-	}
 }
 
-World& Component::getWorld() const
+World* Component::getWorld()
 {
-	return World::instance();
+	return (mActor != nullptr) ? mActor->getWorld() : nullptr;
 }
 
 std::string Component::getId() const
@@ -228,9 +194,14 @@ std::string Component::getId() const
 	return mId;
 }
 
-void Component::setId(std::string const & id)
+void Component::setId(std::string const& id)
 {
 	mId = id;
+}
+
+Actor* Component::getActor()
+{
+	return mActor;
 }
 
 } // namespace ke

@@ -1,19 +1,17 @@
 #ifndef KE_TEXTCOMPONENT_HPP
 #define KE_TEXTCOMPONENT_HPP
 
-#include "../Core/PrimitiveComponent.hpp"
+#include "../Core/SceneComponent.hpp"
 
 #include <SFML/Graphics/Text.hpp>
 
 namespace ke
 {
 
-class TextComponent : public PrimitiveComponent
+class TextComponent : public SceneComponent
 {
 	public:
 		TextComponent();
-
-		void render(sf::RenderTarget& target);
 
 		void setFont(std::string const& font);
 		void setFont(sf::Font& font);
@@ -30,7 +28,11 @@ class TextComponent : public PrimitiveComponent
 		float getOutlineThickness() const;
 
 	private:
+		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);
+
+	private:
 		sf::Text mText;
+		std::string mFont;
 };
 
 } // namespace ke

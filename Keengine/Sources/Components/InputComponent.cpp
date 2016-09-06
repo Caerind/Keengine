@@ -6,12 +6,32 @@ namespace ke
 
 InputComponent::InputComponent()
 {
-	getWorld().getInputs().registerInput(this);
 }
 
 InputComponent::~InputComponent()
 {
-	getWorld().getInputs().unregisterInput(this);
+	if (isRegistered())
+	{
+		onUnregister();
+	}
+}
+
+void InputComponent::onRegister()
+{
+	World* world = getWorld();
+	if (world != nullptr)
+	{
+		world->getInputs().registerInput(this);
+	}
+}
+
+void InputComponent::onUnregister()
+{
+	World* world = getWorld();
+	if (world != nullptr)
+	{
+		world->getInputs().unregisterInput(this);
+	}
 }
 
 } // namespace ke

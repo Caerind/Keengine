@@ -232,7 +232,7 @@ bool Map::loadTmxFile(std::string const& filename)
 
 	for (pugi::xml_node tileset = map.child("tileset"); tileset; tileset = tileset.next_sibling("tileset"))
 	{
-		mTileset = &getWorld().createResource<Tileset>(tileset.attribute("name").as_string(), tileset, path);
+		mTileset = &getWorld()->createResource<Tileset>(tileset.attribute("name").as_string(), tileset, path);
 	}
 
 	for (pugi::xml_node layer = map.child("layer"); layer; layer = layer.next_sibling("layer"))
@@ -270,9 +270,9 @@ bool Map::loadTmxFile(std::string const& filename)
 			std::string source = img.attribute("source").as_string();
 			if (source != "")
 			{
-				if (!getWorld().hasResource(source))
+				if (!getWorld()->hasResource(source))
 				{
-					getWorld().createResource<Texture>(source, path + source);
+					getWorld()->createResource<Texture>(source, path + source);
 				}
 				image->setTexture(source);
 			}
@@ -435,7 +435,7 @@ std::shared_ptr<LayerComponent> Map::createLayer(std::string const& tilesetName,
 	std::shared_ptr<LayerComponent> layer = addLayer();
 	if (layer != nullptr)
 	{
-		layer->create(&getWorld().getResource<Tileset>(tilesetName), size, tileSize, staggerAxis, staggerIndex, orientation, hexSideLength);
+		layer->create(&getWorld()->getResource<Tileset>(tilesetName), size, tileSize, staggerAxis, staggerIndex, orientation, hexSideLength);
 	}
 	return layer;
 }

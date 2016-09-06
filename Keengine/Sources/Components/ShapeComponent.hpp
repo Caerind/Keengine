@@ -1,18 +1,21 @@
 #ifndef KE_SHAPECOMPONENT_HPP
 #define KE_SHAPECOMPONENT_HPP
 
-#include "../Core/PrimitiveComponent.hpp"
+#include "../Core/SceneComponent.hpp"
 
 #include "../ExtLibs/LTBL2/LightShape.hpp"
 
 namespace ke
 {
 
-class ShapeComponent : public PrimitiveComponent
+class ShapeComponent : public SceneComponent
 {
 	public:
 		ShapeComponent();
 		~ShapeComponent();
+
+		void onRegister();
+		void onUnregister();
 
 		void setPointCount(std::size_t points);
 		std::size_t getPointCount() const;
@@ -29,9 +32,11 @@ class ShapeComponent : public PrimitiveComponent
 		void setFillColor(sf::Color const& color);
 		sf::Color getFillColor() const;
 
-		void render(sf::RenderTarget& target);
 		sf::FloatRect getLocalBounds();
 		sf::FloatRect getGlobalBounds();
+
+	private:
+		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);
 
 	private:
 		sf::ConvexShape mShape;

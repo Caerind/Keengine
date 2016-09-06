@@ -29,32 +29,87 @@ void World::destroyInstance()
 }
 
 World::World()
-	: mIdCounter(0)
-	, mActors()
-	, mPrimitives()
-	, mSceneTexture()
+	: mSceneTexture()
 	, mVertices(sf::Triangles, 6)
-	, mCamera(nullptr)
-	, mWorldView(getApplication().getView())
 	, mEffects()
+	, mInputs()
+	, mBackground()
+	, mUsePhysic(false)
+	, mUseLights(false)
+	, mLights()
+	, mTime()
+	, mScene(nullptr)
 {
-	//mUsePhysic = true;
-	//mUseLights = true;
+	initLights();
+	newScene();
+}
 
-	std::string bgTexture = Application::getBackgroundTexture();
-	sf::IntRect bgRect = Application::getBackgroundTextureRect();
-	sf::Color bgColor = Application::getBackgroundColor();
-	if (bgTexture == "")
+World::~World()
+{
+	if (mScene != nullptr)
 	{
-		mBackground.setFillColor(bgColor);
+		mScene->onDestroy();
 	}
-	else
-	{
-		mBackground.setFillColor(sf::Color::White);
-		mBackground.setTexture(&Application::getResource<Texture>(bgTexture));
-		mBackground.setTextureRect(bgRect);
-	}
+}
 
+Application& World::getApplication()
+{
+	return Application::instance();
+}
+
+InputSystem& World::getInputs()
+{
+	return mInputs;
+}
+
+Log& World::getLog()
+{
+	return Application::getLog();
+}
+
+ltbl::LightSystem& World::getLights()
+{
+	return mLights;
+}
+
+TimeSystem& World::getTime()
+{
+	return mTime;
+}
+
+PhysicSystem* World::getPhysic()
+{
+	if (mScene != nullptr)
+	{
+		return &mScene->getPhysic();
+	}
+	return nullptr;
+}
+
+b2World* World::getPhysicWorld()
+{
+	if (mScene != nullptr)
+	{
+		return mScene->getPhysicWorld();
+	}
+	return nullptr;
+}
+
+void World::newScene()
+{
+	if (mScene != nullptr)
+	{
+		mScene->onDestroy();
+	}
+	mScene = std::unique_ptr<Scene>(new Scene(this));
+	if (mScene != nullptr)
+	{
+		mScene->onCreate();
+	}
+}
+
+void World::initLights()
+{
 	if (!hasResource("pointLightTexture"))
 	{
 		Texture& texture = createResource<Texture>("pointLightTexture");
@@ -106,37 +161,6 @@ World::World()
 	mLights.create({ -1000.f, -1000.f, 2000.f, 2000.f }, getApplication().getSize(), getResource<Texture>("penumbraTexture"), getResource<Shader>("unshadowShader"), getResource<Shader>("lightOverShapeShader"));
 }
 
-World::~World()
-{
-	mPrimitives.clear();
-	mActors.clear();
-}
-
-Application& World::getApplication()
-{
-	return Application::instance();
-}
-
-InputSystem& World::getInputs()
-{
-	return mInputs;
-}
-
-Log& World::getLog()
-{
-	return Application::getLog();
-}
-
-ltbl::LightSystem & World::getLights()
-{
-	return mLights;
-}
-
-TimeSystem& World::getTime()
-{
-	return mTime;
-}
-
 void World::handleEvent(sf::Event const & event)
 {
 	mInputs.handleEvent(event);
@@ -149,32 +173,10 @@ void World::update(sf::Time dt)
 	mInputs.update(dt);
 	mTime.update(dt);
 
-	for (std::size_t i = 0; i < mActors.size(); i++)
+	if (mScene != nullptr)
 	{
-		mActors[i]->updateComponents(dt);
-		mActors[i]->update(dt);
+		mScene->update(dt);
 	}
-
-	mActors.erase(std::remove_if(mActors.begin(), mActors.end(), [](Actor::Ptr actor) 
-	{ 
-		bool ret = (actor == nullptr || actor->isMarkedForRemoval());
-		if (actor->isMarkedForRemoval() && actor != nullptr)
-		{
-			actor->onDestroyed();
-			/*
-			TODO : Fix
-			for (std::size_t i = 0; i < actor->getComponentCount(); i++)
-			{
-				Component* component = actor->getComponent(i)->onUnregister();
-				if (component != nullptr)
-				{
-					component->onUnregister();
-				}
-			}
-			*/
-		}
-		return ret;
-	}), mActors.end());
 }
 
 void World::render(sf::RenderTarget& target)
@@ -187,50 +189,35 @@ void World::render(sf::RenderTarget& target)
 		mSceneTexture.create(size.x, size.y);
 	}
 
-	// Update rendering order
-	std::sort(mPrimitives.begin(), mPrimitives.end(), [](PrimitiveComponent* a, PrimitiveComponent* b) -> bool
-	{
-		if (a != nullptr && b != nullptr)
-		{
-			if (a->getWorldZ() < b->getWorldZ())
-			{
-				return true;
-			}
-			else if (a->getWorldZ() > b->getWorldZ())
-			{
-				return false;
-			}
-			else if (a->getWorldPosition().y < b->getWorldPosition().y)
-			{
-				return true;
-			}
-			else if (a->getWorldPosition().y > b->getWorldPosition().y)
-			{
-				return false;
-			}
-			else
-			{
-				return (a->getWorldPosition().x < b->getWorldPosition().x);
-			}
-		}
-		return true;
-	});
-
 	// Draw
 	mSceneTexture.clear();
 
 	mSceneTexture.setView(mSceneTexture.getDefaultView());
 	mSceneTexture.draw(mBackground);
 
-	mSceneTexture.setView(getView());
-
-	for (PrimitiveComponent* primitive : mPrimitives)
+	/* TODO : Background
+	std::string bgTexture = Application::getBackgroundTexture();
+	sf::IntRect bgRect = Application::getBackgroundTextureRect();
+	sf::Color bgColor = Application::getBackgroundColor();
+	if (bgTexture == "")
 	{
-		if (primitive->isRegistered() && primitive->isVisible())
-		{
-			primitive->render(mSceneTexture);
-		}
+		mBackground.setFillColor(bgColor);
 	}
+	else
+	{
+		mBackground.setFillColor(sf::Color::White);
+		mBackground.setTexture(&Application::getResource<Texture>(bgTexture));
+		mBackground.setTextureRect(bgRect);
+	}
+	*/
+
+	// Render Scene
+	if (mScene != nullptr)
+	{
+		mScene->render(mSceneTexture);
+	}
+
+	// Lights
 
 	// Post effects
 	for (auto itr = mEffects.begin(); itr != mEffects.end(); itr++)
@@ -244,74 +231,56 @@ void World::render(sf::RenderTarget& target)
 	target.draw(sf::Sprite(mSceneTexture.getTexture()));
 }
 
-void World::registerPrimitive(PrimitiveComponent* component)
+Actor::Ptr World::getActor(std::string const& id) const
 {
-	if (component != nullptr)
+	if (mScene != nullptr)
 	{
-		mPrimitives.push_back(component);
-	}
-}
-
-void World::unregisterPrimitive(PrimitiveComponent* component)
-{
-	if (component != nullptr)
-	{
-		mPrimitives.erase(std::remove_if(mPrimitives.begin(), mPrimitives.end(), [&component](PrimitiveComponent* cmpnt) { return (cmpnt == nullptr || cmpnt == component); }), mPrimitives.end());
-	}
-}
-
-void World::removeActor(std::string const& id)
-{
-	Actor::Ptr actor = getActor(id);
-	if (actor != nullptr)
-	{
-		actor->remove();
-	}
-}
-
-void World::removeActor(std::size_t index)
-{
-	Actor::Ptr actor = getActor(index);
-	if (actor != nullptr)
-	{
-		actor->remove();
-	}
-}
-
-bool World::hasActor(std::string const& id) const
-{
-	return (getActor(id) != nullptr);
-}
-
-Actor::Ptr World::getActor(std::string const & id) const
-{
-	for (Actor::Ptr actor : mActors)
-	{
-		if (actor->getId() == id)
-		{
-			return actor;
-		}
+		return mScene->getActor(id);
 	}
 	return nullptr;
 }
 
 Actor::Ptr World::getActor(std::size_t index) const
 {
-	if (0 <= index && index < mActors.size())
+	if (mScene != nullptr)
 	{
-		return mActors.at(index);
+		return mScene->getActor(index);
 	}
 	return nullptr;
 }
 
-std::size_t World::getActorCount() const
+void World::removeActor(std::string const& id)
 {
-	return mActors.size();
+	if (mScene != nullptr)
+	{
+		mScene->removeActor(id);
+	}
 }
 
-std::size_t World::getActualId()
+void World::removeActor(std::size_t index)
 {
-	return mIdCounter++;
+	if (mScene != nullptr)
+	{
+		mScene->removeActor(index);
+	}
+}
+
+bool World::hasActor(std::string const& id) const
+{
+	if (mScene != nullptr)
+	{
+		return mScene->hasActor(id);
+	}
+	return false;
+}
+
+std::size_t World::getActorCount() const
+{
+	if (mScene != nullptr)
+	{
+		return mScene->getActorCount();
+	}
+	return 0;
 }
 
 void World::removeEffect(std::size_t const & order)
@@ -323,26 +292,13 @@ void World::removeEffect(std::size_t const & order)
 	}
 }
 
-sf::View& World::getView()
+sf::View* World::getView()
 {
-	if (mCamera == nullptr)
+	if (mScene != nullptr)
 	{
-		return mWorldView;
+		return &(mScene->getView());
 	}
-	else
-	{
-		return mCamera->getView();
-	}
-}
-
-void World::registerCamera(CameraComponent* camera)
-{
-	mCamera = camera;
-}
-
-void World::unregisterCamera(CameraComponent* camera)
-{
-	mCamera = nullptr;
+	return nullptr;
 }
 
 bool World::hasResource(std::string const& id)

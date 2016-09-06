@@ -8,6 +8,8 @@
 #include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
 
+#include "../System/Container.hpp"
+
 #include "Component.hpp"
 #include "SceneComponent.hpp"
 
@@ -21,21 +23,22 @@ class Actor
 		typedef std::shared_ptr<Actor> Ptr;
 
     public:
-		Actor(std::string const& id = "");
+		Actor();
 		virtual ~Actor();
 
 		void remove();
 		bool isMarkedForRemoval() const;
 
-		virtual void onCreated();
-		virtual void onDestroyed();
-
 		void setId(std::string const& id);
 		std::string getId() const;
 
+		std::string getType() const;
+
 		const sf::Vector2f& getPosition() const;
 		void setPosition(sf::Vector2f const& position);
+		void setPosition(float x, float y);
 		void move(sf::Vector2f const& movement);
+		void move(float x, float y);
 
 		float getRotation() const;
 		void setRotation(float rotation);
@@ -43,7 +46,9 @@ class Actor
 
 		const sf::Vector2f& getScale() const;
 		void setScale(sf::Vector2f const& scale);
+		void setScale(float x, float y);
 		void scale(sf::Vector2f const& scale);
+		void scale(float x, float y);
 
 		const sf::Transform& getTransform();
 
@@ -51,52 +56,73 @@ class Actor
 		void setZ(float z);
 		void moveZ(float z);
 
+		bool isVisible() const;
+		void setVisible(bool visible);
+
 		virtual void update(sf::Time dt);
 		void updateComponents(sf::Time dt);
+
+		void render(sf::RenderTarget& target);
 
 		void attachComponent(SceneComponent* component);
 		void detachComponent(SceneComponent* component);
 
 		void registerComponent(Component* component);
 		void unregisterComponent(Component* component);
+		void unregisterComponents();
 
-		World& getWorld() const;
-
-		std::size_t getActualId();
 		std::size_t getComponentCount() const;
 		Component* getComponent(std::size_t index);
 		Component* getComponent(std::string const& id);
 
 		template <typename T>
-		T* getTypedComponent(std::size_t index)
+		T* getComponentT(std::size_t index)
 		{
 			Component* c = getComponent(index);
 			if (c == nullptr)
 			{
 				return nullptr;
 			}
-			return static_cast<T*>(c);
+			return dynamic_cast<T*>(c);
 		}
 
 		template <typename T>
-		T* getTypedComponent(std::string const& id)
+		T* getComponentT(std::string const& id)
 		{
 			Component* c = getComponent(id);
 			if (c == nullptr)
 			{
 				return nullptr;
 			}
-			return static_cast<T*>(c);
+			return dynamic_cast<T*>(c);
 		}
 
+		void setWorld(World* world);
+		World* getWorld();
+
+		b2Body* getBody();
+		void initializePhysic();
+		void destroyPhysic();
+		void prePhysicUpdate();
+		void postPhysicUpdate();
+
 	private:
-		SceneComponent mRoot;
-		std::vector<Component*> mComponents;
+		SceneComponent mRoot; ///< The root for scene components
 
-		bool mMarkedForRemoval;
-		std::string mId;
+		std::vector<Component*> mComponents; ///< All the registered components of this actor
 
-		std::size_t mIdCounter;
+		bool mMarkedForRemoval; ///< Do the Actor need to be removed ?
+
+		std::string mId; ///< The ID of the Actor
+
+		std::size_t mComponentIdCounter; ///< The ID generator for registered components
+
+	protected:
+		World* mWorld; ///< World where the actor lives in
+
+		std::string mType; ///< Type of the object
+
+		b2Body* mBody; ///< Physic body
 };
 
 } // namespace ke

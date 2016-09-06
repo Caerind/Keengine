@@ -46,18 +46,16 @@ int main()
 		"</map>");
 	auto layer = map->getLayer(0);
 
-	{
-		MyActor::Ptr actor = ke::World::instance().createActor<MyActor>();
-		actor->setZ(100.f);
-		actor->setPosition({ 10.f, 100.f });
-	}
+	MyActor::Ptr actor = ke::World::instance().createActor<MyActor>();
+	actor->setZ(100.f);
+	actor->setPosition({ 10.f, 100.f });
 
 	ke::Application::setEventDefaultFunction([&](sf::Event const& event)
 	{
 		ke::World::instance().handleEvent(event);
 		if (event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::TouchBegan)
 		{
-			sf::Vector2f mPos = ke::Application::getPointerPositionView(ke::World::instance().getView());
+			sf::Vector2f mPos = ke::Application::getPointerPositionView(*ke::World::instance().getView());
 			sf::Vector2i coords = layer->worldToCoords(mPos);
 			layer->setTileId(coords, 3);
 		}
@@ -77,6 +75,7 @@ int main()
 
 	map = nullptr;
 	layer = nullptr;
+	actor = nullptr;
 
 	ke::World::instance().getInputs().saveToFile("Example/inputs.cfg");
 

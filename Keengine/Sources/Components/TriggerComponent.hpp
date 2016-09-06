@@ -1,8 +1,6 @@
 #ifndef KE_TRIGGERCOMPONENT_HPP
 #define KE_TRIGGERCOMPONENT_HPP
 
-#include <Box2D\Box2D.h>
-
 #include "CollisionComponent.hpp"
 
 namespace ke

@@ -13,6 +13,9 @@ class PointLightComponent : public SceneComponent
 		PointLightComponent();
 		~PointLightComponent();
 
+		void onRegister();
+		void onUnregister();
+
 		void setColor(sf::Color color);
 		sf::Color getColor() const;
 
@@ -20,7 +23,7 @@ class PointLightComponent : public SceneComponent
 		float getIntensity() const;
 
 	protected:
-		void onPositionChanged();
+		void onTransformUpdated();
 
 	protected:
 		ltbl::LightPointEmission::Ptr mLight;

@@ -6,19 +6,39 @@ namespace ke
 
 PointLightComponent::PointLightComponent()
 {
-	mLight = getWorld().getLights().createLightPoint();
-
-	Texture& texture = getWorld().getResource<Texture>("pointLightTexture");
-
-	mLight->_emissionSprite.setOrigin(sf::Vector2f(texture.getSize().x * 0.5f, texture.getSize().y * 0.5f));
-	mLight->_emissionSprite.setTexture(texture);
-
-	mLight->_emissionSprite.setPosition(getWorldPosition());
 }
 
 PointLightComponent::~PointLightComponent()
 {
-	getWorld().getLights().removeLight(mLight);
+	if (isRegistered())
+	{
+		onUnregister();
+	}
+}
+
+void PointLightComponent::onRegister()
+{
+	World* world = getWorld();
+	if (world != nullptr)
+	{
+		mLight = world->getLights().createLightPoint();
+
+		Texture& texture = world->getResource<Texture>("pointLightTexture");
+
+		mLight->_emissionSprite.setOrigin(sf::Vector2f(texture.getSize().x * 0.5f, texture.getSize().y * 0.5f));
+		mLight->_emissionSprite.setTexture(texture);
+
+		mLight->_emissionSprite.setPosition(getWorldPosition());
+	}
+}
+
+void PointLightComponent::onUnregister()
+{
+	World* world = getWorld();
+	if (world != nullptr)
+	{
+		world->getLights().removeLight(mLight);
+	}
 }
 
 void PointLightComponent::setColor(sf::Color color)
@@ -55,7 +75,7 @@ float PointLightComponent::getIntensity() const
 	return 1.f;
 }
 
-void PointLightComponent::onPositionChanged()
+void PointLightComponent::onTransformUpdated()
 {
 	mLight->_emissionSprite.setPosition(getWorldPosition());
 }

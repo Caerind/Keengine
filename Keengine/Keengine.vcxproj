@@ -30,13 +30,10 @@
   <ItemGroup>
     <Image Include="..\Doc\ApplicationArchitecture.jpg" />
     <Image Include="..\Doc\CoreArchitecture.jpg" />
-    <Image Include="Example\directionLightTexture.png" />
     <Image Include="Example\hexa.png" />
     <Image Include="Example\iso.png" />
     <Image Include="Example\ortho.png" />
     <Image Include="Example\particle.png" />
-    <Image Include="Example\penumbraTexture.png" />
-    <Image Include="Example\pointLightTexture.png" />
     <Image Include="Example\sfml.png" />
     <Image Include="Example\widgets.png" />
   </ItemGroup>
@@ -71,10 +68,56 @@
     <ClCompile Include="Sources\Core\Map.cpp" />
     <ClCompile Include="Sources\Core\Pathfinding.cpp" />
     <ClCompile Include="Sources\Core\PhysicSystem.cpp" />
-    <ClCompile Include="Sources\Core\PrimitiveComponent.cpp" />
+    <ClCompile Include="Sources\Core\Scene.cpp" />
     <ClCompile Include="Sources\Core\SceneComponent.cpp" />
     <ClCompile Include="Sources\Core\TimeSystem.cpp" />
     <ClCompile Include="Sources\Core\World.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2BlockAllocator.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Body.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2BroadPhase.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2ChainAndCircleContact.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2ChainAndPolygonContact.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2ChainShape.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2CircleContact.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2CircleShape.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2CollideCircle.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2CollideEdge.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2CollidePolygon.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Collision.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Contact.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2ContactManager.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2ContactSolver.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Distance.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2DistanceJoint.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Draw.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2DynamicTree.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2EdgeAndCircleContact.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2EdgeAndPolygonContact.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2EdgeShape.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Fixture.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2FrictionJoint.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2GearJoint.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Island.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Joint.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Math.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2MotorJoint.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2MouseJoint.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2PolygonAndCircleContact.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2PolygonContact.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2PolygonShape.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2PrismaticJoint.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2PulleyJoint.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2RevoluteJoint.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Rope.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2RopeJoint.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Settings.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2StackAllocator.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2TimeOfImpact.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2Timer.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2WeldJoint.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2WheelJoint.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2World.cpp" />
+    <ClCompile Include="Sources\ExtLibs\Box2D\b2WorldCallbacks.cpp" />
     <ClCompile Include="Sources\ExtLibs\ConcaveShape.cpp" />
     <ClCompile Include="Sources\ExtLibs\gzstream.cpp" />
     <ClCompile Include="Sources\ExtLibs\imgui\imgui-SFML.cpp" />
@@ -169,11 +212,58 @@
     <ClInclude Include="Sources\Core\Map.hpp" />
     <ClInclude Include="Sources\Core\Pathfinding.hpp" />
     <ClInclude Include="Sources\Core\PhysicSystem.hpp" />
-    <ClInclude Include="Sources\Core\PrimitiveComponent.hpp" />
+    <ClInclude Include="Sources\Core\Scene.hpp" />
     <ClInclude Include="Sources\Core\SceneComponent.hpp" />
     <ClInclude Include="Sources\Core\TimeSystem.hpp" />
     <ClInclude Include="Sources\Core\World.hpp" />
     <ClInclude Include="Sources\ExtLibs\assume.hpp" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2BlockAllocator.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Body.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2BroadPhase.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2ChainAndCircleContact.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2ChainAndPolygonContact.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2ChainShape.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2CircleContact.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2CircleShape.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Collision.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Contact.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2ContactManager.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2ContactSolver.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Distance.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2DistanceJoint.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Draw.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2DynamicTree.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2EdgeAndCircleContact.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2EdgeAndPolygonContact.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2EdgeShape.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Fixture.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2FrictionJoint.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2GearJoint.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2GrowableStack.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Island.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Joint.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Math.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2MotorJoint.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2MouseJoint.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2PolygonAndCircleContact.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2PolygonContact.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2PolygonShape.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2PrismaticJoint.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2PulleyJoint.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2RevoluteJoint.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Rope.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2RopeJoint.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Settings.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Shape.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2StackAllocator.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2TimeOfImpact.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2Timer.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2TimeStep.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2WeldJoint.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2WheelJoint.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2World.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\b2WorldCallbacks.h" />
+    <ClInclude Include="Sources\ExtLibs\Box2D\Box2D.h" />
     <ClInclude Include="Sources\ExtLibs\cocoa.hpp" />
     <ClInclude Include="Sources\ExtLibs\ConcaveShape.hpp" />
     <ClInclude Include="Sources\ExtLibs\gzstream.hpp" />
@@ -343,13 +433,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\C++\Lib\SFML-2.4.0-VC14\include;D:\C++\Lib\zlib-1.2.8\include;D:\C++\Lib\TGUI-0.7.1-VC14\include;D:\C++\Lib\Box2D;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++\Lib\SFML-2.4.0-VC14\include;D:\C++\Lib\zlib-1.2.8\include;D:\C++\Lib\TGUI-0.7.1-VC14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\C++\Lib\SFML-2.4.0-VC14\lib;D:\C++\Lib\zlib-1.2.8\lib;D:\C++\Lib\TGUI-0.7.1-VC14\lib;D:\C++\Lib\Box2D;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-main-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;tgui-d.lib;%(AdditionalDependencies);zdll.lib;opengl32.lib;Box2D.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\C++\Lib\SFML-2.4.0-VC14\lib;D:\C++\Lib\zlib-1.2.8\lib;D:\C++\Lib\TGUI-0.7.1-VC14\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;tgui-d.lib;%(AdditionalDependencies);zdll.lib;opengl32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -376,15 +466,15 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\C++\Lib\SFML-2.4.0-VC14\include;D:\C++\Lib\zlib-1.2.8\include;D:\C++\Lib\TGUI-0.7.1-VC14\include;D:\C++\Lib\Box2D;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++\Lib\SFML-2.4.0-VC14\include;D:\C++\Lib\zlib-1.2.8\include;D:\C++\Lib\TGUI-0.7.1-VC14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\C++\Lib\SFML-2.4.0-VC14\lib;D:\C++\Lib\zlib-1.2.8\lib;D:\C++\Lib\TGUI-0.7.1-VC14\lib;D:\C++\Lib\Box2D;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-main.lib;sfml-audio.lib;sfml-network.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;tgui.lib;%(AdditionalDependencies);zdll.lib;opengl32.lib;Box2D.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\C++\Lib\SFML-2.4.0-VC14\lib;D:\C++\Lib\zlib-1.2.8\lib;D:\C++\Lib\TGUI-0.7.1-VC14\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main.lib;sfml-audio.lib;sfml-network.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;tgui.lib;%(AdditionalDependencies);zdll.lib;opengl32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

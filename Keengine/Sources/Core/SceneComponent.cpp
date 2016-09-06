@@ -5,13 +5,12 @@ namespace ke
 
 SceneComponent::SceneComponent()
 	: mTransformable()
-	, mZ(0.f)
 	, mWorldTransform()
-	, mWorldZ(0.f)
-	, mTransformChanged(true)
-	, mZChanged(true)
+	, mNeedUpdate(true)
+	, mZ(0.f)
 	, mParent(nullptr)
 	, mChildren()
+	, mVisible(true)
 {
 }
 
@@ -27,13 +26,23 @@ const sf::Vector2f& SceneComponent::getPosition() const
 void SceneComponent::setPosition(sf::Vector2f const& position)
 {
 	mTransformable.setPosition(position);
-	onChangedTransform();
+	onTransformChanged();
+}
+
+void SceneComponent::setPosition(float x, float y)
+{
+	setPosition(sf::Vector2f(x, y));
 }
 
 void SceneComponent::move(sf::Vector2f const& movement)
 {
 	mTransformable.move(movement);
-	onChangedTransform();
+	onTransformChanged();
+}
+
+void SceneComponent::move(float x, float y)
+{
+	move(sf::Vector2f(x, y));
 }
 
 float SceneComponent::getRotation() const
@@ -44,13 +53,13 @@ float SceneComponent::getRotation() const
 void SceneComponent::setRotation(float rotation)
 {
 	mTransformable.setRotation(rotation);
-	onChangedTransform();
+	onTransformChanged();
 }
 
 void SceneComponent::rotate(float rotation)
 {
 	mTransformable.rotate(rotation);
-	onChangedTransform();
+	onTransformChanged();
 }
 
 const sf::Vector2f& SceneComponent::getScale() const
@@ -61,13 +70,23 @@ const sf::Vector2f& SceneComponent::getScale() const
 void SceneComponent::setScale(sf::Vector2f const& scale)
 {
 	mTransformable.setScale(scale);
-	onChangedTransform();
+	onTransformChanged();
+}
+
+void SceneComponent::setScale(float x, float y)
+{
+	setScale(sf::Vector2f(x, y));
 }
 
 void SceneComponent::scale(sf::Vector2f const& scale)
 {
 	mTransformable.setScale(scale);
-	onChangedTransform();
+	onTransformChanged();
+}
+
+void SceneComponent::scale(float x, float y)
+{
+	scale(sf::Vector2f(x, y));
 }
 
 const sf::Transform& SceneComponent::getTransform() const
@@ -83,41 +102,41 @@ float SceneComponent::getZ() const
 void SceneComponent::setZ(float z)
 {
 	mZ = z;
-	onChangedZ();
 }
 
 void SceneComponent::moveZ(float z)
 {
 	mZ += z;
-	onChangedZ();
 }
 
-sf::Vector2f SceneComponent::getWorldPosition()
+const sf::Vector2f& SceneComponent::getWorldPosition() const
 {
-	return getWorldTransform().transformPoint(sf::Vector2f());
+	return mWorldTransform.transformPoint(sf::Vector2f());
 }
 
-const sf::Transform& SceneComponent::getWorldTransform()
+const sf::Transform& SceneComponent::getWorldTransform() const
 {
-	if (mTransformChanged)
-	{
-		mWorldTransform = (mParent != nullptr) ? mParent->getWorldTransform() : sf::Transform();
-		mWorldTransform *= mTransformable.getTransform();
-		mTransformChanged = false;
-		onPositionChanged();
-	}
 	return mWorldTransform;
 }
 
-float SceneComponent::getWorldZ()
+void SceneComponent::setVisible(bool visible)
 {
-	if (mZChanged)
+	mVisible = visible;
+}
+
+bool SceneComponent::isVisible() const
+{
+	return mVisible;
+}
+
+void SceneComponent::render(sf::RenderTarget& target, sf::RenderStates states)
+{
+	if (isVisible())
 	{
-		mWorldZ = (mParent != nullptr) ? mParent->getWorldZ() : 0.f;
-		mWorldZ += mZ;
-		mZChanged = false;
+		states.transform *= getTransform();
+		renderCurrent(target, states);
+		renderChildren(target, states);
 	}
-	return mWorldZ;
 }
 
 void SceneComponent::attachComponent(SceneComponent* component)
@@ -125,8 +144,7 @@ void SceneComponent::attachComponent(SceneComponent* component)
 	if (component != nullptr)
 	{
 		component->mParent = this;
-		component->onChangedTransform();
-		component->onChangedZ();
+		component->onTransformChanged();
 		mChildren.push_back(component);
 	}
 }
@@ -140,43 +158,81 @@ void SceneComponent::detachComponent(SceneComponent* component)
 		{ 
 			if (mChildren[i] == component)
 			{
-				if (component->mParent == this)
-				{
-					component->mParent = nullptr;
-				}
-				component->onChangedTransform();
-				component->onChangedZ();
+				component->mParent = nullptr;
+				component->onTransformChanged();
 				mChildren.erase(i + mChildren.begin());
-				size--;
+				return;
 			}
 		}
-
 	}
 }
 
-void SceneComponent::onPositionChanged()
+void SceneComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)
 {
 }
 
-void SceneComponent::onChangedTransform()
+void SceneComponent::renderChildren(sf::RenderTarget& target, sf::RenderStates states)
 {
-	mTransformChanged = true;
+	if (isVisible())
+	{
+		std::sort(mChildren.begin(), mChildren.end(), sortChildren);
+
+		std::size_t size = mChildren.size();
+		for (std::size_t i = 0; i < size; i++)
+		{
+			if (mChildren[i] != nullptr)
+			{
+				if (mChildren[i]->isRegistered() && mChildren[i]->isVisible())
+				{
+					mChildren[i]->render(target, states);
+				}
+			}
+		}
+	}
+}
+
+bool SceneComponent::sortChildren(SceneComponent * a, SceneComponent * b)
+{
+	if (a != nullptr && b != nullptr)
+	{
+		if (a->getZ() < b->getZ())
+		{
+			return true;
+		}
+		else if (a->getZ() > b->getZ())
+		{
+			return false;
+		}
+		else if (a->getWorldPosition().y < b->getWorldPosition().y)
+		{
+			return true;
+		}
+		else if (a->getWorldPosition().y > b->getWorldPosition().y)
+		{
+			return false;
+		}
+		else
+		{
+			return (a->getWorldPosition().x < b->getWorldPosition().x);
+		}
+	}
+	return true;
+}
+
+void SceneComponent::onTransformChanged()
+{
+	mWorldTransform = (mParent != nullptr) ? mParent->getWorldTransform() : sf::Transform();
+	mWorldTransform *= mTransformable.getTransform();
 	std::size_t size = mChildren.size();
 	for (std::size_t i = 0; i < size; i++)
 	{
-		mChildren[i]->onChangedTransform();
-		mChildren[i]->onPositionChanged();
+		mChildren[i]->onTransformChanged();
 	}
+	onTransformUpdated();
 }
 
-void SceneComponent::onChangedZ()
+void SceneComponent::onTransformUpdated()
 {
-	mZChanged = true;
-	std::size_t size = mChildren.size();
-	for (std::size_t i = 0; i < size; i++)
-	{
-		mChildren[i]->onChangedZ();
-	}
 }
 
 } // namespace ke

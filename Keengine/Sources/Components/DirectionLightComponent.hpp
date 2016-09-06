@@ -13,6 +13,9 @@ class DirectionLightComponent : public SceneComponent
 		DirectionLightComponent();
 		~DirectionLightComponent();
 
+		void onRegister();
+		void onUnregister();
+
 		void setColor(sf::Color color);
 		sf::Color getColor() const;
 
@@ -25,7 +28,7 @@ class DirectionLightComponent : public SceneComponent
 		sf::Vector2f getDirection() const;
 
 	protected:
-		void onPositionChanged();
+		void onTransformUpdated();
 
 	protected:
 		ltbl::LightDirectionEmission::Ptr mLight;

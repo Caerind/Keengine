@@ -30,7 +30,9 @@ class Component
 
 		sf::Vector2f getActorPosition() const;
 		void setActorPosition(sf::Vector2f const& position);
+		void setActorPosition(float x, float y);
 		void moveActor(sf::Vector2f const& movement);
+		void moveActor(float x, float y);
 
 		float getActorRotation() const;
 		void setActorRotation(float rotation);
@@ -38,16 +40,20 @@ class Component
 
 		sf::Vector2f getActorScale() const;
 		void setActorScale(sf::Vector2f const& scale);
+		void setActorScale(float x, float y);
 		void scaleActor(sf::Vector2f const& scale);
+		void scaleActor(float x, float y);
 
 		float getActorZ() const;
 		void setActorZ(float z);
 		void moveActorZ(float z);
 
-		World& getWorld() const;
+		World* getWorld();
 
 		std::string getId() const;
 		void setId(std::string const& id);
+
+		Actor* getActor();
 		
 	private:
 		bool mRegistered;

@@ -28,7 +28,8 @@ void CollisionComponent::onUnregister()
 {
 	if (mActor != nullptr)
 	{
-		b2Body* actorBody = mActor->getBody();
+		b2Body* actorBody = nullptr;
+		//b2Body* actorBody = mActor->getBody();
 		if (actorBody != nullptr)
 		{
 			actorBody->DestroyFixture(mFixture);

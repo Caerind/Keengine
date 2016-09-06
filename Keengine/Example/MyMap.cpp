@@ -44,7 +44,7 @@ bool MyMap::loadTmxString(std::string const & str)
 
 	for (pugi::xml_node tileset = map.child("tileset"); tileset; tileset = tileset.next_sibling("tileset"))
 	{
-		mTileset = &getWorld().createResource<ke::Tileset>(tileset.attribute("name").as_string(), tileset, path);
+		mTileset = &getWorld()->createResource<ke::Tileset>(tileset.attribute("name").as_string(), tileset, path);
 	}
 
 	for (pugi::xml_node layer = map.child("layer"); layer; layer = layer.next_sibling("layer"))
@@ -82,9 +82,9 @@ bool MyMap::loadTmxString(std::string const & str)
 			std::string source = img.attribute("source").as_string();
 			if (source != "")
 			{
-				if (!getWorld().hasResource(source))
+				if (!getWorld()->hasResource(source))
 				{
-					getWorld().createResource<ke::Texture>(source, path + source);
+					getWorld()->createResource<ke::Texture>(source, path + source);
 				}
 				image->setTexture(source);
 			}

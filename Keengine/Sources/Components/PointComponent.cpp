@@ -31,9 +31,9 @@ float PointComponent::getRadius() const
     return mPoint.getRadius();
 }
 
-void PointComponent::render(sf::RenderTarget& target)
+void PointComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)
 {
-    target.draw(mPoint, sf::RenderStates(getWorldTransform()));
+    target.draw(mPoint, states);
 }
 
 } // namespace ke

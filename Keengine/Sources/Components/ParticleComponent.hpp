@@ -8,13 +8,13 @@
 
 #include <SFML/Graphics/VertexArray.hpp>
 
-#include "../Core/PrimitiveComponent.hpp"
+#include "../Core/SceneComponent.hpp"
 #include "../Maths/Distribution.hpp"
 
 namespace ke
 {
 
-class ParticleComponent : public PrimitiveComponent
+class ParticleComponent : public SceneComponent
 {
     public:
 		typedef std::array<sf::Vertex, 6> Quad;
@@ -50,7 +50,6 @@ class ParticleComponent : public PrimitiveComponent
 		void clearAffectors();
 
 		virtual void update(sf::Time dt);
-		virtual void render(sf::RenderTarget& target);
 
 		std::size_t getParticleCount() const;
 		void clearParticles();
@@ -77,6 +76,8 @@ class ParticleComponent : public PrimitiveComponent
 		void computeVertices();
 		void computeQuads();
 		void computeQuad(Quad& quad, sf::IntRect const& rect);
+
+		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);
 
 	private:
 		std::vector<Particle> mParticles;

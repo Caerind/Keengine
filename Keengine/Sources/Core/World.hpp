@@ -11,22 +11,19 @@
 
 #include "../Application/Application.hpp"
 
-#include "Actor.hpp"
 #include "Effect.hpp"
 #include "InputSystem.hpp"
 #include "TimeSystem.hpp"
-#include "PrimitiveComponent.hpp"
+#include "Scene.hpp"
 
 #include "../ExtLibs/LTBL2/LightSystem.hpp"
 #include "LightTextures.hpp"
 
-#include "../Components/CameraComponent.hpp"
-
 namespace ke
 {
 
-	class World
-	{
+class World
+{
 	public:
 		static World& createInstance();
 		static World& instance();
@@ -45,20 +42,60 @@ namespace ke
 		ltbl::LightSystem& getLights();
 		TimeSystem& getTime();
 
+		PhysicSystem* getPhysic();
+		b2World* getPhysicWorld();
+
+		void newScene();
+		template <typename T>
+		void newSceneT()
+		{
+			if (mScene != nullptr)
+			{
+				mScene->onDestroy();
+			}
+			mScene = std::unique_ptr<T>(new T(this));
+			if (mScene != nullptr)
+			{
+				mScene->onCreate();
+			}
+		}
+
+		void initLights();
+
 		virtual void handleEvent(sf::Event const& event);
 		virtual void update(sf::Time dt);
 		virtual void render(sf::RenderTarget& target);
 
-		void registerPrimitive(PrimitiveComponent* component);
-		void unregisterPrimitive(PrimitiveComponent* component);
-
 		template <typename T, typename ... Args>
 		std::shared_ptr<T> createActor(Args&& ... args)
 		{
-			std::shared_ptr<T> actor = std::make_shared<T>(std::forward<Args>(args)...);
-			instance().mActors.push_back(actor);
-			actor->onCreated();
-			return actor;
+			if (mScene != nullptr)
+			{
+				return mScene->createActor<T>(std::forward<Args>(args)...);
+			}
+			return nullptr;
+		}
+
+		Actor::Ptr getActor(std::string const& id) const;
+		Actor::Ptr getActor(std::size_t index) const;
+
+		template <typename T>
+		std::shared_ptr<T> getActorT(std::string const& id) const
+		{
+			if (mScene != nullptr)
+			{
+				return mScene.getActorT<T>(id);
+			}
+			return nullptr;
+		}
+		template <typename T>
+		std::shared_ptr<T> getActorT(std::size_t index) const
+		{
+			if (mScene != nullptr)
+			{
+				return mScene.getActorT<T>(index);
+			}
+			return nullptr;
 		}
 
 		void removeActor(std::string const& id);
@@ -66,32 +103,7 @@ namespace ke
 
 		bool hasActor(std::string const& id) const;
 
-		Actor::Ptr getActor(std::string const& id) const;
-		Actor::Ptr getActor(std::size_t index) const;
-		template <typename T>
-		std::shared_ptr<T> getTypedActor(std::string const& id) const
-		{
-			Actor::Ptr actor = getActor(id);
-			if (actor == nullptr)
-			{
-				return nullptr;
-			}
-			return std::dynamic_pointer_cast<T>(actor);
-		}
-		template <typename T>
-		std::shared_ptr<T> getTypedActor(std::size_t index) const
-		{
-			Actor::Ptr actor = getActor(index);
-			if (actor == nullptr)
-			{
-				return nullptr;
-			}
-			return std::dynamic_pointer_cast<T>(actor);
-		}
-
 		std::size_t getActorCount() const;
-
-		std::size_t getActualId();
 
 		template <typename T>
 		void setEffect(std::size_t const& order)
@@ -105,16 +117,14 @@ namespace ke
 			auto itr = mEffects.find(order);
 			if (itr != mEffects.end())
 			{
-				return static_cast<std::shared_ptr<T>>(itr->second);
+				return std::dynamic_pointer_cast<T>(itr->second);
 			}
 			return nullptr;
 		}
 
 		void removeEffect(std::size_t const& order);
 
-		sf::View& getView();
-		void registerCamera(CameraComponent* camera);
-		void unregisterCamera(CameraComponent* camera);
+		sf::View* getView();
 
 		template <typename T, typename ... Args>
 		T& createResource(std::string const& id, Args&& ... args)
@@ -132,15 +142,8 @@ namespace ke
 		void releaseAllResources();
 
 	private:
-		std::size_t mIdCounter;
-		std::vector<Actor::Ptr> mActors;
-		std::vector<PrimitiveComponent*> mPrimitives;
-
 		sf::RenderTexture mSceneTexture;
 		sf::VertexArray mVertices;
-
-		CameraComponent* mCamera;
-		sf::View mWorldView;
 
 		std::map<std::size_t, std::shared_ptr<Effect>> mEffects;
 
@@ -148,11 +151,15 @@ namespace ke
 
 		sf::RectangleShape mBackground;
 
+		bool mUsePhysic;
+
 		bool mUseLights;
 		ltbl::LightSystem mLights;
 
 		TimeSystem mTime;
-	};
+
+		Scene::Ptr mScene;
+};
 
 } // namespace ke
 

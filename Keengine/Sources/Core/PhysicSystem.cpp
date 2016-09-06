@@ -10,6 +10,7 @@ PhysicSystem::PhysicSystem()
 	: mWorld(new b2World(b2Vec2(0.f, 0.f)))
 {
 	mWorld->SetDebugDraw(this);
+	mWorld->SetContactListener(this);
 	mVelocityIterations = 8;
 	mPositionIterations = 3;
 	mRender = false;
@@ -179,6 +180,51 @@ void PhysicSystem::setRenderDebug(bool render)
 bool PhysicSystem::isRenderingDebug() const
 {
 	return mRender;
+}
+
+void PhysicSystem::setHitFunction(std::string const& typeA, std::string const& typeB, HitFunction func)
+{
+	mHitFunctions.insert(std::make_pair(std::make_pair(typeA, typeB), func));
+}
+
+void PhysicSystem::BeginContact(b2Contact* contact)
+{
+	CollisionComponent* cA = static_cast<CollisionComponent*>(contact->GetFixtureA()->GetUserData());
+	CollisionComponent* cB = static_cast<CollisionComponent*>(contact->GetFixtureB()->GetUserData());
+
+	if (cA != nullptr && cB != nullptr)
+	{
+		Actor* a = cA->getActor();
+		Actor* b = cB->getActor();
+		if (a != nullptr && b != nullptr)
+		{
+			bool foundAB = false;
+			auto fct = mHitFunctions.find(std::make_pair(a->getType(), b->getType()));
+			if (fct != mHitFunctions.end())
+			{
+				foundAB = true;
+				if (fct->second)
+				{
+					fct->second(a, b);
+				}
+			}
+			if (!foundAB)
+			{
+				fct = mHitFunctions.find(std::make_pair(b->getType(), a->getType()));
+				if (fct != mHitFunctions.end())
+				{
+					if (fct->second)
+					{
+						fct->second(b, a);
+					}
+				}
+			}
+		}
+	}
+}
+
+void PhysicSystem::EndContact(b2Contact* contact)
+{
 }
 
 } // namespace ke

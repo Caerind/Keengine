@@ -146,11 +146,6 @@ void AnimatorComponent::update(sf::Time dt)
 	}
 }
 
-void AnimatorComponent::render(sf::RenderTarget& target)
-{
-	target.draw(mSprite, sf::RenderStates(getWorldTransform()));
-}
-
 sf::FloatRect AnimatorComponent::getLocalBounds()
 {
 	return getTransform().transformRect(mSprite.getLocalBounds());
@@ -159,6 +154,11 @@ sf::FloatRect AnimatorComponent::getLocalBounds()
 sf::FloatRect AnimatorComponent::getGlobalBounds()
 {
 	return getWorldTransform().transformRect(mSprite.getLocalBounds());
+}
+
+void AnimatorComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)
+{
+	target.draw(mSprite, states);
 }
 
 } // namespace ke

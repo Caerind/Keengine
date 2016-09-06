@@ -6,12 +6,32 @@ namespace ke
 
 ShapeComponent::ShapeComponent()
 {
-	mLightShape = getWorld().getLights().createShape();
 }
 
 ShapeComponent::~ShapeComponent()
 {
-	getWorld().getLights().removeShape(mLightShape);
+	if (isRegistered())
+	{
+		onUnregister();
+	}
+}
+
+void ShapeComponent::onRegister()
+{
+	World* world = getWorld();
+	if (world != nullptr)
+	{
+		mLightShape = world->getLights().createShape();
+	}
+}
+
+void ShapeComponent::onUnregister()
+{
+	World* world = getWorld();
+	if (world != nullptr)
+	{
+		world->getLights().removeShape(mLightShape);
+	}
 }
 
 void ShapeComponent::setPointCount(std::size_t points)
@@ -69,11 +89,6 @@ sf::Color ShapeComponent::getFillColor() const
 	return mShape.getFillColor();
 }
 
-void ShapeComponent::render(sf::RenderTarget& target)
-{
-	target.draw(mShape, sf::RenderStates(getWorldTransform()));
-}
-
 sf::FloatRect ShapeComponent::getLocalBounds()
 {
 	return getTransform().transformRect(mShape.getLocalBounds());
@@ -82,6 +97,11 @@ sf::FloatRect ShapeComponent::getLocalBounds()
 sf::FloatRect ShapeComponent::getGlobalBounds()
 {
 	return getWorldTransform().transformRect(mShape.getLocalBounds());
+}
+
+void ShapeComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)
+{
+	target.draw(mShape, states);
 }
 
 } // namespace ke
