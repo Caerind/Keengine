@@ -95,14 +95,13 @@ void Application::init(std::string const& pathToSettings)
 	#endif
 
     create();
-	instance().mGui.setWindow(instance().mWindow);
 	
 	#ifndef KEENGINE_ANDROID
     ImGui::SFML::Init(instance().mWindow);
 	#endif
 
 	Log::instance() << Log::Info << "Keengine::Application started";
-    Log::instance() << Log::Info << std::string("Current time is " + getTime("%b %d, %Y %I:%M:%S %p"));
+    Log::instance() << Log::Info << std::string("Current time is " + ke::getTime("%b %d, %Y %I:%M:%S %p"));
 }
 
 void Application::quit()
@@ -202,7 +201,6 @@ void Application::run()
         while (timeSinceLastUpdate >= timePerFrame)
         {
             timeSinceLastUpdate -= timePerFrame;
-            instance().mRunningTime += timePerFrame;
             handleEvent();
             update(timePerFrame);
         }
@@ -232,8 +230,8 @@ void Application::handleEvent()
 		#ifndef KEENGINE_ANDROID
         ImGui::SFML::ProcessEvent(event);
 		#endif
-		
-		instance().mGui.handleEvent(event);
+
+		instance().mInputs.handleEvent(event);
 
         if (instance().mStateMode)
         {
@@ -281,6 +279,11 @@ void Application::update(sf::Time dt)
 	setDebugInfo("MouseX", mouse.x);
 	setDebugInfo("MouseY", mouse.y);
 
+	dt *= instance().mTime.getTimeFactor();
+
+	instance().mInputs.update(dt);
+	instance().mTime.update(dt);
+
     if (instance().mStateMode)
     {
         if (stateCount() > 0)
@@ -320,8 +323,6 @@ void Application::render()
         }
     }
 	
-	instance().mGui.draw();
-	
 	#ifndef KEENGINE_ANDROID
     if (isDebugInfoVisible())
     {
@@ -339,11 +340,6 @@ void Application::render()
 	#endif
 	
     display();
-}
-
-sf::Time Application::getRunningTime()
-{
-    return instance().mRunningTime;
 }
 
 unsigned int Application::getFPS()
@@ -372,14 +368,19 @@ Window& Application::getWindow()
 	return instance().mWindow;
 }
 
-tgui::Gui& Application::getGui()
-{
-	return instance().mGui;
-}
-
 PropertiesHolder& Application::getValues()
 {
 	return instance().mProperties;
+}
+
+TimeSystem& Application::getTime()
+{
+	return instance().mTime;
+}
+
+InputSystem& Application::getInputs()
+{
+	return instance().mInputs;
 }
 
 void Application::setLang(std::string const & lang)

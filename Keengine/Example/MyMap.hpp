@@ -2,14 +2,13 @@
 #define MYMAP_HPP
 
 #include "../Sources/Core/Map.hpp"
-#include "../Sources/Components/DirectionLightComponent.hpp"
 
 class MyMap : public ke::Map
 {
 	public:
 		typedef std::shared_ptr<MyMap> Ptr;
 
-		MyMap();
+		MyMap(ke::Scene& scene);
 
 		bool loadTmxString(std::string const& str);
 

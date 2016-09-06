@@ -6,6 +6,8 @@
 #include "StateManager.hpp"
 #include "PropertiesHolder.hpp"
 #include "Window.hpp"
+#include "TimeSystem.hpp"
+#include "InputSystem.hpp"
 
 #include "../Config.hpp"
 
@@ -46,15 +48,15 @@ class Application
         static void update(sf::Time dt);
         static void render();
 
-        static sf::Time getRunningTime();
         static unsigned int getFPS();
         static bool isStateMode();
 
         static Application& instance();
         static Log& getLog();
 		static Window& getWindow();
-		static tgui::Gui& getGui();
 		static PropertiesHolder& getValues();
+		static TimeSystem& getTime();
+		static InputSystem& getInputs();
 
         //
         // Audio
@@ -209,8 +211,9 @@ class Application
         ResourceManager mResources;
         StateManager mStates;
         Window mWindow;
-		tgui::Gui mGui;
 		PropertiesHolder mProperties;
+		TimeSystem mTime;
+		InputSystem mInputs;
 		#ifndef KEENGINE_ANDROID
 		ScriptManager mScripts;
 		#endif
@@ -218,7 +221,6 @@ class Application
         std::string mPathToSettings;
 		std::string mScriptPath;
 		std::string mLang;
-        sf::Time mRunningTime;
         unsigned int mFps;
         bool mStateMode; // Default Mode Or State Mode
         std::string mIconFilename;

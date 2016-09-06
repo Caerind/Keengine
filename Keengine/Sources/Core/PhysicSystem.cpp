@@ -72,6 +72,14 @@ b2Body* PhysicSystem::createBody(b2BodyDef* def)
 	return nullptr;
 }
 
+void PhysicSystem::destroyBody(b2Body* body)
+{
+	if (mWorld != nullptr)
+	{
+		mWorld->DestroyBody(body);
+	}
+}
+
 void PhysicSystem::DrawPolygon(const b2Vec2 * vertices, int32 vertexCount, const b2Color & color)
 {
 	sf::ConvexShape polygon(vertexCount);

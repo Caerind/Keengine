@@ -1,5 +1,5 @@
 #include "TextComponent.hpp"
-#include "../Core/World.hpp"
+#include "../Core/Scene.hpp"
 
 namespace ke
 {
@@ -10,13 +10,12 @@ TextComponent::TextComponent()
 
 void TextComponent::setFont(std::string const& font)
 {
-	World* world = getWorld();
-	if (world != nullptr)
+	if (getApplication().hasResource(font))
 	{
-		if (world->hasResource(font))
+		if (getApplication().isResourceLoaded(font))
 		{
 			mFont = font;
-			mText.setFont(getWorld()->getResource<ke::Font>(font));
+			mText.setFont(getApplication().getResource<ke::Font>(font));
 		}
 	}
 }

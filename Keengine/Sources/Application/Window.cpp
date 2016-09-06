@@ -506,6 +506,11 @@ sf::IntRect Window::getBackgroundTextureRect()
     return mBackgroundSprite.getTextureRect();
 }
 
+bool Window::useBackgroundColor() const
+{
+	return mUseBackgroundColor;
+}
+
 void Window::updateBackground()
 {
 	if (mUseBackgroundColor)

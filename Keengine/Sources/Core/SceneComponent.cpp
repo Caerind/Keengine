@@ -109,7 +109,7 @@ void SceneComponent::moveZ(float z)
 	mZ += z;
 }
 
-const sf::Vector2f& SceneComponent::getWorldPosition() const
+sf::Vector2f SceneComponent::getWorldPosition() const
 {
 	return mWorldTransform.transformPoint(sf::Vector2f());
 }

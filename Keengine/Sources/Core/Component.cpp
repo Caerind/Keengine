@@ -1,7 +1,7 @@
 #include "Component.hpp"
 
 #include "Actor.hpp"
-#include "World.hpp"
+#include "Scene.hpp"
 
 namespace ke
 {
@@ -184,11 +184,6 @@ void Component::moveActorZ(float z)
 	}
 }
 
-World* Component::getWorld()
-{
-	return (mActor != nullptr) ? mActor->getWorld() : nullptr;
-}
-
 std::string Component::getId() const
 {
 	return mId;
@@ -202,6 +197,21 @@ void Component::setId(std::string const& id)
 Actor* Component::getActor()
 {
 	return mActor;
+}
+
+Scene* Component::getScene()
+{
+	return (mActor != nullptr) ? &mActor->getScene() : nullptr;
+}
+
+Log& Component::getLog()
+{
+	return getApplication().getLog();
+}
+
+Application& Component::getApplication()
+{
+	return Application::instance();
 }
 
 } // namespace ke

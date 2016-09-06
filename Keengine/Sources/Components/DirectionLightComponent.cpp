@@ -1,11 +1,11 @@
 #include "DirectionLightComponent.hpp"
-#include "../Core/World.hpp"
+#include "../Core/Scene.hpp"
 #include "../Maths/Vector2.hpp"
 
 namespace ke
 {
 
-DirectionLightComponent::DirectionLightComponent()
+DirectionLightComponent::DirectionLightComponent() : mLight(nullptr)
 {
 }
 
@@ -15,32 +15,34 @@ DirectionLightComponent::~DirectionLightComponent()
 
 void DirectionLightComponent::onRegister()
 {
-	World* world = getWorld();
-	if (world != nullptr)
+	Scene* scene = getScene();
+	if (scene != nullptr)
 	{
-		mLight = world->getLights().createLightDirection();
+		/*
+		mLight = scene->getLights().createLightDirection();
 
-		Texture& texture = world->getResource<Texture>("directionLightTexture");
+		Texture& texture = getApplication().getResource<Texture>("directionLightTexture");
 
 		mLight->_emissionSprite.setOrigin(sf::Vector2f(texture.getSize().x * 0.5f, texture.getSize().y * 0.5f));
 		mLight->_emissionSprite.setTexture(texture);
 
 		mLight->_emissionSprite.setPosition(getWorldPosition());
+		*/
 	}
 }
 
 void DirectionLightComponent::onUnregister()
 {
-	World* world = getWorld();
-	if (world != nullptr)
+	Scene* scene = getScene();
+	if (scene != nullptr)
 	{
-		world->getLights().removeLight(mLight);
+		//scene->getLights().removeLight(mLight);
 	}
 }
 
 void DirectionLightComponent::setColor(sf::Color color)
 {
-	if (mLight)
+	if (mLight != nullptr)
 	{
 		mLight->_emissionSprite.setColor(color);
 	}
@@ -48,7 +50,7 @@ void DirectionLightComponent::setColor(sf::Color color)
 
 sf::Color DirectionLightComponent::getColor() const
 {
-	if (mLight)
+	if (mLight != nullptr)
 	{
 		return mLight->_emissionSprite.getColor();
 	}
@@ -57,37 +59,61 @@ sf::Color DirectionLightComponent::getColor() const
 
 void DirectionLightComponent::setIntensity(float intensity)
 {
-	mLight->_emissionSprite.setScale(intensity * sf::Vector2f(1.f, 1.f));
+	if (mLight != nullptr)
+	{
+		mLight->_emissionSprite.setScale(intensity * sf::Vector2f(1.f, 1.f));
+	}
 }
 
 float DirectionLightComponent::getIntensity() const
 {
-	return mLight->_emissionSprite.getScale().x;
+	if (mLight != nullptr)
+	{
+		return mLight->_emissionSprite.getScale().x;
+	}
+	return 1.f;
 }
 
 void DirectionLightComponent::setAngle(float angle)
 {
-	mLight->_castDirection = polarVector(1.f, angle);
+	if (mLight != nullptr)
+	{
+		mLight->_castDirection = polarVector(1.f, angle);
+	}
 }
 
 float DirectionLightComponent::getAngle() const
 {
-	return getPolarAngle(mLight->_castDirection);
+	if (mLight != nullptr)
+	{
+		return getPolarAngle(mLight->_castDirection);
+	}
+	return 0.f;
 }
 
-void DirectionLightComponent::setDirection(sf::Vector2f const & vector)
+void DirectionLightComponent::setDirection(sf::Vector2f const& vector)
 {
-	mLight->_castDirection = ltbl::vectorNormalize(vector);
+	if (mLight != nullptr)
+	{
+		mLight->_castDirection = ltbl::vectorNormalize(vector);
+	}
 }
 
 sf::Vector2f DirectionLightComponent::getDirection() const
 {
-	return mLight->_castDirection;
+	if (mLight != nullptr)
+	{
+		return mLight->_castDirection;
+	}
+	return sf::Vector2f();
 }
 
 void DirectionLightComponent::onTransformUpdated()
 {
-	mLight->_emissionSprite.setPosition(getWorldPosition());
+	if (mLight != nullptr)
+	{
+		mLight->_emissionSprite.setPosition(getWorldPosition());
+	}
 }
 
 } // namespace ke

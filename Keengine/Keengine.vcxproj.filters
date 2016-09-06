@@ -13,9 +13,6 @@
     <Filter Include="Sources\Core">
       <UniqueIdentifier>{2e61917f-0def-495b-9940-4d8f2ad2ac9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Components">
-      <UniqueIdentifier>{104ba9db-7e87-4e63-ab72-e5c4204c0304}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Maths">
       <UniqueIdentifier>{00d4d57f-2be6-40d7-a7c2-aa100db8ab69}</UniqueIdentifier>
     </Filter>
@@ -42,6 +39,9 @@
     </Filter>
     <Filter Include="Sources\ExtLibs\Box2D">
       <UniqueIdentifier>{5ccacc81-2fb7-4663-8735-e53161f4922b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Components">
+      <UniqueIdentifier>{104ba9db-7e87-4e63-ab72-e5c4204c0304}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -108,9 +108,6 @@
       <Filter>Sources\Application</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Core\SceneComponent.cpp">
-      <Filter>Sources\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Core\World.cpp">
       <Filter>Sources\Core</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Core\Actor.cpp">
@@ -287,9 +284,6 @@
     <ClCompile Include="Sources\Components\ParticleComponent.cpp">
       <Filter>Sources\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Core\InputSystem.cpp">
-      <Filter>Sources\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Components\InputComponent.cpp">
       <Filter>Sources\Components</Filter>
     </ClCompile>
@@ -370,9 +364,6 @@
     </ClCompile>
     <ClCompile Include="Sources\Components\TextComponent.cpp">
       <Filter>Sources\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Core\TimeSystem.cpp">
-      <Filter>Sources\Core</Filter>
     </ClCompile>
     <ClCompile Include="Sources\ExtLibs\Box2D\b2BlockAllocator.cpp">
       <Filter>Sources\ExtLibs\Box2D</Filter>
@@ -515,6 +506,12 @@
     <ClCompile Include="Sources\Core\Scene.cpp">
       <Filter>Sources\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Application\InputSystem.cpp">
+      <Filter>Sources\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Application\TimeSystem.cpp">
+      <Filter>Sources\Application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -536,9 +533,6 @@
       <Filter>Sources\Application</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Core\SceneComponent.hpp">
-      <Filter>Sources\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Core\World.hpp">
       <Filter>Sources\Core</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Core\Actor.hpp">
@@ -805,9 +799,6 @@
     <ClInclude Include="Sources\Components\ParticleComponent.hpp">
       <Filter>Sources\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Core\InputSystem.hpp">
-      <Filter>Sources\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Components\InputComponent.hpp">
       <Filter>Sources\Components</Filter>
     </ClInclude>
@@ -896,9 +887,6 @@
       <Filter>Sources\Components</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Core\LightTextures.hpp">
-      <Filter>Sources\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Core\TimeSystem.hpp">
       <Filter>Sources\Core</Filter>
     </ClInclude>
     <ClInclude Include="Sources\ExtLibs\Box2D\b2BlockAllocator.h">
@@ -1044,6 +1032,15 @@
     </ClInclude>
     <ClInclude Include="Sources\Core\Scene.hpp">
       <Filter>Sources\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Components\Components.hpp">
+      <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Application\TimeSystem.hpp">
+      <Filter>Sources\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Application\InputSystem.hpp">
+      <Filter>Sources\Application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

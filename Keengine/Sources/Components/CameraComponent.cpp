@@ -1,5 +1,5 @@
 #include "CameraComponent.hpp"
-#include "../Core/World.hpp"
+#include "../Core/Scene.hpp"
 
 namespace ke
 {
@@ -14,10 +14,10 @@ CameraComponent::~CameraComponent()
 
 sf::View* CameraComponent::getView()
 {
-	World* world = getWorld();
-	if (world != nullptr)
+	Scene* scene = getScene();
+	if (scene != nullptr)
 	{
-		return world->getView();
+		return &scene->getView();
 	}
 	return nullptr;
 }

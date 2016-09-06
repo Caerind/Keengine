@@ -1,5 +1,5 @@
 #include "SpriteComponent.hpp"
-#include "../Core/World.hpp"
+#include "../Core/Scene.hpp"
 
 namespace ke
 {
@@ -10,13 +10,12 @@ SpriteComponent::SpriteComponent() : mTexture("")
 
 void SpriteComponent::setTexture(std::string const& textureName, sf::IntRect const& rect)
 {
-	World* world = getWorld();
-	if (world != nullptr)
+	if (getApplication().hasResource(textureName))
 	{
-		if (world->hasResource(textureName))
+		if (getApplication().isResourceLoaded(textureName))
 		{
 			mTexture = textureName;
-			setTexture(world->getResource<Texture>(textureName), rect);
+			setTexture(getApplication().getResource<Texture>(textureName), rect);
 		}
 	}
 }

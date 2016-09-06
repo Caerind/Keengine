@@ -1,8 +1,12 @@
 #include "Effect.hpp"
-#include "World.hpp"
+#include "Scene.hpp"
 
 namespace ke
 {
+
+Effect::Effect()
+{
+}
 
 Effect::~Effect()
 {
@@ -13,7 +17,7 @@ bool Effect::isSupported()
     return sf::Shader::isAvailable();
 }
 
-void Effect::apply(sf::RenderTexture const& input, sf::RenderTarget& output)
+void Effect::apply(sf::RenderTexture& texture)
 {
 }
 
@@ -34,9 +38,24 @@ void Effect::applyShader(sf::Shader const& shader, sf::RenderTarget& output)
 	output.draw(vertices, states);
 }
 
-World& Effect::getWorld()
+void Effect::setScene(Scene* scene)
 {
-	return World::instance();
+	mScene = scene;
+}
+
+Scene* Effect::getScene()
+{
+	return mScene;
+}
+
+Log& Effect::getLog()
+{
+	return getApplication().getLog();
+}
+
+Application& Effect::getApplication()
+{
+	return Application::instance();
 }
 
 Blur::Blur()
@@ -60,17 +79,17 @@ Blur::Blur()
 		"	gl_FragColor = gl_Color * (pixel / 16.0);" \
 		"}";
 
-	if (!getWorld().hasResource("blurShader"))
+	if (!getApplication().hasResource("blurShader"))
 	{
-		getWorld().createResource<Shader>("blurShader").loadFromMemory(fragmentShader, sf::Shader::Fragment);
+		getApplication().createResource<Shader>("blurShader").loadFromMemory(fragmentShader, sf::Shader::Fragment);
 	}
 }
 
-void Blur::apply(sf::RenderTexture const& input, sf::RenderTarget& output)
+void Blur::apply(sf::RenderTexture& texture)
 {
-	Shader& shader = getWorld().getResource<Shader>("blurShader");
-	shader.setUniform("texture", input.getTexture());
-	applyShader(shader, output);
+	Shader& shader = getApplication().getResource<Shader>("blurShader");
+	shader.setUniform("texture", texture.getTexture());
+	applyShader(shader, texture);
 }
 
 Pixelate::Pixelate()
@@ -85,17 +104,17 @@ Pixelate::Pixelate()
 		"	gl_FragColor = texture2D(texture, pos) * gl_Color;" \
 		"}";
 
-	if (!getWorld().hasResource("pixelateShader"))
+	if (!getApplication().hasResource("pixelateShader"))
 	{
-		getWorld().createResource<Shader>("pixelateShader").loadFromMemory(fragmentShader, sf::Shader::Fragment);
+		getApplication().createResource<Shader>("pixelateShader").loadFromMemory(fragmentShader, sf::Shader::Fragment);
 	}
 }
 
-void Pixelate::apply(sf::RenderTexture const& input, sf::RenderTarget& output)
+void Pixelate::apply(sf::RenderTexture& texture)
 {
-	Shader& shader = getWorld().getApplication().getResource<Shader>("pixelateShader");
-	shader.setUniform("texture", input.getTexture());
-	applyShader(shader, output);
+	Shader& shader = getApplication().getResource<Shader>("pixelateShader");
+	shader.setUniform("texture", texture.getTexture());
+	applyShader(shader, texture);
 }
 
 } // namespace ke

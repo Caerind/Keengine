@@ -2,7 +2,6 @@
 #define KE_INPUTCOMPONENT_HPP
 
 #include "../Core/Component.hpp"
-#include "../Core/InputSystem.hpp"
 
 namespace ke
 {

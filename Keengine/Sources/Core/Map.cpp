@@ -1,5 +1,5 @@
 #include "Map.hpp"
-#include "World.hpp"
+#include "Scene.hpp"
 
 namespace ke
 {
@@ -169,8 +169,9 @@ sf::Vector2f Map::coordsToWorld(sf::Vector2i const & coords, std::string const &
 	}
 }
 
-Map::Map()
-	: mLayers()
+Map::Map(Scene& scene)
+	: Actor(scene)
+	, mLayers()
 	, mTileset(nullptr)
 	, mSize()
 	, mTileSize()
@@ -232,7 +233,7 @@ bool Map::loadTmxFile(std::string const& filename)
 
 	for (pugi::xml_node tileset = map.child("tileset"); tileset; tileset = tileset.next_sibling("tileset"))
 	{
-		mTileset = &getWorld()->createResource<Tileset>(tileset.attribute("name").as_string(), tileset, path);
+		mTileset = &getApplication().createResource<Tileset>(tileset.attribute("name").as_string(), tileset, path);
 	}
 
 	for (pugi::xml_node layer = map.child("layer"); layer; layer = layer.next_sibling("layer"))
@@ -270,9 +271,9 @@ bool Map::loadTmxFile(std::string const& filename)
 			std::string source = img.attribute("source").as_string();
 			if (source != "")
 			{
-				if (!getWorld()->hasResource(source))
+				if (!getApplication().hasResource(source))
 				{
-					getWorld()->createResource<Texture>(source, path + source);
+					getApplication().createResource<Texture>(source, path + source);
 				}
 				image->setTexture(source);
 			}
@@ -435,7 +436,7 @@ std::shared_ptr<LayerComponent> Map::createLayer(std::string const& tilesetName,
 	std::shared_ptr<LayerComponent> layer = addLayer();
 	if (layer != nullptr)
 	{
-		layer->create(&getWorld()->getResource<Tileset>(tilesetName), size, tileSize, staggerAxis, staggerIndex, orientation, hexSideLength);
+		layer->create(&getApplication().getResource<Tileset>(tilesetName), size, tileSize, staggerAxis, staggerIndex, orientation, hexSideLength);
 	}
 	return layer;
 }

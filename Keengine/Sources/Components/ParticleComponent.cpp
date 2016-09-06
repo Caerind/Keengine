@@ -1,5 +1,5 @@
 #include "ParticleComponent.hpp"
-#include "../Core/World.hpp"
+#include "../Core/Scene.hpp"
 
 namespace ke
 {
@@ -29,9 +29,13 @@ ParticleComponent::ParticleComponent()
 
 void ParticleComponent::setTexture(std::string const& id)
 {
-	assert(World::instance().getApplication().hasResource(id));
-	assert(World::instance().getApplication().isResourceLoaded(id));
-	ParticleComponent::setTexture(World::instance().getApplication().getResource<Texture>(id));
+	if (getApplication().hasResource(id))
+	{
+		if (getApplication().isResourceLoaded(id))
+		{
+			ParticleComponent::setTexture(getApplication().getResource<Texture>(id));
+		}
+	}
 }
 
 void ParticleComponent::setTexture(sf::Texture& texture)

@@ -8,22 +8,23 @@
 #include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
 
-#include "../System/Container.hpp"
+#include "../Application/Application.hpp"
 
 #include "Component.hpp"
 #include "SceneComponent.hpp"
+#include "../Components/Components.hpp"
 
 namespace ke
 {
 
-class World;
+class Scene;
 class Actor
 {
 	public:
 		typedef std::shared_ptr<Actor> Ptr;
 
     public:
-		Actor();
+		Actor(Scene& scene);
 		virtual ~Actor();
 
 		void remove();
@@ -97,14 +98,16 @@ class Actor
 			return dynamic_cast<T*>(c);
 		}
 
-		void setWorld(World* world);
-		World* getWorld();
+		Scene& getScene();
 
 		b2Body* getBody();
 		void initializePhysic();
 		void destroyPhysic();
 		void prePhysicUpdate();
 		void postPhysicUpdate();
+
+		Log& getLog();
+		Application& getApplication();
 
 	private:
 		SceneComponent mRoot; ///< The root for scene components
@@ -118,7 +121,7 @@ class Actor
 		std::size_t mComponentIdCounter; ///< The ID generator for registered components
 
 	protected:
-		World* mWorld; ///< World where the actor lives in
+		Scene& mScene; ///< Scene where the actor lives in
 
 		std::string mType; ///< Type of the object
 

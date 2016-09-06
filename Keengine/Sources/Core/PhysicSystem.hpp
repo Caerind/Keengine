@@ -34,6 +34,7 @@ class PhysicSystem : public b2Draw, public b2ContactListener
 
 		b2World* getWorld();
 		b2Body* createBody(b2BodyDef* def);
+		void destroyBody(b2Body* body);
 
 		void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
 		void DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);

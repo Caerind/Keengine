@@ -1,10 +1,10 @@
 #include "PointLightComponent.hpp"
-#include "../Core/World.hpp"
+#include "../Core/Scene.hpp"
 
 namespace ke
 {
 
-PointLightComponent::PointLightComponent()
+PointLightComponent::PointLightComponent() : mLight(nullptr)
 {
 }
 
@@ -18,32 +18,34 @@ PointLightComponent::~PointLightComponent()
 
 void PointLightComponent::onRegister()
 {
-	World* world = getWorld();
-	if (world != nullptr)
+	Scene* scene = getScene();
+	if (scene != nullptr)
 	{
-		mLight = world->getLights().createLightPoint();
+		/*
+		mLight = scene->getLights().createLightPoint();
 
-		Texture& texture = world->getResource<Texture>("pointLightTexture");
+		Texture& texture = getApplication().getResource<Texture>("pointLightTexture");
 
 		mLight->_emissionSprite.setOrigin(sf::Vector2f(texture.getSize().x * 0.5f, texture.getSize().y * 0.5f));
 		mLight->_emissionSprite.setTexture(texture);
 
 		mLight->_emissionSprite.setPosition(getWorldPosition());
+		*/
 	}
 }
 
 void PointLightComponent::onUnregister()
 {
-	World* world = getWorld();
-	if (world != nullptr)
+	Scene* scene = getScene();
+	if (scene != nullptr)
 	{
-		world->getLights().removeLight(mLight);
+		//scene->getLights().removeLight(mLight);
 	}
 }
 
 void PointLightComponent::setColor(sf::Color color)
 {
-	if (mLight)
+	if (mLight != nullptr)
 	{
 		mLight->_emissionSprite.setColor(color);
 	}
@@ -51,7 +53,7 @@ void PointLightComponent::setColor(sf::Color color)
 
 sf::Color PointLightComponent::getColor() const
 {
-	if (mLight)
+	if (mLight != nullptr)
 	{
 		return mLight->_emissionSprite.getColor();
 	}
@@ -60,7 +62,7 @@ sf::Color PointLightComponent::getColor() const
 
 void PointLightComponent::setIntensity(float intensity)
 {
-	if (mLight)
+	if (mLight != nullptr)
 	{
 		mLight->_emissionSprite.setScale(intensity * sf::Vector2f(1.f, 1.f));
 	}
@@ -68,7 +70,7 @@ void PointLightComponent::setIntensity(float intensity)
 
 float PointLightComponent::getIntensity() const
 {
-	if (mLight)
+	if (mLight != nullptr)
 	{
 		return mLight->_emissionSprite.getScale().x;
 	}
@@ -77,7 +79,10 @@ float PointLightComponent::getIntensity() const
 
 void PointLightComponent::onTransformUpdated()
 {
-	mLight->_emissionSprite.setPosition(getWorldPosition());
+	if (mLight != nullptr)
+	{
+		mLight->_emissionSprite.setPosition(getWorldPosition());
+	}
 }
 
 } // namespace ke

@@ -1,6 +1,6 @@
 #include "MyObject.hpp"
 
-MyObject::MyObject() : mShape()
+MyObject::MyObject(ke::Scene& scene) : ke::Actor(scene), mShape()
 {
 	registerComponent(&mShape);
 	attachComponent(&mShape);

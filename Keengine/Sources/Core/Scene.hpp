@@ -9,8 +9,13 @@
 
 #include <SFML/System/Time.hpp>
 
+#include "../Application/Application.hpp"
+
 #include "Actor.hpp"
 #include "PhysicSystem.hpp"
+#include "../ExtLibs/LTBL2/LightSystem.hpp"
+#include "LightTextures.hpp"
+#include "Effect.hpp"
 
 namespace ke
 {
@@ -20,26 +25,35 @@ class Scene
 	public:
 		typedef std::unique_ptr<Scene> Ptr;
 
-		Scene(World* world = nullptr);
+		enum Options
+		{
+			None = 0,
+			Physic = 1 << 0,
+			Effect = 1 << 1,
+			Light = 1 << 2,
+		};
+
+		Scene(sf::Uint32 options = Options::None);
 		virtual ~Scene();
 
-		virtual void onCreate();
-		virtual void onDestroy();
-
+		void handleEvent(sf::Event const& event);
 		void update(sf::Time dt);
 		void render(sf::RenderTarget& target);
 
-		void renderPhysic(sf::RenderTarget& target);
+		bool usePhysic() const;
+		bool useEffect() const;
+		bool useLight() const;
 
 		PhysicSystem& getPhysic();
 		b2World* getPhysicWorld();
 
+		ltbl::LightSystem& getLights();
+
 		template <typename T, typename ... Args>
 		std::shared_ptr<T> createActor(Args&& ... args)
 		{
-			std::shared_ptr<T> actor = std::make_shared<T>(std::forward<Args>(args)...);
+			std::shared_ptr<T> actor = std::make_shared<T>(*this, std::forward<Args>(args)...);
 			mActors.push_back(actor);
-			actor->setWorld(mWorld);
 			if (mUsePhysic)
 			{
 				actor->initializePhysic();
@@ -82,10 +96,39 @@ class Scene
 
 		sf::View& getView();
 
+		template <typename T>
+		void setEffect(std::size_t const& order)
+		{
+			mEffects[order] = std::make_shared<T>();
+		}
+
+		template <typename T>
+		std::shared_ptr<T> getEffect(std::size_t const& order)
+		{
+			auto itr = mEffects.find(order);
+			if (itr != mEffects.end())
+			{
+				return std::dynamic_pointer_cast<T>(itr->second);
+			}
+			return nullptr;
+		}
+
+		void removeEffect(std::size_t const& order);
+
+		Log& getLog();
+		Application& getApplication();
+		InputSystem& getInputs();
+
+	private:
 		static bool sortActor(Actor::Ptr a, Actor::Ptr b);
 
+		void initLights();
+
+		void renderComplex(sf::RenderTarget& target);
+		void renderSimple(sf::RenderTarget& target);
+
 	protected:
-		World* mWorld;
+		sf::Uint32 mOptions;
 
 		std::size_t mActorIdCounter;
 
@@ -95,7 +138,11 @@ class Scene
 
 		PhysicSystem mPhysic;
 
-		bool mUsePhysic;
+		ltbl::LightSystem mLights;
+
+		sf::RenderTexture mSceneTexture;
+
+		std::map<std::size_t, std::shared_ptr<Effect>> mEffects;
 };
 
 } // namespace ke

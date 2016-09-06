@@ -1,8 +1,8 @@
 #include "MyMap.hpp"
-#include "../Sources/Core/World.hpp"
+#include "../Sources/Core/Scene.hpp"
 #include "MyObject.hpp"
 
-MyMap::MyMap()
+MyMap::MyMap(ke::Scene& scene) : ke::Map(scene)
 {
 	registerComponent(&mSun);
 	attachComponent(&mSun);
@@ -44,7 +44,7 @@ bool MyMap::loadTmxString(std::string const & str)
 
 	for (pugi::xml_node tileset = map.child("tileset"); tileset; tileset = tileset.next_sibling("tileset"))
 	{
-		mTileset = &getWorld()->createResource<ke::Tileset>(tileset.attribute("name").as_string(), tileset, path);
+		mTileset = &getApplication().createResource<ke::Tileset>(tileset.attribute("name").as_string(), tileset, path);
 	}
 
 	for (pugi::xml_node layer = map.child("layer"); layer; layer = layer.next_sibling("layer"))
@@ -82,9 +82,9 @@ bool MyMap::loadTmxString(std::string const & str)
 			std::string source = img.attribute("source").as_string();
 			if (source != "")
 			{
-				if (!getWorld()->hasResource(source))
+				if (!getApplication().hasResource(source))
 				{
-					getWorld()->createResource<ke::Texture>(source, path + source);
+					getApplication().createResource<ke::Texture>(source, path + source);
 				}
 				image->setTexture(source);
 			}
@@ -106,11 +106,9 @@ bool MyMap::loadTmxString(std::string const & str)
 	{
 		for (pugi::xml_node object = group.child("object"); object; object = object.next_sibling("object"))
 		{
-			/*
-			MyObject::Ptr obj = getWorld().createActor<MyObject>();
+			MyObject::Ptr obj = getScene().createActor<MyObject>();
 			obj->setPosition({ object.attribute("x").as_float(), object.attribute("y").as_float() });
 			obj->setSize(object.attribute("width").as_int(), object.attribute("height").as_int());
-			*/
 		}
 	}
 

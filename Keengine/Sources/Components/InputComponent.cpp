@@ -1,5 +1,5 @@
 #include "InputComponent.hpp"
-#include "../Core/World.hpp"
+#include "../Core/Scene.hpp"
 
 namespace ke
 {
@@ -18,19 +18,19 @@ InputComponent::~InputComponent()
 
 void InputComponent::onRegister()
 {
-	World* world = getWorld();
-	if (world != nullptr)
+	Scene* scene = getScene();
+	if (scene != nullptr)
 	{
-		world->getInputs().registerInput(this);
+		scene->getInputs().registerInput(this);
 	}
 }
 
 void InputComponent::onUnregister()
 {
-	World* world = getWorld();
-	if (world != nullptr)
+	Scene* scene = getScene();
+	if (scene != nullptr)
 	{
-		world->getInputs().unregisterInput(this);
+		scene->getInputs().unregisterInput(this);
 	}
 }
 

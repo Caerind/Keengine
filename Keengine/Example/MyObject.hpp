@@ -10,7 +10,7 @@ class MyObject : public ke::Actor
 	public:
 		typedef std::shared_ptr<MyObject> Ptr;
 
-		MyObject();
+		MyObject(ke::Scene& scene);
 
 		void setSize(int x, int y);
 

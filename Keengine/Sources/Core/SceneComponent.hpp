@@ -39,7 +39,7 @@ class SceneComponent : public Component
 		void setZ(float z);
 		void moveZ(float z);
 
-		const sf::Vector2f& getWorldPosition() const;
+		sf::Vector2f getWorldPosition() const;
 		const sf::Transform& getWorldTransform() const;
 
 		void setVisible(bool visible);

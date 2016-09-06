@@ -1,5 +1,5 @@
 #include "AnimatorComponent.hpp"
-#include "../Core/World.hpp"
+#include "../Core/Scene.hpp"
 
 namespace ke
 {
@@ -91,7 +91,7 @@ void AnimatorComponent::playAnimation(std::string const& name)
 	{
 		mActualAnimation = name;
 		mActualTexture = getActualFrame().textureName;
-		mSprite.setTexture(World::instance().getResource<Texture>(mActualTexture));
+		mSprite.setTexture(getApplication().getResource<Texture>(mActualTexture));
 		mSprite.setTextureRect(getActualFrame().textureRect);
 		mPlaying = true;
 	}
@@ -138,7 +138,7 @@ void AnimatorComponent::update(sf::Time dt)
 			if (mActualTexture != newFrame.textureName)
 			{
 				mActualTexture = newFrame.textureName;
-				mSprite.setTexture(World::instance().getResource<Texture>(mActualTexture));
+				mSprite.setTexture(getApplication().getResource<Texture>(mActualTexture));
 			}
 			mSprite.setTextureRect(newFrame.textureRect);
 			mTimeElapsed = sf::Time::Zero;

@@ -143,6 +143,7 @@ class Window : public sf::RenderWindow
         sf::Color getBackgroundColor();
         void setBackgroundTexture(sf::Texture* texture, sf::IntRect rect = sf::IntRect());
         sf::IntRect getBackgroundTextureRect();
+		bool useBackgroundColor() const;
 
     protected:
         void updateBackground();

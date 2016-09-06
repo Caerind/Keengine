@@ -1,18 +1,18 @@
 #include "Actor.hpp"
 
-#include "World.hpp"
+#include "Scene.hpp"
 #include "../Maths/Generics.hpp"
 
 namespace ke
 {
 
-Actor::Actor()
+Actor::Actor(Scene& scene)
 	: mRoot()
 	, mComponents()
 	, mMarkedForRemoval(false)
 	, mId("")
 	, mComponentIdCounter(1)
-	, mWorld(nullptr)
+	, mScene(scene)
 	, mType("")
 	, mBody(nullptr)
 {
@@ -207,17 +207,7 @@ void Actor::unregisterComponent(Component* component)
 
 void Actor::unregisterComponents()
 {
-	std::size_t size = mComponents.size();
-	for (std::size_t i = 0; i < size; i++)
-	{
-		if (mComponents[i] != nullptr)
-		{
-			if (mComponents[i]->isRegistered())
-			{
-				mComponents[i]->onUnregister();
-			}
-		}
-	}
+	mComponents.clear();
 }
 
 std::size_t Actor::getComponentCount() const
@@ -249,14 +239,9 @@ Component* Actor::getComponent(std::string const& id)
 	return nullptr;
 }
 
-void Actor::setWorld(World * world)
+Scene& Actor::getScene()
 {
-	mWorld = world;
-}
-
-World* Actor::getWorld()
-{
-	return mWorld;
+	return mScene;
 }
 
 b2Body* Actor::getBody()
@@ -266,12 +251,12 @@ b2Body* Actor::getBody()
 
 void Actor::initializePhysic()
 {
-	if (mBody == nullptr && mWorld != nullptr)
+	if (mBody == nullptr)
 	{
 		b2BodyDef bDef;
 		bDef.type = b2_dynamicBody;
 		bDef.position.Set(0, 0);
-		mBody = mWorld->getPhysic().createBody(&bDef);
+		mBody = mScene.getPhysic().createBody(&bDef);
 		mBody->SetUserData(this);
 	}
 }
@@ -280,7 +265,8 @@ void Actor::destroyPhysic()
 {
 	if (mBody != nullptr)
 	{
-		mBody->GetWorld()->DestroyBody(mBody);
+		mBody->SetUserData(nullptr);
+		mScene.getPhysic().destroyBody(mBody);
 		mBody = nullptr;
 	}
 }
@@ -300,6 +286,16 @@ void Actor::postPhysicUpdate()
 		setPosition(mBody->GetPosition() * Physic::conv);
 		setRotation(radToDeg(mBody->GetAngle()));
 	}
+}
+
+Log& Actor::getLog()
+{
+	return getApplication().getLog();
+}
+
+Application& Actor::getApplication()
+{
+	return Application::instance();
 }
 
 } // namespace ke

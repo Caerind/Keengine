@@ -18,7 +18,7 @@ class Map : public Actor, public PropertiesHolder
 		static sf::Vector2i worldToCoords(sf::Vector2f const& world, std::string const& orientation, sf::Vector2i const& tileSize, std::string const& staggerIndex = "odd", std::string const& staggerAxis = "y", unsigned int hexSide = 0);
 		static sf::Vector2f coordsToWorld(sf::Vector2i const& coords, std::string const& orientation, sf::Vector2i const& tileSize, std::string const& staggerIndex = "odd", std::string const& staggerAxis = "y", unsigned int hexSide = 0);
 
-		Map();
+		Map(Scene& scene);
 
 		bool loadTmxFile(std::string const& filename);
 		bool saveTmxFile(std::string const& filename);

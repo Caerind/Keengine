@@ -7,11 +7,13 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
+#include "../Application/Application.hpp"
+
 namespace ke
 {
 
 class Actor;
-class World;
+class Scene;
 class Component
 {
     public:
@@ -48,12 +50,14 @@ class Component
 		void setActorZ(float z);
 		void moveActorZ(float z);
 
-		World* getWorld();
-
 		std::string getId() const;
 		void setId(std::string const& id);
 
 		Actor* getActor();
+		Scene* getScene();
+
+		Log& getLog();
+		Application& getApplication();
 		
 	private:
 		bool mRegistered;

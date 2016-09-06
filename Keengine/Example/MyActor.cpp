@@ -1,8 +1,8 @@
 #include "MyActor.hpp"
-#include "../Sources/Core/World.hpp"
+#include "../Sources/Core/Scene.hpp"
 
-MyActor::MyActor()
-	: Actor()
+MyActor::MyActor(ke::Scene& scene)
+	: ke::Actor(scene)
 	, mA()
 	, mB()
 	, mD()
@@ -54,10 +54,6 @@ MyActor::MyActor()
 		}
 		return false;
 	});
-}
-
-MyActor::~MyActor()
-{
 }
 
 void MyActor::update(sf::Time dt)

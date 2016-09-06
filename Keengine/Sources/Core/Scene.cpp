@@ -3,14 +3,18 @@
 namespace ke
 {
 
-Scene::Scene(World* world)
-	: mWorld(world)
+Scene::Scene(sf::Uint32 options)
+	: mOptions(options)
 	, mActorIdCounter(1)
 	, mActors()
-	, mView()
+	, mView(getApplication().getDefaultView())
 	, mPhysic()
-	, mUsePhysic(false)
+	, mLights()
 {
+	if (useLight())
+	{
+		initLights();
+	}
 }
 
 Scene::~Scene()
@@ -18,11 +22,7 @@ Scene::~Scene()
 	mActors.clear();
 }
 
-void Scene::onCreate()
-{
-}
-
-void Scene::onDestroy()
+void Scene::handleEvent(sf::Event const & event)
 {
 }
 
@@ -37,7 +37,7 @@ void Scene::update(sf::Time dt)
 				mActors[i]->updateComponents(dt);
 				mActors[i]->update(dt);
 
-				if (mUsePhysic)
+				if (usePhysic())
 				{
 					mActors[i]->prePhysicUpdate();
 				}
@@ -45,7 +45,7 @@ void Scene::update(sf::Time dt)
 		}
 	}
 
-	if (mUsePhysic)
+	if (usePhysic())
 	{
 		mPhysic.update(dt);
 
@@ -62,36 +62,41 @@ void Scene::update(sf::Time dt)
 	}
 
 	mActors.erase(std::remove_if(mActors.begin(), mActors.end(), [](Actor::Ptr actor) 
-	{ 
+	{
 		return (actor == nullptr || actor->isMarkedForRemoval());
 	}), mActors.end());
 }
 
 void Scene::render(sf::RenderTarget& target)
 {
-	target.setView(mView);
-
-	std::sort(mActors.begin(), mActors.end(), sortActor);
-
-	std::size_t size = mActors.size();
-	for (std::size_t i = 0; i < size; i++)
+	if (useEffect() || useLight())
 	{
-		if (mActors[i] = nullptr)
-		{
-			if (mActors[i]->isVisible())
-			{
-				mActors[i]->render(target);
-			}
-		}
+		renderComplex(target);
 	}
-}
+	else
+	{
+		renderSimple(target);
+	}
 
-void Scene::renderPhysic(sf::RenderTarget& target)
-{
-	if (mUsePhysic)
+	if (usePhysic())
 	{
 		mPhysic.render(target);
 	}
+}
+
+bool Scene::usePhysic() const
+{
+	return (mOptions & Options::Physic);
+}
+
+bool Scene::useEffect() const
+{
+	return (mOptions & Options::Effect);
+}
+
+bool Scene::useLight() const
+{
+	return (mOptions & Options::Light);
 }
 
 PhysicSystem& Scene::getPhysic()
@@ -102,6 +107,11 @@ PhysicSystem& Scene::getPhysic()
 b2World* Scene::getPhysicWorld()
 {
 	return mPhysic.getWorld();
+}
+
+ltbl::LightSystem& Scene::getLights()
+{
+	return mLights;
 }
 
 Actor::Ptr Scene::getActor(std::string const & id) const
@@ -159,6 +169,30 @@ sf::View& Scene::getView()
 	return mView;
 }
 
+void Scene::removeEffect(std::size_t const& order)
+{
+	auto itr = mEffects.find(order);
+	if (itr != mEffects.end())
+	{
+		mEffects.erase(itr);
+	}
+}
+
+Log& Scene::getLog()
+{
+	return getApplication().getLog();
+}
+
+Application& Scene::getApplication()
+{
+	return Application::instance();
+}
+
+InputSystem& Scene::getInputs()
+{
+	return getApplication().getInputs(); // TODO : Return Scene input
+}
+
 bool Scene::sortActor(Actor::Ptr a, Actor::Ptr b)
 {
 	if (a != nullptr && b != nullptr)
@@ -187,6 +221,130 @@ bool Scene::sortActor(Actor::Ptr a, Actor::Ptr b)
 		}
 	}
 	return true;
+}
+
+void Scene::initLights()
+{
+	if (!getApplication().hasResource("pointLightTexture"))
+	{
+		Texture& texture = getApplication().createResource<Texture>("pointLightTexture");
+		if (!texture.loadFromMemory(pointLightTexture, (sizeof(pointLightTexture) / sizeof(*pointLightTexture))))
+		{
+			getLog() << "World - Can't load pointLightTexture";
+		}
+		texture.setSmooth(true);
+	}
+	if (!getApplication().hasResource("directionLightTexture"))
+	{
+		Texture& texture = getApplication().createResource<Texture>("directionLightTexture");
+		if (!texture.loadFromMemory(directionLightTexture, (sizeof(directionLightTexture) / sizeof(*directionLightTexture))))
+		{
+			getLog() << "World - Can't load directionLightTexture";
+		}
+		texture.setSmooth(true);
+	}
+	if (!getApplication().hasResource("penumbraTexture"))
+	{
+		Texture& texture = getApplication().createResource<Texture>("penumbraTexture");
+		if (!texture.loadFromMemory(penumbraTexture, (sizeof(penumbraTexture) / sizeof(*penumbraTexture))))
+		{
+			getLog() << "World - Can't load penumbraTexture";
+		}
+		texture.setSmooth(true);
+	}
+	if (!getApplication().hasResource("unshadowShader"))
+	{
+		const std::string v = "void main() { gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex; gl_TexCoord[0] = gl_MultiTexCoord0; gl_FrontColor = gl_Color; }";
+		const std::string f = "uniform sampler2D penumbraTexture; uniform float lightBrightness; uniform float darkBrightness; void main()  { float penumbra = texture2D(penumbraTexture, gl_TexCoord[0].xy).x; float shadow = (lightBrightness - darkBrightness) * penumbra + darkBrightness; gl_FragColor = vec4(vec3(1.0 - shadow), 1.0); }";
+		Shader& shader = getApplication().createResource<Shader>("unshadowShader");
+		if (!shader.loadFromMemory(v, f))
+		{
+			getLog() << "World - Can't load unshadowShader";
+		}
+	}
+	if (!getApplication().hasResource("lightOverShapeShader"))
+	{
+		const std::string v = "void main() { gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex; gl_TexCoord[0] = gl_MultiTexCoord0; }";
+		const std::string f = "uniform sampler2D emissionTexture; uniform vec2 targetSizeInv; void main() { vec2 targetCoords = gl_FragCoord.xy * targetSizeInv; vec4 emissionColor = texture2D(emissionTexture, targetCoords); gl_FragColor = vec4(emissionColor.rgb, 1.0); }";
+		Shader& shader = getApplication().createResource<Shader>("lightOverShapeShader");
+		if (!shader.loadFromMemory(v, f))
+		{
+			getLog() << "World - Can't load lightOverShapeShader";
+		}
+	}
+
+	mLights.create({ -1000.f, -1000.f, 2000.f, 2000.f }, getApplication().getSize(), getApplication().getResource<Texture>("penumbraTexture"), getApplication().getResource<Shader>("unshadowShader"), getApplication().getResource<Shader>("lightOverShapeShader"));
+}
+
+void Scene::renderComplex(sf::RenderTarget& target)
+{
+	// Update Texture
+	sf::Vector2u size = target.getSize();
+	if (mSceneTexture.getSize() != size)
+	{
+		mSceneTexture.create(size.x, size.y);
+	}
+
+	// Background
+	std::string bgTexture = getApplication().getBackgroundTexture();
+	sf::IntRect bgRect = getApplication().getBackgroundTextureRect();
+	sf::Color bgColor = getApplication().getBackgroundColor();
+
+	// Render Background
+	mSceneTexture.clear(getApplication().getBackgroundColor());
+	if (!getApplication().getWindow().useBackgroundColor())
+	{
+		std::string textureName = getApplication().getBackgroundTexture();
+		if (getApplication().hasResource(textureName))
+		{
+			if (getApplication().isResourceLoaded(textureName))
+			{
+				mSceneTexture.setView(getApplication().getDefaultView());
+				mSceneTexture.draw(sf::Sprite(getApplication().getResource<Texture>(textureName), getApplication().getBackgroundTextureRect()));
+			}
+		}
+	}
+
+	// Render Scene
+	renderSimple(mSceneTexture);
+
+	// Render Lights
+	if (useLight())
+	{
+		mLights.render(mSceneTexture);
+	}
+
+	// Render Effects
+	if (useEffect())
+	{
+		for (auto itr = mEffects.begin(); itr != mEffects.end(); itr++)
+		{
+			itr->second->apply(mSceneTexture);
+		}
+	}
+
+	// Display
+	mSceneTexture.display();
+	target.draw(sf::Sprite(mSceneTexture.getTexture()));
+}
+
+void Scene::renderSimple(sf::RenderTarget& target)
+{
+	target.setView(mView);
+
+	std::sort(mActors.begin(), mActors.end(), sortActor);
+
+	std::size_t size = mActors.size();
+	for (std::size_t i = 0; i < size; i++)
+	{
+		if (mActors[i] != nullptr)
+		{
+			if (mActors[i]->isVisible())
+			{
+				mActors[i]->render(target);
+			}
+		}
+	}
 }
 
 } // namespace ke

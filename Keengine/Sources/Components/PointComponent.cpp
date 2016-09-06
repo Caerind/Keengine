@@ -1,5 +1,5 @@
 #include "PointComponent.hpp"
-#include "../Core/World.hpp"
+#include "../Core/Scene.hpp"
 
 namespace ke
 {

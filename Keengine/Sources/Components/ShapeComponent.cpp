@@ -1,10 +1,10 @@
 #include "ShapeComponent.hpp"
-#include "../Core/World.hpp"
+#include "../Core/Scene.hpp"
 
 namespace ke
 {
 
-ShapeComponent::ShapeComponent()
+ShapeComponent::ShapeComponent() : mLightShape(nullptr)
 {
 }
 
@@ -18,26 +18,29 @@ ShapeComponent::~ShapeComponent()
 
 void ShapeComponent::onRegister()
 {
-	World* world = getWorld();
-	if (world != nullptr)
+	Scene* scene = getScene();
+	if (scene != nullptr)
 	{
-		mLightShape = world->getLights().createShape();
+		//mLightShape = scene->getLights().createShape();
 	}
 }
 
 void ShapeComponent::onUnregister()
 {
-	World* world = getWorld();
-	if (world != nullptr)
+	Scene* scene = getScene();
+	if (scene != nullptr)
 	{
-		world->getLights().removeShape(mLightShape);
+		//scene->getLights().removeShape(mLightShape);
 	}
 }
 
 void ShapeComponent::setPointCount(std::size_t points)
 {
 	mShape.setPointCount(points);
-	mLightShape->_shape.setPointCount(points);
+	if (mLightShape != nullptr)
+	{
+		mLightShape->_shape.setPointCount(points);
+	}
 }
 
 std::size_t ShapeComponent::getPointCount() const
@@ -48,7 +51,10 @@ std::size_t ShapeComponent::getPointCount() const
 void ShapeComponent::setPoint(std::size_t index, sf::Vector2f const& point)
 {
 	mShape.setPoint(index, point);
-	mLightShape->_shape.setPoint(index, point);
+	if (mLightShape != nullptr)
+	{
+		mLightShape->_shape.setPoint(index, point);
+	}
 }
 
 sf::Vector2f ShapeComponent::getPoint(std::size_t index) const
@@ -59,7 +65,10 @@ sf::Vector2f ShapeComponent::getPoint(std::size_t index) const
 void ShapeComponent::setOutlineThickness(float thickness)
 {
 	mShape.setOutlineThickness(thickness);
-	mLightShape->_shape.setOutlineThickness(thickness);
+	if (mLightShape != nullptr)
+	{
+		mLightShape->_shape.setOutlineThickness(thickness);
+	}
 }
 
 float ShapeComponent::getOutlineThicnkess() const
@@ -70,7 +79,10 @@ float ShapeComponent::getOutlineThicnkess() const
 void ShapeComponent::setOutlineColor(sf::Color const& color)
 {
 	mShape.setOutlineColor(color);
-	mLightShape->_shape.setOutlineColor(color);
+	if (mLightShape != nullptr)
+	{
+		mLightShape->_shape.setOutlineColor(color);
+	}
 }
 
 sf::Color ShapeComponent::getOutlineColor() const
@@ -81,7 +93,10 @@ sf::Color ShapeComponent::getOutlineColor() const
 void ShapeComponent::setFillColor(sf::Color const& color)
 {
 	mShape.setFillColor(color);
-	mLightShape->_shape.setFillColor(color);
+	if (mLightShape != nullptr)
+	{
+		mLightShape->_shape.setFillColor(color);
+	}
 }
 
 sf::Color ShapeComponent::getFillColor() const
