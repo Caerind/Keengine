@@ -1,6 +1,7 @@
 #ifndef KE_COMPONENT_HPP
 #define KE_COMPONENT_HPP
 
+#include <memory>
 #include <string>
 
 #include <SFML/System/Time.hpp>
@@ -17,12 +18,10 @@ class Scene;
 class Component
 {
     public:
-		Component();
-		virtual ~Component();
+		typedef std::shared_ptr<Component> Ptr;
 
-		void registerComponent(Actor* actor);
-		void unregisterComponent(Actor* actor = nullptr);
-		bool isRegistered() const;
+		Component(Actor& actor);
+		virtual ~Component();
 
 		virtual void onRegister();
 		virtual void onUnregister();
@@ -53,18 +52,17 @@ class Component
 		std::string getId() const;
 		void setId(std::string const& id);
 
-		Actor* getActor();
-		Scene* getScene();
+		Actor& getActor();
+		Scene& getScene();
 
 		Log& getLog();
 		Application& getApplication();
 		
-	private:
-		bool mRegistered;
+	protected:
+		Actor& mActor;
+
 		std::string mId;
 
-	protected:
-		Actor* mActor;
 		bool mUpdatable;
 };
 

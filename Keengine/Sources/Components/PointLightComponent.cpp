@@ -4,25 +4,17 @@
 namespace ke
 {
 
-PointLightComponent::PointLightComponent() : mLight(nullptr)
+PointLightComponent::PointLightComponent(Actor& actor)
+	: SceneComponent(actor)
+	, mLight(nullptr)
 {
-}
-
-PointLightComponent::~PointLightComponent()
-{
-	if (isRegistered())
-	{
-		onUnregister();
-	}
 }
 
 void PointLightComponent::onRegister()
 {
-	Scene* scene = getScene();
-	if (scene != nullptr)
+	if (getScene().useLight() && mLight == nullptr)
 	{
-		/*
-		mLight = scene->getLights().createLightPoint();
+		mLight = getScene().getLights().createLightPoint();
 
 		Texture& texture = getApplication().getResource<Texture>("pointLightTexture");
 
@@ -30,16 +22,15 @@ void PointLightComponent::onRegister()
 		mLight->_emissionSprite.setTexture(texture);
 
 		mLight->_emissionSprite.setPosition(getWorldPosition());
-		*/
 	}
 }
 
 void PointLightComponent::onUnregister()
 {
-	Scene* scene = getScene();
-	if (scene != nullptr)
+	if (getScene().useLight() && mLight != nullptr)
 	{
-		//scene->getLights().removeLight(mLight);
+		getScene().getLights().removeLight(mLight);
+		mLight = nullptr;
 	}
 }
 

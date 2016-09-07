@@ -17,6 +17,8 @@ namespace ke
 class ParticleComponent : public SceneComponent
 {
     public:
+		typedef std::shared_ptr<ParticleComponent> Ptr;
+
 		typedef std::array<sf::Vertex, 6> Quad;
 		
 		class Particle
@@ -40,7 +42,7 @@ class ParticleComponent : public SceneComponent
 
 
 	public:
-		ParticleComponent();
+		ParticleComponent(Actor& actor);
 
 		void setTexture(std::string const& id);
 		void setTexture(sf::Texture& texture);

@@ -52,8 +52,9 @@ sf::Time Animation::getDuration() const
 	return duration;
 }
 
-AnimatorComponent::AnimatorComponent() 
-	: mPlaying(false)
+AnimatorComponent::AnimatorComponent(Actor& actor)
+	: SceneComponent(actor)
+	, mPlaying(false)
 	, mSprite()
 	, mAnimations()
 	, mActualTexture()

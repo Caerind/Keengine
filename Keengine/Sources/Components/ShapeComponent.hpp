@@ -11,8 +11,9 @@ namespace ke
 class ShapeComponent : public SceneComponent
 {
 	public:
-		ShapeComponent();
-		~ShapeComponent();
+		typedef std::shared_ptr<ShapeComponent> Ptr;
+
+		ShapeComponent(Actor& actor);
 
 		void onRegister();
 		void onUnregister();

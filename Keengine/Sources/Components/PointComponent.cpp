@@ -4,7 +4,8 @@
 namespace ke
 {
 
-PointComponent::PointComponent()
+PointComponent::PointComponent(Actor& actor)
+	: SceneComponent(actor)
 {
     setRadius(2.f);
     setColor(sf::Color::Red);

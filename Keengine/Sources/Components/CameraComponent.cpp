@@ -4,32 +4,19 @@
 namespace ke
 {
 
-CameraComponent::CameraComponent() : SceneComponent()
+CameraComponent::CameraComponent(Actor& actor) : SceneComponent(actor)
 {
 }
 
-CameraComponent::~CameraComponent()
+sf::View& CameraComponent::getView()
 {
-}
-
-sf::View* CameraComponent::getView()
-{
-	Scene* scene = getScene();
-	if (scene != nullptr)
-	{
-		return &scene->getView();
-	}
-	return nullptr;
+	return getScene().getView();
 }
 
 void CameraComponent::onTransformUpdated()
 {
-	sf::View* view = getView();
-	if (view != nullptr)
-	{
-		view->setCenter(getWorldPosition());
-		view->setRotation(getRotation());
-	}
+	getView().setCenter(getWorldPosition());
+	getView().setRotation(getRotation());
 }
 
 } // namespace ke

@@ -202,29 +202,27 @@ void PhysicSystem::BeginContact(b2Contact* contact)
 
 	if (cA != nullptr && cB != nullptr)
 	{
-		Actor* a = cA->getActor();
-		Actor* b = cB->getActor();
-		if (a != nullptr && b != nullptr)
+		Actor& a = cA->getActor();
+		Actor& b = cB->getActor();
+
+		bool foundAB = false;
+		auto fct = mHitFunctions.find(std::make_pair(a.getType(), b.getType()));
+		if (fct != mHitFunctions.end())
 		{
-			bool foundAB = false;
-			auto fct = mHitFunctions.find(std::make_pair(a->getType(), b->getType()));
+			foundAB = true;
+			if (fct->second)
+			{
+				fct->second(&a, &b);
+			}
+		}
+		if (!foundAB)
+		{
+			fct = mHitFunctions.find(std::make_pair(b.getType(), a.getType()));
 			if (fct != mHitFunctions.end())
 			{
-				foundAB = true;
 				if (fct->second)
 				{
-					fct->second(a, b);
-				}
-			}
-			if (!foundAB)
-			{
-				fct = mHitFunctions.find(std::make_pair(b->getType(), a->getType()));
-				if (fct != mHitFunctions.end())
-				{
-					if (fct->second)
-					{
-						fct->second(b, a);
-					}
+					fct->second(&b, &a);
 				}
 			}
 		}

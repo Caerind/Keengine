@@ -15,7 +15,7 @@ class MyObject : public ke::Actor
 		void setSize(int x, int y);
 
 	private:
-		ke::ShapeComponent mShape;
+		ke::ShapeComponent::Ptr mShape;
 };
 
 #endif // MYOBJECT_HPP

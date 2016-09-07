@@ -238,12 +238,15 @@ bool Map::loadTmxFile(std::string const& filename)
 
 	for (pugi::xml_node layer = map.child("layer"); layer; layer = layer.next_sibling("layer"))
 	{
-		addLayer()->loadFromNode(layer, mTileset, mSize, mTileSize, mOrientation, mStaggerAxis, mStaggerIndex, mHexSideLength);
+		LayerComponent::Ptr layerPtr = createComponent<LayerComponent>();
+		attachComponent(layerPtr);
+		layerPtr->loadFromNode(layer, mTileset, mSize, mTileSize, mOrientation, mStaggerAxis, mStaggerIndex, mHexSideLength);
 	}
 
 	for (pugi::xml_node imagelayer = map.child("imagelayer"); imagelayer; imagelayer = imagelayer.next_sibling("imagelayer"))
 	{
-		std::shared_ptr<SpriteComponent> image = addImage();
+		SpriteComponent::Ptr image = createComponent<SpriteComponent>();
+		attachComponent(image);
 		sf::Vector2f offset;
 		for (const pugi::xml_attribute& attr : imagelayer.attributes())
 		{
@@ -383,15 +386,6 @@ sf::Vector2f Map::coordsToWorld(sf::Vector2i const & coords)
 	return Map::coordsToWorld(coords, mOrientation, mTileSize, mStaggerIndex, mStaggerAxis, mHexSideLength);
 }
 
-std::shared_ptr<SpriteComponent> Map::addImage()
-{
-	std::shared_ptr<SpriteComponent> sprite = std::make_shared<SpriteComponent>();
-	mImages.push_back(sprite);
-	registerComponent(sprite.get());
-	attachComponent(sprite.get());
-	return sprite;
-}
-
 std::size_t Map::getImageCount()
 {
 	return mImages.size();
@@ -422,20 +416,12 @@ void Map::setTileset(Tileset * tileset)
 	mTileset = tileset;
 }
 
-std::shared_ptr<LayerComponent> Map::addLayer()
-{
-	std::shared_ptr<LayerComponent> layer = std::make_shared<LayerComponent>();
-	mLayers.push_back(layer);
-	registerComponent(layer.get());
-	attachComponent(layer.get());
-	return layer;
-}
-
 std::shared_ptr<LayerComponent> Map::createLayer(std::string const& tilesetName, sf::Vector2i const& size, sf::Vector2i const& tileSize, std::string const& orientation, std::string const& staggerAxis, std::string const& staggerIndex, unsigned int hexSideLength)
 {
-	std::shared_ptr<LayerComponent> layer = addLayer();
+	std::shared_ptr<LayerComponent> layer = createComponent<LayerComponent>();
 	if (layer != nullptr)
 	{
+		attachComponent(layer);
 		layer->create(&getApplication().getResource<Tileset>(tilesetName), size, tileSize, staggerAxis, staggerIndex, orientation, hexSideLength);
 	}
 	return layer;
@@ -485,8 +471,8 @@ void Map::removeLayer(std::size_t index)
 {
 	if (0 <= index && index < mLayers.size())
 	{
-		unregisterComponent(mLayers[index].get());
-		detachComponent(mLayers[index].get());
+		detachComponent(mLayers[index]);
+		removeComponent(mLayers[index]);
 		mLayers.erase(mLayers.begin() + index);
 	}
 }
@@ -498,10 +484,11 @@ void Map::removeLayer(std::string const & name)
 	{
 		if (mLayers[i]->getName() == name)
 		{
-			unregisterComponent(mLayers[i].get());
-			detachComponent(mLayers[i].get());
+			detachComponent(mLayers[i]);
+			removeComponent(mLayers[i]);
 			mLayers.erase(mLayers.begin() + i);
 			size--;
+			i--;
 		}
 	}
 }

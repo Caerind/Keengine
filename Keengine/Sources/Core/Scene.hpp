@@ -16,7 +16,6 @@
 #include "../ExtLibs/LTBL2/LightSystem.hpp"
 #include "LightTextures.hpp"
 #include "Effect.hpp"
-#include "SceneRoot.hpp"
 
 namespace ke
 {
@@ -148,7 +147,7 @@ class Scene
 
 		Input mInput;
 
-		SceneRoot::Ptr mSceneRoot;
+		Actor::Ptr mSceneRoot;
 };
 
 } // namespace ke

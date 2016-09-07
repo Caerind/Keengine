@@ -4,7 +4,9 @@
 namespace ke
 {
 
-SpriteComponent::SpriteComponent() : mTexture("")
+SpriteComponent::SpriteComponent(Actor& actor) 
+	: SceneComponent(actor)
+	, mTexture("")
 {
 }
 

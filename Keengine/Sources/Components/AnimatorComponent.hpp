@@ -46,7 +46,9 @@ private:
 class AnimatorComponent : public SceneComponent
 {
 	public:
-		AnimatorComponent();
+		typedef std::shared_ptr<AnimatorComponent> Ptr;
+
+		AnimatorComponent(Actor& actor);
 
 		std::size_t getAnimationCount() const;
 

@@ -3,8 +3,9 @@
 namespace ke
 {
 
-SceneComponent::SceneComponent()
-	: mTransformable()
+SceneComponent::SceneComponent(Actor& actor)
+	: Component(actor)
+	, mTransformable()
 	, mWorldTransform()
 	, mNeedUpdate(true)
 	, mZ(0.f)
@@ -182,7 +183,7 @@ void SceneComponent::renderChildren(sf::RenderTarget& target, sf::RenderStates s
 		{
 			if (mChildren[i] != nullptr)
 			{
-				if (mChildren[i]->isRegistered() && mChildren[i]->isVisible())
+				if (mChildren[i]->isVisible())
 				{
 					mChildren[i]->render(target, states);
 				}

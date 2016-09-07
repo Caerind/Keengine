@@ -5,21 +5,17 @@
 namespace ke
 {
 
-DirectionLightComponent::DirectionLightComponent() : mLight(nullptr)
-{
-}
-
-DirectionLightComponent::~DirectionLightComponent()
+DirectionLightComponent::DirectionLightComponent(Actor& actor)
+	: SceneComponent(actor)
+	, mLight(nullptr)
 {
 }
 
 void DirectionLightComponent::onRegister()
 {
-	Scene* scene = getScene();
-	if (scene != nullptr)
+	if (getScene().useLight() && mLight == nullptr)
 	{
-		/*
-		mLight = scene->getLights().createLightDirection();
+		mLight = getScene().getLights().createLightDirection();
 
 		Texture& texture = getApplication().getResource<Texture>("directionLightTexture");
 
@@ -27,16 +23,15 @@ void DirectionLightComponent::onRegister()
 		mLight->_emissionSprite.setTexture(texture);
 
 		mLight->_emissionSprite.setPosition(getWorldPosition());
-		*/
 	}
 }
 
 void DirectionLightComponent::onUnregister()
 {
-	Scene* scene = getScene();
-	if (scene != nullptr)
+	if (getScene().useLight() && mLight != nullptr)
 	{
-		//scene->getLights().removeLight(mLight);
+		getScene().getLights().removeLight(mLight);
+		mLight = nullptr;
 	}
 }
 

@@ -4,7 +4,8 @@
 namespace ke
 {
 
-TextComponent::TextComponent()
+TextComponent::TextComponent(Actor& actor)
+	: SceneComponent(actor)
 {
 }
 

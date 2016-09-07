@@ -12,7 +12,9 @@ namespace ke
 class SpriteComponent : public SceneComponent
 {
 	public:
-		SpriteComponent();
+		typedef std::shared_ptr<SpriteComponent> Ptr;
+
+		SpriteComponent(Actor& actor);
 
 		void setTexture(std::string const& textureName, sf::IntRect const& rect = sf::IntRect());
 		void setTexture(sf::Texture& texture, sf::IntRect const& rect = sf::IntRect());

@@ -18,8 +18,10 @@ namespace ke
 class LayerComponent : public SceneComponent, public PropertiesHolder
 {
 	public:
-		LayerComponent();
-		LayerComponent(Tileset* tileset, sf::Vector2i const& size = sf::Vector2i(), sf::Vector2i const& tileSize = sf::Vector2i(), std::string const& orientation = "orthogonal", std::string const& staggerAxis = "y", std::string const& staggerIndex = "odd", unsigned int hexSideLength = 0);
+		typedef std::shared_ptr<LayerComponent> Ptr;
+
+		LayerComponent(Actor& actor);
+		LayerComponent(Actor& actor, Tileset* tileset, sf::Vector2i const& size = sf::Vector2i(), sf::Vector2i const& tileSize = sf::Vector2i(), std::string const& orientation = "orthogonal", std::string const& staggerAxis = "y", std::string const& staggerIndex = "odd", unsigned int hexSideLength = 0);
 
 		sf::Vector2i worldToCoords(sf::Vector2f const& world);
 		sf::Vector2f coordsToWorld(sf::Vector2i const& coords);

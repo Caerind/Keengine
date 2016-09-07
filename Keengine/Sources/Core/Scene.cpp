@@ -16,7 +16,7 @@ Scene::Scene(sf::Uint32 options)
 		initLights();
 	}
 	getApplication().getInputs().registerInput(&mInput);
-	mSceneRoot = createActor<SceneRoot>();
+	mSceneRoot = createActor<Actor>();
 }
 
 Scene::~Scene()

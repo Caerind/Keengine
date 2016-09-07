@@ -6,45 +6,16 @@
 namespace ke
 {
 
-Component::Component()
-	: mRegistered(false)
+Component::Component(Actor& actor)
+	: mActor(actor)
 	, mId("")
-	, mActor(nullptr)
 	, mUpdatable(true)
 {
 }
 
 Component::~Component()
 {
-}
-
-void Component::registerComponent(Actor* actor)
-{
-	if (actor != nullptr)
-	{
-		mActor = actor;
-		mRegistered = true;
-		onRegister();
-	}
-}
-
-void Component::unregisterComponent(Actor* actor)
-{
-	if (actor == nullptr && mActor != nullptr)
-	{
-		unregisterComponent(mActor);
-	}
-	if (actor != nullptr)
-	{
-		onUnregister();
-		mActor = nullptr;
-		mRegistered = false;
-	}
-}
-
-bool Component::isRegistered() const
-{
-	return mRegistered;
+	onUnregister();
 }
 
 void Component::onRegister()
@@ -66,19 +37,12 @@ void Component::update(sf::Time dt)
 
 sf::Vector2f Component::getActorPosition() const
 {
-	if (mActor != nullptr)
-	{
-		return mActor->getPosition();
-	}
-	return sf::Vector2f();
+	return mActor.getPosition();
 }
 
 void Component::setActorPosition(sf::Vector2f const& position)
 {
-	if (mActor != nullptr)
-	{
-		mActor->setPosition(position);
-	}
+	mActor.setPosition(position);
 }
 
 void Component::setActorPosition(float x, float y)
@@ -88,10 +52,7 @@ void Component::setActorPosition(float x, float y)
 
 void Component::moveActor(sf::Vector2f const& movement)
 {
-	if (mActor != nullptr)
-	{
-		mActor->move(movement);
-	}
+	mActor.move(movement);
 }
 
 void Component::moveActor(float x, float y)
@@ -101,44 +62,27 @@ void Component::moveActor(float x, float y)
 
 float Component::getActorRotation() const
 {
-	if (mActor != nullptr)
-	{
-		return mActor->getRotation();
-	}
-	return 0.f;
+	return mActor.getRotation();
 }
 
 void Component::setActorRotation(float rotation)
 {
-	if (mActor != nullptr)
-	{
-		mActor->setRotation(rotation);
-	}
+	mActor.setRotation(rotation);
 }
 
 void Component::rotateActor(float rotation)
 {
-	if (mActor != nullptr)
-	{
-		mActor->rotate(rotation);
-	}
+	mActor.rotate(rotation);
 }
 
 sf::Vector2f Component::getActorScale() const
 {
-	if (mActor != nullptr)
-	{
-		return mActor->getScale();
-	}
-	return sf::Vector2f();
+	return mActor.getScale();
 }
 
 void Component::setActorScale(sf::Vector2f const& scale)
 {
-	if (mActor != nullptr)
-	{
-		mActor->setScale(scale);
-	}
+	mActor.setScale(scale);
 }
 
 void Component::setActorScale(float x, float y)
@@ -148,10 +92,7 @@ void Component::setActorScale(float x, float y)
 
 void Component::scaleActor(sf::Vector2f const& scale)
 {
-	if (mActor != nullptr)
-	{
-		mActor->scale(scale);
-	}
+	mActor.scale(scale);
 }
 
 void Component::scaleActor(float x, float y)
@@ -161,27 +102,17 @@ void Component::scaleActor(float x, float y)
 
 float Component::getActorZ() const
 {
-	if (mActor != nullptr)
-	{
-		return mActor->getZ();
-	}
-	return 0.f;
+	return mActor.getZ();
 }
 
 void Component::setActorZ(float z)
 {
-	if (mActor != nullptr)
-	{
-		mActor->setZ(z);
-	}
+	mActor.setZ(z);
 }
 
 void Component::moveActorZ(float z)
 {
-	if (mActor != nullptr)
-	{
-		mActor->moveZ(z);
-	}
+	mActor.moveZ(z);
 }
 
 std::string Component::getId() const
@@ -194,14 +125,14 @@ void Component::setId(std::string const& id)
 	mId = id;
 }
 
-Actor* Component::getActor()
+Actor& Component::getActor()
 {
 	return mActor;
 }
 
-Scene* Component::getScene()
+Scene& Component::getScene()
 {
-	return (mActor != nullptr) ? &mActor->getScene() : nullptr;
+	return mActor.getScene();
 }
 
 Log& Component::getLog()

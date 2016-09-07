@@ -4,33 +4,26 @@
 namespace ke
 {
 
-ShapeComponent::ShapeComponent() : mLightShape(nullptr)
+ShapeComponent::ShapeComponent(Actor& actor) 
+	: SceneComponent(actor)
+	, mLightShape(nullptr)
 {
-}
-
-ShapeComponent::~ShapeComponent()
-{
-	if (isRegistered())
-	{
-		onUnregister();
-	}
 }
 
 void ShapeComponent::onRegister()
 {
-	Scene* scene = getScene();
-	if (scene != nullptr)
+	if (getScene().useLight() && mLightShape == nullptr)
 	{
-		//mLightShape = scene->getLights().createShape();
+		mLightShape = getScene().getLights().createShape();
 	}
 }
 
 void ShapeComponent::onUnregister()
 {
-	Scene* scene = getScene();
-	if (scene != nullptr)
+	if (getScene().useLight() && mLightShape != nullptr)
 	{
-		//scene->getLights().removeShape(mLightShape);
+		getScene().getLights().removeShape(mLightShape);
+		mLightShape = nullptr;
 	}
 }
 

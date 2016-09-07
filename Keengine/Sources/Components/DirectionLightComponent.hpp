@@ -10,8 +10,9 @@ namespace ke
 class DirectionLightComponent : public SceneComponent
 {
 	public:
-		DirectionLightComponent();
-		~DirectionLightComponent();
+		typedef std::shared_ptr<DirectionLightComponent> Ptr;
+
+		DirectionLightComponent(Actor& actor);
 
 		void onRegister();
 		void onUnregister();

@@ -3,22 +3,23 @@
 
 MyActor::MyActor(ke::Scene& scene)
 	: ke::Actor(scene)
-	, mA()
-	, mB()
-	, mD()
+	, mA(nullptr)
+	, mB(nullptr)
+	, mC(nullptr)
+	, mD(nullptr)
 	, mRunning(false)
 {
-    registerComponent(&mA);
-	attachComponent(&mA);
+	mA = createComponent<ke::PointComponent>();
+	attachComponent(mA);
 
-	registerComponent(&mB);
-	attachComponent(&mB);
-	ke::Animation& idle = mB.getAnimation("idle");
+	mB = createComponent<ke::AnimatorComponent>();
+	attachComponent(mB);
+	ke::Animation& idle = mB->getAnimation("idle");
 	idle.addFrame("cat", { 0, 0, 64, 64 }, sf::seconds(0.15f));
 	idle.addFrame("cat", { 64, 0, 64, 64 }, sf::seconds(0.15f));
 	idle.addFrame("cat", { 128, 0, 64, 64 }, sf::seconds(0.15f));
 	idle.addFrame("cat", { 192, 0, 64, 64 }, sf::seconds(0.15f));
-	ke::Animation& run = mB.getAnimation("run");
+	ke::Animation& run = mB->getAnimation("run");
 	run.addFrame("cat", { 0, 64, 64, 64 }, sf::seconds(0.15f));
 	run.addFrame("cat", { 64, 64, 64, 64 }, sf::seconds(0.15f));
 	run.addFrame("cat", { 128, 64, 64, 64 }, sf::seconds(0.15f));
@@ -28,28 +29,28 @@ MyActor::MyActor(ke::Scene& scene)
 	run.addFrame("cat", { 384, 64, 64, 64 }, sf::seconds(0.15f));
 	run.addFrame("cat", { 448, 64, 64, 64 }, sf::seconds(0.15f));
 
-	registerComponent(&mC);
-	attachComponent(&mC);
-	mC.setColor(sf::Color::Blue);
-	mC.setIntensity(10.f);
+	mC = createComponent<ke::PointLightComponent>();
+	attachComponent(mC);
+	mC->setColor(sf::Color::Blue);
+	mC->setIntensity(10.f);
 
-	registerComponent(&mD);
-	mD.bindAction("MoveRight", [&](std::vector<std::string> const& data)
+	mD = createComponent<ke::InputComponent>();
+	mD->bindAction("MoveRight", [&](std::vector<std::string> const& data)
 	{
 		if (!mRunning)
 		{
-			mB.stopAnimation();
-			mB.playAnimation("run");
+			mB->stopAnimation();
+			mB->playAnimation("run");
 			mRunning = true;
 		}
 		return false;
 	});
-	mD.bindAction("Stop", [&](std::vector<std::string> const& data)
+	mD->bindAction("Stop", [&](std::vector<std::string> const& data)
 	{
 		if (mRunning)
 		{
-			mB.stopAnimation();
-			mB.playAnimation("idle");
+			mB->stopAnimation();
+			mB->playAnimation("idle");
 			mRunning = false;
 		}
 		return false;

@@ -10,10 +10,11 @@ namespace ke
 class CameraComponent : public SceneComponent
 {
     public:
-        CameraComponent();
-		~CameraComponent();
+		typedef std::shared_ptr<CameraComponent> Ptr;
 
-        sf::View* getView();
+        CameraComponent(Actor& actor);
+
+        sf::View& getView();
 
 		void onTransformUpdated();
 };
