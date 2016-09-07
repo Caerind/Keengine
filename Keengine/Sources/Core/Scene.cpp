@@ -15,11 +15,15 @@ Scene::Scene(sf::Uint32 options)
 	{
 		initLights();
 	}
+	getApplication().getInputs().registerInput(&mInput);
+	mSceneRoot = createActor<SceneRoot>();
 }
 
 Scene::~Scene()
 {
 	mActors.clear();
+	getApplication().getInputs().unregisterInput(&mInput);
+	mSceneRoot = nullptr;
 }
 
 void Scene::handleEvent(sf::Event const & event)
@@ -86,17 +90,17 @@ void Scene::render(sf::RenderTarget& target)
 
 bool Scene::usePhysic() const
 {
-	return (mOptions & Options::Physic);
+	return ((mOptions & Options::Physic) != 0);
 }
 
 bool Scene::useEffect() const
 {
-	return (mOptions & Options::Effect);
+	return ((mOptions & Options::Effect) != 0);
 }
 
 bool Scene::useLight() const
 {
-	return (mOptions & Options::Light);
+	return ((mOptions & Options::Light) != 0);
 }
 
 PhysicSystem& Scene::getPhysic()
@@ -188,9 +192,9 @@ Application& Scene::getApplication()
 	return Application::instance();
 }
 
-InputSystem& Scene::getInputs()
+Input& Scene::getInput()
 {
-	return getApplication().getInputs(); // TODO : Return Scene input
+	return mInput;
 }
 
 bool Scene::sortActor(Actor::Ptr a, Actor::Ptr b)

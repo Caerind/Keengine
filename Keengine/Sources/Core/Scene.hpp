@@ -16,6 +16,7 @@
 #include "../ExtLibs/LTBL2/LightSystem.hpp"
 #include "LightTextures.hpp"
 #include "Effect.hpp"
+#include "SceneRoot.hpp"
 
 namespace ke
 {
@@ -54,7 +55,7 @@ class Scene
 		{
 			std::shared_ptr<T> actor = std::make_shared<T>(*this, std::forward<Args>(args)...);
 			mActors.push_back(actor);
-			if (mUsePhysic)
+			if (usePhysic())
 			{
 				actor->initializePhysic();
 			}
@@ -117,7 +118,8 @@ class Scene
 
 		Log& getLog();
 		Application& getApplication();
-		InputSystem& getInputs();
+
+		Input& getInput();
 
 	private:
 		static bool sortActor(Actor::Ptr a, Actor::Ptr b);
@@ -142,7 +144,11 @@ class Scene
 
 		sf::RenderTexture mSceneTexture;
 
-		std::map<std::size_t, std::shared_ptr<Effect>> mEffects;
+		std::map<std::size_t, std::shared_ptr<ke::Effect>> mEffects;
+
+		Input mInput;
+
+		SceneRoot::Ptr mSceneRoot;
 };
 
 } // namespace ke
