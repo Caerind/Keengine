@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="staggered" renderorder="right-down" width="10" height="10" tilewidth="256" tileheight="128" staggeraxis="y" staggerindex="odd" nextobjectid="1">
+<map version="1.0" orientation="staggered" renderorder="right-down" width="10" height="10" tilewidth="256" tileheight="128" staggeraxis="y" staggerindex="odd" nextobjectid="11">
  <tileset firstgid="1" name="iso" tilewidth="256" tileheight="128" tilecount="4" columns="4">
   <image source="iso.png" width="1024" height="128"/>
  </tileset>
@@ -8,4 +8,13 @@
    eJxjYmBgYKIyZkHCxKgbrOYNBAYAtwAA4w==
   </data>
  </layer>
+ <objectgroup name="Calque d'objets 1">
+  <object id="4" x="172" y="100" width="146" height="48"/>
+  <object id="5" x="586" y="106" width="186" height="62"/>
+  <object id="6" x="190" y="486" width="80" height="44"/>
+  <object id="7" x="418" y="472" width="78" height="48"/>
+  <object id="8" x="686" y="482" width="70" height="74"/>
+  <object id="9" x="902" y="428" width="54" height="70"/>
+  <object id="10" x="858" y="202" width="66" height="46"/>
+ </objectgroup>
 </map>

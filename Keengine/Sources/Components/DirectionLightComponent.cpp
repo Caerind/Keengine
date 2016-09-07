@@ -108,6 +108,7 @@ void DirectionLightComponent::onTransformUpdated()
 	if (mLight != nullptr)
 	{
 		mLight->_emissionSprite.setPosition(getWorldPosition());
+		mLight->_emissionSprite.setRotation(getRotation());
 	}
 }
 

@@ -38,6 +38,7 @@ class ShapeComponent : public SceneComponent
 
 	private:
 		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);
+		virtual void onTransformUpdated();
 
 	private:
 		sf::ConvexShape mShape;

@@ -112,4 +112,12 @@ void ShapeComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates st
 	target.draw(mShape, states);
 }
 
+void ShapeComponent::onTransformUpdated()
+{
+	if (mLightShape != nullptr)
+	{
+		mLightShape->_shape.setPosition(getWorldPosition());
+	}
+}
+
 } // namespace ke

@@ -13,7 +13,10 @@ class MyMap : public ke::Map
 		bool loadTmxString(std::string const& str);
 
 	private:
-		ke::DirectionLightComponent::Ptr mSun;
+		ke::DirectionLightComponent::Ptr mLight;
+
+		sf::Color mSunColor;
+		sf::Color mMoonColor;
 };
 
 #endif // MYMAP_HPP

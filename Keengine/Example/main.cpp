@@ -17,21 +17,23 @@ int main()
 	ke::Application::createResource<ke::Lang>("english", "Example/English.lang");
 	ke::Application::createResource<ke::Lang>("french", "Example/French.lang");
 
-	/*
 	ke::Application::setLang("french");
+
+	tgui::Gui gui(ke::Application::getWindow());
 	tgui::Button::Ptr button = ke::Application::getResource<ke::Theme>("css").create("Button");
 	button->setPosition(350, 50);
 	button->setSize(150, 50);
 	button->setText(std::to_string(ke::Application::getSize().x) + " " + std::to_string(ke::Application::getSize().y));
-	button->connect("pressed", []() { ke::Application::getLog() << ke::Application::inLang("hello"); ke::Application::close(); });
-	ke::Application::getGui().add(button);
-	*/
+	button->connect("pressed", []() { ke::Application::getLog() << ke::Application::inLang("hello"); });
+	gui.add(button);
 
 	ke::Application::getInputs().setKeyboardMapping("MoveRight", sf::Keyboard::D, ke::InputType::Pressed);
-	ke::Application::getInputs().setKeyboardMapping("Stop", sf::Keyboard::D, ke::InputType::Released);
+	ke::Application::getInputs().setKeyboardMapping("StopRight", sf::Keyboard::D, ke::InputType::Released);
+	ke::Application::getInputs().setKeyboardMapping("MoveLeft", sf::Keyboard::Q, ke::InputType::Pressed);
+	ke::Application::getInputs().setKeyboardMapping("StopLeft", sf::Keyboard::Q, ke::InputType::Released);
 	ke::Application::getInputs().loadFromFile("Example/inputs.cfg");
 
-	ke::Scene scene;
+	ke::Scene scene(ke::Scene::Light);
 
 	MyMap::Ptr map = scene.createActor<MyMap>();
 	map->loadTmxString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" \
@@ -44,20 +46,33 @@ int main()
 		"   eJxjYmBgYKIyZkHCxKgbrOYNBAYAtwAA4w==" \
 		"  </data>" \
 		" </layer>" \
+		" <objectgroup name=\"Calque d'objets 1\">" \
+		"  <object id=\"4\" x=\"172\" y=\"100\" width=\"146\" height=\"48\" />" \
+		"  <object id=\"5\" x=\"586\" y=\"106\" width=\"186\" height=\"62\" />" \
+		"  <object id=\"6\" x=\"190\" y=\"486\" width=\"80\" height=\"44\" />" \
+		"  <object id=\"7\" x=\"418\" y=\"472\" width=\"78\" height=\"48\" />" \
+		"  <object id=\"8\" x=\"686\" y=\"482\" width=\"70\" height=\"74\" />" \
+		"  <object id=\"9\" x=\"902\" y=\"428\" width=\"54\" height=\"70\" />" \
+		"  <object id=\"10\" x=\"858\" y=\"202\" width=\"66\" height=\"46\" />" \
+		" </objectgroup>" \
 		"</map>");
-	auto layer = map->getLayer(0);
+	ke::LayerComponent::Ptr layer = map->getLayer(0);
 
 	MyActor::Ptr actor = scene.createActor<MyActor>();
 	actor->setZ(100.f);
-	actor->setPosition({ 10.f, 100.f });
+	actor->setPosition({ 10.f, 300.f });
 
 	ke::Application::setEventDefaultFunction([&](sf::Event const& event)
 	{
+		gui.handleEvent(event);
 		if (event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::TouchBegan)
 		{
 			sf::Vector2f mPos = ke::Application::getPointerPositionView(scene.getView());
-			sf::Vector2i coords = layer->worldToCoords(mPos);
-			layer->setTileId(coords, 3);
+			if (layer != nullptr)
+			{
+				sf::Vector2i coords = layer->worldToCoords(mPos);
+				layer->setTileId(coords, 3);
+			}
 		}
 	});
 
@@ -70,6 +85,7 @@ int main()
 	ke::Application::setRenderDefaultFunction([&](sf::RenderTarget& target)
 	{
 		scene.render(target);
+		gui.draw();
 	});
 
 	ke::Application::runDefault();

@@ -27,17 +27,17 @@ class Map : public Actor, public PropertiesHolder
 		sf::Vector2f coordsToWorld(sf::Vector2i const& coords);
 
 		std::size_t getImageCount();
-		std::shared_ptr<SpriteComponent> getImage(std::size_t index);
+		SpriteComponent::Ptr getImage(std::size_t index);
 		void removeImage(std::size_t index);
 		void clearImages();
 
 		Tileset* getTileset();
 		void setTileset(Tileset* tileset);
 
-		std::shared_ptr<LayerComponent> createLayer(std::string const& tilesetName = "", sf::Vector2i const& size = sf::Vector2i(), sf::Vector2i const& tileSize = sf::Vector2i(), std::string const& orientation = "orthogonal", std::string const& staggerAxis = "y", std::string const& staggerIndex = "odd", unsigned int hexSideLength = 0);
+		LayerComponent::Ptr createLayer(std::string const& tilesetName = "", sf::Vector2i const& size = sf::Vector2i(), sf::Vector2i const& tileSize = sf::Vector2i(), std::string const& orientation = "orthogonal", std::string const& staggerAxis = "y", std::string const& staggerIndex = "odd", unsigned int hexSideLength = 0);
 		std::size_t getLayerCount();
-		std::shared_ptr<LayerComponent> getLayer(std::size_t index);
-		std::shared_ptr<LayerComponent> getLayer(std::string const& name);
+		LayerComponent::Ptr getLayer(std::size_t index);
+		LayerComponent::Ptr getLayer(std::string const& name);
 		bool hasLayer(std::string const& name);
 		void removeLayer(std::size_t index);
 		void removeLayer(std::string const& name);

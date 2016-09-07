@@ -8,7 +8,7 @@ MyObject::MyObject(ke::Scene& scene)
 	attachComponent(mShape);
 	mShape->setPointCount(4);
 	mShape->setPoint(0, sf::Vector2f());
-	mShape->setFillColor(sf::Color::Transparent);
+	mShape->setFillColor(sf::Color::Blue);
 	mShape->setOutlineColor(sf::Color::Red);
 	mShape->setOutlineThickness(1.f);
 }

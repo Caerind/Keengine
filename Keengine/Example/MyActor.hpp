@@ -18,7 +18,8 @@ class MyActor : public ke::Actor
 		ke::PointLightComponent::Ptr mC;
 		ke::InputComponent::Ptr mD;
 
-		bool mRunning;
+		bool mRunningRight;
+		bool mRunningLeft;
 };
 
 #endif // MYACTOR_HPP

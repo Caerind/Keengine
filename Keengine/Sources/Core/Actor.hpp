@@ -110,6 +110,7 @@ class Actor
 			std::shared_ptr<T> component = std::make_shared<T>(*this, std::forward<Args>(args)...);
 			mComponents.push_back(component);
 			component->setId(ke::decToHex(mComponentIdCounter++));
+			component->onRegister();
 			return component;
 		}
 
