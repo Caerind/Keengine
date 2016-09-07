@@ -16,6 +16,7 @@ class MyObject : public ke::Actor
 
 	private:
 		ke::ShapeComponent::Ptr mShape;
+		ke::LightShapeComponent::Ptr mLightShape;
 };
 
 #endif // MYOBJECT_HPP

@@ -31,6 +31,7 @@ int main()
 	ke::Application::getInputs().setKeyboardMapping("StopRight", sf::Keyboard::D, ke::InputType::Released);
 	ke::Application::getInputs().setKeyboardMapping("MoveLeft", sf::Keyboard::Q, ke::InputType::Pressed);
 	ke::Application::getInputs().setKeyboardMapping("StopLeft", sf::Keyboard::Q, ke::InputType::Released);
+	ke::Application::getInputs().setKeyboardMapping("Light", sf::Keyboard::L, ke::InputType::Pressed);
 	ke::Application::getInputs().loadFromFile("Example/inputs.cfg");
 
 	ke::Scene scene(ke::Scene::Light);
@@ -62,23 +63,37 @@ int main()
 	actor->setZ(100.f);
 	actor->setPosition({ 10.f, 300.f });
 
+	ke::PointLightComponent::Ptr mouseLight = scene.createComponent<ke::PointLightComponent>();
+	scene.attachComponent(mouseLight);
+	mouseLight->setPosition(ke::Application::getPointerPositionView(scene.getView()));
+	mouseLight->setColor(sf::Color::White);
+	mouseLight->setIntensity(3.f);
+
 	ke::Application::setEventDefaultFunction([&](sf::Event const& event)
 	{
 		gui.handleEvent(event);
 		if (event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::TouchBegan)
 		{
 			sf::Vector2f mPos = ke::Application::getPointerPositionView(scene.getView());
+
 			if (layer != nullptr)
 			{
 				sf::Vector2i coords = layer->worldToCoords(mPos);
 				layer->setTileId(coords, 3);
 			}
+
+			ke::PointLightComponent::Ptr light = scene.createComponent<ke::PointLightComponent>();
+			scene.attachComponent(light);
+			light->setPosition(mPos);
+			light->setColor(sf::Color(200, 200, 10));
+			light->setIntensity(5.f);
 		}
 	});
 
 	ke::Application::setUpdateDefaultFunction([&](sf::Time dt)
 	{
 		scene.update(dt);
+		mouseLight->setPosition(ke::Application::getPointerPositionView(scene.getView()));
 		ke::Application::setDebugInfo("Actors", scene.getActorCount());
 	});
 
@@ -90,6 +105,7 @@ int main()
 
 	ke::Application::runDefault();
 
+	mouseLight = nullptr;
 	map = nullptr;
 	layer = nullptr;
 	actor = nullptr;

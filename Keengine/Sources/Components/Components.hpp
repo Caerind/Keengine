@@ -7,6 +7,7 @@
 #include "DirectionLightComponent.hpp"
 #include "InputComponent.hpp"
 #include "LayerComponent.hpp"
+#include "LightShapeComponent.hpp"
 #include "ParticleComponent.hpp"
 #include "PointComponent.hpp"
 #include "PointLightComponent.hpp"

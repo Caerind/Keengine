@@ -197,6 +197,30 @@ Input& Scene::getInput()
 	return mInput;
 }
 
+void Scene::attachComponent(SceneComponent::Ptr component)
+{
+	if (mSceneRoot != nullptr)
+	{
+		mSceneRoot->attachComponent(component);
+	}
+}
+
+void Scene::detachComponent(SceneComponent::Ptr component)
+{
+	if (mSceneRoot != nullptr)
+	{
+		mSceneRoot->detachComponent(component);
+	}
+}
+
+void Scene::removeComponent(Component::Ptr component)
+{
+	if (mSceneRoot != nullptr)
+	{
+		mSceneRoot->removeComponent(component);
+	}
+}
+
 bool Scene::sortActor(Actor::Ptr a, Actor::Ptr b)
 {
 	if (a != nullptr && b != nullptr)

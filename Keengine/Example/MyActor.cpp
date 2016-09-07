@@ -66,6 +66,11 @@ MyActor::MyActor(ke::Scene& scene)
 		mRunningLeft = false;
 		return false;
 	});
+	mD->bindAction("Light", [&](std::vector<std::string> const& data)
+	{
+		mC->setOn(!mC->isOn());
+		return false;
+	});
 }
 
 void MyActor::update(sf::Time dt)

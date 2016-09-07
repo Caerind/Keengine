@@ -3,7 +3,7 @@
 
 #include "../Core/SceneComponent.hpp"
 
-#include "../ExtLibs/LTBL2/LightShape.hpp"
+#include <SFML/Graphics/ConvexShape.hpp>
 
 namespace ke
 {
@@ -14,9 +14,6 @@ class ShapeComponent : public SceneComponent
 		typedef std::shared_ptr<ShapeComponent> Ptr;
 
 		ShapeComponent(Actor& actor);
-
-		void onRegister();
-		void onUnregister();
 
 		void setPointCount(std::size_t points);
 		std::size_t getPointCount() const;
@@ -38,11 +35,9 @@ class ShapeComponent : public SceneComponent
 
 	private:
 		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);
-		virtual void onTransformUpdated();
 
 	private:
 		sf::ConvexShape mShape;
-		ltbl::LightShape::Ptr mLightShape;
 };
 
 } // namespace ke

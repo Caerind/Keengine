@@ -23,6 +23,9 @@ class PointLightComponent : public SceneComponent
 		void setIntensity(float intensity);
 		float getIntensity() const;
 
+		void setOn(bool on);
+		bool isOn() const;
+
 	protected:
 		void onTransformUpdated();
 

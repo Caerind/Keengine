@@ -7,11 +7,13 @@ MyMap::MyMap(ke::Scene& scene) : ke::Map(scene)
 	mSunColor = sf::Color::White;
 	mMoonColor = sf::Color(0, 70, 100);
 
+	/*
 	mLight = createComponent<ke::DirectionLightComponent>();
 	attachComponent(mLight);
 	mLight->setColor(mSunColor);
 	mLight->setIntensity(100.f);
 	mLight->setDirection({ 0.1f, 0.6f });
+	*/
 }
 
 bool MyMap::loadTmxString(std::string const & str)

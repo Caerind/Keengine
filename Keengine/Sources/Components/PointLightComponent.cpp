@@ -68,6 +68,23 @@ float PointLightComponent::getIntensity() const
 	return 1.f;
 }
 
+void PointLightComponent::setOn(bool on)
+{
+	if (mLight != nullptr)
+	{
+		mLight->_use = on;
+	}
+}
+
+bool PointLightComponent::isOn() const
+{
+	if (mLight != nullptr)
+	{
+		return mLight->_use;
+	}
+	return false;
+}
+
 void PointLightComponent::onTransformUpdated()
 {
 	if (mLight != nullptr)

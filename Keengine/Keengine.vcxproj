@@ -56,6 +56,7 @@
     <ClCompile Include="Sources\Components\DirectionLightComponent.cpp" />
     <ClCompile Include="Sources\Components\InputComponent.cpp" />
     <ClCompile Include="Sources\Components\LayerComponent.cpp" />
+    <ClCompile Include="Sources\Components\LightShapeComponent.cpp" />
     <ClCompile Include="Sources\Components\ParticleComponent.cpp" />
     <ClCompile Include="Sources\Components\PointComponent.cpp" />
     <ClCompile Include="Sources\Components\PointLightComponent.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Sources\Components\DirectionLightComponent.hpp" />
     <ClInclude Include="Sources\Components\InputComponent.hpp" />
     <ClInclude Include="Sources\Components\LayerComponent.hpp" />
+    <ClInclude Include="Sources\Components\LightShapeComponent.hpp" />
     <ClInclude Include="Sources\Components\ParticleComponent.hpp" />
     <ClInclude Include="Sources\Components\PointComponent.hpp" />
     <ClInclude Include="Sources\Components\PointLightComponent.hpp" />

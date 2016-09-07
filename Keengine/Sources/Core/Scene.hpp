@@ -120,6 +120,21 @@ class Scene
 
 		Input& getInput();
 
+		template <typename T, typename ... Args>
+		std::shared_ptr<T> createComponent(Args&& ... args)
+		{
+			if (mSceneRoot != nullptr)
+			{
+				return mSceneRoot->createComponent<T>(std::forward<Args>(args)...);
+			}
+			return nullptr;
+		}
+
+		void attachComponent(SceneComponent::Ptr component);
+		void detachComponent(SceneComponent::Ptr component);
+
+		void removeComponent(Component::Ptr component);
+
 	private:
 		static bool sortActor(Actor::Ptr a, Actor::Ptr b);
 
