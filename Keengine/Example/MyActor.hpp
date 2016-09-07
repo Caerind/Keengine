@@ -13,10 +13,10 @@ class MyActor : public ke::Actor
 		void update(sf::Time dt);
 
     private:
-		ke::PointComponent mA;
-		ke::AnimatorComponent mB;
-		ke::PointLightComponent mC;
-		ke::InputComponent mD;
+		ke::PointComponent::Ptr mA;
+		ke::AnimatorComponent::Ptr mB;
+		ke::PointLightComponent::Ptr mC;
+		ke::InputComponent::Ptr mD;
 
 		bool mRunning;
 };

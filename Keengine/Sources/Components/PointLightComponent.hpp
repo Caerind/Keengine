@@ -10,8 +10,9 @@ namespace ke
 class PointLightComponent : public SceneComponent
 {
 	public:
-		PointLightComponent();
-		~PointLightComponent();
+		typedef std::shared_ptr<PointLightComponent> Ptr;
+
+		PointLightComponent(Actor& actor);
 
 		void onRegister();
 		void onUnregister();

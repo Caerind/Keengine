@@ -7,7 +7,7 @@ namespace ke
 {
 
 Actor::Actor(Scene& scene)
-	: mRoot()
+	: mRoot(*this)
 	, mComponents()
 	, mMarkedForRemoval(false)
 	, mId("")
@@ -20,7 +20,6 @@ Actor::Actor(Scene& scene)
 
 Actor::~Actor()
 {
-	unregisterComponents();
 	destroyPhysic();
 }
 
@@ -155,7 +154,7 @@ void Actor::updateComponents(sf::Time dt)
 	{
 		if (mComponents[i] != nullptr)
 		{
-			if (mComponents[i]->isUpdatable() && mComponents[i]->isRegistered())
+			if (mComponents[i]->isUpdatable())
 			{
 				mComponents[i]->update(dt);
 			}
@@ -168,46 +167,14 @@ void Actor::render(sf::RenderTarget& target)
 	mRoot.render(target, sf::RenderStates::Default);
 }
 
-void Actor::attachComponent(SceneComponent* component)
+void Actor::attachComponent(SceneComponent::Ptr component)
 {
-	mRoot.attachComponent(component);
+	mRoot.attachComponent(component.get());
 }
 
-void Actor::detachComponent(SceneComponent* component)
+void Actor::detachComponent(SceneComponent::Ptr component)
 {
-	mRoot.detachComponent(component);
-}
-
-void Actor::registerComponent(Component* component)
-{
-	if (component != nullptr && std::find(mComponents.begin(), mComponents.end(), component) == mComponents.end())
-	{
-		component->registerComponent(this);
-		component->setId(ke::decToHex(mComponentIdCounter++));
-		mComponents.push_back(component);
-	}
-}
-
-void Actor::unregisterComponent(Component* component)
-{
-	if (component != nullptr)
-	{
-		std::size_t size = mComponents.size();
-		for (std::size_t i = 0; i < size; i++)
-		{
-			if (mComponents[i] == component)
-			{
-				component->unregisterComponent(this);
-				mComponents.erase(i + mComponents.begin());
-				return;
-			}
-		}
-	}
-}
-
-void Actor::unregisterComponents()
-{
-	mComponents.clear();
+	mRoot.detachComponent(component.get());
 }
 
 std::size_t Actor::getComponentCount() const
@@ -215,7 +182,7 @@ std::size_t Actor::getComponentCount() const
 	return mComponents.size();
 }
 
-Component* Actor::getComponent(std::size_t index)
+Component::Ptr Actor::getComponent(std::size_t index)
 {
 	if (index <= 0 && index < mComponents.size())
 	{
@@ -224,7 +191,7 @@ Component* Actor::getComponent(std::size_t index)
 	return nullptr;
 }
 
-Component* Actor::getComponent(std::string const& id)
+Component::Ptr Actor::getComponent(std::string const& id)
 {
 	for (std::size_t i = 0; i < mComponents.size(); i++)
 	{
@@ -296,6 +263,22 @@ Log& Actor::getLog()
 Application& Actor::getApplication()
 {
 	return Application::instance();
+}
+
+void Actor::removeComponent(Component::Ptr component)
+{
+	std::size_t size = mComponents.size();
+	for (std::size_t i = 0; i < size; i++)
+	{
+		if (mComponents[i] == component)
+		{
+			mComponents.erase(mComponents.begin() + i);
+			component = nullptr;
+			i--;
+			size--;
+			return;
+		}
+	}
 }
 
 } // namespace ke

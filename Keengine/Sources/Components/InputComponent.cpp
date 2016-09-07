@@ -4,16 +4,8 @@
 namespace ke
 {
 
-InputComponent::InputComponent()
+InputComponent::InputComponent(Actor& actor) : Component(actor)
 {
-}
-
-InputComponent::~InputComponent()
-{
-	if (isRegistered())
-	{
-		onUnregister();
-	}
 }
 
 void InputComponent::onRegister()

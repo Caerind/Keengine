@@ -4,10 +4,10 @@
 
 MyMap::MyMap(ke::Scene& scene) : ke::Map(scene)
 {
-	registerComponent(&mSun);
-	attachComponent(&mSun);
-	mSun.setIntensity(6.f);
-	mSun.setDirection({ -0.1f, 0.6f });
+	mSun = createComponent<ke::DirectionLightComponent>();
+	attachComponent(mSun);
+	mSun->setIntensity(6.f);
+	mSun->setDirection({ -0.1f, 0.6f });
 }
 
 bool MyMap::loadTmxString(std::string const & str)
@@ -49,12 +49,15 @@ bool MyMap::loadTmxString(std::string const & str)
 
 	for (pugi::xml_node layer = map.child("layer"); layer; layer = layer.next_sibling("layer"))
 	{
-		addLayer()->loadFromNode(layer, mTileset, mSize, mTileSize, mOrientation, mStaggerAxis, mStaggerIndex, mHexSideLength);
+		ke::LayerComponent::Ptr layerPtr = createComponent<ke::LayerComponent>();
+		attachComponent(layerPtr);
+		layerPtr->loadFromNode(layer, mTileset, mSize, mTileSize, mOrientation, mStaggerAxis, mStaggerIndex, mHexSideLength);
 	}
 
 	for (pugi::xml_node imagelayer = map.child("imagelayer"); imagelayer; imagelayer = imagelayer.next_sibling("imagelayer"))
 	{
-		std::shared_ptr<ke::SpriteComponent> image = addImage();
+		ke::SpriteComponent::Ptr image = createComponent<ke::SpriteComponent>();
+		attachComponent(image);
 		sf::Vector2f offset;
 		for (const pugi::xml_attribute& attr : imagelayer.attributes())
 		{

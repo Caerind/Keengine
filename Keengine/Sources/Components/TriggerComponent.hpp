@@ -9,7 +9,9 @@ namespace ke
 class TriggerComponent : public CollisionComponent
 {
 	public:
-		TriggerComponent();
+		typedef std::shared_ptr<TriggerComponent> Ptr;
+
+		TriggerComponent(Actor& actor);
 
 		void onRegister();
 };

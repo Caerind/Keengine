@@ -4,8 +4,9 @@
 namespace ke
 {
 
-ParticleComponent::ParticleComponent()
-	: mParticles()
+ParticleComponent::ParticleComponent(Actor& actor)
+	: SceneComponent(actor)
+	, mParticles()
 	, mAffectors()
 	, mTexture(nullptr)
 	, mTextureRects()
@@ -167,9 +168,6 @@ void ParticleComponent::emitParticle()
 	particle.color = mParticleColor();
 	particle.textureIndex = mParticleTextureIndex();
 	mParticles.push_back(particle);
-	std::cout << "New particle !" << std::endl;
-	std::cout << particle.totalLifetime.asSeconds() << std::endl << particle.position.x << ":" << particle.position.y << std::endl;
-	std::cout << particle.velocity.x << ":" << particle.velocity.y << std::endl << particle.rotation << " " << particle.rotationSpeed << std::endl;
 }
 
 void ParticleComponent::emitParticles(std::size_t particleAmount)

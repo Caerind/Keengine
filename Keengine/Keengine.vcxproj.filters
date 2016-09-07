@@ -512,9 +512,6 @@
     <ClCompile Include="Sources\Application\TimeSystem.cpp">
       <Filter>Sources\Application</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Core\SceneRoot.cpp">
-      <Filter>Sources\Core</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -1044,9 +1041,6 @@
     </ClInclude>
     <ClInclude Include="Sources\Application\InputSystem.hpp">
       <Filter>Sources\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Core\SceneRoot.hpp">
-      <Filter>Sources\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

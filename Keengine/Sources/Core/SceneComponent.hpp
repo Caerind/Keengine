@@ -14,7 +14,9 @@ namespace ke
 class SceneComponent : public Component
 {
     public:
-		SceneComponent();
+		typedef std::shared_ptr<SceneComponent> Ptr;
+
+		SceneComponent(Actor& actor);
 		virtual ~SceneComponent();
 
 		const sf::Vector2f& getPosition() const;

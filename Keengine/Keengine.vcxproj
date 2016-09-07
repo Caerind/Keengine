@@ -71,7 +71,6 @@
     <ClCompile Include="Sources\Core\PhysicSystem.cpp" />
     <ClCompile Include="Sources\Core\Scene.cpp" />
     <ClCompile Include="Sources\Core\SceneComponent.cpp" />
-    <ClCompile Include="Sources\Core\SceneRoot.cpp" />
     <ClCompile Include="Sources\ExtLibs\Box2D\b2BlockAllocator.cpp" />
     <ClCompile Include="Sources\ExtLibs\Box2D\b2Body.cpp" />
     <ClCompile Include="Sources\ExtLibs\Box2D\b2BroadPhase.cpp" />
@@ -216,7 +215,6 @@
     <ClInclude Include="Sources\Core\PhysicSystem.hpp" />
     <ClInclude Include="Sources\Core\Scene.hpp" />
     <ClInclude Include="Sources\Core\SceneComponent.hpp" />
-    <ClInclude Include="Sources\Core\SceneRoot.hpp" />
     <ClInclude Include="Sources\ExtLibs\assume.hpp" />
     <ClInclude Include="Sources\ExtLibs\Box2D\b2BlockAllocator.h" />
     <ClInclude Include="Sources\ExtLibs\Box2D\b2Body.h" />

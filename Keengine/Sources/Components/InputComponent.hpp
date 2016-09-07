@@ -9,8 +9,9 @@ namespace ke
 class InputComponent : public Input, public Component
 {
     public:
-        InputComponent();
-        ~InputComponent();
+		typedef std::shared_ptr<InputComponent> Ptr;
+
+        InputComponent(Actor& actor);
 
 		void onRegister();
 		void onUnregister();

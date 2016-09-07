@@ -4,8 +4,9 @@
 namespace ke
 {
 
-LayerComponent::LayerComponent()
-	: mVertices(sf::Triangles)
+LayerComponent::LayerComponent(Actor& actor)
+	: SceneComponent(actor)
+	, mVertices(sf::Triangles)
 	, mTileset(nullptr)
 	, mSize()
 	, mTileSize()
@@ -21,8 +22,9 @@ LayerComponent::LayerComponent()
 	create(nullptr);
 }
 
-LayerComponent::LayerComponent(Tileset* tileset, sf::Vector2i const& size, sf::Vector2i const& tileSize, std::string const& orientation, std::string const& staggerAxis, std::string const& staggerIndex, unsigned int hexSideLength)
-	: mVertices(sf::Triangles)
+LayerComponent::LayerComponent(Actor& actor, Tileset* tileset, sf::Vector2i const& size, sf::Vector2i const& tileSize, std::string const& orientation, std::string const& staggerAxis, std::string const& staggerIndex, unsigned int hexSideLength)
+	: SceneComponent(actor)
+	, mVertices(sf::Triangles)
 	, mTileset(nullptr)
 	, mSize()
 	, mTileSize()

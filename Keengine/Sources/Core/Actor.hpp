@@ -23,7 +23,6 @@ class Actor
 	public:
 		typedef std::shared_ptr<Actor> Ptr;
 
-    public:
 		Actor(Scene& scene);
 		virtual ~Actor();
 
@@ -65,37 +64,33 @@ class Actor
 
 		void render(sf::RenderTarget& target);
 
-		void attachComponent(SceneComponent* component);
-		void detachComponent(SceneComponent* component);
-
-		void registerComponent(Component* component);
-		void unregisterComponent(Component* component);
-		void unregisterComponents();
+		void attachComponent(SceneComponent::Ptr component);
+		void detachComponent(SceneComponent::Ptr component);
 
 		std::size_t getComponentCount() const;
-		Component* getComponent(std::size_t index);
-		Component* getComponent(std::string const& id);
+		Component::Ptr getComponent(std::size_t index);
+		Component::Ptr getComponent(std::string const& id);
 
 		template <typename T>
-		T* getComponentT(std::size_t index)
+		std::shared_ptr<T> getComponentT(std::size_t index)
 		{
-			Component* c = getComponent(index);
+			Component::Ptr c = getComponent(index);
 			if (c == nullptr)
 			{
 				return nullptr;
 			}
-			return dynamic_cast<T*>(c);
+			return std::dynamic_pointer_cast<T>(c);
 		}
 
 		template <typename T>
-		T* getComponentT(std::string const& id)
+		std::shared_ptr<T> getComponentT(std::string const& id)
 		{
-			Component* c = getComponent(id);
+			Component::Ptr c = getComponent(id);
 			if (c == nullptr)
 			{
 				return nullptr;
 			}
-			return dynamic_cast<T*>(c);
+			return std::dynamic_pointer_cast<T>(c);
 		}
 
 		Scene& getScene();
@@ -109,10 +104,21 @@ class Actor
 		Log& getLog();
 		Application& getApplication();
 
+		template <typename T, typename ... Args>
+		std::shared_ptr<T> createComponent(Args&& ... args)
+		{
+			std::shared_ptr<T> component = std::make_shared<T>(*this, std::forward<Args>(args)...);
+			mComponents.push_back(component);
+			component->setId(ke::decToHex(mComponentIdCounter++));
+			return component;
+		}
+
+		void removeComponent(Component::Ptr component);
+
 	private:
 		SceneComponent mRoot; ///< The root for scene components
 
-		std::vector<Component*> mComponents; ///< All the registered components of this actor
+		std::vector<Component::Ptr> mComponents; ///< All the registered components of this actor
 
 		bool mMarkedForRemoval; ///< Do the Actor need to be removed ?
 

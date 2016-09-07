@@ -11,7 +11,9 @@ namespace ke
 class TextComponent : public SceneComponent
 {
 	public:
-		TextComponent();
+		typedef std::shared_ptr<TextComponent> Ptr;
+
+		TextComponent(Actor& actor);
 
 		void setFont(std::string const& font);
 		void setFont(sf::Font& font);

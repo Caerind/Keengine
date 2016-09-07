@@ -11,7 +11,9 @@ namespace ke
 class CollisionComponent : public SceneComponent
 {
 	public:
-		CollisionComponent();
+		typedef std::shared_ptr<CollisionComponent> Ptr;
+
+		CollisionComponent(Actor& actor);
 
 		void onRegister();
 		void onUnregister();

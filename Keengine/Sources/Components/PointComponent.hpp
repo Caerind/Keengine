@@ -11,7 +11,9 @@ namespace ke
 class PointComponent : public SceneComponent
 {
     public:
-        PointComponent();
+		typedef std::shared_ptr<PointComponent> Ptr;
+
+        PointComponent(Actor& actor);
 
         void setColor(sf::Color const& color);
         sf::Color getColor() const;
