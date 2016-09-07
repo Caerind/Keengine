@@ -16,6 +16,7 @@ Actor::Actor(Scene& scene)
 	, mType("")
 	, mBody(nullptr)
 {
+	initializePhysic();
 }
 
 Actor::~Actor()
@@ -218,10 +219,10 @@ b2Body* Actor::getBody()
 
 void Actor::initializePhysic()
 {
-	if (mBody == nullptr)
+	if (mBody == nullptr && mScene.usePhysic())
 	{
 		b2BodyDef bDef;
-		bDef.type = b2_dynamicBody;
+		bDef.type = b2_staticBody;
 		bDef.position.Set(0, 0);
 		mBody = mScene.getPhysic().createBody(&bDef);
 		mBody->SetUserData(this);

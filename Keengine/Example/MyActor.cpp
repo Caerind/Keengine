@@ -7,8 +7,8 @@ MyActor::MyActor(ke::Scene& scene)
 	, mB(nullptr)
 	, mC(nullptr)
 	, mD(nullptr)
-	, mRunningRight(false)
-	, mRunningLeft(false)
+	, mMoveCounter(0)
+	, mMoving(false)
 {
 	mA = createComponent<ke::PointComponent>();
 	attachComponent(mA);
@@ -38,32 +38,27 @@ MyActor::MyActor(ke::Scene& scene)
 	mC->setIntensity(5.f);
 
 	mD = createComponent<ke::InputComponent>();
-	mD->bindAction("MoveRight", [&](std::vector<std::string> const& data)
+	mD->bindAction("MoveUp", [&](std::vector<std::string> const& data)
 	{
-		mB->stopAnimation();
-		mB->playAnimation("run");
-		mRunningRight = true;
+		b2Body* body = getBody();
+		if (body != nullptr)
+		{
+			float impulse = body->GetMass() * (-5.f - body->GetLinearVelocity().y);
+			body->ApplyLinearImpulse(b2Vec2(0.f, impulse), body->GetWorldCenter(), true);
+		}
+		mMoveCounter++;
 		return false;
 	});
-	mD->bindAction("StopRight", [&](std::vector<std::string> const& data)
+	mD->bindAction("MoveRight", [&](std::vector<std::string> const& data)
 	{
-		mB->stopAnimation();
-		mB->playAnimation("idle");
-		mRunningRight = false;
+		mVel += 5.f;
+		mMoveCounter++;
 		return false;
 	});
 	mD->bindAction("MoveLeft", [&](std::vector<std::string> const& data)
 	{
-		mB->stopAnimation();
-		mB->playAnimation("run");
-		mRunningLeft = true;
-		return false;
-	});
-	mD->bindAction("StopLeft", [&](std::vector<std::string> const& data)
-	{
-		mB->stopAnimation();
-		mB->playAnimation("idle");
-		mRunningLeft = false;
+		mVel -= 5.f;
+		mMoveCounter++;
 		return false;
 	});
 	mD->bindAction("Light", [&](std::vector<std::string> const& data)
@@ -71,16 +66,35 @@ MyActor::MyActor(ke::Scene& scene)
 		mC->setOn(!mC->isOn());
 		return false;
 	});
+
+	if (mBody != nullptr)
+	{
+		mE = createComponent<ke::CollisionComponent>();
+		attachComponent(mE);
+		mE->setShape({ { -10.f, -10.f },{ 10.f, -10.f },{ 10.f, 20.f },{ -10.f, 20.f } });
+		mE->setDensity(1.f);
+		mBody->SetType(b2_dynamicBody);
+		mBody->SetFixedRotation(true);
+	}
 }
 
 void MyActor::update(sf::Time dt)
 {
-	if (mRunningRight)
+	if (mMoveCounter == 0 && mMoving)
 	{
-		move(sf::Vector2f(1.f, 0.f) * 100.f * dt.asSeconds());
+		mB->playAnimation("idle");
 	}
-	if (mRunningLeft)
+	else if (mMoveCounter != 0 && !mMoving)
 	{
-		move(sf::Vector2f(-1.f, 0.f) * 100.f * dt.asSeconds());
+		mB->playAnimation("run");
 	}
+	mMoveCounter = 0;
+
+	b2Body* body = getBody();
+	if (body != nullptr)
+	{
+		float impulse = body->GetMass() * (mVel - body->GetLinearVelocity().x);
+		body->ApplyLinearImpulse(b2Vec2(impulse, 0.f), body->GetWorldCenter(), true);
+	}
+	mVel = 0.f;
 }

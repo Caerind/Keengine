@@ -11,6 +11,7 @@ PhysicSystem::PhysicSystem()
 {
 	mWorld->SetDebugDraw(this);
 	mWorld->SetContactListener(this);
+	SetFlags(b2Draw::e_shapeBit);
 	mVelocityIterations = 8;
 	mPositionIterations = 3;
 	mRender = false;

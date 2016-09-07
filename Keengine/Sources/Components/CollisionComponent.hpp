@@ -19,8 +19,13 @@ class CollisionComponent : public SceneComponent
 		void onUnregister();
 
 		b2Fixture* getFixture();
+		b2Shape* getShape();
+		b2PolygonShape* getPolygonShape();
 
-		// TODO : Shape interface
+		void setDensity(float density);
+		float getDensity();
+
+		void setShape(std::vector<sf::Vector2f> shape);
 
 	protected:
 		b2Fixture* mFixture;

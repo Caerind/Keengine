@@ -17,9 +17,12 @@ class MyActor : public ke::Actor
 		ke::AnimatorComponent::Ptr mB;
 		ke::PointLightComponent::Ptr mC;
 		ke::InputComponent::Ptr mD;
+		ke::CollisionComponent::Ptr mE;
 
-		bool mRunningRight;
-		bool mRunningLeft;
+		int mMoveCounter;
+		bool mMoving;
+
+		float mVel;
 };
 
 #endif // MYACTOR_HPP

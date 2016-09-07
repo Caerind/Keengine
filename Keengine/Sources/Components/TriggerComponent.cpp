@@ -15,8 +15,9 @@ void TriggerComponent::onRegister()
 	if (actorBody != nullptr)
 	{
 		b2FixtureDef fDef;
+		b2PolygonShape shape;
+		fDef.shape = &shape;
 		fDef.isSensor = true;
-		// TODO : Fixture Def
 		mFixture = actorBody->CreateFixture(&fDef);
 		mFixture->SetUserData(this);
 	}

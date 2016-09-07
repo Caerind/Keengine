@@ -54,10 +54,6 @@ class Scene
 		{
 			std::shared_ptr<T> actor = std::make_shared<T>(*this, std::forward<Args>(args)...);
 			mActors.push_back(actor);
-			if (usePhysic())
-			{
-				actor->initializePhysic();
-			}
 			actor->setId(ke::decToHex<std::size_t>(mActorIdCounter++));
 			return actor;
 		}

@@ -27,14 +27,16 @@ int main()
 	button->connect("pressed", []() { ke::Application::getLog() << ke::Application::inLang("hello"); });
 	gui.add(button);
 
-	ke::Application::getInputs().setKeyboardMapping("MoveRight", sf::Keyboard::D, ke::InputType::Pressed);
-	ke::Application::getInputs().setKeyboardMapping("StopRight", sf::Keyboard::D, ke::InputType::Released);
-	ke::Application::getInputs().setKeyboardMapping("MoveLeft", sf::Keyboard::Q, ke::InputType::Pressed);
-	ke::Application::getInputs().setKeyboardMapping("StopLeft", sf::Keyboard::Q, ke::InputType::Released);
+	ke::Application::getInputs().setKeyboardMapping("MoveUp", sf::Keyboard::Z, ke::InputType::Hold);
+	ke::Application::getInputs().setKeyboardMapping("MoveLeft", sf::Keyboard::Q, ke::InputType::Hold);
+	ke::Application::getInputs().setKeyboardMapping("MoveDown", sf::Keyboard::S, ke::InputType::Hold);
+	ke::Application::getInputs().setKeyboardMapping("MoveRight", sf::Keyboard::D, ke::InputType::Hold);
 	ke::Application::getInputs().setKeyboardMapping("Light", sf::Keyboard::L, ke::InputType::Pressed);
 	ke::Application::getInputs().loadFromFile("Example/inputs.cfg");
 
-	ke::Scene scene(ke::Scene::Light);
+	ke::Scene scene(ke::Scene::Light | ke::Scene::Physic);
+	scene.getPhysic().setRenderDebug(true);
+	scene.getPhysic().setGravity(b2Vec2(0, 9.8f));
 
 	MyMap::Ptr map = scene.createActor<MyMap>();
 	map->loadTmxString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" \
@@ -48,13 +50,12 @@ int main()
 		"  </data>" \
 		" </layer>" \
 		" <objectgroup name=\"Calque d'objets 1\">" \
-		"  <object id=\"4\" x=\"172\" y=\"100\" width=\"146\" height=\"48\" />" \
-		"  <object id=\"5\" x=\"586\" y=\"106\" width=\"186\" height=\"62\" />" \
-		"  <object id=\"6\" x=\"190\" y=\"486\" width=\"80\" height=\"44\" />" \
-		"  <object id=\"7\" x=\"418\" y=\"472\" width=\"78\" height=\"48\" />" \
-		"  <object id=\"8\" x=\"686\" y=\"482\" width=\"70\" height=\"74\" />" \
-		"  <object id=\"9\" x=\"902\" y=\"428\" width=\"54\" height=\"70\" />" \
-		"  <object id=\"10\" x=\"858\" y=\"202\" width=\"66\" height=\"46\" />" \
+		"  <object id=\"4\" x=\"99\" y=\"43\" width=\"146\" height=\"48\" />" \
+		"  <object id=\"5\" x=\"493\" y=\"115\" width=\"186\" height=\"62\" />" \
+		"  <object id=\"6\" x=\"-41\" y=\"486\" width=\"1129\" height=\"214\" />" \
+		"  <object id=\"7\" x=\"292\" y=\"465\" width=\"78\" height=\"48\" />" \
+		"  <object id=\"8\" x=\"773\" y=\"381\" width=\"70\" height=\"120\" />" \
+		"  <object id=\"10\" x=\"930\" y=\"256\" width=\"66\" height=\"46\" />" \
 		" </objectgroup>" \
 		"</map>");
 	ke::LayerComponent::Ptr layer = map->getLayer(0);
