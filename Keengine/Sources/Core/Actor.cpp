@@ -221,11 +221,12 @@ void Actor::initializePhysic()
 {
 	if (mBody == nullptr && mScene.usePhysic())
 	{
-		b2BodyDef bDef;
-		bDef.type = b2_staticBody;
-		bDef.position.Set(0, 0);
-		mBody = mScene.getPhysic().createBody(&bDef);
-		mBody->SetUserData(this);
+		b2BodyDef bodyDef;
+		bodyDef.position.Set(0, 0); 
+		bodyDef.type = b2_staticBody;
+		bodyDef.userData = this;
+		bodyDef.linearDamping = 0.01f;
+		mBody = mScene.getPhysic().createBody(&bodyDef);
 	}
 }
 
@@ -254,6 +255,184 @@ void Actor::postPhysicUpdate()
 		setPosition(mBody->GetPosition() * Physic::conv);
 		setRotation(radToDeg(mBody->GetAngle()));
 	}
+}
+
+void Actor::desiredImpulseX(float impulse)
+{
+	impulse = impulse / Physic::pixelsPerMeter;
+	if (mBody != nullptr && mScene.usePhysic())
+	{
+		if (mBody->GetType() != b2_staticBody)
+		{
+			mBody->ApplyLinearImpulse(b2Vec2(mBody->GetMass() * (impulse - mBody->GetLinearVelocity().x), 0.f), mBody->GetWorldCenter(), true);
+		}
+	}
+}
+
+void Actor::desiredImpulseY(float impulse)
+{
+	impulse = impulse / Physic::pixelsPerMeter;
+	if (mBody != nullptr && mScene.usePhysic())
+	{
+		if (mBody->GetType() != b2_staticBody)
+		{
+			mBody->ApplyLinearImpulse(b2Vec2(0.f, mBody->GetMass() * (impulse - mBody->GetLinearVelocity().y)), mBody->GetWorldCenter(), true);
+		}
+	}
+}
+
+void Actor::setVelocity(sf::Vector2f const& velocity)
+{
+	if (mBody != nullptr && mScene.usePhysic())
+	{
+		mBody->SetLinearVelocity(velocity * Physic::conv);
+	}
+}
+
+sf::Vector2f Actor::getVelocity() const
+{
+	if (mBody != nullptr && mScene.usePhysic())
+	{
+		return mBody->GetLinearVelocity() * Physic::conv;
+	}
+	return sf::Vector2f();
+}
+
+void Actor::setAngularVelocity(float angularVelocity)
+{
+	if (mBody != nullptr)
+	{
+		mBody->SetAngularVelocity(angularVelocity);
+	}
+}
+
+float Actor::getAngularVelocity() const
+{
+	if (mBody != nullptr)
+	{
+		return mBody->GetAngularVelocity();
+	}
+	return 0.0f;
+}
+
+void Actor::setPhysicType(b2BodyType const& type)
+{
+	if (mBody != nullptr)
+	{
+		mBody->SetType(type);
+	}
+}
+
+b2BodyType Actor::getPhysicType() const
+{
+	if (mBody != nullptr)
+	{
+		return mBody->GetType();
+	}
+	return b2_staticBody;
+}
+
+void Actor::setFixedRotation(bool fixed)
+{
+	if (mBody != nullptr)
+	{
+		mBody->SetFixedRotation(fixed);
+	}
+}
+
+bool Actor::isFixedRotation() const
+{
+	if (mBody != nullptr)
+	{
+		return mBody->IsFixedRotation();
+	}
+	return false;
+}
+
+float Actor::getMass() const
+{
+	if (mBody != nullptr)
+	{
+		return mBody->GetMass();
+	}
+	return 0.0f;
+}
+
+float Actor::getInertia() const
+{
+	if (mBody != nullptr)
+	{
+		return mBody->GetInertia();
+	}
+	return 0.0f;
+}
+
+void Actor::setLinearDamping(float damping)
+{
+	if (mBody != nullptr)
+	{
+		mBody->SetLinearDamping(damping);
+	}
+}
+
+float Actor::getLinearDamping() const
+{
+	if (mBody != nullptr)
+	{
+		return mBody->GetLinearDamping();
+	}
+	return 0.0f;
+}
+
+void Actor::setAngularDamping(float damping)
+{
+	if (mBody != nullptr)
+	{
+		mBody->SetAngularDamping(damping);
+	}
+}
+
+float Actor::getAngularDamping() const
+{
+	if (mBody != nullptr)
+	{
+		return mBody->GetAngularDamping();
+	}
+	return 0.0f;
+}
+
+void Actor::setGravityScale(float scale)
+{
+	if (mBody != nullptr)
+	{
+		mBody->SetGravityScale(scale);
+	}
+}
+
+float Actor::getGravityScale() const
+{
+	if (mBody != nullptr)
+	{
+		return mBody->GetGravityScale();
+	}
+	return 0.0f;
+}
+
+void Actor::setPhysicBullet(bool bullet)
+{
+	if (mBody != nullptr)
+	{
+		mBody->SetBullet(bullet);
+	}
+}
+
+bool Actor::isPhysicBullet() const
+{
+	if (mBody != nullptr)
+	{
+		return mBody->IsBullet();
+	}
+	return false;
 }
 
 Log& Actor::getLog()

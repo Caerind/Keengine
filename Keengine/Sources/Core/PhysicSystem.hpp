@@ -29,6 +29,9 @@ class PhysicSystem : public b2Draw, public b2ContactListener
 		void setGravity(b2Vec2 gravity = b2Vec2(0.f, -9.8f));
 		b2Vec2 getGravity();
 
+		void setPixelsPerMeter(float pixelsPerMeter);
+		float getPixelsPerMeter() const;
+
 		void update(sf::Time dt);
 		void render(sf::RenderTarget& target);
 

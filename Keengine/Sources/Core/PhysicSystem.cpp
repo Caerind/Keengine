@@ -40,6 +40,16 @@ b2Vec2 PhysicSystem::getGravity()
 	return mWorld->GetGravity();
 }
 
+void PhysicSystem::setPixelsPerMeter(float pixelsPerMeter)
+{
+	Physic::pixelsPerMeter = pixelsPerMeter;
+}
+
+float PhysicSystem::getPixelsPerMeter() const
+{
+	return Physic::pixelsPerMeter;
+}
+
 void PhysicSystem::setGravity(b2Vec2 gravity)
 {
 	mWorld->SetGravity(gravity);

@@ -35,6 +35,7 @@ int main()
 	ke::Application::getInputs().loadFromFile("Example/inputs.cfg");
 
 	ke::Scene scene(ke::Scene::Light | ke::Scene::Physic);
+	scene.getPhysic().setPixelsPerMeter(32.f);
 	scene.getPhysic().setRenderDebug(true);
 	scene.getPhysic().setGravity(b2Vec2(0, 9.8f));
 
@@ -62,13 +63,16 @@ int main()
 
 	MyActor::Ptr actor = scene.createActor<MyActor>();
 	actor->setZ(100.f);
-	actor->setPosition({ 10.f, 300.f });
+	actor->setPosition({ 100.f, 300.f });
 
 	ke::PointLightComponent::Ptr mouseLight = scene.createComponent<ke::PointLightComponent>();
 	scene.attachComponent(mouseLight);
 	mouseLight->setPosition(ke::Application::getPointerPositionView(scene.getView()));
 	mouseLight->setColor(sf::Color::White);
 	mouseLight->setIntensity(3.f);
+
+	ke::Application::getLog() << std::to_string(actor->getLinearDamping());
+	ke::Application::getLog() << std::to_string(actor->getAngularDamping());
 
 	ke::Application::setEventDefaultFunction([&](sf::Event const& event)
 	{

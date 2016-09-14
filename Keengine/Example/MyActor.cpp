@@ -7,7 +7,6 @@ MyActor::MyActor(ke::Scene& scene)
 	, mB(nullptr)
 	, mC(nullptr)
 	, mD(nullptr)
-	, mMoveCounter(0)
 	, mMoving(false)
 {
 	mA = createComponent<ke::PointComponent>();
@@ -40,25 +39,17 @@ MyActor::MyActor(ke::Scene& scene)
 	mD = createComponent<ke::InputComponent>();
 	mD->bindAction("MoveUp", [&](std::vector<std::string> const& data)
 	{
-		b2Body* body = getBody();
-		if (body != nullptr)
-		{
-			float impulse = body->GetMass() * (-5.f - body->GetLinearVelocity().y);
-			body->ApplyLinearImpulse(b2Vec2(0.f, impulse), body->GetWorldCenter(), true);
-		}
-		mMoveCounter++;
+		desiredImpulseY(-160.f);
 		return false;
 	});
 	mD->bindAction("MoveRight", [&](std::vector<std::string> const& data)
 	{
-		mVel += 5.f;
-		mMoveCounter++;
+		mVel += 160.f;
 		return false;
 	});
 	mD->bindAction("MoveLeft", [&](std::vector<std::string> const& data)
 	{
-		mVel -= 5.f;
-		mMoveCounter++;
+		mVel -= 160.f;
 		return false;
 	});
 	mD->bindAction("Light", [&](std::vector<std::string> const& data)
@@ -67,34 +58,32 @@ MyActor::MyActor(ke::Scene& scene)
 		return false;
 	});
 
-	if (mBody != nullptr)
+	if (mBody != nullptr && mScene.usePhysic())
 	{
+		setPhysicType(b2_dynamicBody);
+		setFixedRotation(true);
+
 		mE = createComponent<ke::CollisionComponent>();
 		attachComponent(mE);
 		mE->setShape({ { -10.f, -10.f },{ 10.f, -10.f },{ 10.f, 20.f },{ -10.f, 20.f } });
 		mE->setDensity(1.f);
-		mBody->SetType(b2_dynamicBody);
-		mBody->SetFixedRotation(true);
 	}
 }
 
 void MyActor::update(sf::Time dt)
 {
-	if (mMoveCounter == 0 && mMoving)
-	{
-		mB->playAnimation("idle");
-	}
-	else if (mMoveCounter != 0 && !mMoving)
+	float l = ke::getLength(getVelocity());
+	if (l > 10.f && !mMoving)
 	{
 		mB->playAnimation("run");
+		mMoving = true;
 	}
-	mMoveCounter = 0;
-
-	b2Body* body = getBody();
-	if (body != nullptr)
+	if (l <= 10.f && mMoving)
 	{
-		float impulse = body->GetMass() * (mVel - body->GetLinearVelocity().x);
-		body->ApplyLinearImpulse(b2Vec2(impulse, 0.f), body->GetWorldCenter(), true);
+		mB->playAnimation("idle");
+		mMoving = false;
 	}
+
+	desiredImpulseX(mVel);
 	mVel = 0.f;
 }

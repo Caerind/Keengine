@@ -100,6 +100,26 @@ class Actor
 		void destroyPhysic();
 		void prePhysicUpdate();
 		void postPhysicUpdate();
+		void desiredImpulseX(float impulse);
+		void desiredImpulseY(float impulse);
+		void setVelocity(sf::Vector2f const& velocity);
+		sf::Vector2f getVelocity() const;
+		void setAngularVelocity(float angularVelocity);
+		float getAngularVelocity() const;
+		void setPhysicType(b2BodyType const& type);
+		b2BodyType getPhysicType() const;
+		void setFixedRotation(bool fixed);
+		bool isFixedRotation() const;
+		float getMass() const;
+		float getInertia() const;
+		void setLinearDamping(float damping);
+		float getLinearDamping() const;
+		void setAngularDamping(float damping);
+		float getAngularDamping() const;
+		void setGravityScale(float scale);
+		float getGravityScale() const;
+		void setPhysicBullet(bool bullet);
+		bool isPhysicBullet() const;
 
 		Log& getLog();
 		Application& getApplication();

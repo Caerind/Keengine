@@ -19,7 +19,6 @@ class MyActor : public ke::Actor
 		ke::InputComponent::Ptr mD;
 		ke::CollisionComponent::Ptr mE;
 
-		int mMoveCounter;
 		bool mMoving;
 
 		float mVel;
