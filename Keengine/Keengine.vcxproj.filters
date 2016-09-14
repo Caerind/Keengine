@@ -19,9 +19,6 @@
     <Filter Include="Sources\System">
       <UniqueIdentifier>{27d82983-3090-4770-8ce2-3cde45161bec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Doc">
-      <UniqueIdentifier>{a6989ad2-ebe5-4bcb-add6-a9b0951986cf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\ExtLibs">
       <UniqueIdentifier>{9cc34823-b476-4313-9fa0-b21452ec1f36}</UniqueIdentifier>
     </Filter>
@@ -68,12 +65,6 @@
   <ItemGroup>
     <Image Include="Example\sfml.png">
       <Filter>Example</Filter>
-    </Image>
-    <Image Include="..\Doc\ApplicationArchitecture.jpg">
-      <Filter>Doc</Filter>
-    </Image>
-    <Image Include="..\Doc\CoreArchitecture.jpg">
-      <Filter>Doc</Filter>
     </Image>
     <Image Include="Example\particle.png">
       <Filter>Example</Filter>
@@ -1047,6 +1038,9 @@
     </ClInclude>
     <ClInclude Include="Sources\Components\LightShapeComponent.hpp">
       <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\Color.hpp">
+      <Filter>Sources\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

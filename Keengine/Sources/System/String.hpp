@@ -6,6 +6,7 @@
 #include <string>
 #include <typeinfo>
 #include <vector>
+#include <sstream>
 
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Color.hpp>

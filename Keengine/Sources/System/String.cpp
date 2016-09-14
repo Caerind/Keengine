@@ -88,7 +88,9 @@ std::string toString(sf::IntRect const& rect)
 
 std::string toString(sf::Color const& color)
 {
-    return std::to_string(color.r) + "," + std::to_string(color.g) + "," + std::to_string(color.b) + "," + std::to_string(color.a);
+	std::ostringstream oss;
+	oss << std::hex << color.toInteger();
+	return oss.str();
 }
 
 std::string toString(sf::Vector2f const& v)
@@ -123,12 +125,25 @@ sf::IntRect toIntRect(std::string str)
 
 sf::Color toColor(std::string str)
 {
-    sf::Color c;
-    c.r = static_cast<sf::Uint8>(std::stoi(split(str,",")));
-    c.g = static_cast<sf::Uint8>(std::stoi(split(str, ",")));
-    c.b = static_cast<sf::Uint8>(std::stoi(split(str, ",")));
-    c.a = static_cast<sf::Uint8>(std::stoi(str));
-    return c;
+	if (str != "")
+	{
+		if (str[0] == '#')
+		{
+			str.erase(str.begin());
+		}
+		int hexTrans;
+		std::stringstream ss(str);
+		ss >> std::hex >> hexTrans;
+		if (hexTrans >= 0)
+		{
+			unsigned char red, green, blue;
+			red = hexTrans >> 16;
+			green = (hexTrans >> 8) & 0xff;
+			blue = hexTrans & 0xff;
+			return sf::Color(red, green, blue);
+		}
+	}
+	return sf::Color::Transparent;
 }
 
 sf::Vector2f toVector2f(std::string str)

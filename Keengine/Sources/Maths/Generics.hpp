@@ -91,6 +91,27 @@ T binToDec(std::string const& binary)
     return decimal;
 }
 
+class Average
+{
+	public:
+		Average() : mAverage(0.f), mCount(0) {}
+
+		float add(float term) 
+		{ 
+			mAverage = ((mAverage * mCount) + term) * 1.f / (mCount + 1);
+			mCount++;
+			return mAverage;
+		}
+
+		float get() { return mAverage; }
+
+		std::size_t getCount() { return mCount; }
+
+	private:
+		float mAverage;
+		std::size_t mCount;
+};
+
 } // namespace ke
 
 #endif // KE_GENERICS_HPP

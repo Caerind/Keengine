@@ -1,11 +1,12 @@
 #ifndef KE_VARIANT_HPP
 #define KE_VARIANT_HPP
 
-#include <sstream>
+#include "String.hpp"
 
 namespace ke
 {
 
+// TODO : Add types
 class Variant : public std::string
 {
 	public:
@@ -24,6 +25,13 @@ class Variant : public std::string
 		{}
 
 		Variant(const std::string &other = std::string()) : std::string(other)
+		{}
+
+		template <typename T>
+		Variant(sf::Vector2<T> const& vector) : std::string(toString(vector))
+		{}
+
+		Variant(sf::Color const& color) : std::string(toString(color))
 		{}
 
 		template <typename T> operator T() const
@@ -70,6 +78,21 @@ class Variant : public std::string
 			float value;
 			iss >> value;
 			return value;
+		}
+
+		inline sf::Vector2f asVector2f()
+		{
+			return toVector2f(*this);
+		}
+
+		inline sf::Vector2i asVector2i()
+		{
+			return toVector2i(*this);
+		}
+
+		inline sf::Color asColor()
+		{
+			return toColor(*this);
 		}
 };
 

@@ -28,8 +28,6 @@
     <None Include="Example\widgets.css" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Doc\ApplicationArchitecture.jpg" />
-    <Image Include="..\Doc\CoreArchitecture.jpg" />
     <Image Include="Example\hexa.png" />
     <Image Include="Example\iso.png" />
     <Image Include="Example\ortho.png" />
@@ -346,6 +344,7 @@
     <ClInclude Include="Sources\Maths\Vector2.hpp" />
     <ClInclude Include="Sources\Maths\Vector3.hpp" />
     <ClInclude Include="Sources\System\ClockedTask.hpp" />
+    <ClInclude Include="Sources\System\Color.hpp" />
     <ClInclude Include="Sources\System\Compression.hpp" />
     <ClInclude Include="Sources\System\Container.hpp" />
     <ClInclude Include="Sources\System\HttpThread.hpp" />

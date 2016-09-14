@@ -513,14 +513,14 @@ bool Window::useBackgroundColor() const
 
 void Window::updateBackground()
 {
+	sf::Vector2f size = static_cast<sf::Vector2f>(getSize());
 	if (mUseBackgroundColor)
 	{
-		mBackgroundRect.setSize(static_cast<sf::Vector2f>(getSize()));
+		mBackgroundRect.setSize(size);
 	}
 	else
 	{
-		// TODO : Scale
-		//mBackgroundSprite.setScale()
+		mBackgroundSprite.setScale(size.x / mBackgroundSprite.getGlobalBounds().width, size.y / mBackgroundSprite.getGlobalBounds().height);
 	}
 }
 
