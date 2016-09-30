@@ -10,6 +10,8 @@
 
 #include "../Application/Application.hpp"
 
+#include "../System/Serializable.hpp"
+
 #include "Component.hpp"
 #include "SceneComponent.hpp"
 #include "../Components/Components.hpp"
@@ -18,7 +20,7 @@ namespace ke
 {
 
 class Scene;
-class Actor
+class Actor : public Serializable
 {
 	public:
 		typedef std::shared_ptr<Actor> Ptr;
@@ -62,6 +64,10 @@ class Actor
 		virtual void update(sf::Time dt);
 		void updateComponents(sf::Time dt);
 
+		virtual void initializePhysic();
+		virtual void initializeComponents();
+		virtual void initialize();
+
 		void render(sf::RenderTarget& target);
 
 		void attachComponent(SceneComponent::Ptr component);
@@ -96,7 +102,6 @@ class Actor
 		Scene& getScene();
 
 		b2Body* getBody();
-		void initializePhysic();
 		void destroyPhysic();
 		void prePhysicUpdate();
 		void postPhysicUpdate();

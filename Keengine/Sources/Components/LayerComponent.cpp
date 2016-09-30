@@ -86,7 +86,7 @@ bool LayerComponent::loadFromNode(pugi::xml_node const& node, Tileset* tileset, 
 	loadProperties(node);
 	if (propertyExist("z"))
 	{
-		setZ(getProperty("z").asFloat());
+		setZ(getProperty("z").as<float>());
 	}
 
 	pugi::xml_node dataNode = node.child("data");

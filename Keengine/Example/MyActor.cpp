@@ -9,6 +9,24 @@ MyActor::MyActor(ke::Scene& scene)
 	, mD(nullptr)
 	, mMoving(false)
 {
+}
+
+void MyActor::initializePhysic()
+{
+	if (mBody == nullptr && mScene.usePhysic())
+	{
+		b2BodyDef bodyDef;
+		bodyDef.position.Set(0, 0);
+		bodyDef.type = b2_dynamicBody;
+		bodyDef.userData = this;
+		bodyDef.linearDamping = 0.01f;
+		bodyDef.fixedRotation = true;
+		mBody = mScene.getPhysic().createBody(&bodyDef);
+	}
+}
+
+void MyActor::initializeComponents()
+{
 	mA = createComponent<ke::PointComponent>();
 	attachComponent(mA);
 
@@ -33,7 +51,7 @@ MyActor::MyActor(ke::Scene& scene)
 
 	mC = createComponent<ke::PointLightComponent>();
 	attachComponent(mC);
-	mC->setColor(sf::Color(200,200,10));
+	mC->setColor(sf::Color(200, 200, 10));
 	mC->setIntensity(5.f);
 
 	mD = createComponent<ke::InputComponent>();
@@ -58,11 +76,8 @@ MyActor::MyActor(ke::Scene& scene)
 		return false;
 	});
 
-	if (mBody != nullptr && mScene.usePhysic())
+	if (mBody != nullptr)
 	{
-		setPhysicType(b2_dynamicBody);
-		setFixedRotation(true);
-
 		mE = createComponent<ke::CollisionComponent>();
 		attachComponent(mE);
 		mE->setShape({ { -10.f, -10.f },{ 10.f, -10.f },{ 10.f, 20.f },{ -10.f, 20.f } });

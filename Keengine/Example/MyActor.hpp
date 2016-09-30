@@ -10,6 +10,9 @@ class MyActor : public ke::Actor
 
         MyActor(ke::Scene& scene);
 
+		void initializePhysic();
+		void initializeComponents();
+
 		void update(sf::Time dt);
 
     private:

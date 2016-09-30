@@ -12,6 +12,8 @@ class MyObject : public ke::Actor
 
 		MyObject(ke::Scene& scene);
 
+		void initializeComponents();
+
 		void setSize(int x, int y);
 
 	private:

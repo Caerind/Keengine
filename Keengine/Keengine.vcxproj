@@ -168,6 +168,8 @@
     <ClCompile Include="Sources\System\Joystick.cpp" />
     <ClCompile Include="Sources\System\Packet.cpp" />
     <ClCompile Include="Sources\System\ParallelTask.cpp" />
+    <ClCompile Include="Sources\System\Serializer.cpp" />
+    <ClCompile Include="Sources\System\Serializable.cpp" />
     <ClCompile Include="Sources\System\String.cpp" />
     <ClCompile Include="Sources\System\Time.cpp" />
   </ItemGroup>
@@ -337,6 +339,8 @@
     <ClInclude Include="Sources\System\Packet.hpp" />
     <ClInclude Include="Sources\System\ParallelTask.hpp" />
     <ClInclude Include="Sources\System\ScriptManager.hpp" />
+    <ClInclude Include="Sources\System\Serializer.hpp" />
+    <ClInclude Include="Sources\System\Serializable.hpp" />
     <ClInclude Include="Sources\System\SmartPool.hpp" />
     <ClInclude Include="Sources\System\String.hpp" />
     <ClInclude Include="Sources\System\Time.hpp" />

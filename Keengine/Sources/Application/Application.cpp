@@ -49,28 +49,28 @@ void Application::init(std::string const& pathToSettings)
             parser["imgui_filename"] = "";
         }
 
-        Log::instance().useConsole(parser["log_console"].asBool());
+        Log::instance().useConsole(parser["log_console"].as<bool>());
         Log::instance().openLog(parser["log_file"]);
         Log::instance().setOnline(parser["log_url"]);
-        setGlobalVolume(parser["global_volume"].asFloat());
-        setMusicVolume(parser["music_volume"].asFloat());
-        setSoundVolume(parser["sound_volume"].asFloat());
-        setFullscreen(parser["fullscreen"].asBool());
-        setVideoMode(sf::VideoMode(parser["width"].asUint(), parser["height"].asUint()));
-        setStyle(static_cast<sf::Uint32>(parser["style"].asInt()));
+        setGlobalVolume(parser["global_volume"].as<float>());
+        setMusicVolume(parser["music_volume"].as<float>());
+        setSoundVolume(parser["sound_volume"].as<float>());
+        setFullscreen(parser["fullscreen"].as<bool>());
+        setVideoMode(sf::VideoMode(parser["width"].as<unsigned int>(), parser["height"].as<unsigned int>()));
+        setStyle(static_cast<sf::Uint32>(parser["style"].as<int>()));
         setTitle(parser["title"]);
-        setVerticalSyncEnabled(parser["vsync"].asBool());
-        setKeyRepeatEnabled(parser["key_repeat"].asBool());
-        setJoystickThreshold(parser["joystick_threshold"].asFloat());
+        setVerticalSyncEnabled(parser["vsync"].as<bool>());
+        setKeyRepeatEnabled(parser["key_repeat"].as<bool>());
+        setJoystickThreshold(parser["joystick_threshold"].as<float>());
         setIcon(parser["icon"]);
-        setMouseCursor(static_cast<Window::MouseCursor>(parser["cursor"].asInt()));
-        setMouseCursorTexture(parser["cursor_texture"], sf::IntRect(parser["cursor_rect_left"].asInt(), parser["cursor_rect_top"].asInt(), parser["cursor_rect_width"].asInt(), parser["cursor_rect_height"].asInt()));
-        setMouseCursorOrigin(sf::Vector2f(parser["cursor_origin_x"].asFloat(), parser["cursor_origin_y"].asFloat()));
+        setMouseCursor(static_cast<Window::MouseCursor>(parser["cursor"].as<int>()));
+        setMouseCursorTexture(parser["cursor_texture"], sf::IntRect(parser["cursor_rect_left"].as<int>(), parser["cursor_rect_top"].as<int>(), parser["cursor_rect_width"].as<int>(), parser["cursor_rect_height"].as<int>()));
+        setMouseCursorOrigin(sf::Vector2f(parser["cursor_origin_x"].as<float>(), parser["cursor_origin_y"].as<float>()));
         setScreenshotPath(parser["screenshot_path"]);
 		setScriptPath(parser["script_path"]);
-        showDebugInfo(parser["show_debug"].asBool());
-        setBackgroundColor(sf::Color(parser["background_color_r"].asUint(), parser["background_color_g"].asUint(), parser["background_color_b"].asUint()));
-        setBackgroundTexture(parser["background_texture"], sf::IntRect(parser["background_rect_left"].asInt(), parser["background_rect_top"].asInt(), parser["background_rect_width"].asInt(), parser["background_rect_height"].asInt()));
+        showDebugInfo(parser["show_debug"].as<bool>());
+        setBackgroundColor(sf::Color(parser["background_color_r"].as<unsigned int>(), parser["background_color_g"].as<unsigned int>(), parser["background_color_b"].as<unsigned int>()));
+        setBackgroundTexture(parser["background_texture"], sf::IntRect(parser["background_rect_left"].as<int>(), parser["background_rect_top"].as<int>(), parser["background_rect_width"].as<int>(), parser["background_rect_height"].as<int>()));
         
 		#ifndef KEENGINE_ANDROID
 		ImGui::GetIO().IniFilename = (parser["imgui_filename"] != "") ? parser["imgui_filename"].c_str() : nullptr;

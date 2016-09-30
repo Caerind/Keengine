@@ -39,7 +39,7 @@ int main()
 	scene.getPhysic().setRenderDebug(true);
 	scene.getPhysic().setGravity(b2Vec2(0, 9.8f));
 
-	MyMap::Ptr map = scene.createActor<MyMap>();
+	MyMap::Ptr map = scene.createActor<MyMap>("map");
 	map->loadTmxString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" \
 		"<map version=\"1.0\" orientation=\"staggered\" renderorder=\"right-down\" width=\"10\" height=\"10\" tilewidth=\"256\" tileheight=\"128\" staggeraxis=\"y\" staggerindex=\"odd\" nextobjectid=\"1\">" \
 		" <tileset firstgid=\"1\" name=\"iso\" tilewidth=\"256\" tileheight=\"128\" tilecount=\"4\" columns=\"4\">" \
@@ -61,7 +61,7 @@ int main()
 		"</map>");
 	ke::LayerComponent::Ptr layer = map->getLayer(0);
 
-	MyActor::Ptr actor = scene.createActor<MyActor>();
+	MyActor::Ptr actor = scene.createActor<MyActor>("player");
 	actor->setZ(100.f);
 	actor->setPosition({ 100.f, 300.f });
 

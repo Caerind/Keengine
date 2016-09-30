@@ -6,7 +6,6 @@
 namespace ke
 {
 
-// TODO : Add types
 class Variant : public std::string
 {
 	public:
@@ -14,7 +13,7 @@ class Variant : public std::string
 		Variant(const T &t) : std::string(std::to_string(t))
 		{}
 
-		Variant(bool boolean) : std::string((boolean) ? "true" : "false")
+		Variant(bool boolean) : std::string(toString<bool>(boolean))
 		{}
 
 		template <size_t N>
@@ -51,48 +50,10 @@ class Variant : public std::string
 			return this->compare(t) == 0;
 		}
 
-		inline bool asBool()
+		template <typename T>
+		T as()
 		{
-			return (*this == "true");
-		}
-
-		inline int asInt()
-		{
-			std::stringstream iss(*this);
-			int value;
-			iss >> value;
-			return value;
-		}
-
-		inline unsigned int asUint()
-		{
-			std::stringstream iss(*this);
-			unsigned int value;
-			iss >> value;
-			return value;
-		}
-
-		inline float asFloat()
-		{
-			std::stringstream iss(*this);
-			float value;
-			iss >> value;
-			return value;
-		}
-
-		inline sf::Vector2f asVector2f()
-		{
-			return toVector2f(*this);
-		}
-
-		inline sf::Vector2i asVector2i()
-		{
-			return toVector2i(*this);
-		}
-
-		inline sf::Color asColor()
-		{
-			return toColor(*this);
+			return fromString<T>(*this);
 		}
 };
 

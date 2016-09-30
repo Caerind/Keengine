@@ -50,11 +50,21 @@ class Scene
 		ltbl::LightSystem& getLights();
 
 		template <typename T, typename ... Args>
-		std::shared_ptr<T> createActor(Args&& ... args)
+		std::shared_ptr<T> createActor(std::string const& actorId, Args&& ... args)
 		{
 			std::shared_ptr<T> actor = std::make_shared<T>(*this, std::forward<Args>(args)...);
+			if (actorId == "")
+			{
+				actor->setId(ke::decToHex<std::size_t>(mActorIdCounter++));
+			}
+			else
+			{
+				actor->setId(actorId);
+			}
+			actor->initializePhysic();
+			actor->initializeComponents();
+			actor->initialize();
 			mActors.push_back(actor);
-			actor->setId(ke::decToHex<std::size_t>(mActorIdCounter++));
 			return actor;
 		}
 

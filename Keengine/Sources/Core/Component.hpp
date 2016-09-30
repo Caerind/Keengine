@@ -10,12 +10,14 @@
 
 #include "../Application/Application.hpp"
 
+#include "../System/Serializable.hpp"
+
 namespace ke
 {
 
 class Actor;
 class Scene;
-class Component
+class Component : public Serializable
 {
     public:
 		typedef std::shared_ptr<Component> Ptr;

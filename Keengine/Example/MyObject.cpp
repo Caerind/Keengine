@@ -6,6 +6,10 @@ MyObject::MyObject(ke::Scene& scene)
 	, mLightShape(nullptr)
 	, mCollision(nullptr)
 {
+}
+
+void MyObject::initializeComponents()
+{
 	mShape = createComponent<ke::ShapeComponent>();
 	attachComponent(mShape);
 	mShape->setPointCount(4);

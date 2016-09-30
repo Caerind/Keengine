@@ -16,12 +16,10 @@ Actor::Actor(Scene& scene)
 	, mType("")
 	, mBody(nullptr)
 {
-	initializePhysic();
 }
 
 Actor::~Actor()
 {
-	destroyPhysic();
 }
 
 void Actor::remove()
@@ -163,6 +161,27 @@ void Actor::updateComponents(sf::Time dt)
 	}
 }
 
+void Actor::initializePhysic()
+{
+	if (mBody == nullptr && mScene.usePhysic())
+	{
+		b2BodyDef bodyDef;
+		bodyDef.position.Set(0, 0);
+		bodyDef.type = b2_staticBody;
+		bodyDef.userData = this;
+		bodyDef.linearDamping = 0.01f;
+		mBody = mScene.getPhysic().createBody(&bodyDef);
+	}
+}
+
+void Actor::initializeComponents()
+{
+}
+
+void Actor::initialize()
+{
+}
+
 void Actor::render(sf::RenderTarget& target)
 {
 	mRoot.render(target, sf::RenderStates::Default);
@@ -217,19 +236,6 @@ b2Body* Actor::getBody()
 	return mBody;
 }
 
-void Actor::initializePhysic()
-{
-	if (mBody == nullptr && mScene.usePhysic())
-	{
-		b2BodyDef bodyDef;
-		bodyDef.position.Set(0, 0); 
-		bodyDef.type = b2_staticBody;
-		bodyDef.userData = this;
-		bodyDef.linearDamping = 0.01f;
-		mBody = mScene.getPhysic().createBody(&bodyDef);
-	}
-}
-
 void Actor::destroyPhysic()
 {
 	if (mBody != nullptr)
@@ -250,7 +256,7 @@ void Actor::prePhysicUpdate()
 
 void Actor::postPhysicUpdate()
 {
-	if (mBody != nullptr)
+	if (mBody != nullptr && mBody->GetType() != b2_staticBody)
 	{
 		setPosition(mBody->GetPosition() * Physic::conv);
 		setRotation(radToDeg(mBody->GetAngle()));

@@ -2,11 +2,11 @@
 #include "../Sources/Core/Scene.hpp"
 #include "MyObject.hpp"
 
-MyMap::MyMap(ke::Scene& scene) : ke::Map(scene)
+MyMap::MyMap(ke::Scene& scene) 
+	: ke::Map(scene)
+	, mSunColor(sf::Color::White)
+	, mMoonColor(sf::Color(0, 70, 100))
 {
-	mSunColor = sf::Color::White;
-	mMoonColor = sf::Color(0, 70, 100);
-
 	/*
 	mLight = createComponent<ke::DirectionLightComponent>();
 	attachComponent(mLight);
@@ -115,7 +115,7 @@ bool MyMap::loadTmxString(std::string const & str)
 	{
 		for (pugi::xml_node object = group.child("object"); object; object = object.next_sibling("object"))
 		{
-			MyObject::Ptr obj = getScene().createActor<MyObject>();
+			MyObject::Ptr obj = getScene().createActor<MyObject>("");
 			obj->setPosition({ object.attribute("x").as_float(), object.attribute("y").as_float() });
 			obj->setSize(object.attribute("width").as_int(), object.attribute("height").as_int());
 		}

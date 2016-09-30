@@ -482,6 +482,12 @@
     <ClCompile Include="Sources\ExtLibs\LetThereBeLight.cpp">
       <Filter>Sources\ExtLibs</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\System\Serializer.cpp">
+      <Filter>Sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\System\Serializable.cpp">
+      <Filter>Sources\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -990,6 +996,12 @@
     </ClInclude>
     <ClInclude Include="Sources\ExtLibs\LetThereBeLight.hpp">
       <Filter>Sources\ExtLibs</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\Serializer.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\Serializable.hpp">
+      <Filter>Sources\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
