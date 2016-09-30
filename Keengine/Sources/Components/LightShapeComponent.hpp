@@ -3,7 +3,7 @@
 
 #include "../Core/SceneComponent.hpp"
 
-#include "../ExtLibs/LTBL2/LightShape.hpp"
+#include "../ExtLibs/LetThereBeLight.hpp"
 
 namespace ke
 {
@@ -24,9 +24,6 @@ class LightShapeComponent : public SceneComponent
 		void setPoint(std::size_t index, sf::Vector2f const& point);
 		sf::Vector2f getPoint(std::size_t index) const;
 
-		void setOutlineThickness(float thickness);
-		float getOutlineThicnkess() const;
-
 		sf::FloatRect getLocalBounds();
 		sf::FloatRect getGlobalBounds();
 
@@ -34,7 +31,7 @@ class LightShapeComponent : public SceneComponent
 		virtual void onTransformUpdated();
 
 	private:
-		ltbl::LightShape::Ptr mLightShape;
+		ltbl::LightShape* mLightShape;
 };
 
 } // namespace ke

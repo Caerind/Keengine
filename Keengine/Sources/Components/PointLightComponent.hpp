@@ -2,7 +2,7 @@
 #define KE_POINTLIGHTCOMPONENT_HPP
 
 #include "../Core/SceneComponent.hpp"
-#include "../ExtLibs/LTBL2/LightPointEmission.hpp"
+#include "../ExtLibs/LetThereBeLight.hpp"
 
 namespace ke
 {
@@ -30,7 +30,7 @@ class PointLightComponent : public SceneComponent
 		void onTransformUpdated();
 
 	protected:
-		ltbl::LightPointEmission::Ptr mLight;
+		ltbl::LightPointEmission* mLight;
 };
 
 } // namespace ke

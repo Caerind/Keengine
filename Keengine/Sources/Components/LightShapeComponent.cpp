@@ -14,7 +14,7 @@ void LightShapeComponent::onRegister()
 {
 	if (getScene().useLight() && mLightShape == nullptr)
 	{
-		mLightShape = getScene().getLights().createShape();
+		mLightShape = getScene().getLights().createLightShape();
 	}
 }
 
@@ -31,7 +31,7 @@ void LightShapeComponent::setPointCount(std::size_t points)
 {
 	if (mLightShape != nullptr)
 	{
-		mLightShape->_shape.setPointCount(points);
+		mLightShape->setPointCount(points);
 	}
 }
 
@@ -39,7 +39,7 @@ std::size_t LightShapeComponent::getPointCount() const
 {
 	if (mLightShape != nullptr)
 	{
-		return mLightShape->_shape.getPointCount();
+		return mLightShape->getPointCount();
 	}
 	return 0;
 }
@@ -48,7 +48,7 @@ void LightShapeComponent::setPoint(std::size_t index, sf::Vector2f const& point)
 {
 	if (mLightShape != nullptr)
 	{
-		mLightShape->_shape.setPoint(index, point);
+		mLightShape->setPoint(index, point);
 	}
 }
 
@@ -56,33 +56,16 @@ sf::Vector2f LightShapeComponent::getPoint(std::size_t index) const
 {
 	if (mLightShape != nullptr)
 	{
-		return mLightShape->_shape.getPoint(index);
+		return mLightShape->getPoint(index);
 	}
 	return sf::Vector2f();
-}
-
-void LightShapeComponent::setOutlineThickness(float thickness)
-{
-	if (mLightShape != nullptr)
-	{
-		mLightShape->_shape.setOutlineThickness(thickness);
-	}
-}
-
-float LightShapeComponent::getOutlineThicnkess() const
-{
-	if (mLightShape != nullptr)
-	{
-		return mLightShape->_shape.getOutlineThickness();
-	}
-	return 0.f;
 }
 
 sf::FloatRect LightShapeComponent::getLocalBounds()
 {
 	if (mLightShape != nullptr)
 	{
-		return getTransform().transformRect(mLightShape->_shape.getLocalBounds());
+		//return getTransform().transformRect(mLightShape->getLocalBounds());
 	}
 	return sf::FloatRect();
 }
@@ -91,7 +74,7 @@ sf::FloatRect LightShapeComponent::getGlobalBounds()
 {
 	if (mLightShape != nullptr)
 	{
-		return getWorldTransform().transformRect(mLightShape->_shape.getLocalBounds());
+		//return getWorldTransform().transformRect(mLightShape->getLocalBounds());
 	}
 	return sf::FloatRect();
 }
@@ -100,7 +83,7 @@ void LightShapeComponent::onTransformUpdated()
 {
 	if (mLightShape != nullptr)
 	{
-		mLightShape->_shape.setPosition(getWorldPosition());
+		mLightShape->setPosition(getWorldPosition());
 	}
 }
 

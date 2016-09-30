@@ -13,7 +13,7 @@
 
 #include "Actor.hpp"
 #include "PhysicSystem.hpp"
-#include "../ExtLibs/LTBL2/LightSystem.hpp"
+#include "../ExtLibs/LetThereBeLight.hpp"
 #include "LightTextures.hpp"
 #include "Effect.hpp"
 

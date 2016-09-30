@@ -262,46 +262,7 @@ void Scene::initLights()
 		}
 		texture.setSmooth(true);
 	}
-	if (!getApplication().hasResource("directionLightTexture"))
-	{
-		Texture& texture = getApplication().createResource<Texture>("directionLightTexture");
-		if (!texture.loadFromMemory(directionLightTexture, (sizeof(directionLightTexture) / sizeof(*directionLightTexture))))
-		{
-			getLog() << "World - Can't load directionLightTexture";
-		}
-		texture.setSmooth(true);
-	}
-	if (!getApplication().hasResource("penumbraTexture"))
-	{
-		Texture& texture = getApplication().createResource<Texture>("penumbraTexture");
-		if (!texture.loadFromMemory(penumbraTexture, (sizeof(penumbraTexture) / sizeof(*penumbraTexture))))
-		{
-			getLog() << "World - Can't load penumbraTexture";
-		}
-		texture.setSmooth(true);
-	}
-	if (!getApplication().hasResource("unshadowShader"))
-	{
-		const std::string v = "void main() { gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex; gl_TexCoord[0] = gl_MultiTexCoord0; gl_FrontColor = gl_Color; }";
-		const std::string f = "uniform sampler2D penumbraTexture; uniform float lightBrightness; uniform float darkBrightness; void main()  { float penumbra = texture2D(penumbraTexture, gl_TexCoord[0].xy).x; float shadow = (lightBrightness - darkBrightness) * penumbra + darkBrightness; gl_FragColor = vec4(vec3(1.0 - shadow), 1.0); }";
-		Shader& shader = getApplication().createResource<Shader>("unshadowShader");
-		if (!shader.loadFromMemory(v, f))
-		{
-			getLog() << "World - Can't load unshadowShader";
-		}
-	}
-	if (!getApplication().hasResource("lightOverShapeShader"))
-	{
-		const std::string v = "void main() { gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex; gl_TexCoord[0] = gl_MultiTexCoord0; }";
-		const std::string f = "uniform sampler2D emissionTexture; uniform vec2 targetSizeInv; void main() { vec2 targetCoords = gl_FragCoord.xy * targetSizeInv; vec4 emissionColor = texture2D(emissionTexture, targetCoords); gl_FragColor = vec4(emissionColor.rgb, 1.0); }";
-		Shader& shader = getApplication().createResource<Shader>("lightOverShapeShader");
-		if (!shader.loadFromMemory(v, f))
-		{
-			getLog() << "World - Can't load lightOverShapeShader";
-		}
-	}
-
-	mLights.create({ -1000.f, -1000.f, 2000.f, 2000.f }, getApplication().getSize(), getApplication().getResource<Texture>("penumbraTexture"), getApplication().getResource<Shader>("unshadowShader"), getApplication().getResource<Shader>("lightOverShapeShader"));
+	mLights.create({ -1000.f, -1000.f, 2000.f, 2000.f }, getApplication().getSize());
 }
 
 void Scene::renderComplex(sf::RenderTarget& target)
