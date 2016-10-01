@@ -365,10 +365,10 @@ bool Map::saveTmxFile(std::string const & filename)
 			pty.attribute("name") = "z";
 			pty.attribute("value") = image->getZ();
 		}
-		if (image->getTextureName() != "")
+		if (image->getTexture() != "")
 		{
 			pugi::xml_node img = imagelayer.append_child("image");
-			img.append_attribute("source") = image->getTextureName().c_str();
+			img.append_attribute("source") = image->getTexture().c_str();
 		}
 	}
 

@@ -467,4 +467,21 @@ void Actor::removeComponent(Component::Ptr component)
 	}
 }
 
+void Actor::serialize(Serializer& serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	// TODO : Save more data
+	for (std::size_t i = 0; i < mComponents.size(); i++)
+	{
+		mComponents[i]->serialize(serializer);
+	}
+	serializer.end();
+}
+
+bool Actor::deserialize(Serializer& serializer, const std::string& identifier)
+{
+	return false;
+}
+
 } // namespace ke

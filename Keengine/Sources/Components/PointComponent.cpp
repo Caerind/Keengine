@@ -32,6 +32,20 @@ float PointComponent::getRadius() const
     return mPoint.getRadius();
 }
 
+void PointComponent::serialize(Serializer& serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	serializer.save("radius", getRadius());
+	serializer.save("color", getColor());
+	serializer.end();
+}
+
+bool PointComponent::deserialize(Serializer & serializer, const std::string & identifier)
+{
+	return false;
+}
+
 void PointComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)
 {
     target.draw(mPoint, states);

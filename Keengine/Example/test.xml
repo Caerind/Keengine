@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<Main>
+	<MyActor id="player">
+		<PointComponent id="1" radius="2" color="ff0000ff" />
+		<AnimatorComponent id="2" pos="-32,-32" rot="0" sca="1,1" z="0" visible="true" playing="true" elapsed="0.066664">
+			<Animation id="0" name="idle">
+				<Frame id="0" texture="cat" textureRect="0,0,64,64" duration="0.15" />
+				<Frame id="1" texture="cat" textureRect="64,0,64,64" duration="0.15" />
+				<Frame id="2" texture="cat" textureRect="128,0,64,64" duration="0.15" />
+				<Frame id="3" texture="cat" textureRect="192,0,64,64" duration="0.15" />
+			</Animation>
+			<Animation id="1" name="run">
+				<Frame id="0" texture="cat" textureRect="0,64,64,64" duration="0.15" />
+				<Frame id="1" texture="cat" textureRect="64,64,64,64" duration="0.15" />
+				<Frame id="2" texture="cat" textureRect="128,64,64,64" duration="0.15" />
+				<Frame id="3" texture="cat" textureRect="192,64,64,64" duration="0.15" />
+				<Frame id="4" texture="cat" textureRect="256,64,64,64" duration="0.15" />
+				<Frame id="5" texture="cat" textureRect="320,64,64,64" duration="0.15" />
+				<Frame id="6" texture="cat" textureRect="384,64,64,64" duration="0.15" />
+				<Frame id="7" texture="cat" textureRect="448,64,64,64" duration="0.15" />
+			</Animation>
+		</AnimatorComponent>
+		<PointLightComponent id="3" pos="0,0" rot="0" sca="1,1" z="0" color="c8c80aff" intensity="5" on="true" />
+		<InputComponent id="4" priority="0" />
+		<CollisionComponent id="5" />
+	</MyActor>
+	<MyMap id="map">
+		<LayerComponent id="1" />
+	</MyMap>
+</Main>

@@ -13,6 +13,8 @@ class LightShapeComponent : public SceneComponent
 	public:
 		typedef std::shared_ptr<LightShapeComponent> Ptr;
 
+		TYPE(LightShapeComponent)
+
 		LightShapeComponent(Actor& actor);
 
 		void onRegister();
@@ -26,6 +28,9 @@ class LightShapeComponent : public SceneComponent
 
 		sf::FloatRect getLocalBounds();
 		sf::FloatRect getGlobalBounds();
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 
 	private:
 		virtual void onTransformUpdated();

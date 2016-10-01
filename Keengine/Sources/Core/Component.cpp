@@ -145,4 +145,16 @@ Application& Component::getApplication()
 	return Application::instance();
 }
 
+void Component::serialize(Serializer& serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	serializer.end();
+}
+
+bool Component::deserialize(Serializer& serializer, const std::string& identifier)
+{
+	return false;
+}
+
 } // namespace ke

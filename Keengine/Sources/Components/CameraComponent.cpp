@@ -4,8 +4,10 @@
 namespace ke
 {
 
-CameraComponent::CameraComponent(Actor& actor) : SceneComponent(actor)
+CameraComponent::CameraComponent(Actor& actor) 
+	: SceneComponent(actor)
 {
+	mUpdatable = false;
 }
 
 sf::View& CameraComponent::getView()

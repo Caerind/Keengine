@@ -168,6 +168,23 @@ void SceneComponent::detachComponent(SceneComponent* component)
 	}
 }
 
+void SceneComponent::serialize(Serializer& serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	serializer.save("pos", getPosition());
+	serializer.save("rot", getRotation());
+	serializer.save("sca", getScale());
+	serializer.save("z", getZ());
+	serializer.save("visible", isVisible());
+	serializer.end();
+}
+
+bool SceneComponent::deserialize(Serializer& serializer, const std::string& identifier)
+{
+	return false;
+}
+
 void SceneComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)
 {
 }

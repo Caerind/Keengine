@@ -19,6 +19,8 @@ class ParticleComponent : public SceneComponent
     public:
 		typedef std::shared_ptr<ParticleComponent> Ptr;
 
+		TYPE(ParticleComponent)
+
 		typedef std::array<sf::Vertex, 6> Quad;
 		
 		class Particle
@@ -71,6 +73,9 @@ class ParticleComponent : public SceneComponent
 
 		void emitParticle();
 		void emitParticles(std::size_t particleAmount);
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 
 	private:
 		std::size_t computeParticleCount(sf::Time dt);

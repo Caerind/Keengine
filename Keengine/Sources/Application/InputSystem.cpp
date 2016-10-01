@@ -89,6 +89,8 @@ void TouchPair::fromString(std::string const& str)
 }
 
 Input::Input()
+	: mActions()
+	, mPriority(0.f)
 {
 }
 

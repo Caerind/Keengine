@@ -1,10 +1,12 @@
 #ifndef KE_SERIALIZER_HPP
 #define KE_SERIALIZER_HPP
 
+#include <fstream>
 #include <map>
 #include <vector>
 #include "String.hpp"
 #include "Serializable.hpp"
+#include "../Extlibs/pugixml.hpp"
 
 namespace ke
 {
@@ -13,16 +15,27 @@ class Serializer
 {
 	public:
 		Serializer();
+		~Serializer();
+
+		bool openDocument(const std::string& filename, bool erase = false);
+		void saveDocument(bool readable = true);
+
 
 		// Write
 		virtual void create(const std::string& identifier);
 
-		template <typename T>
-		void save(const std::string& identifier, const T& value)
-		{
-		}
-
 		virtual void save(const std::string& identifier, const std::string& value);
+		virtual void save(const std::string& identifier, const int& value);
+		virtual void save(const std::string& identifier, const unsigned int& value);
+		virtual void save(const std::string& identifier, const char& value);
+		virtual void save(const std::string& identifier, const float& value);
+		virtual void save(const std::string& identifier, const bool& value);
+		virtual void save(const std::string& identifier, const sf::Vector2f& value);
+		virtual void save(const std::string& identifier, const sf::Vector2i& value);
+		virtual void save(const std::string& identifier, const sf::Color& value);
+		virtual void save(const std::string& identifier, const sf::IntRect& value);
+		virtual void save(const std::string& identifier, const sf::FloatRect& value);
+		virtual void save(const std::string& identifier, const sf::Time& value);
 
 		template <typename T>
 		void save(const std::string& identifier, const std::vector<T>& vector)
@@ -79,7 +92,7 @@ class Serializer
 		}
 
 		template <typename T>
-		void saveComplex(std::string const& identifier, T const& t)
+		void saveComplex(std::string const& identifier, T& t)
 		{
 			t.serialize(*this, identifier);
 		}
@@ -90,20 +103,18 @@ class Serializer
 		virtual bool read(const std::string& identifier);
 
 		virtual bool load(const std::string& identifier, std::string& value);
-
-		template <typename T>
-		bool load(const std::string& identifier, T& value)
-		{
-			return false;
-		}
-
-		template <typename T>
-		T load(const std::string& identifier)
-		{
-			T temp;
-			load(identifier, temp);
-			return temp;
-		}
+		virtual bool load(const std::string& identifier, int& value);
+		virtual bool load(const std::string& identifier, unsigned int& value);
+		virtual bool load(const std::string& identifier, char& value);
+		virtual bool load(const std::string& identifier, float& value);
+		virtual bool load(const std::string& identifier, bool& value);
+		virtual bool load(const std::string& identifier, sf::Vector2f& value);
+		virtual bool load(const std::string& identifier, sf::Vector2i& value);
+		virtual bool load(const std::string& identifier, sf::Color& value);
+		virtual bool load(const std::string& identifier, sf::IntRect& value);
+		virtual bool load(const std::string& identifier, sf::FloatRect& value);
+		virtual bool load(const std::string& identifier, sf::Time& value);
+		virtual std::string load(const std::string& identifier);
 
 		template <typename T>
 		bool load(const std::string& identifier, std::vector<T>& vector)
@@ -244,6 +255,11 @@ class Serializer
 		{
 			return t.deserialize(*this, identifier);
 		}
+
+	private:
+		std::string mFilename;
+		pugi::xml_document mDoc;
+		pugi::xml_node mActualNode;
 };
 
 } // namespace ke

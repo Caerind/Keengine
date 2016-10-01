@@ -12,7 +12,7 @@ class Serializable
 	public:
 		Serializable();
 
-		virtual bool serialize(Serializer& serializer, const std::string& identifier);
+		virtual void serialize(Serializer& serializer);
 		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 };
 

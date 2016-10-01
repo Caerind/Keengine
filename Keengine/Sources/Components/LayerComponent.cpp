@@ -641,6 +641,19 @@ sf::Vector2f LayerComponent::getVertexPosition(sf::Vector2i const & coords)
 	return pos;
 }
 
+void LayerComponent::serialize(Serializer& serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	// TODO : Save data
+	serializer.end();
+}
+
+bool LayerComponent::deserialize(Serializer & serializer, const std::string & identifier)
+{
+	return false;
+}
+
 void LayerComponent::renderCurrent(sf::RenderTarget & target, sf::RenderStates states)
 {
 	if (mTileset != nullptr)

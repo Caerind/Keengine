@@ -11,6 +11,8 @@
 #include "../Application/Application.hpp"
 
 #include "../System/Serializable.hpp"
+#include "../System/Serializer.hpp"
+#include "../System/Type.hpp"
 
 namespace ke
 {
@@ -21,6 +23,8 @@ class Component : public Serializable
 {
     public:
 		typedef std::shared_ptr<Component> Ptr;
+
+		TYPE(Component)
 
 		Component(Actor& actor);
 		virtual ~Component();
@@ -59,6 +63,9 @@ class Component : public Serializable
 
 		Log& getLog();
 		Application& getApplication();
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 		
 	protected:
 		Actor& mActor;

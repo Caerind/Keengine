@@ -12,6 +12,8 @@ class DirectionLightComponent : public SceneComponent
 	public:
 		typedef std::shared_ptr<DirectionLightComponent> Ptr;
 
+		TYPE(DirectionLightComponent)
+
 		DirectionLightComponent(Actor& actor);
 
 		void onRegister();
@@ -24,6 +26,9 @@ class DirectionLightComponent : public SceneComponent
 		float getAngle() const;
 		void setDirection(sf::Vector2f const& vector);
 		sf::Vector2f getDirection() const;
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 
 	protected:
 		ltbl::LightDirectionEmission* mLight;

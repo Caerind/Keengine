@@ -12,6 +12,8 @@ class PointLightComponent : public SceneComponent
 	public:
 		typedef std::shared_ptr<PointLightComponent> Ptr;
 
+		TYPE(PointLightComponent)
+
 		PointLightComponent(Actor& actor);
 
 		void onRegister();
@@ -25,6 +27,9 @@ class PointLightComponent : public SceneComponent
 
 		void setOn(bool on);
 		bool isOn() const;
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 
 	protected:
 		void onTransformUpdated();

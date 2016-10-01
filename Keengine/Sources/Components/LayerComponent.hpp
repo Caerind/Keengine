@@ -20,6 +20,8 @@ class LayerComponent : public SceneComponent, public PropertiesHolder
 	public:
 		typedef std::shared_ptr<LayerComponent> Ptr;
 
+		TYPE(LayerComponent)
+
 		LayerComponent(Actor& actor);
 		LayerComponent(Actor& actor, Tileset* tileset, sf::Vector2i const& size = sf::Vector2i(), sf::Vector2i const& tileSize = sf::Vector2i(), std::string const& orientation = "orthogonal", std::string const& staggerAxis = "y", std::string const& staggerIndex = "odd", unsigned int hexSideLength = 0);
 
@@ -72,6 +74,9 @@ class LayerComponent : public SceneComponent, public PropertiesHolder
 
 		void updateRender();
 		sf::Vector2f getVertexPosition(sf::Vector2i const& coords);
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 
 	private:
 		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);

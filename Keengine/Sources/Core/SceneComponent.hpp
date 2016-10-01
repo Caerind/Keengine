@@ -16,6 +16,8 @@ class SceneComponent : public Component
     public:
 		typedef std::shared_ptr<SceneComponent> Ptr;
 
+		TYPE(SceneComponent)
+
 		SceneComponent(Actor& actor);
 		virtual ~SceneComponent();
 
@@ -51,6 +53,9 @@ class SceneComponent : public Component
 
 		void attachComponent(SceneComponent* component);
 		void detachComponent(SceneComponent* component);
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 
 	private:
 		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);

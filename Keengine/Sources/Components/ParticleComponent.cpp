@@ -178,6 +178,19 @@ void ParticleComponent::emitParticles(std::size_t particleAmount)
 	}
 }
 
+void ParticleComponent::serialize(Serializer& serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	// TODO : Save data
+	serializer.end();
+}
+
+bool ParticleComponent::deserialize(Serializer & serializer, const std::string & identifier)
+{
+	return false;
+}
+
 std::size_t ParticleComponent::computeParticleCount(sf::Time dt)
 {
 	// We want to fulfill the desired particle rate as exact as possible. Since the amount of emitted particles per frame is

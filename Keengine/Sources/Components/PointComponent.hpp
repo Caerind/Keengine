@@ -13,6 +13,8 @@ class PointComponent : public SceneComponent
     public:
 		typedef std::shared_ptr<PointComponent> Ptr;
 
+		TYPE(PointComponent)
+
         PointComponent(Actor& actor);
 
         void setColor(sf::Color const& color);
@@ -20,6 +22,9 @@ class PointComponent : public SceneComponent
 
         void setRadius(float radius);
         float getRadius() const;
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 
 	private:
         virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);

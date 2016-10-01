@@ -344,10 +344,12 @@
     <ClInclude Include="Sources\System\SmartPool.hpp" />
     <ClInclude Include="Sources\System\String.hpp" />
     <ClInclude Include="Sources\System\Time.hpp" />
+    <ClInclude Include="Sources\System\Type.hpp" />
     <ClInclude Include="Sources\System\Variant.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Example\French.lang" />
+    <Xml Include="Example\test.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2fc9c7b4-4c0c-421b-9fe9-54e7947d8769}</ProjectGuid>

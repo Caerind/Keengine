@@ -12,6 +12,8 @@ class CameraComponent : public SceneComponent
     public:
 		typedef std::shared_ptr<CameraComponent> Ptr;
 
+		TYPE(CameraComponent)
+
         CameraComponent(Actor& actor);
 
         sf::View& getView();

@@ -13,6 +13,8 @@ class TextComponent : public SceneComponent
 	public:
 		typedef std::shared_ptr<TextComponent> Ptr;
 
+		TYPE(TextComponent)
+
 		TextComponent(Actor& actor);
 
 		void setFont(std::string const& font);
@@ -23,11 +25,15 @@ class TextComponent : public SceneComponent
 		void setOutlineColor(sf::Color const& color);
 		void setOutlineThickness(float thickness);
 
+		std::string getFont() const;
 		unsigned int getSize() const;
 		std::string getString() const;
 		sf::Color getFillColor() const;
 		sf::Color getOutlineColor() const;
 		float getOutlineThickness() const;
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 
 	private:
 		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);

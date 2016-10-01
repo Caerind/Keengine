@@ -31,7 +31,7 @@ void SpriteComponent::setTexture(sf::Texture& texture, sf::IntRect const& rect)
     }
 }
 
-std::string SpriteComponent::getTextureName() const
+std::string SpriteComponent::getTexture() const
 {
 	return mTexture;
 }
@@ -64,6 +64,26 @@ sf::FloatRect SpriteComponent::getLocalBounds()
 sf::FloatRect SpriteComponent::getGlobalBounds()
 {
 	return getWorldTransform().transformRect(mSprite.getLocalBounds());
+}
+
+void SpriteComponent::serialize(Serializer& serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	serializer.save("pos", getPosition());
+	serializer.save("rot", getRotation());
+	serializer.save("sca", getScale());
+	serializer.save("z", getZ());
+	serializer.save("visible", isVisible());
+	serializer.save("texture", getTexture());
+	serializer.save("textureRect", getTextureRect());
+	serializer.save("color", getColor());
+	serializer.end();
+}
+
+bool SpriteComponent::deserialize(Serializer & serializer, const std::string & identifier)
+{
+	return false;
 }
 
 void SpriteComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)

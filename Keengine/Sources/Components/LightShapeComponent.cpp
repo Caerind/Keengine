@@ -79,6 +79,19 @@ sf::FloatRect LightShapeComponent::getGlobalBounds()
 	return sf::FloatRect();
 }
 
+void LightShapeComponent::serialize(Serializer& serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	// TODO : Save data
+	serializer.end();
+}
+
+bool LightShapeComponent::deserialize(Serializer & serializer, const std::string & identifier)
+{
+	return false;
+}
+
 void LightShapeComponent::onTransformUpdated()
 {
 	if (mLightShape != nullptr)

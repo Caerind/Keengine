@@ -14,11 +14,13 @@ class SpriteComponent : public SceneComponent
 	public:
 		typedef std::shared_ptr<SpriteComponent> Ptr;
 
+		TYPE(SpriteComponent)
+
 		SpriteComponent(Actor& actor);
 
 		void setTexture(std::string const& textureName, sf::IntRect const& rect = sf::IntRect());
 		void setTexture(sf::Texture& texture, sf::IntRect const& rect = sf::IntRect());
-		std::string getTextureName() const;
+		std::string getTexture() const;
 
 		void setTextureRect(sf::IntRect const& rect);
 		sf::IntRect getTextureRect() const;
@@ -28,6 +30,9 @@ class SpriteComponent : public SceneComponent
 
 		sf::FloatRect getLocalBounds();
 		sf::FloatRect getGlobalBounds();
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 
 	private:
 		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);

@@ -23,4 +23,17 @@ void TriggerComponent::onRegister()
 	}
 }
 
+void TriggerComponent::serialize(Serializer & serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	// TODO : Save data
+	serializer.end();
+}
+
+bool TriggerComponent::deserialize(Serializer & serializer, const std::string & identifier)
+{
+	return false;
+}
+
 } // namespace ke

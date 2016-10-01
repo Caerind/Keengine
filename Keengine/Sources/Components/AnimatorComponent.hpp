@@ -23,30 +23,32 @@ struct Frame
 
 class Animation
 {
-public:
-	Animation();
+	public:
+		Animation();
 
-	void addFrame(Frame const& frame);
-	void addFrame(std::string const& textureName, sf::IntRect const& textureRect, sf::Time duration);
+		void addFrame(Frame const& frame);
+		void addFrame(std::string const& textureName, sf::IntRect const& textureRect, sf::Time duration);
 
-	std::size_t getFrameCount() const;
+		std::size_t getFrameCount() const;
 
-	Frame& getFrame(std::size_t index);
+		Frame& getFrame(std::size_t index);
 
-	void removeFrame(std::size_t index);
+		void removeFrame(std::size_t index);
 
-	void removeAllFrames();
+		void removeAllFrames();
 
-	sf::Time getDuration() const;
+		sf::Time getDuration() const;
 
-private:
-	std::vector<Frame> mFrames;
+	private:
+		std::vector<Frame> mFrames;
 };
 
 class AnimatorComponent : public SceneComponent
 {
 	public:
 		typedef std::shared_ptr<AnimatorComponent> Ptr;
+
+		TYPE(AnimatorComponent)
 
 		AnimatorComponent(Actor& actor);
 
@@ -58,9 +60,11 @@ class AnimatorComponent : public SceneComponent
 
 		void removeAllAnimations();
 
+		bool isPlaying() const;
 		void playAnimation(std::string const& name);
 		void stopAnimation();
 
+		sf::Time getElapsedTime() const;
 		void setElapsedTime(sf::Time elapsed);
 
 		Animation& getActualAnimation();
@@ -70,6 +74,9 @@ class AnimatorComponent : public SceneComponent
 		
 		sf::FloatRect getLocalBounds();
 		sf::FloatRect getGlobalBounds();
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 
 	private:
 		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);

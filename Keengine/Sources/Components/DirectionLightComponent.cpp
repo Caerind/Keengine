@@ -9,6 +9,8 @@ DirectionLightComponent::DirectionLightComponent(Actor& actor)
 	: SceneComponent(actor)
 	, mLight(nullptr)
 {
+	mUpdatable = false;
+	mVisible = false;
 }
 
 void DirectionLightComponent::onRegister()
@@ -77,6 +79,20 @@ sf::Vector2f DirectionLightComponent::getDirection() const
 		return mLight->getCastDirection();
 	}
 	return sf::Vector2f();
+}
+
+void DirectionLightComponent::serialize(Serializer& serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	serializer.save("angle", getAngle());
+	serializer.save("color", getColor());
+	serializer.end();
+}
+
+bool DirectionLightComponent::deserialize(Serializer & serializer, const std::string & identifier)
+{
+	return false;
 }
 
 } // namespace ke

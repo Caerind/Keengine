@@ -5,6 +5,8 @@
 #include "MyActor.hpp"
 #include "MyMap.hpp"
 
+#include "../Sources/System/Serializer.hpp"
+
 int main()
 {
 	ke::Application::init("Example/");
@@ -109,6 +111,12 @@ int main()
 	});
 
 	ke::Application::runDefault();
+
+	ke::Serializer s;
+	s.openDocument("Example/test.xml", true);
+	actor->serialize(s);
+	map->serialize(s);
+	s.saveDocument();
 
 	mouseLight = nullptr;
 	map = nullptr;

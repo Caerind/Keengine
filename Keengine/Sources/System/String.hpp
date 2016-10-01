@@ -10,6 +10,7 @@
 
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
 
 namespace ke
@@ -85,6 +86,10 @@ template <> inline std::string toString<sf::FloatRect>(const sf::FloatRect& valu
 	return oss.str();
 }
 
+template <> inline std::string toString<sf::Time>(const sf::Time& value)
+{
+	return toString(value.asSeconds());
+}
 
 template <typename T>
 T fromString(const std::string& string)
@@ -227,6 +232,11 @@ template <> inline sf::FloatRect fromString<sf::FloatRect>(const std::string& st
 		i++;
 	}
 	return rect;
+}
+
+template <> inline sf::Time fromString<sf::Time>(const std::string& string)
+{
+	return sf::seconds(fromString<float>(string));
 }
 
 } // namespace ke

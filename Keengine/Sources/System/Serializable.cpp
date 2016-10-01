@@ -8,9 +8,8 @@ Serializable::Serializable()
 {
 }
 
-bool Serializable::serialize(Serializer& serializer, const std::string& identifier)
+void Serializable::serialize(Serializer& serializer)
 {
-	return true;
 }
 
 bool Serializable::deserialize(Serializer& serializer, const std::string& identifier)

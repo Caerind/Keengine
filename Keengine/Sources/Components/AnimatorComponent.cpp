@@ -84,6 +84,11 @@ void AnimatorComponent::removeAllAnimations()
 	mAnimations.clear();
 }
 
+bool AnimatorComponent::isPlaying() const
+{
+	return mPlaying;
+}
+
 void AnimatorComponent::playAnimation(std::string const& name)
 {
 	mActualFrame = 0;
@@ -105,6 +110,11 @@ void AnimatorComponent::playAnimation(std::string const& name)
 void AnimatorComponent::stopAnimation()
 {
 	mPlaying = false;
+}
+
+sf::Time AnimatorComponent::getElapsedTime() const
+{
+	return mTimeElapsed;
 }
 
 void AnimatorComponent::setElapsedTime(sf::Time elapsed)
@@ -155,6 +165,45 @@ sf::FloatRect AnimatorComponent::getLocalBounds()
 sf::FloatRect AnimatorComponent::getGlobalBounds()
 {
 	return getWorldTransform().transformRect(mSprite.getLocalBounds());
+}
+
+void AnimatorComponent::serialize(Serializer& serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	serializer.save("pos", getPosition());
+	serializer.save("rot", getRotation());
+	serializer.save("sca", getScale());
+	serializer.save("z", getZ());
+	serializer.save("visible", isVisible());
+	serializer.save("playing", isPlaying());
+	serializer.save("elapsed", getElapsedTime());
+	int i = 0;
+	for (auto itr = mAnimations.begin(); itr != mAnimations.end(); itr++)
+	{
+		serializer.create("Animation");
+		serializer.save("id", i);
+		serializer.save("name", itr->first);
+		Animation& a = itr->second;
+		for (std::size_t j = 0; j < a.getFrameCount(); j++)
+		{
+			Frame& f = a.getFrame(j);
+			serializer.create("Frame");
+			serializer.save("id", j);
+			serializer.save("texture", f.textureName);
+			serializer.save("textureRect", f.textureRect);
+			serializer.save("duration", f.duration);
+			serializer.end();
+		}
+		serializer.end();
+		i++;
+	}
+	serializer.end();
+}
+
+bool AnimatorComponent::deserialize(Serializer & serializer, const std::string & identifier)
+{
+	return false;
 }
 
 void AnimatorComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)

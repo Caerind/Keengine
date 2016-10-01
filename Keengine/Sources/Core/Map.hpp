@@ -14,6 +14,8 @@ class Map : public Actor, public PropertiesHolder
 	public:
 		typedef std::shared_ptr<Map> Ptr;
 
+		TYPE(Map)
+
 		static std::vector<sf::Vector2i> getNeighboors(sf::Vector2i const& coords, std::string const& orientation, bool diag = false, std::string const& staggerIndex = "odd", std::string const& staggerAxis = "y");
 		static sf::Vector2i worldToCoords(sf::Vector2f const& world, std::string const& orientation, sf::Vector2i const& tileSize, std::string const& staggerIndex = "odd", std::string const& staggerAxis = "y", unsigned int hexSide = 0);
 		static sf::Vector2f coordsToWorld(sf::Vector2i const& coords, std::string const& orientation, sf::Vector2i const& tileSize, std::string const& staggerIndex = "odd", std::string const& staggerAxis = "y", unsigned int hexSide = 0);

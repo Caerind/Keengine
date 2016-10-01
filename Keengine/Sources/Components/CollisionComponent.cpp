@@ -9,6 +9,7 @@ CollisionComponent::CollisionComponent(Actor& actor)
 	: SceneComponent(actor)
 	, mFixture(nullptr)
 {
+	mUpdatable = false;
 }
 
 void CollisionComponent::onRegister()
@@ -87,6 +88,19 @@ void CollisionComponent::setShape(std::vector<sf::Vector2f> shape)
 		}
 		polygon->Set(vertices, shape.size());
 	}
+}
+
+void CollisionComponent::serialize(Serializer& serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	// TODO : Save data
+	serializer.end();
+}
+
+bool CollisionComponent::deserialize(Serializer & serializer, const std::string & identifier)
+{
+	return false;
 }
 
 } // namespace ke

@@ -8,6 +8,8 @@ PointLightComponent::PointLightComponent(Actor& actor)
 	: SceneComponent(actor)
 	, mLight(nullptr)
 {
+	mUpdatable = false;
+	mVisible = false;
 }
 
 void PointLightComponent::onRegister()
@@ -82,6 +84,25 @@ bool PointLightComponent::isOn() const
 	{
 		return mLight->isTurnedOn();
 	}
+	return false;
+}
+
+void PointLightComponent::serialize(Serializer& serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	serializer.save("pos", getPosition());
+	serializer.save("rot", getRotation());
+	serializer.save("sca", getScale());
+	serializer.save("z", getZ());
+	serializer.save("color", getColor());
+	serializer.save("intensity", getIntensity());
+	serializer.save("on", isOn());
+	serializer.end();
+}
+
+bool PointLightComponent::deserialize(Serializer & serializer, const std::string & identifier)
+{
 	return false;
 }
 

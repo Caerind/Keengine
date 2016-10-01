@@ -1003,9 +1003,15 @@
     <ClInclude Include="Sources\System\Serializable.hpp">
       <Filter>Sources\System</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\System\Type.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Example\French.lang">
+      <Filter>Example</Filter>
+    </Xml>
+    <Xml Include="Example\test.xml">
       <Filter>Example</Filter>
     </Xml>
   </ItemGroup>

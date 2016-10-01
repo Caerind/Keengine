@@ -13,6 +13,8 @@ class CollisionComponent : public SceneComponent
 	public:
 		typedef std::shared_ptr<CollisionComponent> Ptr;
 
+		TYPE(CollisionComponent)
+
 		CollisionComponent(Actor& actor);
 
 		void onRegister();
@@ -26,6 +28,9 @@ class CollisionComponent : public SceneComponent
 		float getDensity();
 
 		void setShape(std::vector<sf::Vector2f> shape);
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 
 	protected:
 		b2Fixture* mFixture;

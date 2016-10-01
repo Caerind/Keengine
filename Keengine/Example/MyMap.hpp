@@ -8,6 +8,8 @@ class MyMap : public ke::Map
 	public:
 		typedef std::shared_ptr<MyMap> Ptr;
 
+		TYPE(MyMap)
+
 		MyMap(ke::Scene& scene);
 
 		bool loadTmxString(std::string const& str);

@@ -11,9 +11,14 @@ class TriggerComponent : public CollisionComponent
 	public:
 		typedef std::shared_ptr<TriggerComponent> Ptr;
 
+		TYPE(TriggerComponent)
+
 		TriggerComponent(Actor& actor);
 
 		void onRegister();
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 };
 
 } // namespace ke

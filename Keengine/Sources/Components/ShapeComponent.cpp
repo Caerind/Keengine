@@ -34,7 +34,7 @@ void ShapeComponent::setOutlineThickness(float thickness)
 	mShape.setOutlineThickness(thickness);
 }
 
-float ShapeComponent::getOutlineThicnkess() const
+float ShapeComponent::getOutlineThickness() const
 {
 	return mShape.getOutlineThickness();
 }
@@ -67,6 +67,32 @@ sf::FloatRect ShapeComponent::getLocalBounds()
 sf::FloatRect ShapeComponent::getGlobalBounds()
 {
 	return getWorldTransform().transformRect(mShape.getLocalBounds());
+}
+
+void ShapeComponent::serialize(Serializer & serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	serializer.save("pos", getPosition());
+	serializer.save("rot", getRotation());
+	serializer.save("sca", getScale());
+	serializer.save("z", getZ());
+	serializer.save("visible", isVisible());
+	serializer.save("fillColor", getFillColor());
+	serializer.save("outColor", getOutlineColor());
+	serializer.save("outThick", getOutlineThickness());
+	std::vector<sf::Vector2f> points;
+	for (std::size_t i = 0; i < getPointCount(); i++)
+	{
+		points.push_back(getPoint(i));
+	}
+	serializer.save("points", points);
+	serializer.end();
+}
+
+bool ShapeComponent::deserialize(Serializer & serializer, const std::string & identifier)
+{
+	return false;
 }
 
 void ShapeComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)

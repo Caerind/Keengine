@@ -13,6 +13,8 @@ class ShapeComponent : public SceneComponent
 	public:
 		typedef std::shared_ptr<ShapeComponent> Ptr;
 
+		TYPE(ShapeComponent)
+
 		ShapeComponent(Actor& actor);
 
 		void setPointCount(std::size_t points);
@@ -22,7 +24,7 @@ class ShapeComponent : public SceneComponent
 		sf::Vector2f getPoint(std::size_t index) const;
 
 		void setOutlineThickness(float thickness);
-		float getOutlineThicnkess() const;
+		float getOutlineThickness() const;
 
 		void setOutlineColor(sf::Color const& color);
 		sf::Color getOutlineColor() const;
@@ -32,6 +34,9 @@ class ShapeComponent : public SceneComponent
 
 		sf::FloatRect getLocalBounds();
 		sf::FloatRect getGlobalBounds();
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 
 	private:
 		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);

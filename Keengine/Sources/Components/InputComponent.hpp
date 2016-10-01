@@ -11,10 +11,15 @@ class InputComponent : public Input, public Component
     public:
 		typedef std::shared_ptr<InputComponent> Ptr;
 
+		TYPE(InputComponent)
+
         InputComponent(Actor& actor);
 
 		void onRegister();
 		void onUnregister();
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
 };
 
 } // namespace ke

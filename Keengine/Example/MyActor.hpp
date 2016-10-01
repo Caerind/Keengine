@@ -8,6 +8,8 @@ class MyActor : public ke::Actor
     public:
 		typedef std::shared_ptr<MyActor> Ptr;
 
+		TYPE(MyActor)
+
         MyActor(ke::Scene& scene);
 
 		void initializePhysic();
