@@ -36,6 +36,11 @@ void PointComponent::serialize(Serializer& serializer)
 {
 	serializer.create(getType());
 	serializer.save("id", getId());
+	serializer.save("pos", getPosition());
+	serializer.save("rot", getRotation());
+	serializer.save("sca", getScale());
+	serializer.save("z", getZ());
+	serializer.save("visible", isVisible());
 	serializer.save("radius", getRadius());
 	serializer.save("color", getColor());
 	serializer.end();

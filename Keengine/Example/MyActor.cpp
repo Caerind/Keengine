@@ -7,6 +7,8 @@ MyActor::MyActor(ke::Scene& scene)
 	, mB(nullptr)
 	, mC(nullptr)
 	, mD(nullptr)
+	, mE(nullptr)
+	, mCam(nullptr)
 	, mMoving(false)
 {
 }
@@ -78,11 +80,14 @@ void MyActor::initializeComponents()
 
 	if (mBody != nullptr)
 	{
-		mE = createComponent<ke::CollisionComponent>();
+		mE = createComponent<ke::ShapeComponent>(ke::ShapeComponent::Physic);
 		attachComponent(mE);
-		mE->setShape({ { -10.f, -10.f },{ 10.f, -10.f },{ 10.f, 20.f },{ -10.f, 20.f } });
+		mE->setPoints({ { -10.f, -10.f },{ 10.f, -10.f },{ 10.f, 20.f },{ -10.f, 20.f } });
 		mE->setDensity(1.f);
 	}
+
+	mCam = createComponent<ke::CameraComponent>();
+	attachComponent(mCam);
 }
 
 void MyActor::update(sf::Time dt)

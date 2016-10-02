@@ -320,12 +320,6 @@
     <ClCompile Include="Sources\Core\Pathfinding.cpp">
       <Filter>Sources\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Components\CollisionComponent.cpp">
-      <Filter>Sources\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Components\TriggerComponent.cpp">
-      <Filter>Sources\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Components\TextComponent.cpp">
       <Filter>Sources\Components</Filter>
     </ClCompile>
@@ -475,9 +469,6 @@
     </ClCompile>
     <ClCompile Include="Sources\Application\TimeSystem.cpp">
       <Filter>Sources\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Components\LightShapeComponent.cpp">
-      <Filter>Sources\Components</Filter>
     </ClCompile>
     <ClCompile Include="Sources\ExtLibs\LetThereBeLight.cpp">
       <Filter>Sources\ExtLibs</Filter>
@@ -823,12 +814,6 @@
     <ClInclude Include="Sources\Core\Pathfinding.hpp">
       <Filter>Sources\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Components\CollisionComponent.hpp">
-      <Filter>Sources\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Components\TriggerComponent.hpp">
-      <Filter>Sources\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\Components\TextComponent.hpp">
       <Filter>Sources\Components</Filter>
     </ClInclude>
@@ -987,9 +972,6 @@
     </ClInclude>
     <ClInclude Include="Sources\Application\InputSystem.hpp">
       <Filter>Sources\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Components\LightShapeComponent.hpp">
-      <Filter>Sources\Components</Filter>
     </ClInclude>
     <ClInclude Include="Sources\System\Color.hpp">
       <Filter>Sources\System</Filter>

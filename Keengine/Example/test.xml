@@ -1,8 +1,44 @@
 <?xml version="1.0"?>
 <Main>
+	<Actor id="1">
+		<PointLightComponent id="1" pos="-686.683,-95.3687" rot="0" sca="1,1" z="0" color="ffffffff" intensity="3" on="true" />
+	</Actor>
+	<MyMap id="map">
+		<LayerComponent id="1" />
+	</MyMap>
+	<MyObject id="2">
+		<ShapeComponent id="1" options="11" pos="0,0" rot="0" sca="1,1" z="0" visible="true" fillColor="ffff" outColor="ff0000ff" outThick="1">
+			<points size="4" i0="0,0" i1="146,0" i2="146,48" i3="0,48" />
+		</ShapeComponent>
+	</MyObject>
+	<MyObject id="3">
+		<ShapeComponent id="1" options="11" pos="0,0" rot="0" sca="1,1" z="0" visible="true" fillColor="ffff" outColor="ff0000ff" outThick="1">
+			<points size="4" i0="0,0" i1="186,0" i2="186,62" i3="0,62" />
+		</ShapeComponent>
+	</MyObject>
+	<MyObject id="7">
+		<ShapeComponent id="1" options="11" pos="0,0" rot="0" sca="1,1" z="0" visible="true" fillColor="ffff" outColor="ff0000ff" outThick="1">
+			<points size="4" i0="0,0" i1="66,0" i2="66,46" i3="0,46" />
+		</ShapeComponent>
+	</MyObject>
+	<MyObject id="6">
+		<ShapeComponent id="1" options="11" pos="0,0" rot="0" sca="1,1" z="0" visible="true" fillColor="ffff" outColor="ff0000ff" outThick="1">
+			<points size="4" i0="0,0" i1="70,0" i2="70,120" i3="0,120" />
+		</ShapeComponent>
+	</MyObject>
+	<MyObject id="5">
+		<ShapeComponent id="1" options="11" pos="0,0" rot="0" sca="1,1" z="0" visible="true" fillColor="ffff" outColor="ff0000ff" outThick="1">
+			<points size="4" i0="0,0" i1="78,0" i2="78,48" i3="0,48" />
+		</ShapeComponent>
+	</MyObject>
+	<MyObject id="4">
+		<ShapeComponent id="1" options="11" pos="0,0" rot="0" sca="1,1" z="0" visible="true" fillColor="ffff" outColor="ff0000ff" outThick="1">
+			<points size="4" i0="0,0" i1="1129,0" i2="1129,214" i3="0,214" />
+		</ShapeComponent>
+	</MyObject>
 	<MyActor id="player">
-		<PointComponent id="1" radius="2" color="ff0000ff" />
-		<AnimatorComponent id="2" pos="-32,-32" rot="0" sca="1,1" z="0" visible="true" playing="true" elapsed="0.066664">
+		<PointComponent id="1" pos="0,0" rot="0" sca="1,1" z="0" visible="true" radius="2" color="ff0000ff" />
+		<AnimatorComponent id="2" pos="-32,-32" rot="0" sca="1,1" z="0" visible="true" playing="true" elapsed="0">
 			<Animation id="0" name="idle">
 				<Frame id="0" texture="cat" textureRect="0,0,64,64" duration="0.15" />
 				<Frame id="1" texture="cat" textureRect="64,0,64,64" duration="0.15" />
@@ -22,9 +58,9 @@
 		</AnimatorComponent>
 		<PointLightComponent id="3" pos="0,0" rot="0" sca="1,1" z="0" color="c8c80aff" intensity="5" on="true" />
 		<InputComponent id="4" priority="0" />
-		<CollisionComponent id="5" />
+		<ShapeComponent id="5" options="2" pos="0,0" rot="0" sca="1,1" z="0" visible="true" fillColor="0" outColor="0" outThick="0">
+			<points size="4" i0="-10,-10" i1="10,-10" i2="10,20" i3="-10,20" />
+		</ShapeComponent>
+		<CameraComponent id="6" pos="0,0" rot="0" />
 	</MyActor>
-	<MyMap id="map">
-		<LayerComponent id="1" />
-	</MyMap>
 </Main>

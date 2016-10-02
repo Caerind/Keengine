@@ -141,6 +141,9 @@ class Scene
 
 		void removeComponent(Component::Ptr component);
 
+		bool loadFromXml(const std::string& filename);
+		void saveToXml(const std::string& filename);
+
 	private:
 		static bool sortActor(Actor::Ptr a, Actor::Ptr b);
 

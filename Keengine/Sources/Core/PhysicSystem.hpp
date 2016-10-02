@@ -12,7 +12,7 @@
 #include "../ExtLibs/Box2D/Box2D.h"
 
 #include "Actor.hpp"
-#include "../Components/CollisionComponent.hpp"
+#include "Component.hpp"
 
 namespace ke
 {

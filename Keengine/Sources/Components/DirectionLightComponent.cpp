@@ -6,11 +6,10 @@ namespace ke
 {
 
 DirectionLightComponent::DirectionLightComponent(Actor& actor)
-	: SceneComponent(actor)
+	: Component(actor)
 	, mLight(nullptr)
 {
 	mUpdatable = false;
-	mVisible = false;
 }
 
 void DirectionLightComponent::onRegister()

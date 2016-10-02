@@ -84,7 +84,10 @@ void Scene::render(sf::RenderTarget& target)
 
 	if (usePhysic())
 	{
+		sf::View v = target.getView();
+		target.setView(mView);
 		mPhysic.render(target);
+		target.setView(v);
 	}
 }
 
@@ -219,6 +222,25 @@ void Scene::removeComponent(Component::Ptr component)
 	{
 		mSceneRoot->removeComponent(component);
 	}
+}
+
+bool Scene::loadFromXml(const std::string& filename)
+{
+	return false;
+}
+
+void Scene::saveToXml(const std::string& filename)
+{
+	Serializer xml;
+	xml.openDocument(filename, true);
+	for (std::size_t i = 0; i < mActors.size(); i++)
+	{
+		if (mActors[i] != nullptr && !mActors[i]->isMarkedForRemoval())
+		{
+			mActors[i]->serialize(xml);
+		}
+	}
+	xml.saveDocument();
 }
 
 bool Scene::sortActor(Actor::Ptr a, Actor::Ptr b)

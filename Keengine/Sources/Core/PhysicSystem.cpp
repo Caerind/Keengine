@@ -208,8 +208,8 @@ void PhysicSystem::setHitFunction(std::string const& typeA, std::string const& t
 
 void PhysicSystem::BeginContact(b2Contact* contact)
 {
-	CollisionComponent* cA = static_cast<CollisionComponent*>(contact->GetFixtureA()->GetUserData());
-	CollisionComponent* cB = static_cast<CollisionComponent*>(contact->GetFixtureB()->GetUserData());
+	Component* cA = static_cast<Component*>(contact->GetFixtureA()->GetUserData());
+	Component* cB = static_cast<Component*>(contact->GetFixtureB()->GetUserData());
 
 	if (cA != nullptr && cB != nullptr)
 	{

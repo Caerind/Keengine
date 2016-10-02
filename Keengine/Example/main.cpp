@@ -112,11 +112,7 @@ int main()
 
 	ke::Application::runDefault();
 
-	ke::Serializer s;
-	s.openDocument("Example/test.xml", true);
-	actor->serialize(s);
-	map->serialize(s);
-	s.saveDocument();
+	scene.saveToXml("Example/test.xml");
 
 	mouseLight = nullptr;
 	map = nullptr;

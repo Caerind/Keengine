@@ -21,4 +21,18 @@ void CameraComponent::onTransformUpdated()
 	getView().setRotation(getRotation());
 }
 
+void CameraComponent::serialize(Serializer& serializer)
+{
+	serializer.create(getType());
+	serializer.save("id", getId());
+	serializer.save("pos", getPosition());
+	serializer.save("rot", getRotation());
+	serializer.end();
+}
+
+bool CameraComponent::deserialize(Serializer & serializer)
+{
+	return false;
+}
+
 } // namespace ke

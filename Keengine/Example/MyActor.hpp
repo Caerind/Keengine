@@ -22,7 +22,8 @@ class MyActor : public ke::Actor
 		ke::AnimatorComponent::Ptr mB;
 		ke::PointLightComponent::Ptr mC;
 		ke::InputComponent::Ptr mD;
-		ke::CollisionComponent::Ptr mE;
+		ke::ShapeComponent::Ptr mE;
+		ke::CameraComponent::Ptr mCam;
 
 		bool mMoving;
 

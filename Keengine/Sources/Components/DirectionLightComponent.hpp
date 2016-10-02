@@ -7,7 +7,7 @@
 namespace ke
 {
 
-class DirectionLightComponent : public SceneComponent
+class DirectionLightComponent : public Component
 {
 	public:
 		typedef std::shared_ptr<DirectionLightComponent> Ptr;

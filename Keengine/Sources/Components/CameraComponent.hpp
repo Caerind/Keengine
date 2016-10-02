@@ -19,6 +19,9 @@ class CameraComponent : public SceneComponent
         sf::View& getView();
 
 		void onTransformUpdated();
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer);
 };
 
 } // namespace ke
