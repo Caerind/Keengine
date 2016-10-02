@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<Main>
+<Scene>
 	<Actor id="1">
-		<PointLightComponent id="1" pos="-686.683,-95.3687" rot="0" sca="1,1" z="0" color="ffffffff" intensity="3" on="true" />
+		<PointLightComponent id="1" pos="-764,-34.8392" rot="0" sca="1,1" z="0" color="ffffffff" intensity="3" on="true" />
 	</Actor>
 	<MyMap id="map">
 		<LayerComponent id="1" />
@@ -38,7 +38,7 @@
 	</MyObject>
 	<MyActor id="player">
 		<PointComponent id="1" pos="0,0" rot="0" sca="1,1" z="0" visible="true" radius="2" color="ff0000ff" />
-		<AnimatorComponent id="2" pos="-32,-32" rot="0" sca="1,1" z="0" visible="true" playing="true" elapsed="0">
+		<AnimatorComponent id="2" pos="-32,-32" rot="0" sca="1,1" z="0" visible="true" playing="true" elapsed="0.133328">
 			<Animation id="0" name="idle">
 				<Frame id="0" texture="cat" textureRect="0,0,64,64" duration="0.15" />
 				<Frame id="1" texture="cat" textureRect="64,0,64,64" duration="0.15" />
@@ -63,4 +63,4 @@
 		</ShapeComponent>
 		<CameraComponent id="6" pos="0,0" rot="0" />
 	</MyActor>
-</Main>
+</Scene>

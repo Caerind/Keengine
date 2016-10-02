@@ -1,16 +1,19 @@
 #include "Scene.hpp"
+#include "Factories.hpp"
 
 namespace ke
 {
 
-Scene::Scene(sf::Uint32 options)
-	: mOptions(options)
+Scene::Scene(const std::string& id, sf::Uint32 options)
+	: mId(id)
+	, mOptions(options)
 	, mActorIdCounter(1)
 	, mActors()
 	, mView(getApplication().getDefaultView())
 	, mPhysic()
 	, mLights()
 {
+	Factories::registerAll();
 	if (useLight())
 	{
 		initLights();
@@ -24,6 +27,16 @@ Scene::~Scene()
 	mActors.clear();
 	getApplication().getInputs().unregisterInput(&mInput);
 	mSceneRoot = nullptr;
+}
+
+void Scene::setId(const std::string& id)
+{
+	mId = id;
+}
+
+std::string Scene::getId() const
+{
+	return mId;
 }
 
 void Scene::handleEvent(sf::Event const & event)
@@ -224,15 +237,23 @@ void Scene::removeComponent(Component::Ptr component)
 	}
 }
 
-bool Scene::loadFromXml(const std::string& filename)
-{
-	return false;
-}
-
-void Scene::saveToXml(const std::string& filename)
+bool Scene::loadFromXml(const std::string& filepath)
 {
 	Serializer xml;
-	xml.openDocument(filename, true);
+	std::string filename = filepath + "scene" + ((mId != "") ? "-" + mId : "") + ".xml";
+	if (!xml.openDocument(filename, false, "Scene"))
+	{
+		getLog() << ke::Log::Error << "Cannot open scene : " + filename;
+		return false;
+	}
+	// TODO : Deserialize
+	return true;
+}
+
+void Scene::saveToXml(const std::string& filepath)
+{
+	Serializer xml;
+	xml.openDocument(filepath + "scene" + ((mId != "") ? "-" + mId : "") + ".xml", true, "Scene");
 	for (std::size_t i = 0; i < mActors.size(); i++)
 	{
 		if (mActors[i] != nullptr && !mActors[i]->isMarkedForRemoval())

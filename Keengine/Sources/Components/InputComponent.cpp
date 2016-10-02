@@ -7,6 +7,7 @@ namespace ke
 InputComponent::InputComponent(Actor& actor) 
 	: Component(actor)
 {
+	mUpdatable = false;
 }
 
 void InputComponent::onRegister()

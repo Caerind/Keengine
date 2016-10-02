@@ -19,6 +19,7 @@ LayerComponent::LayerComponent(Actor& actor)
 	, mEncoding()
 	, mCompression()
 {
+	mUpdatable = false; // TODO : Animation
 	create(nullptr);
 }
 

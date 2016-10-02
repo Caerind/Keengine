@@ -1,5 +1,6 @@
 #include "Actor.hpp"
 
+#include "Factories.hpp"
 #include "Scene.hpp"
 #include "../Maths/Generics.hpp"
 

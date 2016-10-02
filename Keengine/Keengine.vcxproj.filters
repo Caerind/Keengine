@@ -479,6 +479,9 @@
     <ClCompile Include="Sources\System\Serializable.cpp">
       <Filter>Sources\System</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Core\Factories.cpp">
+      <Filter>Sources\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -988,12 +991,15 @@
     <ClInclude Include="Sources\System\Type.hpp">
       <Filter>Sources\System</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\Core\Factories.hpp">
+      <Filter>Sources\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Example\French.lang">
       <Filter>Example</Filter>
     </Xml>
-    <Xml Include="Example\test.xml">
+    <Xml Include="Example\scene-main.xml">
       <Filter>Example</Filter>
     </Xml>
   </ItemGroup>

@@ -1,9 +1,13 @@
 #include "../Sources/Application/Application.hpp"
 
 #include "../Sources/Core/Scene.hpp"
+#include "../Sources/Core/Actor.hpp"
+#include "../Sources/Core/Factories.hpp"
 
 #include "MyActor.hpp"
 #include "MyMap.hpp"
+
+#include "../Sources/Components/Components.hpp"
 
 #include "../Sources/System/Serializer.hpp"
 
@@ -35,8 +39,11 @@ int main()
 	ke::Application::getInputs().setKeyboardMapping("MoveRight", sf::Keyboard::D, ke::InputType::Hold);
 	ke::Application::getInputs().setKeyboardMapping("Light", sf::Keyboard::L, ke::InputType::Pressed);
 	ke::Application::getInputs().loadFromFile("Example/inputs.cfg");
+	
+	ke::Factories::registerActor<MyActor>();
+	ke::Factories::registerActor<MyMap>();
 
-	ke::Scene scene(ke::Scene::Light | ke::Scene::Physic);
+	ke::Scene scene("main", ke::Scene::Light | ke::Scene::Physic);
 	scene.getPhysic().setPixelsPerMeter(32.f);
 	scene.getPhysic().setRenderDebug(true);
 	scene.getPhysic().setGravity(b2Vec2(0, 9.8f));
@@ -112,7 +119,7 @@ int main()
 
 	ke::Application::runDefault();
 
-	scene.saveToXml("Example/test.xml");
+	scene.saveToXml("Example/");
 
 	mouseLight = nullptr;
 	map = nullptr;

@@ -17,7 +17,7 @@ class Serializer
 		Serializer();
 		~Serializer();
 
-		bool openDocument(const std::string& filename, bool erase = false);
+		bool openDocument(const std::string& filename, bool erase = false, const std::string& root = "Main");
 		void saveDocument(bool readable = true);
 
 

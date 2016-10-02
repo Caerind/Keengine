@@ -4,6 +4,8 @@
 #include "../Config.hpp"
 
 #include <cassert>
+#include <functional>
+#include <map>
 #include <memory>
 #include <vector>
 
@@ -33,8 +35,11 @@ class Scene
 			Light = 1 << 2,
 		};
 
-		Scene(sf::Uint32 options = Options::None);
+		Scene(const std::string& id = "", sf::Uint32 options = Options::None);
 		virtual ~Scene();
+
+		void setId(const std::string& id);
+		std::string getId() const;
 
 		void handleEvent(sf::Event const& event);
 		void update(sf::Time dt);
@@ -141,8 +146,8 @@ class Scene
 
 		void removeComponent(Component::Ptr component);
 
-		bool loadFromXml(const std::string& filename);
-		void saveToXml(const std::string& filename);
+		bool loadFromXml(const std::string& filepath);
+		void saveToXml(const std::string& filepath);
 
 	private:
 		static bool sortActor(Actor::Ptr a, Actor::Ptr b);
@@ -153,6 +158,8 @@ class Scene
 		void renderSimple(sf::RenderTarget& target);
 
 	protected:
+		std::string mId;
+
 		sf::Uint32 mOptions;
 
 		std::size_t mActorIdCounter;

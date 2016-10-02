@@ -11,13 +11,13 @@ Serializer::~Serializer()
 {
 }
 
-bool Serializer::openDocument(const std::string& filename, bool erase)
+bool Serializer::openDocument(const std::string& filename, bool erase, const std::string& root)
 {
 	bool ret = true;
 	mFilename = filename;
 	if (erase)
 	{
-		mDoc.append_child("Main");
+		mDoc.append_child(root.c_str());
 		saveDocument();
 	}
 	else
@@ -26,20 +26,20 @@ bool Serializer::openDocument(const std::string& filename, bool erase)
 		if (file)
 		{
 			mDoc.load(file);
-			if (!mDoc.child("Main"))
+			if (!mDoc.child(root.c_str()))
 			{
-				mDoc.append_child("Main");
+				mDoc.append_child(root.c_str());
 			}
 		}
 		else
 		{
-			mDoc.append_child("Main");
+			mDoc.append_child(root.c_str());
 			ret = false;
 		}
 		file.close();
 	}
 
-	mActualNode = mDoc.child("Main");
+	mActualNode = mDoc.child(root.c_str());
 	return ret;
 }
 
