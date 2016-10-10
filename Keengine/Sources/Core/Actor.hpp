@@ -146,7 +146,7 @@ class Actor : public Serializable
 		void removeComponent(Component::Ptr component);
 
 		virtual void serialize(Serializer& serializer);
-		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
+		virtual bool deserialize(Serializer& serializer);
 
 	private:
 		SceneComponent mRoot; ///< The root for scene components

@@ -180,7 +180,7 @@ void SceneComponent::serialize(Serializer& serializer)
 	serializer.end();
 }
 
-bool SceneComponent::deserialize(Serializer& serializer, const std::string& identifier)
+bool SceneComponent::deserialize(Serializer& serializer)
 {
 	return false;
 }

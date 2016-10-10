@@ -201,7 +201,7 @@ void AnimatorComponent::serialize(Serializer& serializer)
 	serializer.end();
 }
 
-bool AnimatorComponent::deserialize(Serializer & serializer, const std::string & identifier)
+bool AnimatorComponent::deserialize(Serializer& serializer)
 {
 	return false;
 }

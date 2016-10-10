@@ -7,6 +7,7 @@ namespace ke
 PointLightComponent::PointLightComponent(Actor& actor)
 	: SceneComponent(actor)
 	, mLight(nullptr)
+	, mTexture("")
 {
 	mUpdatable = false;
 	mVisible = false;
@@ -17,13 +18,6 @@ void PointLightComponent::onRegister()
 	if (getScene().useLight() && mLight == nullptr)
 	{
 		mLight = getScene().getLights().createLightPointEmission();
-
-		Texture& texture = getApplication().getResource<Texture>("pointLightTexture");
-
-		mLight->setOrigin(sf::Vector2f(texture.getSize().x * 0.5f, texture.getSize().y * 0.5f));
-		mLight->setTexture(texture);
-
-		mLight->setPosition(getWorldPosition());
 	}
 }
 
@@ -34,6 +28,49 @@ void PointLightComponent::onUnregister()
 		getScene().getLights().removeLight(mLight);
 		mLight = nullptr;
 	}
+}
+
+void PointLightComponent::setTexture(const std::string& texture)
+{
+	if (getApplication().hasResource(texture) && mLight != nullptr)
+	{
+		if (getApplication().isResourceLoaded(texture))
+		{
+			mTexture = texture;
+			mLight->setTexture(getApplication().getResource<Texture>(texture));
+			mLight->setPosition(getWorldPosition());
+		}
+	}
+}
+
+std::string PointLightComponent::getTexture() const
+{
+	return mTexture;
+}
+
+void PointLightComponent::setOrigin(const sf::Vector2f& origin)
+{
+	if (mLight != nullptr)
+	{
+		mLight->setOrigin(origin);
+	}
+}
+
+void PointLightComponent::setOrigin(float x, float y)
+{
+	if (mLight != nullptr)
+	{
+		mLight->setOrigin(sf::Vector2f(x, y));
+	}
+}
+
+sf::Vector2f PointLightComponent::getOrigin() const
+{
+	if (mLight != nullptr)
+	{
+		return mLight->getOrigin();
+	}
+	return sf::Vector2f();
 }
 
 void PointLightComponent::setColor(sf::Color color)
@@ -95,13 +132,14 @@ void PointLightComponent::serialize(Serializer& serializer)
 	serializer.save("rot", getRotation());
 	serializer.save("sca", getScale());
 	serializer.save("z", getZ());
+	serializer.save("texture", getTexture());
 	serializer.save("color", getColor());
 	serializer.save("intensity", getIntensity());
 	serializer.save("on", isOn());
 	serializer.end();
 }
 
-bool PointLightComponent::deserialize(Serializer & serializer, const std::string & identifier)
+bool PointLightComponent::deserialize(Serializer& serializer)
 {
 	return false;
 }

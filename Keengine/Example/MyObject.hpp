@@ -3,8 +3,6 @@
 
 #include "../Sources/Core/Actor.hpp"
 
-#include "../Sources/Components/ShapeComponent.hpp"
-
 class MyObject : public ke::Actor
 {
 	public:
@@ -20,6 +18,8 @@ class MyObject : public ke::Actor
 
 	private:
 		ke::ShapeComponent::Ptr mShape;
+		ke::LightShapeComponent::Ptr mLight;
+		ke::PhysicComponent::Ptr mPhysic;
 };
 
 #endif // MYOBJECT_HPP

@@ -76,7 +76,7 @@ class AnimatorComponent : public SceneComponent
 		sf::FloatRect getGlobalBounds();
 
 		virtual void serialize(Serializer& serializer);
-		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
+		virtual bool deserialize(Serializer& serializer);
 
 	private:
 		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);

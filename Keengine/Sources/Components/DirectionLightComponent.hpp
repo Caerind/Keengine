@@ -28,7 +28,7 @@ class DirectionLightComponent : public Component
 		sf::Vector2f getDirection() const;
 
 		virtual void serialize(Serializer& serializer);
-		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
+		virtual bool deserialize(Serializer& serializer);
 
 	protected:
 		ltbl::LightDirectionEmission* mLight;

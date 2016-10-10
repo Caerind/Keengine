@@ -19,7 +19,7 @@ class InputComponent : public Input, public Component
 		void onUnregister();
 
 		virtual void serialize(Serializer& serializer);
-		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
+		virtual bool deserialize(Serializer& serializer);
 };
 
 } // namespace ke

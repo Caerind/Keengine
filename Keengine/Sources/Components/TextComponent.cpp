@@ -99,12 +99,12 @@ void TextComponent::serialize(Serializer& serializer)
 	serializer.end();
 }
 
-bool TextComponent::deserialize(Serializer & serializer, const std::string & identifier)
+bool TextComponent::deserialize(Serializer& serializer)
 {
 	return false;
 }
 
-void TextComponent::renderCurrent(sf::RenderTarget & target, sf::RenderStates states)
+void TextComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)
 {
 	target.draw(mText, states);
 }

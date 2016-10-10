@@ -19,6 +19,13 @@ class PointLightComponent : public SceneComponent
 		void onRegister();
 		void onUnregister();
 
+		void setTexture(const std::string& texture);
+		std::string getTexture() const;
+
+		void setOrigin(const sf::Vector2f& origin);
+		void setOrigin(float x, float y);
+		sf::Vector2f getOrigin() const;
+
 		void setColor(sf::Color color);
 		sf::Color getColor() const;
 
@@ -29,13 +36,14 @@ class PointLightComponent : public SceneComponent
 		bool isOn() const;
 
 		virtual void serialize(Serializer& serializer);
-		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
+		virtual bool deserialize(Serializer& serializer);
 
 	protected:
 		void onTransformUpdated();
 
 	protected:
 		ltbl::LightPointEmission* mLight;
+		std::string mTexture;
 };
 
 } // namespace ke

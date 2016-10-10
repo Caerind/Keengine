@@ -81,7 +81,7 @@ void SpriteComponent::serialize(Serializer& serializer)
 	serializer.end();
 }
 
-bool SpriteComponent::deserialize(Serializer & serializer, const std::string & identifier)
+bool SpriteComponent::deserialize(Serializer& serializer)
 {
 	return false;
 }

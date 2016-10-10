@@ -75,7 +75,7 @@ class ParticleComponent : public SceneComponent
 		void emitParticles(std::size_t particleAmount);
 
 		virtual void serialize(Serializer& serializer);
-		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
+		virtual bool deserialize(Serializer& serializer);
 
 	private:
 		std::size_t computeParticleCount(sf::Time dt);

@@ -12,7 +12,7 @@ void Serializable::serialize(Serializer& serializer)
 {
 }
 
-bool Serializable::deserialize(Serializer& serializer, const std::string& identifier)
+bool Serializable::deserialize(Serializer& serializer)
 {
 	return true;
 }

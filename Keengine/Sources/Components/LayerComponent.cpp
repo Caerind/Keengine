@@ -650,7 +650,7 @@ void LayerComponent::serialize(Serializer& serializer)
 	serializer.end();
 }
 
-bool LayerComponent::deserialize(Serializer & serializer, const std::string & identifier)
+bool LayerComponent::deserialize(Serializer& serializer)
 {
 	return false;
 }

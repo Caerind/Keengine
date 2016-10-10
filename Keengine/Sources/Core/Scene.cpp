@@ -134,6 +134,17 @@ ltbl::LightSystem& Scene::getLights()
 	return mLights;
 }
 
+Actor::Ptr Scene::createActorFromFactory(const std::string& type)
+{
+	Actor::Ptr actor = Factories::createActor(*this, type);
+	actor->setId(ke::decToHex<std::size_t>(mActorIdCounter++));
+	actor->initializePhysic();
+	actor->initializeComponents();
+	actor->initialize();
+	mActors.push_back(actor);
+	return actor;
+}
+
 Actor::Ptr Scene::getActor(std::string const & id) const
 {
 	std::size_t size = mActors.size();
@@ -246,7 +257,12 @@ bool Scene::loadFromXml(const std::string& filepath)
 		getLog() << ke::Log::Error << "Cannot open scene : " + filename;
 		return false;
 	}
-	// TODO : Deserialize
+	for (pugi::xml_node node : xml.getRootNode().children())
+	{
+		xml.setNode(node);
+		Actor::Ptr actor = createActorFromFactory(std::string(node.name()));
+		actor->deserialize(xml);
+	}
 	return true;
 }
 

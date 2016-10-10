@@ -89,7 +89,7 @@ void DirectionLightComponent::serialize(Serializer& serializer)
 	serializer.end();
 }
 
-bool DirectionLightComponent::deserialize(Serializer & serializer, const std::string & identifier)
+bool DirectionLightComponent::deserialize(Serializer& serializer)
 {
 	return false;
 }

@@ -73,6 +73,8 @@ class Scene
 			return actor;
 		}
 
+		Actor::Ptr createActorFromFactory(const std::string& type);
+
 		Actor::Ptr getActor(std::string const& id) const;
 		Actor::Ptr getActor(std::size_t index) const;
 

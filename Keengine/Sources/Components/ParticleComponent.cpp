@@ -182,11 +182,12 @@ void ParticleComponent::serialize(Serializer& serializer)
 {
 	serializer.create(getType());
 	serializer.save("id", getId());
-	// TODO : Save data
+	// TODO : Save particles
+	// TODO : Save distribution
 	serializer.end();
 }
 
-bool ParticleComponent::deserialize(Serializer & serializer, const std::string & identifier)
+bool ParticleComponent::deserialize(Serializer& serializer)
 {
 	return false;
 }

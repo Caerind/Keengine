@@ -20,22 +20,25 @@ class Serializer
 		bool openDocument(const std::string& filename, bool erase = false, const std::string& root = "Main");
 		void saveDocument(bool readable = true);
 
+		pugi::xml_node& getRootNode();
+
+		void setNode(pugi::xml_node node);
+		pugi::xml_node getNode();
+
 
 		// Write
 		virtual void create(const std::string& identifier);
 
-		virtual void save(const std::string& identifier, const std::string& value);
-		virtual void save(const std::string& identifier, const int& value);
-		virtual void save(const std::string& identifier, const unsigned int& value);
-		virtual void save(const std::string& identifier, const char& value);
-		virtual void save(const std::string& identifier, const float& value);
-		virtual void save(const std::string& identifier, const bool& value);
-		virtual void save(const std::string& identifier, const sf::Vector2f& value);
-		virtual void save(const std::string& identifier, const sf::Vector2i& value);
-		virtual void save(const std::string& identifier, const sf::Color& value);
-		virtual void save(const std::string& identifier, const sf::IntRect& value);
-		virtual void save(const std::string& identifier, const sf::FloatRect& value);
-		virtual void save(const std::string& identifier, const sf::Time& value);
+		template <typename T>
+		void save(const std::string& identifier, const T& value)
+		{
+			auto id = identifier.c_str();
+			if (!mActualNode.attribute(id))
+			{
+				mActualNode.append_attribute(id);
+			}
+			mActualNode.attribute(id) = toString<T>(value).c_str();
+		}
 
 		template <typename T>
 		void save(const std::string& identifier, const std::vector<T>& vector)
@@ -100,21 +103,19 @@ class Serializer
 		virtual void end();
 
 		// Read
-		virtual bool read(const std::string& identifier);
+		bool read(const std::string& identifier);
 
-		virtual bool load(const std::string& identifier, std::string& value);
-		virtual bool load(const std::string& identifier, int& value);
-		virtual bool load(const std::string& identifier, unsigned int& value);
-		virtual bool load(const std::string& identifier, char& value);
-		virtual bool load(const std::string& identifier, float& value);
-		virtual bool load(const std::string& identifier, bool& value);
-		virtual bool load(const std::string& identifier, sf::Vector2f& value);
-		virtual bool load(const std::string& identifier, sf::Vector2i& value);
-		virtual bool load(const std::string& identifier, sf::Color& value);
-		virtual bool load(const std::string& identifier, sf::IntRect& value);
-		virtual bool load(const std::string& identifier, sf::FloatRect& value);
-		virtual bool load(const std::string& identifier, sf::Time& value);
-		virtual std::string load(const std::string& identifier);
+		template <typename T>
+		bool load(const std::string& identifier, T& value)
+		{
+			auto id = identifier.c_str();
+			if (mActualNode.attribute(id))
+			{
+				value = fromString<T>(mActualNode.attribute(id).value());
+				return true;
+			}
+			return false;
+		}
 
 		template <typename T>
 		bool load(const std::string& identifier, std::vector<T>& vector)
@@ -259,6 +260,7 @@ class Serializer
 	private:
 		std::string mFilename;
 		pugi::xml_document mDoc;
+		pugi::xml_node mRootNode;
 		pugi::xml_node mActualNode;
 };
 

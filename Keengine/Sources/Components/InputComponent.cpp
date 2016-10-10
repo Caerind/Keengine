@@ -28,7 +28,7 @@ void InputComponent::serialize(Serializer& serializer)
 	serializer.end();
 }
 
-bool InputComponent::deserialize(Serializer& serializer, const std::string& identifier)
+bool InputComponent::deserialize(Serializer& serializer)
 {
 	return false;
 }

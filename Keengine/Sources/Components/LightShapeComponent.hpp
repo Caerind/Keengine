@@ -1,9 +1,6 @@
-#ifndef KE_SHAPECOMPONENT_HPP
-#define KE_SHAPECOMPONENT_HPP
+#ifndef KE_LIGHTSHAPECOMPONENT_HPP
+#define KE_LIGHTSHAPECOMPONENT_HPP
 
-#include <SFML/Graphics/ConvexShape.hpp>
-
-#include "../ExtLibs/Box2D/Box2D.h"
 #include "../ExtLibs/LetThereBeLight.hpp"
 
 #include "../Core/SceneComponent.hpp"
@@ -11,14 +8,14 @@
 namespace ke
 {
 
-class ShapeComponent : public SceneComponent
+class LightShapeComponent : public SceneComponent
 {
 	public:
-		typedef std::shared_ptr<ShapeComponent> Ptr;
+		typedef std::shared_ptr<LightShapeComponent> Ptr;
 
-		TYPE(ShapeComponent)
+		TYPE(LightShapeComponent)
 
-		ShapeComponent(Actor& actor);
+		LightShapeComponent(Actor& actor);
 
 		void onRegister();
 		void onUnregister();
@@ -29,32 +26,26 @@ class ShapeComponent : public SceneComponent
 		void setPoint(std::size_t index, sf::Vector2f const& point);
 		sf::Vector2f getPoint(std::size_t index) const;
 
-		void setOutlineThickness(float thickness);
-		float getOutlineThickness() const;
-
-		void setOutlineColor(sf::Color const& color);
-		sf::Color getOutlineColor() const;
-
-		void setFillColor(sf::Color const& color);
-		sf::Color getFillColor() const;
-
 		sf::FloatRect getLocalBounds();
 		sf::FloatRect getGlobalBounds();
 
 		void setPoints(const std::vector<sf::Vector2f>& points);
 		std::vector<sf::Vector2f> getPoints() const;
 
+		void setOn(bool on);
+		bool isOn() const;
+
 		virtual void serialize(Serializer& serializer);
 		virtual bool deserialize(Serializer& serializer);
 
 	private:
-		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);
+		virtual void onTransformUpdated();
 
 	private:
 		std::vector<sf::Vector2f> mPoints;
-		sf::ConvexShape mShape;
+		ltbl::LightShape* mLightShape;
 };
 
 } // namespace ke
 
-#endif // KE_SHAPECOMPONENT_HPP
+#endif // KE_LIGHTSHAPECOMPONENT_HPP

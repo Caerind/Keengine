@@ -152,7 +152,7 @@ void Component::serialize(Serializer& serializer)
 	serializer.end();
 }
 
-bool Component::deserialize(Serializer& serializer, const std::string& identifier)
+bool Component::deserialize(Serializer& serializer)
 {
 	return false;
 }

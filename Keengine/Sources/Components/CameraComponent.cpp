@@ -30,7 +30,7 @@ void CameraComponent::serialize(Serializer& serializer)
 	serializer.end();
 }
 
-bool CameraComponent::deserialize(Serializer & serializer)
+bool CameraComponent::deserialize(Serializer& serializer)
 {
 	return false;
 }

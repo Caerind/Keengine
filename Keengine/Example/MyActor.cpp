@@ -53,6 +53,9 @@ void MyActor::initializeComponents()
 
 	mC = createComponent<ke::PointLightComponent>();
 	attachComponent(mC);
+	ke::Texture& texture = getApplication().getResource<ke::Texture>("pointLightTexture");
+	mC->setTexture("pointLightTexture");
+	mC->setOrigin(sf::Vector2f(texture.getSize().x * 0.5f, texture.getSize().y * 0.5f));
 	mC->setColor(sf::Color(200, 200, 10));
 	mC->setIntensity(5.f);
 
@@ -80,7 +83,7 @@ void MyActor::initializeComponents()
 
 	if (mBody != nullptr)
 	{
-		mE = createComponent<ke::ShapeComponent>(ke::ShapeComponent::Physic);
+		mE = createComponent<ke::PhysicComponent>();
 		attachComponent(mE);
 		mE->setPoints({ { -10.f, -10.f },{ 10.f, -10.f },{ 10.f, 20.f },{ -10.f, 20.f } });
 		mE->setDensity(1.f);

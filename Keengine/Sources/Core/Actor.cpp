@@ -472,7 +472,7 @@ void Actor::serialize(Serializer& serializer)
 {
 	serializer.create(getType());
 	serializer.save("id", getId());
-	// TODO : Save more data
+	// TODO : Save more data (physic, ...)
 	for (std::size_t i = 0; i < mComponents.size(); i++)
 	{
 		mComponents[i]->serialize(serializer);
@@ -480,7 +480,7 @@ void Actor::serialize(Serializer& serializer)
 	serializer.end();
 }
 
-bool Actor::deserialize(Serializer& serializer, const std::string& identifier)
+bool Actor::deserialize(Serializer& serializer)
 {
 	return false;
 }

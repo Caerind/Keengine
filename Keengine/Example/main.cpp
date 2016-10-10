@@ -74,8 +74,11 @@ int main()
 	actor->setZ(100.f);
 	actor->setPosition({ 100.f, 300.f });
 
+	ke::Texture& lightTexture = scene.getApplication().getResource<ke::Texture>("pointLightTexture");
 	ke::PointLightComponent::Ptr mouseLight = scene.createComponent<ke::PointLightComponent>();
 	scene.attachComponent(mouseLight);
+	mouseLight->setTexture("pointLightTexture");
+	mouseLight->setOrigin(sf::Vector2f(lightTexture.getSize().x * 0.5f, lightTexture.getSize().y * 0.5f));
 	mouseLight->setPosition(ke::Application::getPointerPositionView(scene.getView()));
 	mouseLight->setColor(sf::Color::White);
 	mouseLight->setIntensity(3.f);
@@ -99,6 +102,8 @@ int main()
 			ke::PointLightComponent::Ptr light = scene.createComponent<ke::PointLightComponent>();
 			scene.attachComponent(light);
 			light->setPosition(mPos);
+			light->setOrigin(sf::Vector2f(lightTexture.getSize().x * 0.5f, lightTexture.getSize().y * 0.5f));
+			light->setPosition(ke::Application::getPointerPositionView(scene.getView()));
 			light->setColor(sf::Color(200, 200, 10));
 			light->setIntensity(5.f);
 		}

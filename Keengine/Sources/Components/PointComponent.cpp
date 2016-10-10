@@ -46,7 +46,7 @@ void PointComponent::serialize(Serializer& serializer)
 	serializer.end();
 }
 
-bool PointComponent::deserialize(Serializer & serializer, const std::string & identifier)
+bool PointComponent::deserialize(Serializer& serializer)
 {
 	return false;
 }

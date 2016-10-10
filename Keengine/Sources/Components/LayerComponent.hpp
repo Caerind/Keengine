@@ -76,7 +76,7 @@ class LayerComponent : public SceneComponent, public PropertiesHolder
 		sf::Vector2f getVertexPosition(sf::Vector2i const& coords);
 
 		virtual void serialize(Serializer& serializer);
-		virtual bool deserialize(Serializer& serializer, const std::string& identifier);
+		virtual bool deserialize(Serializer& serializer);
 
 	private:
 		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);

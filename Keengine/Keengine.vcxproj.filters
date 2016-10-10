@@ -482,6 +482,12 @@
     <ClCompile Include="Sources\Core\Factories.cpp">
       <Filter>Sources\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Components\PhysicComponent.cpp">
+      <Filter>Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Components\LightShapeComponent.cpp">
+      <Filter>Sources\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -993,6 +999,12 @@
     </ClInclude>
     <ClInclude Include="Sources\Core\Factories.hpp">
       <Filter>Sources\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Components\LightShapeComponent.hpp">
+      <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Components\PhysicComponent.hpp">
+      <Filter>Sources\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
