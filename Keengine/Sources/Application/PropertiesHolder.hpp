@@ -20,7 +20,19 @@ class PropertiesHolder
 			mProperties[id] = Variant(value);
 		}
 
-		Variant getProperty(std::string const& id);
+		std::string getProperty(std::string const& id);
+	
+	        template <typename T> T getProperty(std::string const& id)
+	        {
+		     if (propertyExist(id))
+		     {
+	                 return mProperties[id].as<T>();
+		     }
+		     else
+		     {
+	                return T();
+		     }
+		}
 
 		void loadProperties(pugi::xml_node const& node);
 		void saveProperties(pugi::xml_node& node);
