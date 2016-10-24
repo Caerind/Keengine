@@ -3,51 +3,64 @@
 namespace ke
 {
 
-HttpThread::HttpThread()
+HttpThread::HttpThread(const std::string& url, const std::string& request)
 : mThread(std::bind(&HttpThread::run,this))
+, mMutex()
+, mStatus(0)
+, mHttp()
+, mRequest()
+, mResponse()
 {
-	mUrl = "";
-    mRunning = true;
-    mThread.launch();
-}
-
-HttpThread::HttpThread(std::string const& url)
-: mThread(std::bind(&HttpThread::run,this))
-{
-	mUrl = url;
-    mRunning = true;
+    std::string tempUrl, tempUri;
+    splitUrl(url, tempUrl, tempUri);
+    mHttp.setUrl(tempUrl);
+    mRequest.setMethod(sf::Http::Request::Post);
+    mRequest.setBody(request);
+    mRequest.setUri(tempUri);
     mThread.launch();
 }
 
 HttpThread::~HttpThread()
 {
-    mRunning = false;
     mThread.wait();
 }
 
 void HttpThread::run()
 {
-    while (mRunning)
+    mMutex.lock();
+    mResponse = mHttp.sendRequest(mRequest);
+    if (mResponse.getStatus() == sf::Http::Response::Ok)
     {
-        while (!mMessages.empty())
-        {
-			sendHttpRequest(mUrl, mMessages.back());
-			mMessages.pop_back();
-        }
-
-		sf::sleep(sf::microseconds(100));
+        mStatus = 1;
     }
+    else
+    {
+        mStatus = -1;
+    }
+    mMutex.unlock();
 }
 
-void HttpThread::setAddress(std::string const& url)
+int HttpThread::getStatus() const
 {
-	mUrl = url;
+    return mStatus;
 }
-
-void HttpThread::setMessage(std::string const& message)
+	
+bool HttpThread::isFinished() const
 {
-    mMessages.push_back(message);
+   return mStatus != 0;
 }
+	
+std::string HttpThread::getBody() const
+{
+    if (isFinished())
+    {
+        return mResponse.getBody();    
+    }
+    else
+    {
+	return "";    
+    }
+}	
 
 void HttpThread::splitUrl(std::string const& longurl, std::string& url, std::string& uri)
 {
@@ -72,22 +85,6 @@ void HttpThread::splitUrl(std::string const& longurl, std::string& url, std::str
 		url = longurl;
 		uri = "";
 	}
-}
-
-bool HttpThread::sendHttpRequest(std::string const& url, std::string const& body, std::string* response)
-{
-	std::string tempUrl, tempUri;
-	splitUrl(url, tempUrl, tempUri);
-	sf::Http http(tempUrl);
-	sf::Http::Request request(tempUri, sf::Http::Request::Post);
-	request.setBody(body);
-	sf::Http::Response rep = http.sendRequest(request);
-	if (response != nullptr)
-	{
-		std::string tmp = rep.getBody();
-		*response = tmp;
-	}
-	return rep.getStatus() == sf::Http::Response::Ok;
 }
 
 } // namespace ke
