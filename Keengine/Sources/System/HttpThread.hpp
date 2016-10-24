@@ -1,42 +1,35 @@
 #ifndef KE_HTTPTHREAD_HPP
 #define KE_HTTPTHREAD_HPP
 
-#include <functional>
-#include <vector>
-
 #include <SFML/Network/IpAddress.hpp>
 #include <SFML/Network/Http.hpp>
 #include <SFML/System/Thread.hpp>
-#include <SFML/System/Sleep.hpp>
+#include <SFML/System/Mutex.hpp>
 
 namespace ke
 {
 
-// TODO : Thread-safe
 class HttpThread
 {
     public:
-        HttpThread();
-        HttpThread(std::string const& url);
+        HttpThread(const std::string& url, const std::string& body);
         ~HttpThread();
 
         void run();
+	
+	int getStates() const;
+	bool isFinished() const;
+	std::string getBody() const;
 
-        void setAddress(std::string const& url);
-        void setMessage(std::string const& message);
-
-		static void splitUrl(std::string const& longurl, std::string& url, std::string& uri);
-
-		static bool sendHttpRequest(std::string const& url, std::string const& request, std::string* response = nullptr);
+        static void splitUrl(std::string const& longurl, std::string& url, std::string& uri);
 
     private:
         sf::Thread mThread;
-
-        bool mRunning;
-
-        std::vector<std::string> mMessages;
-
-        std::string mUrl;
+	sf::Mutex mMutex;
+	int mStates;
+	sf::Http mHttp;
+	sf::Http::Request mRequest;
+	sf::Http::Response mResponse;
 };
 
 } // namespace ke
