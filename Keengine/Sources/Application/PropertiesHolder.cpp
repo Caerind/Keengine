@@ -7,9 +7,9 @@ PropertiesHolder::PropertiesHolder()
 {
 }
 
-Variant PropertiesHolder::getProperty(std::string const& id)
+std::string PropertiesHolder::getProperty(std::string const& id)
 {
-	return mProperties[id];
+    return mProperties[id].as<std::string>();
 }
 
 void PropertiesHolder::loadProperties(pugi::xml_node const& node)
