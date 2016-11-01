@@ -26,7 +26,7 @@ class Animation
 	public:
 		Animation();
 
-		void addFrame(Frame const& frame);
+		void addFrame(Frame const& frame = Frame());
 		void addFrame(std::string const& textureName, sf::IntRect const& textureRect, sf::Time duration);
 
 		std::size_t getFrameCount() const;

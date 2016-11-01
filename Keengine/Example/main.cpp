@@ -9,8 +9,6 @@
 
 #include "../Sources/Components/Components.hpp"
 
-#include "../Sources/System/Serializer.hpp"
-
 int main()
 {
 	ke::Application::init("Example/");

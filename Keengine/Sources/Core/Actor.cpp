@@ -180,10 +180,11 @@ void Actor::updateComponents(sf::Time dt)
 
 void Actor::render(sf::RenderTarget& target)
 {
-	if (isVisible())
-	{
-		mRoot.render(target, sf::RenderStates::Default);
-	}
+}
+
+void Actor::renderComponents(sf::RenderTarget& target)
+{
+	mRoot.render(target, sf::RenderStates::Default);
 }
 
 Component::Ptr Actor::createComponentFromFactory(const std::string & type)

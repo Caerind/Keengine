@@ -46,6 +46,7 @@ void Application::init(std::string const& pathToSettings)
             parser["background_rect_top"] = 0;
             parser["background_rect_width"] = 0;
             parser["background_rect_height"] = 0;
+			parser["background_usage"] = 0;
             parser["imgui_filename"] = "";
         }
 
@@ -69,9 +70,14 @@ void Application::init(std::string const& pathToSettings)
         setScreenshotPath(parser["screenshot_path"]);
 		setScriptPath(parser["script_path"]);
         showDebugInfo(parser["show_debug"].as<bool>());
-        setBackgroundColor(sf::Color(parser["background_color_r"].as<unsigned int>(), parser["background_color_g"].as<unsigned int>(), parser["background_color_b"].as<unsigned int>()));
-        setBackgroundTexture(parser["background_texture"], sf::IntRect(parser["background_rect_left"].as<int>(), parser["background_rect_top"].as<int>(), parser["background_rect_width"].as<int>(), parser["background_rect_height"].as<int>()));
-        
+		switch (parser["background_usage"].as<unsigned int>())
+		{
+			case 0: useBackgroundColor(sf::Color(parser["background_color_r"].as<unsigned int>(), parser["background_color_g"].as<unsigned int>(), parser["background_color_b"].as<unsigned int>()));
+			case 1: useBackgroundScaledTexture(parser["background_texture"], sf::IntRect(parser["background_rect_left"].as<int>(), parser["background_rect_top"].as<int>(), parser["background_rect_width"].as<int>(), parser["background_rect_height"].as<int>())); break;
+			case 2: useBackgroundRepeatedTexture(parser["background_texture"], sf::IntRect(parser["background_rect_left"].as<int>(), parser["background_rect_top"].as<int>(), parser["background_rect_width"].as<int>(), parser["background_rect_height"].as<int>())); break;
+			default: break;
+		}
+
 		#ifndef KEENGINE_ANDROID
 		ImGui::GetIO().IniFilename = (parser["imgui_filename"] != "") ? parser["imgui_filename"].c_str() : nullptr;
 		#endif
@@ -149,6 +155,7 @@ void Application::quit()
     parser["background_rect_top"] = bRect.top;
     parser["background_rect_width"] = bRect.width;
     parser["background_rect_height"] = bRect.height;
+	parser["background_usage"] = getBackgroundUsage();
     #ifndef KEENGINE_ANDROID
 	parser["imgui_filename"] = (ImGui::GetIO().IniFilename != nullptr) ? ImGui::GetIO().IniFilename : std::string();
     ImGui::SFML::Shutdown();
@@ -917,33 +924,46 @@ void Application::removeDebugInfos()
     instance().mWindow.removeDebugInfos();
 }
 
-void Application::setBackgroundColor(sf::Color color)
+void Application::useBackgroundColor(sf::Color color)
 {
     instance().mWindow.useBackgroundColor(color);
+}
+
+void Application::useBackgroundScaledTexture(const std::string& filename, sf::IntRect rect)
+{
+	if (filename != "" && hasResource(filename) && isResourceLoaded(filename))
+	{
+		sf::Texture* tex = &getResource<Texture>(filename);
+		instance().mWindow.useBackgroundScaledTexture(tex, rect);
+		instance().mBackgroundFilename = (tex != nullptr) ? filename : "";
+		return;
+	}
+	else
+	{
+		instance().mWindow.useBackgroundScaledTexture(nullptr, rect);
+		instance().mBackgroundFilename = "";
+	}
+}
+
+void Application::useBackgroundRepeatedTexture(const std::string& filename, sf::IntRect rect)
+{
+	if (filename != "" && hasResource(filename) && isResourceLoaded(filename))
+	{
+		sf::Texture* tex = &getResource<Texture>(filename);
+		instance().mWindow.useBackgroundRepeatedTexture(tex, rect);
+		instance().mBackgroundFilename = (tex != nullptr) ? filename : "";
+		return;
+	}
+	else
+	{
+		instance().mWindow.useBackgroundRepeatedTexture(nullptr, rect);
+		instance().mBackgroundFilename = "";
+	}
 }
 
 sf::Color Application::getBackgroundColor()
 {
     return instance().mWindow.getBackgroundColor();
-}
-
-void Application::setBackgroundTexture(std::string const& filename, sf::IntRect rect)
-{
-    if (filename != "" && hasResource(filename))
-    {
-        if (hasResource(filename))
-        {
-            if (isResourceLoaded(filename))
-            {
-                sf::Texture* tex = &getResource<Texture>(filename);
-                instance().mWindow.useBackgroundScaledTexture(tex, rect);
-                instance().mBackgroundFilename = (tex != nullptr) ? filename : "";
-                return;
-            }
-        }
-    }
-    instance().mWindow.useBackgroundScaledTexture(nullptr, rect);
-    instance().mBackgroundFilename = "";
 }
 
 std::string Application::getBackgroundTexture()
@@ -954,6 +974,11 @@ std::string Application::getBackgroundTexture()
 sf::IntRect Application::getBackgroundTextureRect()
 {
     return instance().mWindow.getBackgroundTextureRect();
+}
+
+std::size_t Application::getBackgroundUsage()
+{
+	return instance().mWindow.getBackgroundUsage();
 }
 
 Application::Application()

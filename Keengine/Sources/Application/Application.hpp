@@ -197,11 +197,13 @@ class Application
         static void removeDebugInfo(std::string const& id);
         static void removeDebugInfos();
 
-        static void setBackgroundColor(sf::Color color);
-        static sf::Color getBackgroundColor();
-        static void setBackgroundTexture(std::string const& filename, sf::IntRect rect = sf::IntRect());
+        static void useBackgroundColor(sf::Color color);
+		static void useBackgroundScaledTexture(const std::string& filename, sf::IntRect rect = sf::IntRect());
+		static void useBackgroundRepeatedTexture(const std::string& filename, sf::IntRect rect = sf::IntRect());
+		static sf::Color getBackgroundColor();
         static std::string getBackgroundTexture();
         static sf::IntRect getBackgroundTextureRect();
+		static std::size_t getBackgroundUsage();
 
     private:
         Application();

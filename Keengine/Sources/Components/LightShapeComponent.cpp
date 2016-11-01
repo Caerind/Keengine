@@ -75,20 +75,84 @@ sf::Vector2f LightShapeComponent::getPoint(std::size_t index) const
 
 sf::FloatRect LightShapeComponent::getLocalBounds()
 {
+	sf::FloatRect bounds;
 	if (mLightShape != nullptr)
 	{
-		// TODO : Rect from points
+		for (std::size_t i = 0; i < mPoints.size(); i++)
+		{
+			sf::Vector2f p = getTransform().transformPoint(mPoints[i]);
+			if (i == 0)
+			{
+				bounds.left = p.x;
+				bounds.top = p.y;
+				bounds.width = p.x;
+				bounds.height = p.y;
+			}
+			else
+			{
+				if (p.x < bounds.left)
+				{
+					bounds.left = p.x;
+				}
+				if (p.y < bounds.top)
+				{
+					bounds.top = p.y;
+				}
+				if (p.x > bounds.width)
+				{
+					bounds.width = p.x;
+				}
+				if (p.y > bounds.height)
+				{
+					bounds.height = p.y;
+				}
+			}
+		}
+		bounds.width -= bounds.left;
+		bounds.height -= bounds.top;
 	}
-	return sf::FloatRect();
+	return bounds;
 }
 
 sf::FloatRect LightShapeComponent::getGlobalBounds()
 {
+	sf::FloatRect bounds;
 	if (mLightShape != nullptr)
 	{
-		// TODO : Rect from points
+		for (std::size_t i = 0; i < mPoints.size(); i++)
+		{
+			sf::Vector2f p = getWorldTransform().transformPoint(mPoints[i]);
+			if (i == 0)
+			{
+				bounds.left = p.x;
+				bounds.top = p.y;
+				bounds.width = p.x;
+				bounds.height = p.y;
+			}
+			else
+			{
+				if (p.x < bounds.left)
+				{
+					bounds.left = p.x;
+				}
+				if (p.y < bounds.top)
+				{
+					bounds.top = p.y;
+				}
+				if (p.x > bounds.width)
+				{
+					bounds.width = p.x;
+				}
+				if (p.y > bounds.height)
+				{
+					bounds.height = p.y;
+				}
+			}
+		}
+		bounds.width -= bounds.left;
+		bounds.height -= bounds.top;
 	}
-	return sf::FloatRect();
+	return bounds;
 }
 
 void LightShapeComponent::setPoints(const std::vector<sf::Vector2f>& points)

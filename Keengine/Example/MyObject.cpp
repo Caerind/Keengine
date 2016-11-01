@@ -3,6 +3,8 @@
 MyObject::MyObject(ke::Scene& scene)
 	: ke::Actor(scene)
 	, mShape(nullptr)
+	, mLight(nullptr)
+	, mPhysic(nullptr)
 {
 }
 

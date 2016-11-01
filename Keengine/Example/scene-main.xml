@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Scene>
 	<Actor id="1">
-		<PointLightComponent id="1" up="true" visible="true" parent="" pos="-211.833,-355.48" rot="0" sca="1,1" z="0" texture="pointLightTexture" color="ffffffff" intensity="3" on="true" />
+		<PointLightComponent id="1" up="true" visible="true" parent="" pos="-764,15.5201" rot="0" sca="1,1" z="0" texture="pointLightTexture" color="ffffffff" intensity="3" on="true" />
 	</Actor>
 	<MyMap id="map">
 		<LayerComponent id="1" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" />
@@ -74,14 +74,14 @@
 	</MyObject>
 	<MyActor id="player">
 		<PointComponent id="1" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" radius="2" color="ff0000ff" />
-		<AnimatorComponent id="2" up="true" visible="true" parent="" pos="-32,-32" rot="0" sca="1,1" z="0" playing="true" elapsed="0.049998">
-			<Animation id="0" name="idle">
+		<AnimatorComponent id="2" up="true" visible="true" parent="" pos="-32,-32" rot="0" sca="1,1" z="0" current="idle" playing="true" elapsed="0.016666">
+			<Animation name="idle" size="4">
 				<Frame id="0" texture="cat" textureRect="0,0,64,64" duration="0.15" />
 				<Frame id="1" texture="cat" textureRect="64,0,64,64" duration="0.15" />
 				<Frame id="2" texture="cat" textureRect="128,0,64,64" duration="0.15" />
 				<Frame id="3" texture="cat" textureRect="192,0,64,64" duration="0.15" />
 			</Animation>
-			<Animation id="1" name="run">
+			<Animation name="run" size="8">
 				<Frame id="0" texture="cat" textureRect="0,64,64,64" duration="0.15" />
 				<Frame id="1" texture="cat" textureRect="64,64,64,64" duration="0.15" />
 				<Frame id="2" texture="cat" textureRect="128,64,64,64" duration="0.15" />

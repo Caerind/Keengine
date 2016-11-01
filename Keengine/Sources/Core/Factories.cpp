@@ -11,6 +11,7 @@ void Factories::registerAll()
 {
 	if (!mRegistered)
 	{
+		// TODO : Check up to date
 		registerComponent<AnimatorComponent>();
 		registerComponent<CameraComponent>();
 		registerComponent<DirectionLightComponent>();
@@ -19,12 +20,11 @@ void Factories::registerAll()
 		registerComponent<ParticleComponent>();
 		registerComponent<PointComponent>();
 		registerComponent<PointLightComponent>();
-		// TODO : Register ShapeComponent
-		//registerComponent<ShapeComponent>();
+		registerComponent<ShapeComponent>();
 		registerComponent<SpriteComponent>();
 		registerComponent<TextComponent>();
 
-		// TODO : Register Actors
+		registerActor<Actor>();
 		mRegistered = true;
 	}
 }

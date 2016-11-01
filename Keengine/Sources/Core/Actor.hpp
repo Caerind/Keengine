@@ -68,7 +68,8 @@ class Actor : public Serializable
 		// Update & render
 		virtual void update(sf::Time dt);
 		void updateComponents(sf::Time dt);
-		void render(sf::RenderTarget& target);
+		virtual void render(sf::RenderTarget& target);
+		void renderComponents(sf::RenderTarget& target);
 
 		// Component management
 		template <typename T, typename ... Args>

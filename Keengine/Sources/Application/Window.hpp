@@ -167,7 +167,7 @@ class Window : public sf::RenderWindow
         bool mDebugInfoVisible;
         std::unordered_map<std::string,std::string> mDebugInfo;
 
-		Background mBackground; // TODO : Test it
+		Background mBackground;
 };
 
 template <typename T>

@@ -100,5 +100,5 @@ const sf::Color VeryDarkGray(32, 32, 32);
 } // namespace Color
 
 } // namespace ke
-S
+
 #endif // KE_COLOR_HPP

@@ -186,16 +186,16 @@ void AnimatorComponent::serialize(Serializer& serializer)
 {
 	SceneComponent::serialize(serializer);
 
+	serializer.save("current", mActualAnimation);
 	serializer.save("playing", isPlaying());
 	serializer.save("elapsed", getElapsedTime());
 
-	int i = 0;
 	for (auto itr = mAnimations.begin(); itr != mAnimations.end(); itr++)
 	{
 		serializer.create("Animation");
-		serializer.save("id", i);
 		serializer.save("name", itr->first);
 		Animation& a = itr->second;
+		serializer.save("size", a.getFrameCount());
 		for (std::size_t j = 0; j < a.getFrameCount(); j++)
 		{
 			Frame& f = a.getFrame(j);
@@ -207,18 +207,53 @@ void AnimatorComponent::serialize(Serializer& serializer)
 			serializer.close();
 		}
 		serializer.close();
-		i++;
 	}
 }
 
 bool AnimatorComponent::deserialize(Serializer& serializer)
 {
-	if (!SceneComponent::deserialize(serializer) || !serializer.load("playing", mPlaying) || !serializer.load("elapsed", mTimeElapsed))
+	if (!SceneComponent::deserialize(serializer) 
+		|| !serializer.load("current", mActualAnimation) 
+		|| !serializer.load("playing", mPlaying) 
+		|| !serializer.load("elapsed", mTimeElapsed))
 	{
 		return false;
 	}
 
-	// TODO : Deserialize animations
+	while (serializer.read("Animation"))
+	{
+		std::string name;
+		unsigned int size;
+		if (serializer.load("name", name) && serializer.load("size", size))
+		{
+			Animation& anim = getAnimation(name);
+			while (anim.getFrameCount() < size)
+			{
+				anim.addFrame();
+			}
+			while (serializer.read("Frame"))
+			{
+				unsigned int id;
+				std::string texture;
+				sf::IntRect textureRect;
+				sf::Time duration;
+				if (serializer.load("id", id)
+					&& serializer.load("texture", texture)
+					&& serializer.load("textureRect", textureRect)
+					&& serializer.load("duration", duration))
+				{
+					Frame& f = anim.getFrame(id);
+					f.textureName = texture;
+					f.textureRect = textureRect;
+					f.duration = duration;
+				}
+				serializer.end();
+			}
+		}
+		serializer.end();
+	}
+
+	setElapsedTime(mTimeElapsed);
 
 	return true;
 }

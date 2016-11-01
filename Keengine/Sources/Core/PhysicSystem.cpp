@@ -91,7 +91,7 @@ void PhysicSystem::destroyBody(b2Body* body)
 	}
 }
 
-void PhysicSystem::DrawPolygon(const b2Vec2 * vertices, int32 vertexCount, const b2Color & color)
+void PhysicSystem::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
 {
 	sf::ConvexShape polygon(vertexCount);
 	for (int i = 0; i < vertexCount; i++)
@@ -107,7 +107,7 @@ void PhysicSystem::DrawPolygon(const b2Vec2 * vertices, int32 vertexCount, const
 	}
 }
 
-void PhysicSystem::DrawSolidPolygon(const b2Vec2 * vertices, int32 vertexCount, const b2Color & color)
+void PhysicSystem::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
 {
 	sf::ConvexShape polygon(vertexCount);
 	for (int i = 0; i < vertexCount; i++)
@@ -126,7 +126,7 @@ void PhysicSystem::DrawSolidPolygon(const b2Vec2 * vertices, int32 vertexCount, 
 	}
 }
 
-void PhysicSystem::DrawCircle(const b2Vec2 & center, float32 radius, const b2Color & color)
+void PhysicSystem::DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color)
 {
 	sf::CircleShape circle(radius * Physic::pixelsPerMeter);
 	circle.setOrigin(radius * Physic::pixelsPerMeter, radius * Physic::pixelsPerMeter);
@@ -140,7 +140,7 @@ void PhysicSystem::DrawCircle(const b2Vec2 & center, float32 radius, const b2Col
 	}
 }
 
-void PhysicSystem::DrawSolidCircle(const b2Vec2 & center, float32 radius, const b2Vec2 & axis, const b2Color & color)
+void PhysicSystem::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color)
 {
 	sf::CircleShape circle(radius * Physic::pixelsPerMeter);
 	circle.setOrigin(radius * Physic::pixelsPerMeter, radius * Physic::pixelsPerMeter);
@@ -158,7 +158,7 @@ void PhysicSystem::DrawSolidCircle(const b2Vec2 & center, float32 radius, const 
 	}
 }
 
-void PhysicSystem::DrawSegment(const b2Vec2 & p1, const b2Vec2 & p2, const b2Color & color)
+void PhysicSystem::DrawSegment(const b2Vec2& p1, const b2Vec2 & p2, const b2Color& color)
 {
 	sf::Vertex line[] =
 	{
@@ -172,7 +172,7 @@ void PhysicSystem::DrawSegment(const b2Vec2 & p1, const b2Vec2 & p2, const b2Col
 	}
 }
 
-void PhysicSystem::DrawTransform(const b2Transform & xf)
+void PhysicSystem::DrawTransform(const b2Transform& xf)
 {
 	float lineLength = 0.4f;
 	DrawSegment(xf.p, xf.p + lineLength * xf.q.GetXAxis(), b2Color(1.f, 0.f, 0.f));
@@ -199,6 +199,16 @@ void PhysicSystem::setRenderDebug(bool render)
 bool PhysicSystem::isRenderingDebug() const
 {
 	return mRender;
+}
+
+void PhysicSystem::setRenderFlags(sf::Uint32 flags)
+{
+	SetFlags(flags);
+}
+
+sf::Uint32 PhysicSystem::getRenderFlags() const
+{
+	return GetFlags();
 }
 
 void PhysicSystem::setHitFunction(std::string const& typeA, std::string const& typeB, HitFunction func)

@@ -54,7 +54,6 @@ void Scene::setId(const std::string& id)
 
 void Scene::handleEvent(const sf::Event& event)
 {
-	// TODO : Really needed ?
 }
 
 void Scene::update(sf::Time dt)
@@ -407,8 +406,9 @@ void Scene::renderSimple(sf::RenderTarget& target)
 	std::size_t size = mActors.size();
 	for (std::size_t i = 0; i < size; i++)
 	{
-		if (mActors[i] != nullptr)
+		if (mActors[i] != nullptr && mActors[i]->isVisible())
 		{
+			mActors[i]->renderComponents(target);
 			mActors[i]->render(target);
 		}
 	}

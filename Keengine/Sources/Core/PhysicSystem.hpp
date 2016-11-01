@@ -50,7 +50,8 @@ class PhysicSystem : public b2Draw, public b2ContactListener
 		void setRenderDebug(bool render);
 		bool isRenderingDebug() const;
 
-		// TODO : Debug Render Flags
+		void setRenderFlags(sf::Uint32 flags);
+		sf::Uint32 getRenderFlags() const;
 
 		typedef std::function<void(Actor* a, Actor* b)> HitFunction;
 
