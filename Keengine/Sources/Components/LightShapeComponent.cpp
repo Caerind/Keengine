@@ -9,27 +9,39 @@ LightShapeComponent::LightShapeComponent(Actor& actor)
 	, mPoints()
 	, mLightShape(nullptr)
 {
-	mUpdatable = false;
+}
+
+LightShapeComponent::~LightShapeComponent()
+{
+	onUnregister();
 }
 
 void LightShapeComponent::onRegister()
 {
-	if (getScene().useLight() && mLightShape == nullptr)
+	if (!isRegistered())
 	{
-		mLightShape = getScene().getLights().createLightShape();
-		if (mLightShape != nullptr)
+		if (getScene().useLight() && getScene().getLights() != nullptr && mLightShape == nullptr)
 		{
-			mLightShape->setTurnedOn(isVisible());
+			mLightShape = getScene().getLights()->createLightShape();
+			if (mLightShape != nullptr)
+			{
+				mLightShape->setTurnedOn(isVisible());
+			}
 		}
+		SceneComponent::onRegister();
 	}
 }
 
 void LightShapeComponent::onUnregister()
 {
-	if (getScene().useLight() && mLightShape != nullptr)
+	if (isRegistered())
 	{
-		getScene().getLights().removeShape(mLightShape);
-		mLightShape = nullptr;
+		if (getScene().useLight() && getScene().getLights() != nullptr && mLightShape != nullptr)
+		{
+			getScene().getLights()->removeShape(mLightShape);
+			mLightShape = nullptr;
+		}
+		SceneComponent::onUnregister();
 	}
 }
 
@@ -133,7 +145,7 @@ bool LightShapeComponent::deserialize(Serializer& serializer)
 	return false;
 }
 
-void LightShapeComponent::onTransformUpdated()
+void LightShapeComponent::onTransformNotified()
 {
 	if (mLightShape != nullptr)
 	{

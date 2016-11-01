@@ -51,6 +51,10 @@ class AnimatorComponent : public SceneComponent
 		TYPE(AnimatorComponent)
 
 		AnimatorComponent(Actor& actor);
+		virtual ~AnimatorComponent();
+
+		virtual bool updatable() const;
+		virtual bool renderable() const;
 
 		std::size_t getAnimationCount() const;
 

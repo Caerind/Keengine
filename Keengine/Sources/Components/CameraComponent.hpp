@@ -15,10 +15,11 @@ class CameraComponent : public SceneComponent
 		TYPE(CameraComponent)
 
         CameraComponent(Actor& actor);
+		virtual ~CameraComponent();
 
         sf::View& getView();
 
-		void onTransformUpdated();
+		void onTransformNotified();
 
 		virtual void serialize(Serializer& serializer);
 		virtual bool deserialize(Serializer& serializer);

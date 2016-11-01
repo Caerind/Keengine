@@ -9,24 +9,35 @@ PointLightComponent::PointLightComponent(Actor& actor)
 	, mLight(nullptr)
 	, mTexture("")
 {
-	mUpdatable = false;
-	mVisible = false;
+}
+
+PointLightComponent::~PointLightComponent()
+{
+	onUnregister();
 }
 
 void PointLightComponent::onRegister()
 {
-	if (getScene().useLight() && mLight == nullptr)
+	if (!isRegistered())
 	{
-		mLight = getScene().getLights().createLightPointEmission();
+		if (getScene().useLight() && getScene().getLights() != nullptr && mLight == nullptr)
+		{
+			mLight = getScene().getLights()->createLightPointEmission();
+		}
+		SceneComponent::onRegister();
 	}
 }
 
 void PointLightComponent::onUnregister()
 {
-	if (getScene().useLight() && mLight != nullptr)
+	if (isRegistered())
 	{
-		getScene().getLights().removeLight(mLight);
-		mLight = nullptr;
+		if (getScene().useLight() && getScene().getLights() != nullptr && mLight != nullptr)
+		{
+			getScene().getLights()->removeLight(mLight);
+			mLight = nullptr;
+		}
+		SceneComponent::onUnregister();
 	}
 }
 
@@ -144,7 +155,7 @@ bool PointLightComponent::deserialize(Serializer& serializer)
 	return false;
 }
 
-void PointLightComponent::onTransformUpdated()
+void PointLightComponent::onTransformNotified()
 {
 	if (mLight != nullptr)
 	{

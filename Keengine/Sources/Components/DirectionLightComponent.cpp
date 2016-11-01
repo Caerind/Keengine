@@ -9,23 +9,35 @@ DirectionLightComponent::DirectionLightComponent(Actor& actor)
 	: Component(actor)
 	, mLight(nullptr)
 {
-	mUpdatable = false;
+}
+
+DirectionLightComponent::~DirectionLightComponent()
+{
+	onUnregister();
 }
 
 void DirectionLightComponent::onRegister()
 {
-	if (getScene().useLight() && mLight == nullptr)
+	if (!isRegistered())
 	{
-		mLight = getScene().getLights().createLightDirectionEmission();
+		if (getScene().useLight() && getScene().getLights() != nullptr && mLight == nullptr)
+		{
+			mLight = getScene().getLights()->createLightDirectionEmission();
+		}
+		Component::onRegister();
 	}
 }
 
 void DirectionLightComponent::onUnregister()
 {
-	if (getScene().useLight() && mLight != nullptr)
+	if (isRegistered())
 	{
-		getScene().getLights().removeLight(mLight);
-		mLight = nullptr;
+		if (getScene().useLight() && getScene().getLights() != nullptr && mLight != nullptr)
+		{
+			getScene().getLights()->removeLight(mLight);
+			mLight = nullptr;
+		}
+		Component::onUnregister();
 	}
 }
 

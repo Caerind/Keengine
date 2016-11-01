@@ -26,53 +26,62 @@ class Component : public Serializable
 
 		TYPE(Component)
 
+		// Ctor & Dtor
 		Component(Actor& actor);
 		virtual ~Component();
 
-		virtual void onRegister();
+		// Id
+		std::string getId() const;
+		void setId(std::string const& id);
+
+		// Registeration
+		bool isRegistered() const;
+		virtual void onRegister(); // If you inherit from this, remember to call Component::onRegister()
 		virtual void onUnregister();
 
-		bool isUpdatable() const;
+		// Update
+		virtual bool updatable() const; // Tell if the component class is updatable
+		bool isUpdatable() const; // Tell if we need to update this component
+		void setUpdatable(bool updatable);
 		virtual void update(sf::Time dt);
 
+		// Actor transform
 		sf::Vector2f getActorPosition() const;
 		void setActorPosition(sf::Vector2f const& position);
 		void setActorPosition(float x, float y);
 		void moveActor(sf::Vector2f const& movement);
 		void moveActor(float x, float y);
-
 		float getActorRotation() const;
 		void setActorRotation(float rotation);
 		void rotateActor(float rotation);
-
 		sf::Vector2f getActorScale() const;
 		void setActorScale(sf::Vector2f const& scale);
 		void setActorScale(float x, float y);
 		void scaleActor(sf::Vector2f const& scale);
 		void scaleActor(float x, float y);
-
 		float getActorZ() const;
 		void setActorZ(float z);
 		void moveActorZ(float z);
 
-		std::string getId() const;
-		void setId(std::string const& id);
-
+		// Getters
 		Actor& getActor();
 		Scene& getScene();
-
 		Log& getLog();
 		Application& getApplication();
 
+		// Serialization
 		virtual void serialize(Serializer& serializer);
 		virtual bool deserialize(Serializer& serializer);
-		
-	protected:
-		Actor& mActor;
 
+	private:
 		std::string mId;
 
+		bool mRegistered;
+
 		bool mUpdatable;
+
+	protected:
+		Actor& mActor;
 };
 
 } // namespace ke

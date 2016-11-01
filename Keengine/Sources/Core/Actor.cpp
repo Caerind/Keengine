@@ -1,8 +1,8 @@
 #include "Actor.hpp"
 
+#include "../Maths/Generics.hpp"
 #include "Factories.hpp"
 #include "Scene.hpp"
-#include "../Maths/Generics.hpp"
 
 namespace ke
 {
@@ -14,13 +14,22 @@ Actor::Actor(Scene& scene)
 	, mId("")
 	, mComponentIdCounter(1)
 	, mScene(scene)
-	, mType("")
 	, mBody(nullptr)
 {
 }
 
 Actor::~Actor()
 {
+}
+
+const std::string& Actor::getId() const
+{
+	return mId;
+}
+
+void Actor::setId(const std::string& id)
+{
+	mId = id;
 }
 
 void Actor::remove()
@@ -33,27 +42,12 @@ bool Actor::isMarkedForRemoval() const
 	return mMarkedForRemoval;
 }
 
-void Actor::setId(std::string const & id)
-{
-	mId = id;
-}
-
-std::string Actor::getId() const
-{
-	return mId;
-}
-
-std::string Actor::getType() const
-{
-	return mType;
-}
-
 const sf::Vector2f& Actor::getPosition() const
 {
 	return mRoot.getPosition();
 }
 
-void Actor::setPosition(sf::Vector2f const& position)
+void Actor::setPosition(const sf::Vector2f& position)
 {
 	mRoot.setPosition(position);
 }
@@ -63,7 +57,7 @@ void Actor::setPosition(float x, float y)
 	setPosition(sf::Vector2f(x, y));
 }
 
-void Actor::move(sf::Vector2f const& movement)
+void Actor::move(const sf::Vector2f& movement)
 {
 	mRoot.move(movement);
 }
@@ -93,7 +87,7 @@ const sf::Vector2f& Actor::getScale() const
 	return mRoot.getScale();
 }
 
-void Actor::setScale(sf::Vector2f const & scale)
+void Actor::setScale(const sf::Vector2f& scale)
 {
 	mRoot.setScale(scale);
 }
@@ -103,7 +97,7 @@ void Actor::setScale(float x, float y)
 	setScale(sf::Vector2f(x, y));
 }
 
-void Actor::scale(sf::Vector2f const & scale)
+void Actor::scale(const sf::Vector2f& scale)
 {
 	mRoot.scale(scale);
 }
@@ -115,7 +109,7 @@ void Actor::scale(float x, float y)
 
 const sf::Transform& Actor::getTransform()
 {
-	return mRoot.getWorldTransform();
+	return mRoot.getTransform();
 }
 
 float Actor::getZ() const
@@ -143,35 +137,16 @@ void Actor::setVisible(bool visible)
 	mRoot.setVisible(visible);
 }
 
-void Actor::update(sf::Time dt)
-{
-}
-
-void Actor::updateComponents(sf::Time dt)
-{
-	std::size_t size = mComponents.size();
-	for (std::size_t i = 0; i < size; i++)
-	{
-		if (mComponents[i] != nullptr)
-		{
-			if (mComponents[i]->isUpdatable())
-			{
-				mComponents[i]->update(dt);
-			}
-		}
-	}
-}
-
 void Actor::initializePhysic()
 {
-	if (mBody == nullptr && mScene.usePhysic())
+	if (mBody == nullptr && mScene.usePhysic() && mScene.getPhysic() != nullptr)
 	{
 		b2BodyDef bodyDef;
 		bodyDef.position.Set(0, 0);
 		bodyDef.type = b2_staticBody;
 		bodyDef.userData = this;
 		bodyDef.linearDamping = 0.01f;
-		mBody = mScene.getPhysic().createBody(&bodyDef);
+		mBody = mScene.getPhysic()->createBody(&bodyDef);
 	}
 }
 
@@ -183,9 +158,47 @@ void Actor::initialize()
 {
 }
 
+void Actor::update(sf::Time dt)
+{
+}
+
+void Actor::updateComponents(sf::Time dt)
+{
+	std::size_t size = mComponents.size();
+	for (std::size_t i = 0; i < size; i++)
+	{
+		if (mComponents[i] != nullptr)
+		{
+			if (mComponents[i]->updatable() && mComponents[i]->isUpdatable())
+			{
+				mComponents[i]->update(dt);
+			}
+		}
+	}
+}
+
 void Actor::render(sf::RenderTarget& target)
 {
-	mRoot.render(target, sf::RenderStates::Default);
+	if (isVisible())
+	{
+		mRoot.render(target, sf::RenderStates::Default);
+	}
+}
+
+void Actor::removeComponent(Component::Ptr component)
+{
+	std::size_t size = mComponents.size();
+	for (std::size_t i = 0; i < size; i++)
+	{
+		if (mComponents[i] == component)
+		{
+			mComponents.erase(mComponents.begin() + i);
+			component = nullptr;
+			i--;
+			size--;
+			return;
+		}
+	}
 }
 
 void Actor::attachComponent(SceneComponent::Ptr component)
@@ -212,7 +225,7 @@ Component::Ptr Actor::getComponent(std::size_t index)
 	return nullptr;
 }
 
-Component::Ptr Actor::getComponent(std::string const& id)
+Component::Ptr Actor::getComponent(const std::string& id)
 {
 	for (std::size_t i = 0; i < mComponents.size(); i++)
 	{
@@ -227,11 +240,6 @@ Component::Ptr Actor::getComponent(std::string const& id)
 	return nullptr;
 }
 
-Scene& Actor::getScene()
-{
-	return mScene;
-}
-
 b2Body* Actor::getBody()
 {
 	return mBody;
@@ -239,10 +247,10 @@ b2Body* Actor::getBody()
 
 void Actor::destroyPhysic()
 {
-	if (mBody != nullptr)
+	if (mBody != nullptr && mScene.usePhysic() && mScene.getPhysic() != nullptr)
 	{
 		mBody->SetUserData(nullptr);
-		mScene.getPhysic().destroyBody(mBody);
+		mScene.getPhysic()->destroyBody(mBody);
 		mBody = nullptr;
 	}
 }
@@ -288,14 +296,6 @@ void Actor::desiredImpulseY(float impulse)
 	}
 }
 
-void Actor::setVelocity(sf::Vector2f const& velocity)
-{
-	if (mBody != nullptr && mScene.usePhysic())
-	{
-		mBody->SetLinearVelocity(velocity * Physic::conv);
-	}
-}
-
 sf::Vector2f Actor::getVelocity() const
 {
 	if (mBody != nullptr && mScene.usePhysic())
@@ -305,11 +305,11 @@ sf::Vector2f Actor::getVelocity() const
 	return sf::Vector2f();
 }
 
-void Actor::setAngularVelocity(float angularVelocity)
+void Actor::setVelocity(const sf::Vector2f& velocity)
 {
-	if (mBody != nullptr)
+	if (mBody != nullptr && mScene.usePhysic())
 	{
-		mBody->SetAngularVelocity(angularVelocity);
+		mBody->SetLinearVelocity(velocity * Physic::conv);
 	}
 }
 
@@ -322,11 +322,11 @@ float Actor::getAngularVelocity() const
 	return 0.0f;
 }
 
-void Actor::setPhysicType(b2BodyType const& type)
+void Actor::setAngularVelocity(float angularVelocity)
 {
 	if (mBody != nullptr)
 	{
-		mBody->SetType(type);
+		mBody->SetAngularVelocity(angularVelocity);
 	}
 }
 
@@ -339,11 +339,11 @@ b2BodyType Actor::getPhysicType() const
 	return b2_staticBody;
 }
 
-void Actor::setFixedRotation(bool fixed)
+void Actor::setPhysicType(b2BodyType const& type)
 {
 	if (mBody != nullptr)
 	{
-		mBody->SetFixedRotation(fixed);
+		mBody->SetType(type);
 	}
 }
 
@@ -354,6 +354,14 @@ bool Actor::isFixedRotation() const
 		return mBody->IsFixedRotation();
 	}
 	return false;
+}
+
+void Actor::setFixedRotation(bool fixed)
+{
+	if (mBody != nullptr)
+	{
+		mBody->SetFixedRotation(fixed);
+	}
 }
 
 float Actor::getMass() const
@@ -374,14 +382,6 @@ float Actor::getInertia() const
 	return 0.0f;
 }
 
-void Actor::setLinearDamping(float damping)
-{
-	if (mBody != nullptr)
-	{
-		mBody->SetLinearDamping(damping);
-	}
-}
-
 float Actor::getLinearDamping() const
 {
 	if (mBody != nullptr)
@@ -391,11 +391,11 @@ float Actor::getLinearDamping() const
 	return 0.0f;
 }
 
-void Actor::setAngularDamping(float damping)
+void Actor::setLinearDamping(float damping)
 {
 	if (mBody != nullptr)
 	{
-		mBody->SetAngularDamping(damping);
+		mBody->SetLinearDamping(damping);
 	}
 }
 
@@ -408,11 +408,11 @@ float Actor::getAngularDamping() const
 	return 0.0f;
 }
 
-void Actor::setGravityScale(float scale)
+void Actor::setAngularDamping(float damping)
 {
 	if (mBody != nullptr)
 	{
-		mBody->SetGravityScale(scale);
+		mBody->SetAngularDamping(damping);
 	}
 }
 
@@ -425,11 +425,11 @@ float Actor::getGravityScale() const
 	return 0.0f;
 }
 
-void Actor::setPhysicBullet(bool bullet)
+void Actor::setGravityScale(float scale)
 {
 	if (mBody != nullptr)
 	{
-		mBody->SetBullet(bullet);
+		mBody->SetGravityScale(scale);
 	}
 }
 
@@ -442,6 +442,19 @@ bool Actor::isPhysicBullet() const
 	return false;
 }
 
+void Actor::setPhysicBullet(bool bullet)
+{
+	if (mBody != nullptr)
+	{
+		mBody->SetBullet(bullet);
+	}
+}
+
+Scene& Actor::getScene()
+{
+	return mScene;
+}
+
 Log& Actor::getLog()
 {
 	return getApplication().getLog();
@@ -450,22 +463,6 @@ Log& Actor::getLog()
 Application& Actor::getApplication()
 {
 	return Application::instance();
-}
-
-void Actor::removeComponent(Component::Ptr component)
-{
-	std::size_t size = mComponents.size();
-	for (std::size_t i = 0; i < size; i++)
-	{
-		if (mComponents[i] == component)
-		{
-			mComponents.erase(mComponents.begin() + i);
-			component = nullptr;
-			i--;
-			size--;
-			return;
-		}
-	}
 }
 
 void Actor::serialize(Serializer& serializer)
@@ -482,6 +479,7 @@ void Actor::serialize(Serializer& serializer)
 
 bool Actor::deserialize(Serializer& serializer)
 {
+	// TODO : Deserialization
 	return false;
 }
 

@@ -64,6 +64,21 @@ AnimatorComponent::AnimatorComponent(Actor& actor)
 {
 }
 
+AnimatorComponent::~AnimatorComponent()
+{
+	onUnregister();
+}
+
+bool AnimatorComponent::updatable() const
+{
+	return true;
+}
+
+bool AnimatorComponent::renderable() const
+{
+	return true;
+}
+
 std::size_t AnimatorComponent::getAnimationCount() const
 {
 	return mAnimations.size();

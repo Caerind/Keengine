@@ -28,6 +28,21 @@ ParticleComponent::ParticleComponent(Actor& actor)
 {
 }
 
+ParticleComponent::~ParticleComponent()
+{
+	onUnregister();
+}
+
+bool ParticleComponent::updatable() const
+{
+	return true;
+}
+
+bool ParticleComponent::renderable() const
+{
+	return true;
+}
+
 void ParticleComponent::setTexture(std::string const& id)
 {
 	if (getApplication().hasResource(id))

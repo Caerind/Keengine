@@ -17,6 +17,9 @@ class SpriteComponent : public SceneComponent
 		TYPE(SpriteComponent)
 
 		SpriteComponent(Actor& actor);
+		virtual ~SpriteComponent();
+
+		virtual bool renderable() const;
 
 		void setTexture(std::string const& textureName, sf::IntRect const& rect = sf::IntRect());
 		void setTexture(sf::Texture& texture, sf::IntRect const& rect = sf::IntRect());

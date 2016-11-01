@@ -1,23 +1,16 @@
 #ifndef KE_SCENE_HPP
 #define KE_SCENE_HPP
 
-#include "../Config.hpp"
-
-#include <cassert>
-#include <functional>
-#include <map>
-#include <memory>
-#include <vector>
-
 #include <SFML/System/Time.hpp>
 
 #include "../Application/Application.hpp"
+#include "../ExtLibs/LetThereBeLight.hpp"
+#include "../System/Background.hpp"
 
 #include "Actor.hpp"
-#include "PhysicSystem.hpp"
-#include "../ExtLibs/LetThereBeLight.hpp"
-#include "LightTextures.hpp"
 #include "Effect.hpp"
+#include "LightTextures.hpp"
+#include "PhysicSystem.hpp"
 
 namespace ke
 {
@@ -35,25 +28,21 @@ class Scene
 			Light = 1 << 2,
 		};
 
+	public:
+		// Ctor & Dtor
 		Scene(const std::string& id = "", sf::Uint32 options = Options::None);
 		virtual ~Scene();
-
+	
+		// Id managemenent
+		const std::string& getId() const;
 		void setId(const std::string& id);
-		std::string getId() const;
 
-		void handleEvent(sf::Event const& event);
+		// Usage
+		void handleEvent(const sf::Event& event);
 		void update(sf::Time dt);
 		void render(sf::RenderTarget& target);
 
-		bool usePhysic() const;
-		bool useEffect() const;
-		bool useLight() const;
-
-		PhysicSystem& getPhysic();
-		b2World* getPhysicWorld();
-
-		ltbl::LightSystem& getLights();
-
+		// Actor management
 		template <typename T, typename ... Args>
 		std::shared_ptr<T> createActor(std::string const& actorId, Args&& ... args)
 		{
@@ -72,17 +61,12 @@ class Scene
 			mActors.push_back(actor);
 			return actor;
 		}
-
 		Actor::Ptr createActorFromFactory(const std::string& type);
-
 		Actor::Ptr getActor(std::string const& id) const;
 		Actor::Ptr getActor(std::size_t index) const;
-
 		void removeActor(std::string const& id);
 		void removeActor(std::size_t index);
-
 		bool hasActor(std::string const& id) const;
-
 		template <typename T>
 		std::shared_ptr<T> getActorT(std::string const& id) const
 		{
@@ -93,7 +77,6 @@ class Scene
 			}
 			return std::dynamic_pointer_cast<T>(actor);
 		}
-
 		template <typename T>
 		std::shared_ptr<T> getActorT(std::size_t index) const
 		{
@@ -104,17 +87,26 @@ class Scene
 			}
 			return std::dynamic_pointer_cast<T>(actor);
 		}
-
 		std::size_t getActorCount() const;
 
-		sf::View& getView();
+		// Options
+		bool usePhysic() const;
+		bool useEffect() const;
+		bool useLight() const;
 
+		// Physic
+		std::shared_ptr<PhysicSystem> getPhysic();
+		b2World* getPhysicWorld();
+
+		// Lights
+		std::shared_ptr<ltbl::LightSystem> getLights();
+
+		// Effects
 		template <typename T>
 		void setEffect(std::size_t const& order)
 		{
 			mEffects[order] = std::make_shared<T>();
 		}
-
 		template <typename T>
 		std::shared_ptr<T> getEffect(std::size_t const& order)
 		{
@@ -125,14 +117,9 @@ class Scene
 			}
 			return nullptr;
 		}
-
 		void removeEffect(std::size_t const& order);
 
-		Log& getLog();
-		Application& getApplication();
-
-		Input& getInput();
-
+		// SceneRoot
 		template <typename T, typename ... Args>
 		std::shared_ptr<T> createComponent(Args&& ... args)
 		{
@@ -142,12 +129,22 @@ class Scene
 			}
 			return nullptr;
 		}
-
+		void removeComponent(Component::Ptr component);
 		void attachComponent(SceneComponent::Ptr component);
 		void detachComponent(SceneComponent::Ptr component);
 
-		void removeComponent(Component::Ptr component);
+		// Background
+		void useBackgroundColor(const sf::Color& color);
+		void useBackgroundScaledTexture(sf::Texture* texture, sf::IntRect rect = sf::IntRect());
+		void useBackgroundRepeatedTexture(sf::Texture* texture, sf::IntRect rect = sf::IntRect());
 
+		// Getters
+		sf::View& getView();
+		Input& getInput();
+		Log& getLog();
+		Application& getApplication();
+
+		// Serialization
 		bool loadFromXml(const std::string& filepath);
 		void saveToXml(const std::string& filepath);
 
@@ -160,27 +157,29 @@ class Scene
 		void renderSimple(sf::RenderTarget& target);
 
 	protected:
-		std::string mId;
+		std::string mId; ///< Id of the scene
 
-		sf::Uint32 mOptions;
+		sf::Uint32 mOptions; ///< Options used by the scene
 
-		std::size_t mActorIdCounter;
+		std::size_t mActorIdCounter; ///< Actor Id Counter
 
-		std::vector<Actor::Ptr> mActors;
+		std::vector<Actor::Ptr> mActors; ///< Actors
 
-		sf::View mView;
+		sf::View mView; ///< SceneView
 
-		PhysicSystem mPhysic;
+		std::shared_ptr<PhysicSystem> mPhysic; ///< Physic of the scene, used if defined has an option
 
-		ltbl::LightSystem mLights;
+		std::shared_ptr<ltbl::LightSystem> mLights; ///< Lights of the scene, used if defined has an option
 
-		sf::RenderTexture mSceneTexture;
+		std::unique_ptr<sf::RenderTexture> mSceneTexture; ///< Scene Texture, used if defined has an option
 
-		std::map<std::size_t, std::shared_ptr<ke::Effect>> mEffects;
+		std::map<std::size_t, std::shared_ptr<ke::Effect>> mEffects; ///< Effects, used if defined has an option
 
-		Input mInput;
+		Input mInput; ///< Input manager
 
-		Actor::Ptr mSceneRoot;
+		Actor::Ptr mSceneRoot; ///< Scene Root
+
+		Background mBackground; ///< Background
 };
 
 } // namespace ke

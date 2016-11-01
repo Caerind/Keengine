@@ -43,10 +43,13 @@ int main()
 	ke::Factories::registerActor<MyActor>();
 	ke::Factories::registerActor<MyMap>();
 
-	ke::Scene scene("main", ke::Scene::Light | ke::Scene::Physic);
-	scene.getPhysic().setPixelsPerMeter(32.f);
-	scene.getPhysic().setRenderDebug(true);
-	scene.getPhysic().setGravity(b2Vec2(0, 9.8f));
+	ke::Scene scene("main", ke::Scene::Physic);
+	scene.getPhysic()->setPixelsPerMeter(32.f);
+	scene.getPhysic()->setRenderDebug(true);
+	scene.getPhysic()->setGravity(b2Vec2(0, 9.8f));
+	scene.useBackgroundRepeatedTexture(&ke::Application::getResource<ke::Texture>("sfml"));
+
+	ke::Log::instance() << ke::Variant(123, "Test", true, 'c');
 
 	MyMap::Ptr map = scene.createActor<MyMap>("map");
 	map->loadTmxString("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" \
@@ -77,11 +80,14 @@ int main()
 	ke::Texture& lightTexture = scene.getApplication().getResource<ke::Texture>("pointLightTexture");
 	ke::PointLightComponent::Ptr mouseLight = scene.createComponent<ke::PointLightComponent>();
 	scene.attachComponent(mouseLight);
-	mouseLight->setTexture("pointLightTexture");
-	mouseLight->setOrigin(sf::Vector2f(lightTexture.getSize().x * 0.5f, lightTexture.getSize().y * 0.5f));
-	mouseLight->setPosition(ke::Application::getPointerPositionView(scene.getView()));
-	mouseLight->setColor(sf::Color::White);
-	mouseLight->setIntensity(3.f);
+	if (scene.useLight())
+	{
+		mouseLight->setTexture("pointLightTexture");
+		mouseLight->setOrigin(sf::Vector2f(lightTexture.getSize().x * 0.5f, lightTexture.getSize().y * 0.5f));
+		mouseLight->setPosition(ke::Application::getPointerPositionView(scene.getView()));
+		mouseLight->setColor(sf::Color::White);
+		mouseLight->setIntensity(3.f);
+	}
 
 	ke::Application::getLog() << std::to_string(actor->getLinearDamping());
 	ke::Application::getLog() << std::to_string(actor->getAngularDamping());
@@ -99,20 +105,26 @@ int main()
 				layer->setTileId(coords, 3);
 			}
 
-			ke::PointLightComponent::Ptr light = scene.createComponent<ke::PointLightComponent>();
-			scene.attachComponent(light);
-			light->setPosition(mPos);
-			light->setOrigin(sf::Vector2f(lightTexture.getSize().x * 0.5f, lightTexture.getSize().y * 0.5f));
-			light->setPosition(ke::Application::getPointerPositionView(scene.getView()));
-			light->setColor(sf::Color(200, 200, 10));
-			light->setIntensity(5.f);
+			if (scene.useLight())
+			{
+				ke::PointLightComponent::Ptr light = scene.createComponent<ke::PointLightComponent>();
+				scene.attachComponent(light);
+				light->setPosition(mPos);
+				light->setOrigin(sf::Vector2f(lightTexture.getSize().x * 0.5f, lightTexture.getSize().y * 0.5f));
+				light->setPosition(ke::Application::getPointerPositionView(scene.getView()));
+				light->setColor(sf::Color(200, 200, 10));
+				light->setIntensity(5.f);
+			}
 		}
 	});
 
 	ke::Application::setUpdateDefaultFunction([&](sf::Time dt)
 	{
 		scene.update(dt);
-		mouseLight->setPosition(ke::Application::getPointerPositionView(scene.getView()));
+		if (scene.useLight())
+		{
+			mouseLight->setPosition(ke::Application::getPointerPositionView(scene.getView()));
+		}
 		ke::Application::setDebugInfo("Actors", scene.getActorCount());
 	});
 

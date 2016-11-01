@@ -13,8 +13,6 @@ Window::Window()
     mCursor = MouseCursor::Default;
     mScreenshotPath = "";
     mDebugInfoVisible = false;
-	mUseBackgroundColor = true;
-    mBackgroundRect.setFillColor(sf::Color::Black);
     mVideoMode = sf::VideoMode(800,600);
     mStyle = sf::Style::Close;
     setJoystickThreshold(0.1f);
@@ -32,15 +30,8 @@ void Window::setDefaultView()
 void Window::clear()
 {
     sf::RenderWindow::clear();
-
-	if (mUseBackgroundColor)
-	{
-		draw(mBackgroundRect);
-	}
-	else
-	{
-		draw(mBackgroundSprite);
-	}
+	
+	mBackground.draw(*this);
 }
 
 void Window::display()
@@ -72,7 +63,6 @@ void Window::create()
 
     sf::RenderTarget::initialize();
     setMouseCursor(mCursor);
-    updateBackground();
     mVisible = true;
 	#endif
 }
@@ -478,50 +468,44 @@ std::unordered_map<std::string,std::string>::iterator Window::getDebugInfo(std::
     return itr;
 }
 
-void Window::setBackgroundColor(sf::Color color)
+void Window::useBackgroundColor(const sf::Color& color)
 {
-	mUseBackgroundColor = true;
-    mBackgroundRect.setFillColor(color);
-	updateBackground();
+	mBackground.useColor(color);
 }
 
-sf::Color Window::getBackgroundColor()
+void Window::useBackgroundScaledTexture(sf::Texture* texture, sf::IntRect rect)
 {
-    return mBackgroundRect.getFillColor();
+	mBackground.useScaledTexture(texture, rect);
 }
 
-void Window::setBackgroundTexture(sf::Texture* texture, sf::IntRect rect)
+void Window::useBackgroundRepeatedTexture(sf::Texture* texture, sf::IntRect rect)
 {
-	if (texture != nullptr)
-	{
-		mUseBackgroundColor = false;
-		mBackgroundSprite.setTexture(*texture);
-		mBackgroundSprite.setTextureRect(rect);
-	}
-	updateBackground();
+	mBackground.useRepeatedTexture(texture, rect);
 }
 
-sf::IntRect Window::getBackgroundTextureRect()
+sf::RectangleShape& Window::getBackgroundRectangle()
 {
-    return mBackgroundSprite.getTextureRect();
+	return mBackground.getRectangle();
 }
 
-bool Window::useBackgroundColor() const
+sf::Sprite& Window::getBackgroundSprite()
 {
-	return mUseBackgroundColor;
+	return mBackground.getSprite();
 }
 
-void Window::updateBackground()
+const sf::Color& Window::getBackgroundColor() const
 {
-	sf::Vector2f size = static_cast<sf::Vector2f>(getSize());
-	if (mUseBackgroundColor)
-	{
-		mBackgroundRect.setSize(size);
-	}
-	else
-	{
-		mBackgroundSprite.setScale(size.x / mBackgroundSprite.getGlobalBounds().width, size.y / mBackgroundSprite.getGlobalBounds().height);
-	}
+	return mBackground.getColor();
+}
+
+const sf::IntRect& Window::getBackgroundTextureRect() const
+{
+	return mBackground.getTextureRect();
+}
+
+std::size_t Window::getBackgroundUsage() const
+{
+	return mBackground.getUsage();
 }
 
 } // namespace ke

@@ -488,6 +488,9 @@
     <ClCompile Include="Sources\Components\LightShapeComponent.cpp">
       <Filter>Sources\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\System\Background.cpp">
+      <Filter>Sources\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -1005,6 +1008,9 @@
     </ClInclude>
     <ClInclude Include="Sources\Components\PhysicComponent.hpp">
       <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\Background.hpp">
+      <Filter>Sources\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

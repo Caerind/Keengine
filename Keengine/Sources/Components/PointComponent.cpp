@@ -11,6 +11,16 @@ PointComponent::PointComponent(Actor& actor)
     setColor(sf::Color::Red);
 }
 
+PointComponent::~PointComponent()
+{
+	onUnregister();
+}
+
+bool PointComponent::renderable() const
+{
+	return true;
+}
+
 void PointComponent::setColor(sf::Color const& color)
 {
     mPoint.setFillColor(color);

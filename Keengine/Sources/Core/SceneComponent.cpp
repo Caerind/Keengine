@@ -1,4 +1,5 @@
 #include "SceneComponent.hpp"
+#include "Actor.hpp"
 
 namespace ke
 {
@@ -7,7 +8,7 @@ SceneComponent::SceneComponent(Actor& actor)
 	: Component(actor)
 	, mTransformable()
 	, mWorldTransform()
-	, mNeedUpdate(true)
+	, mNeedUpdateTransform(true)
 	, mZ(0.f)
 	, mParent(nullptr)
 	, mChildren()
@@ -17,6 +18,24 @@ SceneComponent::SceneComponent(Actor& actor)
 
 SceneComponent::~SceneComponent()
 {
+	onUnregister();
+}
+
+void SceneComponent::onRegister()
+{
+	Component::onRegister();
+}
+
+void SceneComponent::onUnregister()
+{
+	if (isRegistered())
+	{
+		if (mParent != nullptr)
+		{
+			mParent->detachComponent(this);
+		}
+		Component::onUnregister();
+	}
 }
 
 const sf::Vector2f& SceneComponent::getPosition() const
@@ -110,14 +129,26 @@ void SceneComponent::moveZ(float z)
 	mZ += z;
 }
 
-sf::Vector2f SceneComponent::getWorldPosition() const
+sf::Vector2f SceneComponent::getWorldPosition()
 {
-	return mWorldTransform.transformPoint(sf::Vector2f());
+	return getWorldTransform().transformPoint(sf::Vector2f());
 }
 
-const sf::Transform& SceneComponent::getWorldTransform() const
+sf::Transform SceneComponent::getWorldTransform()
 {
+	if (mNeedUpdateTransform)
+	{
+		mWorldTransform = (mParent != nullptr) ? mParent->getWorldTransform() : sf::Transform();
+		mWorldTransform *= mTransformable.getTransform();
+		mNeedUpdateTransform = false;
+		onTransformUpdated();
+	}
 	return mWorldTransform;
+}
+
+bool SceneComponent::renderable() const
+{
+	return false;
 }
 
 void SceneComponent::setVisible(bool visible)
@@ -132,12 +163,12 @@ bool SceneComponent::isVisible() const
 
 void SceneComponent::render(sf::RenderTarget& target, sf::RenderStates states)
 {
-	if (isVisible())
+	states.transform *= getTransform();
+	if (renderable() && isVisible())
 	{
-		states.transform *= getTransform();
 		renderCurrent(target, states);
-		renderChildren(target, states);
 	}
+	renderChildren(target, states);
 }
 
 void SceneComponent::attachComponent(SceneComponent* component)
@@ -168,10 +199,31 @@ void SceneComponent::detachComponent(SceneComponent* component)
 	}
 }
 
+std::string SceneComponent::getParentId() const
+{
+	if (mParent != nullptr)
+	{
+		return mParent->getId();
+	}
+	return "";
+}
+
+bool SceneComponent::attachToParent(const std::string& parentId)
+{
+	SceneComponent::Ptr parent = mActor.getComponentT<SceneComponent>(parentId);
+	if (parent != nullptr)
+	{
+		parent->attachComponent(this);
+		return true;
+	}
+	return false;
+}
+
 void SceneComponent::serialize(Serializer& serializer)
 {
 	serializer.create(getType());
 	serializer.save("id", getId());
+	serializer.save("parent", getParentId());
 	serializer.save("pos", getPosition());
 	serializer.save("rot", getRotation());
 	serializer.save("sca", getScale());
@@ -191,20 +243,14 @@ void SceneComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates st
 
 void SceneComponent::renderChildren(sf::RenderTarget& target, sf::RenderStates states)
 {
-	if (isVisible())
-	{
-		std::sort(mChildren.begin(), mChildren.end(), sortChildren);
+	std::sort(mChildren.begin(), mChildren.end(), sortChildren);
 
-		std::size_t size = mChildren.size();
-		for (std::size_t i = 0; i < size; i++)
+	std::size_t size = mChildren.size();
+	for (std::size_t i = 0; i < size; i++)
+	{
+		if (mChildren[i] != nullptr)
 		{
-			if (mChildren[i] != nullptr)
-			{
-				if (mChildren[i]->isVisible())
-				{
-					mChildren[i]->render(target, states);
-				}
-			}
+			mChildren[i]->render(target, states);
 		}
 	}
 }
@@ -221,32 +267,24 @@ bool SceneComponent::sortChildren(SceneComponent * a, SceneComponent * b)
 		{
 			return false;
 		}
-		else if (a->getWorldPosition().y < b->getWorldPosition().y)
-		{
-			return true;
-		}
-		else if (a->getWorldPosition().y > b->getWorldPosition().y)
-		{
-			return false;
-		}
-		else
-		{
-			return (a->getWorldPosition().x < b->getWorldPosition().x);
-		}
+		return (a->getWorldPosition().y < b->getWorldPosition().y);
 	}
-	return true;
+	return (a != nullptr);
 }
 
 void SceneComponent::onTransformChanged()
 {
-	mWorldTransform = (mParent != nullptr) ? mParent->getWorldTransform() : sf::Transform();
-	mWorldTransform *= mTransformable.getTransform();
+	mNeedUpdateTransform = true;
 	std::size_t size = mChildren.size();
 	for (std::size_t i = 0; i < size; i++)
 	{
 		mChildren[i]->onTransformChanged();
 	}
-	onTransformUpdated();
+	onTransformNotified();
+}
+
+void SceneComponent::onTransformNotified()
+{
 }
 
 void SceneComponent::onTransformUpdated()

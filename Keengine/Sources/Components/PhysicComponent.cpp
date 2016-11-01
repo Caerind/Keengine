@@ -11,30 +11,42 @@ PhysicComponent::PhysicComponent(Actor& actor)
 	, mPoints()
 	, mFixture(nullptr)
 {
-	mUpdatable = false;
+}
+
+PhysicComponent::~PhysicComponent()
+{
+	onUnregister();
 }
 
 void PhysicComponent::onRegister()
 {
-	b2Body* actorBody = mActor.getBody();
-	if (getScene().usePhysic() && actorBody != nullptr && mFixture == nullptr)
+	if (!isRegistered())
 	{
-		b2FixtureDef fDef;
-		b2PolygonShape shape;
-		fDef.shape = &shape;
-		mFixture = actorBody->CreateFixture(&fDef);
-		mFixture->SetUserData(this);
+		b2Body* actorBody = mActor.getBody();
+		if (getScene().usePhysic() && actorBody != nullptr && mFixture == nullptr)
+		{
+			b2FixtureDef fDef;
+			b2PolygonShape shape;
+			fDef.shape = &shape;
+			mFixture = actorBody->CreateFixture(&fDef);
+			mFixture->SetUserData(this);
+		}
+		SceneComponent::onRegister();
 	}
 }
 
 void PhysicComponent::onUnregister()
 {
-	b2Body* actorBody = mActor.getBody();
-	if (getScene().usePhysic() && actorBody != nullptr && mFixture != nullptr)
+	if (isRegistered())
 	{
-		actorBody->SetUserData(nullptr);
-		actorBody->DestroyFixture(mFixture);
-		mFixture = nullptr;
+		b2Body* actorBody = mActor.getBody();
+		if (getScene().usePhysic() && actorBody != nullptr && mFixture != nullptr)
+		{
+			actorBody->SetUserData(nullptr);
+			actorBody->DestroyFixture(mFixture);
+			mFixture = nullptr;
+		}
+		SceneComponent::onUnregister();
 	}
 }
 

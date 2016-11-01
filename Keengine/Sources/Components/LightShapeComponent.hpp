@@ -16,6 +16,7 @@ class LightShapeComponent : public SceneComponent
 		TYPE(LightShapeComponent)
 
 		LightShapeComponent(Actor& actor);
+		virtual ~LightShapeComponent();
 
 		void onRegister();
 		void onUnregister();
@@ -39,7 +40,7 @@ class LightShapeComponent : public SceneComponent
 		virtual bool deserialize(Serializer& serializer);
 
 	private:
-		virtual void onTransformUpdated();
+		virtual void onTransformNotified();
 
 	private:
 		std::vector<sf::Vector2f> mPoints;

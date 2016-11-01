@@ -162,6 +162,7 @@
     <ClCompile Include="Sources\Maths\Trigonometry.cpp" />
     <ClCompile Include="Sources\Maths\Vector2.cpp" />
     <ClCompile Include="Sources\Maths\Vector3.cpp" />
+    <ClCompile Include="Sources\System\Background.cpp" />
     <ClCompile Include="Sources\System\ClockedTask.cpp" />
     <ClCompile Include="Sources\System\Compression.cpp" />
     <ClCompile Include="Sources\System\HttpThread.cpp" />
@@ -329,6 +330,7 @@
     <ClInclude Include="Sources\Maths\Trigonometry.hpp" />
     <ClInclude Include="Sources\Maths\Vector2.hpp" />
     <ClInclude Include="Sources\Maths\Vector3.hpp" />
+    <ClInclude Include="Sources\System\Background.hpp" />
     <ClInclude Include="Sources\System\ClockedTask.hpp" />
     <ClInclude Include="Sources\System\Color.hpp" />
     <ClInclude Include="Sources\System\Compression.hpp" />

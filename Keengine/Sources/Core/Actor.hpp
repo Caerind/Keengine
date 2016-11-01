@@ -1,12 +1,7 @@
 #ifndef KE_ACTOR_HPP
 #define KE_ACTOR_HPP
 
-#include <memory>
-#include <vector>
-#include <sstream>
-
 #include <SFML/System/Time.hpp>
-#include <SFML/System/Vector2.hpp>
 
 #include "../Application/Application.hpp"
 
@@ -29,58 +24,68 @@ class Actor : public Serializable
 
 		TYPE(Actor)
 
+	public:
+		// Ctor & Dtor
 		Actor(Scene& scene);
 		virtual ~Actor();
 
+		// Id management
+		const std::string& getId() const;
+		void setId(const std::string& id);
+
+		// Garbage managemenent
 		void remove();
 		bool isMarkedForRemoval() const;
 
-		void setId(std::string const& id);
-		std::string getId() const;
-
-		std::string getType() const;
-
+		// Transform
 		const sf::Vector2f& getPosition() const;
-		void setPosition(sf::Vector2f const& position);
+		void setPosition(const sf::Vector2f& position);
 		void setPosition(float x, float y);
-		void move(sf::Vector2f const& movement);
+		void move(const sf::Vector2f& movement);
 		void move(float x, float y);
-
 		float getRotation() const;
 		void setRotation(float rotation);
 		void rotate(float rotation);
-
 		const sf::Vector2f& getScale() const;
-		void setScale(sf::Vector2f const& scale);
+		void setScale(const sf::Vector2f& scale);
 		void setScale(float x, float y);
-		void scale(sf::Vector2f const& scale);
+		void scale(const sf::Vector2f& scale);
 		void scale(float x, float y);
-
 		const sf::Transform& getTransform();
-
 		float getZ() const;
 		void setZ(float z);
 		void moveZ(float z);
 
+		// Visibility
 		bool isVisible() const;
 		void setVisible(bool visible);
 
-		virtual void update(sf::Time dt);
-		void updateComponents(sf::Time dt);
-
+		// Initialization
 		virtual void initializePhysic();
 		virtual void initializeComponents();
 		virtual void initialize();
 
+		// Update & render
+		virtual void update(sf::Time dt);
+		void updateComponents(sf::Time dt);
 		void render(sf::RenderTarget& target);
 
+		// Component management
+		template <typename T, typename ... Args>
+		std::shared_ptr<T> createComponent(Args&& ... args)
+		{
+			std::shared_ptr<T> component = std::make_shared<T>(*this, std::forward<Args>(args)...);
+			mComponents.push_back(component);
+			component->setId(ke::decToHex(mComponentIdCounter++));
+			component->onRegister();
+			return component;
+		}
+		void removeComponent(Component::Ptr component);
 		void attachComponent(SceneComponent::Ptr component);
 		void detachComponent(SceneComponent::Ptr component);
-
 		std::size_t getComponentCount() const;
 		Component::Ptr getComponent(std::size_t index);
-		Component::Ptr getComponent(std::string const& id);
-
+		Component::Ptr getComponent(const std::string& id);
 		template <typename T>
 		std::shared_ptr<T> getComponentT(std::size_t index)
 		{
@@ -91,9 +96,8 @@ class Actor : public Serializable
 			}
 			return std::dynamic_pointer_cast<T>(c);
 		}
-
 		template <typename T>
-		std::shared_ptr<T> getComponentT(std::string const& id)
+		std::shared_ptr<T> getComponentT(const std::string& id)
 		{
 			Component::Ptr c = getComponent(id);
 			if (c == nullptr)
@@ -103,48 +107,38 @@ class Actor : public Serializable
 			return std::dynamic_pointer_cast<T>(c);
 		}
 
-		Scene& getScene();
-
+		// Physic
 		b2Body* getBody();
 		void destroyPhysic();
 		void prePhysicUpdate();
 		void postPhysicUpdate();
 		void desiredImpulseX(float impulse);
 		void desiredImpulseY(float impulse);
-		void setVelocity(sf::Vector2f const& velocity);
 		sf::Vector2f getVelocity() const;
-		void setAngularVelocity(float angularVelocity);
+		void setVelocity(const sf::Vector2f& velocity);
 		float getAngularVelocity() const;
-		void setPhysicType(b2BodyType const& type);
+		void setAngularVelocity(float angularVelocity);
 		b2BodyType getPhysicType() const;
-		void setFixedRotation(bool fixed);
+		void setPhysicType(const b2BodyType& type);
 		bool isFixedRotation() const;
+		void setFixedRotation(bool fixed);
 		float getMass() const;
 		float getInertia() const;
-		void setLinearDamping(float damping);
 		float getLinearDamping() const;
-		void setAngularDamping(float damping);
+		void setLinearDamping(float damping);
 		float getAngularDamping() const;
-		void setGravityScale(float scale);
+		void setAngularDamping(float damping);
 		float getGravityScale() const;
-		void setPhysicBullet(bool bullet);
+		void setGravityScale(float scale);
 		bool isPhysicBullet() const;
+		void setPhysicBullet(bool bullet);
 
+		// Getters
+		Scene& getScene();
 		Log& getLog();
 		Application& getApplication();
 
-		template <typename T, typename ... Args>
-		std::shared_ptr<T> createComponent(Args&& ... args)
-		{
-			std::shared_ptr<T> component = std::make_shared<T>(*this, std::forward<Args>(args)...);
-			mComponents.push_back(component);
-			component->setId(ke::decToHex(mComponentIdCounter++));
-			component->onRegister();
-			return component;
-		}
-
-		void removeComponent(Component::Ptr component);
-
+		// Serialization
 		virtual void serialize(Serializer& serializer);
 		virtual bool deserialize(Serializer& serializer);
 
@@ -161,8 +155,6 @@ class Actor : public Serializable
 
 	protected:
 		Scene& mScene; ///< Scene where the actor lives in
-
-		std::string mType; ///< Type of the object
 
 		b2Body* mBody; ///< Physic body
 };

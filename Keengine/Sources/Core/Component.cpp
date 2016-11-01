@@ -7,9 +7,10 @@ namespace ke
 {
 
 Component::Component(Actor& actor)
-	: mActor(actor)
-	, mId("")
+	: mId("")
+	, mRegistered(false)
 	, mUpdatable(true)
+	, mActor(actor)
 {
 }
 
@@ -18,17 +19,44 @@ Component::~Component()
 	onUnregister();
 }
 
+std::string Component::getId() const
+{
+	return mId;
+}
+
+void Component::setId(std::string const& id)
+{
+	mId = id;
+}
+
+bool Component::isRegistered() const
+{
+	return mRegistered;
+}
+
 void Component::onRegister()
 {
+	mRegistered = true;
 }
 
 void Component::onUnregister()
 {
+	mRegistered = false;
+}
+
+bool Component::updatable() const
+{
+	return false;
 }
 
 bool Component::isUpdatable() const
 {
 	return mUpdatable;
+}
+
+void Component::setUpdatable(bool updatable)
+{
+	mUpdatable = updatable;
 }
 
 void Component::update(sf::Time dt)
@@ -113,16 +141,6 @@ void Component::setActorZ(float z)
 void Component::moveActorZ(float z)
 {
 	mActor.moveZ(z);
-}
-
-std::string Component::getId() const
-{
-	return mId;
-}
-
-void Component::setId(std::string const& id)
-{
-	mId = id;
 }
 
 Actor& Component::getActor()

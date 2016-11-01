@@ -18,60 +18,70 @@ class SceneComponent : public Component
 
 		TYPE(SceneComponent)
 
+		// Ctor & Dtor
 		SceneComponent(Actor& actor);
 		virtual ~SceneComponent();
 
+		// Registeration
+		virtual void onRegister();
+		virtual void onUnregister();
+
+		// Transform
 		const sf::Vector2f& getPosition() const;
 		void setPosition(sf::Vector2f const& position);
 		void setPosition(float x, float y);
 		void move(sf::Vector2f const& movement);
 		void move(float x, float y);
-
 		float getRotation() const;
 		void setRotation(float rotation);
 		void rotate(float rotation);
-
 		const sf::Vector2f& getScale() const;
 		void setScale(sf::Vector2f const& scale);
 		void setScale(float x, float y);
 		void scale(sf::Vector2f const& scale);
 		void scale(float x, float y);
-
 		const sf::Transform& getTransform() const;
-
 		float getZ() const;
 		void setZ(float z);
 		void moveZ(float z);
 
-		sf::Vector2f getWorldPosition() const;
-		const sf::Transform& getWorldTransform() const;
+		// World transform
+		sf::Vector2f getWorldPosition();
+		sf::Transform getWorldTransform();
 
+		// Visibility
+		virtual bool renderable() const;
 		void setVisible(bool visible);
 		bool isVisible() const;
+		virtual void render(sf::RenderTarget& target, sf::RenderStates states);
 
-		void render(sf::RenderTarget& target, sf::RenderStates states);
-
+		// Attachment
 		void attachComponent(SceneComponent* component);
 		void detachComponent(SceneComponent* component);
+		std::string getParentId() const;
+		bool attachToParent(const std::string& parentId);
 
+		// Serialization
 		virtual void serialize(Serializer& serializer);
 		virtual bool deserialize(Serializer& serializer);
 
 	private:
+		// Render children
 		virtual void renderCurrent(sf::RenderTarget& target, sf::RenderStates states);
 		void renderChildren(sf::RenderTarget& target, sf::RenderStates states);
-
 		static bool sortChildren(SceneComponent* a, SceneComponent* b);
 
 	protected:
+		// Transform
 		virtual void onTransformChanged();
+		virtual void onTransformNotified();
 		virtual void onTransformUpdated();
 
 	private:
 		sf::Transformable mTransformable;
 		sf::Transform mWorldTransform;
 
-		bool mNeedUpdate; ///< Need to update the transform
+		bool mNeedUpdateTransform; ///< Need to update the transform
 
 		float mZ; ///< Z coordinate of the scene component
 

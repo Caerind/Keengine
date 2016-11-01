@@ -16,6 +16,9 @@ class PointComponent : public SceneComponent
 		TYPE(PointComponent)
 
         PointComponent(Actor& actor);
+		virtual ~PointComponent();
+
+		virtual bool renderable() const;
 
         void setColor(sf::Color const& color);
         sf::Color getColor() const;

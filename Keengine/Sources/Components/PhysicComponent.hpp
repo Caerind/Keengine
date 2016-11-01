@@ -16,6 +16,7 @@ class PhysicComponent : public SceneComponent
 		TYPE(PhysicComponent)
 
 		PhysicComponent(Actor& actor);
+		virtual ~PhysicComponent();
 
 		void onRegister();
 		void onUnregister();

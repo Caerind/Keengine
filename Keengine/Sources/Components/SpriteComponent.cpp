@@ -10,6 +10,16 @@ SpriteComponent::SpriteComponent(Actor& actor)
 {
 }
 
+SpriteComponent::~SpriteComponent()
+{
+	onUnregister();
+}
+
+bool SpriteComponent::renderable() const
+{
+	return true;
+}
+
 void SpriteComponent::setTexture(std::string const& textureName, sf::IntRect const& rect)
 {
 	if (getApplication().hasResource(textureName))

@@ -17,19 +17,20 @@ class HttpThread
 
         void run();
 	
-	int getStates() const;
-	bool isFinished() const;
-	std::string getBody() const;
+		int getStatus() const;
+		bool isFinished() const;
+		std::string getBody() const;
 
-        static void splitUrl(std::string const& longurl, std::string& url, std::string& uri);
+        static void splitUrl(const std::string& longurl, std::string& url, std::string& uri);
+		static bool sendRequest(const std::string& url, const std::string& body, std::string* response = nullptr);
 
     private:
         sf::Thread mThread;
-	sf::Mutex mMutex;
-	int mStates;
-	sf::Http mHttp;
-	sf::Http::Request mRequest;
-	sf::Http::Response mResponse;
+		sf::Mutex mMutex;
+		int mStatus;
+		sf::Http mHttp;
+		sf::Http::Request mRequest;
+		sf::Http::Response mResponse;
 };
 
 } // namespace ke

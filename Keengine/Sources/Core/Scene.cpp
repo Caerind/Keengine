@@ -1,4 +1,5 @@
 #include "Scene.hpp"
+
 #include "Factories.hpp"
 
 namespace ke
@@ -10,13 +11,26 @@ Scene::Scene(const std::string& id, sf::Uint32 options)
 	, mActorIdCounter(1)
 	, mActors()
 	, mView(getApplication().getDefaultView())
-	, mPhysic()
-	, mLights()
+	, mPhysic(nullptr)
+	, mLights(nullptr)
+	, mSceneTexture(nullptr)
+	, mEffects()
+	, mInput()
+	, mSceneRoot(nullptr)
 {
 	Factories::registerAll();
+	if (useEffect() || useLight())
+	{
+		mSceneTexture = std::unique_ptr<sf::RenderTexture>(new sf::RenderTexture());
+	}
+	getLog() << "t:" + toString(mOptions);
 	if (useLight())
 	{
 		initLights();
+	}
+	if (usePhysic())
+	{
+		mPhysic = std::make_shared<PhysicSystem>();
 	}
 	getApplication().getInputs().registerInput(&mInput);
 	mSceneRoot = createActor<Actor>("");
@@ -29,18 +43,19 @@ Scene::~Scene()
 	mSceneRoot = nullptr;
 }
 
+const std::string& Scene::getId() const
+{
+	return mId;
+}
+
 void Scene::setId(const std::string& id)
 {
 	mId = id;
 }
 
-std::string Scene::getId() const
+void Scene::handleEvent(const sf::Event& event)
 {
-	return mId;
-}
-
-void Scene::handleEvent(sf::Event const & event)
-{
+	// TODO : Really needed ?
 }
 
 void Scene::update(sf::Time dt)
@@ -62,9 +77,9 @@ void Scene::update(sf::Time dt)
 		}
 	}
 
-	if (usePhysic())
+	if (usePhysic() && mPhysic != nullptr)
 	{
-		mPhysic.update(dt);
+		mPhysic->update(dt);
 
 		for (std::size_t i = 0; i < mActors.size(); i++)
 		{
@@ -95,43 +110,13 @@ void Scene::render(sf::RenderTarget& target)
 		renderSimple(target);
 	}
 
-	if (usePhysic())
+	if (usePhysic() && mPhysic != nullptr && mPhysic->isRenderingDebug())
 	{
 		sf::View v = target.getView();
 		target.setView(mView);
-		mPhysic.render(target);
+		mPhysic->render(target);
 		target.setView(v);
 	}
-}
-
-bool Scene::usePhysic() const
-{
-	return ((mOptions & Options::Physic) != 0);
-}
-
-bool Scene::useEffect() const
-{
-	return ((mOptions & Options::Effect) != 0);
-}
-
-bool Scene::useLight() const
-{
-	return ((mOptions & Options::Light) != 0);
-}
-
-PhysicSystem& Scene::getPhysic()
-{
-	return mPhysic;
-}
-
-b2World* Scene::getPhysicWorld()
-{
-	return mPhysic.getWorld();
-}
-
-ltbl::LightSystem& Scene::getLights()
-{
-	return mLights;
 }
 
 Actor::Ptr Scene::createActorFromFactory(const std::string& type)
@@ -195,9 +180,34 @@ std::size_t Scene::getActorCount() const
 	return mActors.size();
 }
 
-sf::View& Scene::getView()
+bool Scene::usePhysic() const
 {
-	return mView;
+	return ((mOptions & Options::Physic) != 0);
+}
+
+bool Scene::useEffect() const
+{
+	return ((mOptions & Options::Effect) != 0);
+}
+
+bool Scene::useLight() const
+{
+	return ((mOptions & Options::Light) != 0);
+}
+
+std::shared_ptr<PhysicSystem> Scene::getPhysic()
+{
+	return mPhysic;
+}
+
+b2World* Scene::getPhysicWorld()
+{
+	return (mPhysic != nullptr) ? mPhysic->getWorld() : nullptr;
+}
+
+std::shared_ptr<ltbl::LightSystem> Scene::getLights()
+{
+	return mLights;
 }
 
 void Scene::removeEffect(std::size_t const& order)
@@ -209,19 +219,12 @@ void Scene::removeEffect(std::size_t const& order)
 	}
 }
 
-Log& Scene::getLog()
+void Scene::removeComponent(Component::Ptr component)
 {
-	return getApplication().getLog();
-}
-
-Application& Scene::getApplication()
-{
-	return Application::instance();
-}
-
-Input& Scene::getInput()
-{
-	return mInput;
+	if (mSceneRoot != nullptr)
+	{
+		mSceneRoot->removeComponent(component);
+	}
 }
 
 void Scene::attachComponent(SceneComponent::Ptr component)
@@ -240,12 +243,39 @@ void Scene::detachComponent(SceneComponent::Ptr component)
 	}
 }
 
-void Scene::removeComponent(Component::Ptr component)
+void Scene::useBackgroundColor(const sf::Color& color)
 {
-	if (mSceneRoot != nullptr)
-	{
-		mSceneRoot->removeComponent(component);
-	}
+	mBackground.useColor(color);
+}
+
+void Scene::useBackgroundScaledTexture(sf::Texture* texture, sf::IntRect rect)
+{
+	mBackground.useScaledTexture(texture, rect);
+}
+
+void Scene::useBackgroundRepeatedTexture(sf::Texture* texture, sf::IntRect rect)
+{
+	mBackground.useRepeatedTexture(texture, rect);
+}
+
+sf::View& Scene::getView()
+{
+	return mView;
+}
+
+Input& Scene::getInput()
+{
+	return mInput;
+}
+
+Log& Scene::getLog()
+{
+	return getApplication().getLog();
+}
+
+Application& Scene::getApplication()
+{
+	return Application::instance();
 }
 
 bool Scene::loadFromXml(const std::string& filepath)
@@ -321,45 +351,31 @@ void Scene::initLights()
 		}
 		texture.setSmooth(true);
 	}
-	mLights.create({ -1000.f, -1000.f, 2000.f, 2000.f }, getApplication().getSize());
+	mLights = std::make_shared<ltbl::LightSystem>();
+	mLights->create({ -1000.f, -1000.f, 2000.f, 2000.f }, getApplication().getSize());
 }
 
 void Scene::renderComplex(sf::RenderTarget& target)
 {
-	// Update Texture
-	sf::Vector2u size = target.getSize();
-	if (mSceneTexture.getSize() != size)
+	if (mSceneTexture == nullptr)
 	{
-		mSceneTexture.create(size.x, size.y);
+		return;
 	}
 
-	// Background
-	std::string bgTexture = getApplication().getBackgroundTexture();
-	sf::IntRect bgRect = getApplication().getBackgroundTextureRect();
-	sf::Color bgColor = getApplication().getBackgroundColor();
-
-	// Render Background
-	mSceneTexture.clear(getApplication().getBackgroundColor());
-	if (!getApplication().getWindow().useBackgroundColor())
+	// Update Texture
+	sf::Vector2u size = target.getSize();
+	if (mSceneTexture->getSize() != size)
 	{
-		std::string textureName = getApplication().getBackgroundTexture();
-		if (getApplication().hasResource(textureName))
-		{
-			if (getApplication().isResourceLoaded(textureName))
-			{
-				mSceneTexture.setView(getApplication().getDefaultView());
-				mSceneTexture.draw(sf::Sprite(getApplication().getResource<Texture>(textureName), getApplication().getBackgroundTextureRect()));
-			}
-		}
+		mSceneTexture->create(size.x, size.y);
 	}
 
 	// Render Scene
-	renderSimple(mSceneTexture);
+	renderSimple(*mSceneTexture);
 
 	// Render Lights
-	if (useLight())
+	if (useLight() && mLights != nullptr)
 	{
-		mLights.render(mSceneTexture);
+		mLights->render(*mSceneTexture);
 	}
 
 	// Render Effects
@@ -367,18 +383,20 @@ void Scene::renderComplex(sf::RenderTarget& target)
 	{
 		for (auto itr = mEffects.begin(); itr != mEffects.end(); itr++)
 		{
-			itr->second->apply(mSceneTexture);
+			itr->second->apply(*mSceneTexture);
 		}
 	}
 
 	// Display
-	mSceneTexture.display();
-	target.draw(sf::Sprite(mSceneTexture.getTexture()));
+	mSceneTexture->display();
+	target.draw(sf::Sprite(mSceneTexture->getTexture()));
 }
 
 void Scene::renderSimple(sf::RenderTarget& target)
 {
 	target.setView(mView);
+
+	mBackground.draw(target);
 
 	std::sort(mActors.begin(), mActors.end(), sortActor);
 
@@ -387,10 +405,7 @@ void Scene::renderSimple(sf::RenderTarget& target)
 	{
 		if (mActors[i] != nullptr)
 		{
-			if (mActors[i]->isVisible())
-			{
-				mActors[i]->render(target);
-			}
+			mActors[i]->render(target);
 		}
 	}
 }

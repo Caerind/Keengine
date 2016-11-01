@@ -46,7 +46,7 @@ bool MyMap::loadTmxString(std::string const & str)
 		if (attr.name() == std::string("staggerindex")) mStaggerIndex = attr.as_string();
 	}
 
-	loadProperties(map);
+	PropertiesHolder::loadFromXml(map);
 
 	for (pugi::xml_node tileset = map.child("tileset"); tileset; tileset = tileset.next_sibling("tileset"))
 	{

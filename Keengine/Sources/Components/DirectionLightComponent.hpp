@@ -15,6 +15,7 @@ class DirectionLightComponent : public Component
 		TYPE(DirectionLightComponent)
 
 		DirectionLightComponent(Actor& actor);
+		virtual ~DirectionLightComponent();
 
 		void onRegister();
 		void onUnregister();

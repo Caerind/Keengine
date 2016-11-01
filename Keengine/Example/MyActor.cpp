@@ -15,7 +15,7 @@ MyActor::MyActor(ke::Scene& scene)
 
 void MyActor::initializePhysic()
 {
-	if (mBody == nullptr && mScene.usePhysic())
+	if (mBody == nullptr && mScene.usePhysic() && mScene.getPhysic() != nullptr)
 	{
 		b2BodyDef bodyDef;
 		bodyDef.position.Set(0, 0);
@@ -23,7 +23,7 @@ void MyActor::initializePhysic()
 		bodyDef.userData = this;
 		bodyDef.linearDamping = 0.01f;
 		bodyDef.fixedRotation = true;
-		mBody = mScene.getPhysic().createBody(&bodyDef);
+		mBody = mScene.getPhysic()->createBody(&bodyDef);
 	}
 }
 
@@ -51,13 +51,16 @@ void MyActor::initializeComponents()
 	run.addFrame("cat", { 448, 64, 64, 64 }, sf::seconds(0.15f));
 	mB->playAnimation("idle");
 
-	mC = createComponent<ke::PointLightComponent>();
-	attachComponent(mC);
-	ke::Texture& texture = getApplication().getResource<ke::Texture>("pointLightTexture");
-	mC->setTexture("pointLightTexture");
-	mC->setOrigin(sf::Vector2f(texture.getSize().x * 0.5f, texture.getSize().y * 0.5f));
-	mC->setColor(sf::Color(200, 200, 10));
-	mC->setIntensity(5.f);
+	if (mScene.useLight())
+	{
+		mC = createComponent<ke::PointLightComponent>();
+		attachComponent(mC);
+		ke::Texture& texture = getApplication().getResource<ke::Texture>("pointLightTexture");
+		mC->setTexture("pointLightTexture");
+		mC->setOrigin(sf::Vector2f(texture.getSize().x * 0.5f, texture.getSize().y * 0.5f));
+		mC->setColor(sf::Color(200, 200, 10));
+		mC->setIntensity(5.f);
+	}
 
 	mD = createComponent<ke::InputComponent>();
 	mD->bindAction("MoveUp", [&](std::vector<std::string> const& data)

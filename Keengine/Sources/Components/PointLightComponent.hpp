@@ -15,6 +15,7 @@ class PointLightComponent : public SceneComponent
 		TYPE(PointLightComponent)
 
 		PointLightComponent(Actor& actor);
+		virtual ~PointLightComponent();
 
 		void onRegister();
 		void onUnregister();
@@ -39,7 +40,7 @@ class PointLightComponent : public SceneComponent
 		virtual bool deserialize(Serializer& serializer);
 
 	protected:
-		void onTransformUpdated();
+		void onTransformNotified();
 
 	protected:
 		ltbl::LightPointEmission* mLight;

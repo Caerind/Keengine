@@ -4,7 +4,7 @@ namespace ke
 {
 
 HttpThread::HttpThread(const std::string& url, const std::string& request)
-: mThread(std::bind(&HttpThread::run,this))
+: mThread(&HttpThread::run, this)
 , mMutex()
 , mStatus(0)
 , mHttp()
@@ -13,7 +13,7 @@ HttpThread::HttpThread(const std::string& url, const std::string& request)
 {
     std::string tempUrl, tempUri;
     splitUrl(url, tempUrl, tempUri);
-    mHttp.setUrl(tempUrl);
+    mHttp.setHost(tempUrl);
     mRequest.setMethod(sf::Http::Request::Post);
     mRequest.setBody(request);
     mRequest.setUri(tempUri);
@@ -44,7 +44,7 @@ int HttpThread::getStatus() const
 {
     return mStatus;
 }
-	
+
 bool HttpThread::isFinished() const
 {
    return mStatus != 0;
@@ -62,7 +62,7 @@ std::string HttpThread::getBody() const
     }
 }	
 
-void HttpThread::splitUrl(std::string const& longurl, std::string& url, std::string& uri)
+void HttpThread::splitUrl(const std::string& longurl, std::string& url, std::string& uri)
 {
 	std::string temp = longurl;
 	if (longurl.find("http://") != std::string::npos)
@@ -85,6 +85,22 @@ void HttpThread::splitUrl(std::string const& longurl, std::string& url, std::str
 		url = longurl;
 		uri = "";
 	}
+}
+
+bool HttpThread::sendRequest(const std::string& url, const std::string& body, std::string* response)
+{
+	std::string tempUrl, tempUri;
+	splitUrl(url, tempUrl, tempUri);
+	sf::Http http(tempUrl);
+	sf::Http::Request request(tempUri, sf::Http::Request::Post);
+	request.setBody(body);
+	sf::Http::Response rep = http.sendRequest(request);
+	bool ret = rep.getStatus() == sf::Http::Response::Ok;
+	if (response != nullptr && ret)
+	{
+		*response = rep.getBody();
+	}
+	return ret;
 }
 
 } // namespace ke

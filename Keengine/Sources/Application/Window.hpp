@@ -12,6 +12,7 @@
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Touch.hpp>
 
+#include "../System/Background.hpp"
 #include "../System/Log.hpp"
 #include "../System/Time.hpp"
 
@@ -139,14 +140,14 @@ class Window : public sf::RenderWindow
         //
         // BACKGROUND
         //
-        void setBackgroundColor(sf::Color color);
-        sf::Color getBackgroundColor();
-        void setBackgroundTexture(sf::Texture* texture, sf::IntRect rect = sf::IntRect());
-        sf::IntRect getBackgroundTextureRect();
-		bool useBackgroundColor() const;
-
-    protected:
-        void updateBackground();
+		void useBackgroundColor(const sf::Color& color);
+		void useBackgroundScaledTexture(sf::Texture* texture, sf::IntRect rect = sf::IntRect());
+		void useBackgroundRepeatedTexture(sf::Texture* texture, sf::IntRect rect = sf::IntRect());
+		sf::RectangleShape& getBackgroundRectangle();
+		sf::Sprite& getBackgroundSprite();
+		const sf::Color& getBackgroundColor() const;
+		const sf::IntRect& getBackgroundTextureRect() const;
+		std::size_t getBackgroundUsage() const;
 
     protected:
         bool mFullscreen;
@@ -166,9 +167,7 @@ class Window : public sf::RenderWindow
         bool mDebugInfoVisible;
         std::unordered_map<std::string,std::string> mDebugInfo;
 
-		bool mUseBackgroundColor;
-        sf::RectangleShape mBackgroundRect;
-		sf::Sprite mBackgroundSprite;
+		Background mBackground; // TODO : Test it
 };
 
 template <typename T>

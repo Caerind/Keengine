@@ -1,6 +1,7 @@
 #ifndef KE_PROPERTIESHOLDER_HPP
 #define KE_PROPERTIESHOLDER_HPP
 
+#include <fstream>
 #include <string>
 #include <unordered_map>
 
@@ -15,34 +16,53 @@ class PropertiesHolder
     public:
 		PropertiesHolder();
 
-		template <typename T> void setProperty(std::string const& id, T const& value)
+		template <typename T> void setProperty(const std::string& id, const T& value)
 		{
-			mProperties[id] = Variant(value);
+			std::size_t size = mProperties.size();
+			for (std::size_t i = 0; i < size; i++)
+			{
+				if (mProperties[i].first == id)
+				{
+					mProperties[i].second = Variant(value);
+					return;
+				}
+			}
+			mProperties.push_back(std::pair<std::string, Variant>(id, value));
 		}
 
-		std::string getProperty(std::string const& id);
+		Variant& operator[](std::string const& id)
+		{
+			std::size_t size = mProperties.size();
+			for (std::size_t i = 0; i < size; i++)
+			{
+				if (mProperties[i].first == id)
+				{
+					return mProperties[i].second;
+				}
+			}
+			mProperties.push_back(std::pair<std::string, Variant>(id, std::string("")));
+			return mProperties.back().second;
+		}
+
+		std::string getProperty(const std::string& id);
 	
-	        template <typename T> T getProperty(std::string const& id)
-	        {
-		     if (propertyExist(id))
-		     {
-	                 return mProperties[id].as<T>();
-		     }
-		     else
-		     {
-	                return T();
-		     }
+		template <typename T> T getPropertyAs(const std::string& id)
+		{
+			return (*this)[id].as<T>();
 		}
 
-		void loadProperties(pugi::xml_node const& node);
-		void saveProperties(pugi::xml_node& node);
+		void loadFromXml(const pugi::xml_node& node);
+		void saveToXml(pugi::xml_node& node);
 
-		bool propertyExist(std::string const& id) const;
+		bool loadFromIni(const std::string& filename);
+		bool saveToIni(const std::string& filename);
 
-		void removeProperty(std::string const& id);
+		bool propertyExist(const std::string& id) const;
+
+		void removeProperty(const std::string& id);
 
     protected:
-		std::unordered_map<std::string, Variant> mProperties;
+		std::vector<std::pair<std::string, Variant>> mProperties;
 };
 
 } // namespace ke

@@ -19,9 +19,9 @@ class ShapeComponent : public SceneComponent
 		TYPE(ShapeComponent)
 
 		ShapeComponent(Actor& actor);
+		virtual ~ShapeComponent();
 
-		void onRegister();
-		void onUnregister();
+		virtual bool renderable() const;
 
 		void setPointCount(std::size_t points);
 		std::size_t getPointCount() const;

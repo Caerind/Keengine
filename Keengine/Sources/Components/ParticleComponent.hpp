@@ -45,6 +45,10 @@ class ParticleComponent : public SceneComponent
 
 	public:
 		ParticleComponent(Actor& actor);
+		virtual ~ParticleComponent();
+
+		virtual bool updatable() const;
+		virtual bool renderable() const;
 
 		void setTexture(std::string const& id);
 		void setTexture(sf::Texture& texture);

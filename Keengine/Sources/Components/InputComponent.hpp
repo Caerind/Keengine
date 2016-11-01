@@ -14,6 +14,7 @@ class InputComponent : public Input, public Component
 		TYPE(InputComponent)
 
         InputComponent(Actor& actor);
+		virtual ~InputComponent();
 
 		void onRegister();
 		void onUnregister();

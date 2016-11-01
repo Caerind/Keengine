@@ -9,6 +9,16 @@ TextComponent::TextComponent(Actor& actor)
 {
 }
 
+TextComponent::~TextComponent()
+{
+	onUnregister();
+}
+
+bool TextComponent::renderable() const
+{
+	return true;
+}
+
 void TextComponent::setFont(std::string const& font)
 {
 	if (getApplication().hasResource(font))

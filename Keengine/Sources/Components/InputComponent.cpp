@@ -7,17 +7,29 @@ namespace ke
 InputComponent::InputComponent(Actor& actor) 
 	: Component(actor)
 {
-	mUpdatable = false;
+}
+
+InputComponent::~InputComponent()
+{
+	onUnregister();
 }
 
 void InputComponent::onRegister()
 {
-	getApplication().getInputs().registerInput(this);
+	if (!isRegistered())
+	{
+		getApplication().getInputs().registerInput(this);
+		Component::onRegister();
+	}
 }
 
 void InputComponent::onUnregister()
 {
-	getApplication().getInputs().unregisterInput(this);
+	if (isRegistered())
+	{
+		getApplication().getInputs().unregisterInput(this);
+		Component::onUnregister();
+	}
 }
 
 void InputComponent::serialize(Serializer& serializer)

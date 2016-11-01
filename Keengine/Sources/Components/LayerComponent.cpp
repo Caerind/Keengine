@@ -19,7 +19,6 @@ LayerComponent::LayerComponent(Actor& actor)
 	, mEncoding()
 	, mCompression()
 {
-	mUpdatable = false; // TODO : Animation
 	create(nullptr);
 }
 
@@ -39,6 +38,21 @@ LayerComponent::LayerComponent(Actor& actor, Tileset* tileset, sf::Vector2i cons
 	, mCompression()
 {
 	create(tileset, size, tileSize, orientation, staggerAxis, staggerIndex, hexSideLength);
+}
+
+LayerComponent::~LayerComponent()
+{
+	onUnregister();
+}
+
+bool LayerComponent::updatable() const
+{
+	return true;
+}
+
+bool LayerComponent::renderable() const
+{
+	return true;
 }
 
 sf::Vector2i LayerComponent::worldToCoords(sf::Vector2f const& world)
@@ -84,10 +98,11 @@ bool LayerComponent::loadFromNode(pugi::xml_node const& node, Tileset* tileset, 
 
 	setPosition(offset);
 
-	loadProperties(node);
+	PropertiesHolder::loadFromXml(node);
+
 	if (propertyExist("z"))
 	{
-		setZ(getProperty("z").as<float>());
+		setZ(getPropertyAs<float>("z"));
 	}
 
 	pugi::xml_node dataNode = node.child("data");
@@ -222,7 +237,8 @@ void LayerComponent::saveToNode(pugi::xml_node & node)
 	{
 		setProperty("z", getZ());
 	}
-	saveProperties(node);
+
+	PropertiesHolder::saveToXml(node);
 
 	node.append_attribute("width") = mSize.x;
 	node.append_attribute("height") = mSize.y;

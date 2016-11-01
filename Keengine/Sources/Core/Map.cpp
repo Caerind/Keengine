@@ -229,7 +229,7 @@ bool Map::loadTmxFile(std::string const& filename)
 		if (attr.name() == std::string("staggerindex")) mStaggerIndex = attr.as_string();
 	}
 	
-	loadProperties(map);
+	PropertiesHolder::loadFromXml(map);
 
 	for (pugi::xml_node tileset = map.child("tileset"); tileset; tileset = tileset.next_sibling("tileset"))
 	{
@@ -326,7 +326,7 @@ bool Map::saveTmxFile(std::string const & filename)
 		map.append_attribute("staggerindex") = mStaggerIndex.c_str();
 	}
 
-	saveProperties(map);
+	PropertiesHolder::saveToXml(map);
 
 	if (mTileset != nullptr)
 	{

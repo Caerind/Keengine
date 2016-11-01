@@ -16,6 +16,9 @@ class TextComponent : public SceneComponent
 		TYPE(TextComponent)
 
 		TextComponent(Actor& actor);
+		virtual ~TextComponent();
+
+		virtual bool renderable() const;
 
 		void setFont(std::string const& font);
 		void setFont(sf::Font& font);

@@ -7,7 +7,11 @@ namespace ke
 CameraComponent::CameraComponent(Actor& actor) 
 	: SceneComponent(actor)
 {
-	mUpdatable = false;
+}
+
+CameraComponent::~CameraComponent()
+{
+	onUnregister();
 }
 
 sf::View& CameraComponent::getView()
@@ -15,7 +19,7 @@ sf::View& CameraComponent::getView()
 	return getScene().getView();
 }
 
-void CameraComponent::onTransformUpdated()
+void CameraComponent::onTransformNotified()
 {
 	getView().setCenter(getWorldPosition());
 	getView().setRotation(getRotation());

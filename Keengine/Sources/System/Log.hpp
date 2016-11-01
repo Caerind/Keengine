@@ -16,185 +16,186 @@
 namespace ke
 {
 
-class Log
-{
-    public:
-        enum LogType
-        {
-            Error,
-            Warning,
-            Info,
-        };
+	class Log
+	{
+	public:
+		enum LogType
+		{
+			Error,
+			Warning,
+			Info,
+		};
 
 		static Log& instance()
-        {
-            static Log* instance = new Log();
-            return *instance;
-        }
+		{
+			static Log* instance = new Log();
+			return *instance;
+		}
 
-        static void log(std::string const& message)
-        {
-            std::stringstream ss;
-            ss << getTime("[%x][%X]");
-            switch (instance().mType)
-            {
-                case LogType::Error:
-                    ss << "[ERROR] : ";
-                    break;
+		static void log(std::string const& message)
+		{
+			std::stringstream ss;
+			ss << getTime("[%x][%X]");
+			switch (instance().mType)
+			{
+			case LogType::Error:
+				ss << "[ERROR] : ";
+				break;
 
-                case LogType::Warning:
-                    ss << "[WARNING] : ";
-                    break;
+			case LogType::Warning:
+				ss << "[WARNING] : ";
+				break;
 
-                default:
-                    ss << "[INFO] : ";
-            }
-            ss << message;
+			default:
+				ss << "[INFO] : ";
+			}
+			ss << message;
 
-            if (instance().mConsole)
-            {
-                std::cout << ss.str() << std::endl;
-            }
-            if (instance().mFile.is_open())
-            {
-                instance().mFile << ss.str() << std::endl;
-            }
-            if (instance().mOnline)
-            {
-                Log::onlineLog(message);
-            }
+			if (instance().mConsole)
+			{
+				std::cout << ss.str() << std::endl;
+			}
+			if (instance().mFile.is_open())
+			{
+				instance().mFile << ss.str() << std::endl;
+			}
+			if (instance().mOnline)
+			{
+				Log::onlineLog(message);
+			}
 
-            instance().mType = Log::LogType::Info;
-        }
+			instance().mType = Log::LogType::Info;
+		}
 
 		static void onlineLog(std::string const& message)
-        {
-            std::stringstream stream;
-            stream << "action=insert";
-            if (instance().mType == LogType::Warning)
-                stream << "&type=warning";
-            else if (instance().mType == LogType::Error)
-                stream << "&type=error";
-            else
-                stream << "&type=info";
-            stream << "&address=" << sf::IpAddress::getPublicAddress().toString();
-            stream << "&content=" << message;
-            instance().mThread.setMessage(stream.str());
-        }
+		{
+			std::stringstream stream;
+			stream << "action=insert";
+			if (instance().mType == LogType::Warning)
+				stream << "&type=warning";
+			else if (instance().mType == LogType::Error)
+				stream << "&type=error";
+			else
+				stream << "&type=info";
+			stream << "&address=" << sf::IpAddress::getPublicAddress().toString();
+			stream << "&content=" << message;
+			if (instance().mOnline)
+			{
+				HttpThread::sendRequest(instance().mUrl, stream.str());
+			}
+		}
 
-        friend Log& operator<<(Log& log, std::string const& message)
-        {
-            Log::log(message);
-            return log;
-        }
+		friend Log& operator<<(Log& log, std::string const& message)
+		{
+			Log::log(message);
+			return log;
+		}
 
-        friend Log& operator<<(Log& log, LogType type)
-        {
+		friend Log& operator<<(Log& log, LogType type)
+		{
 			Log::setLogType(type);
-            return log;
-        }
+			return log;
+		}
 
-        static void info(std::string const& message)
-        {
-            instance().mType = LogType::Info;
-            log(message);
-        }
+		static void info(std::string const& message)
+		{
+			instance().mType = LogType::Info;
+			log(message);
+		}
 
-        static void warning(std::string const& message)
-        {
-            instance().mType = LogType::Warning;
-            log(message);
-        }
+		static void warning(std::string const& message)
+		{
+			instance().mType = LogType::Warning;
+			log(message);
+		}
 
-        static void error(std::string const& message)
-        {
-            instance().mType = LogType::Error;
-            log(message);
-        }
+		static void error(std::string const& message)
+		{
+			instance().mType = LogType::Error;
+			log(message);
+		}
 
-        static void setLogType(LogType type)
-        {
-            instance().mType = type;
-        }
+		static void setLogType(LogType type)
+		{
+			instance().mType = type;
+		}
 
 		static LogType getLogType()
 		{
-		    return instance().mType;
+			return instance().mType;
 		}
 
-        static bool openLog(std::string const& filename)
-        {
-            instance().mFilename = filename;
-            instance().mFile.close();
-            if (filename != "")
-            {
-                instance().mFile.open(filename,std::ios::app);
-            }
-            return instance().mFile.is_open();
-        }
+		static bool openLog(std::string const& filename)
+		{
+			instance().mFilename = filename;
+			instance().mFile.close();
+			if (filename != "")
+			{
+				instance().mFile.open(filename, std::ios::app);
+			}
+			return instance().mFile.is_open();
+		}
 
-        static std::string getFilename()
-        {
-            return instance().mFilename;
-        }
+		static std::string getFilename()
+		{
+			return instance().mFilename;
+		}
 
-        static bool isLogOpen()
-        {
-            return instance().mFile.is_open();
-        }
+		static bool isLogOpen()
+		{
+			return instance().mFile.is_open();
+		}
 
-        static void useConsole(bool use)
-        {
-            instance().mConsole = use;
-        }
+		static void useConsole(bool use)
+		{
+			instance().mConsole = use;
+		}
 
 		static bool usingConsole()
-        {
-            return instance().mConsole;
-        }
+		{
+			return instance().mConsole;
+		}
 
 		static void setOnline(std::string const& url)
 		{
-		    instance().mUrl = url;
-            if (url != "")
-            {
-                instance().mThread.setAddress(url);
-                instance().mOnline = true;
-            }
-            else
-            {
-                instance().mOnline = false;
-            }
-        }
-
-        static std::string getUrl()
-        {
-            return instance().mUrl;
-        }
+			instance().mUrl = url;
+			if (url != "")
+			{
+				instance().mOnline = true;
+			}
+			else
+			{
+				instance().mOnline = false;
+			}
+		}
 
 		static bool isOnline()
-        {
-            return instance().mOnline;
-        }
+		{
+			return instance().mOnline;
+		}
+
+		static const std::string& getUrl()
+		{
+			return instance().mUrl;
+		}
 
 	private:
-        Log() : mType(Log::LogType::Info), mFile(), mConsole(true), mOnline(false)
-        {
-        }
+		Log() : mType(Log::LogType::Info), mFile(), mConsole(true), mOnline(false)
+		{
+		}
 
 		~Log()
 		{
 		}
 
-    private:
-        LogType mType;
-        std::string mFilename;
-        std::ofstream mFile;
-        bool mConsole;
+	private:
+		LogType mType;
+		std::string mFilename;
+		std::ofstream mFile;
+		bool mConsole;
 		bool mOnline;
-		HttpThread mThread;
 		std::string mUrl;
-};
+	};
 
 } // namespace ke
 

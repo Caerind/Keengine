@@ -458,7 +458,7 @@ bool Tileset::loadFromNode(pugi::xml_node const& node, std::string const& mapPat
 		}
 	}
 
-	loadProperties(node);
+	loadFromXml(node);
 
 	getTexture();
 
@@ -539,7 +539,7 @@ bool Tileset::saveToNode(pugi::xml_node& node, bool fromTsx)
 		data.text().set(mImageData.data());
 	}
 
-	saveProperties(node);
+	saveToXml(node);
 
 	return true;
 }

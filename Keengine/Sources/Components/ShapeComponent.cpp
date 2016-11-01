@@ -8,17 +8,18 @@ ShapeComponent::ShapeComponent(Actor& actor)
 	, mPoints()
 	, mShape()
 {
-	mUpdatable = false;
-}
-
-void ShapeComponent::onRegister()
-{
 	mShape.setFillColor(sf::Color::Transparent);
 	mShape.setOutlineColor(sf::Color::Transparent);
 }
 
-void ShapeComponent::onUnregister()
+ShapeComponent::~ShapeComponent()
 {
+	onUnregister();
+}
+
+bool ShapeComponent::renderable() const
+{
+	return true;
 }
 
 void ShapeComponent::setPointCount(std::size_t points)

@@ -140,9 +140,9 @@ void Application::quit()
 	parser["script_path"] = getScriptPath();
     parser["show_debug"] = isDebugInfoVisible();
     sf::Color bColor = getBackgroundColor();
-    parser["background_color_r"] = bColor.r;
-    parser["background_color_g"] = bColor.g;
-    parser["background_color_b"] = bColor.b;
+    parser["background_color_r"] = static_cast<unsigned int>(bColor.r);
+    parser["background_color_g"] = static_cast<unsigned int>(bColor.g);
+    parser["background_color_b"] = static_cast<unsigned int>(bColor.b);
     parser["background_texture"] = getBackgroundTexture();
     sf::IntRect bRect = getBackgroundTextureRect();
     parser["background_rect_left"] = bRect.left;
@@ -919,7 +919,7 @@ void Application::removeDebugInfos()
 
 void Application::setBackgroundColor(sf::Color color)
 {
-    instance().mWindow.setBackgroundColor(color);
+    instance().mWindow.useBackgroundColor(color);
 }
 
 sf::Color Application::getBackgroundColor()
@@ -936,13 +936,13 @@ void Application::setBackgroundTexture(std::string const& filename, sf::IntRect 
             if (isResourceLoaded(filename))
             {
                 sf::Texture* tex = &getResource<Texture>(filename);
-                instance().mWindow.setBackgroundTexture(tex, rect);
+                instance().mWindow.useBackgroundScaledTexture(tex, rect);
                 instance().mBackgroundFilename = (tex != nullptr) ? filename : "";
                 return;
             }
         }
     }
-    instance().mWindow.setBackgroundTexture(nullptr, rect);
+    instance().mWindow.useBackgroundScaledTexture(nullptr, rect);
     instance().mBackgroundFilename = "";
 }
 
