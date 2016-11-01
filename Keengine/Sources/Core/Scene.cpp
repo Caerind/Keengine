@@ -23,7 +23,6 @@ Scene::Scene(const std::string& id, sf::Uint32 options)
 	{
 		mSceneTexture = std::unique_ptr<sf::RenderTexture>(new sf::RenderTexture());
 	}
-	getLog() << "t:" + toString(mOptions);
 	if (useLight())
 	{
 		initLights();
@@ -291,7 +290,10 @@ bool Scene::loadFromXml(const std::string& filepath)
 	{
 		xml.setNode(node);
 		Actor::Ptr actor = createActorFromFactory(std::string(node.name()));
-		actor->deserialize(xml);
+		if (actor != nullptr)
+		{
+			actor->deserialize(xml);
+		}
 	}
 	return true;
 }
@@ -304,7 +306,9 @@ void Scene::saveToXml(const std::string& filepath)
 	{
 		if (mActors[i] != nullptr && !mActors[i]->isMarkedForRemoval())
 		{
+			xml.create(mActors[i]->getType());
 			mActors[i]->serialize(xml);
+			xml.close();
 		}
 	}
 	xml.saveDocument();

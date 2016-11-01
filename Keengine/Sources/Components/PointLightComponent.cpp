@@ -137,21 +137,31 @@ bool PointLightComponent::isOn() const
 
 void PointLightComponent::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
-	serializer.save("id", getId());
-	serializer.save("pos", getPosition());
-	serializer.save("rot", getRotation());
-	serializer.save("sca", getScale());
-	serializer.save("z", getZ());
+	SceneComponent::serialize(serializer);
 	serializer.save("texture", getTexture());
 	serializer.save("color", getColor());
 	serializer.save("intensity", getIntensity());
 	serializer.save("on", isOn());
-	serializer.end();
 }
 
 bool PointLightComponent::deserialize(Serializer& serializer)
 {
+	std::string texture;
+	sf::Color color;
+	float intensity;
+	bool on;
+	if (SceneComponent::deserialize(serializer)
+		&& serializer.load("texture", texture)
+		&& serializer.load("color", color)
+		&& serializer.load("intensity", intensity)
+		&& serializer.load("on", on))
+	{
+		setTexture(texture);
+		setColor(color);
+		setIntensity(intensity);
+		setOn(on);
+		return true;
+	}
 	return false;
 }
 

@@ -34,14 +34,18 @@ void InputComponent::onUnregister()
 
 void InputComponent::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
-	serializer.save("id", getId());
+	Component::serialize(serializer);
 	serializer.save("priority", getPriority());
-	serializer.end();
 }
 
 bool InputComponent::deserialize(Serializer& serializer)
 {
+	float priority;
+	if (Component::deserialize(serializer) && serializer.load("priority", priority))
+	{
+		setPriority(priority);
+		return true;
+	}
 	return false;
 }
 

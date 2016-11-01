@@ -27,7 +27,7 @@ class Serializer
 
 
 		// Write
-		virtual void create(const std::string& identifier);
+		void create(const std::string& identifier);
 
 		template <typename T>
 		void save(const std::string& identifier, const T& value)
@@ -49,7 +49,7 @@ class Serializer
 			{
 				save("i" + std::to_string(i), vector.at(i));
 			}
-			end();
+			close();
 		}
 
 		template <typename T>
@@ -61,7 +61,7 @@ class Serializer
 			{
 				vector.at(i).serialize(*this, "i" + std::to_string(i));
 			}
-			end();
+			close();
 		}
 
 		template <typename K, typename T>
@@ -75,7 +75,7 @@ class Serializer
 				save("i" + std::to_string(i), std::string(toString<K>(itr->first) + "||" + toString<T>(itr->second)));
 				i++;
 			}
-			end();
+			close();
 		}
 
 		template <typename K, typename T>
@@ -91,7 +91,7 @@ class Serializer
 				itr->second.serialize(*this, key);
 				i++;
 			}
-			end();
+			close();
 		}
 
 		template <typename T>
@@ -100,7 +100,7 @@ class Serializer
 			t.serialize(*this, identifier);
 		}
 
-		virtual void end();
+		void close();
 
 		// Read
 		bool read(const std::string& identifier);
@@ -137,10 +137,10 @@ class Serializer
 						}
 						vector.push_back(value);
 					}
-					end();
+					close();
 					return ret;
 				}
-				end();
+				close();
 			}
 			return false;
 		}
@@ -163,10 +163,10 @@ class Serializer
 							ret = false;
 						}
 					}
-					end();
+					close();
 					return ret;
 				}
-				end();
+				close();
 			}
 			return false;
 		}
@@ -202,14 +202,14 @@ class Serializer
 						}
 						else
 						{
-							end();
+							close();
 							return false;
 						}
 					}
-					end();
+					close();
 					return ret;
 				}
-				end();
+				close();
 			}
 			return false;
 		}
@@ -239,14 +239,14 @@ class Serializer
 						}
 						else
 						{
-							end();
+							close();
 							return false;
 						}
 					}
-					end();
+					close();
 					return ret;
 				}
-				end();
+				close();
 			}
 			return false;
 		}
@@ -256,6 +256,8 @@ class Serializer
 		{
 			return t.deserialize(*this, identifier);
 		}
+
+		void end();
 
 	private:
 		std::string mFilename;

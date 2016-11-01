@@ -44,20 +44,21 @@ float PointComponent::getRadius() const
 
 void PointComponent::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
-	serializer.save("id", getId());
-	serializer.save("pos", getPosition());
-	serializer.save("rot", getRotation());
-	serializer.save("sca", getScale());
-	serializer.save("z", getZ());
-	serializer.save("visible", isVisible());
+	SceneComponent::serialize(serializer);
 	serializer.save("radius", getRadius());
 	serializer.save("color", getColor());
-	serializer.end();
 }
 
 bool PointComponent::deserialize(Serializer& serializer)
 {
+	float radius;
+	sf::Color color;
+	if (SceneComponent::deserialize(serializer) && serializer.load("radius", radius) && serializer.load("color", color))
+	{
+		setRadius(radius);
+		setColor(color);
+		return true;
+	}
 	return false;
 }
 

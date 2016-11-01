@@ -194,23 +194,35 @@ std::vector<sf::Vector2f> PhysicComponent::getPoints() const
 
 void PhysicComponent::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
-	serializer.save("id", getId());
-	serializer.save("pos", getPosition());
-	serializer.save("rot", getRotation());
-	serializer.save("sca", getScale());
-	serializer.save("z", getZ());
-	//serializer.save("visible", isVisible());
+	SceneComponent::serialize(serializer);
 	serializer.save("points", getPoints());
 	serializer.save("density", getDensity());
 	serializer.save("friction", getFriction());
 	serializer.save("restitution", getRestitution());
 	serializer.save("sensor", isSensor());
-	serializer.end();
 }
 
 bool PhysicComponent::deserialize(Serializer& serializer)
 {
+	std::vector<sf::Vector2f> points;
+	float density;
+	float friction;
+	float restitution;
+	bool sensor;
+	if (SceneComponent::deserialize(serializer)
+		&& serializer.load("points", points)
+		&& serializer.load("density", density)
+		&& serializer.load("friction", friction)
+		&& serializer.load("restitution", restitution)
+		&& serializer.load("sensor", sensor))
+	{
+		setPoints(points);
+		setDensity(density);
+		setFriction(friction);
+		setRestitution(restitution);
+		setSensor(sensor);
+		return true;
+	}
 	return false;
 }
 

@@ -660,14 +660,17 @@ sf::Vector2f LayerComponent::getVertexPosition(sf::Vector2i const & coords)
 
 void LayerComponent::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
-	serializer.save("id", getId());
-	// TODO : Save data
-	serializer.end();
+	SceneComponent::serialize(serializer);
+	// TODO : Save
 }
 
 bool LayerComponent::deserialize(Serializer& serializer)
 {
+	if (!SceneComponent::deserialize(serializer))
+	{
+		return false;
+	}
+	// TODO : Load
 	return false;
 }
 

@@ -201,19 +201,23 @@ void SceneComponent::detachComponent(SceneComponent* component)
 
 std::string SceneComponent::getParentId() const
 {
-	if (mParent != nullptr)
-	{
-		return mParent->getId();
-	}
-	return "";
+	return (mParent != nullptr) ? mParent->getId() : "";
 }
 
 bool SceneComponent::attachToParent(const std::string& parentId)
 {
-	SceneComponent::Ptr parent = mActor.getComponentT<SceneComponent>(parentId);
-	if (parent != nullptr)
+	if (parentId != "")
 	{
-		parent->attachComponent(this);
+		SceneComponent::Ptr parent = mActor.getComponentT<SceneComponent>(parentId);
+		if (parent != nullptr)
+		{
+			parent->attachComponent(this);
+			return true;
+		}
+	}
+	else
+	{
+		mActor.attachComponent(this);
 		return true;
 	}
 	return false;
@@ -221,19 +225,38 @@ bool SceneComponent::attachToParent(const std::string& parentId)
 
 void SceneComponent::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
-	serializer.save("id", getId());
+	Component::serialize(serializer);
+
+	serializer.save("visible", isVisible());
 	serializer.save("parent", getParentId());
 	serializer.save("pos", getPosition());
 	serializer.save("rot", getRotation());
 	serializer.save("sca", getScale());
 	serializer.save("z", getZ());
-	serializer.save("visible", isVisible());
-	serializer.end();
 }
 
 bool SceneComponent::deserialize(Serializer& serializer)
 {
+	std::string parentId;
+	sf::Vector2f pos;
+	float rot;
+	sf::Vector2f sca;
+	float z;
+	if (Component::deserialize(serializer)
+		&& serializer.load("visible", mVisible)
+		&& serializer.load("parent", parentId)
+		&& serializer.load("pos", pos)
+		&& serializer.load("rot", rot)
+		&& serializer.load("sca", sca)
+		&& serializer.load("z", z))
+	{
+		attachToParent(parentId);
+		setPosition(pos);
+		setRotation(rot);
+		setScale(sca);
+		setZ(z);
+		return true;
+	}
 	return false;
 }
 

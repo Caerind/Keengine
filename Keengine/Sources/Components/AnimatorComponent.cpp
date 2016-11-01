@@ -184,15 +184,11 @@ sf::FloatRect AnimatorComponent::getGlobalBounds()
 
 void AnimatorComponent::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
-	serializer.save("id", getId());
-	serializer.save("pos", getPosition());
-	serializer.save("rot", getRotation());
-	serializer.save("sca", getScale());
-	serializer.save("z", getZ());
-	serializer.save("visible", isVisible());
+	SceneComponent::serialize(serializer);
+
 	serializer.save("playing", isPlaying());
 	serializer.save("elapsed", getElapsedTime());
+
 	int i = 0;
 	for (auto itr = mAnimations.begin(); itr != mAnimations.end(); itr++)
 	{
@@ -208,17 +204,23 @@ void AnimatorComponent::serialize(Serializer& serializer)
 			serializer.save("texture", f.textureName);
 			serializer.save("textureRect", f.textureRect);
 			serializer.save("duration", f.duration);
-			serializer.end();
+			serializer.close();
 		}
-		serializer.end();
+		serializer.close();
 		i++;
 	}
-	serializer.end();
 }
 
 bool AnimatorComponent::deserialize(Serializer& serializer)
 {
-	return false;
+	if (!SceneComponent::deserialize(serializer) || !serializer.load("playing", mPlaying) || !serializer.load("elapsed", mTimeElapsed))
+	{
+		return false;
+	}
+
+	// TODO : Deserialize animations
+
+	return true;
 }
 
 void AnimatorComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)

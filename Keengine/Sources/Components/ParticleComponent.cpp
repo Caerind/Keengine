@@ -195,15 +195,17 @@ void ParticleComponent::emitParticles(std::size_t particleAmount)
 
 void ParticleComponent::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
-	serializer.save("id", getId());
+	SceneComponent::serialize(serializer);
 	// TODO : Save particles
 	// TODO : Save distribution
-	serializer.end();
 }
 
 bool ParticleComponent::deserialize(Serializer& serializer)
 {
+	if (!SceneComponent::deserialize(serializer))
+	{
+		return false;
+	}
 	return false;
 }
 

@@ -78,21 +78,27 @@ sf::FloatRect SpriteComponent::getGlobalBounds()
 
 void SpriteComponent::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
-	serializer.save("id", getId());
-	serializer.save("pos", getPosition());
-	serializer.save("rot", getRotation());
-	serializer.save("sca", getScale());
-	serializer.save("z", getZ());
-	serializer.save("visible", isVisible());
+	SceneComponent::serialize(serializer);
 	serializer.save("texture", getTexture());
 	serializer.save("textureRect", getTextureRect());
 	serializer.save("color", getColor());
-	serializer.end();
 }
 
 bool SpriteComponent::deserialize(Serializer& serializer)
 {
+	std::string texture;
+	sf::IntRect textureRect;
+	sf::Color color;
+	if (SceneComponent::deserialize(serializer)
+		&& serializer.load("texture", texture)
+		&& serializer.load("textureRect", textureRect)
+		&& serializer.load("color", color))
+	{
+		setTexture(texture);
+		setTextureRect(textureRect);
+		setColor(color);
+		return true;
+	}
 	return false;
 }
 

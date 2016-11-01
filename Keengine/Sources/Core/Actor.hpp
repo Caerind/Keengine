@@ -75,14 +75,17 @@ class Actor : public Serializable
 		std::shared_ptr<T> createComponent(Args&& ... args)
 		{
 			std::shared_ptr<T> component = std::make_shared<T>(*this, std::forward<Args>(args)...);
-			mComponents.push_back(component);
 			component->setId(ke::decToHex(mComponentIdCounter++));
-			component->onRegister();
+			component->onRegister(); 
+			mComponents.push_back(component);
 			return component;
 		}
+		Component::Ptr createComponentFromFactory(const std::string& type);
 		void removeComponent(Component::Ptr component);
 		void attachComponent(SceneComponent::Ptr component);
+		void attachComponent(SceneComponent* component);
 		void detachComponent(SceneComponent::Ptr component);
+		void detachComponent(SceneComponent* component);
 		std::size_t getComponentCount() const;
 		Component::Ptr getComponent(std::size_t index);
 		Component::Ptr getComponent(const std::string& id);
@@ -141,6 +144,22 @@ class Actor : public Serializable
 		// Serialization
 		virtual void serialize(Serializer& serializer);
 		virtual bool deserialize(Serializer& serializer);
+		void serializeComponent(Serializer& serializer, Component::Ptr component);
+		template <typename T>
+		std::shared_ptr<T> deserializeComponent(Serializer& serializer)
+		{
+			if (serializer.read(T::getStaticType()))
+			{
+				Component::Ptr component = createComponentFromFactory(T::getStaticType());
+				if (component != nullptr)
+				{
+					component->deserialize(serializer);
+					serializer.end();
+					return std::dynamic_pointer_cast<T>(component);
+				}
+			}
+			return nullptr;
+		}
 
 	private:
 		SceneComponent mRoot; ///< The root for scene components

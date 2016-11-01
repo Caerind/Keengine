@@ -102,22 +102,31 @@ std::vector<sf::Vector2f> ShapeComponent::getPoints() const
 
 void ShapeComponent::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
-	serializer.save("id", getId());
-	serializer.save("pos", getPosition());
-	serializer.save("rot", getRotation());
-	serializer.save("sca", getScale());
-	serializer.save("z", getZ());
-	serializer.save("visible", isVisible());
+	SceneComponent::serialize(serializer);
 	serializer.save("fillColor", getFillColor());
 	serializer.save("outColor", getOutlineColor());
 	serializer.save("outThick", getOutlineThickness());
 	serializer.save("points", getPoints());
-	serializer.end();
 }
 
 bool ShapeComponent::deserialize(Serializer& serializer)
 {
+	sf::Color fillColor;
+	sf::Color outColor;
+	float outThick;
+	std::vector<sf::Vector2f> points;
+	if (SceneComponent::deserialize(serializer)
+		&& serializer.load("fillColor", fillColor)
+		&& serializer.load("outColor", outColor)
+		&& serializer.load("outThick", outThick)
+		&& serializer.load("points", points))
+	{
+		setFillColor(fillColor);
+		setOutlineColor(outColor);
+		setOutlineThickness(outThick);
+		setPoints(points);
+		return true;
+	}
 	return false;
 }
 

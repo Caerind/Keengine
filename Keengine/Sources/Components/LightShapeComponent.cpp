@@ -129,19 +129,21 @@ bool LightShapeComponent::isOn() const
 
 void LightShapeComponent::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
-	serializer.save("id", getId());
-	serializer.save("pos", getPosition());
-	serializer.save("rot", getRotation());
-	serializer.save("sca", getScale());
-	serializer.save("z", getZ());
+	SceneComponent::serialize(serializer);
 	serializer.save("on", isOn());
 	serializer.save("points", getPoints());
-	serializer.end();
 }
 
 bool LightShapeComponent::deserialize(Serializer& serializer)
 {
+	bool on;
+	std::vector<sf::Vector2f> points;
+	if (SceneComponent::deserialize(serializer) && serializer.load("on", on) && serializer.load("points", points))
+	{
+		setOn(on);
+		setPoints(points);
+		return true;
+	}
 	return false;
 }
 

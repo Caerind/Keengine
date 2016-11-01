@@ -58,6 +58,7 @@
     <None Include="Example\map.tmx">
       <Filter>Example</Filter>
     </None>
+    <None Include="..\NOTES.md" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Example\sfml.png">
@@ -238,9 +239,6 @@
     </ClCompile>
     <ClCompile Include="Sources\Maths\Random.cpp">
       <Filter>Sources\Maths</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\System\Time.cpp">
-      <Filter>Sources\System</Filter>
     </ClCompile>
     <ClCompile Include="Sources\System\Compression.cpp">
       <Filter>Sources\System</Filter>
@@ -491,6 +489,9 @@
     <ClCompile Include="Sources\System\Background.cpp">
       <Filter>Sources\System</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\System\DateTime.cpp">
+      <Filter>Sources\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -728,9 +729,6 @@
       <Filter>Sources\Maths</Filter>
     </ClInclude>
     <ClInclude Include="Sources\System\ScriptManager.hpp">
-      <Filter>Sources\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\System\Time.hpp">
       <Filter>Sources\System</Filter>
     </ClInclude>
     <ClInclude Include="Sources\System\Compression.hpp">
@@ -1010,6 +1008,9 @@
       <Filter>Sources\Components</Filter>
     </ClInclude>
     <ClInclude Include="Sources\System\Background.hpp">
+      <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\System\DateTime.hpp">
       <Filter>Sources\System</Filter>
     </ClInclude>
   </ItemGroup>

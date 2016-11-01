@@ -101,7 +101,7 @@ void Application::init(std::string const& pathToSettings)
 	#endif
 
 	Log::instance() << Log::Info << "Keengine::Application started";
-    Log::instance() << Log::Info << std::string("Current time is " + ke::getTime("%b %d, %Y %I:%M:%S %p"));
+    Log::instance() << Log::Info << std::string("Current time is " + DateTime().toString("%b %d, %Y %I:%M:%S %p"));
 }
 
 void Application::quit()

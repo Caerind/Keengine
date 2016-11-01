@@ -76,7 +76,7 @@ void Serializer::create(const std::string& identifier)
 	mActualNode = mActualNode.append_child(identifier.c_str());
 }
 
-void Serializer::end()
+void Serializer::close()
 {
 	mActualNode = mActualNode.parent();
 }
@@ -89,6 +89,13 @@ bool Serializer::read(const std::string& identifier)
 		return true;
 	}
 	return false;
+}
+
+void Serializer::end()
+{
+	pugi::xml_node rem = mActualNode;
+	mActualNode = mActualNode.parent();
+	mActualNode.remove_child(rem);
 }
 
 } // namespace ke

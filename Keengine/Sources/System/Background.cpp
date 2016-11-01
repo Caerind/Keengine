@@ -1,8 +1,5 @@
 #include "Background.hpp"
 
-#include "Log.hpp"
-#include "String.hpp"
-
 namespace ke
 {
 
@@ -65,7 +62,6 @@ void Background::draw(sf::RenderTarget& target)
 	{
 		mSize = s;
 		update();
-		Log::instance() << toString(mUsage);
 	}
 
 	sf::Transform viewTransform;

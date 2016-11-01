@@ -3,9 +3,6 @@
 
 #include <SFML/Graphics/ConvexShape.hpp>
 
-#include "../ExtLibs/Box2D/Box2D.h"
-#include "../ExtLibs/LetThereBeLight.hpp"
-
 #include "../Core/SceneComponent.hpp"
 
 namespace ke

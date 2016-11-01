@@ -165,14 +165,13 @@ Application& Component::getApplication()
 
 void Component::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
 	serializer.save("id", getId());
-	serializer.end();
+	serializer.save("up", isUpdatable());
 }
 
 bool Component::deserialize(Serializer& serializer)
 {
-	return false;
+	return (serializer.load("id", mId) && serializer.load("up", mUpdatable));
 }
 
 } // namespace ke

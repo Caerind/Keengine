@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\NOTES.md" />
     <None Include="..\README.md" />
     <None Include="Example\application_settings.ini" />
     <None Include="Example\English.lang" />
@@ -172,7 +173,7 @@
     <ClCompile Include="Sources\System\Serializer.cpp" />
     <ClCompile Include="Sources\System\Serializable.cpp" />
     <ClCompile Include="Sources\System\String.cpp" />
-    <ClCompile Include="Sources\System\Time.cpp" />
+    <ClCompile Include="Sources\System\DateTime.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp" />
@@ -345,7 +346,7 @@
     <ClInclude Include="Sources\System\Serializable.hpp" />
     <ClInclude Include="Sources\System\SmartPool.hpp" />
     <ClInclude Include="Sources\System\String.hpp" />
-    <ClInclude Include="Sources\System\Time.hpp" />
+    <ClInclude Include="Sources\System\DateTime.hpp" />
     <ClInclude Include="Sources\System\Type.hpp" />
     <ClInclude Include="Sources\System\Variant.hpp" />
   </ItemGroup>

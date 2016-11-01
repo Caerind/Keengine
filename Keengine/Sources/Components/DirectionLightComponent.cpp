@@ -94,15 +94,24 @@ sf::Vector2f DirectionLightComponent::getDirection() const
 
 void DirectionLightComponent::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
-	serializer.save("id", getId());
+	Component::serialize(serializer);
+
 	serializer.save("angle", getAngle());
 	serializer.save("color", getColor());
-	serializer.end();
 }
 
 bool DirectionLightComponent::deserialize(Serializer& serializer)
 {
+	float angle;
+	sf::Color color;
+
+	if (Component::deserialize(serializer) && serializer.load("angle", angle) && serializer.load("color", color))
+	{
+		setAngle(angle);
+		setColor(color);
+		return true;
+	}
+
 	return false;
 }
 

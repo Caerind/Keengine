@@ -93,24 +93,39 @@ float TextComponent::getOutlineThickness() const
 
 void TextComponent::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
-	serializer.save("id", getId());
-	serializer.save("pos", getPosition());
-	serializer.save("rot", getRotation());
-	serializer.save("sca", getScale());
-	serializer.save("z", getZ());
-	serializer.save("visible", isVisible());
+	SceneComponent::serialize(serializer);
 	serializer.save("font", getFont());
 	serializer.save("size", getSize());
 	serializer.save("string", getString());
 	serializer.save("fillColor", getFillColor());
 	serializer.save("outColor", getOutlineColor());
 	serializer.save("outThick", getOutlineThickness());
-	serializer.end();
 }
 
 bool TextComponent::deserialize(Serializer& serializer)
 {
+	std::string font;
+	unsigned int size;
+	std::string string;
+	sf::Color fillColor;
+	sf::Color outColor;
+	float outThick;
+	if (SceneComponent::deserialize(serializer)
+		&& serializer.load("font", font)
+		&& serializer.load("size", size)
+		&& serializer.load("string", string)
+		&& serializer.load("fillColor", fillColor)
+		&& serializer.load("outColor", outColor)
+		&& serializer.load("outThick", outThick))
+	{
+		setFont(font);
+		setSize(size);
+		setString(string);
+		setFillColor(fillColor);
+		setOutlineColor(outColor);
+		setOutlineThickness(outThick);
+		return true;
+	}
 	return false;
 }
 

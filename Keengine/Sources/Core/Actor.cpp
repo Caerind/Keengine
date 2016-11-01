@@ -16,6 +16,7 @@ Actor::Actor(Scene& scene)
 	, mScene(scene)
 	, mBody(nullptr)
 {
+	mRoot.onRegister();
 }
 
 Actor::~Actor()
@@ -185,6 +186,15 @@ void Actor::render(sf::RenderTarget& target)
 	}
 }
 
+Component::Ptr Actor::createComponentFromFactory(const std::string & type)
+{
+	Component::Ptr component = Factories::createComponent(*this, type);
+	component->setId(ke::decToHex<std::size_t>(mComponentIdCounter++));
+	component->onRegister();
+	mComponents.push_back(component);
+	return component;
+}
+
 void Actor::removeComponent(Component::Ptr component)
 {
 	std::size_t size = mComponents.size();
@@ -206,9 +216,19 @@ void Actor::attachComponent(SceneComponent::Ptr component)
 	mRoot.attachComponent(component.get());
 }
 
+void Actor::attachComponent(SceneComponent* component)
+{
+	mRoot.attachComponent(component);
+}
+
 void Actor::detachComponent(SceneComponent::Ptr component)
 {
 	mRoot.detachComponent(component.get());
+}
+
+void Actor::detachComponent(SceneComponent* component)
+{
+	mRoot.detachComponent(component);
 }
 
 std::size_t Actor::getComponentCount() const
@@ -467,20 +487,49 @@ Application& Actor::getApplication()
 
 void Actor::serialize(Serializer& serializer)
 {
-	serializer.create(getType());
 	serializer.save("id", getId());
 	// TODO : Save more data (physic, ...)
+
 	for (std::size_t i = 0; i < mComponents.size(); i++)
 	{
-		mComponents[i]->serialize(serializer);
+	    serializeComponent(serializer, mComponents[i]);
 	}
-	serializer.end();
+
+	// Serialize components
+	//for (std::size_t i = 0; i < mComponents.size(); i++)
+	//{
+	//    serializeComponent(serializer, mComponents[i]);
+	//}
+
+	//serializeComponent(serializer, myComponent);
 }
 
 bool Actor::deserialize(Serializer& serializer)
 {
-	// TODO : Deserialization
-	return false;
+	serializer.load("id", mId);
+	// TODO : Load more data (physic, ...)
+
+	// Deserialize components
+	//pugi::xml_node& root = serializer.getNode();
+	//for (pugi::xml_node node : root.children())
+	//{
+	//	serializer.setNode(node);
+	//	Component::Ptr component = createComponentFromFactory(std::string(node.name()));
+	//	component->deserialize(serializer);
+	//}
+
+	//myComponent = deserializeComponent<TypeOfMyComponent>(serializer);
+	return true;
+}
+
+void Actor::serializeComponent(Serializer& serializer, Component::Ptr component)
+{
+	if (component != nullptr && component->isRegistered())
+	{
+		serializer.create(component->getType());
+		component->serialize(serializer);
+		serializer.close();
+	}
 }
 
 } // namespace ke

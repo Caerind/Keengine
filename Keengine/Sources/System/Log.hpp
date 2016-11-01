@@ -11,7 +11,7 @@
 #include <SFML/Network/IpAddress.hpp>
 
 #include "HttpThread.hpp"
-#include "Time.hpp"
+#include "DateTime.hpp"
 
 namespace ke
 {
@@ -35,7 +35,7 @@ namespace ke
 		static void log(std::string const& message)
 		{
 			std::stringstream ss;
-			ss << getTime("[%x][%X]");
+			ss << DateTime().toString("[%x][%X]");
 			switch (instance().mType)
 			{
 			case LogType::Error:
