@@ -29,7 +29,7 @@ void MyActor::initializePhysic()
 
 void MyActor::initializeComponents()
 {
-	mA = createComponent<ke::PointComponent>();
+	mA = createComponent<ke::NodeComponent>();
 	attachComponent(mA);
 
 	mB = createComponent<ke::AnimatorComponent>();

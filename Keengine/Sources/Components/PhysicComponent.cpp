@@ -74,20 +74,84 @@ sf::Vector2f PhysicComponent::getPoint(std::size_t index) const
 
 sf::FloatRect PhysicComponent::getLocalBounds()
 {
+	sf::FloatRect bounds;
 	if (mFixture != nullptr)
 	{
-		// TODO : Rect from points
+		for (std::size_t i = 0; i < mPoints.size(); i++)
+		{
+			sf::Vector2f p = getTransform().transformPoint(mPoints[i]);
+			if (i == 0)
+			{
+				bounds.left = p.x;
+				bounds.top = p.y;
+				bounds.width = p.x;
+				bounds.height = p.y;
+			}
+			else
+			{
+				if (p.x < bounds.left)
+				{
+					bounds.left = p.x;
+				}
+				if (p.y < bounds.top)
+				{
+					bounds.top = p.y;
+				}
+				if (p.x > bounds.width)
+				{
+					bounds.width = p.x;
+				}
+				if (p.y > bounds.height)
+				{
+					bounds.height = p.y;
+				}
+			}
+		}
+		bounds.width -= bounds.left;
+		bounds.height -= bounds.top;
 	}
-	return sf::FloatRect();
+	return bounds;
 }
 
 sf::FloatRect PhysicComponent::getGlobalBounds()
 {
+	sf::FloatRect bounds;
 	if (mFixture != nullptr)
 	{
-		// TODO : Rect from points
+		for (std::size_t i = 0; i < mPoints.size(); i++)
+		{
+			sf::Vector2f p = getWorldTransform().transformPoint(mPoints[i]);
+			if (i == 0)
+			{
+				bounds.left = p.x;
+				bounds.top = p.y;
+				bounds.width = p.x;
+				bounds.height = p.y;
+			}
+			else
+			{
+				if (p.x < bounds.left)
+				{
+					bounds.left = p.x;
+				}
+				if (p.y < bounds.top)
+				{
+					bounds.top = p.y;
+				}
+				if (p.x > bounds.width)
+				{
+					bounds.width = p.x;
+				}
+				if (p.y > bounds.height)
+				{
+					bounds.height = p.y;
+				}
+			}
+		}
+		bounds.width -= bounds.left;
+		bounds.height -= bounds.top;
 	}
-	return sf::FloatRect();
+	return bounds;
 }
 
 b2Fixture* PhysicComponent::getFixture()
@@ -226,24 +290,28 @@ bool PhysicComponent::deserialize(Serializer& serializer)
 	return false;
 }
 
-void PhysicComponent::onTransformUpdated()
+void PhysicComponent::onTransformNotified()
 {
-	// TODO : Update Transform
+	// TODO : Update Physic Shape
+	// Problem is that onTransformNotified is called no matter which part change (ie even if Actor move)
+	// But the Fixture position is relative to the Body (ie Actor)
+	// So we need to update it ONLY if the transform of the component changes
 	//updatePhysicShape();
 }
 
 void PhysicComponent::updatePhysicShape()
 {
-	if (mFixture != nullptr)
+	std::size_t count = mPoints.size();
+	if (mFixture != nullptr && count >= 3)
 	{
 		b2PolygonShape* polygon = getPolygonShape();
 		if (polygon != nullptr)
 		{
 			b2Vec2 vertices[8];
-			std::size_t count = mPoints.size();
 			for (std::size_t i = 0; i < count; i++)
 			{
 				// TODO : Transform Points to be Actor relative
+				// What if : Actor <-> NodeComponent <-> PhysicComponent ?
 				vertices[i] = mPoints[i] * ke::Physic::conv;
 			}
 			polygon->Set(vertices, count);

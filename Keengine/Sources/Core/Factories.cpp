@@ -17,8 +17,8 @@ void Factories::registerAll()
 		registerComponent<DirectionLightComponent>();
 		registerComponent<InputComponent>();
 		registerComponent<LayerComponent>();
+		registerComponent<NodeComponent>();
 		registerComponent<ParticleComponent>();
-		registerComponent<PointComponent>();
 		registerComponent<PointLightComponent>();
 		registerComponent<ShapeComponent>();
 		registerComponent<SpriteComponent>();

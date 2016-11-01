@@ -53,7 +53,7 @@ class PhysicComponent : public SceneComponent
 		virtual bool deserialize(Serializer& serializer);
 
 	private:
-		virtual void onTransformUpdated();
+		virtual void onTransformNotified();
 		void updatePhysicShape();
 
 	private:

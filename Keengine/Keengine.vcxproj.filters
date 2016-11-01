@@ -105,9 +105,6 @@
     <ClCompile Include="Sources\Core\Component.cpp">
       <Filter>Sources\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Components\PointComponent.cpp">
-      <Filter>Sources\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Components\SpriteComponent.cpp">
       <Filter>Sources\Components</Filter>
     </ClCompile>
@@ -492,6 +489,9 @@
     <ClCompile Include="Sources\System\DateTime.cpp">
       <Filter>Sources\System</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Components\NodeComponent.cpp">
+      <Filter>Sources\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -522,9 +522,6 @@
       <Filter>Sources\Core</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Components\SpriteComponent.hpp">
-      <Filter>Sources\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Components\PointComponent.hpp">
       <Filter>Sources\Components</Filter>
     </ClInclude>
     <ClInclude Include="Sources\ExtLibs\pugixml.hpp">
@@ -1012,6 +1009,9 @@
     </ClInclude>
     <ClInclude Include="Sources\System\DateTime.hpp">
       <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Components\NodeComponent.hpp">
+      <Filter>Sources\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

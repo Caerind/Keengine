@@ -57,7 +57,7 @@
     <ClCompile Include="Sources\Components\LightShapeComponent.cpp" />
     <ClCompile Include="Sources\Components\ParticleComponent.cpp" />
     <ClCompile Include="Sources\Components\PhysicComponent.cpp" />
-    <ClCompile Include="Sources\Components\PointComponent.cpp" />
+    <ClCompile Include="Sources\Components\NodeComponent.cpp" />
     <ClCompile Include="Sources\Components\PointLightComponent.cpp" />
     <ClCompile Include="Sources\Components\ShapeComponent.cpp" />
     <ClCompile Include="Sources\Components\SpriteComponent.cpp" />
@@ -196,7 +196,7 @@
     <ClInclude Include="Sources\Components\LightShapeComponent.hpp" />
     <ClInclude Include="Sources\Components\ParticleComponent.hpp" />
     <ClInclude Include="Sources\Components\PhysicComponent.hpp" />
-    <ClInclude Include="Sources\Components\PointComponent.hpp" />
+    <ClInclude Include="Sources\Components\NodeComponent.hpp" />
     <ClInclude Include="Sources\Components\PointLightComponent.hpp" />
     <ClInclude Include="Sources\Components\ShapeComponent.hpp" />
     <ClInclude Include="Sources\Components\SpriteComponent.hpp" />

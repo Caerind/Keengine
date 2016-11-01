@@ -1,5 +1,5 @@
-#ifndef KE_POINTCOMPONENT_HPP
-#define KE_POINTCOMPONENT_HPP
+#ifndef KE_NODECOMPONENT_HPP
+#define KE_NODECOMPONENT_HPP
 
 #include <SFML/Graphics/CircleShape.hpp>
 
@@ -8,15 +8,15 @@
 namespace ke
 {
 
-class PointComponent : public SceneComponent
+class NodeComponent : public SceneComponent
 {
     public:
-		typedef std::shared_ptr<PointComponent> Ptr;
+		typedef std::shared_ptr<NodeComponent> Ptr;
 
-		TYPE(PointComponent)
+		TYPE(NodeComponent)
 
-        PointComponent(Actor& actor);
-		virtual ~PointComponent();
+		NodeComponent(Actor& actor);
+		virtual ~NodeComponent();
 
 		virtual bool renderable() const;
 
@@ -38,4 +38,4 @@ class PointComponent : public SceneComponent
 
 } // namespace ke
 
-#endif // KE_POINTCOMPONENT_HPP
+#endif // KE_NODECOMPONENT_HPP

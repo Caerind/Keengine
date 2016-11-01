@@ -1,55 +1,55 @@
-#include "PointComponent.hpp"
+#include "NodeComponent.hpp"
 #include "../Core/Scene.hpp"
 
 namespace ke
 {
 
-PointComponent::PointComponent(Actor& actor)
+NodeComponent::NodeComponent(Actor& actor)
 	: SceneComponent(actor)
 {
-    setRadius(2.f);
-    setColor(sf::Color::Red);
+    setRadius(0.f);
+    setColor(sf::Color::Transparent);
 }
 
-PointComponent::~PointComponent()
+NodeComponent::~NodeComponent()
 {
 	onUnregister();
 }
 
-bool PointComponent::renderable() const
+bool NodeComponent::renderable() const
 {
 	return true;
 }
 
-void PointComponent::setColor(sf::Color const& color)
+void NodeComponent::setColor(sf::Color const& color)
 {
     mPoint.setFillColor(color);
 }
 
-sf::Color PointComponent::getColor() const
+sf::Color NodeComponent::getColor() const
 {
     return mPoint.getFillColor();
 }
 
-void PointComponent::setRadius(float radius)
+void NodeComponent::setRadius(float radius)
 {
     mPoint.setRadius(radius);
     mPoint.setOrigin(radius, radius);
 }
 
-float PointComponent::getRadius() const
+float NodeComponent::getRadius() const
 {
     return mPoint.getRadius();
 }
 
-void PointComponent::serialize(Serializer& serializer)
+void NodeComponent::serialize(Serializer& serializer)
 {
 	SceneComponent::serialize(serializer);
 	serializer.save("radius", getRadius());
 	serializer.save("color", getColor());
 }
 
-bool PointComponent::deserialize(Serializer& serializer)
+bool NodeComponent::deserialize(Serializer& serializer)
 {
 	float radius;
 	sf::Color color;
@@ -62,9 +62,12 @@ bool PointComponent::deserialize(Serializer& serializer)
 	return false;
 }
 
-void PointComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)
+void NodeComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)
 {
-    target.draw(mPoint, states);
+	if (getRadius() > 0.f)
+	{
+		target.draw(mPoint, states);
+	}
 }
 
 } // namespace ke

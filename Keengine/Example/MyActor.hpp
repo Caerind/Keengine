@@ -18,7 +18,7 @@ class MyActor : public ke::Actor
 		void update(sf::Time dt);
 
     private:
-		ke::PointComponent::Ptr mA;
+		ke::NodeComponent::Ptr mA;
 		ke::AnimatorComponent::Ptr mB;
 		ke::PointLightComponent::Ptr mC;
 		ke::InputComponent::Ptr mD;
