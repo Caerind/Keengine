@@ -60,17 +60,17 @@ void Scene::update(sf::Time dt)
 {
 	for (std::size_t i = 0; i < mActors.size(); i++)
 	{
-		if (mActors[i] != nullptr)
+		if (mActors[i] != nullptr && !mActors[i]->isMarkedForRemoval())
 		{
-			if (!mActors[i]->isMarkedForRemoval())
+			if (mActors[i]->isUpdatable())
 			{
 				mActors[i]->updateComponents(dt);
 				mActors[i]->update(dt);
+			}
 
-				if (usePhysic())
-				{
-					mActors[i]->prePhysicUpdate();
-				}
+			if (usePhysic())
+			{
+				mActors[i]->prePhysicUpdate();
 			}
 		}
 	}
@@ -285,13 +285,17 @@ bool Scene::loadFromXml(const std::string& filepath)
 		getLog() << ke::Log::Error << "Cannot open scene : " + filename;
 		return false;
 	}
+	xml.load("count", mActorIdCounter);
 	for (pugi::xml_node node : xml.getRootNode().children())
 	{
 		xml.setNode(node);
-		Actor::Ptr actor = createActorFromFactory(std::string(node.name()));
+		Actor::Ptr actor = Factories::createActor(*this, std::string(node.name()));
 		if (actor != nullptr)
 		{
+			actor->initializePhysic();
 			actor->deserialize(xml);
+			actor->initialize();
+			mActors.push_back(actor);
 		}
 	}
 	return true;
@@ -301,6 +305,7 @@ void Scene::saveToXml(const std::string& filepath)
 {
 	Serializer xml;
 	xml.openDocument(filepath + "scene" + ((mId != "") ? "-" + mId : "") + ".xml", true, "Scene");
+	xml.save("count", mActorIdCounter);
 	for (std::size_t i = 0; i < mActors.size(); i++)
 	{
 		if (mActors[i] != nullptr && !mActors[i]->isMarkedForRemoval())

@@ -56,7 +56,9 @@ class Actor : public Serializable
 		void setZ(float z);
 		void moveZ(float z);
 
-		// Visibility
+		// Updatable & Visibility
+		bool isUpdatable() const;
+		void setUpdatable(bool updatable);
 		bool isVisible() const;
 		void setVisible(bool visible);
 
@@ -146,15 +148,18 @@ class Actor : public Serializable
 		virtual void serialize(Serializer& serializer);
 		virtual bool deserialize(Serializer& serializer);
 		void serializeComponent(Serializer& serializer, Component::Ptr component);
+		bool deserializeComponent(Serializer& serializer, Component::Ptr component);
 		template <typename T>
 		std::shared_ptr<T> deserializeComponent(Serializer& serializer)
 		{
 			if (serializer.read(T::getStaticType()))
 			{
-				Component::Ptr component = createComponentFromFactory(T::getStaticType());
+				Component::Ptr component = Factories::createComponent(*this, T::getStaticType());
 				if (component != nullptr)
 				{
+					component->onRegister();
 					component->deserialize(serializer);
+					mComponents.push_back(component);
 					serializer.end();
 					return std::dynamic_pointer_cast<T>(component);
 				}

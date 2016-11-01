@@ -128,6 +128,16 @@ void Actor::moveZ(float z)
 	mRoot.moveZ(z);
 }
 
+bool Actor::isUpdatable() const
+{
+	return mRoot.isUpdatable();
+}
+
+void Actor::setUpdatable(bool updatable)
+{
+	mRoot.setUpdatable(updatable);
+}
+
 bool Actor::isVisible() const
 {
 	return mRoot.isVisible();
@@ -190,9 +200,12 @@ void Actor::renderComponents(sf::RenderTarget& target)
 Component::Ptr Actor::createComponentFromFactory(const std::string & type)
 {
 	Component::Ptr component = Factories::createComponent(*this, type);
-	component->setId(ke::decToHex<std::size_t>(mComponentIdCounter++));
-	component->onRegister();
-	mComponents.push_back(component);
+	if (component != nullptr)
+	{
+		component->setId(ke::decToHex<std::size_t>(mComponentIdCounter++));
+		component->onRegister();
+		mComponents.push_back(component);
+	}
 	return component;
 }
 
@@ -489,38 +502,73 @@ Application& Actor::getApplication()
 void Actor::serialize(Serializer& serializer)
 {
 	serializer.save("id", getId());
-	// TODO : Save more data (physic, ...)
-
-	for (std::size_t i = 0; i < mComponents.size(); i++)
-	{
-	    serializeComponent(serializer, mComponents[i]);
-	}
-
-	// Serialize components
-	//for (std::size_t i = 0; i < mComponents.size(); i++)
-	//{
-	//    serializeComponent(serializer, mComponents[i]);
-	//}
-
-	//serializeComponent(serializer, myComponent);
+	serializer.save("up", isUpdatable());
+	serializer.save("visible", isVisible());
+	serializer.save("pos", getPosition());
+	serializer.save("rot", getRotation());
+	serializer.save("sca", getScale());
+	serializer.save("z", getZ());
+	serializer.save("vel", getVelocity());
+	serializer.save("angv", getAngularVelocity());
+	serializer.save("ptype", static_cast<unsigned int>(getPhysicType()));
+	serializer.save("frot", isFixedRotation());
+	serializer.save("ldamp", getLinearDamping());
+	serializer.save("adamp", getAngularDamping());
+	serializer.save("gsca", getGravityScale());
+	serializer.save("bul", isPhysicBullet());
+	serializer.save("count", mComponentIdCounter);
 }
 
 bool Actor::deserialize(Serializer& serializer)
 {
-	serializer.load("id", mId);
-	// TODO : Load more data (physic, ...)
-
-	// Deserialize components
-	//pugi::xml_node& root = serializer.getNode();
-	//for (pugi::xml_node node : root.children())
-	//{
-	//	serializer.setNode(node);
-	//	Component::Ptr component = createComponentFromFactory(std::string(node.name()));
-	//	component->deserialize(serializer);
-	//}
-
-	//myComponent = deserializeComponent<TypeOfMyComponent>(serializer);
-	return true;
+	bool up;
+	bool visible;
+	sf::Vector2f pos;
+	float rot;
+	sf::Vector2f sca;
+	float z;
+	sf::Vector2f vel;
+	float angv;
+	unsigned int ptype;
+	bool frot;
+	float ldamp;
+	float adamp;
+	float gsca;
+	bool bul;
+	if (serializer.load("id", mId)
+		&& serializer.load("up", up)
+		&& serializer.load("visible", visible)
+		&& serializer.load("pos", pos)
+		&& serializer.load("rot", rot)
+		&& serializer.load("sca", sca)
+		&& serializer.load("z", z)
+		&& serializer.load("vel", vel)
+		&& serializer.load("angv", angv)
+		&& serializer.load("ptype", ptype)
+		&& serializer.load("frot", frot)
+		&& serializer.load("ldamp", ldamp)
+		&& serializer.load("adamp", adamp)
+		&& serializer.load("gsca", gsca)
+		&& serializer.load("bul", bul)
+		&& serializer.load("count", mComponentIdCounter))
+	{
+		setUpdatable(up);
+		setVisible(visible);
+		setPosition(pos);
+		setRotation(rot);
+		setScale(sca);
+		setZ(z);
+		setVelocity(vel);
+		setAngularVelocity(angv);
+		setPhysicType(static_cast<b2BodyType>(ptype));
+		setFixedRotation(frot);
+		setLinearDamping(ldamp);
+		setAngularDamping(adamp);
+		setGravityScale(gsca);
+		setPhysicBullet(bul);
+		return true;
+	}
+	return false;
 }
 
 void Actor::serializeComponent(Serializer& serializer, Component::Ptr component)
@@ -531,6 +579,20 @@ void Actor::serializeComponent(Serializer& serializer, Component::Ptr component)
 		component->serialize(serializer);
 		serializer.close();
 	}
+}
+
+bool Actor::deserializeComponent(Serializer& serializer, Component::Ptr component)
+{
+	if (component != nullptr && component->isRegistered())
+	{
+		if (serializer.read(component->getType()))
+		{
+			component->deserialize(serializer);
+			serializer.end();
+			return true;
+		}
+	}
+	return false;
 }
 
 } // namespace ke

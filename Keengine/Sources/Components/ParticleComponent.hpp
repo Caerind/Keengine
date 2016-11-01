@@ -42,7 +42,6 @@ class ParticleComponent : public SceneComponent
 
 		typedef std::function<void(Particle&, sf::Time)> Affector;
 
-
 	public:
 		ParticleComponent(Actor& actor);
 		virtual ~ParticleComponent();
@@ -77,6 +76,8 @@ class ParticleComponent : public SceneComponent
 
 		void emitParticle();
 		void emitParticles(std::size_t particleAmount);
+
+		void applyWorldGravity();
 
 		virtual void serialize(Serializer& serializer);
 		virtual bool deserialize(Serializer& serializer);

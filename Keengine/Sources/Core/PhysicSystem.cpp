@@ -35,9 +35,14 @@ void PhysicSystem::disableGravity()
 	mWorld->SetGravity(b2Vec2(0.f, 0.f));
 }
 
-b2Vec2 PhysicSystem::getGravity()
+void PhysicSystem::setGravity(const sf::Vector2f& gravity)
 {
-	return mWorld->GetGravity();
+	mWorld->SetGravity(b2Vec2(gravity.x, gravity.y));
+}
+
+sf::Vector2f PhysicSystem::getGravity()
+{
+	return sf::Vector2f(mWorld->GetGravity().x, mWorld->GetGravity().y);
 }
 
 void PhysicSystem::setPixelsPerMeter(float pixelsPerMeter)
@@ -48,11 +53,6 @@ void PhysicSystem::setPixelsPerMeter(float pixelsPerMeter)
 float PhysicSystem::getPixelsPerMeter() const
 {
 	return Physic::pixelsPerMeter;
-}
-
-void PhysicSystem::setGravity(b2Vec2 gravity)
-{
-	mWorld->SetGravity(gravity);
 }
 
 void PhysicSystem::update(sf::Time dt)

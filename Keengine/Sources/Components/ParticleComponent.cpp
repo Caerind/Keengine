@@ -193,6 +193,20 @@ void ParticleComponent::emitParticles(std::size_t particleAmount)
 	}
 }
 
+void ParticleComponent::applyWorldGravity()
+{
+	if (getScene().usePhysic() && getScene().getPhysic() != nullptr)
+	{
+		mAffectors.push_back([&](Particle& particle, sf::Time dt)
+		{
+			if (getScene().getPhysic() != nullptr)
+			{
+				particle.velocity += dt.asSeconds() * getScene().getPhysic()->getGravity();
+			}
+		});
+	}
+}
+
 void ParticleComponent::serialize(Serializer& serializer)
 {
 	SceneComponent::serialize(serializer);
