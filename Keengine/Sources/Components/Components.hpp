@@ -2,6 +2,7 @@
 #define KE_COMPONENTS_HPP
 
 #include "AnimatorComponent.hpp"
+#include "AudioListenerComponent.hpp"
 #include "CameraComponent.hpp"
 #include "DirectionLightComponent.hpp"
 #include "InputComponent.hpp"

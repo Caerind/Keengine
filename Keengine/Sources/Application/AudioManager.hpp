@@ -48,7 +48,6 @@ class AudioManager
         std::vector<SoundPtr> mSounds;
         sf::SoundSource::Status mStatus;
 
-        float mGlobalVolume;
         float mMusicVolume;
         float mSoundVolume;
 };

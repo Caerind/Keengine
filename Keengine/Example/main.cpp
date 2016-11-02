@@ -44,7 +44,7 @@ int main()
 	ke::Scene scene("main", ke::Scene::Light | ke::Scene::Physic);
 	scene.getPhysic()->setPixelsPerMeter(32.f);
 	scene.getPhysic()->setRenderDebug(true);
-	scene.getPhysic()->setGravity(b2Vec2(0, 9.8f));
+	scene.getPhysic()->setGravity();
 	scene.useBackgroundRepeatedTexture(&ke::Application::getResource<ke::Texture>("sfml"));
 
 	MyMap::Ptr map = scene.createActor<MyMap>("map");

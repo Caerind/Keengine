@@ -50,6 +50,7 @@
     <ClCompile Include="Sources\Application\TimeSystem.cpp" />
     <ClCompile Include="Sources\Application\Window.cpp" />
     <ClCompile Include="Sources\Components\AnimatorComponent.cpp" />
+    <ClCompile Include="Sources\Components\AudioListenerComponent.cpp" />
     <ClCompile Include="Sources\Components\CameraComponent.cpp" />
     <ClCompile Include="Sources\Components\DirectionLightComponent.cpp" />
     <ClCompile Include="Sources\Components\InputComponent.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="Sources\Application\TimeSystem.hpp" />
     <ClInclude Include="Sources\Application\Window.hpp" />
     <ClInclude Include="Sources\Components\AnimatorComponent.hpp" />
+    <ClInclude Include="Sources\Components\AudioListenerComponent.hpp" />
     <ClInclude Include="Sources\Components\CameraComponent.hpp" />
     <ClInclude Include="Sources\Components\Components.hpp" />
     <ClInclude Include="Sources\Components\DirectionLightComponent.hpp" />

@@ -492,6 +492,9 @@
     <ClCompile Include="Sources\Components\NodeComponent.cpp">
       <Filter>Sources\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Components\AudioListenerComponent.cpp">
+      <Filter>Sources\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -1011,6 +1014,9 @@
       <Filter>Sources\System</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Components\NodeComponent.hpp">
+      <Filter>Sources\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Components\AudioListenerComponent.hpp">
       <Filter>Sources\Components</Filter>
     </ClInclude>
   </ItemGroup>

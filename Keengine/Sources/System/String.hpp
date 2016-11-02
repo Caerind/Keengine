@@ -12,6 +12,7 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <SFML/System/Vector3.hpp>
 
 namespace ke
 {
@@ -55,6 +56,13 @@ template <> inline std::string toString<sf::Vector2f>(const sf::Vector2f& value)
 {
 	std::ostringstream oss;
 	oss << value.x << "," << value.y;
+	return oss.str();
+}
+
+template <> inline std::string toString<sf::Vector3f>(const sf::Vector3f& value)
+{
+	std::ostringstream oss;
+	oss << value.x << "," << value.y << "," << value.z;
 	return oss.str();
 }
 
@@ -143,6 +151,14 @@ template <> inline sf::Vector2f fromString<sf::Vector2f>(const std::string& stri
 		iss >> vector.y;
 	}
 	return vector;
+}
+
+template <> inline sf::Vector3f fromString<sf::Vector3f>(const std::string& string)
+{
+	std::string z = string;
+	std::string x = split(z, ",");
+	std::string y = split(z, ",");
+	return sf::Vector3f(fromString<float>(x), fromString<float>(y), fromString<float>(z));
 }
 
 template <> inline sf::Vector2i fromString<sf::Vector2i>(const std::string& string)

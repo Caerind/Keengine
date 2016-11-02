@@ -32,7 +32,7 @@ Scene::Scene(const std::string& id, sf::Uint32 options)
 		mPhysic = std::make_shared<PhysicSystem>();
 	}
 	getApplication().getInputs().registerInput(&mInput);
-	mSceneRoot = createActor<Actor>("");
+	mSceneRoot = createActor<Actor>("sceneroot");
 }
 
 Scene::~Scene()
@@ -285,7 +285,56 @@ bool Scene::loadFromXml(const std::string& filepath)
 		getLog() << ke::Log::Error << "Cannot open scene : " + filename;
 		return false;
 	}
-	xml.load("count", mActorIdCounter);
+
+	// Load Scene
+	float inputp;
+	if (!xml.load("count", mActorIdCounter)
+		// TODO : Load view
+		//|| !xml.load("view", mView)
+		|| !xml.load("inputp", inputp))
+	{
+		return false;
+	}
+	mInput.setPriority(inputp);
+	if (usePhysic() && mPhysic != nullptr)
+	{
+		sf::Vector2f pgrav;
+		float pxm;
+		bool prdbg;
+		unsigned int prfla;
+		if (!xml.load("pgrav", pgrav)
+			|| !xml.load("pxm", pxm)
+			|| !xml.load("prdbg", prdbg)
+			|| !xml.load("prfla", prfla))
+		{
+			return false;
+		}
+		mPhysic->setGravity(pgrav);
+		mPhysic->setPixelsPerMeter(pxm);
+		mPhysic->setRenderDebug(prdbg);
+		mPhysic->setRenderFlags(prfla);
+	}
+	if (useLight() && mLights != nullptr)
+	{
+		float lrang;
+		float lradm;
+		sf::Color lambc;
+		if (!xml.load("lrang", lrang)
+			|| !xml.load("lradm", lradm)
+			|| !xml.load("lambc", lambc))
+		{
+			return false;
+		}
+		mLights->setDirectionEmissionRange(lrang);
+		mLights->setDirectionEmissionRadiusMultiplier(lradm);
+		mLights->setAmbientColor(lambc);
+	}
+	if (useEffect())
+	{
+		// TODO : Load effects
+	}
+
+	// Load Actors
 	for (pugi::xml_node node : xml.getRootNode().children())
 	{
 		xml.setNode(node);
@@ -293,9 +342,11 @@ bool Scene::loadFromXml(const std::string& filepath)
 		if (actor != nullptr)
 		{
 			actor->initializePhysic();
-			actor->deserialize(xml);
-			actor->initialize();
-			mActors.push_back(actor);
+			if (actor->deserialize(xml))
+			{
+				actor->initialize();
+				mActors.push_back(actor);
+			}
 		}
 	}
 	return true;
@@ -305,7 +356,31 @@ void Scene::saveToXml(const std::string& filepath)
 {
 	Serializer xml;
 	xml.openDocument(filepath + "scene" + ((mId != "") ? "-" + mId : "") + ".xml", true, "Scene");
+
+	// Save Scene
 	xml.save("count", mActorIdCounter);
+	// TODO : Save view
+	//xml.save("view", mView);
+	xml.save("inputp", mInput.getPriority());
+	if (usePhysic() && mPhysic != nullptr)
+	{
+		xml.save("pgrav", mPhysic->getGravity());
+		xml.save("pxm", mPhysic->getPixelsPerMeter());
+		xml.save("prdbg", mPhysic->isRenderingDebug());
+		xml.save("prfla", mPhysic->getRenderFlags());
+	}
+	if (useLight() && mLights != nullptr)
+	{
+		xml.save("lrang", mLights->getDirectionEmissionRange());
+		xml.save("lradm", mLights->getDirectionEmissionRadiusMultiplier());
+		xml.save("lambc", mLights->getAmbientColor());
+	}
+	if (useEffect())
+	{
+		// TODO : Save effects
+	}
+
+	// Save Actors
 	for (std::size_t i = 0; i < mActors.size(); i++)
 	{
 		if (mActors[i] != nullptr && !mActors[i]->isMarkedForRemoval())

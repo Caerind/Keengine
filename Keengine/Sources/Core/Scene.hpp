@@ -118,7 +118,7 @@ class Scene
 			return nullptr;
 		}
 		void removeEffect(std::size_t const& order);
-
+		
 		// SceneRoot
 		template <typename T, typename ... Args>
 		std::shared_ptr<T> createComponent(Args&& ... args)

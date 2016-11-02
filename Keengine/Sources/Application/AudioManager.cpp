@@ -7,7 +7,6 @@ namespace ke
 AudioManager::AudioManager()
 {
     mStatus = sf::SoundSource::Playing;
-    mGlobalVolume = 100.f;
     mMusicVolume = 100.f;
     mSoundVolume = 100.f;
 }
@@ -156,7 +155,6 @@ void AudioManager::update()
 
 void AudioManager::setGlobalVolume(float volume)
 {
-    mGlobalVolume = volume;
     sf::Listener::setGlobalVolume(volume);
 }
 
@@ -180,7 +178,7 @@ void AudioManager::setSoundVolume(float volume)
 
 float AudioManager::getGlobalVolume() const
 {
-    return mGlobalVolume;
+	return sf::Listener::getGlobalVolume();
 }
 
 float AudioManager::getMusicVolume() const

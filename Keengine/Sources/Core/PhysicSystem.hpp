@@ -26,7 +26,7 @@ class PhysicSystem : public b2Draw, public b2ContactListener
 		void reset();
 
 		void disableGravity();
-		void setGravity(const sf::Vector2f& gravity = sf::Vector2f(0.f, -9.8f));
+		void setGravity(const sf::Vector2f& gravity = sf::Vector2f(0.f, 9.8f));
 		sf::Vector2f getGravity();
 
 		void setPixelsPerMeter(float pixelsPerMeter);

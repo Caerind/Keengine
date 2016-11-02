@@ -2,6 +2,7 @@
 
 #include "Scene.hpp"
 #include "Actor.hpp"
+#include "Effect.hpp"
 #include "Component.hpp"
 #include "../Components/Components.hpp"
 
@@ -23,6 +24,12 @@ class Factories
 			mComponentFactory[T::getStaticType()] = [](Actor& actor) { return Component::Ptr(new T(actor)); };
 		}
 
+		template <typename T>
+		static void registerEffect()
+		{
+			mEffectFactory[T::getStaticType()] = []() { return std::shared_ptr<ke::Effect>(new T()); };
+		}
+
 		static void registerAll();
 
 		template <typename T>
@@ -41,10 +48,20 @@ class Factories
 
 		static Component::Ptr createComponent(Actor& actor, const std::string& type);
 
+		template <typename T>
+		static std::shared_ptr<ke::Effect> createEffect()
+		{
+			return createEffect(T::getStaticType());
+		}
+
+		static std::shared_ptr<ke::Effect> createEffect(const std::string& type);
+
 	private:
 		static std::map<std::string, std::function<Actor::Ptr(Scene& scene)>> mActorFactory;
 
 		static std::map<std::string, std::function<Component::Ptr(Actor& actor)>> mComponentFactory;
+
+		static std::map<std::string, std::function<std::shared_ptr<ke::Effect>()>> mEffectFactory;
 
 		static bool mRegistered;
 };
