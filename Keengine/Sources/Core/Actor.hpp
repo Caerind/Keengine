@@ -166,6 +166,8 @@ class Actor : public Serializable
 			}
 			return nullptr;
 		}
+		void serializeComponents(Serializer& serializer);
+		void deserializeComponents(Serializer& serializer);
 
 	private:
 		SceneComponent mRoot; ///< The root for scene components

@@ -107,6 +107,7 @@ class Scene
 		{
 			mEffects[order] = std::make_shared<T>();
 		}
+		void setEffect(std::size_t const& order, const std::string& effect);
 		template <typename T>
 		std::shared_ptr<T> getEffect(std::size_t const& order)
 		{

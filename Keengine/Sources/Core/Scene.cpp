@@ -32,7 +32,7 @@ Scene::Scene(const std::string& id, sf::Uint32 options)
 		mPhysic = std::make_shared<PhysicSystem>();
 	}
 	getApplication().getInputs().registerInput(&mInput);
-	mSceneRoot = createActor<Actor>("sceneroot");
+	mSceneRoot = createActor<Actor>("0");
 }
 
 Scene::~Scene()
@@ -208,6 +208,11 @@ std::shared_ptr<ltbl::LightSystem> Scene::getLights()
 	return mLights;
 }
 
+void Scene::setEffect(std::size_t const& order, const std::string& effect)
+{
+	mEffects[order] = Factories::createEffect(effect);
+}
+
 void Scene::removeEffect(std::size_t const& order)
 {
 	auto itr = mEffects.find(order);
@@ -288,10 +293,7 @@ bool Scene::loadFromXml(const std::string& filepath)
 
 	// Load Scene
 	float inputp;
-	if (!xml.load("count", mActorIdCounter)
-		// TODO : Load view
-		//|| !xml.load("view", mView)
-		|| !xml.load("inputp", inputp))
+	if (!xml.load("count", mActorIdCounter) || !xml.load("inputp", inputp))
 	{
 		return false;
 	}
@@ -329,10 +331,48 @@ bool Scene::loadFromXml(const std::string& filepath)
 		mLights->setDirectionEmissionRadiusMultiplier(lradm);
 		mLights->setAmbientColor(lambc);
 	}
-	if (useEffect())
+	if (useEffect() && xml.read("Effects"))
 	{
-		// TODO : Load effects
+		while (xml.read("Effect"))
+		{
+			std::size_t order;
+			std::string effect;
+			if (!xml.load("order", order) || !xml.load("effect", effect))
+			{
+				return false;
+			}
+			setEffect(order, effect);
+			xml.end();
+		}
+		xml.end();
 	}
+	if (xml.read("View"))
+	{
+		sf::Vector2f center;
+		sf::Vector2f size;
+		float rotation;
+		sf::FloatRect viewport;
+		if (!xml.load("center", center)
+			|| !xml.load("size", size)
+			|| !xml.load("rotation", rotation)
+			|| !xml.load("viewport", viewport))
+		{
+			return false;
+		}
+		mView.setCenter(center);
+		mView.setSize(size);
+		mView.setRotation(rotation);
+		mView.setViewport(viewport);
+		xml.end();
+	}
+
+	if (!xml.read("SceneRoot"))
+	{
+		return false;
+	}
+	mSceneRoot->deserialize(xml);
+	mSceneRoot->deserializeComponents(xml);
+	xml.end();
 
 	// Load Actors
 	for (pugi::xml_node node : xml.getRootNode().children())
@@ -359,8 +399,6 @@ void Scene::saveToXml(const std::string& filepath)
 
 	// Save Scene
 	xml.save("count", mActorIdCounter);
-	// TODO : Save view
-	//xml.save("view", mView);
 	xml.save("inputp", mInput.getPriority());
 	if (usePhysic() && mPhysic != nullptr)
 	{
@@ -375,19 +413,44 @@ void Scene::saveToXml(const std::string& filepath)
 		xml.save("lradm", mLights->getDirectionEmissionRadiusMultiplier());
 		xml.save("lambc", mLights->getAmbientColor());
 	}
-	if (useEffect())
+	if (useEffect() && mEffects.size() > 0)
 	{
-		// TODO : Save effects
+		xml.create("Effects");
+		for (auto itr = mEffects.begin(); itr != mEffects.end(); itr++)
+		{
+			if (itr->second != nullptr)
+			{
+				xml.create("Effect");
+				xml.save("order", itr->first);
+				xml.save("effect", itr->second->getType());
+				xml.close();
+			}
+		}
+		xml.close();
 	}
+	xml.create("View");
+	xml.save("center", mView.getCenter());
+	xml.save("size", mView.getSize());
+	xml.save("rotation", mView.getRotation());
+	xml.save("viewport", mView.getViewport());
+	xml.close();
+
+	xml.create("SceneRoot");
+	mSceneRoot->serialize(xml);
+	mSceneRoot->serializeComponents(xml);
+	xml.close();
 
 	// Save Actors
 	for (std::size_t i = 0; i < mActors.size(); i++)
 	{
 		if (mActors[i] != nullptr && !mActors[i]->isMarkedForRemoval())
 		{
-			xml.create(mActors[i]->getType());
-			mActors[i]->serialize(xml);
-			xml.close();
+			if (mActors[i] != mSceneRoot)
+			{
+				xml.create(mActors[i]->getType());
+				mActors[i]->serialize(xml);
+				xml.close();
+			}
 		}
 	}
 	xml.saveDocument();

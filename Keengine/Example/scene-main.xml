@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <Scene count="7" inputp="0" pgrav="0,9.8" pxm="32" prdbg="true" prfla="1" lrang="1000" lradm="1.1" lambc="101010ff">
-	<Actor id="sceneroot" up="true" visible="true" pos="0,0" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="2" />
+	<View center="36,465.52" size="1600,900" rotation="0" viewport="0,0,1,1" />
+	<SceneRoot id="0" up="true" visible="true" pos="0,0" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="2">
+		<PointLightComponent id="1" up="true" visible="true" parent="" pos="-764,15.5201" rot="0" sca="1,1" z="0" texture="pointLightTexture" color="ffffffff" intensity="3" on="true" />
+	</SceneRoot>
 	<MyMap id="map" up="true" visible="true" pos="0,0" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="2" />
 	<MyObject id="1" up="true" visible="true" pos="99,43" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="4" />
 	<MyObject id="2" up="true" visible="true" pos="493,115" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="4" />

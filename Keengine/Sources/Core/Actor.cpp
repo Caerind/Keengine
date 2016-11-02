@@ -595,4 +595,29 @@ bool Actor::deserializeComponent(Serializer& serializer, Component::Ptr componen
 	return false;
 }
 
+void Actor::serializeComponents(Serializer& serializer)
+{
+	std::size_t size = mComponents.size();
+	for (std::size_t i = 0; i < size; i++)
+	{
+		serializeComponent(serializer, mComponents[i]);
+    }
+}
+
+void Actor::deserializeComponents(Serializer& serializer)
+{
+	pugi::xml_node& root = serializer.getNode();
+	for (pugi::xml_node node : root.children())
+	{
+		serializer.setNode(node);
+		Component::Ptr component = Factories::createComponent(*this, std::string(node.name()));
+		if (component != nullptr)
+		{
+			component->onRegister();
+			component->deserialize(serializer);
+			mComponents.push_back(component);
+		}
+	}
+}
+
 } // namespace ke
