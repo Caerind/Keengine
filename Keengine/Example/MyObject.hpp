@@ -16,6 +16,9 @@ class MyObject : public ke::Actor
 
 		void setSize(int x, int y);
 
+		virtual void serialize(ke::Serializer& serializer);
+		virtual bool deserialize(ke::Serializer& serializer);
+
 	private:
 		ke::ShapeComponent::Ptr mShape;
 		ke::LightShapeComponent::Ptr mLight;

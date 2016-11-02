@@ -139,6 +139,7 @@ void PointLightComponent::serialize(Serializer& serializer)
 {
 	SceneComponent::serialize(serializer);
 	serializer.save("texture", getTexture());
+	serializer.save("origin", getOrigin());
 	serializer.save("color", getColor());
 	serializer.save("intensity", getIntensity());
 	serializer.save("on", isOn());
@@ -147,16 +148,19 @@ void PointLightComponent::serialize(Serializer& serializer)
 bool PointLightComponent::deserialize(Serializer& serializer)
 {
 	std::string texture;
+	sf::Vector2f origin;
 	sf::Color color;
 	float intensity;
 	bool on;
 	if (SceneComponent::deserialize(serializer)
 		&& serializer.load("texture", texture)
+		&& serializer.load("origin", origin)
 		&& serializer.load("color", color)
 		&& serializer.load("intensity", intensity)
 		&& serializer.load("on", on))
 	{
 		setTexture(texture);
+		setOrigin(origin);
 		setColor(color);
 		setIntensity(intensity);
 		setOn(on);

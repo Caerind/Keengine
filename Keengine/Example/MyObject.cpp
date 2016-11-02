@@ -32,3 +32,20 @@ void MyObject::setSize(int x, int y)
 	mPhysic->setPoints(points);
 	mLight->setPoints(points);
 }
+
+void MyObject::serialize(ke::Serializer& serializer)
+{
+	ke::Actor::serialize(serializer);
+	serializeComponent(serializer, mShape);
+	serializeComponent(serializer, mLight);
+	serializeComponent(serializer, mPhysic);
+}
+
+bool MyObject::deserialize(ke::Serializer& serializer)
+{
+	ke::Actor::deserialize(serializer);
+	mShape = deserializeComponent<ke::ShapeComponent>(serializer);
+	mLight = deserializeComponent<ke::LightShapeComponent>(serializer);
+	mPhysic = deserializeComponent<ke::PhysicComponent>(serializer);
+	return true;
+}

@@ -63,6 +63,21 @@ void MyActor::initializeComponents()
 	}
 
 	mD = createComponent<ke::InputComponent>();
+
+	if (mBody != nullptr)
+	{
+		mE = createComponent<ke::PhysicComponent>();
+		attachComponent(mE);
+		mE->setPoints({ { -10.f, -10.f },{ 10.f, -10.f },{ 10.f, 20.f },{ -10.f, 20.f } });
+		mE->setDensity(1.f);
+	}
+
+	mCam = createComponent<ke::CameraComponent>();
+	attachComponent(mCam);
+}
+
+void MyActor::initialize()
+{
 	mD->bindAction("MoveUp", [&](std::vector<std::string> const& data)
 	{
 		desiredImpulseY(-160.f);
@@ -83,17 +98,6 @@ void MyActor::initializeComponents()
 		mC->setOn(!mC->isOn());
 		return false;
 	});
-
-	if (mBody != nullptr)
-	{
-		mE = createComponent<ke::PhysicComponent>();
-		attachComponent(mE);
-		mE->setPoints({ { -10.f, -10.f },{ 10.f, -10.f },{ 10.f, 20.f },{ -10.f, 20.f } });
-		mE->setDensity(1.f);
-	}
-
-	mCam = createComponent<ke::CameraComponent>();
-	attachComponent(mCam);
 }
 
 void MyActor::update(sf::Time dt)
@@ -112,4 +116,58 @@ void MyActor::update(sf::Time dt)
 
 	desiredImpulseX(mVel);
 	mVel = 0.f;
+}
+
+void MyActor::serialize(ke::Serializer& serializer)
+{
+	ke::Actor::serialize(serializer);
+
+	serializeComponent(serializer, mA);
+	serializeComponent(serializer, mB);
+
+	if (mScene.useLight())
+	{
+		serializeComponent(serializer, mC);
+	}
+
+	serializeComponent(serializer, mD);
+
+	if (mScene.usePhysic())
+	{
+		serializeComponent(serializer, mE);
+	}
+
+	serializeComponent(serializer, mCam);
+}
+
+bool MyActor::deserialize(ke::Serializer& serializer)
+{
+	if (!ke::Actor::deserialize(serializer))
+	{
+		return false;
+	}
+
+	mA = deserializeComponent<ke::NodeComponent>(serializer);
+
+	mB = deserializeComponent<ke::AnimatorComponent>(serializer);
+	if (mB == nullptr)
+	{
+		getLog() << "Shit";
+	}
+
+	if (mScene.useLight())
+	{
+		mC = deserializeComponent<ke::PointLightComponent>(serializer);
+	}
+
+	mD = deserializeComponent<ke::InputComponent>(serializer);
+
+	if (mScene.usePhysic())
+	{
+		mE = deserializeComponent<ke::PhysicComponent>(serializer);
+	}
+
+	mCam = deserializeComponent<ke::CameraComponent>(serializer);
+
+	return true;
 }

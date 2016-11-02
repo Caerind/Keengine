@@ -18,7 +18,6 @@ Scene::Scene(const std::string& id, sf::Uint32 options)
 	, mInput()
 	, mSceneRoot(nullptr)
 {
-	Factories::registerAll();
 	if (useEffect() || useLight())
 	{
 		mSceneTexture = std::unique_ptr<sf::RenderTexture>(new sf::RenderTexture());
@@ -74,6 +73,9 @@ void Scene::update(sf::Time dt)
 			}
 		}
 	}
+
+	getApplication().setDebugInfo("Actors", getActorCount());
+	getApplication().setDebugInfo("MouseView", ke::toString(ke::Application::getMousePositionView(mView)));
 
 	if (usePhysic() && mPhysic != nullptr)
 	{
@@ -298,6 +300,8 @@ bool Scene::loadFromXml(const std::string& filepath)
 		return false;
 	}
 	mInput.setPriority(inputp);
+
+	// Load Physic
 	if (usePhysic() && mPhysic != nullptr)
 	{
 		sf::Vector2f pgrav;
@@ -316,6 +320,8 @@ bool Scene::loadFromXml(const std::string& filepath)
 		mPhysic->setRenderDebug(prdbg);
 		mPhysic->setRenderFlags(prfla);
 	}
+
+	// Load Lights
 	if (useLight() && mLights != nullptr)
 	{
 		float lrang;
@@ -331,6 +337,8 @@ bool Scene::loadFromXml(const std::string& filepath)
 		mLights->setDirectionEmissionRadiusMultiplier(lradm);
 		mLights->setAmbientColor(lambc);
 	}
+
+	// Load Effects
 	if (useEffect() && xml.read("Effects"))
 	{
 		while (xml.read("Effect"))
@@ -346,26 +354,27 @@ bool Scene::loadFromXml(const std::string& filepath)
 		}
 		xml.end();
 	}
-	if (xml.read("View"))
-	{
-		sf::Vector2f center;
-		sf::Vector2f size;
-		float rotation;
-		sf::FloatRect viewport;
-		if (!xml.load("center", center)
-			|| !xml.load("size", size)
-			|| !xml.load("rotation", rotation)
-			|| !xml.load("viewport", viewport))
-		{
-			return false;
-		}
-		mView.setCenter(center);
-		mView.setSize(size);
-		mView.setRotation(rotation);
-		mView.setViewport(viewport);
-		xml.end();
-	}
 
+	// Load View
+	if (!xml.read("View"))
+	{
+		return false;
+	}
+	sf::Vector2f center;
+	sf::Vector2f size;
+	float rotation;
+	if (!xml.load("center", center)
+		|| !xml.load("size", size)
+		|| !xml.load("rotation", rotation))
+	{
+		return false;
+	}
+	mView.setCenter(center);
+	mView.setSize(size);
+	mView.setRotation(rotation);
+	xml.end();
+
+	// Load SceneRoot
 	if (!xml.read("SceneRoot"))
 	{
 		return false;
@@ -386,6 +395,11 @@ bool Scene::loadFromXml(const std::string& filepath)
 			{
 				actor->initialize();
 				mActors.push_back(actor);
+				getLog() << Variant("Loaded ", actor->getId()); // TODO : Debug
+			}
+			else
+			{
+				getLog() << Variant("Unloaded ", actor->getId()); // TODO : Debug
 			}
 		}
 	}

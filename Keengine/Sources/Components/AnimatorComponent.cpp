@@ -157,7 +157,8 @@ void AnimatorComponent::update(sf::Time dt)
 	if (mPlaying)
 	{
 		mTimeElapsed += dt;
-		if (mTimeElapsed >= getActualFrame().duration)
+		sf::Time t = getActualFrame().duration;
+		if (mTimeElapsed >= t)
 		{
 			mActualFrame = (mActualFrame + 1) % getActualAnimation().getFrameCount();
 			const Frame& newFrame = getActualFrame();
@@ -167,7 +168,7 @@ void AnimatorComponent::update(sf::Time dt)
 				mSprite.setTexture(getApplication().getResource<Texture>(mActualTexture));
 			}
 			mSprite.setTextureRect(newFrame.textureRect);
-			mTimeElapsed = sf::Time::Zero;
+			mTimeElapsed -= t;
 		}
 	}
 }
@@ -212,10 +213,11 @@ void AnimatorComponent::serialize(Serializer& serializer)
 
 bool AnimatorComponent::deserialize(Serializer& serializer)
 {
+	sf::Time elapsed;
 	if (!SceneComponent::deserialize(serializer) 
 		|| !serializer.load("current", mActualAnimation) 
 		|| !serializer.load("playing", mPlaying) 
-		|| !serializer.load("elapsed", mTimeElapsed))
+		|| !serializer.load("elapsed", elapsed))
 	{
 		return false;
 	}
@@ -253,7 +255,11 @@ bool AnimatorComponent::deserialize(Serializer& serializer)
 		serializer.end();
 	}
 
-	setElapsedTime(mTimeElapsed);
+	if (mPlaying)
+	{
+		playAnimation(mActualAnimation);
+	}
+	setElapsedTime(elapsed);
 
 	return true;
 }

@@ -30,7 +30,7 @@ class Factories
 			mEffectFactory[T::getStaticType()] = []() { return std::shared_ptr<ke::Effect>(new T()); };
 		}
 
-		static void registerAll();
+		static bool registerAll();
 
 		template <typename T>
 		static Actor::Ptr createActor(Scene& scene)

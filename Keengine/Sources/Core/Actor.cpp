@@ -197,12 +197,19 @@ void Actor::renderComponents(sf::RenderTarget& target)
 	mRoot.render(target, sf::RenderStates::Default);
 }
 
-Component::Ptr Actor::createComponentFromFactory(const std::string & type)
+Component::Ptr Actor::createComponentFromFactory(const std::string& type, const std::string& id)
 {
 	Component::Ptr component = Factories::createComponent(*this, type);
 	if (component != nullptr)
 	{
-		component->setId(ke::decToHex<std::size_t>(mComponentIdCounter++));
+		if (id == "")
+		{
+			component->setId(ke::decToHex<std::size_t>(mComponentIdCounter++));
+		}
+		else
+		{
+			component->setId(id);
+		}
 		component->onRegister();
 		mComponents.push_back(component);
 	}
@@ -521,54 +528,128 @@ void Actor::serialize(Serializer& serializer)
 
 bool Actor::deserialize(Serializer& serializer)
 {
-	bool up;
-	bool visible;
-	sf::Vector2f pos;
-	float rot;
-	sf::Vector2f sca;
-	float z;
-	sf::Vector2f vel;
-	float angv;
-	unsigned int ptype;
-	bool frot;
-	float ldamp;
-	float adamp;
-	float gsca;
-	bool bul;
-	if (serializer.load("id", mId)
-		&& serializer.load("up", up)
-		&& serializer.load("visible", visible)
-		&& serializer.load("pos", pos)
-		&& serializer.load("rot", rot)
-		&& serializer.load("sca", sca)
-		&& serializer.load("z", z)
-		&& serializer.load("vel", vel)
-		&& serializer.load("angv", angv)
-		&& serializer.load("ptype", ptype)
-		&& serializer.load("frot", frot)
-		&& serializer.load("ldamp", ldamp)
-		&& serializer.load("adamp", adamp)
-		&& serializer.load("gsca", gsca)
-		&& serializer.load("bul", bul)
-		&& serializer.load("count", mComponentIdCounter))
+	if (!serializer.load("id", mId))
 	{
-		setUpdatable(up);
-		setVisible(visible);
-		setPosition(pos);
-		setRotation(rot);
-		setScale(sca);
-		setZ(z);
-		setVelocity(vel);
-		setAngularVelocity(angv);
-		setPhysicType(static_cast<b2BodyType>(ptype));
-		setFixedRotation(frot);
-		setLinearDamping(ldamp);
-		setAngularDamping(adamp);
-		setGravityScale(gsca);
-		setPhysicBullet(bul);
-		return true;
+		getLog() << "id";
+		return false;
 	}
-	return false;
+
+	bool up;
+	if (!serializer.load("up", up))
+	{
+		getLog() << "up";
+		return false;
+	}
+	setUpdatable(up);
+
+	bool visible;
+	if (!serializer.load("visible", visible))
+	{
+		getLog() << "visible";
+		return false;
+	}
+	setVisible(visible);
+
+	sf::Vector2f pos;
+	if (!serializer.load("pos", pos))
+	{
+		getLog() << "pos";
+		return false;
+	}
+	setPosition(pos);
+
+	float rot;
+	if (!serializer.load("rot", rot))
+	{
+		getLog() << "rot";
+		return false;
+	}
+	setRotation(rot);
+
+	sf::Vector2f sca;
+	if (!serializer.load("sca", sca))
+	{
+		getLog() << "sca";
+		return false;
+	}
+	setScale(sca);
+
+	float z;
+	if (!serializer.load("z", z))
+	{
+		getLog() << "z";
+		return false;
+	}
+	setZ(z);
+	
+	if (mBody != nullptr)
+	{
+		sf::Vector2f vel;
+		if (!serializer.load("vel", vel))
+		{
+			getLog() << "vel";
+			return false;
+		}
+		setVelocity(vel);
+
+		float angv;
+		if (!serializer.load("angv", angv))
+		{
+			getLog() << "angv";
+			return false;
+		}
+		setAngularVelocity(angv);
+
+		unsigned int ptype;
+		if (!serializer.load("ptype", ptype))
+		{
+			getLog() << "ptype";
+			return false;
+		}
+		setPhysicType(static_cast<b2BodyType>(ptype));
+
+		bool frot;
+		if (!serializer.load("frot", frot))
+		{
+			getLog() << "frot";
+			return false;
+		}
+		setFixedRotation(frot);
+
+		float ldamp;
+		if (!serializer.load("ldamp", ldamp))
+		{
+			getLog() << "ldamp";
+			return false;
+		}
+		setLinearDamping(ldamp);
+
+		float adamp;
+		if (!serializer.load("adamp", adamp))
+		{
+			getLog() << "adamp";
+			return false;
+		}
+		setAngularDamping(adamp);
+
+		float gsca;
+		if (!serializer.load("gsca", gsca))
+		{
+			getLog() << "gsca";
+			return false;
+		}
+		setGravityScale(gsca);
+
+		bool bul; 
+		if (!serializer.load("bul", bul))
+		{
+			getLog() << "bul";
+			return false;
+		}
+		setPhysicBullet(bul);
+	}
+
+	return true;
 }
 
 void Actor::serializeComponent(Serializer& serializer, Component::Ptr component)

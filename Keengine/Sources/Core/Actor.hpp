@@ -83,7 +83,7 @@ class Actor : public Serializable
 			mComponents.push_back(component);
 			return component;
 		}
-		Component::Ptr createComponentFromFactory(const std::string& type);
+		Component::Ptr createComponentFromFactory(const std::string& type, const std::string& id = "");
 		void removeComponent(Component::Ptr component);
 		void attachComponent(SceneComponent::Ptr component);
 		void attachComponent(SceneComponent* component);
@@ -154,15 +154,18 @@ class Actor : public Serializable
 		{
 			if (serializer.read(T::getStaticType()))
 			{
-				Component::Ptr component = Factories::createComponent(*this, T::getStaticType());
+				Component::Ptr component = createComponentFromFactory(T::getStaticType(), "tempDeserialized");
 				if (component != nullptr)
 				{
-					component->onRegister();
-					component->deserialize(serializer);
-					mComponents.push_back(component);
+					if (!component->deserialize(serializer))
+					{
+						serializer.end();
+						return nullptr;
+					}
 					serializer.end();
 					return std::dynamic_pointer_cast<T>(component);
 				}
+				serializer.end();
 			}
 			return nullptr;
 		}

@@ -282,9 +282,7 @@ void Application::update(sf::Time dt)
 {
 	instance().mAudio.update();
 
-	auto mouse = getMousePosition2i();
-	setDebugInfo("MouseX", mouse.x);
-	setDebugInfo("MouseY", mouse.y);
+	setDebugInfo("Mouse", toString(getMousePosition2i()));
 
 	dt *= instance().mTime.getTimeFactor();
 

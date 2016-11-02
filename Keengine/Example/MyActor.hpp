@@ -14,8 +14,12 @@ class MyActor : public ke::Actor
 
 		void initializePhysic();
 		void initializeComponents();
+		void initialize();
 
 		void update(sf::Time dt);
+
+		virtual void serialize(ke::Serializer& serializer);
+		virtual bool deserialize(ke::Serializer& serializer);
 
     private:
 		ke::NodeComponent::Ptr mA;

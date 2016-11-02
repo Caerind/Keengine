@@ -185,16 +185,17 @@ template <> inline sf::Color fromString<sf::Color>(const std::string& string)
 		{
 			color.erase(color.begin());
 		}
-		int hexTrans;
+		sf::Uint32 hexTrans;
 		std::stringstream ss(color);
 		ss >> std::hex >> hexTrans;
 		if (hexTrans >= 0)
 		{
-			unsigned char red, green, blue;
-			red = hexTrans >> 16;
-			green = (hexTrans >> 8) & 0xff;
-			blue = hexTrans & 0xff;
-			return sf::Color(red, green, blue);
+			sf::Uint8 red, green, blue, alpha;
+			red = (hexTrans >> 24) & 0xff;
+			green = (hexTrans >> 16) & 0xff;
+			blue = (hexTrans >> 8) & 0xff;
+			alpha = hexTrans & 0xff;
+			return sf::Color(red, green, blue, alpha);
 		}
 	}
 	return sf::Color::Transparent;
@@ -202,52 +203,20 @@ template <> inline sf::Color fromString<sf::Color>(const std::string& string)
 
 template <> inline sf::IntRect fromString<sf::IntRect>(const std::string& string)
 {
-	sf::IntRect rect;
-	int i = 0;
-	std::string str = string;
-	std::size_t found = str.find_first_of(',');
-	while (found != std::string::npos)
-	{
-		std::istringstream iss(str.substr(0, found));
-		switch (i)
-		{
-			case 0: iss >> rect.left; break;
-			case 1: iss >> rect.top; break;
-			case 2: iss >> rect.width; break;
-			case 3: iss >> rect.height; break;
-			default: break;
-		}
-		iss.clear();
-		str = str.substr(found + 1);
-		found = str.find_first_of(",");
-		i++;
-	}
-	return rect;
+	std::string h = string;
+	std::string x = split(h, ",");
+	std::string y = split(h, ",");
+	std::string w = split(h, ",");
+	return sf::IntRect(fromString<int>(x), fromString<int>(y), fromString<int>(w), fromString<int>(h));
 }
 
 template <> inline sf::FloatRect fromString<sf::FloatRect>(const std::string& string)
 {
-	sf::FloatRect rect;
-	int i = 0;
-	std::string str = string;
-	std::size_t found = str.find_first_of(',');
-	while (found != std::string::npos)
-	{
-		std::istringstream iss(str.substr(0, found));
-		switch (i)
-		{
-		case 0: iss >> rect.left; break;
-		case 1: iss >> rect.top; break;
-		case 2: iss >> rect.width; break;
-		case 3: iss >> rect.height; break;
-		default: break;
-		}
-		iss.clear();
-		str = str.substr(found + 1);
-		found = str.find_first_of(",");
-		i++;
-	}
-	return rect;
+	std::string h = string;
+	std::string x = split(h, ",");
+	std::string y = split(h, ",");
+	std::string w = split(h, ",");
+	return sf::FloatRect(fromString<float>(x), fromString<float>(y), fromString<float>(w), fromString<float>(h));
 }
 
 template <> inline sf::Time fromString<sf::Time>(const std::string& string)
