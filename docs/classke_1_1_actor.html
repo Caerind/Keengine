@@ -181,8 +181,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3fc1f4d8255daeb6ee158acd3571318f"><td class="memTemplParams" colspan="2">template&lt;typename T , typename ... Args&gt; </td></tr>
 <tr class="memitem:a3fc1f4d8255daeb6ee158acd3571318f"><td class="memTemplItemLeft" align="right" valign="top">std::shared_ptr&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classke_1_1_actor.html#a3fc1f4d8255daeb6ee158acd3571318f">createComponent</a> (Args &amp;&amp;... args)</td></tr>
 <tr class="separator:a3fc1f4d8255daeb6ee158acd3571318f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87a269229c478a60568abc04fbede952"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classke_1_1_component.html#a3af56fae1947630257e21eb2dd29c28c">Component::Ptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_actor.html#a87a269229c478a60568abc04fbede952">createComponentFromFactory</a> (const std::string &amp;type)</td></tr>
-<tr class="separator:a87a269229c478a60568abc04fbede952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ba5c28090c21be0614b79f16cfcd2e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classke_1_1_component.html#a3af56fae1947630257e21eb2dd29c28c">Component::Ptr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_actor.html#a9ba5c28090c21be0614b79f16cfcd2e9">createComponentFromFactory</a> (const std::string &amp;type, const std::string &amp;id=&quot;&quot;)</td></tr>
+<tr class="separator:a9ba5c28090c21be0614b79f16cfcd2e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb57d68900a1a45de5ce0aad3b214810"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_actor.html#afb57d68900a1a45de5ce0aad3b214810">removeComponent</a> (<a class="el" href="classke_1_1_component.html#a3af56fae1947630257e21eb2dd29c28c">Component::Ptr</a> component)</td></tr>
 <tr class="separator:afb57d68900a1a45de5ce0aad3b214810"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb9e6d5ec93a3dfee2b36d1be2ed6cb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_actor.html#acb9e6d5ec93a3dfee2b36d1be2ed6cb6">attachComponent</a> (<a class="el" href="classke_1_1_scene_component.html#af07c49dfa2db6f9b3462616688818b40">SceneComponent::Ptr</a> component)</td></tr>
@@ -411,8 +411,8 @@ template&lt;typename T , typename ... Args&gt; </div>
 
 </div>
 </div>
-<a id="a87a269229c478a60568abc04fbede952"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87a269229c478a60568abc04fbede952">&sect;&nbsp;</a></span>createComponentFromFactory()</h2>
+<a id="a9ba5c28090c21be0614b79f16cfcd2e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ba5c28090c21be0614b79f16cfcd2e9">&sect;&nbsp;</a></span>createComponentFromFactory()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -421,8 +421,18 @@ template&lt;typename T , typename ... Args&gt; </div>
           <td class="memname"><a class="el" href="classke_1_1_component.html#a3af56fae1947630257e21eb2dd29c28c">Component::Ptr</a> ke::Actor::createComponentFromFactory </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>id</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

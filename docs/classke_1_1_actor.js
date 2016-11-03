@@ -6,7 +6,7 @@ var classke_1_1_actor =
     [ "attachComponent", "classke_1_1_actor.html#acb9e6d5ec93a3dfee2b36d1be2ed6cb6", null ],
     [ "attachComponent", "classke_1_1_actor.html#ac088313888fca527ef894d45273adc98", null ],
     [ "createComponent", "classke_1_1_actor.html#a3fc1f4d8255daeb6ee158acd3571318f", null ],
-    [ "createComponentFromFactory", "classke_1_1_actor.html#a87a269229c478a60568abc04fbede952", null ],
+    [ "createComponentFromFactory", "classke_1_1_actor.html#a9ba5c28090c21be0614b79f16cfcd2e9", null ],
     [ "deserialize", "classke_1_1_actor.html#a8472027415450d90b41d80ce4183edb5", null ],
     [ "deserializeComponent", "classke_1_1_actor.html#a9f214e06895e5726180971f336f07d0d", null ],
     [ "deserializeComponent", "classke_1_1_actor.html#ad4c7363ad35094cb78a5029efc3dbb7c", null ],

@@ -44,7 +44,7 @@ var searchData=
   ['createactorfromfactory',['createActorFromFactory',['../classke_1_1_scene.html#a1308df1d1b1c0fe98e6c49411479e9bc',1,'ke::Scene']]],
   ['createbody',['createBody',['../classke_1_1_physic_system.html#a840472db36f6c7183942830146aedf84',1,'ke::PhysicSystem']]],
   ['createcomponent',['createComponent',['../classke_1_1_actor.html#a3fc1f4d8255daeb6ee158acd3571318f',1,'ke::Actor::createComponent()'],['../classke_1_1_factories.html#a05c3540cee52829dbf2333dd1f1ace88',1,'ke::Factories::createComponent(Actor &amp;actor)'],['../classke_1_1_factories.html#aea44c32fe82cede64261a63f4bffcb18',1,'ke::Factories::createComponent(Actor &amp;actor, const std::string &amp;type)'],['../classke_1_1_scene.html#a3dc8dbaf8a9005d13ff716e460abc61f',1,'ke::Scene::createComponent()']]],
-  ['createcomponentfromfactory',['createComponentFromFactory',['../classke_1_1_actor.html#a87a269229c478a60568abc04fbede952',1,'ke::Actor']]],
+  ['createcomponentfromfactory',['createComponentFromFactory',['../classke_1_1_actor.html#a9ba5c28090c21be0614b79f16cfcd2e9',1,'ke::Actor']]],
   ['createeffect',['createEffect',['../classke_1_1_factories.html#a15ddc59b6b628702a787a4e840cd51d7',1,'ke::Factories::createEffect()'],['../classke_1_1_factories.html#afaed0570cfa4000eb8cd98f36c04298d',1,'ke::Factories::createEffect(const std::string &amp;type)']]],
   ['createlayer',['createLayer',['../classke_1_1_map.html#acff94485a3b8fafc224ff42a49a060ca',1,'ke::Map']]],
   ['createresource',['createResource',['../classke_1_1_application.html#a87ed48314757d9abaee3b0a4db0b120e',1,'ke::Application::createResource()'],['../classke_1_1_resource_manager.html#a60082af3391ad612a7084e0d4aa7ea15',1,'ke::ResourceManager::createResource()']]],

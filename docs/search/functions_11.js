@@ -10,7 +10,7 @@ var searchData=
   ['rect',['rect',['../namespaceke_1_1_distributions.html#af63bf30b5ab93e40389b347c2765a73a',1,'ke::Distributions']]],
   ['red',['Red',['../namespaceke_1_1_color.html#a27e6fd02af8458e4ff25acf96e5cacd6',1,'ke::Color']]],
   ['registeractor',['registerActor',['../classke_1_1_factories.html#a391269e1611c6a4c5e5ccb360f91b19a',1,'ke::Factories']]],
-  ['registerall',['registerAll',['../classke_1_1_factories.html#af3eb93db7923d49e6f0f9f01fa97b1b0',1,'ke::Factories']]],
+  ['registerall',['registerAll',['../classke_1_1_factories.html#ae1d815b1683d3f84e1b858c9878e4da0',1,'ke::Factories']]],
   ['registercomponent',['registerComponent',['../classke_1_1_factories.html#aab8591a5c37188ea91c2e527d4b61a36',1,'ke::Factories']]],
   ['registereffect',['registerEffect',['../classke_1_1_factories.html#a21a8866870bf992be88f87292ad282a0',1,'ke::Factories']]],
   ['registerinput',['registerInput',['../classke_1_1_input_system.html#adb835d57f3744890b708a37f3c9ae4d7',1,'ke::InputSystem']]],
