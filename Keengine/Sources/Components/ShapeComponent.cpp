@@ -111,23 +111,44 @@ void ShapeComponent::serialize(Serializer& serializer)
 
 bool ShapeComponent::deserialize(Serializer& serializer)
 {
-	sf::Color fillColor;
-	sf::Color outColor;
-	float outThick;
-	std::vector<sf::Vector2f> points;
-	if (SceneComponent::deserialize(serializer)
-		&& serializer.load("fillColor", fillColor)
-		&& serializer.load("outColor", outColor)
-		&& serializer.load("outThick", outThick)
-		&& serializer.load("points", points))
+	if (!SceneComponent::deserialize(serializer))
 	{
-		setFillColor(fillColor);
-		setOutlineColor(outColor);
-		setOutlineThickness(outThick);
-		setPoints(points);
-		return true;
+		return false;
 	}
-	return false;
+
+	sf::Color fillColor;
+	if (!serializer.load("fillColor", fillColor))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("ShapeComponent::deserialize : Can't find \"fillColor\" in ", getId());
+		fillColor = sf::Color();
+	}
+	setFillColor(fillColor);
+
+	sf::Color outColor;
+	if (!serializer.load("outColor", outColor))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("ShapeComponent::deserialize : Can't find \"outColor\" in ", getId());
+		outColor = sf::Color();
+	}
+	setOutlineColor(outColor);
+
+	float outThick;
+	if (!serializer.load("outThick", outThick))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("ShapeComponent::deserialize : Can't find \"outThick\" in ", getId());
+		outThick = 0.f;
+	}
+	setOutlineThickness(outThick);
+
+	std::vector<sf::Vector2f> points;
+	if (!serializer.load("points", points))
+	{
+		getLog() << ke::Log::Error << ke::Variant("ShapeComponent::deserialize : Can't find \"points\" in ", getId());
+		return false;
+	}
+	setPoints(points);
+
+	return true;
 }
 
 void ShapeComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)

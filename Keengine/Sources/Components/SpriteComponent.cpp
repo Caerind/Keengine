@@ -22,13 +22,10 @@ bool SpriteComponent::renderable() const
 
 void SpriteComponent::setTexture(std::string const& textureName, sf::IntRect const& rect)
 {
-	if (getApplication().hasResource(textureName))
+	if (textureName != "" && getApplication().hasResource(textureName) && getApplication().isResourceLoaded(textureName))
 	{
-		if (getApplication().isResourceLoaded(textureName))
-		{
-			mTexture = textureName;
-			setTexture(getApplication().getResource<Texture>(textureName), rect);
-		}
+		mTexture = textureName;
+		setTexture(getApplication().getResource<Texture>(textureName), rect);
 	}
 }
 
@@ -86,20 +83,36 @@ void SpriteComponent::serialize(Serializer& serializer)
 
 bool SpriteComponent::deserialize(Serializer& serializer)
 {
-	std::string texture;
-	sf::IntRect textureRect;
-	sf::Color color;
-	if (SceneComponent::deserialize(serializer)
-		&& serializer.load("texture", texture)
-		&& serializer.load("textureRect", textureRect)
-		&& serializer.load("color", color))
+	if (!SceneComponent::deserialize(serializer))
 	{
-		setTexture(texture);
-		setTextureRect(textureRect);
-		setColor(color);
-		return true;
+		return false;
 	}
-	return false;
+
+	std::string texture;
+	if (!serializer.load("texture", texture))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("SpriteComponent::deserialize : Can't find \"texture\" in ", getId());
+		texture = "";
+	}
+	setTexture(texture);
+
+	sf::IntRect textureRect;
+	if (!serializer.load("textureRect", textureRect))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("SpriteComponent::deserialize : Can't find \"textureRect\" in ", getId());
+		texture = "";
+	}
+	setTextureRect(textureRect);
+
+	sf::Color color;
+	if (!serializer.load("color", color))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("SpriteComponent::deserialize : Can't find \"color\" in ", getId());
+		color = sf::Color();
+	}
+	setColor(color);
+
+	return true;
 }
 
 void SpriteComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)

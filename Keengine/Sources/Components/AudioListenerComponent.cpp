@@ -68,20 +68,36 @@ void AudioListenerComponent::serialize(Serializer& serializer)
 
 bool AudioListenerComponent::deserialize(Serializer& serializer)
 {
-	float volume;
-	sf::Vector3f direction;
-	sf::Vector3f upvector;
-	if (SceneComponent::deserialize(serializer)
-		&& serializer.load("volume", volume)
-		&& serializer.load("direction", direction)
-		&& serializer.load("upvector", upvector))
+	if (!SceneComponent::deserialize(serializer))
 	{
-		setGlobalVolume(volume);
-		setDirection(direction);
-		setUpVector(upvector);
-		return true;
+		return false;
 	}
-	return false;
+
+	float volume;
+	if (!serializer.load("volume", volume))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("AudioListenerComponent::deserialize : Can't find \"volume\" in ", getId());
+		volume = 100.f;
+	}
+	setGlobalVolume(volume);
+
+	sf::Vector3f direction;
+	if (!serializer.load("direction", direction))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("AudioListenerComponent::deserialize : Can't find \"direction\" in ", getId());
+		direction = sf::Vector3f(0.f, 0.f, -1.f);
+	}
+	setDirection(direction);
+
+	sf::Vector3f upvector;
+	if (!serializer.load("upvector", upvector))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("AudioListenerComponent::deserialize : Can't find \"upvector\" in ", getId());
+		upvector = sf::Vector3f(0.f, 1.f, 0.f);
+	}
+	setUpVector(upvector);
+
+	return true;
 }
 
 } // namespace ke

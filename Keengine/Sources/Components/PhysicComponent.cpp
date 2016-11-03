@@ -268,26 +268,52 @@ void PhysicComponent::serialize(Serializer& serializer)
 
 bool PhysicComponent::deserialize(Serializer& serializer)
 {
-	std::vector<sf::Vector2f> points;
-	float density;
-	float friction;
-	float restitution;
-	bool sensor;
-	if (SceneComponent::deserialize(serializer)
-		&& serializer.load("points", points)
-		&& serializer.load("density", density)
-		&& serializer.load("friction", friction)
-		&& serializer.load("restitution", restitution)
-		&& serializer.load("sensor", sensor))
+	if (!SceneComponent::deserialize(serializer))
 	{
-		setPoints(points);
-		setDensity(density);
-		setFriction(friction);
-		setRestitution(restitution);
-		setSensor(sensor);
-		return true;
+		return false;
 	}
-	return false;
+
+	std::vector<sf::Vector2f> points;
+	if (!serializer.load("points", points))
+	{
+		getLog() << ke::Log::Error << ke::Variant("PhysicComponent::deserialize : Can't find \"points\" in ", getId());
+		return false;
+	}
+	setPoints(points);
+
+	float density;
+	if (!serializer.load("density", density))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("PhysicComponent::deserialize : Can't find \"density\" in ", getId());
+		density = 0.f;
+	}
+	setDensity(density);
+
+	float friction;
+	if (!serializer.load("friction", friction))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("PhysicComponent::deserialize : Can't find \"friction\" in ", getId());
+		friction = 0.2f;
+	}
+	setFriction(friction);
+
+	float restitution;
+	if (!serializer.load("restitution", restitution))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("PhysicComponent::deserialize : Can't find \"restitution\" in ", getId());
+		restitution = 0.f;
+	}
+	setRestitution(restitution);
+
+	bool sensor;
+	if (!serializer.load("sensor", sensor))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("PhysicComponent::deserialize : Can't find \"sensor\" in ", getId());
+		sensor = false;
+	}
+	setSensor(sensor);
+
+	return true;
 }
 
 void PhysicComponent::onTransformNotified()

@@ -51,15 +51,28 @@ void NodeComponent::serialize(Serializer& serializer)
 
 bool NodeComponent::deserialize(Serializer& serializer)
 {
-	float radius;
-	sf::Color color;
-	if (SceneComponent::deserialize(serializer) && serializer.load("radius", radius) && serializer.load("color", color))
+	if (!SceneComponent::deserialize(serializer))
 	{
-		setRadius(radius);
-		setColor(color);
-		return true;
+		return false;
 	}
-	return false;
+
+	float radius;
+	if (!serializer.load("radius", radius))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("NodeComponent::deserialize : Can't find \"radius\" in ", getId());
+		radius = 0.f;
+	}
+	setRadius(radius);
+
+	sf::Color color;
+	if (!serializer.load("color", color))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("NodeComponent::deserialize : Can't find \"color\" in ", getId());
+		color = sf::Color();
+	}
+	setColor(color);
+
+	return true;
 }
 
 void NodeComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)

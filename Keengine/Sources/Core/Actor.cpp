@@ -515,14 +515,17 @@ void Actor::serialize(Serializer& serializer)
 	serializer.save("rot", getRotation());
 	serializer.save("sca", getScale());
 	serializer.save("z", getZ());
-	serializer.save("vel", getVelocity());
-	serializer.save("angv", getAngularVelocity());
-	serializer.save("ptype", static_cast<unsigned int>(getPhysicType()));
-	serializer.save("frot", isFixedRotation());
-	serializer.save("ldamp", getLinearDamping());
-	serializer.save("adamp", getAngularDamping());
-	serializer.save("gsca", getGravityScale());
-	serializer.save("bul", isPhysicBullet());
+	if (mScene.usePhysic() && mBody != nullptr)
+	{
+		serializer.save("vel", getVelocity());
+		serializer.save("angv", getAngularVelocity());
+		serializer.save("ptype", static_cast<unsigned int>(getPhysicType()));
+		serializer.save("frot", isFixedRotation());
+		serializer.save("ldamp", getLinearDamping());
+		serializer.save("adamp", getAngularDamping());
+		serializer.save("gsca", getGravityScale());
+		serializer.save("bul", isPhysicBullet());
+	}
 	serializer.save("count", mComponentIdCounter);
 }
 
@@ -530,123 +533,129 @@ bool Actor::deserialize(Serializer& serializer)
 {
 	if (!serializer.load("id", mId))
 	{
-		getLog() << "id";
+		getLog() << ke::Log::Error << "Actor::deserialize : Can't find \"id\"";
 		return false;
 	}
 
 	bool up;
 	if (!serializer.load("up", up))
 	{
-		getLog() << "up";
-		return false;
+		getLog() << ke::Log::Warning << ke::Variant("Actor::deserialize : Can't find \"up\" in : ", getId());
+		up = true;
 	}
 	setUpdatable(up);
 
 	bool visible;
 	if (!serializer.load("visible", visible))
 	{
-		getLog() << "visible";
-		return false;
+		getLog() << ke::Log::Warning << ke::Variant("Actor::deserialize : Can't find \"visible\" in : ", getId());
+		visible = true;
 	}
 	setVisible(visible);
 
 	sf::Vector2f pos;
 	if (!serializer.load("pos", pos))
 	{
-		getLog() << "pos";
-		return false;
+		getLog() << ke::Log::Warning << ke::Variant("Actor::deserialize : Can't find \"pos\" in : ", getId());
+		pos = sf::Vector2f();
 	}
 	setPosition(pos);
 
 	float rot;
 	if (!serializer.load("rot", rot))
 	{
-		getLog() << "rot";
-		return false;
+		getLog() << ke::Log::Warning << ke::Variant("Actor::deserialize : Can't find \"rot\" in : ", getId());
+		rot = 0.f;
 	}
 	setRotation(rot);
 
 	sf::Vector2f sca;
 	if (!serializer.load("sca", sca))
 	{
-		getLog() << "sca";
-		return false;
+		getLog() << ke::Log::Warning << ke::Variant("Actor::deserialize : Can't find \"sca\" in : ", getId());
+		sca = sf::Vector2f(1.f, 1.f);
 	}
 	setScale(sca);
 
 	float z;
 	if (!serializer.load("z", z))
 	{
-		getLog() << "z";
-		return false;
+		getLog() << ke::Log::Warning << ke::Variant("Actor::deserialize : Can't find \"z\" in : ", getId());
+		z = 0.f;
 	}
 	setZ(z);
 	
-	if (mBody != nullptr)
+	if (mScene.usePhysic() && mBody != nullptr)
 	{
 		sf::Vector2f vel;
 		if (!serializer.load("vel", vel))
 		{
-			getLog() << "vel";
-			return false;
+			getLog() << ke::Log::Warning << ke::Variant("Actor::deserialize : Can't find \"vel\" in : ", getId());
+			vel = sf::Vector2f();
 		}
 		setVelocity(vel);
 
 		float angv;
 		if (!serializer.load("angv", angv))
 		{
-			getLog() << "angv";
-			return false;
+			getLog() << ke::Log::Warning << ke::Variant("Actor::deserialize : Can't find \"angv\" in : ", getId());
+			angv = 0.f;
 		}
 		setAngularVelocity(angv);
 
 		unsigned int ptype;
 		if (!serializer.load("ptype", ptype))
 		{
-			getLog() << "ptype";
-			return false;
+			getLog() << ke::Log::Warning << ke::Variant("Actor::deserialize : Can't find \"ptype\" in : ", getId());
+			ptype = static_cast<unsigned int>(b2_staticBody);
 		}
 		setPhysicType(static_cast<b2BodyType>(ptype));
 
 		bool frot;
 		if (!serializer.load("frot", frot))
 		{
-			getLog() << "frot";
-			return false;
+			getLog() << ke::Log::Warning << ke::Variant("Actor::deserialize : Can't find \"frot\" in : ", getId());
+			frot = false;
 		}
 		setFixedRotation(frot);
 
 		float ldamp;
 		if (!serializer.load("ldamp", ldamp))
 		{
-			getLog() << "ldamp";
-			return false;
+			getLog() << ke::Log::Warning << ke::Variant("Actor::deserialize : Can't find \"ldamp\" in : ", getId());
+			ldamp = 0.01f;
 		}
 		setLinearDamping(ldamp);
 
 		float adamp;
 		if (!serializer.load("adamp", adamp))
 		{
-			getLog() << "adamp";
-			return false;
+			getLog() << ke::Log::Warning << ke::Variant("Actor::deserialize : Can't find \"adamp\" in : ", getId());
+			adamp = 0.f;
 		}
 		setAngularDamping(adamp);
 
 		float gsca;
 		if (!serializer.load("gsca", gsca))
 		{
-			getLog() << "gsca";
-			return false;
+			getLog() << ke::Log::Warning << ke::Variant("Actor::deserialize : Can't find \"gsca\" in : ", getId());
+			gsca = 1.f;
 		}
 		setGravityScale(gsca);
 
 		bool bul; 
 		if (!serializer.load("bul", bul))
 		{
-			getLog() << "bul";
-			return false;
+			getLog() << ke::Log::Warning << ke::Variant("Actor::deserialize : Can't find \"bul\" in : ", getId());
+			bul = false;
 		}
 		setPhysicBullet(bul);
+	}
+
+	if (!serializer.load("count", mComponentIdCounter))
+	{
+		getLog() << ke::Log::Error << ke::Variant("Actor::deserialize : Can't find \"count\" in : ", getId());
+		return false;
 	}
 
 	return true;
@@ -668,9 +677,9 @@ bool Actor::deserializeComponent(Serializer& serializer, Component::Ptr componen
 	{
 		if (serializer.read(component->getType()))
 		{
-			component->deserialize(serializer);
+			bool ret = component->deserialize(serializer);
 			serializer.end();
-			return true;
+			return ret;
 		}
 	}
 	return false;
@@ -695,8 +704,10 @@ void Actor::deserializeComponents(Serializer& serializer)
 		if (component != nullptr)
 		{
 			component->onRegister();
-			component->deserialize(serializer);
-			mComponents.push_back(component);
+			if (component->deserialize(serializer))
+			{
+				mComponents.push_back(component);
+			}
 		}
 	}
 }

@@ -21,13 +21,10 @@ bool TextComponent::renderable() const
 
 void TextComponent::setFont(std::string const& font)
 {
-	if (getApplication().hasResource(font))
+	if (font != "" && getApplication().hasResource(font) && getApplication().isResourceLoaded(font))
 	{
-		if (getApplication().isResourceLoaded(font))
-		{
-			mFont = font;
-			mText.setFont(getApplication().getResource<ke::Font>(font));
-		}
+		mFont = font;
+		mText.setFont(getApplication().getResource<ke::Font>(font));
 	}
 }
 
@@ -104,29 +101,60 @@ void TextComponent::serialize(Serializer& serializer)
 
 bool TextComponent::deserialize(Serializer& serializer)
 {
-	std::string font;
-	unsigned int size;
-	std::string string;
-	sf::Color fillColor;
-	sf::Color outColor;
-	float outThick;
-	if (SceneComponent::deserialize(serializer)
-		&& serializer.load("font", font)
-		&& serializer.load("size", size)
-		&& serializer.load("string", string)
-		&& serializer.load("fillColor", fillColor)
-		&& serializer.load("outColor", outColor)
-		&& serializer.load("outThick", outThick))
+	if (!SceneComponent::deserialize(serializer))
 	{
-		setFont(font);
-		setSize(size);
-		setString(string);
-		setFillColor(fillColor);
-		setOutlineColor(outColor);
-		setOutlineThickness(outThick);
-		return true;
+		return false;
 	}
-	return false;
+
+	std::string font;
+	if (!serializer.load("font", font))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("TextComponent::deserialize : Can't find \"font\" in ", getId());
+		font = "";
+	}
+	setFont(font);
+
+	unsigned int size;
+	if (!serializer.load("size", size))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("TextComponent::deserialize : Can't find \"size\" in ", getId());
+		size = 20;
+	}
+	setSize(size);
+	
+	std::string string;
+	if (!serializer.load("string", string))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("TextComponent::deserialize : Can't find \"string\" in ", getId());
+		string = "";
+	}
+	setString(string);
+
+	sf::Color fillColor;
+	if (!serializer.load("fillColor", fillColor))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("TextComponent::deserialize : Can't find \"fillColor\" in ", getId());
+		fillColor = sf::Color();
+	}
+	setFillColor(fillColor);
+
+	sf::Color outColor;
+	if (!serializer.load("outColor", outColor))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("TextComponent::deserialize : Can't find \"outColor\" in ", getId());
+		outColor = sf::Color();
+	}
+	setOutlineColor(outColor);
+
+	float outThick;
+	if (!serializer.load("outThick", outThick))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("TextComponent::deserialize : Can't find \"outThick\" in ", getId());
+		outThick = 0.f;
+	}
+	setOutlineThickness(outThick);
+
+	return true;
 }
 
 void TextComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)

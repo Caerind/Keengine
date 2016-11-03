@@ -220,7 +220,8 @@ bool ParticleComponent::deserialize(Serializer& serializer)
 	{
 		return false;
 	}
-	return false;
+
+	return true;
 }
 
 std::size_t ParticleComponent::computeParticleCount(sf::Time dt)

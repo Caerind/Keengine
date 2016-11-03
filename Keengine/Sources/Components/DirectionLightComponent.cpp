@@ -102,17 +102,28 @@ void DirectionLightComponent::serialize(Serializer& serializer)
 
 bool DirectionLightComponent::deserialize(Serializer& serializer)
 {
-	float angle;
-	sf::Color color;
-
-	if (Component::deserialize(serializer) && serializer.load("angle", angle) && serializer.load("color", color))
+	if (!Component::deserialize(serializer))
 	{
-		setAngle(angle);
-		setColor(color);
-		return true;
+		return false;
 	}
 
-	return false;
+	float angle;
+	if (!serializer.load("angle", angle))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("DirectionLightComponent::deserialize : Can't find \"angle\" in ", getId());
+		angle = 0.f;
+	}
+	setAngle(angle);
+
+	sf::Color color;
+	if (!serializer.load("color", color))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("DirectionLightComponent::deserialize : Can't find \"color\" in ", getId());
+		color = sf::Color();
+	}
+	setColor(color);
+
+	return true;
 }
 
 } // namespace ke

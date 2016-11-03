@@ -237,27 +237,58 @@ void SceneComponent::serialize(Serializer& serializer)
 
 bool SceneComponent::deserialize(Serializer& serializer)
 {
-	std::string parentId;
-	sf::Vector2f pos;
-	float rot;
-	sf::Vector2f sca;
-	float z;
-	if (Component::deserialize(serializer)
-		&& serializer.load("visible", mVisible)
-		&& serializer.load("parent", parentId)
-		&& serializer.load("pos", pos)
-		&& serializer.load("rot", rot)
-		&& serializer.load("sca", sca)
-		&& serializer.load("z", z))
+	if (!Component::deserialize(serializer))
 	{
-		attachToParent(parentId);
-		setPosition(pos);
-		setRotation(rot);
-		setScale(sca);
-		setZ(z);
-		return true;
+		return false;
 	}
-	return false;
+
+	if (!serializer.load("visible", mVisible))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("SceneComponent::deserialize : Can't find \"visible\" in : ", getId());
+		mVisible = true;
+	}
+
+	std::string parent;
+	if (!serializer.load("parent", parent))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("SceneComponent::deserialize : Can't find \"parent\" in : ", getId());
+		parent = "";
+	}
+	attachToParent(parent);
+
+	sf::Vector2f pos;
+	if (!serializer.load("pos", pos))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("SceneComponent::deserialize : Can't find \"pos\" in : ", getId());
+		pos = sf::Vector2f();
+	}
+	setPosition(pos);
+
+	float rot;
+	if (!serializer.load("rot", rot))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("SceneComponent::deserialize : Can't find \"rot\" in : ", getId());
+		rot = 0.f;
+	}
+	setRotation(rot);
+
+	sf::Vector2f sca;
+	if (!serializer.load("sca", sca))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("SceneComponent::deserialize : Can't find \"sca\" in : ", getId());
+		sca = sf::Vector2f(1.f, 1.f);
+	}
+	setScale(sca);
+
+	float z;
+	if (!serializer.load("z", z))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("SceneComponent::deserialize : Can't find \"z\" in : ", getId());
+		z = 0.f;
+	}
+	setZ(z);
+
+	return true;
 }
 
 void SceneComponent::renderCurrent(sf::RenderTarget& target, sf::RenderStates states)

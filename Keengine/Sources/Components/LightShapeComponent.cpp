@@ -200,15 +200,28 @@ void LightShapeComponent::serialize(Serializer& serializer)
 
 bool LightShapeComponent::deserialize(Serializer& serializer)
 {
-	bool on;
-	std::vector<sf::Vector2f> points;
-	if (SceneComponent::deserialize(serializer) && serializer.load("on", on) && serializer.load("points", points))
+	if (!SceneComponent::deserialize(serializer))
 	{
-		setOn(on);
-		setPoints(points);
-		return true;
+		return false;
 	}
-	return false;
+
+	std::vector<sf::Vector2f> points;
+	if (!serializer.load("points", points))
+	{
+		getLog() << ke::Log::Error << ke::Variant("LightShapeComponent::deserialize : Can't find \"points\" in ", getId());
+		return false;
+	}
+	setPoints(points);
+
+	bool on;
+	if (!serializer.load("on", on))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("PhysicComponent::deserialize : Can't find \"on\" in ", getId());
+		on = true;
+	}
+	setOn(on);
+
+	return true;
 }
 
 void LightShapeComponent::onTransformNotified()

@@ -171,7 +171,19 @@ void Component::serialize(Serializer& serializer)
 
 bool Component::deserialize(Serializer& serializer)
 {
-	return (serializer.load("id", mId) && serializer.load("up", mUpdatable));
+	if (!serializer.load("id", mId))
+	{
+		getLog() << ke::Log::Error << "Component::deserialize : Can't find \"id\"";
+		return false;
+	}
+
+	if (!serializer.load("up", mUpdatable))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("Component::deserialize : Can't find \"up\" in : ", getId());
+		mUpdatable = true;
+	}
+
+	return true;
 }
 
 } // namespace ke

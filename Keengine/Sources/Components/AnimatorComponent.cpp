@@ -213,13 +213,28 @@ void AnimatorComponent::serialize(Serializer& serializer)
 
 bool AnimatorComponent::deserialize(Serializer& serializer)
 {
-	sf::Time elapsed;
-	if (!SceneComponent::deserialize(serializer) 
-		|| !serializer.load("current", mActualAnimation) 
-		|| !serializer.load("playing", mPlaying) 
-		|| !serializer.load("elapsed", elapsed))
+	if (!SceneComponent::deserialize(serializer))
 	{
 		return false;
+	}
+
+	if (!serializer.load("current", mActualAnimation))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("AnimatorComponent::deserialize : Can't find \"current\" in ", getId());
+		mActualAnimation = "";
+	}
+
+	if (!serializer.load("playing", mPlaying))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("AnimatorComponent::deserialize : Can't find \"playing\" in ", getId());
+		mPlaying = false;
+	}
+
+	sf::Time elapsed;
+	if (!serializer.load("elapsed", elapsed))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("AnimatorComponent::deserialize : Can't find \"elapsed\" in ", getId());
+		elapsed = sf::Time::Zero;
 	}
 
 	while (serializer.read("Animation"))

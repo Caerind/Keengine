@@ -152,8 +152,7 @@ class SmartPool
         }
 
         /// \brief Add a child
-        /// \param filter Filter to determine which objects can be handled by the pool
-        /// \return The child
+        /// \param child The child
         void addChild(SmartPool<T>* child)
         {
             if (child != nullptr)

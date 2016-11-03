@@ -40,13 +40,20 @@ void InputComponent::serialize(Serializer& serializer)
 
 bool InputComponent::deserialize(Serializer& serializer)
 {
-	float priority;
-	if (Component::deserialize(serializer) && serializer.load("priority", priority))
+	if (!Component::deserialize(serializer))
 	{
-		setPriority(priority);
-		return true;
+		return false;
 	}
-	return false;
+
+	float priority;
+	if (!serializer.load("priority", priority))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("InputComponent::deserialize : Can't find \"priority\" in ", getId());
+		priority = 0.f;
+	}
+	setPriority(priority);
+
+	return true;
 }
 
 } // namespace ke

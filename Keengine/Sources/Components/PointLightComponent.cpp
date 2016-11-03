@@ -147,26 +147,52 @@ void PointLightComponent::serialize(Serializer& serializer)
 
 bool PointLightComponent::deserialize(Serializer& serializer)
 {
-	std::string texture;
-	sf::Vector2f origin;
-	sf::Color color;
-	float intensity;
-	bool on;
-	if (SceneComponent::deserialize(serializer)
-		&& serializer.load("texture", texture)
-		&& serializer.load("origin", origin)
-		&& serializer.load("color", color)
-		&& serializer.load("intensity", intensity)
-		&& serializer.load("on", on))
+	if (!SceneComponent::deserialize(serializer))
 	{
-		setTexture(texture);
-		setOrigin(origin);
-		setColor(color);
-		setIntensity(intensity);
-		setOn(on);
-		return true;
+		return false;
 	}
-	return false;
+
+	std::string texture;
+	if (!serializer.load("texture", texture))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("PointLightComponent::deserialize : Can't find \"texture\" in ", getId());
+		texture = "";
+	}
+	setTexture(texture);
+
+	sf::Vector2f origin;
+	if (!serializer.load("origin", origin))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("PointLightComponent::deserialize : Can't find \"origin\" in ", getId());
+		origin = sf::Vector2f();
+	}
+	setOrigin(origin);
+
+	sf::Color color;
+	if (!serializer.load("color", color))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("PointLightComponent::deserialize : Can't find \"color\" in ", getId());
+		color = sf::Color();
+	}
+	setColor(color);
+
+	float intensity;
+	if (!serializer.load("intensity", intensity))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("PointLightComponent::deserialize : Can't find \"intensity\" in ", getId());
+		intensity = 1.f;
+	}
+	setIntensity(intensity);
+
+	bool on;
+	if (!serializer.load("on", on))
+	{
+		getLog() << ke::Log::Warning << ke::Variant("PointLightComponent::deserialize : Can't find \"on\" in ", getId());
+		on = true;
+	}
+	setOn(on);
+
+	return true;
 }
 
 void PointLightComponent::onTransformNotified()

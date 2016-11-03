@@ -338,6 +338,68 @@ bool Scene::loadFromXml(const std::string& filepath)
 		mLights->setAmbientColor(lambc);
 	}
 
+	// Load Background
+	if (xml.read("Background"))
+	{
+		unsigned int usage;
+		if (!xml.load("usage", usage))
+		{
+			usage = static_cast<unsigned int>(Background::Usage::Color);
+		}
+		
+		switch (usage)
+		{
+			case Background::Usage::Color:
+			{
+				sf::Color color;
+				if (!xml.load("color", color))
+				{
+					color = sf::Color();
+				}
+				mBackground.useColor(color);
+			} break;
+
+			case Background::Usage::Repeated:
+			{
+				std::string texture;
+				if (!xml.load("texture", texture))
+				{
+					texture = "";
+				}
+
+				sf::IntRect rect;
+				if (!xml.load("rect", rect))
+				{
+					rect = sf::IntRect();
+				}
+	
+				// TODO : Load from file
+				//mBackground.useRepeatedTexture(texture, rect);
+			} break;
+
+			case Background::Usage::Scaled:
+			{
+				std::string texture;
+				if (!xml.load("texture", texture))
+				{
+					texture = "";
+				}
+
+				sf::IntRect rect;
+				if (!xml.load("rect", rect))
+				{
+					rect = sf::IntRect();
+				}
+
+				// TODO : Load from file
+				//mBackground.useScaledTexture(texture, rect);
+			} break;
+
+			default: break;
+		}
+		xml.end();
+	}
+
 	// Load Effects
 	if (useEffect() && xml.read("Effects"))
 	{
@@ -427,6 +489,32 @@ void Scene::saveToXml(const std::string& filepath)
 		xml.save("lradm", mLights->getDirectionEmissionRadiusMultiplier());
 		xml.save("lambc", mLights->getAmbientColor());
 	}
+
+	xml.create("Background");
+	xml.save("usage", mBackground.getUsage());
+	switch (mBackground.getUsage())
+	{
+		case Background::Usage::Color: 
+		{
+			xml.save("color", mBackground.getColor());
+		} break;
+
+		case Background::Usage::Repeated:
+		{
+			//xml.save("texture", )
+			xml.save("rect", mBackground.getTextureRect());
+		} break;
+
+		case Background::Usage::Scaled:
+		{
+			//xml.save("texture", )
+			xml.save("rect", mBackground.getTextureRect());
+		} break;
+
+		default: break;
+	}
+	xml.close();
+
 	if (useEffect() && mEffects.size() > 0)
 	{
 		xml.create("Effects");

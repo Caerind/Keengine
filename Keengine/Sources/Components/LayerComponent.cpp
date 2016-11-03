@@ -671,7 +671,7 @@ bool LayerComponent::deserialize(Serializer& serializer)
 		return false;
 	}
 	// TODO : Load
-	return false;
+	return true;
 }
 
 void LayerComponent::renderCurrent(sf::RenderTarget & target, sf::RenderStates states)
