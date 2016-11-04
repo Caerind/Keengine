@@ -34,7 +34,7 @@ float randomDev(float middle, float deviation)
 	return Random::instance()(middle - deviation, middle + deviation);
 }
 
-void setRandomSeed(std::string const& seed)
+void setRandomSeed(const std::string& seed)
 {
     Random::instance().setSeed(seed);
 }

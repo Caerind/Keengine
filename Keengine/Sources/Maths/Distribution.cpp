@@ -34,32 +34,30 @@ Distribution<sf::Time> uniform(sf::Time min, sf::Time max)
     });
 }
 
-Distribution<sf::Vector2f> rect(sf::Vector2f center, sf::Vector2f halfSize)
+Distribution<sf::Vector2f> rect(const sf::Vector2f& center, const sf::Vector2f& halfSize)
 {
-    assert(halfSize.x >= 0.f && halfSize.y >= 0.f);
     return Distribution<sf::Vector2f>([=] () -> sf::Vector2f
     {
-        return {randomDev(center.x, halfSize.x), randomDev(center.y, halfSize.y)};
+        return sf::Vector2f(randomDev(center.x, halfSize.x), randomDev(center.y, halfSize.y));
     });
 }
 
-Distribution<sf::Vector2f> circle(sf::Vector2f center, float radius)
+Distribution<sf::Vector2f> circle(const sf::Vector2f& center, float radius)
 {
-    assert(radius >= 0.f);
     return Distribution<sf::Vector2f>([=] () -> sf::Vector2f
     {
         sf::Vector2f n;
-        setLength(n, radius * std::sqrt(random(0.f,1.f)));
-        setPolarAngle(n, random(0.f,360.f));
+        setLength(n, radius * random(0.f, 1.f));
+        setPolarAngle(n, random(0.f, 360.f));
         return center + n;
     });
 }
 
-Distribution<sf::Vector2f> deflect(sf::Vector2f direction, float maxRotation)
+Distribution<sf::Vector2f> deflect(const sf::Vector2f& direction, float maxRotation)
 {
     return Distribution<sf::Vector2f>([=] () -> sf::Vector2f
     {
-        return direction + rotated(direction, randomDev(0.f,maxRotation));
+        return rotated(direction, randomDev(0.f, maxRotation));
     });
 }
 

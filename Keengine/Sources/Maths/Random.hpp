@@ -19,40 +19,55 @@ class Random
             setSeed(oss.str());
         }
 
-        Random(std::string const& seed)
+        Random(const std::string& seed)
         {
             setSeed(seed);
         }
 
         int operator()(int min, int max)
         {
-            assert(min <= max);
+			if (min > max)
+			{
+				int temp = min;
+				max = min;
+				min = temp;
+			}
             std::uniform_int_distribution<int> distribution(min, max);
             return distribution(mGenerator);
         }
 
         unsigned int operator()(unsigned int min, unsigned int max)
         {
-            assert(min <= max);
+			if (min > max)
+			{
+				unsigned int temp = min;
+				max = min;
+				min = temp;
+			}
             std::uniform_int_distribution<unsigned int> distribution(min, max);
             return distribution(mGenerator);
         }
 
         float operator()(float min, float max)
         {
-            assert(min <= max);
+			if (min > max)
+			{
+				float temp = min;
+				max = min;
+				min = temp;
+			}
             std::uniform_real_distribution<float> distribution(min, max);
             return distribution(mGenerator);
         }
 
-        void setSeed(std::string const& seed)
+        void setSeed(const std::string& seed)
         {
             mSeed = seed;
             std::seed_seq s(mSeed.begin(), mSeed.end());
             mGenerator.seed(s);
         }
 
-        std::string getSeed() const
+        const std::string& getSeed() const
         {
             return mSeed;
         }
@@ -78,7 +93,7 @@ float random(float min, float max);
 
 float randomDev(float middle, float deviation);
 
-void setRandomSeed(std::string const& seed);
+void setRandomSeed(const std::string& seed);
 
 std::string getRandomSeed();
 

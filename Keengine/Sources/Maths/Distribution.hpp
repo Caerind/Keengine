@@ -24,7 +24,7 @@ namespace priv
 		{
 		}
 
-		T operator() () const
+		T operator()() const
 		{
 			return value;
 		}
@@ -63,15 +63,19 @@ Distribution<int> uniform(int min, int max);
 Distribution<unsigned int> uniform(unsigned int min, unsigned int max);
 Distribution<float> uniform(float min, float max);
 Distribution<sf::Time> uniform(sf::Time min, sf::Time max);
-Distribution<sf::Vector2f> rect(sf::Vector2f center, sf::Vector2f halfSize);
-Distribution<sf::Vector2f> circle(sf::Vector2f center, float radius);
-Distribution<sf::Vector2f> deflect(sf::Vector2f direction, float maxRotation);
+Distribution<sf::Vector2f> rect(const sf::Vector2f& center, const sf::Vector2f& halfSize);
+Distribution<sf::Vector2f> circle(const sf::Vector2f& center, float radius);
+Distribution<sf::Vector2f> deflect(const sf::Vector2f& direction, float maxRotation);
 
 template <typename T>
 Distribution<T> uniformT(T min, T max)
 {
-    assert(min <= max);
-
+	if (min > max)
+	{
+		T temp = min;
+		max = min;
+		min = temp;
+	}
     return Distribution<T>([=] () -> T
     {
         return random(min, max);
