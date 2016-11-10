@@ -16,11 +16,8 @@ int main()
 {
 	ke::Application::init("Example/");
 
-	ke::Application::createResource<ke::Texture>("sfml", "Example/sfml.png");
-	ke::Application::createResource<ke::Texture>("particle", "Example/particle.png");
-	ke::Application::createResource<ke::Texture>("cat", "Example/cat.png");
-	ke::Application::createResource<ke::Theme>("css", "Example/widgets.css");
-
+	ke::Application::loadResources("Example/resources.xml");
+	
 	ke::Application::createResource<ke::Lang>("english", "Example/English.lang");
 	ke::Application::createResource<ke::Lang>("french", "Example/French.lang");
 
@@ -48,9 +45,9 @@ int main()
 	int choice = 1;
 
 	ke::Scene scene("main", ke::Scene::Light | ke::Scene::Physic);
-	scene.useBackgroundRepeatedTexture(&ke::Application::getResource<ke::Texture>("sfml")); // TODO : Serialize background
 	if (choice == 0)
 	{
+		scene.useBackgroundRepeatedTexture("sfml");
 		scene.getPhysic()->setPixelsPerMeter(32.f);
 		scene.getPhysic()->setRenderDebug(true);
 		scene.getPhysic()->setGravity();

@@ -136,8 +136,8 @@ class Scene
 
 		// Background
 		void useBackgroundColor(const sf::Color& color);
-		void useBackgroundScaledTexture(sf::Texture* texture, sf::IntRect rect = sf::IntRect());
-		void useBackgroundRepeatedTexture(sf::Texture* texture, sf::IntRect rect = sf::IntRect());
+		void useBackgroundScaledTexture(const std::string& textureName, sf::IntRect rect = sf::IntRect());
+		void useBackgroundRepeatedTexture(const std::string& textureName, sf::IntRect rect = sf::IntRect());
 
 		// Getters
 		sf::View& getView();

@@ -501,6 +501,11 @@ void Application::releaseAllResources()
     instance().mResources.releaseAllResources();
 }
 
+void Application::loadResources(const std::string& filename)
+{
+	instance().mResources.loadResources(filename);
+}
+
 void Application::setScriptPath(std::string const& scriptPath)
 {
 	instance().mScriptPath = scriptPath;
@@ -927,35 +932,29 @@ void Application::useBackgroundColor(sf::Color color)
     instance().mWindow.useBackgroundColor(color);
 }
 
-void Application::useBackgroundScaledTexture(const std::string& filename, sf::IntRect rect)
+void Application::useBackgroundScaledTexture(const std::string& textureName, sf::IntRect rect)
 {
-	if (filename != "" && hasResource(filename) && isResourceLoaded(filename))
+	if (textureName != "" && isResourceLoaded(textureName))
 	{
-		sf::Texture* tex = &getResource<Texture>(filename);
-		instance().mWindow.useBackgroundScaledTexture(tex, rect);
-		instance().mBackgroundFilename = (tex != nullptr) ? filename : "";
+		instance().mWindow.useBackgroundScaledTexture(&getResource<Texture>(textureName), rect);
 		return;
 	}
 	else
 	{
 		instance().mWindow.useBackgroundScaledTexture(nullptr, rect);
-		instance().mBackgroundFilename = "";
 	}
 }
 
-void Application::useBackgroundRepeatedTexture(const std::string& filename, sf::IntRect rect)
+void Application::useBackgroundRepeatedTexture(const std::string& textureName, sf::IntRect rect)
 {
-	if (filename != "" && hasResource(filename) && isResourceLoaded(filename))
+	if (textureName != "" && isResourceLoaded(textureName))
 	{
-		sf::Texture* tex = &getResource<Texture>(filename);
-		instance().mWindow.useBackgroundRepeatedTexture(tex, rect);
-		instance().mBackgroundFilename = (tex != nullptr) ? filename : "";
+		instance().mWindow.useBackgroundRepeatedTexture(&getResource<Texture>(textureName), rect);
 		return;
 	}
 	else
 	{
 		instance().mWindow.useBackgroundRepeatedTexture(nullptr, rect);
-		instance().mBackgroundFilename = "";
 	}
 }
 
@@ -977,6 +976,11 @@ sf::IntRect Application::getBackgroundTextureRect()
 std::size_t Application::getBackgroundUsage()
 {
 	return instance().mWindow.getBackgroundUsage();
+}
+
+std::string Application::getBackgroundTextureName()
+{
+	return instance().mWindow.getBackgroundTextureName();
 }
 
 Application::Application()

@@ -22,7 +22,6 @@
     <None Include="..\NOTES.md" />
     <None Include="..\README.md" />
     <None Include="Example\application_settings.ini" />
-    <None Include="Example\English.lang" />
     <None Include="Example\inputs.cfg" />
     <None Include="Example\map.tmx" />
     <None Include="Example\script.lua" />
@@ -353,7 +352,7 @@
     <ClInclude Include="Sources\System\Variant.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Example\French.lang" />
+    <Xml Include="Example\resources.xml" />
     <Xml Include="Example\scene-main.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

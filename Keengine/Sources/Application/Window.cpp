@@ -473,12 +473,12 @@ void Window::useBackgroundColor(const sf::Color& color)
 	mBackground.useColor(color);
 }
 
-void Window::useBackgroundScaledTexture(sf::Texture* texture, sf::IntRect rect)
+void Window::useBackgroundScaledTexture(Texture* texture, sf::IntRect rect)
 {
 	mBackground.useScaledTexture(texture, rect);
 }
 
-void Window::useBackgroundRepeatedTexture(sf::Texture* texture, sf::IntRect rect)
+void Window::useBackgroundRepeatedTexture(Texture* texture, sf::IntRect rect)
 {
 	mBackground.useRepeatedTexture(texture, rect);
 }
@@ -506,6 +506,11 @@ const sf::IntRect& Window::getBackgroundTextureRect() const
 std::size_t Window::getBackgroundUsage() const
 {
 	return mBackground.getUsage();
+}
+
+std::string Window::getBackgroundTextureName() const
+{
+	return mBackground.getTextureName();
 }
 
 } // namespace ke

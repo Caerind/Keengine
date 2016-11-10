@@ -4,54 +4,6 @@
 namespace ke
 {
 
-Animation::Animation()
-{
-}
-
-void Animation::addFrame(Frame const& frame)
-{
-	mFrames.push_back(frame);
-}
-
-void Animation::addFrame(std::string const& textureName, sf::IntRect const& textureRect, sf::Time duration)
-{
-	Frame frame;
-	frame.textureName = textureName;
-	frame.textureRect = textureRect;
-	frame.duration = duration;
-	addFrame(frame);
-}
-
-std::size_t Animation::getFrameCount() const
-{
-	return mFrames.size();
-}
-
-Frame& Animation::getFrame(std::size_t index)
-{
-	return mFrames.at(index);
-}
-
-void Animation::removeFrame(std::size_t index)
-{
-	mFrames.erase(mFrames.begin() + index);
-}
-
-void Animation::removeAllFrames()
-{
-	mFrames.clear();
-}
-
-sf::Time Animation::getDuration() const
-{
-	sf::Time duration;
-	for (const auto& f : mFrames)
-	{
-		duration += f.duration;
-	}
-	return duration;
-}
-
 AnimatorComponent::AnimatorComponent(Actor& actor)
 	: SceneComponent(actor)
 	, mPlaying(false)
@@ -84,9 +36,18 @@ std::size_t AnimatorComponent::getAnimationCount() const
 	return mAnimations.size();
 }
 
-Animation& AnimatorComponent::getAnimation(std::string const& name)
+Animation& AnimatorComponent::addAnimation(const std::string& name, const std::string& animationName)
 {
-	return mAnimations[name];
+	auto itr = mAnimations.find(name);
+	if (itr != mAnimations.end())
+	{
+		return itr->second;
+	}
+	else
+	{
+		mAnimations[name] = getApplication().getResource<Animation>(animationName);
+		return mAnimations[name];
+	}
 }
 
 void AnimatorComponent::removeAnimation(std::string const& name)
@@ -147,7 +108,7 @@ Animation& AnimatorComponent::getActualAnimation()
 	return mAnimations[mActualAnimation];
 }
 
-Frame& AnimatorComponent::getActualFrame()
+Animation::Frame& AnimatorComponent::getActualFrame()
 {
 	return getActualAnimation().getFrame(mActualFrame);
 }
@@ -161,7 +122,7 @@ void AnimatorComponent::update(sf::Time dt)
 		if (mTimeElapsed >= t)
 		{
 			mActualFrame = (mActualFrame + 1) % getActualAnimation().getFrameCount();
-			const Frame& newFrame = getActualFrame();
+			const Animation::Frame& newFrame = getActualFrame();
 			if (mActualTexture != newFrame.textureName)
 			{
 				mActualTexture = newFrame.textureName;
@@ -195,18 +156,7 @@ void AnimatorComponent::serialize(Serializer& serializer)
 	{
 		serializer.create("Animation");
 		serializer.save("name", itr->first);
-		Animation& a = itr->second;
-		serializer.save("size", a.getFrameCount());
-		for (std::size_t j = 0; j < a.getFrameCount(); j++)
-		{
-			Frame& f = a.getFrame(j);
-			serializer.create("Frame");
-			serializer.save("id", j);
-			serializer.save("texture", f.textureName);
-			serializer.save("textureRect", f.textureRect);
-			serializer.save("duration", f.duration);
-			serializer.close();
-		}
+		serializer.save("animation", itr->second.getName());
 		serializer.close();
 	}
 }
@@ -237,37 +187,11 @@ bool AnimatorComponent::deserialize(Serializer& serializer)
 		elapsed = sf::Time::Zero;
 	}
 
-	while (serializer.read("Animation"))
+	for (pugi::xml_node animation : serializer.getNode().children("Animation"))
 	{
-		std::string name;
-		unsigned int size;
-		if (serializer.load("name", name) && serializer.load("size", size))
-		{
-			Animation& anim = getAnimation(name);
-			while (anim.getFrameCount() < size)
-			{
-				anim.addFrame();
-			}
-			while (serializer.read("Frame"))
-			{
-				unsigned int id;
-				std::string texture;
-				sf::IntRect textureRect;
-				sf::Time duration;
-				if (serializer.load("id", id)
-					&& serializer.load("texture", texture)
-					&& serializer.load("textureRect", textureRect)
-					&& serializer.load("duration", duration))
-				{
-					Frame& f = anim.getFrame(id);
-					f.textureName = texture;
-					f.textureRect = textureRect;
-					f.duration = duration;
-				}
-				serializer.end();
-			}
-		}
-		serializer.end();
+		std::string name = animation.attribute("name").as_string();
+		std::string aName = animation.attribute("animation").as_string();
+		mAnimations[name] = getApplication().getResource<Animation>(aName);
 	}
 
 	if (mPlaying)

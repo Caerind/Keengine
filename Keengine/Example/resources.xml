@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Resources>
+  <Texture name="sfml" filename="Example/sfml.png" />
+  <Texture name="particle" filename="Example/particle.png" />
+  <Texture name="cat" filename="Example/cat.png" />
+  <Theme name="css" filename="Example/widgets.css" />
+  <Lang name="english">
+    <Token name="hello">Hello World !</Token>
+  </Lang>
+  <Lang name="french">
+    <Token name="hello">Bonjour le monde !</Token>
+  </Lang>
+  <Animation name="ninja-cat-idle">
+		<Frame textureName="cat" textureRect="0,0,64,64" duration="0.15" />
+		<Frame textureName="cat" textureRect="64,0,64,64" duration="0.15" />
+		<Frame textureName="cat" textureRect="128,0,64,64" duration="0.15" />
+		<Frame textureName="cat" textureRect="192,0,64,64" duration="0.15" />
+	</Animation>
+	<Animation name="ninja-cat-run">
+		<Frame textureName="cat" textureRect="0,64,64,64" duration="0.15" />
+		<Frame textureName="cat" textureRect="64,64,64,64" duration="0.15" />
+		<Frame textureName="cat" textureRect="128,64,64,64" duration="0.15" />
+		<Frame textureName="cat" textureRect="192,64,64,64" duration="0.15" />
+		<Frame textureName="cat" textureRect="256,64,64,64" duration="0.15" />
+		<Frame textureName="cat" textureRect="320,64,64,64" duration="0.15" />
+		<Frame textureName="cat" textureRect="384,64,64,64" duration="0.15" />
+		<Frame textureName="cat" textureRect="448,64,64,64" duration="0.15" />
+	</Animation>
+</Resources>

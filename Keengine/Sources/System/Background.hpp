@@ -6,6 +6,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
+#include "../Application/ResourceManager.hpp"
+
 namespace ke
 {
 
@@ -23,8 +25,8 @@ class Background
 		Background();
 
 		void useColor(const sf::Color& color);
-		void useScaledTexture(sf::Texture* texture, sf::IntRect rect = sf::IntRect());
-		void useRepeatedTexture(sf::Texture* texture, sf::IntRect rect = sf::IntRect());
+		void useScaledTexture(Texture* texture, sf::IntRect rect = sf::IntRect());
+		void useRepeatedTexture(Texture* texture, sf::IntRect rect = sf::IntRect());
 
 		void draw(sf::RenderTarget& target);
 
@@ -34,6 +36,7 @@ class Background
 		const sf::Color& getColor() const;
 		const sf::IntRect& getTextureRect() const;
 		std::size_t getUsage() const;
+		std::string getTextureName() const;
 
 	private:
 		void update();
@@ -42,6 +45,7 @@ class Background
 		sf::Vector2u mSize;
 		sf::RectangleShape mRectangle;
 		sf::Sprite mSprite;
+		Texture* mTexture;
 		std::size_t mUsage;
 };
 

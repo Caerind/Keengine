@@ -17,11 +17,12 @@ void Background::useColor(const sf::Color& color)
 	mSize = sf::Vector2u(); // Force update
 }
 
-void Background::useScaledTexture(sf::Texture* texture, sf::IntRect rect)
+void Background::useScaledTexture(Texture* texture, sf::IntRect rect)
 {
-	if (texture != nullptr)
+	mTexture = texture;
+	if (mTexture != nullptr)
 	{
-		mSprite.setTexture(*texture);
+		mSprite.setTexture(*mTexture);
 		if (rect != sf::IntRect())
 		{
 			mSprite.setTextureRect(rect);
@@ -35,11 +36,12 @@ void Background::useScaledTexture(sf::Texture* texture, sf::IntRect rect)
 	mSize = sf::Vector2u(); // Force update
 }
 
-void Background::useRepeatedTexture(sf::Texture* texture, sf::IntRect rect)
+void Background::useRepeatedTexture(Texture* texture, sf::IntRect rect)
 {
-	if (texture != nullptr)
+	mTexture = texture;
+	if (mTexture != nullptr)
 	{
-		mSprite.setTexture(*texture);
+		mSprite.setTexture(*mTexture);
 		if (rect != sf::IntRect())
 		{
 			mSprite.setTextureRect(rect);
@@ -116,6 +118,11 @@ const sf::IntRect& Background::getTextureRect() const
 std::size_t Background::getUsage() const
 {
 	return mUsage;
+}
+
+std::string Background::getTextureName() const
+{
+	return (mTexture != nullptr) ? mTexture->getName() : "";
 }
 
 void Background::update()

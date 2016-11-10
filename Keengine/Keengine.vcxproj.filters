@@ -52,9 +52,6 @@
     <None Include="Example\inputs.cfg">
       <Filter>Example</Filter>
     </None>
-    <None Include="Example\English.lang">
-      <Filter>Example</Filter>
-    </None>
     <None Include="Example\map.tmx">
       <Filter>Example</Filter>
     </None>
@@ -1021,10 +1018,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="Example\French.lang">
+    <Xml Include="Example\scene-main.xml">
       <Filter>Example</Filter>
     </Xml>
-    <Xml Include="Example\scene-main.xml">
+    <Xml Include="Example\resources.xml">
       <Filter>Example</Filter>
     </Xml>
   </ItemGroup>

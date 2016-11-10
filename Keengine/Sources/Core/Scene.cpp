@@ -253,14 +253,28 @@ void Scene::useBackgroundColor(const sf::Color& color)
 	mBackground.useColor(color);
 }
 
-void Scene::useBackgroundScaledTexture(sf::Texture* texture, sf::IntRect rect)
+void Scene::useBackgroundScaledTexture(const std::string& textureName, sf::IntRect rect)
 {
-	mBackground.useScaledTexture(texture, rect);
+	if (textureName != "" && getApplication().isResourceLoaded(textureName))
+	{
+		mBackground.useScaledTexture(&getApplication().getResource<Texture>(textureName), rect);
+	}
+	else
+	{
+		mBackground.useScaledTexture(nullptr, rect);
+	}
 }
 
-void Scene::useBackgroundRepeatedTexture(sf::Texture* texture, sf::IntRect rect)
+void Scene::useBackgroundRepeatedTexture(const std::string& textureName, sf::IntRect rect)
 {
-	mBackground.useRepeatedTexture(texture, rect);
+	if (textureName != "" && getApplication().isResourceLoaded(textureName))
+	{
+		mBackground.useRepeatedTexture(&getApplication().getResource<Texture>(textureName), rect);
+	}
+	else
+	{
+		mBackground.useRepeatedTexture(nullptr, rect);
+	}
 }
 
 sf::View& Scene::getView()
@@ -373,8 +387,11 @@ bool Scene::loadFromXml(const std::string& filepath)
 					rect = sf::IntRect();
 				}
 	
-				// TODO : Load from file
-				//mBackground.useRepeatedTexture(texture, rect);
+				if (getApplication().isResourceLoaded(texture))
+				{
+					mBackground.useRepeatedTexture(&getApplication().getResource<Texture>(texture), rect);
+				}
+
 			} break;
 
 			case Background::Usage::Scaled:
@@ -391,8 +408,11 @@ bool Scene::loadFromXml(const std::string& filepath)
 					rect = sf::IntRect();
 				}
 
-				// TODO : Load from file
-				//mBackground.useScaledTexture(texture, rect);
+				if (getApplication().isResourceLoaded(texture))
+				{
+					mBackground.useScaledTexture(&getApplication().getResource<Texture>(texture), rect);
+				}
+
 			} break;
 
 			default: break;
@@ -501,13 +521,13 @@ void Scene::saveToXml(const std::string& filepath)
 
 		case Background::Usage::Repeated:
 		{
-			//xml.save("texture", )
+			xml.save("texture", mBackground.getTextureName());
 			xml.save("rect", mBackground.getTextureRect());
 		} break;
 
 		case Background::Usage::Scaled:
 		{
-			//xml.save("texture", )
+			xml.save("texture", mBackground.getTextureName());
 			xml.save("rect", mBackground.getTextureRect());
 		} break;
 

@@ -9,39 +9,12 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/System/Time.hpp>
 
+#include "../Application/ResourceManager.hpp"
+
 #include "../Core/SceneComponent.hpp"
 
 namespace ke
 {
-
-struct Frame
-{
-	std::string textureName;
-	sf::IntRect textureRect;
-	sf::Time duration;
-};
-
-class Animation
-{
-	public:
-		Animation();
-
-		void addFrame(Frame const& frame = Frame());
-		void addFrame(std::string const& textureName, sf::IntRect const& textureRect, sf::Time duration);
-
-		std::size_t getFrameCount() const;
-
-		Frame& getFrame(std::size_t index);
-
-		void removeFrame(std::size_t index);
-
-		void removeAllFrames();
-
-		sf::Time getDuration() const;
-
-	private:
-		std::vector<Frame> mFrames;
-};
 
 class AnimatorComponent : public SceneComponent
 {
@@ -58,7 +31,7 @@ class AnimatorComponent : public SceneComponent
 
 		std::size_t getAnimationCount() const;
 
-		Animation& getAnimation(std::string const& name);
+		Animation& addAnimation(const std::string& name, const std::string& animationName);
 
 		void removeAnimation(std::string const& name);
 
@@ -72,7 +45,7 @@ class AnimatorComponent : public SceneComponent
 		void setElapsedTime(sf::Time elapsed);
 
 		Animation& getActualAnimation();
-		Frame& getActualFrame();
+		Animation::Frame& getActualFrame();
 
 		void update(sf::Time dt);
 		

@@ -13,9 +13,24 @@ Resource::~Resource()
 {
 }
 
+void Resource::setLoaded(bool loaded)
+{
+	mLoaded = loaded;
+}
+
 bool Resource::isLoaded() const
 { 
 	return mLoaded; 
+}
+
+void Resource::setName(const std::string& name)
+{
+	mName = name;
+}
+
+const std::string& Resource::getName() const
+{
+	return mName;
 }
 
 ResourceManager::ResourceManager()
@@ -27,33 +42,134 @@ ResourceManager::~ResourceManager()
 	releaseAllResources();
 }
 
-bool ResourceManager::hasResource(std::string const& id) const
+bool ResourceManager::hasResource(const std::string& id) const
 {
-	auto itr = mResources.find(id);
-	return (itr != mResources.end() && itr->second != nullptr);
-}
-
-bool ResourceManager::isResourceLoaded(std::string const& id) const
-{
-	return (hasResource(id) && mResources.find(id)->second->isLoaded());
-}
-
-void ResourceManager::releaseResource(std::string const& id)
-{
-	if (mResources.find(id) != mResources.end())
+	std::size_t size = mResources.size();
+	for (std::size_t i = 0; i < size; i++)
 	{
-		delete mResources[id];
-		mResources.erase(mResources.find(id));
+		if (mResources.at(i) != nullptr && mResources.at(i)->getName() == id)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool ResourceManager::isResourceLoaded(const std::string& id) const
+{
+	std::size_t size = mResources.size();
+	for (std::size_t i = 0; i < size; i++)
+	{
+		if (mResources.at(i) != nullptr && mResources.at(i)->getName() == id && mResources.at(i)->isLoaded())
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void ResourceManager::releaseResource(const std::string& id)
+{
+	std::size_t size = mResources.size();
+	for (std::size_t i = 0; i < size; i++)
+	{
+		if (mResources[i] == nullptr)
+		{
+			mResources.erase(mResources.begin() + i);
+			i--;
+			size--;
+		}
+		else if (mResources[i]->getName() == id)
+		{
+			delete mResources[i];
+			mResources[i] = nullptr;
+			mResources.erase(mResources.begin() + i);
+			i--;
+			size--;
+		}
 	}
 }
 
 void ResourceManager::releaseAllResources()
 {
-	for (auto itr = mResources.begin(); itr != mResources.end(); itr++)
+	std::size_t size = mResources.size();
+	for (std::size_t i = 0; i < size; i++)
 	{
-		delete itr->second;
+		if (mResources[i] != nullptr)
+		{
+			delete mResources[i];
+			mResources[i] = nullptr;
+		}
 	}
 	mResources.clear();
+}
+
+bool ResourceManager::loadResources(const std::string& filename)
+{
+	pugi::xml_document doc;
+	std::ifstream file(filename);
+	if (!file)
+	{
+		return false;
+	}
+	doc.load(file);
+	pugi::xml_node root = doc.child("Resources");
+
+	for (pugi::xml_node node : root.children("Texture"))
+	{
+		createResource<Texture>(node.attribute("name").as_string(), node.attribute("filename").as_string());
+	}
+	for (pugi::xml_node node : root.children("Image"))
+	{
+		createResource<Image>(node.attribute("name").as_string(), node.attribute("filename").as_string());
+	}
+	for (pugi::xml_node node : root.children("Font"))
+	{
+		createResource<Font>(node.attribute("name").as_string(), node.attribute("filename").as_string());
+	}
+	for (pugi::xml_node node : root.children("SoundBuffer"))
+	{
+		createResource<SoundBuffer>(node.attribute("name").as_string(), node.attribute("filename").as_string());
+	}
+	for (pugi::xml_node node : root.children("Shader"))
+	{
+		std::string name = node.attribute("name").as_string();
+		if (node.attribute("type") && node.attribute("filename"))
+		{
+			createResource<Shader>(name, node.attribute("filename").as_string(), static_cast<sf::Shader::Type>(node.attribute("type").as_uint()));
+		}
+		else
+		{
+			createResource<Shader>(name, node.attribute("vertex").as_string(), node.attribute("fragment").as_string());
+		}
+	}
+	for (pugi::xml_node node : root.children("Theme"))
+	{
+		createResource<Theme>(node.attribute("name").as_string(), node.attribute("filename").as_string());
+	}
+	for (pugi::xml_node node : root.children("Lang"))
+	{
+		Lang& lang = createResource<Lang>(node.attribute("name").as_string());
+		for (pugi::xml_node token = doc.child("Token"); token; token = token.next_sibling("Token"))
+		{
+			lang.add(token.attribute("name").as_string(), token.text().get());
+		}
+		lang.setLoaded(true);
+	}
+	for (pugi::xml_node node : root.children("Animation"))
+	{
+		Animation& animation = createResource<Animation>(node.attribute("name").as_string());
+		for (pugi::xml_node frame : node.children("Frame"))
+		{
+			std::string textureName = frame.attribute("textureName").as_string();
+			sf::IntRect textureRect = fromString<sf::IntRect>(frame.attribute("textureRect").as_string());
+			sf::Time duration = fromString<sf::Time>(frame.attribute("duration").as_string());
+			animation.addFrame(textureName, textureRect, duration);
+		}
+		animation.setLoaded(true);
+	}
+
+	return true;
 }
 
 Texture::Texture() 
@@ -318,7 +434,7 @@ tgui::WidgetConverter Theme::create(std::string const& className)
 Tileset::Tileset()
 	: mFirstGid(1)
 	, mSource()
-	, mName()
+	//, mName()
 	, mTileSize()
 	, mSpacing(0)
 	, mMargin(0)
@@ -338,7 +454,7 @@ Tileset::Tileset()
 Tileset::Tileset(pugi::xml_node const& node, std::string const& mapPath)
 	: mFirstGid(1)
 	, mSource()
-	, mName()
+	//, mName()
 	, mTileSize()
 	, mSpacing(0)
 	, mMargin(0)
@@ -371,7 +487,7 @@ bool Tileset::loadFromNode(pugi::xml_node const& node, std::string const& mapPat
 		}
 		if (attr.name() == std::string("name"))
 		{
-			mName = attr.as_string();
+			//mName = attr.as_string();
 		}
 		if (attr.name() == std::string("tilewidth"))
 		{
@@ -497,7 +613,7 @@ bool Tileset::saveToNode(pugi::xml_node& node, bool fromTsx)
 		node.append_attribute("source") = mSource.c_str();
 		return saveToFile(mMapPath + mSource);
 	}
-	node.append_attribute("name") = mName.c_str();
+	//node.append_attribute("name") = mName.c_str();
 	node.append_attribute("tilewidth") = mTileSize.x;
 	node.append_attribute("tileheight") = mTileSize.y;
 	if (mSpacing != 0)
@@ -573,10 +689,12 @@ const std::string& Tileset::getSource() const
 	return mSource;
 }
 
+/*
 const std::string& Tileset::getName() const
 {
 	return mName;
 }
+*/
 
 const sf::Vector2i& Tileset::getTileSize() const
 {
@@ -643,10 +761,12 @@ void Tileset::setSource(std::string const& source)
 	mSource = source;
 }
 
+/*
 void Tileset::setName(std::string const& name)
 {
 	mName = name;
 }
+*/
 
 void Tileset::setTileSize(sf::Vector2i const& tileSize)
 {
@@ -800,24 +920,9 @@ Lang::Lang()
 {
 }
 
-Lang::Lang(std::string const& filename)
+void Lang::add(const std::string& id, const std::string& value)
 {
-	loadFromFile(filename);
-}
-
-bool Lang::loadFromFile(std::string const& filename)
-{
-	pugi::xml_document doc;
-	if (!doc.load_file(filename.c_str()))
-	{
-		return false;
-	}
-	for (pugi::xml_node token = doc.child("Token"); token; token = token.next_sibling("Token"))
-	{
-		mLang[token.attribute("name").as_string()] = token.text().get();
-	}
-	mLoaded = true;
-	return true;
+	mLang[id] = value;
 }
 
 IniParser::IniParser(std::string const& filename)
@@ -867,6 +972,54 @@ bool IniParser::saveToFile(std::string const & filename) const
 	}
 	file.close();
 	return true;
+}
+
+Animation::Animation()
+{
+}
+
+void Animation::addFrame(Animation::Frame const& frame)
+{
+	mFrames.push_back(frame);
+}
+
+void Animation::addFrame(std::string const& textureName, sf::IntRect const& textureRect, sf::Time duration)
+{
+	Animation::Frame frame;
+	frame.textureName = textureName;
+	frame.textureRect = textureRect;
+	frame.duration = duration;
+	addFrame(frame);
+}
+
+std::size_t Animation::getFrameCount() const
+{
+	return mFrames.size();
+}
+
+Animation::Frame& Animation::getFrame(std::size_t index)
+{
+	return mFrames.at(index);
+}
+
+void Animation::removeFrame(std::size_t index)
+{
+	mFrames.erase(mFrames.begin() + index);
+}
+
+void Animation::removeAllFrames()
+{
+	mFrames.clear();
+}
+
+sf::Time Animation::getDuration() const
+{
+	sf::Time duration;
+	for (const auto& f : mFrames)
+	{
+		duration += f.duration;
+	}
+	return duration;
 }
 
 } // namespace ke

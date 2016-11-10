@@ -141,13 +141,14 @@ class Window : public sf::RenderWindow
         // BACKGROUND
         //
 		void useBackgroundColor(const sf::Color& color);
-		void useBackgroundScaledTexture(sf::Texture* texture, sf::IntRect rect = sf::IntRect());
-		void useBackgroundRepeatedTexture(sf::Texture* texture, sf::IntRect rect = sf::IntRect());
+		void useBackgroundScaledTexture(Texture* texture, sf::IntRect rect = sf::IntRect());
+		void useBackgroundRepeatedTexture(Texture* texture, sf::IntRect rect = sf::IntRect());
 		sf::RectangleShape& getBackgroundRectangle();
 		sf::Sprite& getBackgroundSprite();
 		const sf::Color& getBackgroundColor() const;
 		const sf::IntRect& getBackgroundTextureRect() const;
 		std::size_t getBackgroundUsage() const;
+		std::string getBackgroundTextureName() const;
 
     protected:
         bool mFullscreen;

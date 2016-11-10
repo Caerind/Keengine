@@ -87,6 +87,7 @@ class Application
         static bool isResourceLoaded(std::string const& id);
         static void releaseResource(std::string const& id);
         static void releaseAllResources();
+		static void loadResources(const std::string& filename);
 
 		// Script
 		static void setScriptPath(std::string const& scriptPath);
@@ -198,12 +199,13 @@ class Application
         static void removeDebugInfos();
 
         static void useBackgroundColor(sf::Color color);
-		static void useBackgroundScaledTexture(const std::string& filename, sf::IntRect rect = sf::IntRect());
-		static void useBackgroundRepeatedTexture(const std::string& filename, sf::IntRect rect = sf::IntRect());
+		static void useBackgroundScaledTexture(const std::string& textureName, sf::IntRect rect = sf::IntRect());
+		static void useBackgroundRepeatedTexture(const std::string& textureName, sf::IntRect rect = sf::IntRect());
 		static sf::Color getBackgroundColor();
         static std::string getBackgroundTexture();
         static sf::IntRect getBackgroundTextureRect();
 		static std::size_t getBackgroundUsage();
+		static std::string getBackgroundTextureName();
 
     private:
         Application();

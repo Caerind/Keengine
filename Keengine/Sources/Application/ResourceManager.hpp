@@ -26,10 +26,17 @@ class Resource
 		Resource();
 		virtual ~Resource();
 
+		void setLoaded(bool loaded);
 		bool isLoaded() const;
+
+		void setName(const std::string& name);
+		const std::string& getName() const;
 
     protected:
         bool mLoaded;
+
+	private:
+		std::string mName;
 };
 
 class ResourceManager
@@ -40,33 +47,50 @@ class ResourceManager
 		~ResourceManager();
 
         template <typename T, typename ... Args>
-        T& createResource(std::string const& id, Args&& ... args)
+        T& createResource(const std::string& id, Args&& ... args)
         {
-            mResources[id] = new T(std::forward<Args>(args)...);
-            return *dynamic_cast<T*>(mResources[id]);
+			std::size_t size = mResources.size();
+			for (std::size_t i = 0; i < size; i++)
+			{
+				if (mResources[i] != nullptr && mResources[i]->getName() == id)
+				{
+					return *dynamic_cast<T*>(mResources[i]);
+				}
+			}
+            mResources.push_back(new T(std::forward<Args>(args)...));
+			mResources.back()->setName(id);
+            return *dynamic_cast<T*>(mResources.back());
         }
 
         template <typename T>
-        T& getResource(std::string const& id)
+        T& getResource(const std::string& id)
         {
-            auto itr = mResources.find(id);
-            if (itr == mResources.end())
-            {
-                Log::instance() << Log::Error << std::string("Resource with id (" + id + ") don't exist");
-            }
-            return *dynamic_cast<T*>(mResources[id]);
+			std::size_t size = mResources.size();
+			for (std::size_t i = 0; i < size; i++)
+			{
+				if (mResources[i] != nullptr && mResources[i]->getName() == id)
+				{
+					return *dynamic_cast<T*>(mResources[i]);
+				}
+			}
+            Log::instance() << Log::Error << std::string("Resource with id (" + id + ") wasn't created before");
+			mResources.push_back(new T());
+			mResources.back()->setName(id);
+			return *dynamic_cast<T*>(mResources.back());
         }
 
-		bool hasResource(std::string const& id) const;
+		bool hasResource(const std::string& id) const;
 
-		bool isResourceLoaded(std::string const& id) const;
+		bool isResourceLoaded(const std::string& id) const;
 
-		void releaseResource(std::string const& id);
+		void releaseResource(const std::string& id);
 
 		void releaseAllResources();
 
+		bool loadResources(const std::string& filename);
+
     protected:
-        std::map<std::string,Resource*> mResources;
+        std::vector<Resource*> mResources;
 };
 
 class Texture : public sf::Texture, public Resource
@@ -153,17 +177,17 @@ class Shader : public sf::Shader, public Resource
 
 class Theme : public Resource
 {
-public:
-	Theme();
+	public:
+		Theme();
 
-	Theme(std::string const& filename);
+		Theme(std::string const& filename);
 
-	bool loadFromFile(std::string const& filename);
+		bool loadFromFile(std::string const& filename);
 
-	tgui::WidgetConverter create(std::string const& className);
+		tgui::WidgetConverter create(std::string const& className);
 
-private:
-	tgui::Theme::Ptr mTheme;
+	private:
+		tgui::Theme::Ptr mTheme;
 };
 
 class Tileset : public Resource, public PropertiesHolder
@@ -179,7 +203,7 @@ class Tileset : public Resource, public PropertiesHolder
 
 		unsigned int getFirstGid() const;
 		const std::string& getSource() const;
-		const std::string& getName() const;
+		//const std::string& getName() const;
 		const sf::Vector2i& getTileSize() const;
 		unsigned int getSpacing() const;
 		unsigned int getMargin() const;
@@ -194,7 +218,7 @@ class Tileset : public Resource, public PropertiesHolder
 
 		void setFirstGid(unsigned int id);
 		void setSource(std::string const& source);
-		void setName(std::string const& name);
+		//void setName(std::string const& name);
 		void setTileSize(sf::Vector2i const& tileSize);
 		void setSpacing(unsigned int spacing);
 		void setMargin(unsigned int margin);
@@ -219,7 +243,7 @@ class Tileset : public Resource, public PropertiesHolder
 
 		unsigned int mFirstGid;
 		std::string mSource;
-		std::string mName;
+		//std::string mName;
 		sf::Vector2i mTileSize;
 		unsigned int mSpacing;
 		unsigned int mMargin;
@@ -241,9 +265,8 @@ class Lang : public Resource
 {
 	public:
 		Lang();
-		Lang(std::string const& filename);
 
-		bool loadFromFile(std::string const& filename);
+		void add(const std::string& id, const std::string& value);
 
 		std::string operator() (std::string const& id) const
 		{
@@ -258,13 +281,13 @@ class Lang : public Resource
 		std::unordered_map<std::string, std::string> mLang;
 };
 
-class IniParser : public std::map<std::string, Variant>, public Resource
+class IniParser : public Resource
 {
 	public:
 		IniParser() {}
 		IniParser(std::string const& filename);
 
-		Variant& operator[](std::string const& id)
+		Variant& operator[](const std::string& id)
 		{
 			for (std::size_t i = 0; i < mPairs.size(); i++)
 			{
@@ -282,6 +305,36 @@ class IniParser : public std::map<std::string, Variant>, public Resource
 
 	private:
 		std::vector<std::pair<std::string, Variant>> mPairs;
+};
+
+class Animation : public Resource
+{
+	public:
+		struct Frame
+		{
+			std::string textureName;
+			sf::IntRect textureRect;
+			sf::Time duration;
+		};
+
+	public:
+		Animation();
+
+		void addFrame(Animation::Frame const& frame = Animation::Frame());
+		void addFrame(std::string const& textureName, sf::IntRect const& textureRect, sf::Time duration);
+
+		std::size_t getFrameCount() const;
+
+		Animation::Frame& getFrame(std::size_t index);
+
+		void removeFrame(std::size_t index);
+
+		void removeAllFrames();
+
+		sf::Time getDuration() const;
+
+	private:
+		std::vector<Animation::Frame> mFrames;
 };
 
 } // namespace ke

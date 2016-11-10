@@ -1,26 +1,13 @@
 <?xml version="1.0"?>
 <Scene count="1" inputp="0" pgrav="0,9.8" pxm="32" prdbg="true" prfla="1" lrang="1000" lradm="1.1" lambc="101010ff">
+	<Background usage="2" texture="sfml" rect="0,0,512,192" />
 	<View center="100,300" size="1600,900" rotation="0" viewport="0,0,1,1" />
 	<SceneRoot id="0" up="true" visible="true" pos="0,0" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="1" />
 	<MyActor id="player" up="true" visible="true" pos="100,300" rot="0" sca="1,1" z="100" vel="0,0" angv="0" ptype="2" frot="true" ldamp="0.01" adamp="0" gsca="1" bul="false" count="7">
 		<NodeComponent id="1" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" radius="0" color="0" />
 		<AnimatorComponent id="2" up="true" visible="true" parent="" pos="-32,-32" rot="0" sca="1,1" z="0" current="idle" playing="true" elapsed="0">
-			<Animation name="idle" size="4">
-				<Frame id="0" texture="cat" textureRect="0,0,64,64" duration="0.15" />
-				<Frame id="1" texture="cat" textureRect="64,0,64,64" duration="0.15" />
-				<Frame id="2" texture="cat" textureRect="128,0,64,64" duration="0.15" />
-				<Frame id="3" texture="cat" textureRect="192,0,64,64" duration="0.15" />
-			</Animation>
-			<Animation name="run" size="8">
-				<Frame id="0" texture="cat" textureRect="0,64,64,64" duration="0.15" />
-				<Frame id="1" texture="cat" textureRect="64,64,64,64" duration="0.15" />
-				<Frame id="2" texture="cat" textureRect="128,64,64,64" duration="0.15" />
-				<Frame id="3" texture="cat" textureRect="192,64,64,64" duration="0.15" />
-				<Frame id="4" texture="cat" textureRect="256,64,64,64" duration="0.15" />
-				<Frame id="5" texture="cat" textureRect="320,64,64,64" duration="0.15" />
-				<Frame id="6" texture="cat" textureRect="384,64,64,64" duration="0.15" />
-				<Frame id="7" texture="cat" textureRect="448,64,64,64" duration="0.15" />
-			</Animation>
+			<Animation name="idle" animation="ninja-cat-idle" />
+			<Animation name="run" animation="ninja-cat-run" />
 		</AnimatorComponent>
 		<PointLightComponent id="3" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" texture="pointLightTexture" origin="32,32" color="c8c80aff" intensity="5" on="true" />
 		<InputComponent id="4" up="true" priority="0" />

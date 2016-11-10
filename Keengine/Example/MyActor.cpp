@@ -35,20 +35,8 @@ void MyActor::initializeComponents()
 	mB = createComponent<ke::AnimatorComponent>();
 	attachComponent(mB);
 	mB->setPosition(-32.f, -32.f);
-	ke::Animation& idle = mB->getAnimation("idle");
-	idle.addFrame("cat", { 0, 0, 64, 64 }, sf::seconds(0.15f));
-	idle.addFrame("cat", { 64, 0, 64, 64 }, sf::seconds(0.15f));
-	idle.addFrame("cat", { 128, 0, 64, 64 }, sf::seconds(0.15f));
-	idle.addFrame("cat", { 192, 0, 64, 64 }, sf::seconds(0.15f));
-	ke::Animation& run = mB->getAnimation("run");
-	run.addFrame("cat", { 0, 64, 64, 64 }, sf::seconds(0.15f));
-	run.addFrame("cat", { 64, 64, 64, 64 }, sf::seconds(0.15f));
-	run.addFrame("cat", { 128, 64, 64, 64 }, sf::seconds(0.15f));
-	run.addFrame("cat", { 192, 64, 64, 64 }, sf::seconds(0.15f));
-	run.addFrame("cat", { 256, 64, 64, 64 }, sf::seconds(0.15f));
-	run.addFrame("cat", { 320, 64, 64, 64 }, sf::seconds(0.15f));
-	run.addFrame("cat", { 384, 64, 64, 64 }, sf::seconds(0.15f));
-	run.addFrame("cat", { 448, 64, 64, 64 }, sf::seconds(0.15f));
+	mB->addAnimation("idle", "ninja-cat-idle");
+	mB->addAnimation("run", "ninja-cat-run");
 	mB->playAnimation("idle");
 
 	if (mScene.useLight())
