@@ -2,6 +2,7 @@
 
 #include "Scene.hpp"
 #include "Actor.hpp"
+#include "Map.hpp"
 #include "Effect.hpp"
 #include "Component.hpp"
 #include "../Components/Components.hpp"

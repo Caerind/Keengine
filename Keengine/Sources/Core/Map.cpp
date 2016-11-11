@@ -152,11 +152,11 @@ sf::Vector2f Map::coordsToWorld(sf::Vector2i const& coords, std::string const& o
 {
 	if (orientation == "orthogonal")
 	{
-		return sf::Vector2f(coords.x * tileSize.x, coords.y * tileSize.y);
+		return sf::Vector2f(static_cast<float>(coords.x * tileSize.x), static_cast<float>(coords.y * tileSize.y));
 	}
 	else if (orientation == "isometric")
 	{
-		return sf::Vector2f((coords.x - coords.y) * tileSize.x / 2, (coords.x + coords.y) * tileSize.y / 2);
+		return sf::Vector2f(static_cast<float>((coords.x - coords.y) * tileSize.x / 2), static_cast<float>((coords.x + coords.y) * tileSize.y / 2));
 	}
 	else if (orientation == "staggered")
 	{
@@ -259,14 +259,18 @@ bool Map::loadTmxFile(std::string const& filename)
 	for (pugi::xml_node layer = map.child("layer"); layer; layer = layer.next_sibling("layer"))
 	{
 		LayerComponent::Ptr layerPtr = createComponent<LayerComponent>();
+		layerPtr->onRegister();
 		attachComponent(layerPtr);
+		mLayers.push_back(layerPtr);
 		layerPtr->loadFromNode(layer, mTileset, mSize, mTileSize, mOrientation, mStaggerAxis, mStaggerIndex, mHexSideLength);
 	}
 
 	for (pugi::xml_node imagelayer = map.child("imagelayer"); imagelayer; imagelayer = imagelayer.next_sibling("imagelayer"))
 	{
 		SpriteComponent::Ptr image = createComponent<SpriteComponent>();
+		image->onRegister();
 		attachComponent(image);
+		mImages.push_back(image);
 		sf::Vector2f offset;
 		for (const pugi::xml_attribute& attr : imagelayer.attributes())
 		{
@@ -356,7 +360,7 @@ bool Map::saveTmxFile(std::string const & filename)
 	if (mTileset != nullptr)
 	{
 		pugi::xml_node tileset = map.append_child("tileset");
-		mTileset->saveToNode(tileset);
+		mTileset->saveToTmxNode(tileset);
 	}
 
 	for (std::size_t i = 0; i < mLayers.size(); i++)
@@ -441,7 +445,9 @@ std::shared_ptr<LayerComponent> Map::createLayer(std::string const& tilesetName,
 	std::shared_ptr<LayerComponent> layer = createComponent<LayerComponent>();
 	if (layer != nullptr)
 	{
+		layer->onRegister();
 		attachComponent(layer);
+		mLayers.push_back(layer);
 		layer->create(&getApplication().getResource<Tileset>(tilesetName), size, tileSize, staggerAxis, staggerIndex, orientation, hexSideLength);
 	}
 	return layer;
@@ -520,6 +526,23 @@ void Map::clearLayers()
 	{
 		removeLayer(i);
 	}
+}
+
+void Map::setTileset(const std::string& name)
+{
+	if (name != "" && getApplication().isResourceLoaded(name))
+	{
+		mTileset = &getApplication().getResource<Tileset>(name);
+	}
+	else
+	{
+		mTileset = nullptr;
+	}
+}
+
+Tileset* Map::getTileset()
+{
+	return mTileset;
 }
 
 const sf::Vector2i& Map::getSize() const
@@ -609,6 +632,121 @@ void Map::setHexSideLength(unsigned int hexSideLength)
 void Map::setObjectFunction(std::function<void(pugi::xml_node&node)> function)
 {
 	mObjectFunction = function;
+}
+
+void Map::serialize(Serializer& serializer)
+{
+	Actor::serialize(serializer);
+
+	serializer.create("MapData");
+	serializer.save("size", mSize);
+	serializer.save("tileSize", mTileSize);
+	serializer.save("orientation", mOrientation);
+	serializer.save("staggerAxis", mStaggerAxis);
+	serializer.save("staggerIndex", mStaggerIndex);
+	serializer.save("hexSide", mHexSideLength);
+	serializer.close();
+
+	if (mTileset != nullptr)
+	{
+		serializer.create("Tileset");
+		serializer.save("name", mTileset->getName());
+		serializer.close();
+	}
+
+	std::size_t iSize = mImages.size();
+	for (std::size_t i = 0; i < iSize; i++)
+	{
+		serializeComponent(serializer, mImages[i]);
+	}
+
+	std::size_t lSize = mLayers.size();
+	for (std::size_t i = 0; i < lSize; i++)
+	{
+		serializeComponent(serializer, mLayers[i]);
+	}
+}
+
+bool Map::deserialize(Serializer& serializer)
+{
+	if (!Actor::deserialize(serializer))
+	{
+		return false;
+	}
+
+	if (!serializer.read("MapData"))
+	{
+		serializer.end();
+		return false;
+	}
+	if (!serializer.load("size", mSize))
+	{
+		serializer.end();
+		return false;
+	}
+	if (!serializer.load("tileSize", mTileSize))
+	{
+		serializer.end();
+		return false;
+	}
+	if (!serializer.load("orientation", mOrientation))
+	{
+		mOrientation = "orthogonal";
+	}
+	if (!serializer.load("staggerAxis", mStaggerAxis))
+	{
+		mStaggerAxis = "y";
+	}
+	if (!serializer.load("staggerIndex", mStaggerIndex))
+	{
+		mStaggerIndex = "odd";
+	}
+	if (!serializer.load("hexSide", mHexSideLength))
+	{
+		mHexSideLength = 0;
+	}
+	serializer.end();
+
+	if (serializer.read("Tileset"))
+	{
+		std::string name;
+		if (!serializer.load("name", name))
+		{
+			name = "";
+		}
+		setTileset(name);
+		serializer.end();
+	}
+
+	while (serializer.read("SpriteComponent"))
+	{
+		SpriteComponent::Ptr image = createComponent<SpriteComponent>();
+		if (image != nullptr)
+		{
+			image->onRegister();
+			if (image->deserialize(serializer))
+			{
+				mImages.push_back(image);
+			}
+		}
+		serializer.end();
+	}
+
+	while (serializer.read("LayerComponent"))
+	{
+		LayerComponent::Ptr layer = createComponent<LayerComponent>();
+		if (layer != nullptr)
+		{
+			layer->onRegister();
+			if (layer->deserialize(serializer))
+			{
+				mLayers.push_back(layer);
+			}
+		}
+		serializer.end();
+	}
+
+	return true;
 }
 
 } // namespace ke

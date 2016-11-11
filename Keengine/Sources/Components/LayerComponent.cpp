@@ -373,6 +373,9 @@ std::string LayerComponent::getCode()
 bool LayerComponent::loadFromCode(std::string const& code)
 {
 	sf::Vector2i coords;
+	const unsigned int FLIPPED_HORIZONTALLY_FLAG = 0x80000000;
+	const unsigned int FLIPPED_VERTICALLY_FLAG = 0x40000000;
+	const unsigned int FLIPPED_DIAGONALLY_FLAG = 0x20000000;
 	std::string data;
 	std::stringstream ss;
 	ss << code;
@@ -387,10 +390,11 @@ bool LayerComponent::loadFromCode(std::string const& code)
 	{
 		byteVector.push_back(*i);
 	}
-	std::size_t size = byteVector.size();
-	for (std::size_t i = 0; i < size - 3; i += 4)
+	for (std::size_t i = 0; i < byteVector.size() - 3; i += 4)
 	{
-		setTileId(coords, byteVector[i] | byteVector[i + 1] << 8 | byteVector[i + 2] << 16 | byteVector[i + 3] << 24);
+		unsigned int gid = byteVector[i] | byteVector[i + 1] << 8 | byteVector[i + 2] << 16 | byteVector[i + 3] << 24;
+		gid &= ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG);
+		setTileId(coords, gid);
 		coords.x = (coords.x + 1) % mSize.x;
 		if (coords.x == 0)
 		{
@@ -589,6 +593,7 @@ void LayerComponent::updateRender()
 
 sf::Vector2f LayerComponent::getVertexPosition(sf::Vector2i const & coords)
 {
+	// TODO : Use Map::coordsToWorld
 	sf::Vector2f pos;
 	unsigned int index = (mStaggerIndex == "odd") ? 0 : 1;
 	if (mOrientation == "orthogonal")
@@ -661,7 +666,25 @@ sf::Vector2f LayerComponent::getVertexPosition(sf::Vector2i const & coords)
 void LayerComponent::serialize(Serializer& serializer)
 {
 	SceneComponent::serialize(serializer);
-	// TODO : Save
+
+	serializer.create("MapData");
+	serializer.save("size", mSize);
+	serializer.save("tileSize", mTileSize);
+	serializer.save("orientation", mOrientation);
+	serializer.save("staggerAxis", mStaggerAxis);
+	serializer.save("staggerIndex", mStaggerIndex);
+	serializer.save("hexSide", mHexSideLength);
+	serializer.close();
+
+	serializer.create("LayerData");
+	serializer.save("name", mName);
+	serializer.save("opacity", mOpacity);
+	if (mTileset != nullptr)
+	{
+		serializer.save("tileset", mTileset->getName());
+	}
+	serializer.getNode().text().set(getCode().c_str());
+	serializer.close();
 }
 
 bool LayerComponent::deserialize(Serializer& serializer)
@@ -670,7 +693,74 @@ bool LayerComponent::deserialize(Serializer& serializer)
 	{
 		return false;
 	}
-	// TODO : Load
+
+	if (!serializer.read("MapData"))
+	{
+		getLog() << ke::Log::Error << ke::Variant("LayerComponent::deserialize : Can't find \"MapData\" in ", getId());
+		serializer.end();
+		return false;
+	}
+	if (!serializer.load("size", mSize))
+	{
+		getLog() << ke::Log::Error << ke::Variant("LayerComponent::deserialize : Can't find \"size\" in ", getId());
+		serializer.end();
+		return false;
+	}
+	if (!serializer.load("tileSize", mTileSize))
+	{
+		getLog() << ke::Log::Error << ke::Variant("LayerComponent::deserialize : Can't find \"tileSize\" in ", getId());
+		serializer.end();
+		return false;
+	}
+	if (!serializer.load("orientation", mOrientation))
+	{
+		mOrientation = "orthogonal";
+	}
+	if (!serializer.load("staggerAxis", mStaggerAxis))
+	{
+		mStaggerAxis = "y";
+	}
+	if (!serializer.load("staggerIndex", mStaggerIndex))
+	{
+		mStaggerIndex = "odd";
+	}
+	if (!serializer.load("hexSide", mHexSideLength))
+	{
+		mHexSideLength = 0;
+	}
+	serializer.end();
+
+	if (!serializer.read("LayerData"))
+	{
+		getLog() << ke::Log::Error << ke::Variant("LayerComponent::deserialize : Can't find \"LayerData\" in ", getId());
+		serializer.end();
+		return false;
+	}
+	if (!serializer.load("name", mName))
+	{
+		mName = "";
+	}
+	if (!serializer.load("opacity", mOpacity))
+	{
+		mOpacity = 1.f;
+	}
+	std::string tileset;
+	if (!serializer.load("tileset", tileset))
+	{
+		tileset = "";
+	}
+	if (tileset != "" && getApplication().isResourceLoaded(tileset))
+	{
+		mTileset = &getApplication().getResource<Tileset>(tileset);
+	}
+	else
+	{
+		mTileset = nullptr;
+	}
+	updateRender();
+	loadFromCode(serializer.getNode().text().get());
+	serializer.end();
+
 	return true;
 }
 

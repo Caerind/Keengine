@@ -3,9 +3,9 @@
 #include "../Sources/Core/Scene.hpp"
 #include "../Sources/Core/Actor.hpp"
 #include "../Sources/Core/Factories.hpp"
+#include "../Sources/Core/Map.hpp"
 
 #include "MyActor.hpp"
-#include "MyMap.hpp"
 #include "MyObject.hpp"
 
 #include "../Sources/Components/Components.hpp"
@@ -17,9 +17,6 @@ int main()
 	ke::Application::init("Example/");
 
 	ke::Application::loadResources("Example/resources.xml");
-	
-	ke::Application::createResource<ke::Lang>("english", "Example/English.lang");
-	ke::Application::createResource<ke::Lang>("french", "Example/French.lang");
 
 	ke::Application::setLang("french");
 
@@ -40,7 +37,6 @@ int main()
 	
 	ke::Factories::registerActor<MyActor>();
 	ke::Factories::registerActor<MyObject>();
-	ke::Factories::registerActor<MyMap>();
 
 	int choice = 1;
 
@@ -56,9 +52,14 @@ int main()
 		actor->setZ(100.f);
 		actor->setPosition({ 100.f, 300.f });
 
-		MyObject::Ptr object = scene.createActor<MyObject>("block");
-		object->setPosition({ 0, 600.f });
-		object->setSize(600, 200);
+		ke::Map::Ptr map = scene.createActor<ke::Map>("map");
+		map->setObjectFunction([&](pugi::xml_node& node)
+		{
+			MyObject::Ptr obj = scene.createActor<MyObject>("");
+			obj->setPosition(node.attribute("x").as_float(), node.attribute("y").as_float());
+			obj->setSize(node.attribute("width").as_int(), node.attribute("height").as_int());
+		});
+		map->loadTmxFile("Example/map.tmx");
 
 		scene.saveToXml("Example/");
 	}

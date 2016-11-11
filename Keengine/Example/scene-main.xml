@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Scene count="1" inputp="0" pgrav="0,9.8" pxm="32" prdbg="true" prfla="1" lrang="1000" lradm="1.1" lambc="101010ff">
+<Scene count="7" inputp="0" pgrav="0,9.8" pxm="32" prdbg="true" prfla="1" lrang="1000" lradm="1.1" lambc="101010ff">
 	<Background usage="2" texture="sfml" rect="0,0,512,192" />
 	<View center="100,300" size="1600,900" rotation="0" viewport="0,0,1,1" />
 	<SceneRoot id="0" up="true" visible="true" pos="0,0" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="1" />
@@ -16,15 +16,78 @@
 		</PhysicComponent>
 		<CameraComponent id="6" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" />
 	</MyActor>
-	<MyObject id="block" up="true" visible="true" pos="0,600" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="4">
+	<Map id="map" up="true" visible="true" pos="0,0" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="2">
+		<MapData size="10,10" tileSize="256,128" orientation="staggered" staggerAxis="y" staggerIndex="odd" hexSide="0" />
+		<Tileset name="iso" />
+		<LayerComponent id="1" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0">
+			<MapData size="10,10" tileSize="256,128" orientation="staggered" staggerAxis="y" staggerIndex="odd" hexSide="0" />
+			<LayerData name="Calque de Tile 1" opacity="1" tileset="iso">eNpjYmBgYKIyZkHCxKgbrOYNBAYAtwAA4w==</LayerData>
+		</LayerComponent>
+	</Map>
+	<MyObject id="1" up="true" visible="true" pos="99,43" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="4">
 		<ShapeComponent id="1" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" fillColor="ffff" outColor="ff0000ff" outThick="1">
-			<points size="4" i0="0,0" i1="600,0" i2="600,200" i3="0,200" />
+			<points size="4" i0="0,0" i1="146,0" i2="146,48" i3="0,48" />
 		</ShapeComponent>
 		<LightShapeComponent id="2" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" on="true">
-			<points size="4" i0="0,0" i1="600,0" i2="600,200" i3="0,200" />
+			<points size="4" i0="0,0" i1="146,0" i2="146,48" i3="0,48" />
 		</LightShapeComponent>
 		<PhysicComponent id="3" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" density="0" friction="0.2" restitution="0" sensor="false">
-			<points size="4" i0="0,0" i1="600,0" i2="600,200" i3="0,200" />
+			<points size="4" i0="0,0" i1="146,0" i2="146,48" i3="0,48" />
+		</PhysicComponent>
+	</MyObject>
+	<MyObject id="2" up="true" visible="true" pos="493,115" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="4">
+		<ShapeComponent id="1" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" fillColor="ffff" outColor="ff0000ff" outThick="1">
+			<points size="4" i0="0,0" i1="186,0" i2="186,62" i3="0,62" />
+		</ShapeComponent>
+		<LightShapeComponent id="2" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" on="true">
+			<points size="4" i0="0,0" i1="186,0" i2="186,62" i3="0,62" />
+		</LightShapeComponent>
+		<PhysicComponent id="3" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" density="0" friction="0.2" restitution="0" sensor="false">
+			<points size="4" i0="0,0" i1="186,0" i2="186,62" i3="0,62" />
+		</PhysicComponent>
+	</MyObject>
+	<MyObject id="3" up="true" visible="true" pos="-41,486" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="4">
+		<ShapeComponent id="1" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" fillColor="ffff" outColor="ff0000ff" outThick="1">
+			<points size="4" i0="0,0" i1="1129,0" i2="1129,214" i3="0,214" />
+		</ShapeComponent>
+		<LightShapeComponent id="2" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" on="true">
+			<points size="4" i0="0,0" i1="1129,0" i2="1129,214" i3="0,214" />
+		</LightShapeComponent>
+		<PhysicComponent id="3" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" density="0" friction="0.2" restitution="0" sensor="false">
+			<points size="4" i0="0,0" i1="1129,0" i2="1129,214" i3="0,214" />
+		</PhysicComponent>
+	</MyObject>
+	<MyObject id="4" up="true" visible="true" pos="292,465" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="4">
+		<ShapeComponent id="1" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" fillColor="ffff" outColor="ff0000ff" outThick="1">
+			<points size="4" i0="0,0" i1="78,0" i2="78,48" i3="0,48" />
+		</ShapeComponent>
+		<LightShapeComponent id="2" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" on="true">
+			<points size="4" i0="0,0" i1="78,0" i2="78,48" i3="0,48" />
+		</LightShapeComponent>
+		<PhysicComponent id="3" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" density="0" friction="0.2" restitution="0" sensor="false">
+			<points size="4" i0="0,0" i1="78,0" i2="78,48" i3="0,48" />
+		</PhysicComponent>
+	</MyObject>
+	<MyObject id="5" up="true" visible="true" pos="773,381" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="4">
+		<ShapeComponent id="1" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" fillColor="ffff" outColor="ff0000ff" outThick="1">
+			<points size="4" i0="0,0" i1="70,0" i2="70,120" i3="0,120" />
+		</ShapeComponent>
+		<LightShapeComponent id="2" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" on="true">
+			<points size="4" i0="0,0" i1="70,0" i2="70,120" i3="0,120" />
+		</LightShapeComponent>
+		<PhysicComponent id="3" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" density="0" friction="0.2" restitution="0" sensor="false">
+			<points size="4" i0="0,0" i1="70,0" i2="70,120" i3="0,120" />
+		</PhysicComponent>
+	</MyObject>
+	<MyObject id="6" up="true" visible="true" pos="930,256" rot="0" sca="1,1" z="0" vel="0,0" angv="0" ptype="0" frot="false" ldamp="0.01" adamp="0" gsca="1" bul="false" count="4">
+		<ShapeComponent id="1" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" fillColor="ffff" outColor="ff0000ff" outThick="1">
+			<points size="4" i0="0,0" i1="66,0" i2="66,46" i3="0,46" />
+		</ShapeComponent>
+		<LightShapeComponent id="2" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" on="true">
+			<points size="4" i0="0,0" i1="66,0" i2="66,46" i3="0,46" />
+		</LightShapeComponent>
+		<PhysicComponent id="3" up="true" visible="true" parent="" pos="0,0" rot="0" sca="1,1" z="0" density="0" friction="0.2" restitution="0" sensor="false">
+			<points size="4" i0="0,0" i1="66,0" i2="66,46" i3="0,46" />
 		</PhysicComponent>
 	</MyObject>
 </Scene>

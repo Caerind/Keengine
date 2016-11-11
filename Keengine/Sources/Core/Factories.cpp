@@ -32,6 +32,7 @@ bool Factories::registerAll()
 		registerEffect<Pixelate>();
 
 		registerActor<Actor>();
+		registerActor<Map>();
 
 		mRegistered = true;
 	}

@@ -300,9 +300,6 @@
     <ClCompile Include="Sources\Components\DirectionLightComponent.cpp">
       <Filter>Sources\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Example\MyMap.cpp">
-      <Filter>Example</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Components\ShapeComponent.cpp">
       <Filter>Sources\Components</Filter>
     </ClCompile>
@@ -805,9 +802,6 @@
     </ClInclude>
     <ClInclude Include="Sources\Components\DirectionLightComponent.hpp">
       <Filter>Sources\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Example\MyMap.hpp">
-      <Filter>Example</Filter>
     </ClInclude>
     <ClInclude Include="Example\MyObject.hpp">
       <Filter>Example</Filter>

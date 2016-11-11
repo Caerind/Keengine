@@ -193,8 +193,11 @@ class Tileset : public Resource, public PropertiesHolder
 		Tileset();
 		Tileset(pugi::xml_node const& node, std::string const& mapPath);
 
-		bool loadFromNode(pugi::xml_node const& node, std::string const& mapPath);
-		bool saveToNode(pugi::xml_node& node);
+		bool loadFromTmxNode(pugi::xml_node const& node, std::string const& mapPath);
+		bool saveToTmxNode(pugi::xml_node& node);
+
+		bool loadFromResourceNode(pugi::xml_node const& node);
+		bool saveToResourceNode(pugi::xml_node& node);
 
 		unsigned int getFirstGid() const;
 		const sf::Vector2i& getTileSize() const;
@@ -202,10 +205,8 @@ class Tileset : public Resource, public PropertiesHolder
 		unsigned int getMargin() const;
 		unsigned int getTileCount() const;
 		unsigned int getColumns() const;
-		const sf::Vector2f& getTileOffset() const;
 		const std::string& getImageSource() const;
 		sf::Color getImageTransparent() const;
-		const sf::Vector2i& getImageSize() const;
 		void setFirstGid(unsigned int id);
 		void setTileSize(sf::Vector2i const& tileSize);
 		void setSpacing(unsigned int spacing);
@@ -239,7 +240,7 @@ class Tileset : public Resource, public PropertiesHolder
 class Lang : public Resource
 {
 	public:
-		Lang();
+		Lang() {}
 
 		void add(const std::string& id, const std::string& value);
 

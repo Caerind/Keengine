@@ -210,8 +210,6 @@ void ParticleComponent::applyWorldGravity()
 void ParticleComponent::serialize(Serializer& serializer)
 {
 	SceneComponent::serialize(serializer);
-	// TODO : Save particles
-	// TODO : Save distribution
 }
 
 bool ParticleComponent::deserialize(Serializer& serializer)
@@ -220,7 +218,6 @@ bool ParticleComponent::deserialize(Serializer& serializer)
 	{
 		return false;
 	}
-
 	return true;
 }
 

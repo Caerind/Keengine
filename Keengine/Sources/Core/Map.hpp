@@ -43,7 +43,8 @@ class Map : public Actor, public PropertiesHolder
 		void removeLayer(std::string const& name);
 		void clearLayers();
 
-		// TODO : Interface with Tileset
+		void setTileset(const std::string& name = "");
+		Tileset* getTileset();
 
 		const sf::Vector2i& getSize() const;
 		void setSize(sf::Vector2i const& size);
@@ -64,6 +65,9 @@ class Map : public Actor, public PropertiesHolder
 		void setHexSideLength(unsigned int hexSideLength);
 
 		void setObjectFunction(std::function<void(pugi::xml_node& node)> function);
+
+		virtual void serialize(Serializer& serializer);
+		virtual bool deserialize(Serializer& serializer);
 
 	protected:
 		std::vector<std::shared_ptr<SpriteComponent>> mImages;

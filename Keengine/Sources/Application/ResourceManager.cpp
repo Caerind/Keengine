@@ -147,10 +147,15 @@ bool ResourceManager::loadResources(const std::string& filename)
 	{
 		createResource<Theme>(node.attribute("name").as_string(), node.attribute("filename").as_string());
 	}
+	for (pugi::xml_node node : root.children("Tileset"))
+	{
+		Tileset& tileset = createResource<Tileset>(node.attribute("name").as_string());
+		tileset.loadFromResourceNode(node);
+	}
 	for (pugi::xml_node node : root.children("Lang"))
 	{
 		Lang& lang = createResource<Lang>(node.attribute("name").as_string());
-		for (pugi::xml_node token = doc.child("Token"); token; token = token.next_sibling("Token"))
+		for (pugi::xml_node token : node.children("Token"))
 		{
 			lang.add(token.attribute("name").as_string(), token.text().get());
 		}
@@ -457,10 +462,10 @@ Tileset::Tileset(pugi::xml_node const& node, std::string const& mapPath)
 	, mImageTransparent(sf::Color::Transparent)
 	, mImageChanged(true)
 {
-	loadFromNode(node, mapPath);
+	loadFromTmxNode(node, mapPath);
 }
 
-bool Tileset::loadFromNode(pugi::xml_node const& node, std::string const& mapPath)
+bool Tileset::loadFromTmxNode(pugi::xml_node const& node, std::string const& mapPath)
 {
 	mMapPath = mapPath;
 	for (const pugi::xml_attribute& attr : node.attributes())
@@ -524,7 +529,7 @@ bool Tileset::loadFromNode(pugi::xml_node const& node, std::string const& mapPat
 	return true;
 }
 
-bool Tileset::saveToNode(pugi::xml_node& node)
+bool Tileset::saveToTmxNode(pugi::xml_node& node)
 {
 	node.append_attribute("firstgid") = mFirstGid;
 	node.append_attribute("name") = mName.c_str();
@@ -553,6 +558,82 @@ bool Tileset::saveToNode(pugi::xml_node& node)
 
 	PropertiesHolder::saveToXml(node);
 
+	return true;
+}
+
+bool Tileset::loadFromResourceNode(pugi::xml_node const& node)
+{
+	mMapPath = "";
+	for (const pugi::xml_attribute& attr : node.attributes())
+	{
+		if (attr.name() == std::string("firstgid"))
+		{
+			mFirstGid = attr.as_uint();
+		}
+		if (attr.name() == std::string("name"))
+		{
+			mName = attr.as_string();
+		}
+		if (attr.name() == std::string("tilewidth"))
+		{
+			mTileSize.x = attr.as_int();
+		}
+		if (attr.name() == std::string("tileheight"))
+		{
+			mTileSize.y = attr.as_int();
+		}
+		if (attr.name() == std::string("spacing"))
+		{
+			mSpacing = attr.as_uint();
+		}
+		if (attr.name() == std::string("margin"))
+		{
+			mMargin = attr.as_uint();
+		}
+		if (attr.name() == std::string("tilecount"))
+		{
+			mTileCount = attr.as_uint();
+		}
+		if (attr.name() == std::string("columns"))
+		{
+			mColumns = attr.as_uint();
+		}
+		if (attr.name() == std::string("source"))
+		{
+			mImageSource = attr.as_string();
+		}
+		if (attr.name() == std::string("trans"))
+		{
+			mImageTransparent = fromString<sf::Color>(attr.as_string());
+		}
+	}
+	mImageChanged = true;
+	getTexture();
+	mLoaded = true;
+	return true;
+}
+
+bool Tileset::saveToResourceNode(pugi::xml_node& node)
+{
+	node.append_attribute("firstgid") = mFirstGid;
+	node.append_attribute("name") = mName.c_str();
+	node.append_attribute("tilewidth") = mTileSize.x;
+	node.append_attribute("tileheight") = mTileSize.y;
+	if (mSpacing != 0)
+	{
+		node.append_attribute("spacing") = mSpacing;
+	}
+	if (mMargin != 0)
+	{
+		node.append_attribute("margin") = mMargin;
+	}
+	node.append_attribute("tilecount") = mTileCount;
+	node.append_attribute("columns") = mColumns;
+	node.append_attribute("source") = (mMapPath + mImageSource).c_str();
+	if (mImageTransparent != sf::Color::Transparent)
+	{
+		node.append_attribute("trans") = toString(mImageTransparent).c_str();
+	}
 	return true;
 }
 
@@ -687,10 +768,6 @@ unsigned int Tileset::toId(sf::Vector2i const& pos)
 		return 1 + (pos.x - mMargin) / (mTileSize.x + mSpacing) + (pos.y - mMargin) / (mTileSize.y + mSpacing) * mColumns;
 	}
 	return 0;
-}
-
-Lang::Lang()
-{
 }
 
 void Lang::add(const std::string& id, const std::string& value)

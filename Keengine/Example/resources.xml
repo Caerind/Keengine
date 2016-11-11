@@ -4,6 +4,7 @@
   <Texture name="particle" filename="Example/particle.png" />
   <Texture name="cat" filename="Example/cat.png" />
   <Theme name="css" filename="Example/widgets.css" />
+  <Tileset firstgid="1" name="iso" tilewidth="256" tileheight="128" tilecount="4" columns="4" source="Example/iso.png" />
   <Lang name="english">
     <Token name="hello">Hello World !</Token>
   </Lang>
