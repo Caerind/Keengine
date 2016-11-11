@@ -8,6 +8,4 @@
 #include "Vector2.hpp"
 #include "Vector3.hpp"
 
-// TODO : Matrix / Quaternion / Vector3
-
 #endif // KE_MATH_HPP

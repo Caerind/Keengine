@@ -4,7 +4,7 @@
 namespace ke
 {
 
-std::vector<sf::Vector2i> Map::getNeighboors(sf::Vector2i const & coords, std::string const & orientation, bool diag, std::string const& staggerIndex , std::string const& staggerAxis)
+std::vector<sf::Vector2i> Map::getNeighboors(sf::Vector2i const& coords, std::string const& orientation, bool diag, std::string const& staggerIndex, std::string const& staggerAxis)
 {
 	if (orientation == "orthogonal")
 	{
@@ -24,13 +24,22 @@ std::vector<sf::Vector2i> Map::getNeighboors(sf::Vector2i const & coords, std::s
 	}
 	else if (orientation == "isometric")
 	{
-		// TODO : Conversion
 		std::vector<sf::Vector2i> n;
+		n.push_back({ coords.x - 1, coords.y });
+		n.push_back({ coords.x, coords.y - 1 });
+		n.push_back({ coords.x + 1, coords.y });
+		n.push_back({ coords.x, coords.y + 1 });
+		if (diag)
+		{
+			n.push_back({ coords.x - 1, coords.y - 1 });
+			n.push_back({ coords.x + 1, coords.y - 1 });
+			n.push_back({ coords.x + 1, coords.y + 1 });
+			n.push_back({ coords.x - 1, coords.y + 1 });
+		}
 		return n;
 	}
 	else if (orientation == "staggered")
 	{
-		// TODO : Use stagger
 		std::vector<sf::Vector2i> n;
 		if (coords.y % 2 == 0)
 		{
@@ -57,18 +66,31 @@ std::vector<sf::Vector2i> Map::getNeighboors(sf::Vector2i const & coords, std::s
 	}
 	else if (orientation == "hexagonal")
 	{
-		// TODO : Conversion
 		std::vector<sf::Vector2i> n;
+		if (coords.y % 2 == 0)
+		{
+			n.push_back({ coords.x - 1, coords.y - 1 });
+			n.push_back({ coords.x, coords.y - 1 });
+			n.push_back({ coords.x + 1, coords.y });
+			n.push_back({ coords.x, coords.y + 1 });
+			n.push_back({ coords.x - 1, coords.y - 1 });
+			n.push_back({ coords.x - 1, coords.y });
+		}
+		else
+		{
+			n.push_back({ coords.x, coords.y - 1 });
+			n.push_back({ coords.x + 1, coords.y - 1 });
+			n.push_back({ coords.x + 1, coords.y });
+			n.push_back({ coords.x + 1, coords.y + 1 });
+			n.push_back({ coords.x, coords.y + 1 });
+			n.push_back({ coords.x - 1, coords.y });
+		}
 		return n;
 	}
-	else
-	{
-		// Unknown
-		return std::vector<sf::Vector2i>();
-	}
+	return std::vector<sf::Vector2i>();
 }
 
-sf::Vector2i Map::worldToCoords(sf::Vector2f const & world, std::string const & orientation, sf::Vector2i const & tileSize, std::string const & staggerIndex, std::string const & staggerAxis, unsigned int hexSide)
+sf::Vector2i Map::worldToCoords(sf::Vector2f const& world, std::string const& orientation, sf::Vector2i const& tileSize, std::string const & staggerIndex, std::string const & staggerAxis, unsigned int hexSide)
 {
 	if (orientation == "orthogonal")
 	{
@@ -76,8 +98,7 @@ sf::Vector2i Map::worldToCoords(sf::Vector2f const & world, std::string const & 
 	}
 	else if (orientation == "isometric")
 	{
-		// TODO : Conversion isometric
-		return sf::Vector2i();
+		return sf::Vector2i(((int)world.x / tileSize.x) + ((int)world.y / tileSize.y), ((int)world.y / tileSize.y) + ((int)world.x / tileSize.x));
 	}
 	else if (orientation == "staggered")
 	{
@@ -124,27 +145,21 @@ sf::Vector2i Map::worldToCoords(sf::Vector2f const & world, std::string const & 
 		// TODO : Conversion hexagonal
 		return sf::Vector2i();
 	}
-	else
-	{
-		// Unknown
-		return sf::Vector2i();
-	}
+	return sf::Vector2i();
 }
 
-sf::Vector2f Map::coordsToWorld(sf::Vector2i const & coords, std::string const & orientation, sf::Vector2i const & tileSize, std::string const & staggerIndex, std::string const & staggerAxis, unsigned int hexSide)
+sf::Vector2f Map::coordsToWorld(sf::Vector2i const& coords, std::string const& orientation, sf::Vector2i const& tileSize, std::string const& staggerIndex, std::string const& staggerAxis, unsigned int hexSide)
 {
 	if (orientation == "orthogonal")
 	{
-		return { coords.x * tileSize.x + 0.5f * tileSize.x, coords.y * tileSize.y + 0.5f * tileSize.y };
+		return sf::Vector2f(coords.x * tileSize.x, coords.y * tileSize.y);
 	}
 	else if (orientation == "isometric")
 	{
-		// TODO : Conversion
-		return sf::Vector2f();
+		return sf::Vector2f((coords.x - coords.y) * tileSize.x / 2, (coords.x + coords.y) * tileSize.y / 2);
 	}
 	else if (orientation == "staggered")
 	{
-		// TODO : Use stagger
 		sf::Vector2f ret;
 		ret.y = coords.y * tileSize.y * 0.5f + tileSize.y * 0.5f;
 		if (coords.y % 2 == 0)
@@ -159,14 +174,10 @@ sf::Vector2f Map::coordsToWorld(sf::Vector2i const & coords, std::string const &
 	}
 	else if (orientation == "hexagonal")
 	{
-		// TODO : Conversion
+		// TODO : Conversion hexagonal
 		return sf::Vector2f();
 	}
-	else
-	{
-		// Unknown
-		return sf::Vector2f();
-	}
+	return sf::Vector2f();
 }
 
 Map::Map(Scene& scene)
@@ -179,6 +190,7 @@ Map::Map(Scene& scene)
 	, mStaggerAxis("y")
 	, mStaggerIndex("odd")
 	, mHexSideLength(0)
+	, mObjectFunction()
 {
 }
 
@@ -231,9 +243,17 @@ bool Map::loadTmxFile(std::string const& filename)
 	
 	PropertiesHolder::loadFromXml(map);
 
-	for (pugi::xml_node tileset = map.child("tileset"); tileset; tileset = tileset.next_sibling("tileset"))
+	for (pugi::xml_node tileset : map.children("tileset"))
 	{
-		mTileset = &getApplication().createResource<Tileset>(tileset.attribute("name").as_string(), tileset, path);
+		std::string tilesetName = tileset.attribute("name").as_string();
+		if (getApplication().isResourceLoaded(tilesetName))
+		{
+			mTileset = &getApplication().getResource<Tileset>(tilesetName);
+		}
+		else
+		{
+			mTileset = &getApplication().createResource<Tileset>(tilesetName, tileset, path);
+		}
 	}
 
 	for (pugi::xml_node layer = map.child("layer"); layer; layer = layer.next_sibling("layer"))
@@ -274,7 +294,7 @@ bool Map::loadTmxFile(std::string const& filename)
 			std::string source = img.attribute("source").as_string();
 			if (source != "")
 			{
-				if (!getApplication().hasResource(source))
+				if (!getApplication().isResourceLoaded(source))
 				{
 					getApplication().createResource<Texture>(source, path + source);
 				}
@@ -294,11 +314,14 @@ bool Map::loadTmxFile(std::string const& filename)
 		}
 	}
 
-	for (pugi::xml_node group = map.child("objectgroup"); group; group = group.next_sibling("objectgroup"))
+	for (pugi::xml_node group : map.children("objectgroup"))
 	{
-		for (pugi::xml_node object = group.child("object"); object; object = object.next_sibling("object"))
+		for (pugi::xml_node object : group.children("object"))
 		{
-			
+			if (mObjectFunction)
+			{
+				mObjectFunction(object);
+			}
 		}
 	}
 
@@ -319,7 +342,9 @@ bool Map::saveTmxFile(std::string const & filename)
 	map.append_attribute("tilewidth") = mTileSize.x;
 	map.append_attribute("tileheight") = mTileSize.y;
 	if (mHexSideLength != 0)
+	{
 		map.append_attribute("hexsidelength") = mHexSideLength;
+	}
 	if (mOrientation == "staggered" || mOrientation == "hexagonal")
 	{
 		map.append_attribute("staggeraxis") = mStaggerAxis.c_str();
@@ -376,6 +401,11 @@ bool Map::saveTmxFile(std::string const & filename)
 	return true;
 }
 
+std::vector<sf::Vector2i> Map::getNeighboors(sf::Vector2i const& coords, bool diag)
+{
+	return Map::getNeighboors(coords, mOrientation, diag, mStaggerIndex, mStaggerAxis);
+}
+
 sf::Vector2i Map::worldToCoords(sf::Vector2f const & world)
 {
 	return Map::worldToCoords(world, mOrientation, mTileSize, mStaggerIndex, mStaggerAxis, mHexSideLength);
@@ -404,16 +434,6 @@ void Map::removeImage(std::size_t index)
 void Map::clearImages()
 {
 	mImages.clear();
-}
-
-Tileset* Map::getTileset()
-{
-	return mTileset;
-}
-
-void Map::setTileset(Tileset * tileset)
-{
-	mTileset = tileset;
 }
 
 std::shared_ptr<LayerComponent> Map::createLayer(std::string const& tilesetName, sf::Vector2i const& size, sf::Vector2i const& tileSize, std::string const& orientation, std::string const& staggerAxis, std::string const& staggerIndex, unsigned int hexSideLength)
@@ -584,6 +604,11 @@ void Map::setHexSideLength(unsigned int hexSideLength)
 	{
 		mLayers[i]->setHexSideLength(hexSideLength);
 	}
+}
+
+void Map::setObjectFunction(std::function<void(pugi::xml_node&node)> function)
+{
+	mObjectFunction = function;
 }
 
 } // namespace ke

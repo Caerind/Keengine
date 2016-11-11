@@ -34,8 +34,6 @@ class Resource
 
     protected:
         bool mLoaded;
-
-	private:
 		std::string mName;
 };
 
@@ -139,7 +137,6 @@ class SoundBuffer : public sf::SoundBuffer, public Resource
 		bool loadFromSamples(sf::Int16 const* samples, sf::Uint64 sampleCount, unsigned int channelCount, unsigned int sampleRate);
 };
 
-// TODO : Add uniform types
 class Shader : public sf::Shader, public Resource
 {
     public:
@@ -196,69 +193,47 @@ class Tileset : public Resource, public PropertiesHolder
 		Tileset();
 		Tileset(pugi::xml_node const& node, std::string const& mapPath);
 
-		bool loadFromNode(pugi::xml_node const& node, std::string const& mapPath, bool fromTsx = false);
-		bool loadFromFile(std::string const& filename);
-		bool saveToNode(pugi::xml_node& node, bool fromTsx = false);
-		bool saveToFile(std::string const& filename);
+		bool loadFromNode(pugi::xml_node const& node, std::string const& mapPath);
+		bool saveToNode(pugi::xml_node& node);
 
 		unsigned int getFirstGid() const;
-		const std::string& getSource() const;
-		//const std::string& getName() const;
 		const sf::Vector2i& getTileSize() const;
 		unsigned int getSpacing() const;
 		unsigned int getMargin() const;
 		unsigned int getTileCount() const;
 		unsigned int getColumns() const;
 		const sf::Vector2f& getTileOffset() const;
-		const std::string& getImageData() const;
-		const std::string& getImageFormat() const;
 		const std::string& getImageSource() const;
 		sf::Color getImageTransparent() const;
 		const sf::Vector2i& getImageSize() const;
-
 		void setFirstGid(unsigned int id);
-		void setSource(std::string const& source);
-		//void setName(std::string const& name);
 		void setTileSize(sf::Vector2i const& tileSize);
 		void setSpacing(unsigned int spacing);
 		void setMargin(unsigned int margin);
 		void setTileCount(unsigned int tileCount);
 		void setColumns(unsigned int columns);
-		void setOffset(sf::Vector2f const& offset);
-		void setImageData(std::string const& data);
-		void setImageFormat(std::string const& format);
-		void setImageSource(std::string const& source);
-		void setImageTransparent(sf::Color const& color);
-		void setImageSize(sf::Vector2i const& size);
 
 		sf::Texture& getTexture();
+		bool possess(unsigned int gid);
 		sf::Vector2i toPos(unsigned int gid);
 		sf::IntRect toRect(unsigned int gid);
 		unsigned int toId(sf::Vector2i const& pos);
 
-		// TODO : Add Terrain and Tile
-
 	private:
-		sf::Texture mTexture;
+		std::string mMapPath;
 
 		unsigned int mFirstGid;
-		std::string mSource;
-		//std::string mName;
 		sf::Vector2i mTileSize;
 		unsigned int mSpacing;
 		unsigned int mMargin;
 		unsigned int mTileCount;
 		unsigned int mColumns;
-		sf::Vector2f mTileOffset;
 
-		std::string mImageData;
-		std::string mImageFormat;
+		sf::Texture mTexture;
 		std::string mImageSource;
 		sf::Color mImageTransparent;
-		sf::Vector2i mImageSize;
 
 		bool mImageChanged;
-		std::string mMapPath;
 };
 
 class Lang : public Resource

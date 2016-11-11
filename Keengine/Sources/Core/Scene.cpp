@@ -477,11 +477,6 @@ bool Scene::loadFromXml(const std::string& filepath)
 			{
 				actor->initialize();
 				mActors.push_back(actor);
-				getLog() << Variant("Loaded ", actor->getId()); // TODO : Debug
-			}
-			else
-			{
-				getLog() << Variant("Unloaded ", actor->getId()); // TODO : Debug
 			}
 		}
 	}

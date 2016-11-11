@@ -12,7 +12,6 @@ bool Factories::registerAll()
 {
 	if (!mRegistered)
 	{
-		// TODO : Check up to date
 		registerComponent<AnimatorComponent>();
 		registerComponent<AudioListenerComponent>();
 		registerComponent<CameraComponent>();

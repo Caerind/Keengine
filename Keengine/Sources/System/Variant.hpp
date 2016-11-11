@@ -33,7 +33,15 @@ class Variant : public std::string
 		{
 		}
 
-		// TODO : More than 4 values ?
+		template <typename T1, typename T2, typename T3, typename T4>
+		Variant(const T1& v1, const T2& v2, const T3& v3, const T4& v4, const T5& v5) : std::string(toString<T1>(v1) + toString<T2>(v2) + toString<T3>(v3) + toString<T4>(v4) + toString<T5>(v5))
+		{
+		}
+
+		template <typename T1, typename T2, typename T3, typename T4>
+		Variant(const T1& v1, const T2& v2, const T3& v3, const T4& v4, const T6& v6) : std::string(toString<T1>(v1) + toString<T2>(v2) + toString<T3>(v3) + toString<T4>(v4) + toString<T5>(v5) + toString<T6>(v6))
+		{
+		}
 
 		template <typename T> bool operator==(const T& value) const
 		{

@@ -432,47 +432,35 @@ tgui::WidgetConverter Theme::create(std::string const& className)
 }
 
 Tileset::Tileset()
-	: mFirstGid(1)
-	, mSource()
-	//, mName()
+	: mMapPath("")
+	, mFirstGid(1)
 	, mTileSize()
 	, mSpacing(0)
 	, mMargin(0)
 	, mTileCount(0)
 	, mColumns(0)
-	, mTileOffset()
-	, mImageData()
-	, mImageFormat()
 	, mImageSource()
 	, mImageTransparent(sf::Color::Transparent)
-	, mImageSize()
 	, mImageChanged(true)
-	, mMapPath("")
 {
 }
 
 Tileset::Tileset(pugi::xml_node const& node, std::string const& mapPath)
-	: mFirstGid(1)
-	, mSource()
-	//, mName()
+	: mMapPath("")
+	, mFirstGid(1)
 	, mTileSize()
 	, mSpacing(0)
 	, mMargin(0)
 	, mTileCount(0)
 	, mColumns(0)
-	, mTileOffset()
-	, mImageData()
-	, mImageFormat()
 	, mImageSource()
 	, mImageTransparent(sf::Color::Transparent)
-	, mImageSize()
 	, mImageChanged(true)
-	, mMapPath("")
 {
 	loadFromNode(node, mapPath);
 }
 
-bool Tileset::loadFromNode(pugi::xml_node const& node, std::string const& mapPath, bool fromTsx)
+bool Tileset::loadFromNode(pugi::xml_node const& node, std::string const& mapPath)
 {
 	mMapPath = mapPath;
 	for (const pugi::xml_attribute& attr : node.attributes())
@@ -481,13 +469,9 @@ bool Tileset::loadFromNode(pugi::xml_node const& node, std::string const& mapPat
 		{
 			mFirstGid = attr.as_uint();
 		}
-		if (attr.name() == std::string("source"))
-		{
-			mSource = attr.as_string();
-		}
 		if (attr.name() == std::string("name"))
 		{
-			//mName = attr.as_string();
+			mName = attr.as_string();
 		}
 		if (attr.name() == std::string("tilewidth"))
 		{
@@ -515,105 +499,35 @@ bool Tileset::loadFromNode(pugi::xml_node const& node, std::string const& mapPat
 		}
 	}
 
-	if (mSource != "" && !fromTsx)
-	{
-		return loadFromFile(mMapPath + mSource);
-	}
-
-	// TODO : Handle offset
-
 	pugi::xml_node image = node.child("image");
 	if (image)
 	{
 		for (const pugi::xml_attribute& attr : image.attributes())
 		{
-			if (attr.name() == std::string("format"))
-			{
-				mImageFormat = attr.as_string();
-			}
 			if (attr.name() == std::string("source"))
 			{
 				mImageSource = attr.as_string();
 			}
 			if (attr.name() == std::string("trans"))
 			{
-				std::string color = attr.as_string();
-				if (color != "")
-				{
-					if (color[0] == '#')
-					{
-						color.erase(color.begin());
-					}
-					int hexTrans;
-					std::stringstream ss(color);
-					ss >> std::hex >> hexTrans;
-					if (hexTrans >= 0)
-					{
-						unsigned char red, green, blue;
-						red = hexTrans >> 16;
-						green = (hexTrans >> 8) & 0xff;
-						blue = hexTrans & 0xff;
-						mImageTransparent = sf::Color(red, green, blue);
-					}
-				}
+				mImageTransparent = fromString<sf::Color>(attr.as_string());
 			}
-			if (attr.name() == std::string("width"))
-			{
-				mImageSize.x = attr.as_uint();
-			}
-			if (attr.name() == std::string("height"))
-			{
-				mImageSize.y = attr.as_uint();
-			}
-		}
-		pugi::xml_node data = image.child("data");
-		if (data)
-		{
-			std::stringstream ss(data.text().get());
-			ss >> mImageData;
 		}
 	}
 
-	loadFromXml(node);
+	PropertiesHolder::loadFromXml(node);
 
+	mImageChanged = true;
 	getTexture();
 
 	mLoaded = true;
 	return true;
 }
 
-bool Tileset::loadFromFile(std::string const& filename)
+bool Tileset::saveToNode(pugi::xml_node& node)
 {
-	mLoaded = false;
-	if (filename == "")
-	{
-		return false;
-	}
-	pugi::xml_document doc;
-	if (!doc.load_file(filename.c_str()))
-	{
-		return false;
-	}
-	pugi::xml_node tileset = doc.child("tileset");
-	if (!tileset)
-	{
-		return false;
-	}
-	return loadFromNode(tileset, mMapPath, true);
-}
-
-bool Tileset::saveToNode(pugi::xml_node& node, bool fromTsx)
-{
-	if (!fromTsx)
-	{
-		node.append_attribute("firstgid") = mFirstGid;
-	}
-	if (mSource != "" && !fromTsx)
-	{
-		node.append_attribute("source") = mSource.c_str();
-		return saveToFile(mMapPath + mSource);
-	}
-	//node.append_attribute("name") = mName.c_str();
+	node.append_attribute("firstgid") = mFirstGid;
+	node.append_attribute("name") = mName.c_str();
 	node.append_attribute("tilewidth") = mTileSize.x;
 	node.append_attribute("tileheight") = mTileSize.y;
 	if (mSpacing != 0)
@@ -627,55 +541,18 @@ bool Tileset::saveToNode(pugi::xml_node& node, bool fromTsx)
 	node.append_attribute("tilecount") = mTileCount;
 	node.append_attribute("columns") = mColumns;
 
-	// TODO : Save Offset
-
 	pugi::xml_node image = node.append_child("image");
-	if (mImageFormat != "")
-	{
-		image.append_attribute("format") = mImageFormat.c_str();
-	}
 	if (mImageSource != "")
 	{
 		image.append_attribute("source") = mImageSource.c_str();
 	}
 	if (mImageTransparent != sf::Color::Transparent)
 	{
-		std::ostringstream oss;
-		oss << "#" << std::hex << mImageTransparent.toInteger();
-		image.append_attribute("trans") = oss.str().c_str();
-	}
-	if (mImageSize != sf::Vector2i())
-	{
-		image.append_attribute("width") = mImageSize.x;
-		image.append_attribute("height") = mImageSize.y;
-	}
-	if (mImageData != "")
-	{
-		pugi::xml_node data = image.append_child("data");
-		data.text().set(mImageData.data());
+		image.append_attribute("trans") = toString(mImageTransparent).c_str();
 	}
 
-	saveToXml(node);
+	PropertiesHolder::saveToXml(node);
 
-	return true;
-}
-
-bool Tileset::saveToFile(std::string const& filename)
-{
-	if (filename == "")
-	{
-		return false;
-	}
-	pugi::xml_document doc;
-	pugi::xml_node tileset = doc.append_child("tileset");
-	if (!saveToNode(tileset, true))
-	{
-		return false;
-	}
-	if (!doc.save_file(filename.c_str()))
-	{
-		return false;
-	}
 	return true;
 }
 
@@ -683,18 +560,6 @@ unsigned int Tileset::getFirstGid() const
 {
 	return mFirstGid;
 }
-
-const std::string& Tileset::getSource() const
-{
-	return mSource;
-}
-
-/*
-const std::string& Tileset::getName() const
-{
-	return mName;
-}
-*/
 
 const sf::Vector2i& Tileset::getTileSize() const
 {
@@ -721,21 +586,6 @@ unsigned int Tileset::getColumns() const
 	return mColumns;
 }
 
-const sf::Vector2f& Tileset::getTileOffset() const
-{
-	return mTileOffset;
-}
-
-const std::string& Tileset::getImageData() const
-{
-	return mImageData;
-}
-
-const std::string& Tileset::getImageFormat() const
-{
-	return mImageFormat;
-}
-
 const std::string& Tileset::getImageSource() const
 {
 	return mImageSource;
@@ -746,27 +596,10 @@ sf::Color Tileset::getImageTransparent() const
 	return mImageTransparent;
 }
 
-const sf::Vector2i& Tileset::getImageSize() const
-{
-	return mImageSize;
-}
-
 void Tileset::setFirstGid(unsigned int id)
 {
 	mFirstGid = id;
 }
-
-void Tileset::setSource(std::string const& source)
-{
-	mSource = source;
-}
-
-/*
-void Tileset::setName(std::string const& name)
-{
-	mName = name;
-}
-*/
 
 void Tileset::setTileSize(sf::Vector2i const& tileSize)
 {
@@ -793,87 +626,27 @@ void Tileset::setColumns(unsigned int columns)
 	mColumns = columns;
 }
 
-void Tileset::setOffset(sf::Vector2f const& offset)
-{
-	mTileOffset = offset;
-}
-
-void Tileset::setImageData(std::string const& data)
-{
-	if (mImageData != data)
-	{
-		mImageChanged = true;
-	}
-	mImageData = data;
-}
-
-void Tileset::setImageFormat(std::string const& format)
-{
-	mImageFormat = format;
-}
-
-void Tileset::setImageSource(std::string const& source)
-{
-	if (mImageSource != source)
-	{
-		mImageChanged = true;
-	}
-	mImageSource = source;
-}
-
-void Tileset::setImageTransparent(sf::Color const& color)
-{
-	if (mImageTransparent != color)
-	{
-		mImageChanged = true;
-	}
-	mImageTransparent = color;
-}
-
-void Tileset::setImageSize(sf::Vector2i const& size)
-{
-	mImageSize = size;
-}
-
 sf::Texture& Tileset::getTexture()
 {
 	if (mImageChanged)
 	{
-		if (mImageTransparent != sf::Color::Transparent)
-		{
-			sf::Image image;
-			if (mImageSource != "")
-			{
-				image.loadFromFile(mMapPath + mImageSource);
-			}
-			else if (mImageData != "")
-			{
-				image.loadFromMemory(mImageData.data(), mImageData.size());
-			}
-
-			image.createMaskFromColor(mImageTransparent);
-
-			mTexture.loadFromImage(image);
-		}
-		else
-		{
-			if (mImageSource != "")
-			{
-				mTexture.loadFromFile(mMapPath + mImageSource);
-			}
-			else if (mImageData != "")
-			{
-				mTexture.loadFromMemory(mImageData.data(), mImageData.size());
-			}
-		}
+		sf::Image image;
+		image.loadFromFile(mMapPath + mImageSource);
+		image.createMaskFromColor(mImageTransparent);
+		mTexture.loadFromImage(image);
 		mImageChanged = false;
 	}
 	return mTexture;
 }
 
+bool Tileset::possess(unsigned int gid)
+{
+	return (mFirstGid <= gid && gid < mFirstGid + mTileCount);
+}
+
 sf::Vector2i Tileset::toPos(unsigned int gid)
 {
-	if (gid < mFirstGid || gid >= mFirstGid + mTileCount)
+	if (!possess(gid))
 	{
 		return sf::Vector2i();
 	}
@@ -890,7 +663,7 @@ sf::Vector2i Tileset::toPos(unsigned int gid)
 
 sf::IntRect Tileset::toRect(unsigned int gid)
 {
-	if (gid < mFirstGid || gid >= mFirstGid + mTileCount)
+	if (!possess(gid))
 	{
 		return sf::IntRect();
 	}

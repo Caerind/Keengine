@@ -25,6 +25,7 @@ class Map : public Actor, public PropertiesHolder
 		bool loadTmxFile(std::string const& filename);
 		bool saveTmxFile(std::string const& filename);
 
+		std::vector<sf::Vector2i> getNeighboors(sf::Vector2i const& coords, bool diag = false);
 		sf::Vector2i worldToCoords(sf::Vector2f const& world);
 		sf::Vector2f coordsToWorld(sf::Vector2i const& coords);
 
@@ -32,9 +33,6 @@ class Map : public Actor, public PropertiesHolder
 		SpriteComponent::Ptr getImage(std::size_t index);
 		void removeImage(std::size_t index);
 		void clearImages();
-
-		Tileset* getTileset();
-		void setTileset(Tileset* tileset);
 
 		LayerComponent::Ptr createLayer(std::string const& tilesetName = "", sf::Vector2i const& size = sf::Vector2i(), sf::Vector2i const& tileSize = sf::Vector2i(), std::string const& orientation = "orthogonal", std::string const& staggerAxis = "y", std::string const& staggerIndex = "odd", unsigned int hexSideLength = 0);
 		std::size_t getLayerCount();
@@ -44,6 +42,8 @@ class Map : public Actor, public PropertiesHolder
 		void removeLayer(std::size_t index);
 		void removeLayer(std::string const& name);
 		void clearLayers();
+
+		// TODO : Interface with Tileset
 
 		const sf::Vector2i& getSize() const;
 		void setSize(sf::Vector2i const& size);
@@ -63,6 +63,8 @@ class Map : public Actor, public PropertiesHolder
 		unsigned int getHexSizeLength() const;
 		void setHexSideLength(unsigned int hexSideLength);
 
+		void setObjectFunction(std::function<void(pugi::xml_node& node)> function);
+
 	protected:
 		std::vector<std::shared_ptr<SpriteComponent>> mImages;
 		std::vector<std::shared_ptr<LayerComponent>> mLayers;
@@ -74,6 +76,8 @@ class Map : public Actor, public PropertiesHolder
 		std::string mStaggerAxis;
 		std::string mStaggerIndex;
 		unsigned int mHexSideLength;
+
+		std::function<void(pugi::xml_node& node)> mObjectFunction;
 };
 
 } // namespace ke
