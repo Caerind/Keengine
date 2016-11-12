@@ -38,67 +38,33 @@ int main()
 	ke::Factories::registerActor<MyActor>();
 	ke::Factories::registerActor<MyObject>();
 
-	ke::Scene scene("main");
+	ke::Scene scene("main", ke::Scene::Light | ke::Scene::Physic);
 	scene.useBackgroundRepeatedTexture("sfml");
+	scene.getPhysic()->setPixelsPerMeter(32.f);
+	scene.getPhysic()->setRenderDebug(true);
+	scene.getPhysic()->setGravity();
+
+	MyActor::Ptr actor = scene.createActor<MyActor>("player");
+	actor->setZ(100.f);
+	actor->setPosition({ 100.f, 300.f });
 
 	ke::Map::Ptr map = scene.createActor<ke::Map>("map");
-	int choice = 2;
-	switch (choice)
+	map->setObjectFunction([&](pugi::xml_node& node)
 	{
-		case 0: map->loadTmxFile("Example/ortho.tmx"); break;
-		case 1: map->loadTmxFile("Example/iso.tmx"); break;
-		case 2: map->loadTmxFile("Example/stagg.tmx"); break;
-		case 3: map->loadTmxFile("Example/hexa.tmx"); break;
-	}
-	ke::LayerComponent::Ptr layer = map->getLayer(0);
+		MyObject::Ptr object = scene.createActor<MyObject>("");
+		object->setPosition(node.attribute("x").as_float(), node.attribute("y").as_float());
+		object->setSize(node.attribute("width").as_int(), node.attribute("height").as_int());
+	});
+	map->loadTmxFile("Example/map.tmx");
 
-	int gid = 1;
 	ke::Application::setEventDefaultFunction([&](sf::Event const& event)
 	{
 		gui.handleEvent(event);
-		sf::Vector2i c = map->worldToCoords(ke::Application::getMousePositionView(scene.getView()));
-		if (event.type == sf::Event::MouseButtonPressed)
-		{
-			std::vector<sf::Vector2i> n = map->getNeighboors(c, (event.mouseButton.button == sf::Mouse::Right));
-			if (layer != nullptr)
-			{
-				for (std::size_t i = 0; i < n.size(); i++)
-				{
-					layer->setTileId(n[i], gid);
-				}
-				gid++;
-				if (gid >= 4)
-				{
-					gid = 1;
-				}
-			}
-		}
 	});
 
 	ke::Application::setUpdateDefaultFunction([&](sf::Time dt)
 	{
 		scene.update(dt);
-		sf::Vector2i c = map->worldToCoords(ke::Application::getMousePositionView(scene.getView()));
-		ke::Application::setDebugInfo("MouseCoords", c);
-
-		sf::Vector2f mvt;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-		{
-			mvt.y--;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-		{
-			mvt.x--;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		{
-			mvt.y++;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		{
-			mvt.x++;
-		}
-		scene.getView().move(mvt * 400.f * dt.asSeconds());
 	});
 
 	ke::Application::setRenderDefaultFunction([&](sf::RenderTarget& target)
@@ -109,8 +75,8 @@ int main()
 
 	ke::Application::runDefault();
 
+	actor = nullptr;
 	map = nullptr;
-	layer = nullptr;
 
 	ke::Application::getInputs().saveToFile("Example/inputs.cfg");
 
