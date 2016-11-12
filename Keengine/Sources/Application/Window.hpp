@@ -174,7 +174,7 @@ class Window : public sf::RenderWindow
 template <typename T>
 void Window::setDebugInfo(std::string const& id, T value)
 {
-    mDebugInfo[id] = std::to_string(value);
+    mDebugInfo[id] = toString(value);
 }
 
 template <>

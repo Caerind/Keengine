@@ -318,7 +318,7 @@ bool PhysicComponent::deserialize(Serializer& serializer)
 
 void PhysicComponent::onTransformNotified()
 {
-	// TODO : Update Physic Shape
+	// Update Physic Shape
 	// Problem is that onTransformNotified is called no matter which part change (ie even if Actor move)
 	// But the Fixture position is relative to the Body (ie Actor)
 	// So we need to update it ONLY if the transform of the component changes
@@ -336,7 +336,7 @@ void PhysicComponent::updatePhysicShape()
 			b2Vec2 vertices[8];
 			for (std::size_t i = 0; i < count; i++)
 			{
-				// TODO : Transform Points to be Actor relative
+				// Transform Points to be Actor relative
 				// What if : Actor <-> NodeComponent <-> PhysicComponent ?
 				vertices[i] = mPoints[i] * ke::Physic::conv;
 			}

@@ -6,9 +6,9 @@ namespace ke
 
 std::vector<sf::Vector2i> Map::getNeighboors(sf::Vector2i const& coords, std::string const& orientation, bool diag, std::string const& staggerIndex, std::string const& staggerAxis)
 {
+	std::vector<sf::Vector2i> n;
 	if (orientation == "orthogonal")
 	{
-		std::vector<sf::Vector2i> n;
 		n.push_back({ coords.x, coords.y - 1 });
 		n.push_back({ coords.x, coords.y + 1 });
 		n.push_back({ coords.x - 1, coords.y });
@@ -20,11 +20,9 @@ std::vector<sf::Vector2i> Map::getNeighboors(sf::Vector2i const& coords, std::st
 			n.push_back({ coords.x - 1, coords.y + 1 });
 			n.push_back({ coords.x - 1, coords.y - 1 });
 		}
-		return n;
 	}
 	else if (orientation == "isometric")
 	{
-		std::vector<sf::Vector2i> n;
 		n.push_back({ coords.x - 1, coords.y });
 		n.push_back({ coords.x, coords.y - 1 });
 		n.push_back({ coords.x + 1, coords.y });
@@ -36,11 +34,9 @@ std::vector<sf::Vector2i> Map::getNeighboors(sf::Vector2i const& coords, std::st
 			n.push_back({ coords.x + 1, coords.y + 1 });
 			n.push_back({ coords.x - 1, coords.y + 1 });
 		}
-		return n;
 	}
 	else if (orientation == "staggered")
 	{
-		std::vector<sf::Vector2i> n;
 		if (coords.y % 2 == 0)
 		{
 			n.push_back({ coords.x - 1, coords.y - 1 });
@@ -57,23 +53,21 @@ std::vector<sf::Vector2i> Map::getNeighboors(sf::Vector2i const& coords, std::st
 		}
 		if (diag)
 		{
-			n.push_back({ coords.x, coords.y - 1 });
+			n.push_back({ coords.x, coords.y - 2 });
 			n.push_back({ coords.x + 1, coords.y });
-			n.push_back({ coords.x, coords.y + 1 });
+			n.push_back({ coords.x, coords.y + 2 });
 			n.push_back({ coords.x - 1, coords.y });
 		}
-		return n;
 	}
 	else if (orientation == "hexagonal")
 	{
-		std::vector<sf::Vector2i> n;
 		if (coords.y % 2 == 0)
 		{
 			n.push_back({ coords.x - 1, coords.y - 1 });
 			n.push_back({ coords.x, coords.y - 1 });
 			n.push_back({ coords.x + 1, coords.y });
 			n.push_back({ coords.x, coords.y + 1 });
-			n.push_back({ coords.x - 1, coords.y - 1 });
+			n.push_back({ coords.x - 1, coords.y + 1 });
 			n.push_back({ coords.x - 1, coords.y });
 		}
 		else
@@ -85,99 +79,156 @@ std::vector<sf::Vector2i> Map::getNeighboors(sf::Vector2i const& coords, std::st
 			n.push_back({ coords.x, coords.y + 1 });
 			n.push_back({ coords.x - 1, coords.y });
 		}
-		return n;
 	}
-	return std::vector<sf::Vector2i>();
+	return n;
 }
 
 sf::Vector2i Map::worldToCoords(sf::Vector2f const& world, std::string const& orientation, sf::Vector2i const& tileSize, std::string const & staggerIndex, std::string const & staggerAxis, unsigned int hexSide)
 {
+	sf::Vector2i c;
 	if (orientation == "orthogonal")
 	{
-		return sf::Vector2i((int)world.x / tileSize.x, (int)world.y / tileSize.y);
+		c.x = (int)world.x / tileSize.x;
+		c.y = (int)world.y / tileSize.y;
 	}
 	else if (orientation == "isometric")
 	{
-		return sf::Vector2i(((int)world.x / tileSize.x) + ((int)world.y / tileSize.y), ((int)world.y / tileSize.y) + ((int)world.x / tileSize.x));
+		sf::Vector2f s = static_cast<sf::Vector2f>(tileSize);
+		c.x = static_cast<int>(((world.x - s.x * 0.5f) / s.x) + (world.y / s.y));
+		c.y = static_cast<int>((world.y / s.y) - ((world.x - s.x * 0.5f) / s.x));
 	}
 	else if (orientation == "staggered")
 	{
-		sf::Vector2f s = sf::Vector2f(tileSize.x * 0.5f, tileSize.y * 0.5f);
-		sf::Vector2f mc = sf::Vector2f(floor(world.x / s.x), floor(world.y / s.y));
-		sf::Vector2f p = world - sf::Vector2f(mc.x * s.x, mc.y * s.y);
-		const float rad = 0.523599f; // = 30 degrees
+		sf::Vector2f halfSize = sf::Vector2f(tileSize.x * 0.5f, tileSize.y * 0.5f);
+		sf::Vector2f sector = sf::Vector2f(floor(world.x / halfSize.x), floor(world.y / halfSize.y));
+		sf::Vector2f p = world - sf::Vector2f(sector.x * halfSize.x, sector.y * halfSize.y);
 		int indexInt = (staggerIndex == "odd") ? 0 : 1;
 		if (staggerAxis == "y")
 		{
-			if (((int)mc.x + (int)mc.y) % 2 == indexInt)
+			if (((int)sector.x + (int)sector.y) % 2 == indexInt)
 			{
-				if (std::atan2(s.y - p.y, p.x) > rad)
+				if (ke::atan2(halfSize.y - p.y, p.x) > 30.f)
 				{
-					mc.x--;
-					mc.y--;
+					sector.x--;
+					sector.y--;
 				}
 			}
 			else
 			{
-				(std::atan2(-p.y, p.x) > -rad) ? mc.y-- : mc.x--;
+				(ke::atan2(-p.y, p.x) > -30.f) ? sector.y-- : sector.x--;
 			}
-			return sf::Vector2i((int)floor(mc.x * 0.5f), (int)mc.y);
+			c.x = (int)floor(sector.x * 0.5f);
+			c.y = (int)sector.y;
 		}
 		else
 		{
-			if (((int)mc.x + (int)mc.y) % 2 == indexInt)
+			if (((int)sector.x + (int)sector.y) % 2 == indexInt)
 			{
-				if (std::atan2(s.x - p.x, p.y) > rad)
+				if (ke::atan2(halfSize.x - p.x, p.y) > 30.f)
 				{
-					mc.x--;
-					mc.y--;
+					sector.x--;
+					sector.y--;
 				}
 			}
 			else
 			{
-				(std::atan2(-p.x, p.y) > -rad) ? mc.x-- : mc.y--;
+				(ke::atan2(-p.x, p.y) > -30.f) ? sector.x-- : sector.y--;
 			}
-			return sf::Vector2i((int)mc.x, (int)floor(mc.y * 0.5f));
+			c.x = (int)sector.x;
+			c.y = (int)floor(sector.y * 0.5f);
 		}
 	}
 	else if (orientation == "hexagonal")
 	{
-		// TODO : Conversion hexagonal
-		return sf::Vector2i();
+		float s = static_cast<float>(hexSide);
+		float h = (static_cast<float>(tileSize.y) - s) * 0.5f;
+		float hs = h + s;
+		float r = static_cast<float>(tileSize.x) * 0.5f;
+		sf::Vector2f sector = sf::Vector2f(floor(world.x / (2.f * r)), floor(world.y / hs));
+		sf::Vector2f p = world - sf::Vector2f(sector.x * (2.f * r), sector.y * hs);
+		float angle = 30.f; // TODO : Calculate
+		if ((int)sector.y % 2 == 0) // Zone A
+		{
+			if (p.y < h) // Zone A top
+			{
+				if (p.x < r) // Zone A top left
+				{
+					if (ke::atan2(h - p.y, p.x) > angle)
+					{
+						sector.x--;
+						sector.y--;
+					}
+				}
+				else // Zone A top right
+				{
+					if (ke::atan2(-p.y, p.x - r) > -angle)
+					{
+						sector.y--;
+					}
+				}
+			}
+		}
+		else // Zone B
+		{
+			if (p.y < h) // Zone B top
+			{
+				if (p.x < r) // Zone B top left
+				{
+					if (ke::atan2(-p.y, p.x) > -angle)
+					{
+						sector.y--;
+					}
+					else
+					{
+						sector.x--;
+					}
+				}
+				else // Zone B top right
+				{
+					if (ke::atan2(h - p.y, p.x - r) > angle)
+					{
+						sector.y--;
+					}
+				}
+			}
+			else // Zone B down
+			{
+				if (p.x < r)
+				{
+					sector.x--;
+				}
+			}
+		}
+		c.x = (int)sector.x;
+		c.y = (int)sector.y;
 	}
-	return sf::Vector2i();
+	return c;
 }
 
 sf::Vector2f Map::coordsToWorld(sf::Vector2i const& coords, std::string const& orientation, sf::Vector2i const& tileSize, std::string const& staggerIndex, std::string const& staggerAxis, unsigned int hexSide)
 {
+	sf::Vector2f p;
 	if (orientation == "orthogonal")
 	{
-		return sf::Vector2f(static_cast<float>(coords.x * tileSize.x), static_cast<float>(coords.y * tileSize.y));
+		p.x = static_cast<float>(coords.x * tileSize.x);
+		p.y = static_cast<float>(coords.y * tileSize.y);
 	}
 	else if (orientation == "isometric")
 	{
-		return sf::Vector2f(static_cast<float>((coords.x - coords.y) * tileSize.x / 2), static_cast<float>((coords.x + coords.y) * tileSize.y / 2));
+		p.x = static_cast<float>((coords.x - coords.y) * (tileSize.x / 2));
+		p.y = static_cast<float>((coords.x + coords.y) * (tileSize.y / 2));
 	}
 	else if (orientation == "staggered")
 	{
-		sf::Vector2f ret;
-		ret.y = coords.y * tileSize.y * 0.5f + tileSize.y * 0.5f;
-		if (coords.y % 2 == 0)
-		{
-			ret.x = coords.x * tileSize.x + tileSize.x * 0.5f;
-		}
-		else
-		{
-			ret.x = static_cast<float>(coords.x * tileSize.x + tileSize.x);
-		}
-		return ret;
+		p.x = static_cast<float>(((coords.y % 2) == 0) ? coords.x * tileSize.x : (coords.x + 0.5f) * tileSize.x);
+		p.y = coords.y * tileSize.y * 0.5f;
 	}
 	else if (orientation == "hexagonal")
 	{
-		// TODO : Conversion hexagonal
-		return sf::Vector2f();
+		p.x = static_cast<float>(((coords.y % 2) == 0) ? coords.x * tileSize.x : (coords.x + 0.5f) * tileSize.x);
+		p.y = coords.y * (tileSize.y + hexSide) * 0.5f;
 	}
-	return sf::Vector2f();
+	return p;
 }
 
 Map::Map(Scene& scene)
@@ -373,7 +424,7 @@ bool Map::saveTmxFile(std::string const & filename)
 	{
 		std::shared_ptr<SpriteComponent> image = mImages[i];
 		pugi::xml_node imagelayer = map.append_child("imagelayer");
-		imagelayer.append_attribute("name") = std::string("ImageLayer" + std::to_string(i)).c_str();
+		imagelayer.append_attribute("name") = std::string("ImageLayer" + ke::toString(i)).c_str();
 		if (image->getPosition() != sf::Vector2f())
 		{
 			imagelayer.append_attribute("offsetx") = image->getPosition().x;

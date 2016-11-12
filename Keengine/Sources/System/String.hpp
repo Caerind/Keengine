@@ -59,17 +59,24 @@ template <> inline std::string toString<sf::Vector2f>(const sf::Vector2f& value)
 	return oss.str();
 }
 
-template <> inline std::string toString<sf::Vector3f>(const sf::Vector3f& value)
-{
-	std::ostringstream oss;
-	oss << value.x << "," << value.y << "," << value.z;
-	return oss.str();
-}
-
 template <> inline std::string toString<sf::Vector2i>(const sf::Vector2i& value)
 {
 	std::ostringstream oss;
 	oss << value.x << "," << value.y;
+	return oss.str();
+}
+
+template <> inline std::string toString<sf::Vector2u>(const sf::Vector2u& value)
+{
+	std::ostringstream oss;
+	oss << value.x << "," << value.y;
+	return oss.str();
+}
+
+template <> inline std::string toString<sf::Vector3f>(const sf::Vector3f& value)
+{
+	std::ostringstream oss;
+	oss << value.x << "," << value.y << "," << value.z;
 	return oss.str();
 }
 
@@ -153,14 +160,6 @@ template <> inline sf::Vector2f fromString<sf::Vector2f>(const std::string& stri
 	return vector;
 }
 
-template <> inline sf::Vector3f fromString<sf::Vector3f>(const std::string& string)
-{
-	std::string z = string;
-	std::string x = split(z, ",");
-	std::string y = split(z, ",");
-	return sf::Vector3f(fromString<float>(x), fromString<float>(y), fromString<float>(z));
-}
-
 template <> inline sf::Vector2i fromString<sf::Vector2i>(const std::string& string)
 {
 	sf::Vector2i vector;
@@ -174,6 +173,29 @@ template <> inline sf::Vector2i fromString<sf::Vector2i>(const std::string& stri
 		iss >> vector.y;
 	}
 	return vector;
+}
+
+template <> inline sf::Vector2u fromString<sf::Vector2u>(const std::string& string)
+{
+	sf::Vector2u vector;
+	std::size_t found = string.find_first_of(',');
+	if (found != std::string::npos)
+	{
+		std::istringstream iss(string.substr(0, found));
+		iss >> vector.x;
+		iss.clear();
+		iss.str(string.substr(found + 1));
+		iss >> vector.y;
+	}
+	return vector;
+}
+
+template <> inline sf::Vector3f fromString<sf::Vector3f>(const std::string& string)
+{
+	std::string z = string;
+	std::string x = split(z, ",");
+	std::string y = split(z, ",");
+	return sf::Vector3f(fromString<float>(x), fromString<float>(y), fromString<float>(z));
 }
 
 template <> inline sf::Color fromString<sf::Color>(const std::string& string)

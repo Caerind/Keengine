@@ -47,7 +47,7 @@ class Serializer
 			save("size", vector.size());
 			for (std::size_t i = 0; i < vector.size(); ++i)
 			{
-				save("i" + std::to_string(i), vector.at(i));
+				save("i" + ke::toString(i), vector.at(i));
 			}
 			close();
 		}
@@ -59,7 +59,7 @@ class Serializer
 			save("size", vector.size());
 			for (std::size_t i = 0; i < vector.size(); ++i)
 			{
-				vector.at(i).serialize(*this, "i" + std::to_string(i));
+				vector.at(i).serialize(*this, "i" + ke::toString(i));
 			}
 			close();
 		}
@@ -72,7 +72,7 @@ class Serializer
 			std::size_t i = 0;
 			for (auto itr = map.begin(); itr != map.end(); itr++)
 			{
-				save("i" + std::to_string(i), std::string(toString<K>(itr->first) + "||" + toString<T>(itr->second)));
+				save("i" + ke::toString(i), std::string(toString<K>(itr->first) + "||" + toString<T>(itr->second)));
 				i++;
 			}
 			close();
@@ -87,7 +87,7 @@ class Serializer
 			for (auto itr = map.begin(); itr != map.end(); itr++)
 			{
 				std::string key = toString<K>(itr->first);
-				save("i" + std::to_string(i), key);
+				save("i" + ke::toString(i), key);
 				itr->second.serialize(*this, key);
 				i++;
 			}
@@ -130,7 +130,7 @@ class Serializer
 					for (std::size_t i = 0; i < size; ++i)
 					{
 						T value;
-						if (!load("i" + std::to_string(i), value))
+						if (!load("i" + ke::toString(i), value))
 						{
 							value = T();
 							ret = false;
@@ -158,7 +158,7 @@ class Serializer
 					for (std::size_t i = 0; i < size; ++i)
 					{
 						vector.push_back(T());
-						if (!loadComplex("i" + std::to_string(i), vector.back()))
+						if (!loadComplex("i" + ke::toString(i), vector.back()))
 						{
 							ret = false;
 						}
@@ -184,7 +184,7 @@ class Serializer
 					for (std::size_t i = 0; i < size; ++i)
 					{
 						std::string temp;
-						if (load("i" + std::to_string(i), temp))
+						if (load("i" + ke::toString(i), temp))
 						{
 							std::size_t f = temp.find_first_of("||");
 							K k;

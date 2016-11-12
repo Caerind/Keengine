@@ -62,7 +62,7 @@ void MousePair::fromString(std::string const& str)
 
 std::string TouchPair::toString()
 {
-	return "type=Touch&index=" + std::to_string(index) + "&input=" + InputSystem::inputTypeToString(type);
+	return "type=Touch&index=" + ke::toString(index) + "&input=" + InputSystem::inputTypeToString(type);
 }
 
 void TouchPair::fromString(std::string const& str)
@@ -280,7 +280,7 @@ void InputSystem::update(sf::Time dt)
 	mEvents.clear();
 
 	std::vector<std::string> realtimeData;
-	realtimeData.push_back(std::to_string(dt.asSeconds()));
+	realtimeData.push_back(ke::toString(dt.asSeconds()));
 
 	// Keyboard realtime
 	for (auto itr = mKeyboardMapping.begin(); itr != mKeyboardMapping.end(); itr++)
@@ -296,8 +296,8 @@ void InputSystem::update(sf::Time dt)
 	{
 		auto mouseData = realtimeData;
 		auto mousePos = Application::getMousePosition();
-		mouseData.push_back(std::to_string(mousePos.x));
-		mouseData.push_back(std::to_string(mousePos.y));
+		mouseData.push_back(ke::toString(mousePos.x));
+		mouseData.push_back(ke::toString(mousePos.y));
 		if (sf::Mouse::isButtonPressed(itr->second.button) && itr->second.type == InputType::Hold)
 		{
 			emitData(itr->first, mouseData);
@@ -309,8 +309,8 @@ void InputSystem::update(sf::Time dt)
 	{
 		auto touchData = realtimeData;
 		auto touchPos = Application::getTouchPosition();
-		touchData.push_back(std::to_string(touchPos.x));
-		touchData.push_back(std::to_string(touchPos.y));
+		touchData.push_back(ke::toString(touchPos.x));
+		touchData.push_back(ke::toString(touchPos.y));
 		if (sf::Touch::isDown(itr->second.index) && itr->second.type == InputType::Hold)
 		{
 			emitData(itr->first, touchData);
@@ -438,16 +438,16 @@ std::vector<std::string> InputSystem::eventToData(sf::Event const& event)
 
 	if (event.type == sf::Event::Resized)
 	{
-		data.push_back(std::to_string(event.size.width));
-		data.push_back(std::to_string(event.size.height));
+		data.push_back(ke::toString(event.size.width));
+		data.push_back(ke::toString(event.size.height));
 	}
 	if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased)
 	{
 		data.push_back(keyToString(event.key.code));
-		data.push_back(std::to_string(event.key.alt));
-		data.push_back(std::to_string(event.key.control));
-		data.push_back(std::to_string(event.key.shift));
-		data.push_back(std::to_string(event.key.system));
+		data.push_back(ke::toString(event.key.alt));
+		data.push_back(ke::toString(event.key.control));
+		data.push_back(ke::toString(event.key.shift));
+		data.push_back(ke::toString(event.key.system));
 	}
 	if (event.type == sf::Event::TextEntered)
 	{
@@ -455,55 +455,55 @@ std::vector<std::string> InputSystem::eventToData(sf::Event const& event)
 	}
 	if (event.type == sf::Event::MouseMoved)
 	{
-		data.push_back(std::to_string(event.mouseMove.x));
-		data.push_back(std::to_string(event.mouseMove.y));
+		data.push_back(ke::toString(event.mouseMove.x));
+		data.push_back(ke::toString(event.mouseMove.y));
 	}
 	if (event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::MouseButtonReleased)
 	{
-		data.push_back(std::to_string(event.mouseButton.button));
-		data.push_back(std::to_string(event.mouseButton.x));
-		data.push_back(std::to_string(event.mouseButton.y));
+		data.push_back(ke::toString(event.mouseButton.button));
+		data.push_back(ke::toString(event.mouseButton.x));
+		data.push_back(ke::toString(event.mouseButton.y));
 	}
 	if (event.type == sf::Event::MouseWheelScrolled)
 	{
-		data.push_back(std::to_string(event.mouseWheelScroll.wheel));
-		data.push_back(std::to_string(event.mouseWheelScroll.delta));
-		data.push_back(std::to_string(event.mouseWheelScroll.x));
-		data.push_back(std::to_string(event.mouseWheelScroll.y));
+		data.push_back(ke::toString(event.mouseWheelScroll.wheel));
+		data.push_back(ke::toString(event.mouseWheelScroll.delta));
+		data.push_back(ke::toString(event.mouseWheelScroll.x));
+		data.push_back(ke::toString(event.mouseWheelScroll.y));
 	}
 	if (event.type == sf::Event::MouseWheelMoved)
 	{
-		data.push_back(std::to_string(event.mouseWheel.delta));
-		data.push_back(std::to_string(event.mouseWheel.x));
-		data.push_back(std::to_string(event.mouseWheel.y));
+		data.push_back(ke::toString(event.mouseWheel.delta));
+		data.push_back(ke::toString(event.mouseWheel.x));
+		data.push_back(ke::toString(event.mouseWheel.y));
 	}
 	if (event.type == sf::Event::JoystickMoved)
 	{
-		data.push_back(std::to_string(event.joystickMove.joystickId));
-		data.push_back(std::to_string(event.joystickMove.axis));
-		data.push_back(std::to_string(event.joystickMove.position));
+		data.push_back(ke::toString(event.joystickMove.joystickId));
+		data.push_back(ke::toString(event.joystickMove.axis));
+		data.push_back(ke::toString(event.joystickMove.position));
 	}
 	if (event.type == sf::Event::JoystickButtonPressed || event.type == sf::Event::JoystickButtonReleased)
 	{
-		data.push_back(std::to_string(event.joystickButton.joystickId));
-		data.push_back(std::to_string(event.joystickButton.button));
+		data.push_back(ke::toString(event.joystickButton.joystickId));
+		data.push_back(ke::toString(event.joystickButton.button));
 	}
 	if (event.type == sf::Event::JoystickConnected || event.type == sf::Event::JoystickDisconnected)
 	{
-		data.push_back(std::to_string(event.joystickConnect.joystickId));
+		data.push_back(ke::toString(event.joystickConnect.joystickId));
 	}
 	if (event.type == sf::Event::TouchBegan || event.type == sf::Event::TouchEnded || event.type == sf::Event::TouchMoved)
 	{
-		data.push_back(std::to_string(event.touch.finger));
-		data.push_back(std::to_string(event.touch.x));
-		data.push_back(std::to_string(event.touch.y));
+		data.push_back(ke::toString(event.touch.finger));
+		data.push_back(ke::toString(event.touch.x));
+		data.push_back(ke::toString(event.touch.y));
 	}
 	if (event.type == sf::Event::SensorChanged)
 	{
-		data.push_back(std::to_string(event.sensor.type));
-		data.push_back(std::to_string(event.sensor.x));
-		data.push_back(std::to_string(event.sensor.y));
-		data.push_back(std::to_string(event.sensor.z));
+		data.push_back(ke::toString(event.sensor.type));
+		data.push_back(ke::toString(event.sensor.x));
+		data.push_back(ke::toString(event.sensor.y));
+		data.push_back(ke::toString(event.sensor.z));
 	}
 
 	return data;

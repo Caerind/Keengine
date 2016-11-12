@@ -66,8 +66,8 @@ class Component : public Serializable
 		// Getters
 		Actor& getActor();
 		Scene& getScene();
-		Log& getLog();
-		Application& getApplication();
+		static Log& getLog();
+		static Application& getApplication();
 
 		// Serialization
 		virtual void serialize(Serializer& serializer);

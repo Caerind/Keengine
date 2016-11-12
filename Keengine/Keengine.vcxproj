@@ -22,9 +22,13 @@
     <None Include="..\NOTES.md" />
     <None Include="..\README.md" />
     <None Include="Example\application_settings.ini" />
+    <None Include="Example\hexa.tmx" />
     <None Include="Example\inputs.cfg" />
+    <None Include="Example\iso.tmx" />
     <None Include="Example\map.tmx" />
+    <None Include="Example\ortho.tmx" />
     <None Include="Example\script.lua" />
+    <None Include="Example\stagg.tmx" />
     <None Include="Example\widgets.css" />
   </ItemGroup>
   <ItemGroup>

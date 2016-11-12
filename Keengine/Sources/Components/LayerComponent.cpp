@@ -293,7 +293,7 @@ void LayerComponent::saveToNode(pugi::xml_node & node)
 		{
 			for (coords.x = 0; coords.x < mSize.x; coords.x++)
 			{
-				data += std::to_string(getTileId(coords)) + ",";
+				data += ke::toString(getTileId(coords)) + ",";
 			}
 			data += "\n";
 		}
@@ -591,76 +591,9 @@ void LayerComponent::updateRender()
 	}
 }
 
-sf::Vector2f LayerComponent::getVertexPosition(sf::Vector2i const & coords)
+sf::Vector2f LayerComponent::getVertexPosition(sf::Vector2i const& coords)
 {
-	// TODO : Use Map::coordsToWorld
-	sf::Vector2f pos;
-	unsigned int index = (mStaggerIndex == "odd") ? 0 : 1;
-	if (mOrientation == "orthogonal")
-	{
-		pos.x = static_cast<float>(coords.x * mTileSize.x);
-		pos.y = static_cast<float>(coords.y * mTileSize.y);
-	}
-	else if (mOrientation == "isometric")
-	{
-		pos.x = ((float)coords.x - (float)coords.y) * mTileSize.x * 0.5f;
-		pos.y = ((float)coords.x + (float)coords.y) * mTileSize.y * 0.5f;
-	}
-	else if (mOrientation == "staggered")
-	{
-		if (mStaggerAxis == "y")
-		{
-			if ((coords.y % 2) == index)
-			{
-				pos.x = static_cast<float>(coords.x * mTileSize.x);
-			}
-			else
-			{
-				pos.x = static_cast<float>((coords.x + 0.5f) * mTileSize.x);
-			}
-			pos.y = coords.y * mTileSize.y * 0.5f;
-		}
-		else
-		{
-			if ((coords.x % 2) == index)
-			{
-				pos.y = static_cast<float>(coords.y * mTileSize.y);
-			}
-			else
-			{
-				pos.y = static_cast<float>((coords.y + 0.5f) * mTileSize.y);
-			}
-			pos.x = coords.x * mTileSize.x * 0.5f;
-		}
-	}
-	else if (mOrientation == "hexagonal")
-	{
-		if (mStaggerAxis == "y")
-		{
-			if ((coords.y % 2) == index)
-			{
-				pos.x = static_cast<float>(coords.x * mTileSize.x);
-			}
-			else
-			{
-				pos.x = static_cast<float>((coords.x + 0.5f) * mTileSize.x);
-			}
-			pos.y = coords.y * ((mTileSize.y - mHexSideLength) * 0.5f + mHexSideLength);
-		}
-		else
-		{
-			if ((coords.x % 2) == index)
-			{
-				pos.y = static_cast<float>(coords.y * mTileSize.y);
-			}
-			else
-			{
-				pos.y = static_cast<float>((coords.y + 0.5f) * mTileSize.y);
-			}
-			pos.x = coords.x * ((mTileSize.x - mHexSideLength) * 0.5f + mHexSideLength);
-		}
-	}
-	return pos;
+	return Map::coordsToWorld(coords, mOrientation, mTileSize, mStaggerIndex, mStaggerAxis, mHexSideLength);
 }
 
 void LayerComponent::serialize(Serializer& serializer)

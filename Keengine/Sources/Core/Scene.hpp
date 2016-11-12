@@ -142,8 +142,8 @@ class Scene
 		// Getters
 		sf::View& getView();
 		Input& getInput();
-		Log& getLog();
-		Application& getApplication();
+		static Log& getLog();
+		static Application& getApplication();
 
 		// Serialization
 		bool loadFromXml(const std::string& filepath);

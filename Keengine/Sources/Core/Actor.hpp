@@ -141,8 +141,8 @@ class Actor : public Serializable
 
 		// Getters
 		Scene& getScene();
-		Log& getLog();
-		Application& getApplication();
+		static Log& getLog();
+		static Application& getApplication();
 
 		// Serialization
 		virtual void serialize(Serializer& serializer);

@@ -56,6 +56,18 @@
       <Filter>Example</Filter>
     </None>
     <None Include="..\NOTES.md" />
+    <None Include="Example\stagg.tmx">
+      <Filter>Example</Filter>
+    </None>
+    <None Include="Example\ortho.tmx">
+      <Filter>Example</Filter>
+    </None>
+    <None Include="Example\iso.tmx">
+      <Filter>Example</Filter>
+    </None>
+    <None Include="Example\hexa.tmx">
+      <Filter>Example</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Example\sfml.png">
