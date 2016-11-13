@@ -66,6 +66,8 @@ class Map : public Actor, public PropertiesHolder
 
 		void setObjectFunction(std::function<void(pugi::xml_node& node)> function);
 
+		void useForPathFinding(bool diag = false, std::function<bool(const sf::Vector2i& coords)> checker = [](const sf::Vector2i& coords) -> bool { return true; });
+
 		virtual void serialize(Serializer& serializer);
 		virtual bool deserialize(Serializer& serializer);
 

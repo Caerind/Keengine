@@ -3,164 +3,227 @@
 namespace ke
 {
 
-namespace priv
+std::vector<priv::PathFinder::Ptr> PathFinding::mPathFinders;
+unsigned int PathFinding::mPathFindersIdCounter = 1;
+
+std::function<bool(const sf::Vector2i& coords)> PathFinding::mChecker = [](const sf::Vector2i& coords) -> bool { return true; };
+std::string PathFinding::mOrientation = "orthogonal";
+bool PathFinding::mDiag = false;
+std::string PathFinding::mStaggerAxis = "y";
+std::string PathFinding::mStaggerIndex = "odd";
+
+priv::PathFinder::PathFinder(unsigned int id, const sf::Vector2i& begin, const sf::Vector2i& end)
+	: mId(id)
+	, mBegin(begin)
+	, mEnd(end)
+	, mThread(&PathFinder::run, this)
+	, mFinished(false)
 {
-	std::vector<sf::Vector2i> reorganizedNeighboors(sf::Vector2i const& pos, sf::Vector2i const& end)
-	{
-		std::vector<sf::Vector2i> p;
-		/*
-		std::vector<sf::Vector2i> n = Map::getNeighboors(pos, false);
-		sf::Vector2f delta = coordsToWorld(end) - coordsToWorld(pos);
-		if (delta != sf::Vector2f())
-		{
-			return n;
-		}
-		float angle = getPolarAngle(delta);
-		if (0.f <= angle && angle < 30.f) // 2130
-		{
-			p.push_back(n.at(2));
-			p.push_back(n.at(1));
-			p.push_back(n.at(3));
-			p.push_back(n.at(0));
-		}
-		else if (30.f <= angle && angle < 90.f) // 2310
-		{
-			p.push_back(n.at(2));
-			p.push_back(n.at(3));
-			p.push_back(n.at(1));
-			p.push_back(n.at(0));
-		}
-		else if (90.f <= angle && angle < 150.f) // 3201
-		{
-			p.push_back(n.at(3));
-			p.push_back(n.at(2));
-			p.push_back(n.at(0));
-			p.push_back(n.at(1));
-		}
-		else if (150.f <= angle && angle < 180.f) // 3021
-		{
-			p.push_back(n.at(3));
-			p.push_back(n.at(0));
-			p.push_back(n.at(2));
-			p.push_back(n.at(1));
-		}
-		else if (180.f <= angle && angle < 210.f) // 0312
-		{
-			p.push_back(n.at(0));
-			p.push_back(n.at(3));
-			p.push_back(n.at(1));
-			p.push_back(n.at(2));
-		}
-		else if (210.f <= angle && angle < 270.f) // 0132
-		{
-			p.push_back(n.at(0));
-			p.push_back(n.at(1));
-			p.push_back(n.at(3));
-			p.push_back(n.at(2));
-		}
-		else if (270.f <= angle && angle < 330.f) // 1023
-		{
-			p.push_back(n.at(1));
-			p.push_back(n.at(0));
-			p.push_back(n.at(2));
-			p.push_back(n.at(3));
-		}
-		else // 1203
-		{
-			p.push_back(n.at(1));
-			p.push_back(n.at(2));
-			p.push_back(n.at(0));
-			p.push_back(n.at(3));
-		}
-		*/
-		return p;
-	}
+	mThread.launch();
 }
 
-std::vector<sf::Vector2i> pathfinding(sf::Vector2i const & begin, sf::Vector2i const & end, std::function<bool(sf::Vector2i const&coords)> collisions)
+void priv::PathFinder::run()
 {
-	std::vector<priv::Node> container;
+	mFinished = false;
+	mMutex.lock();
+	mPath = PathFinding::pathfinding(mBegin, mEnd);
+	mMutex.unlock();
+	mFinished = true;
+}
+
+unsigned int priv::PathFinder::getId() const
+{
+	return mId;
+}
+
+bool priv::PathFinder::isFinished() const
+{
+	return mFinished;
+}
+
+std::vector<sf::Vector2i> priv::PathFinder::getPath() const
+{
+	if (mFinished)
+	{
+		return mPath;
+	}
+	return std::vector<sf::Vector2i>();
+}
+
+unsigned int PathFinding::startPath(const sf::Vector2i& begin, const sf::Vector2i& end)
+{
+	mPathFinders.push_back(std::make_shared<priv::PathFinder>(mPathFindersIdCounter++, begin, end));
+	return mPathFinders.back()->getId();
+}
+
+bool PathFinding::hasPath(unsigned int id)
+{
+	for (std::size_t i = 0; i < mPathFinders.size(); i++)
+	{
+		if (mPathFinders[i]->getId() == id)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool PathFinding::calculatedPath(unsigned int id)
+{
+	for (std::size_t i = 0; i < mPathFinders.size(); i++)
+	{
+		if (mPathFinders[i]->getId() == id)
+		{
+			if (mPathFinders[i]->isFinished())
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+std::vector<sf::Vector2i> PathFinding::getPath(unsigned int id)
+{
+	for (std::size_t i = 0; i < mPathFinders.size(); i++)
+	{
+		if (mPathFinders[i]->getId() == id)
+		{
+			if (mPathFinders[i]->isFinished())
+			{
+				std::vector<sf::Vector2i> p = mPathFinders[i]->getPath();
+				mPathFinders.erase(i + mPathFinders.begin());
+				i--;
+				return p;
+			}
+		}
+	}
+	return std::vector<sf::Vector2i>();
+}
+
+void PathFinding::setChecker(std::function<bool(const sf::Vector2i& coords)> checker)
+{
+	mChecker = checker;
+}
+
+void PathFinding::setOrientation(const std::string& orientation)
+{
+	mOrientation = orientation;
+}
+
+void PathFinding::setDiag(bool diag)
+{
+	mDiag = diag;
+}
+
+void PathFinding::setStaggerAxis(const std::string& staggerAxis)
+{
+	mStaggerAxis = staggerAxis;
+}
+
+void PathFinding::setStaggerIndex(const std::string& staggerIndex)
+{
+	mStaggerIndex = staggerIndex;
+}
+
+std::vector<sf::Vector2i> PathFinding::pathfinding(const sf::Vector2i& begin, const sf::Vector2i& end)
+{
 	if (begin == end)
 	{
-		return{};
+		return std::vector<sf::Vector2i>();
 	}
-	container.push_back(priv::Node(begin, begin));
-	std::size_t test = 0;
-	bool reached = false;
-	std::vector<priv::Node> temp;
-	while (test < 30 && !reached)
+	std::vector<priv::Node> reachable;
+	std::vector<priv::Node> explored;
+	reachable.push_back(priv::Node(begin, sf::Vector2i(666,666), 0.f));
+	while (!reachable.empty())
 	{
-		for (std::size_t i = 0; i < container.size(); i++)
-		{
-			std::vector<sf::Vector2i> n = priv::reorganizedNeighboors(container[i].coords, end);
-			for (std::size_t j = 0; j < n.size(); j++)
-			{
-				bool addToList = true;
-				if (collisions)
-				{
-					if (collisions(n[j]))
-					{
-						addToList = false;
-					}
-				}
-				for (std::size_t k = 0; k < container.size(); k++)
-				{
-					if (container[k].coords == n[j])
-					{
-						addToList = false;
-					}
-				}
-				for (std::size_t k = 0; k < temp.size(); k++)
-				{
-					if (temp[k].coords == n[j])
-					{
-						addToList = false;
-					}
-				}
-				if (addToList)
-				{
-					temp.push_back(priv::Node(n[j], container[i].coords));
-					if (n[j] == end)
-					{
-						reached = true;
-					}
-				}
-			}
-		}
-		for (std::size_t i = 0; i < temp.size(); i++)
-		{
-			container.push_back(temp[i]);
-		}
-		temp.clear();
-		test++;
-	}
+		std::sort(reachable.begin(), reachable.end(), [](priv::Node& a, priv::Node& b) { return a.cost < b.cost; });
 
-	std::vector<sf::Vector2i> path;
-	if (reached)
-	{
-		sf::Vector2i pos = end;
-		reached = false;
-		while (!reached)
+		if (reachable.front().coords == end)
 		{
-			bool handled = false;
-			for (std::size_t i = 0; i < container.size(); i++)
+			return buildPath(reachable.front(), explored);
+		}
+
+		explored.push_back(reachable.front());
+		reachable.erase(reachable.begin());
+
+		std::vector<sf::Vector2i> newr = Map::getNeighboors(explored.back().coords, mOrientation, mDiag, mStaggerIndex, mStaggerAxis);
+		std::size_t size = newr.size();
+		for (std::size_t i = 0; i < size; i++)
+		{
+			bool valid = coordsValid(newr[i]);
+			if (valid)
 			{
-				if (container[i].coords == pos && !handled)
+				bool explrd = coordsExplored(newr[i], explored);
+				if (!explrd)
 				{
-					path.push_back(pos);
-					if (container[i].parent == container[i].coords)
+					bool reached = coordsReachable(newr[i], reachable);
+					if (!reached)
 					{
-						reached = true;
+						reachable.push_back(priv::Node(newr[i], explored.back().coords, explored.back().cost + 1.f));
 					}
-					pos = container[i].parent;
-					handled = true;
 				}
 			}
 		}
-		path.pop_back();
-		std::reverse(path.begin(), path.end());
 	}
+	return std::vector<sf::Vector2i>();
+}
+
+std::vector<sf::Vector2i> PathFinding::buildPath(priv::Node node, std::vector<priv::Node>& explored)
+{
+	std::vector<sf::Vector2i> path;
+	bool parentFound;
+	do
+	{
+		parentFound = false;
+		for (std::size_t i = 0; !parentFound && i < explored.size(); i++)
+		{
+			if (node.parent == explored[i].coords)
+			{
+				parentFound = true;
+				path.push_back(node.coords);
+				node = explored[i];
+			}
+		}
+	} while (parentFound);
+	path.push_back(node.coords);
+	std::reverse(path.begin(), path.end());
 	return path;
+}
+
+bool PathFinding::coordsValid(const sf::Vector2i& coords)
+{
+	if (mChecker)
+	{
+		return mChecker(coords);
+	}
+	return true;
+}
+
+bool PathFinding::coordsExplored(const sf::Vector2i& coords, std::vector<priv::Node>& explored)
+{
+	std::size_t size = explored.size();
+	for (std::size_t i = 0; i < size; i++)
+	{
+		if (explored[i].coords == coords)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool PathFinding::coordsReachable(const sf::Vector2i& coords, std::vector<priv::Node>& reachable)
+{
+	std::size_t size = reachable.size();
+	for (std::size_t i = 0; i < size; i++)
+	{
+		if (reachable[i].coords == coords)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 } // namespace ke

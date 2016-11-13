@@ -1,5 +1,6 @@
 #include "Map.hpp"
 #include "Scene.hpp"
+#include "Pathfinding.hpp"
 
 namespace ke
 {
@@ -756,6 +757,15 @@ void Map::setHexSideLength(unsigned int hexSideLength)
 void Map::setObjectFunction(std::function<void(pugi::xml_node&node)> function)
 {
 	mObjectFunction = function;
+}
+
+void Map::useForPathFinding(bool diag, std::function<bool(const sf::Vector2i& coords)> checker)
+{
+	PathFinding::setDiag(diag);
+	PathFinding::setChecker(checker);
+	PathFinding::setOrientation(mOrientation);
+	PathFinding::setStaggerAxis(mStaggerAxis);
+	PathFinding::setStaggerIndex(mStaggerIndex);
 }
 
 void Map::serialize(Serializer& serializer)
