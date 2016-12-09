@@ -61,12 +61,12 @@ pugi::xml_node& Serializer::getRootNode()
 	return mRootNode;
 }
 
-void Serializer::setNode(pugi::xml_node node)
+void Serializer::setNode(const pugi::xml_node& node)
 {
 	mActualNode = node;
 }
 
-pugi::xml_node Serializer::getNode()
+pugi::xml_node& Serializer::getNode()
 {
 	return mActualNode;
 }

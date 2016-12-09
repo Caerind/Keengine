@@ -8,6 +8,8 @@ var searchData=
   ['bindaction',['bindAction',['../classke_1_1_input.html#a64cc1105b52bf5c6e7177cf7feea82df',1,'ke::Input::bindAction()'],['../classke_1_1_input_system.html#ac787e1ed7d4d392adce20515c88ccc86',1,'ke::InputSystem::bindAction()']]],
   ['bintodec',['binToDec',['../namespaceke.html#a09062ef57b81035c63392eb0bf49747d',1,'ke']]],
   ['black',['Black',['../namespaceke_1_1_color.html#a3fb4a4314a6e51381330ecc0b7631b18',1,'ke::Color']]],
+  ['blockhorizontal',['blockHorizontal',['../classke_1_1_joystick.html#ae348e39be837f2e4375ad6a286955129',1,'ke::Joystick']]],
+  ['blockvertical',['blockVertical',['../classke_1_1_joystick.html#acc9ed85e044eb6946ad9ac7afa165eed',1,'ke::Joystick']]],
   ['blue',['Blue',['../namespaceke_1_1_color.html#a11d2c251634986faa87f2183e5ae0723',1,'ke::Color']]],
   ['blur',['Blur',['../classke_1_1_blur.html#ad19178094f2f7c63d693afaec54def84',1,'ke::Blur']]],
   ['brown',['Brown',['../namespaceke_1_1_color.html#a6477f2565928c9c8b25feee116536fe3',1,'ke::Color']]],

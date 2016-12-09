@@ -68,17 +68,17 @@ void MyActor::initialize()
 {
 	mD->bindAction("MoveUp", [&](std::vector<std::string> const& data)
 	{
-		desiredImpulseY(-160.f);
+		desiredImpulseY(-240.f);
 		return false;
 	});
 	mD->bindAction("MoveRight", [&](std::vector<std::string> const& data)
 	{
-		mVel += 160.f;
+		mVel = 160.f;
 		return false;
 	});
 	mD->bindAction("MoveLeft", [&](std::vector<std::string> const& data)
 	{
-		mVel -= 160.f;
+		mVel = -160.f;
 		return false;
 	});
 	mD->bindAction("Light", [&](std::vector<std::string> const& data)
@@ -86,6 +86,11 @@ void MyActor::initialize()
 		mC->setOn(!mC->isOn());
 		return false;
 	});
+}
+
+void MyActor::setVelocityX(float velx)
+{
+	mVel = velx;
 }
 
 void MyActor::update(sf::Time dt)

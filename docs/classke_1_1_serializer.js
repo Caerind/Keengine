@@ -5,7 +5,7 @@ var classke_1_1_serializer =
     [ "close", "classke_1_1_serializer.html#addfbd751c0a8e09af8abdabf077d76c2", null ],
     [ "create", "classke_1_1_serializer.html#aabf384e0f42a46e8b16aeb1fa0474539", null ],
     [ "end", "classke_1_1_serializer.html#a37578c3460abc33640e6fbc9303de15f", null ],
-    [ "getNode", "classke_1_1_serializer.html#ae84b093b80668137cca74610379451cc", null ],
+    [ "getNode", "classke_1_1_serializer.html#a3be413bfdd9e04559293686bf9f034bf", null ],
     [ "getRootNode", "classke_1_1_serializer.html#a004776904a7377398cb1ad274ec62098", null ],
     [ "load", "classke_1_1_serializer.html#a8991e198a2703e23fa0ba72d5bd1b0ba", null ],
     [ "load", "classke_1_1_serializer.html#af901c623b0aadc7ae594ed9b948dab6c", null ],
@@ -22,5 +22,5 @@ var classke_1_1_serializer =
     [ "saveComplex", "classke_1_1_serializer.html#aa439563c6ca6f39670ce535fa57f5615", null ],
     [ "saveComplex", "classke_1_1_serializer.html#a5d345de24ab44f8c5a20fd6f93f0d081", null ],
     [ "saveDocument", "classke_1_1_serializer.html#a7735c424a08b71de590c27892530d13b", null ],
-    [ "setNode", "classke_1_1_serializer.html#affb402a896948470da0c9ba6d217d4b2", null ]
+    [ "setNode", "classke_1_1_serializer.html#af7fa20d7a4c46b2dc8d3ce932da1ec70", null ]
 ];

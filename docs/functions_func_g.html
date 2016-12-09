@@ -88,6 +88,9 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 : <a class="el" href="classke_1_1_average.html#a1d369454ea2b5438bf2604ec98cce4f3">ke::Average</a>
 , <a class="el" href="classke_1_1_random_table.html#a2ae863ca4db45a83272d286c09233617">ke::RandomTable&lt; T &gt;</a>
 </li>
+<li>getAction()
+: <a class="el" href="classke_1_1_window.html#af3c0c508cb43d6935c0a602ddf5c543c">ke::Window</a>
+</li>
 <li>getActor()
 : <a class="el" href="classke_1_1_component.html#a6a55892606ab33c733d80fce3b473e2c">ke::Component</a>
 , <a class="el" href="classke_1_1_scene.html#ae52b801aabfccdb016e007151585438c">ke::Scene</a>
@@ -114,7 +117,7 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 : <a class="el" href="classke_1_1_animator_component.html#a8e79fd29666ddeb7bf4a2fba5867e48d">ke::AnimatorComponent</a>
 </li>
 <li>getActualFrame()
-: <a class="el" href="classke_1_1_animator_component.html#a248c052c312fb0142b088ff8a0fd51b6">ke::AnimatorComponent</a>
+: <a class="el" href="classke_1_1_animator_component.html#aa535a24ac7e7a364e338617d673509ff">ke::AnimatorComponent</a>
 </li>
 <li>getActualState()
 : <a class="el" href="classke_1_1_application.html#a8f86aea06ab307e9afbb823c35a3a47e">ke::Application</a>
@@ -132,9 +135,6 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>getAngularVelocity()
 : <a class="el" href="classke_1_1_actor.html#a61e6710cc6c34bf383b1c84a3ab098d7">ke::Actor</a>
 </li>
-<li>getAnimation()
-: <a class="el" href="classke_1_1_animator_component.html#ad557f0cd30c554dde6fa3ec6dba0d7e7">ke::AnimatorComponent</a>
-</li>
 <li>getAnimationCount()
 : <a class="el" href="classke_1_1_animator_component.html#afe712824270535e4347e590c2a459d5d">ke::AnimatorComponent</a>
 </li>
@@ -145,29 +145,26 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 , <a class="el" href="classke_1_1_scene.html#a3a39973b5296a8d5e4f17fed635aae4f">ke::Scene</a>
 , <a class="el" href="classke_1_1_state.html#a6fc8c848eadc47cffb1c4ecd5ed5d046">ke::State</a>
 </li>
+<li>getAssetsPath()
+: <a class="el" href="classke_1_1_application.html#a6aa694619bd5a5ce594adb941cdfdfb3">ke::Application</a>
+</li>
 <li>getAudioStatus()
 : <a class="el" href="classke_1_1_application.html#a7b9aaf7821adc41f19a3e547bbdb92e8">ke::Application</a>
 </li>
 <li>getBackgroundColor()
-: <a class="el" href="classke_1_1_application.html#aa57fd4b822de38ec63c1bac7270673c6">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#adc2db245344083ff4db2049895740dd8">ke::Window</a>
-</li>
-<li>getBackgroundRectangle()
-: <a class="el" href="classke_1_1_window.html#ab779919b78c9c63fe493c39f30e0985c">ke::Window</a>
-</li>
-<li>getBackgroundSprite()
-: <a class="el" href="classke_1_1_window.html#acc57e6a4e046b1657925da40bbf67c53">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#adc2db245344083ff4db2049895740dd8">ke::Window</a>
 </li>
 <li>getBackgroundTexture()
-: <a class="el" href="classke_1_1_application.html#a9f1de89e206b196f82828ef87dc7905b">ke::Application</a>
+: <a class="el" href="classke_1_1_window.html#aef6c7ba822d09f4152994859f78988ef">ke::Window</a>
+</li>
+<li>getBackgroundTextureData()
+: <a class="el" href="classke_1_1_window.html#a3ecd95f540abc2b384c71bbe4aa04855">ke::Window</a>
 </li>
 <li>getBackgroundTextureRect()
-: <a class="el" href="classke_1_1_application.html#a221baf68e8db1ba8b6e8b9dc5eb9c9bf">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#ab4f8b166bedcf29baa783e21ed6f4eae">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#ab4f8b166bedcf29baa783e21ed6f4eae">ke::Window</a>
 </li>
 <li>getBackgroundUsage()
-: <a class="el" href="classke_1_1_application.html#a344efea48b1b43d74f05826429874bf3">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#a2f6e1a857b6739f4eddd67bda81b64e4">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#a2b41008fcfb352e9e601bc9665e8f87c">ke::Window</a>
 </li>
 <li>getBody()
 : <a class="el" href="classke_1_1_actor.html#a99a1d370266ded44ff5b4c0ce7603071">ke::Actor</a>
@@ -204,21 +201,32 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>getCompression()
 : <a class="el" href="classke_1_1_layer_component.html#ad0c1a85b442d6c6c9b8ac4a3b5cd46b3">ke::LayerComponent</a>
 </li>
+<li>getConsoleContent()
+: <a class="el" href="classke_1_1_window.html#a4c05498661fedf51446c7318c07377c0">ke::Window</a>
+</li>
+<li>getConsoleFont()
+: <a class="el" href="classke_1_1_window.html#a35c7f6d9c36516e808efd141939ed400">ke::Window</a>
+</li>
+<li>getConsoleFontData()
+: <a class="el" href="classke_1_1_window.html#a5862f5fc121f943aa1c96939dc60e6b3">ke::Window</a>
+</li>
 <li>getCount()
 : <a class="el" href="classke_1_1_average.html#a10f076395fb54cf5be58f4dee496a3c8">ke::Average</a>
 </li>
 <li>getDay()
 : <a class="el" href="classke_1_1_date_time.html#a7dbe3289a249d0f36812fb3773b9fd6b">ke::DateTime</a>
 </li>
-<li>getDebugInfo()
-: <a class="el" href="classke_1_1_application.html#a64f0ed6e6b9fc498d9930540ad2e93c0">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#a33f00f7caa45cef1da7b2e688a06cfea">ke::Window</a>
+<li>getDebugInfoCharacterSize()
+: <a class="el" href="classke_1_1_window.html#a32403e29480706c77faf2c6583eab01a">ke::Window</a>
 </li>
-<li>getDebugInfoCount()
-: <a class="el" href="classke_1_1_window.html#a1891479edbd09a8c96138fa03850651b">ke::Window</a>
+<li>getDebugInfoFont()
+: <a class="el" href="classke_1_1_window.html#a3d24b55271f0d6acf378a061f5ac410b">ke::Window</a>
+</li>
+<li>getDebugInfoFontData()
+: <a class="el" href="classke_1_1_window.html#a723f49173fe1de7928507d75979ae772">ke::Window</a>
 </li>
 <li>getDefaultView()
-: <a class="el" href="classke_1_1_application.html#aeb2a12d4c8bb709ba6cb12285536b350">ke::Application</a>
+: <a class="el" href="classke_1_1_window.html#ae6a6a7ba113d4786527a6282462412bb">ke::Window</a>
 </li>
 <li>getDelta()
 : <a class="el" href="classke_1_1_joystick.html#a2e21b4030210570f3ce9966463e03542">ke::Joystick</a>
@@ -246,7 +254,12 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 : <a class="el" href="classke_1_1_input_system.html#acc0f4ed11df6a7a8e76d0023c4b977e6">ke::InputSystem</a>
 </li>
 <li>getFilename()
-: <a class="el" href="classke_1_1_log.html#a2325b2fafedcf39210af7f0f9f6667c0">ke::Log</a>
+: <a class="el" href="classke_1_1_configuration.html#aa4fa33c259649090aba31f42984e25d5">ke::Configuration</a>
+, <a class="el" href="classke_1_1_font.html#ae1b6bb90d131216fadd2fe21cf7db398">ke::Font</a>
+, <a class="el" href="classke_1_1_image.html#ac45a3c4042f6158f6bcf51c446c82267">ke::Image</a>
+, <a class="el" href="classke_1_1_sound_buffer.html#a74122f24c7cf59092183990ab1d35a7e">ke::SoundBuffer</a>
+, <a class="el" href="classke_1_1_texture.html#adb74b230ac77ccb95886c63a28131df0">ke::Texture</a>
+, <a class="el" href="classke_1_1_theme.html#af73f912dfebf999b58fde6b054d09472">ke::Theme</a>
 </li>
 <li>getFillColor()
 : <a class="el" href="classke_1_1_shape_component.html#a564c0a418b197b8c15f46906974b17d8">ke::ShapeComponent</a>
@@ -262,16 +275,22 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 : <a class="el" href="classke_1_1_text_component.html#aca5b83bf200ba388d72dd8594f821f6f">ke::TextComponent</a>
 </li>
 <li>getFPS()
-: <a class="el" href="classke_1_1_application.html#a60bdcc8891096590c1a2fdab9cbf9625">ke::Application</a>
+: <a class="el" href="classke_1_1_window.html#a28be5beffe4a2750d7b747548b825965">ke::Window</a>
+</li>
+<li>getFragmentFilename()
+: <a class="el" href="classke_1_1_shader.html#a93b67ad4b8acc0045306405c6d61e9e0">ke::Shader</a>
 </li>
 <li>getFrame()
-: <a class="el" href="classke_1_1_animation.html#a11cfdb08f5ce992615e60c5789051e28">ke::Animation</a>
+: <a class="el" href="classke_1_1_animation.html#af29be9082827938d154647649fb5a4cd">ke::Animation</a>
 </li>
 <li>getFrameCount()
 : <a class="el" href="classke_1_1_animation.html#a2cc5ae203152e9dbc15ad959f003f8ca">ke::Animation</a>
 </li>
 <li>getFriction()
 : <a class="el" href="classke_1_1_physic_component.html#a9f740eeee0247e12ce1d9d26d322d78e">ke::PhysicComponent</a>
+</li>
+<li>getGeometryFilename()
+: <a class="el" href="classke_1_1_shader.html#a89db25c898fce85ccbba8c2729c4d649">ke::Shader</a>
 </li>
 <li>getGlobalBounds()
 : <a class="el" href="classke_1_1_animator_component.html#a5a7312b8d7200ccc53d0d131134511f0">ke::AnimatorComponent</a>
@@ -291,6 +310,9 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>getGravityScale()
 : <a class="el" href="classke_1_1_actor.html#a95688362be8d1d8644e10cdd16928de0">ke::Actor</a>
 </li>
+<li>getHandle()
+: <a class="el" href="classke_1_1_window.html#ab3b21e958c1045968b93dfbfcc1a4ed0">ke::Window</a>
+</li>
 <li>getHexSizeLength()
 : <a class="el" href="classke_1_1_layer_component.html#acf8d2955dacf487d638508d1e9b4d3ba">ke::LayerComponent</a>
 , <a class="el" href="classke_1_1_map.html#a28260424f41b5630dbf4d95bb74b5b23">ke::Map</a>
@@ -299,12 +321,15 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 : <a class="el" href="classke_1_1_date_time.html#a78d490aae76297c3518a350c7692f3d0">ke::DateTime</a>
 </li>
 <li>getIcon()
-: <a class="el" href="classke_1_1_application.html#a82fd586e447ea91e441022a46252b5e0">ke::Application</a>
+: <a class="el" href="classke_1_1_window.html#a7034f233cf5b4bb2fae2d0d48b5d0255">ke::Window</a>
+</li>
+<li>getIconPath()
+: <a class="el" href="classke_1_1_window.html#ab274f9c5be247be31feed316512604bf">ke::Window</a>
 </li>
 <li>getId()
 : <a class="el" href="classke_1_1_actor.html#a57d990207debdd5385f4e25056bfc266">ke::Actor</a>
 , <a class="el" href="classke_1_1_component.html#a5976ccaa82c4dd47592e28810280269e">ke::Component</a>
-, <a class="el" href="classke_1_1_scene.html#a16bc8743b30ffa26579687dcacf43e8f">ke::Scene</a>
+, <a class="el" href="classke_1_1priv_1_1_path_finder.html#ab3ac910ab6441de9e6a637465609b21e">ke::priv::PathFinder</a>
 </li>
 <li>getImage()
 : <a class="el" href="classke_1_1_map.html#ab9b874fcf9992727a3b878165c8baa06">ke::Map</a>
@@ -312,20 +337,11 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>getImageCount()
 : <a class="el" href="classke_1_1_map.html#ae823547fd25d483c4b72b38031152e05">ke::Map</a>
 </li>
-<li>getImageData()
-: <a class="el" href="classke_1_1_tileset.html#ae32fd1da6044e55fd5aab3325c7813d1">ke::Tileset</a>
-</li>
-<li>getImageFormat()
-: <a class="el" href="classke_1_1_tileset.html#a35557905911e9fb52f5095bfedd5b115">ke::Tileset</a>
-</li>
-<li>getImageSize()
-: <a class="el" href="classke_1_1_tileset.html#acc6af64f6928bfbd647e8d39411377ce">ke::Tileset</a>
-</li>
 <li>getImageSource()
 : <a class="el" href="classke_1_1_tileset.html#a37bc280f77b67a8b56c8fe8f2d0f7d20">ke::Tileset</a>
 </li>
 <li>getImageTransparent()
-: <a class="el" href="classke_1_1_tileset.html#ad96347eb92e84f0f75dc26b29711a318">ke::Tileset</a>
+: <a class="el" href="classke_1_1_tileset.html#aa8e7d9f89cac87ca12b6fa2efdafeb5f">ke::Tileset</a>
 </li>
 <li>getInertia()
 : <a class="el" href="classke_1_1_actor.html#ace56e6581c59cd91641543f8acc5bb4b">ke::Actor</a>
@@ -340,14 +356,10 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 : <a class="el" href="classke_1_1_point_light_component.html#a460008c3a08ba3da54cc2f0cc4f55d72">ke::PointLightComponent</a>
 </li>
 <li>getJoystickThreshold()
-: <a class="el" href="classke_1_1_application.html#afb6bd2f8a16092086137c7ba75dbe415">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#af6fee09320e1ff0e723a873de15be8d0">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#af6fee09320e1ff0e723a873de15be8d0">ke::Window</a>
 </li>
 <li>getKeyboardMapping()
 : <a class="el" href="classke_1_1_input_system.html#a8aeb4e3a368c0c6b4134092790b480ff">ke::InputSystem</a>
-</li>
-<li>getLang()
-: <a class="el" href="classke_1_1_application.html#a5989f8a9547d6434253d5e08d57de4ba">ke::Application</a>
 </li>
 <li>getLayer()
 : <a class="el" href="classke_1_1_map.html#a88af203cfd6e8c1bbc0962052e3247a7">ke::Map</a>
@@ -375,9 +387,6 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 , <a class="el" href="classke_1_1_effect.html#aa52ea2a6e5aa32730f51d67585b72843">ke::Effect</a>
 , <a class="el" href="classke_1_1_scene.html#a5992e7f5ce71e97e372bdaa2fd7a11b9">ke::Scene</a>
 </li>
-<li>getLogType()
-: <a class="el" href="classke_1_1_log.html#a24ab4174b322ab8c7a6749c05d4c8683">ke::Log</a>
-</li>
 <li>getMargin()
 : <a class="el" href="classke_1_1_tileset.html#a7b4999cda76caafcbd2d86c7b883f31d">ke::Tileset</a>
 </li>
@@ -391,52 +400,52 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 : <a class="el" href="classke_1_1_date_time.html#a124512ca81274e8974bf5597adde7ae0">ke::DateTime</a>
 </li>
 <li>getMouseCursor()
-: <a class="el" href="classke_1_1_application.html#ab750661197bb0e98e0ecb225849a45d5">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#ab5c05419d58a12ac97e853396ef6dc7a">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#ab5c05419d58a12ac97e853396ef6dc7a">ke::Window</a>
+</li>
+<li>getMouseCursorColor()
+: <a class="el" href="classke_1_1_window.html#ac2351899d3246eaa0b1e2036c2013bce">ke::Window</a>
 </li>
 <li>getMouseCursorOrigin()
-: <a class="el" href="classke_1_1_application.html#ac10d948bd5cb8eaa29f88611ff9ccd99">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#a345c7b35c94ef07faf2dda0a1520767d">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#a0266aee454528335db422b431c2e20fd">ke::Window</a>
+</li>
+<li>getMouseCursorRotation()
+: <a class="el" href="classke_1_1_window.html#a0a0340737abcee7c2a8b512c9c51513f">ke::Window</a>
+</li>
+<li>getMouseCursorScale()
+: <a class="el" href="classke_1_1_window.html#af25f3a6137a15d1d4d64ec7a193a3c36">ke::Window</a>
 </li>
 <li>getMouseCursorTexture()
-: <a class="el" href="classke_1_1_application.html#a7d22a70c1d8bfbb0ebdd6725889956cb">ke::Application</a>
+: <a class="el" href="classke_1_1_window.html#a7b3534859372c666f59f7a9e9f3934ed">ke::Window</a>
+</li>
+<li>getMouseCursorTextureData()
+: <a class="el" href="classke_1_1_window.html#a6f20d1b701472dee39fd40bed76eaa49">ke::Window</a>
 </li>
 <li>getMouseCursorTextureRect()
-: <a class="el" href="classke_1_1_application.html#a60cd68c30361c09e8dd440b5391e9354">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#ac5af622e6f57e4c8fb3f05b9dcbc3357">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#a7cb21bd3ba3fa649ef1394e384e52a95">ke::Window</a>
 </li>
 <li>getMouseMapping()
 : <a class="el" href="classke_1_1_input_system.html#a7dfb88e928bcd287b66b3b0dab9aecf1">ke::InputSystem</a>
 </li>
 <li>getMousePosition()
-: <a class="el" href="classke_1_1_application.html#ada55e4d5d76c02dca453fb4e0e620a6f">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#a780a255c9eb83a955c85e1a67b1e3b46">ke::Window</a>
-</li>
-<li>getMousePosition2i()
-: <a class="el" href="classke_1_1_application.html#aeae595cc371d814f1130ba43f56c23bf">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#a834e09a2e503be3bff3e2bb238ae661f">ke::Window</a>
-</li>
-<li>getMousePositionMap()
-: <a class="el" href="classke_1_1_application.html#abac61c700cfebf179f8ccdf8ef26a5d1">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#a5d46812aadb0a0ac2a9d702c5d5ea75b">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#a780a255c9eb83a955c85e1a67b1e3b46">ke::Window</a>
 </li>
 <li>getMousePositionView()
-: <a class="el" href="classke_1_1_application.html#ae5cf64abead9f7c6c46d0d7c17b7cf38">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#ab0fcb4621aa865272e6d2d5fa340a780">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#a13de58d959b98eed36645238f0ca8795">ke::Window</a>
 </li>
 <li>getMusicVolume()
 : <a class="el" href="classke_1_1_application.html#adb654e090105bccf4bd40d894091717d">ke::Application</a>
 , <a class="el" href="classke_1_1_audio_manager.html#a14a1a8745409635a2dfa46025b66b764">ke::AudioManager</a>
 </li>
 <li>getName()
-: <a class="el" href="classke_1_1_layer_component.html#afe2777a6c7ac39da86f7991a40767ef5">ke::LayerComponent</a>
-, <a class="el" href="classke_1_1_tileset.html#a9975b36dab719d18a7fd3cad910964da">ke::Tileset</a>
+: <a class="el" href="classke_1_1_application.html#ad6e9a1ee2930eb50a901934062968ab6">ke::Application</a>
+, <a class="el" href="classke_1_1_layer_component.html#afe2777a6c7ac39da86f7991a40767ef5">ke::LayerComponent</a>
+, <a class="el" href="classke_1_1_resource.html#a45817fcf76b1af84e515b4dbfed80790">ke::Resource</a>
 </li>
 <li>getNeighboors()
-: <a class="el" href="classke_1_1_map.html#a396e861cbb3d6bdfd94470ac88aca228">ke::Map</a>
+: <a class="el" href="classke_1_1_map.html#aa44f0d7eb5f302d86d94bcfbbb252b09">ke::Map</a>
 </li>
 <li>getNode()
-: <a class="el" href="classke_1_1_serializer.html#ae84b093b80668137cca74610379451cc">ke::Serializer</a>
+: <a class="el" href="classke_1_1_serializer.html#a3be413bfdd9e04559293686bf9f034bf">ke::Serializer</a>
 </li>
 <li>getOpacity()
 : <a class="el" href="classke_1_1_layer_component.html#ae2e31dabbe20ed003b37ee72432f1805">ke::LayerComponent</a>
@@ -462,6 +471,10 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>getParticleCount()
 : <a class="el" href="classke_1_1_particle_component.html#a52f8e03789a0e20f17469df72d4b0063">ke::ParticleComponent</a>
 </li>
+<li>getPath()
+: <a class="el" href="classke_1_1_path_finding.html#a537092a0aa8cda2efbb3a4e66f3a96f6">ke::PathFinding</a>
+, <a class="el" href="classke_1_1priv_1_1_path_finder.html#a5163b9230bb09370bf960816211da22d">ke::priv::PathFinder</a>
+</li>
 <li>getPhysic()
 : <a class="el" href="classke_1_1_scene.html#af930d9c01392f34cf5a36c0bb2260224">ke::Scene</a>
 </li>
@@ -485,20 +498,10 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 , <a class="el" href="classke_1_1_shape_component.html#a69a84ed11f92bc571564545a783ab04b">ke::ShapeComponent</a>
 </li>
 <li>getPointerPosition()
-: <a class="el" href="classke_1_1_application.html#a9d309f91cb83bef2308bd62198dd7b0c">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#af620fa7ee7b6c96438653a217413e880">ke::Window</a>
-</li>
-<li>getPointerPosition2i()
-: <a class="el" href="classke_1_1_application.html#a2e3ae9fe42eb86fad91fdc201a82bd28">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#afa4b782335a9f8bfd30e54bf6fd39601">ke::Window</a>
-</li>
-<li>getPointerPositionMap()
-: <a class="el" href="classke_1_1_application.html#adc841f05dc2f2c4b59ac9e867196e945">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#a9c2a499f64984b72effe4ae9342b57a8">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#af620fa7ee7b6c96438653a217413e880">ke::Window</a>
 </li>
 <li>getPointerPositionView()
-: <a class="el" href="classke_1_1_application.html#ada65ed7ba78e284e51940560f77c6129">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#a4ca7c82c1eedd791af175fd7d6b532f8">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#a44114621c20a2fdc3ce86d6e6f691137">ke::Window</a>
 </li>
 <li>getPoints()
 : <a class="el" href="classke_1_1_light_shape_component.html#a2f0d2f5cb915e59be6be9afafefb34fa">ke::LightShapeComponent</a>
@@ -511,12 +514,14 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>getPosition()
 : <a class="el" href="classke_1_1_actor.html#ad7270d5dddab6e4f3c406b06c3f38a67">ke::Actor</a>
 , <a class="el" href="classke_1_1_scene_component.html#acb2fed5fb11e0665aa89c7eab8e1dbd5">ke::SceneComponent</a>
+, <a class="el" href="classke_1_1_window.html#a8d14b2d9d2d579a9957fc8d4627021a1">ke::Window</a>
 </li>
 <li>getPriority()
 : <a class="el" href="classke_1_1_input.html#aaaefa00d879d782b02a66b022db17f36">ke::Input</a>
 </li>
 <li>getProperty()
-: <a class="el" href="classke_1_1_properties_holder.html#a18807eef167d52247aecc584d7ce13cd">ke::PropertiesHolder</a>
+: <a class="el" href="classke_1_1_configuration.html#a7e957e47f579bbd2ed58175dbf3e8fbe">ke::Configuration</a>
+, <a class="el" href="classke_1_1_properties_holder.html#a18807eef167d52247aecc584d7ce13cd">ke::PropertiesHolder</a>
 </li>
 <li>getPropertyAs()
 : <a class="el" href="classke_1_1_properties_holder.html#a0d8d94d70dc66dcde16bc9acc0133157">ke::PropertiesHolder</a>
@@ -527,12 +532,18 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>getRectangle()
 : <a class="el" href="classke_1_1_background.html#a1e734d1e8a1feb1c33a5b852b03b0562">ke::Background</a>
 </li>
+<li>getRelativePath()
+: <a class="el" href="classke_1_1_tileset.html#a7df8fec54c232cc05bf563726d18d7db">ke::Tileset</a>
+</li>
 <li>getRenderFlags()
 : <a class="el" href="classke_1_1_physic_system.html#a6553f35b077afce2fbacad97ea16939d">ke::PhysicSystem</a>
 </li>
 <li>getResource()
-: <a class="el" href="classke_1_1_application.html#afb332d4640eb70af157276b4a8b5c85a">ke::Application</a>
-, <a class="el" href="classke_1_1_resource_manager.html#a894da186a58a4fb7696a93939c5e6acb">ke::ResourceManager</a>
+: <a class="el" href="classke_1_1_application.html#ace4260db642f12d73ec1200d884b12ba">ke::Application</a>
+, <a class="el" href="classke_1_1_resource_manager.html#ab158f03aa6716429f014ba2ef70ca6db">ke::ResourceManager</a>
+</li>
+<li>getResources()
+: <a class="el" href="classke_1_1_application.html#aeab59149135ca3fbce9c08e011dd8482">ke::Application</a>
 </li>
 <li>getRestitution()
 : <a class="el" href="classke_1_1_physic_component.html#a93688ac32c5a63688cfe0582a1d1e99a">ke::PhysicComponent</a>
@@ -554,33 +565,32 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 , <a class="el" href="classke_1_1_effect.html#a118364fb7aed5fe22b29f37b52ac8510">ke::Effect</a>
 </li>
 <li>getScreenshotPath()
-: <a class="el" href="classke_1_1_application.html#a120b0ebe53ea305fcdbd17e0a1c9bfd3">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#adb80d8fe1027c207d0c0028e19f7d214">ke::Window</a>
-</li>
-<li>getScriptPath()
-: <a class="el" href="classke_1_1_application.html#ae54e9607c08898130e90f482e3876d39">ke::Application</a>
+: <a class="el" href="classke_1_1_window.html#a6678f85b790a76e774f803a4e5f0e704">ke::Window</a>
 </li>
 <li>getSeconds()
 : <a class="el" href="classke_1_1_date_time.html#adfafc3746fa7d8363ca08e24ae7baf92">ke::DateTime</a>
 </li>
 <li>getSeed()
-: <a class="el" href="classke_1_1_random.html#af52ec2539e2e0554abe8c853d1339019">ke::Random</a>
+: <a class="el" href="classke_1_1_random.html#aad4b08cf064ba523d6e87b7e1ebc6216">ke::Random</a>
+</li>
+<li>getSettings()
+: <a class="el" href="classke_1_1_window.html#a2a13aabed86f14ffb6791de92ecd0117">ke::Window</a>
+</li>
+<li>getShaderType()
+: <a class="el" href="classke_1_1_shader.html#ad1250595aef33fa2ada45e53aa925506">ke::Shader</a>
 </li>
 <li>getShape()
 : <a class="el" href="classke_1_1_physic_component.html#a78502a716505338a5e721c64438edb82">ke::PhysicComponent</a>
 </li>
 <li>getSize()
-: <a class="el" href="classke_1_1_application.html#aa8a7f885d9dd61ddbb995ced58250365">ke::Application</a>
-, <a class="el" href="classke_1_1_layer_component.html#ad05421e5aa5c515c8ceb5126273f07d0">ke::LayerComponent</a>
+: <a class="el" href="classke_1_1_layer_component.html#ad05421e5aa5c515c8ceb5126273f07d0">ke::LayerComponent</a>
 , <a class="el" href="classke_1_1_map.html#a20aec0d2c036217b0256abd7c1bc1ade">ke::Map</a>
 , <a class="el" href="classke_1_1_text_component.html#a901982d51592c894e3e6226fed726a59">ke::TextComponent</a>
+, <a class="el" href="classke_1_1_window.html#a6012cc7a4b345ec9edc1710e04eab12c">ke::Window</a>
 </li>
 <li>getSoundVolume()
 : <a class="el" href="classke_1_1_application.html#a5ecf767f9f7eb3cb4ee3f1030c724c3d">ke::Application</a>
 , <a class="el" href="classke_1_1_audio_manager.html#a49960082b002b0c7aea485b9e0d25030">ke::AudioManager</a>
-</li>
-<li>getSource()
-: <a class="el" href="classke_1_1_tileset.html#a9fe1d4cb74788724eade8fbfc4021ee9">ke::Tileset</a>
 </li>
 <li>getSpacing()
 : <a class="el" href="classke_1_1_tileset.html#ace36e90ec97f022530b42b7cda3319da">ke::Tileset</a>
@@ -599,6 +609,9 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>getStateOrder()
 : <a class="el" href="classke_1_1_state_manager.html#a7a0e5599999f82993de9a688c25322ab">ke::StateManager</a>
 </li>
+<li>getStaticType()
+: <a class="el" href="classke_1_1_resource.html#a7610ae55ad9fb5cc9834bba9b87c2cc2">ke::Resource</a>
+</li>
 <li>getStatus()
 : <a class="el" href="classke_1_1_audio_manager.html#a4abbd07ed653426431312f03c2cb55a3">ke::AudioManager</a>
 , <a class="el" href="classke_1_1_http_thread.html#afaddf24b173ecd62babd6b147438501b">ke::HttpThread</a>
@@ -607,13 +620,18 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 : <a class="el" href="classke_1_1_text_component.html#ad9669eaa77482072baaed613eae5643d">ke::TextComponent</a>
 </li>
 <li>getStyle()
-: <a class="el" href="classke_1_1_application.html#ac02ca7a9a22c9249737bda6614befe2a">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#aab33b54362db07711f2acc813bf5f0a8">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#aab33b54362db07711f2acc813bf5f0a8">ke::Window</a>
+</li>
+<li>getSystemHandle()
+: <a class="el" href="classke_1_1_window.html#a3a3d0bb6730de7e5fa3d582bdac8b394">ke::Window</a>
 </li>
 <li>getTexture()
 : <a class="el" href="classke_1_1_point_light_component.html#a357da6d2b084568e1961d59dfa411e47">ke::PointLightComponent</a>
 , <a class="el" href="classke_1_1_sprite_component.html#aa2d97177f313531aea90b2edc6896208">ke::SpriteComponent</a>
 , <a class="el" href="classke_1_1_tileset.html#ae9b183f9bd0f2d65013f9e52be7b37a0">ke::Tileset</a>
+</li>
+<li>getTextureName()
+: <a class="el" href="classke_1_1_background.html#af13420aa79ffae6e443ece4177a369b5">ke::Background</a>
 </li>
 <li>getTextureRect()
 : <a class="el" href="classke_1_1_background.html#add81a19c417e6d2ca7ec23e79a980cc8">ke::Background</a>
@@ -624,9 +642,6 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 </li>
 <li>getTileId()
 : <a class="el" href="classke_1_1_layer_component.html#ada5f41ab3c4688039aa526c9dcef23fe">ke::LayerComponent</a>
-</li>
-<li>getTileOffset()
-: <a class="el" href="classke_1_1_tileset.html#ab6631cfc23e0c2056c1408a4a8b68c77">ke::Tileset</a>
 </li>
 <li>getTileset()
 : <a class="el" href="classke_1_1_layer_component.html#ac86872cbf258c1457186bb11a69ebdc6">ke::LayerComponent</a>
@@ -656,49 +671,26 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 : <a class="el" href="classke_1_1_time_system.html#afdbffa9c2ec5eae404c628b3e8b6963d">ke::TimeSystem</a>
 </li>
 <li>getTitle()
-: <a class="el" href="classke_1_1_application.html#ac9437ced934f6252297c34def13d9680">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#a34729d92baa3da8c54630ab0b7c44ac7">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#a8a5f4a22b9ed6d30015f195ad57492b9">ke::Window</a>
 </li>
 <li>getTouchMapping()
 : <a class="el" href="classke_1_1_input_system.html#a7872877ee53e895f93ad67be64816943">ke::InputSystem</a>
 </li>
 <li>getTouchPosition()
-: <a class="el" href="classke_1_1_application.html#aa6b3094c89bba04cd960030219c69a12">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#a2593a84b1ce1e6a2c7a5cd2f0f7b5f68">ke::Window</a>
-</li>
-<li>getTouchPosition2i()
-: <a class="el" href="classke_1_1_application.html#a23b337de76e7a03c5e0d84370d87347e">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#a6667cbf4c04a7df7f6cd082a951a13a3">ke::Window</a>
-</li>
-<li>getTouchPositionMap()
-: <a class="el" href="classke_1_1_application.html#a7b4849c50fed8e0891c9152e2d56b442">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#a6724ae65d5b2c7d856c7f8850099f092">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#a2593a84b1ce1e6a2c7a5cd2f0f7b5f68">ke::Window</a>
 </li>
 <li>getTouchPositionView()
-: <a class="el" href="classke_1_1_application.html#a917fc3d2f058d1a6e17f5a9d9d2e973d">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#a7beddb214ced9cd9bcd5bad726bc3137">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#adb0bc4f1c96cf3de4c8f7d03372031dc">ke::Window</a>
 </li>
 <li>getTransform()
 : <a class="el" href="classke_1_1_actor.html#ab940ad1ef83cb13f0c7c3f2d55197b69">ke::Actor</a>
 , <a class="el" href="classke_1_1_scene_component.html#a96bc73e8134b0a41e6d6e6887d873770">ke::SceneComponent</a>
 </li>
-<li>getUniformColor()
-: <a class="el" href="classke_1_1_shader.html#a620fb38a48a19964110b8dfb8cd74e1f">ke::Shader</a>
-</li>
-<li>getUniformFloat()
-: <a class="el" href="classke_1_1_shader.html#a971496ade238d7eda46900dc1d6c1b94">ke::Shader</a>
-</li>
-<li>getUniformVector2f()
-: <a class="el" href="classke_1_1_shader.html#a30e6afd03c2a07875949552c0c3a79fb">ke::Shader</a>
-</li>
-<li>getUniformVector3f()
-: <a class="el" href="classke_1_1_shader.html#a87fd6d94212fbf699c061371b3d6a188">ke::Shader</a>
+<li>getType()
+: <a class="el" href="classke_1_1_resource.html#a436cf90493ecf97b6d5c7f05276d7196">ke::Resource</a>
 </li>
 <li>getUpVector()
 : <a class="el" href="classke_1_1_audio_listener_component.html#aff572f25df919b3f80082b4c6b8a3c0e">ke::AudioListenerComponent</a>
-</li>
-<li>getUrl()
-: <a class="el" href="classke_1_1_log.html#adb83d81965ce93f074c13e222240ba02">ke::Log</a>
 </li>
 <li>getUsage()
 : <a class="el" href="classke_1_1_background.html#a1e45bbaf9321c6bbdfaa9bd95d0cbcb1">ke::Background</a>
@@ -709,20 +701,22 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>getVelocity()
 : <a class="el" href="classke_1_1_actor.html#a1422d514c06164d0ce44bd18e5274b02">ke::Actor</a>
 </li>
+<li>getVertexFilename()
+: <a class="el" href="classke_1_1_shader.html#a2e7f15882c0552a60855dd5cdc01e28b">ke::Shader</a>
+</li>
 <li>getVertexPosition()
 : <a class="el" href="classke_1_1_layer_component.html#a4821dbba261781d394a99b3238848d05">ke::LayerComponent</a>
 </li>
 <li>getVideoMode()
-: <a class="el" href="classke_1_1_application.html#a94d98912b5e9c7b42f8a8b9620f2c02a">ke::Application</a>
-, <a class="el" href="classke_1_1_window.html#a1b4fb001fc150d143f17840cc914066d">ke::Window</a>
+: <a class="el" href="classke_1_1_window.html#a82a36729aad018b5ae837817de6071c2">ke::Window</a>
 </li>
 <li>getView()
-: <a class="el" href="classke_1_1_application.html#a04a7db1cc581baa847c87fefc662b7a6">ke::Application</a>
-, <a class="el" href="classke_1_1_camera_component.html#ac35fe0be66b6e2afbbfc006d69878083">ke::CameraComponent</a>
+: <a class="el" href="classke_1_1_camera_component.html#ac35fe0be66b6e2afbbfc006d69878083">ke::CameraComponent</a>
 , <a class="el" href="classke_1_1_scene.html#aa367ff1eb5ff0528b34e10deab515862">ke::Scene</a>
+, <a class="el" href="classke_1_1_window.html#a42d46abcaff3353e8c191074fedb3184">ke::Window</a>
 </li>
 <li>getViewport()
-: <a class="el" href="classke_1_1_application.html#ae85a58edf722917ea689a8219ddbf765">ke::Application</a>
+: <a class="el" href="classke_1_1_window.html#ac211f7d0f878840d688bcb50f0e04d5f">ke::Window</a>
 </li>
 <li>getWindow()
 : <a class="el" href="classke_1_1_application.html#acb0df73ff875524e019f557a042bce43">ke::Application</a>

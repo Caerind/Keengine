@@ -11,6 +11,7 @@ var _string_8hpp =
     [ "fromString< sf::Time >", "_string_8hpp.html#a047104f64391a81a4fa5805dc9303194", null ],
     [ "fromString< sf::Vector2f >", "_string_8hpp.html#aa934f75e709be65eb97376b5601354b8", null ],
     [ "fromString< sf::Vector2i >", "_string_8hpp.html#ad8e478507a60edb9885b975c2bf8aaf2", null ],
+    [ "fromString< sf::Vector2u >", "_string_8hpp.html#aec92b944c714e3e6b76084314d769b08", null ],
     [ "fromString< sf::Vector3f >", "_string_8hpp.html#a4db1aeba9a5170861a2fc30b47ed78c1", null ],
     [ "fromString< std::string >", "_string_8hpp.html#a331f978e8f58623527c8e0a6f19cc8d7", null ],
     [ "limitSize", "_string_8hpp.html#a859592470fee7645a10004b023d6441e", null ],
@@ -27,6 +28,7 @@ var _string_8hpp =
     [ "toString< sf::Time >", "_string_8hpp.html#acca4df291b90149108479256630d20bf", null ],
     [ "toString< sf::Vector2f >", "_string_8hpp.html#ab0654beb375922ad0db2de19d21c5adc", null ],
     [ "toString< sf::Vector2i >", "_string_8hpp.html#a7cf95c27a6bdb698099d223026b8450b", null ],
+    [ "toString< sf::Vector2u >", "_string_8hpp.html#ae45ca160249da757b677b5d27be15071", null ],
     [ "toString< sf::Vector3f >", "_string_8hpp.html#adb78436681a55d5cafca326ab65e9021", null ],
     [ "toString< std::string >", "_string_8hpp.html#a0514edf03ce0325d3976fa84fe4a3e9c", null ],
     [ "toUpper", "_string_8hpp.html#af1781dcbc804cfbfa95a1eb157f73742", null ]

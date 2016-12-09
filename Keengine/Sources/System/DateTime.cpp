@@ -6,7 +6,11 @@ namespace ke
 DateTime::DateTime()
 {
 	std::time_t t = std::time(nullptr);
-	localtime_s(&mTime, &t);
+	#ifdef KEENGINE_DESKTOP
+		localtime_s(&mTime, &t);
+	#else
+		mTime = *localtime(&t);
+	#endif
 	update();
 }
 

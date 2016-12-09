@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.12"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Keengine: Keengine/Sources/Application/ResourceManager.hpp File Reference</title>
+<title>Keengine: Keengine/Sources/System/ResourceManager.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,19 +88,14 @@ $(document).ready(function(){initNavTree('_resource_manager_8hpp.html','');});
 <div class="title">ResourceManager.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cassert&gt;</code><br />
+<div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
-<code>#include &lt;SFML/Audio/SoundBuffer.hpp&gt;</code><br />
-<code>#include &lt;SFML/Graphics/Font.hpp&gt;</code><br />
-<code>#include &lt;SFML/Graphics/Image.hpp&gt;</code><br />
-<code>#include &lt;SFML/Graphics/Shader.hpp&gt;</code><br />
-<code>#include &lt;SFML/Graphics/Texture.hpp&gt;</code><br />
-<code>#include &lt;TGUI/Loading/Theme.hpp&gt;</code><br />
-<code>#include &quot;<a class="el" href="_properties_holder_8hpp_source.html">PropertiesHolder.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_log_8hpp_source.html">../System/Log.hpp</a>&quot;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;../ExtLibs/pugixml.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="_type_8hpp_source.html">Type.hpp</a>&quot;</code><br />
 </div>
 <p><a href="_resource_manager_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -109,24 +104,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html">ke::Resource</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html">ke::ResourceManager</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html">ke::Texture</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_image.html">ke::Image</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_font.html">ke::Font</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_sound_buffer.html">ke::SoundBuffer</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html">ke::Shader</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_theme.html">ke::Theme</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_tileset.html">ke::Tileset</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_lang.html">ke::Lang</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_ini_parser.html">ke::IniParser</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -139,7 +116,7 @@ Namespaces</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_f360c72d76f04ebd414f69e5744215a7.html">Keengine</a></li><li class="navelem"><a class="el" href="dir_a757a1b65b8e4b202c95169a8774ce99.html">Sources</a></li><li class="navelem"><a class="el" href="dir_c92c7bd06d35279e36823dfd3a708198.html">Application</a></li><li class="navelem"><a class="el" href="_resource_manager_8hpp.html">ResourceManager.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_f360c72d76f04ebd414f69e5744215a7.html">Keengine</a></li><li class="navelem"><a class="el" href="dir_a757a1b65b8e4b202c95169a8774ce99.html">Sources</a></li><li class="navelem"><a class="el" href="dir_bff26e7327b82dc632b70991b3e08239.html">System</a></li><li class="navelem"><a class="el" href="_resource_manager_8hpp.html">ResourceManager.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>

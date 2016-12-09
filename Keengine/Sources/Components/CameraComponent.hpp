@@ -1,8 +1,9 @@
 #ifndef KE_CAMERACOMPONENT_HPP
 #define KE_CAMERACOMPONENT_HPP
 
-#include "../Core/SceneComponent.hpp"
 #include <SFML/Graphics/View.hpp>
+
+#include "../Core/SceneComponent.hpp"
 
 namespace ke
 {

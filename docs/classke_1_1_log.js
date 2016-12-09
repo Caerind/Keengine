@@ -1,10 +1,10 @@
 var classke_1_1_log =
 [
-    [ "LogType", "classke_1_1_log.html#a37f226cd39ec022ede042fac488530d8", [
-      [ "Error", "classke_1_1_log.html#a37f226cd39ec022ede042fac488530d8a64df00ae40f7d9fad272c9137357dc64", null ],
-      [ "Warning", "classke_1_1_log.html#a37f226cd39ec022ede042fac488530d8a43828867ce60e9d98b4d196df866c39a", null ],
-      [ "Info", "classke_1_1_log.html#a37f226cd39ec022ede042fac488530d8a336a006552d8c947954e335f073b2b91", null ]
+    [ "Type", "classke_1_1_log.html#a2c8a4f6a0f870b9c9bd1da851c4c3a41", [
+      [ "Info", "classke_1_1_log.html#a2c8a4f6a0f870b9c9bd1da851c4c3a41a336a006552d8c947954e335f073b2b91", null ],
+      [ "Warning", "classke_1_1_log.html#a2c8a4f6a0f870b9c9bd1da851c4c3a41a43828867ce60e9d98b4d196df866c39a", null ],
+      [ "Error", "classke_1_1_log.html#a2c8a4f6a0f870b9c9bd1da851c4c3a41a64df00ae40f7d9fad272c9137357dc64", null ]
     ] ],
-    [ "operator<<", "classke_1_1_log.html#a37b3427f9708e88d7fd425b4775be52e", null ],
-    [ "operator<<", "classke_1_1_log.html#a6b2a238e8316d66d531c1ccef3dfa5e4", null ]
+    [ "operator<<", "classke_1_1_log.html#ac317f4a69192fb257a31c6f58b231953", null ],
+    [ "operator<<", "classke_1_1_log.html#a9659af645ddca372d954fe8b33f03a49", null ]
 ];

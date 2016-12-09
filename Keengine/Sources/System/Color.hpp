@@ -20,7 +20,7 @@ const sf::Color Magenta(255, 0, 255);
 const sf::Color Cyan(0, 255, 255);
 const sf::Color Transparent(0, 0, 0, 0);
 
-// standard
+// Standard
 const sf::Color Brown(128, 80, 32);
 const sf::Color Orange(255, 128, 0);
 const sf::Color Pink(255, 128, 192);
@@ -34,7 +34,7 @@ const sf::Color Lime(128, 255, 0);
 const sf::Color Mint(64, 255, 192);
 const sf::Color Gray(128, 128, 128);
 
-// lights
+// Lights
 const sf::Color LightBlack(64, 64, 64);
 const sf::Color LightBlue(128, 128, 255);
 const sf::Color LightRed(255, 128, 128);
@@ -55,7 +55,7 @@ const sf::Color LightLime(192, 255, 128);
 const sf::Color LightMint(128, 255, 224);
 const sf::Color LightGray(192, 192, 192);
 
-// darks
+// Darks
 const sf::Color DarkBlue(0, 0, 128);
 const sf::Color DarkRed(128, 0, 0);
 const sf::Color DarkMagenta(128, 0, 128);
@@ -76,7 +76,7 @@ const sf::Color DarkLime(64, 128, 0);
 const sf::Color DarkMint(32, 128, 96);
 const sf::Color DarkGray(64, 64, 64);
 
-// very darks
+// Very darks
 const sf::Color VeryDarkBlue(0, 0, 64);
 const sf::Color VeryDarkRed(64, 0, 0);
 const sf::Color VeryDarkMagenta(64, 0, 64);

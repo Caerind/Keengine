@@ -1,8 +1,9 @@
 #ifndef KE_AUDIOLISTENERCOMPONENT_HPP
 #define KE_AUDIOLISTENERCOMPONENT_HPP
 
-#include "../Core/SceneComponent.hpp"
 #include <SFML/Audio/Listener.hpp>
+
+#include "../Core/SceneComponent.hpp"
 
 namespace ke
 {

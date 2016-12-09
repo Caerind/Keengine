@@ -82,9 +82,9 @@ $(document).ready(function(){initNavTree('classke_1_1_window.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classke_1_1_window-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ke::Window Class Reference</div>  </div>
@@ -92,22 +92,35 @@ $(document).ready(function(){initNavTree('classke_1_1_window.html','');});
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="_window_8hpp_source.html">Window.hpp</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for ke::Window:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classke_1_1_window.png" usemap="#ke::Window_map" alt=""/>
-  <map id="ke::Window_map" name="ke::Window_map">
-</map>
- </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structke_1_1_window_1_1_command_args.html">CommandArgs</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a5ccc2e20aee293a4fa1e55f382afe915"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a5ccc2e20aee293a4fa1e55f382afe915">MouseCursor</a> { <a class="el" href="classke_1_1_window.html#a5ccc2e20aee293a4fa1e55f382afe915a969236770047031d890772acce6a5cda">Default</a>, 
+<tr class="memitem:a5ccc2e20aee293a4fa1e55f382afe915"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a5ccc2e20aee293a4fa1e55f382afe915">MouseCursor</a> { <a class="el" href="classke_1_1_window.html#a5ccc2e20aee293a4fa1e55f382afe915a969236770047031d890772acce6a5cda">Default</a> = 0, 
 <a class="el" href="classke_1_1_window.html#a5ccc2e20aee293a4fa1e55f382afe915a22ba505ddb30ae2f957c93584b8e5b6d">None</a>, 
 <a class="el" href="classke_1_1_window.html#a5ccc2e20aee293a4fa1e55f382afe915afaab9a4f333c12cd65ff3c8616562bfd">Custom</a>
  }</td></tr>
 <tr class="separator:a5ccc2e20aee293a4fa1e55f382afe915"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade9ca5c3e4040082a74fba8c3971eb41"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ade9ca5c3e4040082a74fba8c3971eb41">BackgroundUsage</a> { <a class="el" href="classke_1_1_window.html#ade9ca5c3e4040082a74fba8c3971eb41a7441aeb402c68b6c43c8ca4861ebba08">Color</a> = 0, 
+<a class="el" href="classke_1_1_window.html#ade9ca5c3e4040082a74fba8c3971eb41a6518a3bd50c5d57b622656359893ffd1">Scaled</a>, 
+<a class="el" href="classke_1_1_window.html#ade9ca5c3e4040082a74fba8c3971eb41a4a58116621a4665336a0487b2f111404">Repeated</a>
+ }</td></tr>
+<tr class="separator:ade9ca5c3e4040082a74fba8c3971eb41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41a19f0d421337f46c0ceba9ae86fbcc"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a41a19f0d421337f46c0ceba9ae86fbcc">Action</a> { <br />
+&#160;&#160;<a class="el" href="classke_1_1_window.html#a41a19f0d421337f46c0ceba9ae86fbcca11f739130848160abf4f3d4a1210f571">Console</a> = 0, 
+<a class="el" href="classke_1_1_window.html#a41a19f0d421337f46c0ceba9ae86fbccac70b54dbec48691eb7175572ef8773d3">Screenshot</a>, 
+<a class="el" href="classke_1_1_window.html#a41a19f0d421337f46c0ceba9ae86fbcca4700587f448d86890d0f0857a76dde76">DebugInfo</a>, 
+<a class="el" href="classke_1_1_window.html#a41a19f0d421337f46c0ceba9ae86fbcca0bd4000dfb2322da319a26c8af9d6b29">Quit</a>, 
+<br />
+&#160;&#160;<a class="el" href="classke_1_1_window.html#a41a19f0d421337f46c0ceba9ae86fbccae0bdd2fe375e3d4f25ee04e817a22a23">Fullscreen</a>, 
+<a class="el" href="classke_1_1_window.html#a41a19f0d421337f46c0ceba9ae86fbccae5a6099309a6c3436f475aa0f8744028">Count</a>
+<br />
+ }</td></tr>
+<tr class="separator:a41a19f0d421337f46c0ceba9ae86fbcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -115,193 +128,297 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0248d9f38457b21462494b381689b47e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1552d853906f4cd5746ad0d02ca50fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ad1552d853906f4cd5746ad0d02ca50fa">~Window</a> ()</td></tr>
 <tr class="separator:ad1552d853906f4cd5746ad0d02ca50fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac66b57089688db99ff10b1d423edd02b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ac66b57089688db99ff10b1d423edd02b">setDefaultView</a> ()</td></tr>
-<tr class="separator:ac66b57089688db99ff10b1d423edd02b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51e7933a9939f65cdbc9c1b82a60dc2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a51e7933a9939f65cdbc9c1b82a60dc2a">clear</a> ()</td></tr>
-<tr class="separator:a51e7933a9939f65cdbc9c1b82a60dc2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2fb5b6a44aeda5f5cc5f39a15c3e752"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ac2fb5b6a44aeda5f5cc5f39a15c3e752">display</a> ()</td></tr>
-<tr class="separator:ac2fb5b6a44aeda5f5cc5f39a15c3e752"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a046c1f311fe099570024d8298442f895"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a046c1f311fe099570024d8298442f895">create</a> ()</td></tr>
 <tr class="separator:a046c1f311fe099570024d8298442f895"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5224d1edf682d60fc8fa54a5593a69af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a5224d1edf682d60fc8fa54a5593a69af">create</a> (sf::VideoMode videoMode, std::string const &amp;title, sf::Uint32 style=sf::Style::Close)</td></tr>
-<tr class="separator:a5224d1edf682d60fc8fa54a5593a69af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2619b627e1434b44d9c9026b960babe2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a2619b627e1434b44d9c9026b960babe2">create</a> (sf::VideoMode mode, const std::string &amp;title, sf::Uint32 style=sf::Style::Default, const sf::ContextSettings &amp;settings=sf::ContextSettings())</td></tr>
+<tr class="separator:a2619b627e1434b44d9c9026b960babe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a895cc0c436060ba0f4fb6402ae9f5126"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a895cc0c436060ba0f4fb6402ae9f5126">toFullscreen</a> ()</td></tr>
+<tr class="separator:a895cc0c436060ba0f4fb6402ae9f5126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad72dc6ca2751a294eff40ba41a781ed7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ad72dc6ca2751a294eff40ba41a781ed7">toNonFullscreen</a> ()</td></tr>
+<tr class="separator:ad72dc6ca2751a294eff40ba41a781ed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af27d3d594bc1d386d3fb3b5c2107167b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#af27d3d594bc1d386d3fb3b5c2107167b">toggleFullscreen</a> ()</td></tr>
+<tr class="separator:af27d3d594bc1d386d3fb3b5c2107167b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afeca8915ee591171009ded839783d363"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#afeca8915ee591171009ded839783d363">close</a> ()</td></tr>
 <tr class="separator:afeca8915ee591171009ded839783d363"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad671014a3c545fde9a970235e280679e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ad671014a3c545fde9a970235e280679e">isFullscreen</a> () const</td></tr>
 <tr class="separator:ad671014a3c545fde9a970235e280679e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a329d4247af40c4b056a55ed16912c66d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a329d4247af40c4b056a55ed16912c66d">setFullscreen</a> (bool full)</td></tr>
-<tr class="separator:a329d4247af40c4b056a55ed16912c66d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b4fb001fc150d143f17840cc914066d"><td class="memItemLeft" align="right" valign="top">sf::VideoMode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a1b4fb001fc150d143f17840cc914066d">getVideoMode</a> () const</td></tr>
-<tr class="separator:a1b4fb001fc150d143f17840cc914066d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaabe228c277c970236494c2c4cf0c645"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aaabe228c277c970236494c2c4cf0c645">setVideoMode</a> (sf::VideoMode const &amp;videoMode)</td></tr>
-<tr class="separator:aaabe228c277c970236494c2c4cf0c645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82a36729aad018b5ae837817de6071c2"><td class="memItemLeft" align="right" valign="top">const sf::VideoMode &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a82a36729aad018b5ae837817de6071c2">getVideoMode</a> () const</td></tr>
+<tr class="separator:a82a36729aad018b5ae837817de6071c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab33b54362db07711f2acc813bf5f0a8"><td class="memItemLeft" align="right" valign="top">sf::Uint32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aab33b54362db07711f2acc813bf5f0a8">getStyle</a> () const</td></tr>
 <tr class="separator:aab33b54362db07711f2acc813bf5f0a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab26b8663b4b542d7a59c7e3a8d28c898"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ab26b8663b4b542d7a59c7e3a8d28c898">setStyle</a> (sf::Uint32 style)</td></tr>
-<tr class="separator:ab26b8663b4b542d7a59c7e3a8d28c898"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d043593b7b483de8552d1595d092c68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a9d043593b7b483de8552d1595d092c68">setTitle</a> (std::string const &amp;title)</td></tr>
-<tr class="separator:a9d043593b7b483de8552d1595d092c68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34729d92baa3da8c54630ab0b7c44ac7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a34729d92baa3da8c54630ab0b7c44ac7">getTitle</a> () const</td></tr>
-<tr class="separator:a34729d92baa3da8c54630ab0b7c44ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace01c0e72159ab85b6bc43274b04821c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ace01c0e72159ab85b6bc43274b04821c">setVerticalSyncEnabled</a> (bool enabled)</td></tr>
-<tr class="separator:ace01c0e72159ab85b6bc43274b04821c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a5f4a22b9ed6d30015f195ad57492b9"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a8a5f4a22b9ed6d30015f195ad57492b9">getTitle</a> () const</td></tr>
+<tr class="separator:a8a5f4a22b9ed6d30015f195ad57492b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04c00df8c99dcf36d2ff5752a09bcfc4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a04c00df8c99dcf36d2ff5752a09bcfc4">isVerticalSyncEnabled</a> () const</td></tr>
 <tr class="separator:a04c00df8c99dcf36d2ff5752a09bcfc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a078ba1f4d1b9261a7f8316d525db959e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a078ba1f4d1b9261a7f8316d525db959e">setVisible</a> (bool visible)</td></tr>
-<tr class="separator:a078ba1f4d1b9261a7f8316d525db959e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae605388850f70c01b919a191dd05975"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aae605388850f70c01b919a191dd05975">isVisible</a> () const</td></tr>
 <tr class="separator:aae605388850f70c01b919a191dd05975"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b0a738997f71fa472fcdec7fb9dab64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a9b0a738997f71fa472fcdec7fb9dab64">setKeyRepeatEnabled</a> (bool enabled)</td></tr>
-<tr class="separator:a9b0a738997f71fa472fcdec7fb9dab64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75bfaba1bca404558bd8167b127c4aec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a75bfaba1bca404558bd8167b127c4aec">isKeyRepeatEnabled</a> () const</td></tr>
 <tr class="separator:a75bfaba1bca404558bd8167b127c4aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a393f77792dcb5ae0fd6ce003d713f8cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a393f77792dcb5ae0fd6ce003d713f8cf">setJoystickThreshold</a> (float threshold)</td></tr>
-<tr class="separator:a393f77792dcb5ae0fd6ce003d713f8cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6fee09320e1ff0e723a873de15be8d0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#af6fee09320e1ff0e723a873de15be8d0">getJoystickThreshold</a> () const</td></tr>
 <tr class="separator:af6fee09320e1ff0e723a873de15be8d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1cda53adf0910b65b4a1188de6e78b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aa1cda53adf0910b65b4a1188de6e78b4">setIcon</a> (sf::Image *image)</td></tr>
-<tr class="separator:aa1cda53adf0910b65b4a1188de6e78b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a028e9a00a5a1468d72b019d697c8462d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a028e9a00a5a1468d72b019d697c8462d">setMousePosition2i</a> (sf::Vector2i const &amp;position)</td></tr>
-<tr class="separator:a028e9a00a5a1468d72b019d697c8462d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4291df89b82ae0888d461b38dfb4e71e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a4291df89b82ae0888d461b38dfb4e71e">setMousePosition</a> (sf::Vector2f const &amp;position)</td></tr>
-<tr class="separator:a4291df89b82ae0888d461b38dfb4e71e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a1ec2e5ef6ca98f28237f0044acdb99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a5a1ec2e5ef6ca98f28237f0044acdb99">setMousePositionMap</a> (sf::Vector2f const &amp;position)</td></tr>
-<tr class="separator:a5a1ec2e5ef6ca98f28237f0044acdb99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36aa4753f9e3eec4d12387631a8f9289"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a36aa4753f9e3eec4d12387631a8f9289">setMousePositionView</a> (sf::Vector2f const &amp;position, sf::View const &amp;view)</td></tr>
-<tr class="separator:a36aa4753f9e3eec4d12387631a8f9289"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a834e09a2e503be3bff3e2bb238ae661f"><td class="memItemLeft" align="right" valign="top">sf::Vector2i&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a834e09a2e503be3bff3e2bb238ae661f">getMousePosition2i</a> () const</td></tr>
-<tr class="separator:a834e09a2e503be3bff3e2bb238ae661f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa7d2e8722403bbf0ba2252163d1839f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#afa7d2e8722403bbf0ba2252163d1839f">isMouseCursorGrabbed</a> () const</td></tr>
+<tr class="separator:afa7d2e8722403bbf0ba2252163d1839f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7034f233cf5b4bb2fae2d0d48b5d0255"><td class="memItemLeft" align="right" valign="top">const sf::Image &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a7034f233cf5b4bb2fae2d0d48b5d0255">getIcon</a> () const</td></tr>
+<tr class="separator:a7034f233cf5b4bb2fae2d0d48b5d0255"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab274f9c5be247be31feed316512604bf"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ab274f9c5be247be31feed316512604bf">getIconPath</a> () const</td></tr>
+<tr class="separator:ab274f9c5be247be31feed316512604bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d14b2d9d2d579a9957fc8d4627021a1"><td class="memItemLeft" align="right" valign="top">sf::Vector2i&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a8d14b2d9d2d579a9957fc8d4627021a1">getPosition</a> () const</td></tr>
+<tr class="separator:a8d14b2d9d2d579a9957fc8d4627021a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a13aabed86f14ffb6791de92ecd0117"><td class="memItemLeft" align="right" valign="top">const sf::ContextSettings &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a2a13aabed86f14ffb6791de92ecd0117">getSettings</a> () const</td></tr>
+<tr class="separator:a2a13aabed86f14ffb6791de92ecd0117"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6012cc7a4b345ec9edc1710e04eab12c"><td class="memItemLeft" align="right" valign="top">sf::Vector2u&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a6012cc7a4b345ec9edc1710e04eab12c">getSize</a> () const</td></tr>
+<tr class="separator:a6012cc7a4b345ec9edc1710e04eab12c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a3d0bb6730de7e5fa3d582bdac8b394"><td class="memItemLeft" align="right" valign="top">sf::WindowHandle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a3a3d0bb6730de7e5fa3d582bdac8b394">getSystemHandle</a> () const</td></tr>
+<tr class="separator:a3a3d0bb6730de7e5fa3d582bdac8b394"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a814c6d6695ea4ce384960de6ca346602"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a814c6d6695ea4ce384960de6ca346602">hasFocus</a> () const</td></tr>
+<tr class="separator:a814c6d6695ea4ce384960de6ca346602"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace01c0e72159ab85b6bc43274b04821c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ace01c0e72159ab85b6bc43274b04821c">setVerticalSyncEnabled</a> (bool enabled)</td></tr>
+<tr class="separator:ace01c0e72159ab85b6bc43274b04821c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a078ba1f4d1b9261a7f8316d525db959e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a078ba1f4d1b9261a7f8316d525db959e">setVisible</a> (bool visible)</td></tr>
+<tr class="separator:a078ba1f4d1b9261a7f8316d525db959e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b0a738997f71fa472fcdec7fb9dab64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a9b0a738997f71fa472fcdec7fb9dab64">setKeyRepeatEnabled</a> (bool enabled)</td></tr>
+<tr class="separator:a9b0a738997f71fa472fcdec7fb9dab64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a393f77792dcb5ae0fd6ce003d713f8cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a393f77792dcb5ae0fd6ce003d713f8cf">setJoystickThreshold</a> (float threshold)</td></tr>
+<tr class="separator:a393f77792dcb5ae0fd6ce003d713f8cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b094f4e957dcce96a05c46464ef2c8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a4b094f4e957dcce96a05c46464ef2c8c">setMouseCursorGrabbed</a> (bool grabbed)</td></tr>
+<tr class="separator:a4b094f4e957dcce96a05c46464ef2c8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5204e6775d3fa7a5c4a2fc29d00b213"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aa5204e6775d3fa7a5c4a2fc29d00b213">setIcon</a> (const std::string &amp;icon)</td></tr>
+<tr class="separator:aa5204e6775d3fa7a5c4a2fc29d00b213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d4bd028c939d37709cd721be2b59238"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a9d4bd028c939d37709cd721be2b59238">setIcon</a> (const sf::Image &amp;image)</td></tr>
+<tr class="separator:a9d4bd028c939d37709cd721be2b59238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa95821b6d9e127478910cf38ee38da9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aa95821b6d9e127478910cf38ee38da9c">setPosition</a> (const sf::Vector2i &amp;position)</td></tr>
+<tr class="separator:aa95821b6d9e127478910cf38ee38da9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0da806460a198ec746531ea1d8b5321b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a0da806460a198ec746531ea1d8b5321b">setSize</a> (const sf::Vector2u &amp;size)</td></tr>
+<tr class="separator:a0da806460a198ec746531ea1d8b5321b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac15297a3f7024e3e1860f75b221f6f26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ac15297a3f7024e3e1860f75b221f6f26">setActive</a> (bool active=true)</td></tr>
+<tr class="separator:ac15297a3f7024e3e1860f75b221f6f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ceca69758fccbebb355a6036c5dc522"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a2ceca69758fccbebb355a6036c5dc522">requestFocus</a> ()</td></tr>
+<tr class="separator:a2ceca69758fccbebb355a6036c5dc522"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ea3d1d1a0c9b44d8614268484e599f5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a5ea3d1d1a0c9b44d8614268484e599f5">isOpen</a> () const</td></tr>
+<tr class="separator:a5ea3d1d1a0c9b44d8614268484e599f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04439e10b08f4ac9ae7a29c741ec1692"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a04439e10b08f4ac9ae7a29c741ec1692">handleEvent</a> (sf::Event &amp;event)</td></tr>
+<tr class="separator:a04439e10b08f4ac9ae7a29c741ec1692"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa69ea7ffee3f1897e589702bc9314d47"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aa69ea7ffee3f1897e589702bc9314d47">clear</a> (const sf::Color &amp;color=sf::Color(0, 0, 0, 255))</td></tr>
+<tr class="separator:aa69ea7ffee3f1897e589702bc9314d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a453c98567b882bdb2294a09c13d7929c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a453c98567b882bdb2294a09c13d7929c">draw</a> (const sf::Drawable &amp;drawable, const sf::RenderStates &amp;states=sf::RenderStates::Default)</td></tr>
+<tr class="separator:a453c98567b882bdb2294a09c13d7929c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16a352f6b6c2a4eae05a4b655d18eaee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a16a352f6b6c2a4eae05a4b655d18eaee">draw</a> (const sf::Vertex *vertices, std::size_t vertexCount, sf::PrimitiveType type, const sf::RenderStates &amp;states=sf::RenderStates::Default)</td></tr>
+<tr class="separator:a16a352f6b6c2a4eae05a4b655d18eaee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2fb5b6a44aeda5f5cc5f39a15c3e752"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ac2fb5b6a44aeda5f5cc5f39a15c3e752">display</a> ()</td></tr>
+<tr class="separator:ac2fb5b6a44aeda5f5cc5f39a15c3e752"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44aa2f0837dcc1335d91ced203ca7610"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a44aa2f0837dcc1335d91ced203ca7610">setView</a> (const sf::View &amp;view)</td></tr>
+<tr class="separator:a44aa2f0837dcc1335d91ced203ca7610"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06e35b200bbdbd83fdfef9c309892b08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a06e35b200bbdbd83fdfef9c309892b08">applyDefaultView</a> ()</td></tr>
+<tr class="separator:a06e35b200bbdbd83fdfef9c309892b08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42d46abcaff3353e8c191074fedb3184"><td class="memItemLeft" align="right" valign="top">const sf::View &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a42d46abcaff3353e8c191074fedb3184">getView</a> () const</td></tr>
+<tr class="separator:a42d46abcaff3353e8c191074fedb3184"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6a6a7ba113d4786527a6282462412bb"><td class="memItemLeft" align="right" valign="top">const sf::View &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ae6a6a7ba113d4786527a6282462412bb">getDefaultView</a> () const</td></tr>
+<tr class="separator:ae6a6a7ba113d4786527a6282462412bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac211f7d0f878840d688bcb50f0e04d5f"><td class="memItemLeft" align="right" valign="top">sf::IntRect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ac211f7d0f878840d688bcb50f0e04d5f">getViewport</a> (const sf::View &amp;view) const</td></tr>
+<tr class="separator:ac211f7d0f878840d688bcb50f0e04d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eecf85e6b85a8fabcdcf995717917be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a0eecf85e6b85a8fabcdcf995717917be">mapPixelToCoords</a> (const sf::Vector2i &amp;point, const sf::View &amp;view=sf::View(sf::FloatRect()))</td></tr>
+<tr class="separator:a0eecf85e6b85a8fabcdcf995717917be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a373e32517e2b9bb471a5aedd1bbe05e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a373e32517e2b9bb471a5aedd1bbe05e1">mapCoordsToPixel</a> (const sf::Vector2f &amp;point, const sf::View &amp;view=sf::View(sf::FloatRect()))</td></tr>
+<tr class="separator:a373e32517e2b9bb471a5aedd1bbe05e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2918807c5c0006d55117251df5c7393"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aa2918807c5c0006d55117251df5c7393">setMousePosition</a> (const sf::Vector2f &amp;position)</td></tr>
+<tr class="separator:aa2918807c5c0006d55117251df5c7393"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc527d319c8b155108d5654a611a20c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#adc527d319c8b155108d5654a611a20c8">setMousePositionView</a> (const sf::Vector2f &amp;position, const sf::View &amp;view)</td></tr>
+<tr class="separator:adc527d319c8b155108d5654a611a20c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a780a255c9eb83a955c85e1a67b1e3b46"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a780a255c9eb83a955c85e1a67b1e3b46">getMousePosition</a> () const</td></tr>
 <tr class="separator:a780a255c9eb83a955c85e1a67b1e3b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d46812aadb0a0ac2a9d702c5d5ea75b"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a5d46812aadb0a0ac2a9d702c5d5ea75b">getMousePositionMap</a> () const</td></tr>
-<tr class="separator:a5d46812aadb0a0ac2a9d702c5d5ea75b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0fcb4621aa865272e6d2d5fa340a780"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ab0fcb4621aa865272e6d2d5fa340a780">getMousePositionView</a> (sf::View const &amp;view)</td></tr>
-<tr class="separator:ab0fcb4621aa865272e6d2d5fa340a780"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6667cbf4c04a7df7f6cd082a951a13a3"><td class="memItemLeft" align="right" valign="top">sf::Vector2i&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a6667cbf4c04a7df7f6cd082a951a13a3">getTouchPosition2i</a> (unsigned int touchIndex=0) const</td></tr>
-<tr class="separator:a6667cbf4c04a7df7f6cd082a951a13a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13de58d959b98eed36645238f0ca8795"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a13de58d959b98eed36645238f0ca8795">getMousePositionView</a> (const sf::View &amp;view)</td></tr>
+<tr class="separator:a13de58d959b98eed36645238f0ca8795"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2593a84b1ce1e6a2c7a5cd2f0f7b5f68"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a2593a84b1ce1e6a2c7a5cd2f0f7b5f68">getTouchPosition</a> (unsigned int touchIndex=0) const</td></tr>
 <tr class="separator:a2593a84b1ce1e6a2c7a5cd2f0f7b5f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6724ae65d5b2c7d856c7f8850099f092"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a6724ae65d5b2c7d856c7f8850099f092">getTouchPositionMap</a> (unsigned int touchIndex=0) const</td></tr>
-<tr class="separator:a6724ae65d5b2c7d856c7f8850099f092"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7beddb214ced9cd9bcd5bad726bc3137"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a7beddb214ced9cd9bcd5bad726bc3137">getTouchPositionView</a> (sf::View const &amp;view, unsigned int touchIndex=0)</td></tr>
-<tr class="separator:a7beddb214ced9cd9bcd5bad726bc3137"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a517a935d0371b075f66f0b8c33be8f0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a517a935d0371b075f66f0b8c33be8f0b">setPointerPosition2i</a> (sf::Vector2i const &amp;position)</td></tr>
-<tr class="separator:a517a935d0371b075f66f0b8c33be8f0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac24ef204ccb7a96041e46463310b29c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ac24ef204ccb7a96041e46463310b29c3">setPointerPosition</a> (sf::Vector2f const &amp;position)</td></tr>
-<tr class="separator:ac24ef204ccb7a96041e46463310b29c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23da8f54fb068173bf25f9ef73435cb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a23da8f54fb068173bf25f9ef73435cb0">setPointerPositionMap</a> (sf::Vector2f const &amp;position)</td></tr>
-<tr class="separator:a23da8f54fb068173bf25f9ef73435cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cf2b530ef61839babd7c314a18d4c80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a2cf2b530ef61839babd7c314a18d4c80">setPointerPositionView</a> (sf::Vector2f const &amp;position, sf::View const &amp;view)</td></tr>
-<tr class="separator:a2cf2b530ef61839babd7c314a18d4c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa4b782335a9f8bfd30e54bf6fd39601"><td class="memItemLeft" align="right" valign="top">sf::Vector2i&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#afa4b782335a9f8bfd30e54bf6fd39601">getPointerPosition2i</a> (unsigned int touchIndex=0) const</td></tr>
-<tr class="separator:afa4b782335a9f8bfd30e54bf6fd39601"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb0bc4f1c96cf3de4c8f7d03372031dc"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#adb0bc4f1c96cf3de4c8f7d03372031dc">getTouchPositionView</a> (const sf::View &amp;view, unsigned int touchIndex=0)</td></tr>
+<tr class="separator:adb0bc4f1c96cf3de4c8f7d03372031dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12dd9f422443e51f2fb062b78a42b3cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a12dd9f422443e51f2fb062b78a42b3cd">setPointerPosition</a> (const sf::Vector2f &amp;position)</td></tr>
+<tr class="separator:a12dd9f422443e51f2fb062b78a42b3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9df5276cc4522ae9213a34c370cbda2d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a9df5276cc4522ae9213a34c370cbda2d">setPointerPositionView</a> (const sf::Vector2f &amp;position, const sf::View &amp;view)</td></tr>
+<tr class="separator:a9df5276cc4522ae9213a34c370cbda2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af620fa7ee7b6c96438653a217413e880"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#af620fa7ee7b6c96438653a217413e880">getPointerPosition</a> (unsigned int touchIndex=0) const</td></tr>
 <tr class="separator:af620fa7ee7b6c96438653a217413e880"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c2a499f64984b72effe4ae9342b57a8"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a9c2a499f64984b72effe4ae9342b57a8">getPointerPositionMap</a> (unsigned int touchIndex=0) const</td></tr>
-<tr class="separator:a9c2a499f64984b72effe4ae9342b57a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ca7c82c1eedd791af175fd7d6b532f8"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a4ca7c82c1eedd791af175fd7d6b532f8">getPointerPositionView</a> (sf::View const &amp;view, unsigned int touchIndex=0)</td></tr>
-<tr class="separator:a4ca7c82c1eedd791af175fd7d6b532f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa4b9d326cd40699d081dc79e1f48678"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#afa4b9d326cd40699d081dc79e1f48678">setMouseCursor</a> (<a class="el" href="classke_1_1_window.html#a5ccc2e20aee293a4fa1e55f382afe915">MouseCursor</a> cursor)</td></tr>
-<tr class="separator:afa4b9d326cd40699d081dc79e1f48678"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44114621c20a2fdc3ce86d6e6f691137"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a44114621c20a2fdc3ce86d6e6f691137">getPointerPositionView</a> (const sf::View &amp;view, unsigned int touchIndex=0)</td></tr>
+<tr class="separator:a44114621c20a2fdc3ce86d6e6f691137"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5c05419d58a12ac97e853396ef6dc7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classke_1_1_window.html#a5ccc2e20aee293a4fa1e55f382afe915">MouseCursor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ab5c05419d58a12ac97e853396ef6dc7a">getMouseCursor</a> () const</td></tr>
+<tr class="separator:ab5c05419d58a12ac97e853396ef6dc7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25ce42434bf60b83f0c423c1d48501e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a25ce42434bf60b83f0c423c1d48501e7">setMouseCursor</a> (<a class="el" href="classke_1_1_window.html#a5ccc2e20aee293a4fa1e55f382afe915">MouseCursor</a> mouseCursor)</td></tr>
+<tr class="separator:a25ce42434bf60b83f0c423c1d48501e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1fc711a3697248a7159b0e9bc7bf590"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ad1fc711a3697248a7159b0e9bc7bf590">hideMouseCursor</a> ()</td></tr>
 <tr class="separator:ad1fc711a3697248a7159b0e9bc7bf590"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1318cf5da5684b85a7cbc72e3788edbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a1318cf5da5684b85a7cbc72e3788edbe">useDefaultMouseCursor</a> ()</td></tr>
 <tr class="separator:a1318cf5da5684b85a7cbc72e3788edbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa59dfa6b5ed70539c91e4520fc69386f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aa59dfa6b5ed70539c91e4520fc69386f">useCustomMouseCursor</a> (sf::Texture *texture=nullptr, sf::Vector2f const &amp;origin=sf::Vector2f(), sf::IntRect const &amp;textureRect=sf::IntRect())</td></tr>
-<tr class="separator:aa59dfa6b5ed70539c91e4520fc69386f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5c05419d58a12ac97e853396ef6dc7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classke_1_1_window.html#a5ccc2e20aee293a4fa1e55f382afe915">MouseCursor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ab5c05419d58a12ac97e853396ef6dc7a">getMouseCursor</a> () const</td></tr>
-<tr class="separator:ab5c05419d58a12ac97e853396ef6dc7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83f2483c2a37b794134ae7370473b48a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a83f2483c2a37b794134ae7370473b48a">setMouseCursorTexture</a> (sf::Texture *texture, sf::IntRect rect=sf::IntRect())</td></tr>
-<tr class="separator:a83f2483c2a37b794134ae7370473b48a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1958dbaf9270ac5fd713410c855f5e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ae1958dbaf9270ac5fd713410c855f5e5">setMouseCursorTextureRect</a> (sf::IntRect const &amp;textureRect)</td></tr>
-<tr class="separator:ae1958dbaf9270ac5fd713410c855f5e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2eb5cf086b32a734ef51e51387dc65fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a2eb5cf086b32a734ef51e51387dc65fc">setMouseCursorOrigin</a> (sf::Vector2f const &amp;origin)</td></tr>
-<tr class="separator:a2eb5cf086b32a734ef51e51387dc65fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5af622e6f57e4c8fb3f05b9dcbc3357"><td class="memItemLeft" align="right" valign="top">sf::IntRect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ac5af622e6f57e4c8fb3f05b9dcbc3357">getMouseCursorTextureRect</a> ()</td></tr>
-<tr class="separator:ac5af622e6f57e4c8fb3f05b9dcbc3357"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a345c7b35c94ef07faf2dda0a1520767d"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a345c7b35c94ef07faf2dda0a1520767d">getMouseCursorOrigin</a> ()</td></tr>
-<tr class="separator:a345c7b35c94ef07faf2dda0a1520767d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54c0385a1534e63d55fd609a5e56bd74"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a54c0385a1534e63d55fd609a5e56bd74">useCustomMouseCursor</a> (const std::string &amp;texture, const sf::IntRect &amp;textureRect=sf::IntRect(), const sf::Vector2f &amp;origin=sf::Vector2f())</td></tr>
+<tr class="separator:a54c0385a1534e63d55fd609a5e56bd74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b42b0bfae065ce02aa82ff2b76640bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a9b42b0bfae065ce02aa82ff2b76640bf">useCustomMouseCursor</a> (sf::Texture *texture, const std::string &amp;textureData=&quot;&quot;, const sf::IntRect &amp;textureRect=sf::IntRect(), const sf::Vector2f &amp;origin=sf::Vector2f())</td></tr>
+<tr class="separator:a9b42b0bfae065ce02aa82ff2b76640bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b3534859372c666f59f7a9e9f3934ed"><td class="memItemLeft" align="right" valign="top">sf::Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a7b3534859372c666f59f7a9e9f3934ed">getMouseCursorTexture</a> () const</td></tr>
+<tr class="separator:a7b3534859372c666f59f7a9e9f3934ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f20d1b701472dee39fd40bed76eaa49"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a6f20d1b701472dee39fd40bed76eaa49">getMouseCursorTextureData</a> () const</td></tr>
+<tr class="separator:a6f20d1b701472dee39fd40bed76eaa49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cb21bd3ba3fa649ef1394e384e52a95"><td class="memItemLeft" align="right" valign="top">const sf::IntRect &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a7cb21bd3ba3fa649ef1394e384e52a95">getMouseCursorTextureRect</a> () const</td></tr>
+<tr class="separator:a7cb21bd3ba3fa649ef1394e384e52a95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0266aee454528335db422b431c2e20fd"><td class="memItemLeft" align="right" valign="top">const sf::Vector2f &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a0266aee454528335db422b431c2e20fd">getMouseCursorOrigin</a> () const</td></tr>
+<tr class="separator:a0266aee454528335db422b431c2e20fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af25f3a6137a15d1d4d64ec7a193a3c36"><td class="memItemLeft" align="right" valign="top">const sf::Vector2f &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#af25f3a6137a15d1d4d64ec7a193a3c36">getMouseCursorScale</a> () const</td></tr>
+<tr class="separator:af25f3a6137a15d1d4d64ec7a193a3c36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a0340737abcee7c2a8b512c9c51513f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a0a0340737abcee7c2a8b512c9c51513f">getMouseCursorRotation</a> () const</td></tr>
+<tr class="separator:a0a0340737abcee7c2a8b512c9c51513f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2351899d3246eaa0b1e2036c2013bce"><td class="memItemLeft" align="right" valign="top">const sf::Color &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ac2351899d3246eaa0b1e2036c2013bce">getMouseCursorColor</a> () const</td></tr>
+<tr class="separator:ac2351899d3246eaa0b1e2036c2013bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e3c274dd0edf3af7a73bf3aeaf35238"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a5e3c274dd0edf3af7a73bf3aeaf35238">setMouseCursorTexture</a> (const std::string &amp;texture)</td></tr>
+<tr class="separator:a5e3c274dd0edf3af7a73bf3aeaf35238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5095d8388a9140f38d8fae531343b8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ad5095d8388a9140f38d8fae531343b8e">setMouseCursorTexture</a> (sf::Texture *texture, const std::string &amp;textureData=&quot;&quot;)</td></tr>
+<tr class="separator:ad5095d8388a9140f38d8fae531343b8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9634310bddee5d300ec2575bee84d31e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a9634310bddee5d300ec2575bee84d31e">setMouseCursorTextureRect</a> (const sf::IntRect &amp;textureRect)</td></tr>
+<tr class="separator:a9634310bddee5d300ec2575bee84d31e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8704004e978d044904e56899f25ca92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ad8704004e978d044904e56899f25ca92">setMouseCursorOrigin</a> (const sf::Vector2f &amp;origin)</td></tr>
+<tr class="separator:ad8704004e978d044904e56899f25ca92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91478df537a1aadbccf3289143269dc5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a91478df537a1aadbccf3289143269dc5">setMouseCursorScale</a> (const sf::Vector2f &amp;scale)</td></tr>
+<tr class="separator:a91478df537a1aadbccf3289143269dc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd1081cb52c2865dde2499e6adf0a927"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#abd1081cb52c2865dde2499e6adf0a927">setMouseCursorRotation</a> (float rotation)</td></tr>
+<tr class="separator:abd1081cb52c2865dde2499e6adf0a927"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7273d221131e2d2c1ef6bb15dd5405f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aa7273d221131e2d2c1ef6bb15dd5405f">setMouseCursorColor</a> (const sf::Color &amp;color)</td></tr>
+<tr class="separator:aa7273d221131e2d2c1ef6bb15dd5405f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b4372bb93195ab82626b5a7664687da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a1b4372bb93195ab82626b5a7664687da">screenshot</a> ()</td></tr>
 <tr class="separator:a1b4372bb93195ab82626b5a7664687da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e8ea7111c6a6c28ecb23419e2794604"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a2e8ea7111c6a6c28ecb23419e2794604">setScreenshotPath</a> (std::string const &amp;screenshotPath)</td></tr>
-<tr class="separator:a2e8ea7111c6a6c28ecb23419e2794604"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb80d8fe1027c207d0c0028e19f7d214"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#adb80d8fe1027c207d0c0028e19f7d214">getScreenshotPath</a> () const</td></tr>
-<tr class="separator:adb80d8fe1027c207d0c0028e19f7d214"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a157326e773852c83e3d1057fbfd192"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a3a157326e773852c83e3d1057fbfd192">showDebugInfo</a> (bool visible)</td></tr>
-<tr class="separator:a3a157326e773852c83e3d1057fbfd192"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42575462d2ff623a3ced831bf3b44076"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a42575462d2ff623a3ced831bf3b44076">isDebugInfoVisible</a> () const</td></tr>
-<tr class="separator:a42575462d2ff623a3ced831bf3b44076"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9ec23d8c7d33b5b65e637f2cfd4776d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:aa9ec23d8c7d33b5b65e637f2cfd4776d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aa9ec23d8c7d33b5b65e637f2cfd4776d">setDebugInfo</a> (std::string const &amp;id, T value)</td></tr>
-<tr class="separator:aa9ec23d8c7d33b5b65e637f2cfd4776d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33f00f7caa45cef1da7b2e688a06cfea"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a33f00f7caa45cef1da7b2e688a06cfea">getDebugInfo</a> (std::string const &amp;id) const</td></tr>
-<tr class="separator:a33f00f7caa45cef1da7b2e688a06cfea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a749e2b5c3e806326642524387bd3c70b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a749e2b5c3e806326642524387bd3c70b">removeDebugInfo</a> (std::string const &amp;id)</td></tr>
-<tr class="separator:a749e2b5c3e806326642524387bd3c70b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae00814590357128632ffc85796eae73c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ae00814590357128632ffc85796eae73c">removeDebugInfos</a> ()</td></tr>
-<tr class="separator:ae00814590357128632ffc85796eae73c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1891479edbd09a8c96138fa03850651b"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a1891479edbd09a8c96138fa03850651b">getDebugInfoCount</a> () const</td></tr>
-<tr class="separator:a1891479edbd09a8c96138fa03850651b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af285c67bd9e74aa6bf95aad4c37f9b55"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, std::string &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#af285c67bd9e74aa6bf95aad4c37f9b55">getDebugInfo</a> (std::size_t id)</td></tr>
-<tr class="separator:af285c67bd9e74aa6bf95aad4c37f9b55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6678f85b790a76e774f803a4e5f0e704"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a6678f85b790a76e774f803a4e5f0e704">getScreenshotPath</a> () const</td></tr>
+<tr class="separator:a6678f85b790a76e774f803a4e5f0e704"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0281d725b0351f54990c4287363c6abf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a0281d725b0351f54990c4287363c6abf">setScreenshotPath</a> (const std::string &amp;screenshotPath)</td></tr>
+<tr class="separator:a0281d725b0351f54990c4287363c6abf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b41008fcfb352e9e601bc9665e8f87c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classke_1_1_window.html#ade9ca5c3e4040082a74fba8c3971eb41">BackgroundUsage</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a2b41008fcfb352e9e601bc9665e8f87c">getBackgroundUsage</a> () const</td></tr>
+<tr class="separator:a2b41008fcfb352e9e601bc9665e8f87c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6964fcc1bd1f17d78482e86edb27aa4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a6964fcc1bd1f17d78482e86edb27aa4d">setBackgroundUsage</a> (<a class="el" href="classke_1_1_window.html#ade9ca5c3e4040082a74fba8c3971eb41">BackgroundUsage</a> usage)</td></tr>
+<tr class="separator:a6964fcc1bd1f17d78482e86edb27aa4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9b992aadc144084e424cd7ada679c25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ae9b992aadc144084e424cd7ada679c25">useBackgroundColor</a> (const sf::Color &amp;color)</td></tr>
 <tr class="separator:ae9b992aadc144084e424cd7ada679c25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fef20f2bd7733321a05f7d1bc5d07d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a2fef20f2bd7733321a05f7d1bc5d07d4">useBackgroundScaledTexture</a> (sf::Texture *texture, sf::IntRect rect=sf::IntRect())</td></tr>
-<tr class="separator:a2fef20f2bd7733321a05f7d1bc5d07d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52a26a7a5bdd05758882868924e20b0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a52a26a7a5bdd05758882868924e20b0c">useBackgroundRepeatedTexture</a> (sf::Texture *texture, sf::IntRect rect=sf::IntRect())</td></tr>
-<tr class="separator:a52a26a7a5bdd05758882868924e20b0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab779919b78c9c63fe493c39f30e0985c"><td class="memItemLeft" align="right" valign="top">sf::RectangleShape &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ab779919b78c9c63fe493c39f30e0985c">getBackgroundRectangle</a> ()</td></tr>
-<tr class="separator:ab779919b78c9c63fe493c39f30e0985c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc57e6a4e046b1657925da40bbf67c53"><td class="memItemLeft" align="right" valign="top">sf::Sprite &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#acc57e6a4e046b1657925da40bbf67c53">getBackgroundSprite</a> ()</td></tr>
-<tr class="separator:acc57e6a4e046b1657925da40bbf67c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2b667c3ef268d791ba7d727aa9cd708"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ae2b667c3ef268d791ba7d727aa9cd708">useBackgroundScaled</a> (const std::string &amp;texture, const sf::IntRect &amp;rect=sf::IntRect())</td></tr>
+<tr class="separator:ae2b667c3ef268d791ba7d727aa9cd708"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a135cef0337647b6f28d32e4b4b6d8c54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a135cef0337647b6f28d32e4b4b6d8c54">useBackgroundScaled</a> (sf::Texture *texture, const std::string &amp;textureData=&quot;&quot;, const sf::IntRect &amp;rect=sf::IntRect())</td></tr>
+<tr class="separator:a135cef0337647b6f28d32e4b4b6d8c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45c3fd82eb60ccf8961a25a8f5e7656a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a45c3fd82eb60ccf8961a25a8f5e7656a">useBackgroundRepeated</a> (const std::string &amp;texture, const sf::IntRect &amp;rect=sf::IntRect())</td></tr>
+<tr class="separator:a45c3fd82eb60ccf8961a25a8f5e7656a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad00abf0cf6cd22ee723ef496fceb0da0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ad00abf0cf6cd22ee723ef496fceb0da0">useBackgroundRepeated</a> (sf::Texture *texture, const std::string &amp;textureData=&quot;&quot;, const sf::IntRect &amp;rect=sf::IntRect())</td></tr>
+<tr class="separator:ad00abf0cf6cd22ee723ef496fceb0da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc2db245344083ff4db2049895740dd8"><td class="memItemLeft" align="right" valign="top">const sf::Color &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#adc2db245344083ff4db2049895740dd8">getBackgroundColor</a> () const</td></tr>
 <tr class="separator:adc2db245344083ff4db2049895740dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef6c7ba822d09f4152994859f78988ef"><td class="memItemLeft" align="right" valign="top">sf::Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aef6c7ba822d09f4152994859f78988ef">getBackgroundTexture</a> () const</td></tr>
+<tr class="separator:aef6c7ba822d09f4152994859f78988ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ecd95f540abc2b384c71bbe4aa04855"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a3ecd95f540abc2b384c71bbe4aa04855">getBackgroundTextureData</a> () const</td></tr>
+<tr class="separator:a3ecd95f540abc2b384c71bbe4aa04855"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4f8b166bedcf29baa783e21ed6f4eae"><td class="memItemLeft" align="right" valign="top">const sf::IntRect &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ab4f8b166bedcf29baa783e21ed6f4eae">getBackgroundTextureRect</a> () const</td></tr>
 <tr class="separator:ab4f8b166bedcf29baa783e21ed6f4eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f6e1a857b6739f4eddd67bda81b64e4"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a2f6e1a857b6739f4eddd67bda81b64e4">getBackgroundUsage</a> () const</td></tr>
-<tr class="separator:a2f6e1a857b6739f4eddd67bda81b64e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc30845bab025ed01138ca2ee1e6a17b"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
-<tr class="memitem:afc30845bab025ed01138ca2ee1e6a17b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#afc30845bab025ed01138ca2ee1e6a17b">setDebugInfo</a> (std::string const &amp;id, const char *value)</td></tr>
-<tr class="separator:afc30845bab025ed01138ca2ee1e6a17b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8860ac86e7f702e7b311d4ca1e3db1b8"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
-<tr class="memitem:a8860ac86e7f702e7b311d4ca1e3db1b8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a8860ac86e7f702e7b311d4ca1e3db1b8">setDebugInfo</a> (std::string const &amp;id, char value)</td></tr>
-<tr class="separator:a8860ac86e7f702e7b311d4ca1e3db1b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa35b23d8b9cedea87a6a7d3e4ff025f4"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
-<tr class="memitem:aa35b23d8b9cedea87a6a7d3e4ff025f4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aa35b23d8b9cedea87a6a7d3e4ff025f4">setDebugInfo</a> (std::string const &amp;id, bool value)</td></tr>
-<tr class="separator:aa35b23d8b9cedea87a6a7d3e4ff025f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:aaa9beed78887f035f442ad9629bd3081"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aaa9beed78887f035f442ad9629bd3081">mFullscreen</a></td></tr>
-<tr class="separator:aaa9beed78887f035f442ad9629bd3081"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3dcb6a09d57d37b1930cc35db1bb05b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aa3dcb6a09d57d37b1930cc35db1bb05b">mTitle</a></td></tr>
-<tr class="separator:aa3dcb6a09d57d37b1930cc35db1bb05b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a449fe6f757e43a076e684f84648b6aa0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a449fe6f757e43a076e684f84648b6aa0">mVerticalSync</a></td></tr>
-<tr class="separator:a449fe6f757e43a076e684f84648b6aa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae60a137152a97baaedda3fbdb007d918"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ae60a137152a97baaedda3fbdb007d918">mVisible</a></td></tr>
-<tr class="separator:ae60a137152a97baaedda3fbdb007d918"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b7a2ff0435282e701e9c45ddeb522e4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a9b7a2ff0435282e701e9c45ddeb522e4">mKeyRepeat</a></td></tr>
-<tr class="separator:a9b7a2ff0435282e701e9c45ddeb522e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6292080ba985b82ca44ecfee6d624020"><td class="memItemLeft" align="right" valign="top">sf::VideoMode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a6292080ba985b82ca44ecfee6d624020">mVideoMode</a></td></tr>
-<tr class="separator:a6292080ba985b82ca44ecfee6d624020"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82f216f04ce4f488c0e5270df6208dc8"><td class="memItemLeft" align="right" valign="top">sf::Uint32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a82f216f04ce4f488c0e5270df6208dc8">mStyle</a></td></tr>
-<tr class="separator:a82f216f04ce4f488c0e5270df6208dc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0819f61e752c196901b63976e30d1477"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a0819f61e752c196901b63976e30d1477">mJoystickThreshold</a></td></tr>
-<tr class="separator:a0819f61e752c196901b63976e30d1477"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9518b387b3926d9e9bbe9a3c78a0a9b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classke_1_1_window.html#a5ccc2e20aee293a4fa1e55f382afe915">MouseCursor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a9518b387b3926d9e9bbe9a3c78a0a9b2">mCursor</a></td></tr>
-<tr class="separator:a9518b387b3926d9e9bbe9a3c78a0a9b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4f08aed399015bd7b097ed002e58f70"><td class="memItemLeft" align="right" valign="top">sf::Sprite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ab4f08aed399015bd7b097ed002e58f70">mCursorSprite</a></td></tr>
-<tr class="separator:ab4f08aed399015bd7b097ed002e58f70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3680a86c06ad6ee12d0d496ea519b99d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a3680a86c06ad6ee12d0d496ea519b99d">mScreenshotPath</a></td></tr>
-<tr class="separator:a3680a86c06ad6ee12d0d496ea519b99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5460f15cb020ad3ed9435df90051416"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ab5460f15cb020ad3ed9435df90051416">mDebugInfoVisible</a></td></tr>
-<tr class="separator:ab5460f15cb020ad3ed9435df90051416"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89de9bd7f9a78938a8ce4609d634ff97"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a89de9bd7f9a78938a8ce4609d634ff97">mDebugInfo</a></td></tr>
-<tr class="separator:a89de9bd7f9a78938a8ce4609d634ff97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01d43985d7c45fd71141a5722ce5b26f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classke_1_1_background.html">Background</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a01d43985d7c45fd71141a5722ce5b26f">mBackground</a></td></tr>
-<tr class="separator:a01d43985d7c45fd71141a5722ce5b26f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1645acc062e21c7e72364101ee15229"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ad1645acc062e21c7e72364101ee15229">setConsoleFont</a> (const std::string &amp;font)</td></tr>
+<tr class="separator:ad1645acc062e21c7e72364101ee15229"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae634a08e6a672d5f1296230d2eff5e30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ae634a08e6a672d5f1296230d2eff5e30">setConsoleFont</a> (sf::Font *font, const std::string &amp;fontData=&quot;&quot;)</td></tr>
+<tr class="separator:ae634a08e6a672d5f1296230d2eff5e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35c7f6d9c36516e808efd141939ed400"><td class="memItemLeft" align="right" valign="top">sf::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a35c7f6d9c36516e808efd141939ed400">getConsoleFont</a> () const</td></tr>
+<tr class="separator:a35c7f6d9c36516e808efd141939ed400"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5862f5fc121f943aa1c96939dc60e6b3"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a5862f5fc121f943aa1c96939dc60e6b3">getConsoleFontData</a> () const</td></tr>
+<tr class="separator:a5862f5fc121f943aa1c96939dc60e6b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e92d796d800014c9e23f217dcbf0f28"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a0e92d796d800014c9e23f217dcbf0f28">setConsoleVisible</a> (bool visible)</td></tr>
+<tr class="separator:a0e92d796d800014c9e23f217dcbf0f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a13d6295df671165b792b55d0a55f2b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a2a13d6295df671165b792b55d0a55f2b">isConsoleVisible</a> () const</td></tr>
+<tr class="separator:a2a13d6295df671165b792b55d0a55f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c05498661fedf51446c7318c07377c0"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a4c05498661fedf51446c7318c07377c0">getConsoleContent</a> () const</td></tr>
+<tr class="separator:a4c05498661fedf51446c7318c07377c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af22150db148b2006a7c9ba274dc775f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#af22150db148b2006a7c9ba274dc775f3">setConsoleContent</a> (const std::string &amp;content)</td></tr>
+<tr class="separator:af22150db148b2006a7c9ba274dc775f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94ba3dd9cb7cafb2667160c534a7a914"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a94ba3dd9cb7cafb2667160c534a7a914">setConsoleCommand</a> (const std::string &amp;name, std::function&lt; void(const <a class="el" href="structke_1_1_window_1_1_command_args.html">CommandArgs</a> &amp;)&gt; command, const std::string &amp;help=&quot;&quot;, const std::string &amp;man=&quot;&quot;)</td></tr>
+<tr class="separator:a94ba3dd9cb7cafb2667160c534a7a914"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add28996dff815b3d18dd37fe806d79a4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#add28996dff815b3d18dd37fe806d79a4">hasConsoleCommand</a> (const std::string &amp;name)</td></tr>
+<tr class="separator:add28996dff815b3d18dd37fe806d79a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9f6d92edc57e2b56499ea8f35368251"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ac9f6d92edc57e2b56499ea8f35368251">useConsoleCommand</a> (const std::string &amp;name, const std::string &amp;args=&quot;&quot;)</td></tr>
+<tr class="separator:ac9f6d92edc57e2b56499ea8f35368251"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab17c959df8a7beac89780ba32dee3bcc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ab17c959df8a7beac89780ba32dee3bcc">removeConsoleCommand</a> (const std::string &amp;name)</td></tr>
+<tr class="separator:ab17c959df8a7beac89780ba32dee3bcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11e582d3da2be3a3286b89221854cc00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a11e582d3da2be3a3286b89221854cc00">addConsoleLine</a> (const std::string &amp;line)</td></tr>
+<tr class="separator:a11e582d3da2be3a3286b89221854cc00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ec88c865650a6f5eb0ae067300849da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a6ec88c865650a6f5eb0ae067300849da">setDebugInfoFont</a> (const std::string &amp;font)</td></tr>
+<tr class="separator:a6ec88c865650a6f5eb0ae067300849da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d3040d957637551024bc1dd35585a39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a3d3040d957637551024bc1dd35585a39">setDebugInfoFont</a> (sf::Font *font, const std::string &amp;fontData=&quot;&quot;)</td></tr>
+<tr class="separator:a3d3040d957637551024bc1dd35585a39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d24b55271f0d6acf378a061f5ac410b"><td class="memItemLeft" align="right" valign="top">sf::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a3d24b55271f0d6acf378a061f5ac410b">getDebugInfoFont</a> () const</td></tr>
+<tr class="separator:a3d24b55271f0d6acf378a061f5ac410b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a723f49173fe1de7928507d75979ae772"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a723f49173fe1de7928507d75979ae772">getDebugInfoFontData</a> () const</td></tr>
+<tr class="separator:a723f49173fe1de7928507d75979ae772"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30748b4f8156a182977d6017866b2d4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a30748b4f8156a182977d6017866b2d4d">setDebugInfoVisible</a> (bool visible)</td></tr>
+<tr class="separator:a30748b4f8156a182977d6017866b2d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42575462d2ff623a3ced831bf3b44076"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a42575462d2ff623a3ced831bf3b44076">isDebugInfoVisible</a> () const</td></tr>
+<tr class="separator:a42575462d2ff623a3ced831bf3b44076"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbf5627e01980e2d762be2cf0689a6c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#adbf5627e01980e2d762be2cf0689a6c7">setDebugInfoCharacterSize</a> (unsigned int size)</td></tr>
+<tr class="separator:adbf5627e01980e2d762be2cf0689a6c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32403e29480706c77faf2c6583eab01a"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a32403e29480706c77faf2c6583eab01a">getDebugInfoCharacterSize</a> () const</td></tr>
+<tr class="separator:a32403e29480706c77faf2c6583eab01a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21036f846bd43561698ae8be3ca18b3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a21036f846bd43561698ae8be3ca18b3b">setDebugInfo</a> (const std::string &amp;id, const std::string &amp;value)</td></tr>
+<tr class="separator:a21036f846bd43561698ae8be3ca18b3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13181e743890430649e961b29f21ff56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a13181e743890430649e961b29f21ff56">removeDebugInfo</a> (const std::string &amp;id)</td></tr>
+<tr class="separator:a13181e743890430649e961b29f21ff56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28be5beffe4a2750d7b747548b825965"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a28be5beffe4a2750d7b747548b825965">getFPS</a> () const</td></tr>
+<tr class="separator:a28be5beffe4a2750d7b747548b825965"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ef8aba6cf22df2bd5653e11269af33d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a0ef8aba6cf22df2bd5653e11269af33d">setResizeCallback</a> (std::function&lt; void(const sf::Vector2u &amp;)&gt; resizeCallback)</td></tr>
+<tr class="separator:a0ef8aba6cf22df2bd5653e11269af33d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83e91f0f1238bf58de8aa5685bf6d988"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a83e91f0f1238bf58de8aa5685bf6d988">setErrorCallback</a> (std::function&lt; void(const std::string &amp;)&gt; errorCallback)</td></tr>
+<tr class="separator:a83e91f0f1238bf58de8aa5685bf6d988"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91741e85d70ec6afb9ac9606e98dfcc0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a91741e85d70ec6afb9ac9606e98dfcc0">setWarningCallback</a> (std::function&lt; void(const std::string &amp;)&gt; warningCallback)</td></tr>
+<tr class="separator:a91741e85d70ec6afb9ac9606e98dfcc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9e08681c34e8aec5c1e2702ce59948e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#aa9e08681c34e8aec5c1e2702ce59948e">setInfoCallback</a> (std::function&lt; void(const std::string &amp;)&gt; infoCallback)</td></tr>
+<tr class="separator:aa9e08681c34e8aec5c1e2702ce59948e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a570094b4bfbe54271d6604148ee043a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a570094b4bfbe54271d6604148ee043a5">setLostFocusCallback</a> (std::function&lt; void()&gt; lostFocusCallback)</td></tr>
+<tr class="separator:a570094b4bfbe54271d6604148ee043a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f6d6fb6d8a55242f1613ed10644206c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a8f6d6fb6d8a55242f1613ed10644206c">setGainedFocusCallback</a> (std::function&lt; void()&gt; gainedFocusCallback)</td></tr>
+<tr class="separator:a8f6d6fb6d8a55242f1613ed10644206c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e46aa6a87b57fe1f785237eb1164345"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a8e46aa6a87b57fe1f785237eb1164345">setCloseCallback</a> (std::function&lt; bool()&gt; closeCallback)</td></tr>
+<tr class="separator:a8e46aa6a87b57fe1f785237eb1164345"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e644246cf4b68484f1b7afb244f5546"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#a0e644246cf4b68484f1b7afb244f5546">setAction</a> (<a class="el" href="classke_1_1_window.html#a41a19f0d421337f46c0ceba9ae86fbcc">Action</a> action, sf::Keyboard::Key key=sf::Keyboard::Unknown)</td></tr>
+<tr class="separator:a0e644246cf4b68484f1b7afb244f5546"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3c0c508cb43d6935c0a602ddf5c543c"><td class="memItemLeft" align="right" valign="top">sf::Keyboard::Key&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#af3c0c508cb43d6935c0a602ddf5c543c">getAction</a> (<a class="el" href="classke_1_1_window.html#a41a19f0d421337f46c0ceba9ae86fbcc">Action</a> action) const</td></tr>
+<tr class="separator:af3c0c508cb43d6935c0a602ddf5c543c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3b21e958c1045968b93dfbfcc1a4ed0"><td class="memItemLeft" align="right" valign="top">sf::RenderWindow &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html#ab3b21e958c1045968b93dfbfcc1a4ed0">getHandle</a> ()</td></tr>
+<tr class="separator:ab3b21e958c1045968b93dfbfcc1a4ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a41a19f0d421337f46c0ceba9ae86fbcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41a19f0d421337f46c0ceba9ae86fbcc">&sect;&nbsp;</a></span>Action</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classke_1_1_window.html#a41a19f0d421337f46c0ceba9ae86fbcc">ke::Window::Action</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a41a19f0d421337f46c0ceba9ae86fbcca11f739130848160abf4f3d4a1210f571"></a>Console&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a41a19f0d421337f46c0ceba9ae86fbccac70b54dbec48691eb7175572ef8773d3"></a>Screenshot&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a41a19f0d421337f46c0ceba9ae86fbcca4700587f448d86890d0f0857a76dde76"></a>DebugInfo&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a41a19f0d421337f46c0ceba9ae86fbcca0bd4000dfb2322da319a26c8af9d6b29"></a>Quit&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a41a19f0d421337f46c0ceba9ae86fbccae0bdd2fe375e3d4f25ee04e817a22a23"></a>Fullscreen&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a41a19f0d421337f46c0ceba9ae86fbccae5a6099309a6c3436f475aa0f8744028"></a>Count&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="ade9ca5c3e4040082a74fba8c3971eb41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade9ca5c3e4040082a74fba8c3971eb41">&sect;&nbsp;</a></span>BackgroundUsage</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classke_1_1_window.html#ade9ca5c3e4040082a74fba8c3971eb41">ke::Window::BackgroundUsage</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ade9ca5c3e4040082a74fba8c3971eb41a7441aeb402c68b6c43c8ca4861ebba08"></a>Color&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ade9ca5c3e4040082a74fba8c3971eb41a6518a3bd50c5d57b622656359893ffd1"></a>Scaled&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ade9ca5c3e4040082a74fba8c3971eb41a4a58116621a4665336a0487b2f111404"></a>Repeated&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <a id="a5ccc2e20aee293a4fa1e55f382afe915"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5ccc2e20aee293a4fa1e55f382afe915">&sect;&nbsp;</a></span>MouseCursor</h2>
 
@@ -357,8 +474,43 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a51e7933a9939f65cdbc9c1b82a60dc2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51e7933a9939f65cdbc9c1b82a60dc2a">&sect;&nbsp;</a></span>clear()</h2>
+<a id="a11e582d3da2be3a3286b89221854cc00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11e582d3da2be3a3286b89221854cc00">&sect;&nbsp;</a></span>addConsoleLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::addConsoleLine </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>line</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a06e35b200bbdbd83fdfef9c309892b08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06e35b200bbdbd83fdfef9c309892b08">&sect;&nbsp;</a></span>applyDefaultView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::applyDefaultView </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa69ea7ffee3f1897e589702bc9314d47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa69ea7ffee3f1897e589702bc9314d47">&sect;&nbsp;</a></span>clear()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -366,7 +518,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void ke::Window::clear </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const sf::Color &amp;&#160;</td>
+          <td class="paramname"><em>color</em> = <code>sf::Color(0,&#160;0,&#160;0,&#160;255)</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -408,8 +561,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5224d1edf682d60fc8fa54a5593a69af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5224d1edf682d60fc8fa54a5593a69af">&sect;&nbsp;</a></span>create() <span class="overload">[2/2]</span></h2>
+<a id="a2619b627e1434b44d9c9026b960babe2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2619b627e1434b44d9c9026b960babe2">&sect;&nbsp;</a></span>create() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -418,19 +571,25 @@ Protected Attributes</h2></td></tr>
           <td class="memname">void ke::Window::create </td>
           <td>(</td>
           <td class="paramtype">sf::VideoMode&#160;</td>
-          <td class="paramname"><em>videoMode</em>, </td>
+          <td class="paramname"><em>mode</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>title</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">sf::Uint32&#160;</td>
-          <td class="paramname"><em>style</em> = <code>sf::Style::Close</code>&#160;</td>
+          <td class="paramname"><em>style</em> = <code>sf::Style::Default</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::ContextSettings &amp;&#160;</td>
+          <td class="paramname"><em>settings</em> = <code>sf::ContextSettings()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -459,6 +618,92 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a453c98567b882bdb2294a09c13d7929c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a453c98567b882bdb2294a09c13d7929c">&sect;&nbsp;</a></span>draw() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::draw </td>
+          <td>(</td>
+          <td class="paramtype">const sf::Drawable &amp;&#160;</td>
+          <td class="paramname"><em>drawable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::RenderStates &amp;&#160;</td>
+          <td class="paramname"><em>states</em> = <code>sf::RenderStates::Default</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a16a352f6b6c2a4eae05a4b655d18eaee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16a352f6b6c2a4eae05a4b655d18eaee">&sect;&nbsp;</a></span>draw() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::draw </td>
+          <td>(</td>
+          <td class="paramtype">const sf::Vertex *&#160;</td>
+          <td class="paramname"><em>vertices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>vertexCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::PrimitiveType&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::RenderStates &amp;&#160;</td>
+          <td class="paramname"><em>states</em> = <code>sf::RenderStates::Default</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af3c0c508cb43d6935c0a602ddf5c543c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3c0c508cb43d6935c0a602ddf5c543c">&sect;&nbsp;</a></span>getAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Keyboard::Key ke::Window::getAction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classke_1_1_window.html#a41a19f0d421337f46c0ceba9ae86fbcc">Action</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="adc2db245344083ff4db2049895740dd8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc2db245344083ff4db2049895740dd8">&sect;&nbsp;</a></span>getBackgroundColor()</h2>
 
@@ -476,34 +721,34 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab779919b78c9c63fe493c39f30e0985c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab779919b78c9c63fe493c39f30e0985c">&sect;&nbsp;</a></span>getBackgroundRectangle()</h2>
+<a id="aef6c7ba822d09f4152994859f78988ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef6c7ba822d09f4152994859f78988ef">&sect;&nbsp;</a></span>getBackgroundTexture()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">sf::RectangleShape &amp; ke::Window::getBackgroundRectangle </td>
+          <td class="memname">sf::Texture * ke::Window::getBackgroundTexture </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="acc57e6a4e046b1657925da40bbf67c53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc57e6a4e046b1657925da40bbf67c53">&sect;&nbsp;</a></span>getBackgroundSprite()</h2>
+<a id="a3ecd95f540abc2b384c71bbe4aa04855"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ecd95f540abc2b384c71bbe4aa04855">&sect;&nbsp;</a></span>getBackgroundTextureData()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">sf::Sprite &amp; ke::Window::getBackgroundSprite </td>
+          <td class="memname">const std::string &amp; ke::Window::getBackgroundTextureData </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -527,14 +772,14 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a2f6e1a857b6739f4eddd67bda81b64e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f6e1a857b6739f4eddd67bda81b64e4">&sect;&nbsp;</a></span>getBackgroundUsage()</h2>
+<a id="a2b41008fcfb352e9e601bc9665e8f87c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b41008fcfb352e9e601bc9665e8f87c">&sect;&nbsp;</a></span>getBackgroundUsage()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::size_t ke::Window::getBackgroundUsage </td>
+          <td class="memname"><a class="el" href="classke_1_1_window.html#ade9ca5c3e4040082a74fba8c3971eb41">Window::BackgroundUsage</a> ke::Window::getBackgroundUsage </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -544,17 +789,16 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a33f00f7caa45cef1da7b2e688a06cfea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33f00f7caa45cef1da7b2e688a06cfea">&sect;&nbsp;</a></span>getDebugInfo() <span class="overload">[1/2]</span></h2>
+<a id="a4c05498661fedf51446c7318c07377c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c05498661fedf51446c7318c07377c0">&sect;&nbsp;</a></span>getConsoleContent()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string ke::Window::getDebugInfo </td>
+          <td class="memname">std::string ke::Window::getConsoleContent </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -562,17 +806,135 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af285c67bd9e74aa6bf95aad4c37f9b55"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af285c67bd9e74aa6bf95aad4c37f9b55">&sect;&nbsp;</a></span>getDebugInfo() <span class="overload">[2/2]</span></h2>
+<a id="a35c7f6d9c36516e808efd141939ed400"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35c7f6d9c36516e808efd141939ed400">&sect;&nbsp;</a></span>getConsoleFont()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt; std::string, std::string &gt;::iterator ke::Window::getDebugInfo </td>
+          <td class="memname">sf::Font * ke::Window::getConsoleFont </td>
           <td>(</td>
-          <td class="paramtype">std::size_t&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5862f5fc121f943aa1c96939dc60e6b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5862f5fc121f943aa1c96939dc60e6b3">&sect;&nbsp;</a></span>getConsoleFontData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; ke::Window::getConsoleFontData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a32403e29480706c77faf2c6583eab01a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32403e29480706c77faf2c6583eab01a">&sect;&nbsp;</a></span>getDebugInfoCharacterSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int ke::Window::getDebugInfoCharacterSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3d24b55271f0d6acf378a061f5ac410b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d24b55271f0d6acf378a061f5ac410b">&sect;&nbsp;</a></span>getDebugInfoFont()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Font * ke::Window::getDebugInfoFont </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a723f49173fe1de7928507d75979ae772"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a723f49173fe1de7928507d75979ae772">&sect;&nbsp;</a></span>getDebugInfoFontData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; ke::Window::getDebugInfoFontData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae6a6a7ba113d4786527a6282462412bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6a6a7ba113d4786527a6282462412bb">&sect;&nbsp;</a></span>getDefaultView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const sf::View &amp; ke::Window::getDefaultView </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28be5beffe4a2750d7b747548b825965"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28be5beffe4a2750d7b747548b825965">&sect;&nbsp;</a></span>getFPS()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int ke::Window::getFPS </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab3b21e958c1045968b93dfbfcc1a4ed0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3b21e958c1045968b93dfbfcc1a4ed0">&sect;&nbsp;</a></span>getHandle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::RenderWindow &amp; ke::Window::getHandle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -580,14 +942,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1891479edbd09a8c96138fa03850651b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1891479edbd09a8c96138fa03850651b">&sect;&nbsp;</a></span>getDebugInfoCount()</h2>
+<a id="a7034f233cf5b4bb2fae2d0d48b5d0255"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7034f233cf5b4bb2fae2d0d48b5d0255">&sect;&nbsp;</a></span>getIcon()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::size_t ke::Window::getDebugInfoCount </td>
+          <td class="memname">const sf::Image &amp; ke::Window::getIcon </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab274f9c5be247be31feed316512604bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab274f9c5be247be31feed316512604bf">&sect;&nbsp;</a></span>getIconPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; ke::Window::getIconPath </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -631,34 +1010,119 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a345c7b35c94ef07faf2dda0a1520767d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a345c7b35c94ef07faf2dda0a1520767d">&sect;&nbsp;</a></span>getMouseCursorOrigin()</h2>
+<a id="ac2351899d3246eaa0b1e2036c2013bce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2351899d3246eaa0b1e2036c2013bce">&sect;&nbsp;</a></span>getMouseCursorColor()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">sf::Vector2f ke::Window::getMouseCursorOrigin </td>
+          <td class="memname">const sf::Color &amp; ke::Window::getMouseCursorColor </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ac5af622e6f57e4c8fb3f05b9dcbc3357"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5af622e6f57e4c8fb3f05b9dcbc3357">&sect;&nbsp;</a></span>getMouseCursorTextureRect()</h2>
+<a id="a0266aee454528335db422b431c2e20fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0266aee454528335db422b431c2e20fd">&sect;&nbsp;</a></span>getMouseCursorOrigin()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">sf::IntRect ke::Window::getMouseCursorTextureRect </td>
+          <td class="memname">const sf::Vector2f &amp; ke::Window::getMouseCursorOrigin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0a0340737abcee7c2a8b512c9c51513f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a0340737abcee7c2a8b512c9c51513f">&sect;&nbsp;</a></span>getMouseCursorRotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float ke::Window::getMouseCursorRotation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af25f3a6137a15d1d4d64ec7a193a3c36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af25f3a6137a15d1d4d64ec7a193a3c36">&sect;&nbsp;</a></span>getMouseCursorScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const sf::Vector2f &amp; ke::Window::getMouseCursorScale </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7b3534859372c666f59f7a9e9f3934ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b3534859372c666f59f7a9e9f3934ed">&sect;&nbsp;</a></span>getMouseCursorTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Texture * ke::Window::getMouseCursorTexture </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f20d1b701472dee39fd40bed76eaa49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f20d1b701472dee39fd40bed76eaa49">&sect;&nbsp;</a></span>getMouseCursorTextureData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; ke::Window::getMouseCursorTextureData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7cb21bd3ba3fa649ef1394e384e52a95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cb21bd3ba3fa649ef1394e384e52a95">&sect;&nbsp;</a></span>getMouseCursorTextureRect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const sf::IntRect &amp; ke::Window::getMouseCursorTextureRect </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -682,42 +1146,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a834e09a2e503be3bff3e2bb238ae661f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a834e09a2e503be3bff3e2bb238ae661f">&sect;&nbsp;</a></span>getMousePosition2i()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::Vector2i ke::Window::getMousePosition2i </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5d46812aadb0a0ac2a9d702c5d5ea75b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d46812aadb0a0ac2a9d702c5d5ea75b">&sect;&nbsp;</a></span>getMousePositionMap()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::Vector2f ke::Window::getMousePositionMap </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab0fcb4621aa865272e6d2d5fa340a780"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0fcb4621aa865272e6d2d5fa340a780">&sect;&nbsp;</a></span>getMousePositionView()</h2>
+<a id="a13de58d959b98eed36645238f0ca8795"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13de58d959b98eed36645238f0ca8795">&sect;&nbsp;</a></span>getMousePositionView()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -725,7 +1155,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">sf::Vector2f ke::Window::getMousePositionView </td>
           <td>(</td>
-          <td class="paramtype">sf::View const &amp;&#160;</td>
+          <td class="paramtype">const sf::View &amp;&#160;</td>
           <td class="paramname"><em>view</em></td><td>)</td>
           <td></td>
         </tr>
@@ -752,44 +1182,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="afa4b782335a9f8bfd30e54bf6fd39601"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa4b782335a9f8bfd30e54bf6fd39601">&sect;&nbsp;</a></span>getPointerPosition2i()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::Vector2i ke::Window::getPointerPosition2i </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>touchIndex</em> = <code>0</code></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9c2a499f64984b72effe4ae9342b57a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c2a499f64984b72effe4ae9342b57a8">&sect;&nbsp;</a></span>getPointerPositionMap()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::Vector2f ke::Window::getPointerPositionMap </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>touchIndex</em> = <code>0</code></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4ca7c82c1eedd791af175fd7d6b532f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ca7c82c1eedd791af175fd7d6b532f8">&sect;&nbsp;</a></span>getPointerPositionView()</h2>
+<a id="a44114621c20a2fdc3ce86d6e6f691137"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44114621c20a2fdc3ce86d6e6f691137">&sect;&nbsp;</a></span>getPointerPositionView()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -797,7 +1191,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">sf::Vector2f ke::Window::getPointerPositionView </td>
           <td>(</td>
-          <td class="paramtype">sf::View const &amp;&#160;</td>
+          <td class="paramtype">const sf::View &amp;&#160;</td>
           <td class="paramname"><em>view</em>, </td>
         </tr>
         <tr>
@@ -816,14 +1210,65 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="adb80d8fe1027c207d0c0028e19f7d214"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb80d8fe1027c207d0c0028e19f7d214">&sect;&nbsp;</a></span>getScreenshotPath()</h2>
+<a id="a8d14b2d9d2d579a9957fc8d4627021a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d14b2d9d2d579a9957fc8d4627021a1">&sect;&nbsp;</a></span>getPosition()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string ke::Window::getScreenshotPath </td>
+          <td class="memname">sf::Vector2i ke::Window::getPosition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6678f85b790a76e774f803a4e5f0e704"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6678f85b790a76e774f803a4e5f0e704">&sect;&nbsp;</a></span>getScreenshotPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; ke::Window::getScreenshotPath </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2a13aabed86f14ffb6791de92ecd0117"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a13aabed86f14ffb6791de92ecd0117">&sect;&nbsp;</a></span>getSettings()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const sf::ContextSettings &amp; ke::Window::getSettings </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6012cc7a4b345ec9edc1710e04eab12c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6012cc7a4b345ec9edc1710e04eab12c">&sect;&nbsp;</a></span>getSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Vector2u ke::Window::getSize </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -850,14 +1295,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a34729d92baa3da8c54630ab0b7c44ac7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34729d92baa3da8c54630ab0b7c44ac7">&sect;&nbsp;</a></span>getTitle()</h2>
+<a id="a3a3d0bb6730de7e5fa3d582bdac8b394"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a3d0bb6730de7e5fa3d582bdac8b394">&sect;&nbsp;</a></span>getSystemHandle()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string ke::Window::getTitle </td>
+          <td class="memname">sf::WindowHandle ke::Window::getSystemHandle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a5f4a22b9ed6d30015f195ad57492b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a5f4a22b9ed6d30015f195ad57492b9">&sect;&nbsp;</a></span>getTitle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; ke::Window::getTitle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -885,44 +1347,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6667cbf4c04a7df7f6cd082a951a13a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6667cbf4c04a7df7f6cd082a951a13a3">&sect;&nbsp;</a></span>getTouchPosition2i()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::Vector2i ke::Window::getTouchPosition2i </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>touchIndex</em> = <code>0</code></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a6724ae65d5b2c7d856c7f8850099f092"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6724ae65d5b2c7d856c7f8850099f092">&sect;&nbsp;</a></span>getTouchPositionMap()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::Vector2f ke::Window::getTouchPositionMap </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>touchIndex</em> = <code>0</code></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7beddb214ced9cd9bcd5bad726bc3137"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7beddb214ced9cd9bcd5bad726bc3137">&sect;&nbsp;</a></span>getTouchPositionView()</h2>
+<a id="adb0bc4f1c96cf3de4c8f7d03372031dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb0bc4f1c96cf3de4c8f7d03372031dc">&sect;&nbsp;</a></span>getTouchPositionView()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -930,7 +1356,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">sf::Vector2f ke::Window::getTouchPositionView </td>
           <td>(</td>
-          <td class="paramtype">sf::View const &amp;&#160;</td>
+          <td class="paramtype">const sf::View &amp;&#160;</td>
           <td class="paramname"><em>view</em>, </td>
         </tr>
         <tr>
@@ -949,14 +1375,102 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1b4fb001fc150d143f17840cc914066d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b4fb001fc150d143f17840cc914066d">&sect;&nbsp;</a></span>getVideoMode()</h2>
+<a id="a82a36729aad018b5ae837817de6071c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82a36729aad018b5ae837817de6071c2">&sect;&nbsp;</a></span>getVideoMode()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">sf::VideoMode ke::Window::getVideoMode </td>
+          <td class="memname">const sf::VideoMode &amp; ke::Window::getVideoMode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a42d46abcaff3353e8c191074fedb3184"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42d46abcaff3353e8c191074fedb3184">&sect;&nbsp;</a></span>getView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const sf::View &amp; ke::Window::getView </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac211f7d0f878840d688bcb50f0e04d5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac211f7d0f878840d688bcb50f0e04d5f">&sect;&nbsp;</a></span>getViewport()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::IntRect ke::Window::getViewport </td>
+          <td>(</td>
+          <td class="paramtype">const sf::View &amp;&#160;</td>
+          <td class="paramname"><em>view</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a04439e10b08f4ac9ae7a29c741ec1692"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04439e10b08f4ac9ae7a29c741ec1692">&sect;&nbsp;</a></span>handleEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Window::handleEvent </td>
+          <td>(</td>
+          <td class="paramtype">sf::Event &amp;&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="add28996dff815b3d18dd37fe806d79a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add28996dff815b3d18dd37fe806d79a4">&sect;&nbsp;</a></span>hasConsoleCommand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Window::hasConsoleCommand </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a814c6d6695ea4ce384960de6ca346602"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a814c6d6695ea4ce384960de6ca346602">&sect;&nbsp;</a></span>hasFocus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Window::hasFocus </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -977,6 +1491,23 @@ Protected Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2a13d6295df671165b792b55d0a55f2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a13d6295df671165b792b55d0a55f2b">&sect;&nbsp;</a></span>isConsoleVisible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Window::isConsoleVisible </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1034,6 +1565,40 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="afa7d2e8722403bbf0ba2252163d1839f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa7d2e8722403bbf0ba2252163d1839f">&sect;&nbsp;</a></span>isMouseCursorGrabbed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Window::isMouseCursorGrabbed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5ea3d1d1a0c9b44d8614268484e599f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ea3d1d1a0c9b44d8614268484e599f5">&sect;&nbsp;</a></span>isOpen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Window::isOpen </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a04c00df8c99dcf36d2ff5752a09bcfc4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a04c00df8c99dcf36d2ff5752a09bcfc4">&sect;&nbsp;</a></span>isVerticalSyncEnabled()</h2>
 
@@ -1068,8 +1633,82 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a749e2b5c3e806326642524387bd3c70b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a749e2b5c3e806326642524387bd3c70b">&sect;&nbsp;</a></span>removeDebugInfo()</h2>
+<a id="a373e32517e2b9bb471a5aedd1bbe05e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a373e32517e2b9bb471a5aedd1bbe05e1">&sect;&nbsp;</a></span>mapCoordsToPixel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::mapCoordsToPixel </td>
+          <td>(</td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
+          <td class="paramname"><em>point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::View &amp;&#160;</td>
+          <td class="paramname"><em>view</em> = <code>sf::View(sf::FloatRect())</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0eecf85e6b85a8fabcdcf995717917be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eecf85e6b85a8fabcdcf995717917be">&sect;&nbsp;</a></span>mapPixelToCoords()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::mapPixelToCoords </td>
+          <td>(</td>
+          <td class="paramtype">const sf::Vector2i &amp;&#160;</td>
+          <td class="paramname"><em>point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::View &amp;&#160;</td>
+          <td class="paramname"><em>view</em> = <code>sf::View(sf::FloatRect())</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab17c959df8a7beac89780ba32dee3bcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab17c959df8a7beac89780ba32dee3bcc">&sect;&nbsp;</a></span>removeConsoleCommand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::removeConsoleCommand </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a13181e743890430649e961b29f21ff56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13181e743890430649e961b29f21ff56">&sect;&nbsp;</a></span>removeDebugInfo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1077,7 +1716,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void ke::Window::removeDebugInfo </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1086,14 +1725,14 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae00814590357128632ffc85796eae73c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae00814590357128632ffc85796eae73c">&sect;&nbsp;</a></span>removeDebugInfos()</h2>
+<a id="a2ceca69758fccbebb355a6036c5dc522"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ceca69758fccbebb355a6036c5dc522">&sect;&nbsp;</a></span>requestFocus()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ke::Window::removeDebugInfos </td>
+          <td class="memname">void ke::Window::requestFocus </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1120,25 +1759,23 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa9ec23d8c7d33b5b65e637f2cfd4776d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9ec23d8c7d33b5b65e637f2cfd4776d">&sect;&nbsp;</a></span>setDebugInfo() <span class="overload">[1/4]</span></h2>
+<a id="a0e644246cf4b68484f1b7afb244f5546"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e644246cf4b68484f1b7afb244f5546">&sect;&nbsp;</a></span>setAction()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void ke::Window::setDebugInfo </td>
+          <td class="memname">void ke::Window::setAction </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
+          <td class="paramtype"><a class="el" href="classke_1_1_window.html#a41a19f0d421337f46c0ceba9ae86fbcc">Action</a>&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
+          <td class="paramtype">sf::Keyboard::Key&#160;</td>
+          <td class="paramname"><em>key</em> = <code>sf::Keyboard::Unknown</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1150,148 +1787,17 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="afc30845bab025ed01138ca2ee1e6a17b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc30845bab025ed01138ca2ee1e6a17b">&sect;&nbsp;</a></span>setDebugInfo() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ke::Window::setDebugInfo </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a8860ac86e7f702e7b311d4ca1e3db1b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8860ac86e7f702e7b311d4ca1e3db1b8">&sect;&nbsp;</a></span>setDebugInfo() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ke::Window::setDebugInfo </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa35b23d8b9cedea87a6a7d3e4ff025f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa35b23d8b9cedea87a6a7d3e4ff025f4">&sect;&nbsp;</a></span>setDebugInfo() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ke::Window::setDebugInfo </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac66b57089688db99ff10b1d423edd02b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac66b57089688db99ff10b1d423edd02b">&sect;&nbsp;</a></span>setDefaultView()</h2>
+<a id="ac15297a3f7024e3e1860f75b221f6f26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac15297a3f7024e3e1860f75b221f6f26">&sect;&nbsp;</a></span>setActive()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ke::Window::setDefaultView </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a329d4247af40c4b056a55ed16912c66d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a329d4247af40c4b056a55ed16912c66d">&sect;&nbsp;</a></span>setFullscreen()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ke::Window::setFullscreen </td>
+          <td class="memname">void ke::Window::setActive </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>full</em></td><td>)</td>
+          <td class="paramname"><em>active</em> = <code>true</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1299,8 +1805,312 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="aa1cda53adf0910b65b4a1188de6e78b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1cda53adf0910b65b4a1188de6e78b4">&sect;&nbsp;</a></span>setIcon()</h2>
+<a id="a6964fcc1bd1f17d78482e86edb27aa4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6964fcc1bd1f17d78482e86edb27aa4d">&sect;&nbsp;</a></span>setBackgroundUsage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setBackgroundUsage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classke_1_1_window.html#ade9ca5c3e4040082a74fba8c3971eb41">BackgroundUsage</a>&#160;</td>
+          <td class="paramname"><em>usage</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8e46aa6a87b57fe1f785237eb1164345"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e46aa6a87b57fe1f785237eb1164345">&sect;&nbsp;</a></span>setCloseCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setCloseCallback </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; bool()&gt;&#160;</td>
+          <td class="paramname"><em>closeCallback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a94ba3dd9cb7cafb2667160c534a7a914"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94ba3dd9cb7cafb2667160c534a7a914">&sect;&nbsp;</a></span>setConsoleCommand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setConsoleCommand </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(const <a class="el" href="structke_1_1_window_1_1_command_args.html">CommandArgs</a> &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>command</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>help</em> = <code>&quot;&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>man</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af22150db148b2006a7c9ba274dc775f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af22150db148b2006a7c9ba274dc775f3">&sect;&nbsp;</a></span>setConsoleContent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setConsoleContent </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>content</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad1645acc062e21c7e72364101ee15229"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1645acc062e21c7e72364101ee15229">&sect;&nbsp;</a></span>setConsoleFont() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setConsoleFont </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>font</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae634a08e6a672d5f1296230d2eff5e30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae634a08e6a672d5f1296230d2eff5e30">&sect;&nbsp;</a></span>setConsoleFont() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setConsoleFont </td>
+          <td>(</td>
+          <td class="paramtype">sf::Font *&#160;</td>
+          <td class="paramname"><em>font</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>fontData</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0e92d796d800014c9e23f217dcbf0f28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e92d796d800014c9e23f217dcbf0f28">&sect;&nbsp;</a></span>setConsoleVisible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setConsoleVisible </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>visible</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a21036f846bd43561698ae8be3ca18b3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21036f846bd43561698ae8be3ca18b3b">&sect;&nbsp;</a></span>setDebugInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setDebugInfo </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adbf5627e01980e2d762be2cf0689a6c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbf5627e01980e2d762be2cf0689a6c7">&sect;&nbsp;</a></span>setDebugInfoCharacterSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setDebugInfoCharacterSize </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ec88c865650a6f5eb0ae067300849da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ec88c865650a6f5eb0ae067300849da">&sect;&nbsp;</a></span>setDebugInfoFont() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setDebugInfoFont </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>font</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3d3040d957637551024bc1dd35585a39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d3040d957637551024bc1dd35585a39">&sect;&nbsp;</a></span>setDebugInfoFont() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setDebugInfoFont </td>
+          <td>(</td>
+          <td class="paramtype">sf::Font *&#160;</td>
+          <td class="paramname"><em>font</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>fontData</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a30748b4f8156a182977d6017866b2d4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30748b4f8156a182977d6017866b2d4d">&sect;&nbsp;</a></span>setDebugInfoVisible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setDebugInfoVisible </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>visible</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a83e91f0f1238bf58de8aa5685bf6d988"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83e91f0f1238bf58de8aa5685bf6d988">&sect;&nbsp;</a></span>setErrorCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setErrorCallback </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void(const std::string &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>errorCallback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8f6d6fb6d8a55242f1613ed10644206c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f6d6fb6d8a55242f1613ed10644206c">&sect;&nbsp;</a></span>setGainedFocusCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setGainedFocusCallback </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void()&gt;&#160;</td>
+          <td class="paramname"><em>gainedFocusCallback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa5204e6775d3fa7a5c4a2fc29d00b213"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5204e6775d3fa7a5c4a2fc29d00b213">&sect;&nbsp;</a></span>setIcon() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1308,8 +2118,44 @@ template&lt;&gt; </div>
         <tr>
           <td class="memname">void ke::Window::setIcon </td>
           <td>(</td>
-          <td class="paramtype">sf::Image *&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>icon</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9d4bd028c939d37709cd721be2b59238"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d4bd028c939d37709cd721be2b59238">&sect;&nbsp;</a></span>setIcon() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setIcon </td>
+          <td>(</td>
+          <td class="paramtype">const sf::Image &amp;&#160;</td>
           <td class="paramname"><em>image</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa9e08681c34e8aec5c1e2702ce59948e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9e08681c34e8aec5c1e2702ce59948e">&sect;&nbsp;</a></span>setInfoCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setInfoCallback </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void(const std::string &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>infoCallback</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1353,8 +2199,26 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="afa4b9d326cd40699d081dc79e1f48678"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa4b9d326cd40699d081dc79e1f48678">&sect;&nbsp;</a></span>setMouseCursor()</h2>
+<a id="a570094b4bfbe54271d6604148ee043a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a570094b4bfbe54271d6604148ee043a5">&sect;&nbsp;</a></span>setLostFocusCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setLostFocusCallback </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void()&gt;&#160;</td>
+          <td class="paramname"><em>lostFocusCallback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a25ce42434bf60b83f0c423c1d48501e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25ce42434bf60b83f0c423c1d48501e7">&sect;&nbsp;</a></span>setMouseCursor()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1363,7 +2227,7 @@ template&lt;&gt; </div>
           <td class="memname">void ke::Window::setMouseCursor </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classke_1_1_window.html#a5ccc2e20aee293a4fa1e55f382afe915">MouseCursor</a>&#160;</td>
-          <td class="paramname"><em>cursor</em></td><td>)</td>
+          <td class="paramname"><em>mouseCursor</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1371,8 +2235,44 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="a2eb5cf086b32a734ef51e51387dc65fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2eb5cf086b32a734ef51e51387dc65fc">&sect;&nbsp;</a></span>setMouseCursorOrigin()</h2>
+<a id="aa7273d221131e2d2c1ef6bb15dd5405f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7273d221131e2d2c1ef6bb15dd5405f">&sect;&nbsp;</a></span>setMouseCursorColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setMouseCursorColor </td>
+          <td>(</td>
+          <td class="paramtype">const sf::Color &amp;&#160;</td>
+          <td class="paramname"><em>color</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4b094f4e957dcce96a05c46464ef2c8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b094f4e957dcce96a05c46464ef2c8c">&sect;&nbsp;</a></span>setMouseCursorGrabbed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setMouseCursorGrabbed </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>grabbed</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad8704004e978d044904e56899f25ca92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8704004e978d044904e56899f25ca92">&sect;&nbsp;</a></span>setMouseCursorOrigin()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1380,7 +2280,7 @@ template&lt;&gt; </div>
         <tr>
           <td class="memname">void ke::Window::setMouseCursorOrigin </td>
           <td>(</td>
-          <td class="paramtype">sf::Vector2f const &amp;&#160;</td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
           <td class="paramname"><em>origin</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1389,8 +2289,62 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="a83f2483c2a37b794134ae7370473b48a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83f2483c2a37b794134ae7370473b48a">&sect;&nbsp;</a></span>setMouseCursorTexture()</h2>
+<a id="abd1081cb52c2865dde2499e6adf0a927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd1081cb52c2865dde2499e6adf0a927">&sect;&nbsp;</a></span>setMouseCursorRotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setMouseCursorRotation </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>rotation</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a91478df537a1aadbccf3289143269dc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91478df537a1aadbccf3289143269dc5">&sect;&nbsp;</a></span>setMouseCursorScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setMouseCursorScale </td>
+          <td>(</td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
+          <td class="paramname"><em>scale</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5e3c274dd0edf3af7a73bf3aeaf35238"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e3c274dd0edf3af7a73bf3aeaf35238">&sect;&nbsp;</a></span>setMouseCursorTexture() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setMouseCursorTexture </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>texture</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad5095d8388a9140f38d8fae531343b8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5095d8388a9140f38d8fae531343b8e">&sect;&nbsp;</a></span>setMouseCursorTexture() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1404,8 +2358,8 @@ template&lt;&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::IntRect&#160;</td>
-          <td class="paramname"><em>rect</em> = <code>sf::IntRect()</code>&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>textureData</em> = <code>&quot;&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1417,8 +2371,8 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="ae1958dbaf9270ac5fd713410c855f5e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1958dbaf9270ac5fd713410c855f5e5">&sect;&nbsp;</a></span>setMouseCursorTextureRect()</h2>
+<a id="a9634310bddee5d300ec2575bee84d31e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9634310bddee5d300ec2575bee84d31e">&sect;&nbsp;</a></span>setMouseCursorTextureRect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1426,7 +2380,7 @@ template&lt;&gt; </div>
         <tr>
           <td class="memname">void ke::Window::setMouseCursorTextureRect </td>
           <td>(</td>
-          <td class="paramtype">sf::IntRect const &amp;&#160;</td>
+          <td class="paramtype">const sf::IntRect &amp;&#160;</td>
           <td class="paramname"><em>textureRect</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1435,8 +2389,8 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="a4291df89b82ae0888d461b38dfb4e71e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4291df89b82ae0888d461b38dfb4e71e">&sect;&nbsp;</a></span>setMousePosition()</h2>
+<a id="aa2918807c5c0006d55117251df5c7393"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2918807c5c0006d55117251df5c7393">&sect;&nbsp;</a></span>setMousePosition()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1444,7 +2398,7 @@ template&lt;&gt; </div>
         <tr>
           <td class="memname">void ke::Window::setMousePosition </td>
           <td>(</td>
-          <td class="paramtype">sf::Vector2f const &amp;&#160;</td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
           <td class="paramname"><em>position</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1453,44 +2407,8 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="a028e9a00a5a1468d72b019d697c8462d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a028e9a00a5a1468d72b019d697c8462d">&sect;&nbsp;</a></span>setMousePosition2i()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ke::Window::setMousePosition2i </td>
-          <td>(</td>
-          <td class="paramtype">sf::Vector2i const &amp;&#160;</td>
-          <td class="paramname"><em>position</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5a1ec2e5ef6ca98f28237f0044acdb99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a1ec2e5ef6ca98f28237f0044acdb99">&sect;&nbsp;</a></span>setMousePositionMap()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ke::Window::setMousePositionMap </td>
-          <td>(</td>
-          <td class="paramtype">sf::Vector2f const &amp;&#160;</td>
-          <td class="paramname"><em>position</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a36aa4753f9e3eec4d12387631a8f9289"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36aa4753f9e3eec4d12387631a8f9289">&sect;&nbsp;</a></span>setMousePositionView()</h2>
+<a id="adc527d319c8b155108d5654a611a20c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc527d319c8b155108d5654a611a20c8">&sect;&nbsp;</a></span>setMousePositionView()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1498,13 +2416,13 @@ template&lt;&gt; </div>
         <tr>
           <td class="memname">void ke::Window::setMousePositionView </td>
           <td>(</td>
-          <td class="paramtype">sf::Vector2f const &amp;&#160;</td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
           <td class="paramname"><em>position</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::View const &amp;&#160;</td>
+          <td class="paramtype">const sf::View &amp;&#160;</td>
           <td class="paramname"><em>view</em>&#160;</td>
         </tr>
         <tr>
@@ -1517,8 +2435,8 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="ac24ef204ccb7a96041e46463310b29c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac24ef204ccb7a96041e46463310b29c3">&sect;&nbsp;</a></span>setPointerPosition()</h2>
+<a id="a12dd9f422443e51f2fb062b78a42b3cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12dd9f422443e51f2fb062b78a42b3cd">&sect;&nbsp;</a></span>setPointerPosition()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1526,7 +2444,7 @@ template&lt;&gt; </div>
         <tr>
           <td class="memname">void ke::Window::setPointerPosition </td>
           <td>(</td>
-          <td class="paramtype">sf::Vector2f const &amp;&#160;</td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
           <td class="paramname"><em>position</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1535,44 +2453,8 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="a517a935d0371b075f66f0b8c33be8f0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a517a935d0371b075f66f0b8c33be8f0b">&sect;&nbsp;</a></span>setPointerPosition2i()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ke::Window::setPointerPosition2i </td>
-          <td>(</td>
-          <td class="paramtype">sf::Vector2i const &amp;&#160;</td>
-          <td class="paramname"><em>position</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a23da8f54fb068173bf25f9ef73435cb0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23da8f54fb068173bf25f9ef73435cb0">&sect;&nbsp;</a></span>setPointerPositionMap()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ke::Window::setPointerPositionMap </td>
-          <td>(</td>
-          <td class="paramtype">sf::Vector2f const &amp;&#160;</td>
-          <td class="paramname"><em>position</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a2cf2b530ef61839babd7c314a18d4c80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cf2b530ef61839babd7c314a18d4c80">&sect;&nbsp;</a></span>setPointerPositionView()</h2>
+<a id="a9df5276cc4522ae9213a34c370cbda2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9df5276cc4522ae9213a34c370cbda2d">&sect;&nbsp;</a></span>setPointerPositionView()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1580,13 +2462,13 @@ template&lt;&gt; </div>
         <tr>
           <td class="memname">void ke::Window::setPointerPositionView </td>
           <td>(</td>
-          <td class="paramtype">sf::Vector2f const &amp;&#160;</td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
           <td class="paramname"><em>position</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::View const &amp;&#160;</td>
+          <td class="paramtype">const sf::View &amp;&#160;</td>
           <td class="paramname"><em>view</em>&#160;</td>
         </tr>
         <tr>
@@ -1599,8 +2481,44 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="a2e8ea7111c6a6c28ecb23419e2794604"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e8ea7111c6a6c28ecb23419e2794604">&sect;&nbsp;</a></span>setScreenshotPath()</h2>
+<a id="aa95821b6d9e127478910cf38ee38da9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa95821b6d9e127478910cf38ee38da9c">&sect;&nbsp;</a></span>setPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setPosition </td>
+          <td>(</td>
+          <td class="paramtype">const sf::Vector2i &amp;&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0ef8aba6cf22df2bd5653e11269af33d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ef8aba6cf22df2bd5653e11269af33d">&sect;&nbsp;</a></span>setResizeCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::setResizeCallback </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void(const sf::Vector2u &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>resizeCallback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0281d725b0351f54990c4287363c6abf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0281d725b0351f54990c4287363c6abf">&sect;&nbsp;</a></span>setScreenshotPath()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1608,7 +2526,7 @@ template&lt;&gt; </div>
         <tr>
           <td class="memname">void ke::Window::setScreenshotPath </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>screenshotPath</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1617,35 +2535,17 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="ab26b8663b4b542d7a59c7e3a8d28c898"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab26b8663b4b542d7a59c7e3a8d28c898">&sect;&nbsp;</a></span>setStyle()</h2>
+<a id="a0da806460a198ec746531ea1d8b5321b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0da806460a198ec746531ea1d8b5321b">&sect;&nbsp;</a></span>setSize()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ke::Window::setStyle </td>
+          <td class="memname">void ke::Window::setSize </td>
           <td>(</td>
-          <td class="paramtype">sf::Uint32&#160;</td>
-          <td class="paramname"><em>style</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9d043593b7b483de8552d1595d092c68"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d043593b7b483de8552d1595d092c68">&sect;&nbsp;</a></span>setTitle()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ke::Window::setTitle </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>title</em></td><td>)</td>
+          <td class="paramtype">const sf::Vector2u &amp;&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1671,17 +2571,17 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="aaabe228c277c970236494c2c4cf0c645"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaabe228c277c970236494c2c4cf0c645">&sect;&nbsp;</a></span>setVideoMode()</h2>
+<a id="a44aa2f0837dcc1335d91ced203ca7610"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44aa2f0837dcc1335d91ced203ca7610">&sect;&nbsp;</a></span>setView()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ke::Window::setVideoMode </td>
+          <td class="memname">void ke::Window::setView </td>
           <td>(</td>
-          <td class="paramtype">sf::VideoMode const &amp;&#160;</td>
-          <td class="paramname"><em>videoMode</em></td><td>)</td>
+          <td class="paramtype">const sf::View &amp;&#160;</td>
+          <td class="paramname"><em>view</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1707,17 +2607,68 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="a3a157326e773852c83e3d1057fbfd192"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a157326e773852c83e3d1057fbfd192">&sect;&nbsp;</a></span>showDebugInfo()</h2>
+<a id="a91741e85d70ec6afb9ac9606e98dfcc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91741e85d70ec6afb9ac9606e98dfcc0">&sect;&nbsp;</a></span>setWarningCallback()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ke::Window::showDebugInfo </td>
+          <td class="memname">void ke::Window::setWarningCallback </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>visible</em></td><td>)</td>
+          <td class="paramtype">std::function&lt; void(const std::string &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>warningCallback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a895cc0c436060ba0f4fb6402ae9f5126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a895cc0c436060ba0f4fb6402ae9f5126">&sect;&nbsp;</a></span>toFullscreen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::toFullscreen </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af27d3d594bc1d386d3fb3b5c2107167b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af27d3d594bc1d386d3fb3b5c2107167b">&sect;&nbsp;</a></span>toggleFullscreen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::toggleFullscreen </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad72dc6ca2751a294eff40ba41a781ed7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad72dc6ca2751a294eff40ba41a781ed7">&sect;&nbsp;</a></span>toNonFullscreen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::toNonFullscreen </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1743,22 +2694,22 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="a52a26a7a5bdd05758882868924e20b0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52a26a7a5bdd05758882868924e20b0c">&sect;&nbsp;</a></span>useBackgroundRepeatedTexture()</h2>
+<a id="a45c3fd82eb60ccf8961a25a8f5e7656a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45c3fd82eb60ccf8961a25a8f5e7656a">&sect;&nbsp;</a></span>useBackgroundRepeated() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ke::Window::useBackgroundRepeatedTexture </td>
+          <td class="memname">void ke::Window::useBackgroundRepeated </td>
           <td>(</td>
-          <td class="paramtype">sf::Texture *&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>texture</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::IntRect&#160;</td>
+          <td class="paramtype">const sf::IntRect &amp;&#160;</td>
           <td class="paramname"><em>rect</em> = <code>sf::IntRect()</code>&#160;</td>
         </tr>
         <tr>
@@ -1771,14 +2722,14 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="a2fef20f2bd7733321a05f7d1bc5d07d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2fef20f2bd7733321a05f7d1bc5d07d4">&sect;&nbsp;</a></span>useBackgroundScaledTexture()</h2>
+<a id="ad00abf0cf6cd22ee723ef496fceb0da0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad00abf0cf6cd22ee723ef496fceb0da0">&sect;&nbsp;</a></span>useBackgroundRepeated() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ke::Window::useBackgroundScaledTexture </td>
+          <td class="memname">void ke::Window::useBackgroundRepeated </td>
           <td>(</td>
           <td class="paramtype">sf::Texture *&#160;</td>
           <td class="paramname"><em>texture</em>, </td>
@@ -1786,7 +2737,13 @@ template&lt;&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::IntRect&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>textureData</em> = <code>&quot;&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::IntRect &amp;&#160;</td>
           <td class="paramname"><em>rect</em> = <code>sf::IntRect()</code>&#160;</td>
         </tr>
         <tr>
@@ -1799,8 +2756,132 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="aa59dfa6b5ed70539c91e4520fc69386f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa59dfa6b5ed70539c91e4520fc69386f">&sect;&nbsp;</a></span>useCustomMouseCursor()</h2>
+<a id="ae2b667c3ef268d791ba7d727aa9cd708"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2b667c3ef268d791ba7d727aa9cd708">&sect;&nbsp;</a></span>useBackgroundScaled() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::useBackgroundScaled </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>texture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::IntRect &amp;&#160;</td>
+          <td class="paramname"><em>rect</em> = <code>sf::IntRect()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a135cef0337647b6f28d32e4b4b6d8c54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a135cef0337647b6f28d32e4b4b6d8c54">&sect;&nbsp;</a></span>useBackgroundScaled() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::useBackgroundScaled </td>
+          <td>(</td>
+          <td class="paramtype">sf::Texture *&#160;</td>
+          <td class="paramname"><em>texture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>textureData</em> = <code>&quot;&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::IntRect &amp;&#160;</td>
+          <td class="paramname"><em>rect</em> = <code>sf::IntRect()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac9f6d92edc57e2b56499ea8f35368251"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9f6d92edc57e2b56499ea8f35368251">&sect;&nbsp;</a></span>useConsoleCommand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::useConsoleCommand </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>args</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a54c0385a1534e63d55fd609a5e56bd74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54c0385a1534e63d55fd609a5e56bd74">&sect;&nbsp;</a></span>useCustomMouseCursor() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Window::useCustomMouseCursor </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>texture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::IntRect &amp;&#160;</td>
+          <td class="paramname"><em>textureRect</em> = <code>sf::IntRect()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
+          <td class="paramname"><em>origin</em> = <code>sf::Vector2f()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9b42b0bfae065ce02aa82ff2b76640bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b42b0bfae065ce02aa82ff2b76640bf">&sect;&nbsp;</a></span>useCustomMouseCursor() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1809,19 +2890,25 @@ template&lt;&gt; </div>
           <td class="memname">void ke::Window::useCustomMouseCursor </td>
           <td>(</td>
           <td class="paramtype">sf::Texture *&#160;</td>
-          <td class="paramname"><em>texture</em> = <code>nullptr</code>, </td>
+          <td class="paramname"><em>texture</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::Vector2f const &amp;&#160;</td>
-          <td class="paramname"><em>origin</em> = <code>sf::Vector2f()</code>, </td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>textureData</em> = <code>&quot;&quot;</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::IntRect const &amp;&#160;</td>
-          <td class="paramname"><em>textureRect</em> = <code>sf::IntRect()</code>&#160;</td>
+          <td class="paramtype">const sf::IntRect &amp;&#160;</td>
+          <td class="paramname"><em>textureRect</em> = <code>sf::IntRect()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
+          <td class="paramname"><em>origin</em> = <code>sf::Vector2f()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1850,318 +2937,9 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a01d43985d7c45fd71141a5722ce5b26f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01d43985d7c45fd71141a5722ce5b26f">&sect;&nbsp;</a></span>mBackground</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classke_1_1_background.html">Background</a> ke::Window::mBackground</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9518b387b3926d9e9bbe9a3c78a0a9b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9518b387b3926d9e9bbe9a3c78a0a9b2">&sect;&nbsp;</a></span>mCursor</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classke_1_1_window.html#a5ccc2e20aee293a4fa1e55f382afe915">MouseCursor</a> ke::Window::mCursor</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab4f08aed399015bd7b097ed002e58f70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4f08aed399015bd7b097ed002e58f70">&sect;&nbsp;</a></span>mCursorSprite</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::Sprite ke::Window::mCursorSprite</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a89de9bd7f9a78938a8ce4609d634ff97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89de9bd7f9a78938a8ce4609d634ff97">&sect;&nbsp;</a></span>mDebugInfo</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::unordered_map&lt;std::string,std::string&gt; ke::Window::mDebugInfo</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab5460f15cb020ad3ed9435df90051416"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5460f15cb020ad3ed9435df90051416">&sect;&nbsp;</a></span>mDebugInfoVisible</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ke::Window::mDebugInfoVisible</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aaa9beed78887f035f442ad9629bd3081"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa9beed78887f035f442ad9629bd3081">&sect;&nbsp;</a></span>mFullscreen</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ke::Window::mFullscreen</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a0819f61e752c196901b63976e30d1477"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0819f61e752c196901b63976e30d1477">&sect;&nbsp;</a></span>mJoystickThreshold</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float ke::Window::mJoystickThreshold</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9b7a2ff0435282e701e9c45ddeb522e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b7a2ff0435282e701e9c45ddeb522e4">&sect;&nbsp;</a></span>mKeyRepeat</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ke::Window::mKeyRepeat</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3680a86c06ad6ee12d0d496ea519b99d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3680a86c06ad6ee12d0d496ea519b99d">&sect;&nbsp;</a></span>mScreenshotPath</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string ke::Window::mScreenshotPath</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a82f216f04ce4f488c0e5270df6208dc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82f216f04ce4f488c0e5270df6208dc8">&sect;&nbsp;</a></span>mStyle</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::Uint32 ke::Window::mStyle</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa3dcb6a09d57d37b1930cc35db1bb05b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3dcb6a09d57d37b1930cc35db1bb05b">&sect;&nbsp;</a></span>mTitle</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string ke::Window::mTitle</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a449fe6f757e43a076e684f84648b6aa0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a449fe6f757e43a076e684f84648b6aa0">&sect;&nbsp;</a></span>mVerticalSync</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ke::Window::mVerticalSync</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a6292080ba985b82ca44ecfee6d624020"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6292080ba985b82ca44ecfee6d624020">&sect;&nbsp;</a></span>mVideoMode</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::VideoMode ke::Window::mVideoMode</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae60a137152a97baaedda3fbdb007d918"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae60a137152a97baaedda3fbdb007d918">&sect;&nbsp;</a></span>mVisible</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ke::Window::mVisible</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Keengine/Sources/Application/<a class="el" href="_window_8hpp_source.html">Window.hpp</a></li>
-<li>Keengine/Sources/Application/<a class="el" href="_window_8cpp.html">Window.cpp</a></li>
+<li>Keengine/Sources/System/<a class="el" href="_window_8hpp_source.html">Window.hpp</a></li>
+<li>Keengine/Sources/System/<a class="el" href="_window_8cpp.html">Window.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

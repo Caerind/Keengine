@@ -5,12 +5,15 @@
 
 #include <SFML/Graphics/VertexArray.hpp>
 
-#include "../Application/PropertiesHolder.hpp"
-#include "../Application/ResourceManager.hpp"
-#include "../Core/SceneComponent.hpp"
 #include "../ExtLibs/pugixml.hpp"
+
 #include "../System/Compression.hpp"
+#include "../System/PropertiesHolder.hpp"
+#include "../System/ResourceManager.hpp"
+#include "../System/Tileset.hpp"
 #include "../System/Variant.hpp"
+
+#include "../Core/SceneComponent.hpp"
 
 namespace ke
 {

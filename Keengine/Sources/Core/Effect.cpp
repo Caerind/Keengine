@@ -81,7 +81,7 @@ Blur::Blur()
 
 	if (!getApplication().hasResource("blurShader"))
 	{
-		getApplication().createResource<Shader>("blurShader").loadFromMemory(fragmentShader, sf::Shader::Fragment);
+		getApplication().getResource<Shader>("blurShader").loadFromMemory(fragmentShader, Shader::Fragment);
 	}
 }
 
@@ -106,7 +106,7 @@ Pixelate::Pixelate()
 
 	if (!getApplication().hasResource("pixelateShader"))
 	{
-		getApplication().createResource<Shader>("pixelateShader").loadFromMemory(fragmentShader, sf::Shader::Fragment);
+		getApplication().getResource<Shader>("pixelateShader").loadFromMemory(fragmentShader, Shader::Fragment);
 	}
 }
 

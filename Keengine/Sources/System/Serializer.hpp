@@ -22,8 +22,8 @@ class Serializer
 
 		pugi::xml_node& getRootNode();
 
-		void setNode(pugi::xml_node node);
-		pugi::xml_node getNode();
+		void setNode(const pugi::xml_node& node);
+		pugi::xml_node& getNode();
 
 
 		// Write

@@ -26,7 +26,9 @@ var dir_c92c7bd06d35279e36823dfd3a708198 =
       [ "Theme", "classke_1_1_theme.html", "classke_1_1_theme" ],
       [ "Tileset", "classke_1_1_tileset.html", "classke_1_1_tileset" ],
       [ "Lang", "classke_1_1_lang.html", "classke_1_1_lang" ],
-      [ "IniParser", "classke_1_1_ini_parser.html", "classke_1_1_ini_parser" ]
+      [ "IniParser", "classke_1_1_ini_parser.html", "classke_1_1_ini_parser" ],
+      [ "Animation", "classke_1_1_animation.html", "classke_1_1_animation" ],
+      [ "Frame", "structke_1_1_animation_1_1_frame.html", "structke_1_1_animation_1_1_frame" ]
     ] ],
     [ "StateManager.cpp", "_state_manager_8cpp.html", null ],
     [ "StateManager.hpp", "_state_manager_8hpp.html", [

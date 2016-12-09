@@ -11,5 +11,7 @@ var searchData=
   ['compression_2ecpp',['Compression.cpp',['../_compression_8cpp.html',1,'']]],
   ['compression_2ehpp',['Compression.hpp',['../_compression_8hpp.html',1,'']]],
   ['config_2ehpp',['Config.hpp',['../_config_8hpp.html',1,'']]],
+  ['configuration_2ecpp',['Configuration.cpp',['../_configuration_8cpp.html',1,'']]],
+  ['configuration_2ehpp',['Configuration.hpp',['../_configuration_8hpp.html',1,'']]],
   ['container_2ehpp',['Container.hpp',['../_container_8hpp.html',1,'']]]
 ];

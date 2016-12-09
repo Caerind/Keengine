@@ -2,6 +2,8 @@ var searchData=
 [
   ['magenta',['Magenta',['../namespaceke_1_1_color.html#a349e30d22c46b9d19e2fcb865ede423b',1,'ke::Color']]],
   ['map',['Map',['../classke_1_1_map.html#a5d52b0e427015adf0675a97fa70488ed',1,'ke::Map']]],
+  ['mapcoordstopixel',['mapCoordsToPixel',['../classke_1_1_window.html#a373e32517e2b9bb471a5aedd1bbe05e1',1,'ke::Window']]],
+  ['mappixeltocoords',['mapPixelToCoords',['../classke_1_1_window.html#a0eecf85e6b85a8fabcdcf995717917be',1,'ke::Window']]],
   ['mint',['Mint',['../namespaceke_1_1_color.html#a0d9297c76e930000988a790e97b59532',1,'ke::Color']]],
   ['mousepair',['MousePair',['../structke_1_1_mouse_pair.html#af5a64e0f206e4b405802fc8af6cbe971',1,'ke::MousePair::MousePair()'],['../structke_1_1_mouse_pair.html#a2de028831059170176dccd41462d152c',1,'ke::MousePair::MousePair(sf::Mouse::Button b, InputType t)']]],
   ['move',['move',['../classke_1_1_actor.html#ac55d7cb3e6b8ade77cf33e0f2f14a9d9',1,'ke::Actor::move(const sf::Vector2f &amp;movement)'],['../classke_1_1_actor.html#aed044d55efabc6ae74cacde56d4aed8e',1,'ke::Actor::move(float x, float y)'],['../classke_1_1_scene_component.html#a9c0b7c869d6067eafd57a71a24cc25d9',1,'ke::SceneComponent::move(sf::Vector2f const &amp;movement)'],['../classke_1_1_scene_component.html#a672bb9111935a33f1286019661b7e634',1,'ke::SceneComponent::move(float x, float y)']]],

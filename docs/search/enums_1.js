@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['inputtype',['InputType',['../namespaceke.html#ad65cbeea9a9a51729f4da9560e0064fe',1,'ke']]]
+  ['backgroundusage',['BackgroundUsage',['../classke_1_1_window.html#ade9ca5c3e4040082a74fba8c3971eb41',1,'ke::Window']]]
 ];

@@ -8,8 +8,7 @@
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 
-#include "../Application/Application.hpp"
-
+#include "../System/Application.hpp"
 #include "../System/Type.hpp"
 
 namespace ke

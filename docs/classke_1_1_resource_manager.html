@@ -82,8 +82,8 @@ $(document).ready(function(){initNavTree('classke_1_1_resource_manager.html','')
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classke_1_1_resource_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ke::ResourceManager Class Reference</div>  </div>
@@ -92,32 +92,74 @@ $(document).ready(function(){initNavTree('classke_1_1_resource_manager.html','')
 
 <p><code>#include &lt;<a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a1b60b06e31e6f0259c3ffaba487cdc2f"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void(<a class="el" href="classke_1_1_resource_manager.html">ResourceManager</a> *, const pugi::xml_node &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#a1b60b06e31e6f0259c3ffaba487cdc2f">ResourceReader</a></td></tr>
+<tr class="separator:a1b60b06e31e6f0259c3ffaba487cdc2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad78b88a68aa3482b952a12895571483b"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void(<a class="el" href="classke_1_1_resource.html">Resource</a> *, pugi::xml_node &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#ad78b88a68aa3482b952a12895571483b">ResourceWriter</a></td></tr>
+<tr class="separator:ad78b88a68aa3482b952a12895571483b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6f3f693362a22f75a0deba6d3037c1b9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#a6f3f693362a22f75a0deba6d3037c1b9">ResourceManager</a> ()</td></tr>
 <tr class="separator:a6f3f693362a22f75a0deba6d3037c1b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a694870b4426fd7dfb89d26978bc2d108"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#a694870b4426fd7dfb89d26978bc2d108">~ResourceManager</a> ()</td></tr>
 <tr class="separator:a694870b4426fd7dfb89d26978bc2d108"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60082af3391ad612a7084e0d4aa7ea15"><td class="memTemplParams" colspan="2">template&lt;typename T , typename ... Args&gt; </td></tr>
-<tr class="memitem:a60082af3391ad612a7084e0d4aa7ea15"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#a60082af3391ad612a7084e0d4aa7ea15">createResource</a> (std::string const &amp;id, Args &amp;&amp;... args)</td></tr>
-<tr class="separator:a60082af3391ad612a7084e0d4aa7ea15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a894da186a58a4fb7696a93939c5e6acb"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a894da186a58a4fb7696a93939c5e6acb"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#a894da186a58a4fb7696a93939c5e6acb">getResource</a> (std::string const &amp;id)</td></tr>
-<tr class="separator:a894da186a58a4fb7696a93939c5e6acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe904d051ded368713961cff3bd79932"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#afe904d051ded368713961cff3bd79932">hasResource</a> (std::string const &amp;id) const</td></tr>
-<tr class="separator:afe904d051ded368713961cff3bd79932"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14def5b9b9af8a5e35878a84a53ec8f6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#a14def5b9b9af8a5e35878a84a53ec8f6">isResourceLoaded</a> (std::string const &amp;id) const</td></tr>
-<tr class="separator:a14def5b9b9af8a5e35878a84a53ec8f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdafc025cc1c3a03539c1d2d35085efa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#acdafc025cc1c3a03539c1d2d35085efa">releaseResource</a> (std::string const &amp;id)</td></tr>
-<tr class="separator:acdafc025cc1c3a03539c1d2d35085efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac64b742be3162beb5180df5089d57f65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#ac64b742be3162beb5180df5089d57f65">releaseAllResources</a> ()</td></tr>
-<tr class="separator:ac64b742be3162beb5180df5089d57f65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:ac1b510f43f237a7820e66faeace8712e"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, <a class="el" href="classke_1_1_resource.html">Resource</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#ac1b510f43f237a7820e66faeace8712e">mResources</a></td></tr>
-<tr class="separator:ac1b510f43f237a7820e66faeace8712e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab158f03aa6716429f014ba2ef70ca6db"><td class="memTemplParams" colspan="2">template&lt;typename T , typename ... Args&gt; </td></tr>
+<tr class="memitem:ab158f03aa6716429f014ba2ef70ca6db"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#ab158f03aa6716429f014ba2ef70ca6db">getResource</a> (const std::string &amp;name, Args &amp;&amp;... args)</td></tr>
+<tr class="separator:ab158f03aa6716429f014ba2ef70ca6db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8e37b85ffef35d75795bb0d64cd0a51"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#ac8e37b85ffef35d75795bb0d64cd0a51">hasResource</a> (const std::string &amp;name, const std::string &amp;type=&quot;&quot;) const</td></tr>
+<tr class="separator:ac8e37b85ffef35d75795bb0d64cd0a51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafda920303a279951d2a9f3f507f3f00"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#aafda920303a279951d2a9f3f507f3f00">isResourceLoaded</a> (const std::string &amp;name, const std::string &amp;type=&quot;&quot;) const</td></tr>
+<tr class="separator:aafda920303a279951d2a9f3f507f3f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada6d8eac4a6d1f8522156703b12634d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#ada6d8eac4a6d1f8522156703b12634d4">releaseResource</a> (const std::string &amp;name, const std::string &amp;type=&quot;&quot;)</td></tr>
+<tr class="separator:ada6d8eac4a6d1f8522156703b12634d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af66500488a000694d9cfac8e88ddb864"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#af66500488a000694d9cfac8e88ddb864">releaseAllResources</a> (const std::string &amp;type=&quot;&quot;)</td></tr>
+<tr class="separator:af66500488a000694d9cfac8e88ddb864"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a658697843df320e1de4c567bb1be9ec0"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#a658697843df320e1de4c567bb1be9ec0">countResources</a> (const std::string &amp;type=&quot;&quot;) const</td></tr>
+<tr class="separator:a658697843df320e1de4c567bb1be9ec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83501e70b242879ef9576f9a9a88dcf3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#a83501e70b242879ef9576f9a9a88dcf3">loadFromXml</a> (const std::string &amp;filename)</td></tr>
+<tr class="separator:a83501e70b242879ef9576f9a9a88dcf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad642016597826353665f6a95298fdc7f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#ad642016597826353665f6a95298fdc7f">loadFromMemory</a> (const std::string &amp;memory)</td></tr>
+<tr class="separator:ad642016597826353665f6a95298fdc7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa69df4ff19b669cabddab34b85e2acb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#afa69df4ff19b669cabddab34b85e2acb">saveToXml</a> (const std::string &amp;filename)</td></tr>
+<tr class="separator:afa69df4ff19b669cabddab34b85e2acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac48459aa37b1a9de10190cac8bfa7401"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#ac48459aa37b1a9de10190cac8bfa7401">setReader</a> (const std::string &amp;type, <a class="el" href="classke_1_1_resource_manager.html#a1b60b06e31e6f0259c3ffaba487cdc2f">ResourceReader</a> reader=[](<a class="el" href="classke_1_1_resource_manager.html">ResourceManager</a> *, const pugi::xml_node &amp;) {})</td></tr>
+<tr class="separator:ac48459aa37b1a9de10190cac8bfa7401"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace4e82781ccf95e88ad6961e157be976"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#ace4e82781ccf95e88ad6961e157be976">setWriter</a> (const std::string &amp;type, <a class="el" href="classke_1_1_resource_manager.html#ad78b88a68aa3482b952a12895571483b">ResourceWriter</a> writer=[](<a class="el" href="classke_1_1_resource.html">Resource</a> *, pugi::xml_node &amp;){})</td></tr>
+<tr class="separator:ace4e82781ccf95e88ad6961e157be976"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5739897416f9e2ef7471e2a6e565dcab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource_manager.html#a5739897416f9e2ef7471e2a6e565dcab">setLogWarning</a> (std::function&lt; void(const std::string &amp;)&gt; log)</td></tr>
+<tr class="separator:a5739897416f9e2ef7471e2a6e565dcab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a1b60b06e31e6f0259c3ffaba487cdc2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b60b06e31e6f0259c3ffaba487cdc2f">&sect;&nbsp;</a></span>ResourceReader</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::function&lt;void(<a class="el" href="classke_1_1_resource_manager.html">ResourceManager</a>*, const pugi::xml_node&amp;)&gt; <a class="el" href="classke_1_1_resource_manager.html#a1b60b06e31e6f0259c3ffaba487cdc2f">ke::ResourceManager::ResourceReader</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad78b88a68aa3482b952a12895571483b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad78b88a68aa3482b952a12895571483b">&sect;&nbsp;</a></span>ResourceWriter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::function&lt;void(<a class="el" href="classke_1_1_resource.html">Resource</a>*, pugi::xml_node&amp;)&gt; <a class="el" href="classke_1_1_resource_manager.html#ad78b88a68aa3482b952a12895571483b">ke::ResourceManager::ResourceWriter</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6f3f693362a22f75a0deba6d3037c1b9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6f3f693362a22f75a0deba6d3037c1b9">&sect;&nbsp;</a></span>ResourceManager()</h2>
@@ -154,8 +196,26 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a60082af3391ad612a7084e0d4aa7ea15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60082af3391ad612a7084e0d4aa7ea15">&sect;&nbsp;</a></span>createResource()</h2>
+<a id="a658697843df320e1de4c567bb1be9ec0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a658697843df320e1de4c567bb1be9ec0">&sect;&nbsp;</a></span>countResources()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t ke::ResourceManager::countResources </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>type</em> = <code>&quot;&quot;</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab158f03aa6716429f014ba2ef70ca6db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab158f03aa6716429f014ba2ef70ca6db">&sect;&nbsp;</a></span>getResource()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,10 +226,10 @@ template&lt;typename T , typename ... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T&amp; ke::ResourceManager::createResource </td>
+          <td class="memname">T &amp; ke::ResourceManager::getResource </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -192,36 +252,8 @@ template&lt;typename T , typename ... Args&gt; </div>
 
 </div>
 </div>
-<a id="a894da186a58a4fb7696a93939c5e6acb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a894da186a58a4fb7696a93939c5e6acb">&sect;&nbsp;</a></span>getResource()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">T&amp; ke::ResourceManager::getResource </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="afe904d051ded368713961cff3bd79932"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe904d051ded368713961cff3bd79932">&sect;&nbsp;</a></span>hasResource()</h2>
+<a id="ac8e37b85ffef35d75795bb0d64cd0a51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8e37b85ffef35d75795bb0d64cd0a51">&sect;&nbsp;</a></span>hasResource()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -229,17 +261,27 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">bool ke::ResourceManager::hasResource </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>type</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a14def5b9b9af8a5e35878a84a53ec8f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14def5b9b9af8a5e35878a84a53ec8f6">&sect;&nbsp;</a></span>isResourceLoaded()</h2>
+<a id="aafda920303a279951d2a9f3f507f3f00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafda920303a279951d2a9f3f507f3f00">&sect;&nbsp;</a></span>isResourceLoaded()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,17 +289,63 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">bool ke::ResourceManager::isResourceLoaded </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>type</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ac64b742be3162beb5180df5089d57f65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac64b742be3162beb5180df5089d57f65">&sect;&nbsp;</a></span>releaseAllResources()</h2>
+<a id="ad642016597826353665f6a95298fdc7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad642016597826353665f6a95298fdc7f">&sect;&nbsp;</a></span>loadFromMemory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::ResourceManager::loadFromMemory </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>memory</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a83501e70b242879ef9576f9a9a88dcf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83501e70b242879ef9576f9a9a88dcf3">&sect;&nbsp;</a></span>loadFromXml()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::ResourceManager::loadFromXml </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af66500488a000694d9cfac8e88ddb864"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af66500488a000694d9cfac8e88ddb864">&sect;&nbsp;</a></span>releaseAllResources()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -265,7 +353,8 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">void ke::ResourceManager::releaseAllResources </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>type</em> = <code>&quot;&quot;</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -273,8 +362,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="acdafc025cc1c3a03539c1d2d35085efa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acdafc025cc1c3a03539c1d2d35085efa">&sect;&nbsp;</a></span>releaseResource()</h2>
+<a id="ada6d8eac4a6d1f8522156703b12634d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada6d8eac4a6d1f8522156703b12634d4">&sect;&nbsp;</a></span>releaseResource()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -282,8 +371,36 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">void ke::ResourceManager::releaseResource </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>type</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa69df4ff19b669cabddab34b85e2acb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa69df4ff19b669cabddab34b85e2acb">&sect;&nbsp;</a></span>saveToXml()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::ResourceManager::saveToXml </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -291,32 +408,83 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="ac1b510f43f237a7820e66faeace8712e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1b510f43f237a7820e66faeace8712e">&sect;&nbsp;</a></span>mResources</h2>
+<a id="a5739897416f9e2ef7471e2a6e565dcab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5739897416f9e2ef7471e2a6e565dcab">&sect;&nbsp;</a></span>setLogWarning()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;std::string,<a class="el" href="classke_1_1_resource.html">Resource</a>*&gt; ke::ResourceManager::mResources</td>
+          <td class="memname">void ke::ResourceManager::setLogWarning </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void(const std::string &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>log</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac48459aa37b1a9de10190cac8bfa7401"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac48459aa37b1a9de10190cac8bfa7401">&sect;&nbsp;</a></span>setReader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::ResourceManager::setReader </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classke_1_1_resource_manager.html#a1b60b06e31e6f0259c3ffaba487cdc2f">ResourceReader</a>&#160;</td>
+          <td class="paramname"><em>reader</em> = <code>[](<a class="el" href="classke_1_1_resource_manager.html">ResourceManager</a>*,&#160;const&#160;pugi::xml_node&amp;)&#160;{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ace4e82781ccf95e88ad6961e157be976"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace4e82781ccf95e88ad6961e157be976">&sect;&nbsp;</a></span>setWriter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::ResourceManager::setWriter </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classke_1_1_resource_manager.html#ad78b88a68aa3482b952a12895571483b">ResourceWriter</a>&#160;</td>
+          <td class="paramname"><em>writer</em> = <code>[](<a class="el" href="classke_1_1_resource.html">Resource</a>*,&#160;pugi::xml_node&amp;){}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
 </div><div class="memdoc">
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Keengine/Sources/Application/<a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a></li>
-<li>Keengine/Sources/Application/<a class="el" href="_resource_manager_8cpp.html">ResourceManager.cpp</a></li>
+<li>Keengine/Sources/System/<a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a></li>
+<li>Keengine/Sources/System/<a class="el" href="_resource_manager_8cpp.html">ResourceManager.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

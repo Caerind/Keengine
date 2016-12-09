@@ -1,6 +1,5 @@
 var hierarchy =
 [
-    [ "ke::Animation", "classke_1_1_animation.html", null ],
     [ "ke::Application", "classke_1_1_application.html", null ],
     [ "ke::AudioManager", "classke_1_1_audio_manager.html", null ],
     [ "ke::Average", "classke_1_1_average.html", null ],
@@ -12,6 +11,7 @@ var hierarchy =
     ] ],
     [ "ke::Background", "classke_1_1_background.html", null ],
     [ "ke::ClockedTask", "classke_1_1_clocked_task.html", null ],
+    [ "ke::Window::CommandArgs", "structke_1_1_window_1_1_command_args.html", null ],
     [ "ke::priv::Constant< T >", "structke_1_1priv_1_1_constant.html", null ],
     [ "ke::DateTime", "classke_1_1_date_time.html", null ],
     [ "ke::Distribution< T >", "classke_1_1_distribution.html", null ],
@@ -28,7 +28,7 @@ var hierarchy =
     [ "Font", null, [
       [ "ke::Font", "classke_1_1_font.html", null ]
     ] ],
-    [ "ke::Frame", "structke_1_1_frame.html", null ],
+    [ "ke::Animation::Frame", "structke_1_1_animation_1_1_frame.html", null ],
     [ "ke::HttpThread", "classke_1_1_http_thread.html", null ],
     [ "Image", null, [
       [ "ke::Image", "classke_1_1_image.html", null ]
@@ -39,13 +39,12 @@ var hierarchy =
     [ "ke::InputSystem", "classke_1_1_input_system.html", null ],
     [ "ke::KeyboardPair", "structke_1_1_keyboard_pair.html", null ],
     [ "ke::Log", "classke_1_1_log.html", null ],
-    [ "map", null, [
-      [ "ke::IniParser", "classke_1_1_ini_parser.html", null ]
-    ] ],
     [ "ke::MousePair", "structke_1_1_mouse_pair.html", null ],
     [ "ke::priv::Node", "structke_1_1priv_1_1_node.html", null ],
     [ "ke::ParallelTask", "classke_1_1_parallel_task.html", null ],
     [ "ke::ParticleComponent::Particle", "classke_1_1_particle_component_1_1_particle.html", null ],
+    [ "ke::priv::PathFinder", "classke_1_1priv_1_1_path_finder.html", null ],
+    [ "ke::PathFinding", "classke_1_1_path_finding.html", null ],
     [ "ke::StateManager::PendingChange", "structke_1_1_state_manager_1_1_pending_change.html", null ],
     [ "ke::Physic", "classke_1_1_physic.html", null ],
     [ "ke::PropertiesHolder", "classke_1_1_properties_holder.html", [
@@ -55,14 +54,11 @@ var hierarchy =
     ] ],
     [ "ke::Random", "classke_1_1_random.html", null ],
     [ "ke::RandomTable< T >", "classke_1_1_random_table.html", null ],
-    [ "RenderWindow", null, [
-      [ "ke::Window", "classke_1_1_window.html", null ]
-    ] ],
     [ "ke::Resource", "classke_1_1_resource.html", [
+      [ "ke::Animation", "classke_1_1_animation.html", null ],
+      [ "ke::Configuration", "classke_1_1_configuration.html", null ],
       [ "ke::Font", "classke_1_1_font.html", null ],
       [ "ke::Image", "classke_1_1_image.html", null ],
-      [ "ke::IniParser", "classke_1_1_ini_parser.html", null ],
-      [ "ke::Lang", "classke_1_1_lang.html", null ],
       [ "ke::Shader", "classke_1_1_shader.html", null ],
       [ "ke::SoundBuffer", "classke_1_1_sound_buffer.html", null ],
       [ "ke::Texture", "classke_1_1_texture.html", null ],
@@ -71,7 +67,6 @@ var hierarchy =
     ] ],
     [ "ke::ResourceManager", "classke_1_1_resource_manager.html", null ],
     [ "ke::Scene", "classke_1_1_scene.html", null ],
-    [ "ke::ScriptManager", "classke_1_1_script_manager.html", null ],
     [ "ke::Serializable", "classke_1_1_serializable.html", [
       [ "ke::Actor", "classke_1_1_actor.html", [
         [ "ke::Map", "classke_1_1_map.html", null ]
@@ -116,5 +111,6 @@ var hierarchy =
     [ "ke::TouchPair", "structke_1_1_touch_pair.html", null ],
     [ "Transformable", null, [
       [ "ke::Joystick", "classke_1_1_joystick.html", null ]
-    ] ]
+    ] ],
+    [ "ke::Window", "classke_1_1_window.html", null ]
 ];

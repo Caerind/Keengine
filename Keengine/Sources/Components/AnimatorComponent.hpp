@@ -9,7 +9,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/System/Time.hpp>
 
-#include "../Application/ResourceManager.hpp"
+#include "../System/Animation.hpp"
 
 #include "../Core/SceneComponent.hpp"
 

@@ -12,7 +12,7 @@ var searchData=
   ['end',['end',['../classke_1_1_serializer.html#a37578c3460abc33640e6fbc9303de15f',1,'ke::Serializer']]],
   ['endcontact',['EndContact',['../classke_1_1_physic_system.html#a3d2a1be495f9f6a7edd039d843f86157',1,'ke::PhysicSystem']]],
   ['erase',['erase',['../namespaceke.html#a3cf2e6d9d889aabcef333a369d261fd9',1,'ke']]],
-  ['error',['error',['../classke_1_1_log.html#a0582fe3527b83ea3a4d96151619df418',1,'ke::Log::error(std::string const &amp;message)'],['../classke_1_1_log.html#a37f226cd39ec022ede042fac488530d8a64df00ae40f7d9fad272c9137357dc64',1,'ke::Log::Error()']]],
+  ['error',['Error',['../classke_1_1_log.html#a2c8a4f6a0f870b9c9bd1da851c4c3a41a64df00ae40f7d9fad272c9137357dc64',1,'ke::Log::Error()'],['../classke_1_1_log.html#a46bced17a8445c6ff234499c91cc5433',1,'ke::Log::error(const std::string &amp;message)']]],
   ['eventfunction',['EventFunction',['../classke_1_1_application.html#ac4bfb7cc2055e6c3071bec5aad940242',1,'ke::Application']]],
   ['eventtypetostring',['eventTypeToString',['../classke_1_1_input_system.html#abc2db842b91047b2049c2bf994ef7645',1,'ke::InputSystem']]],
   ['execute',['execute',['../classke_1_1_clocked_task.html#a78d3d31c8707f8c21b16ce60cc5a08ae',1,'ke::ClockedTask::execute()'],['../classke_1_1_parallel_task.html#a89411a285be83112de4d290d16251df4',1,'ke::ParallelTask::execute()']]]

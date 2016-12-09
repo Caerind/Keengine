@@ -8,8 +8,9 @@
 
 #include <SFML/Graphics/VertexArray.hpp>
 
-#include "../Core/SceneComponent.hpp"
 #include "../Maths/Distribution.hpp"
+
+#include "../Core/SceneComponent.hpp"
 
 namespace ke
 {

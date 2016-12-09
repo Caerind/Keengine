@@ -83,20 +83,21 @@ $(document).ready(function(){initNavTree('classke_1_1_texture.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classke_1_1_texture-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ke::Texture Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_sfml_resources_8hpp_source.html">SfmlResources.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ke::Texture:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classke_1_1_texture.png" usemap="#ke::Texture_map" alt=""/>
   <map id="ke::Texture_map" name="ke::Texture_map">
-<area href="classke_1_1_resource.html" alt="ke::Resource" shape="rect" coords="95,0,180,24"/>
+<area href="classke_1_1_resource.html" alt="ke::Resource" shape="rect" coords="0,0,85,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -104,27 +105,53 @@ Inheritance diagram for ke::Texture:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae370a613d3a9c1080943bd76ed3d0ddd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#ae370a613d3a9c1080943bd76ed3d0ddd">Texture</a> ()</td></tr>
 <tr class="separator:ae370a613d3a9c1080943bd76ed3d0ddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38229aa673e61010b4a48ba043608159"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#a38229aa673e61010b4a48ba043608159">Texture</a> (std::string const &amp;filename)</td></tr>
-<tr class="separator:a38229aa673e61010b4a48ba043608159"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6cc32d78f5927079bbac9a9034e3501"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#ad6cc32d78f5927079bbac9a9034e3501">loadFromFile</a> (std::string const &amp;filename, sf::IntRect const &amp;area=sf::IntRect())</td></tr>
-<tr class="separator:ad6cc32d78f5927079bbac9a9034e3501"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a190f99472bd049e43ba28f5311168dcb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#a190f99472bd049e43ba28f5311168dcb">loadFromMemory</a> (void const *data, std::size_t size, sf::IntRect const &amp;area=sf::IntRect())</td></tr>
-<tr class="separator:a190f99472bd049e43ba28f5311168dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d5519387d5de6d630b87acd613a4a2a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#a5d5519387d5de6d630b87acd613a4a2a">loadFromStream</a> (sf::InputStream &amp;stream, sf::IntRect const &amp;area=sf::IntRect())</td></tr>
-<tr class="separator:a5d5519387d5de6d630b87acd613a4a2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa294bc84a36c769ee9c4aaafacb086df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#aa294bc84a36c769ee9c4aaafacb086df">loadFromImage</a> (sf::Image const &amp;image, sf::IntRect const &amp;area=sf::IntRect())</td></tr>
-<tr class="separator:aa294bc84a36c769ee9c4aaafacb086df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50f0e011d8a783849a8482d49ef75795"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#a50f0e011d8a783849a8482d49ef75795">Texture</a> (const std::string &amp;filename)</td></tr>
+<tr class="separator:a50f0e011d8a783849a8482d49ef75795"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aaced8d68494f4a392b4880c4bbc3c5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#a6aaced8d68494f4a392b4880c4bbc3c5">~Texture</a> ()</td></tr>
+<tr class="separator:a6aaced8d68494f4a392b4880c4bbc3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a385ad5d84563cf6c5a8798728c8b6388"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#a385ad5d84563cf6c5a8798728c8b6388">loadFromFile</a> (const std::string &amp;filename, const sf::IntRect &amp;area=sf::IntRect())</td></tr>
+<tr class="separator:a385ad5d84563cf6c5a8798728c8b6388"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20f4968e5a6a1e6d73de8bd32185924c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#a20f4968e5a6a1e6d73de8bd32185924c">loadFromMemory</a> (const void *data, std::size_t size, const sf::IntRect &amp;area=sf::IntRect())</td></tr>
+<tr class="separator:a20f4968e5a6a1e6d73de8bd32185924c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af24d6a45dd3ab82a89fc8414cee8c433"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#af24d6a45dd3ab82a89fc8414cee8c433">loadFromStream</a> (sf::InputStream &amp;stream, const sf::IntRect &amp;area=sf::IntRect())</td></tr>
+<tr class="separator:af24d6a45dd3ab82a89fc8414cee8c433"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab004409a998d06e6283b015fefd66411"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#ab004409a998d06e6283b015fefd66411">loadFromImage</a> (const sf::Image &amp;image, const sf::IntRect &amp;area=sf::IntRect())</td></tr>
+<tr class="separator:ab004409a998d06e6283b015fefd66411"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb74b230ac77ccb95886c63a28131df0"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#adb74b230ac77ccb95886c63a28131df0">getFilename</a> () const</td></tr>
+<tr class="separator:adb74b230ac77ccb95886c63a28131df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classke_1_1_resource"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classke_1_1_resource')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classke_1_1_resource.html">ke::Resource</a></td></tr>
 <tr class="memitem:af46420b3f8cdf3f4d0936a428026f238 inherit pub_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#af46420b3f8cdf3f4d0936a428026f238">Resource</a> ()</td></tr>
 <tr class="separator:af46420b3f8cdf3f4d0936a428026f238 inherit pub_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0cba1042226343e9716d4cfcb246418 inherit pub_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#ae0cba1042226343e9716d4cfcb246418">~Resource</a> ()</td></tr>
 <tr class="separator:ae0cba1042226343e9716d4cfcb246418 inherit pub_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a436cf90493ecf97b6d5c7f05276d7196 inherit pub_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a436cf90493ecf97b6d5c7f05276d7196">getType</a> ()=0</td></tr>
+<tr class="separator:a436cf90493ecf97b6d5c7f05276d7196 inherit pub_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a213e0f88d8efb519cf9aa3ed6903934a inherit pub_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a213e0f88d8efb519cf9aa3ed6903934a">setName</a> (const std::string &amp;name)</td></tr>
+<tr class="separator:a213e0f88d8efb519cf9aa3ed6903934a inherit pub_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45817fcf76b1af84e515b4dbfed80790 inherit pub_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a45817fcf76b1af84e515b4dbfed80790">getName</a> () const</td></tr>
+<tr class="separator:a45817fcf76b1af84e515b4dbfed80790 inherit pub_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54e9ce66360b3498af3f8b1a93a5d982 inherit pub_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a54e9ce66360b3498af3f8b1a93a5d982">setLoaded</a> (bool loaded)</td></tr>
+<tr class="separator:a54e9ce66360b3498af3f8b1a93a5d982 inherit pub_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af20ecd72c4e61afb47d109b376cf9cab inherit pub_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#af20ecd72c4e61afb47d109b376cf9cab">isLoaded</a> () const</td></tr>
 <tr class="separator:af20ecd72c4e61afb47d109b376cf9cab inherit pub_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a5cd1221b69e8c38550722ca0c00c7b85"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#a5cd1221b69e8c38550722ca0c00c7b85">readFromXml</a> (<a class="el" href="classke_1_1_resource_manager.html">ResourceManager</a> *manager, const pugi::xml_node &amp;node)</td></tr>
+<tr class="separator:a5cd1221b69e8c38550722ca0c00c7b85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add0f2aeb8d5866d051582cc5f264b838"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#add0f2aeb8d5866d051582cc5f264b838">writeToXml</a> (<a class="el" href="classke_1_1_resource.html">Resource</a> *resource, pugi::xml_node &amp;node)</td></tr>
+<tr class="separator:add0f2aeb8d5866d051582cc5f264b838"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad8d52570dfd06996a4ebcfe197e971"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_texture.html#adad8d52570dfd06996a4ebcfe197e971">registerType</a> (<a class="el" href="classke_1_1_resource_manager.html">ResourceManager</a> &amp;manager)</td></tr>
+<tr class="separator:adad8d52570dfd06996a4ebcfe197e971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_classke_1_1_resource"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classke_1_1_resource')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classke_1_1_resource.html">ke::Resource</a></td></tr>
+<tr class="memitem:a7610ae55ad9fb5cc9834bba9b87c2cc2 inherit pub_static_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a7610ae55ad9fb5cc9834bba9b87c2cc2">getStaticType</a> ()</td></tr>
+<tr class="separator:a7610ae55ad9fb5cc9834bba9b87c2cc2 inherit pub_static_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_classke_1_1_resource"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classke_1_1_resource')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classke_1_1_resource.html">ke::Resource</a></td></tr>
+<tr class="memitem:a84b256f432bd59bd73d7a70c3692f6d2 inherit pro_attribs_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a84b256f432bd59bd73d7a70c3692f6d2">mName</a></td></tr>
+<tr class="separator:a84b256f432bd59bd73d7a70c3692f6d2 inherit pro_attribs_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae88989bcbe7bd566673ffc4aee4856b5 inherit pro_attribs_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#ae88989bcbe7bd566673ffc4aee4856b5">mLoaded</a></td></tr>
 <tr class="separator:ae88989bcbe7bd566673ffc4aee4856b5 inherit pro_attribs_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -146,8 +173,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a38229aa673e61010b4a48ba043608159"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38229aa673e61010b4a48ba043608159">&sect;&nbsp;</a></span>Texture() <span class="overload">[2/2]</span></h2>
+<a id="a50f0e011d8a783849a8482d49ef75795"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50f0e011d8a783849a8482d49ef75795">&sect;&nbsp;</a></span>Texture() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -155,7 +182,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">ke::Texture::Texture </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>filename</em></td><td>)</td>
           <td></td>
         </tr>
@@ -164,9 +191,51 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a6aaced8d68494f4a392b4880c4bbc3c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aaced8d68494f4a392b4880c4bbc3c5">&sect;&nbsp;</a></span>~Texture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ke::Texture::~Texture </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad6cc32d78f5927079bbac9a9034e3501"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6cc32d78f5927079bbac9a9034e3501">&sect;&nbsp;</a></span>loadFromFile()</h2>
+<a id="adb74b230ac77ccb95886c63a28131df0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb74b230ac77ccb95886c63a28131df0">&sect;&nbsp;</a></span>getFilename()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; ke::Texture::getFilename </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a385ad5d84563cf6c5a8798728c8b6388"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a385ad5d84563cf6c5a8798728c8b6388">&sect;&nbsp;</a></span>loadFromFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,13 +243,13 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">bool ke::Texture::loadFromFile </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>filename</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::IntRect const &amp;&#160;</td>
+          <td class="paramtype">const sf::IntRect &amp;&#160;</td>
           <td class="paramname"><em>area</em> = <code>sf::IntRect()</code>&#160;</td>
         </tr>
         <tr>
@@ -193,8 +262,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="aa294bc84a36c769ee9c4aaafacb086df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa294bc84a36c769ee9c4aaafacb086df">&sect;&nbsp;</a></span>loadFromImage()</h2>
+<a id="ab004409a998d06e6283b015fefd66411"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab004409a998d06e6283b015fefd66411">&sect;&nbsp;</a></span>loadFromImage()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -202,13 +271,13 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">bool ke::Texture::loadFromImage </td>
           <td>(</td>
-          <td class="paramtype">sf::Image const &amp;&#160;</td>
+          <td class="paramtype">const sf::Image &amp;&#160;</td>
           <td class="paramname"><em>image</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::IntRect const &amp;&#160;</td>
+          <td class="paramtype">const sf::IntRect &amp;&#160;</td>
           <td class="paramname"><em>area</em> = <code>sf::IntRect()</code>&#160;</td>
         </tr>
         <tr>
@@ -221,8 +290,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a190f99472bd049e43ba28f5311168dcb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a190f99472bd049e43ba28f5311168dcb">&sect;&nbsp;</a></span>loadFromMemory()</h2>
+<a id="a20f4968e5a6a1e6d73de8bd32185924c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20f4968e5a6a1e6d73de8bd32185924c">&sect;&nbsp;</a></span>loadFromMemory()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -230,7 +299,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">bool ke::Texture::loadFromMemory </td>
           <td>(</td>
-          <td class="paramtype">void const *&#160;</td>
+          <td class="paramtype">const void *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -242,7 +311,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::IntRect const &amp;&#160;</td>
+          <td class="paramtype">const sf::IntRect &amp;&#160;</td>
           <td class="paramname"><em>area</em> = <code>sf::IntRect()</code>&#160;</td>
         </tr>
         <tr>
@@ -255,8 +324,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a5d5519387d5de6d630b87acd613a4a2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d5519387d5de6d630b87acd613a4a2a">&sect;&nbsp;</a></span>loadFromStream()</h2>
+<a id="af24d6a45dd3ab82a89fc8414cee8c433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af24d6a45dd3ab82a89fc8414cee8c433">&sect;&nbsp;</a></span>loadFromStream()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -270,7 +339,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::IntRect const &amp;&#160;</td>
+          <td class="paramtype">const sf::IntRect &amp;&#160;</td>
           <td class="paramname"><em>area</em> = <code>sf::IntRect()</code>&#160;</td>
         </tr>
         <tr>
@@ -283,9 +352,107 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a5cd1221b69e8c38550722ca0c00c7b85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cd1221b69e8c38550722ca0c00c7b85">&sect;&nbsp;</a></span>readFromXml()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Texture::readFromXml </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classke_1_1_resource_manager.html">ResourceManager</a> *&#160;</td>
+          <td class="paramname"><em>manager</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const pugi::xml_node &amp;&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adad8d52570dfd06996a4ebcfe197e971"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adad8d52570dfd06996a4ebcfe197e971">&sect;&nbsp;</a></span>registerType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Texture::registerType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classke_1_1_resource_manager.html">ResourceManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>manager</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="add0f2aeb8d5866d051582cc5f264b838"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add0f2aeb8d5866d051582cc5f264b838">&sect;&nbsp;</a></span>writeToXml()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Texture::writeToXml </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classke_1_1_resource.html">Resource</a> *&#160;</td>
+          <td class="paramname"><em>resource</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">pugi::xml_node &amp;&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Keengine/Sources/Application/<a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a></li>
-<li>Keengine/Sources/Application/<a class="el" href="_resource_manager_8cpp.html">ResourceManager.cpp</a></li>
+<li>Keengine/Sources/System/<a class="el" href="_sfml_resources_8hpp_source.html">SfmlResources.hpp</a></li>
+<li>Keengine/Sources/System/<a class="el" href="_sfml_resources_8cpp.html">SfmlResources.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -91,10 +91,7 @@ bool HttpThread::sendRequest(const std::string& url, const std::string& body, st
 {
 	std::string tempUrl, tempUri;
 	splitUrl(url, tempUrl, tempUri);
-	sf::Http http(tempUrl);
-	sf::Http::Request request(tempUri, sf::Http::Request::Post);
-	request.setBody(body);
-	sf::Http::Response rep = http.sendRequest(request);
+	sf::Http::Response rep = sf::Http(tempUrl).sendRequest(sf::Http::Request(tempUri, sf::Http::Request::Post, body));
 	bool ret = rep.getStatus() == sf::Http::Response::Ok;
 	if (response != nullptr && ret)
 	{

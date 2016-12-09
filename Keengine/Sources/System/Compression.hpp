@@ -24,6 +24,8 @@
 //
 ////////////////////////////////////////////////////////////
 
+// TODO : Use mini-z
+
 #ifndef KE_COMPRESSION_HPP
 #define KE_COMPRESSION_HPP
 

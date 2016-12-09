@@ -118,16 +118,22 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae2b9a5a3200859193883271fca007c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21108b954449b95ae9dd7e72453470dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#a21108b954449b95ae9dd7e72453470dd">setDeltaMax</a> (float dMax)</td></tr>
 <tr class="separator:a21108b954449b95ae9dd7e72453470dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae348e39be837f2e4375ad6a286955129"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#ae348e39be837f2e4375ad6a286955129">blockHorizontal</a> (bool block)</td></tr>
+<tr class="separator:ae348e39be837f2e4375ad6a286955129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6689caa9e4dfcddb2187d9b56292484"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#ab6689caa9e4dfcddb2187d9b56292484">isBlockedHorizontal</a> () const</td></tr>
+<tr class="separator:ab6689caa9e4dfcddb2187d9b56292484"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc9ed85e044eb6946ad9ac7afa165eed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#acc9ed85e044eb6946ad9ac7afa165eed">blockVertical</a> (bool block)</td></tr>
+<tr class="separator:acc9ed85e044eb6946ad9ac7afa165eed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5282cb5a559d89ca2b35828234b33ca5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#a5282cb5a559d89ca2b35828234b33ca5">isBlockedVertical</a> () const</td></tr>
+<tr class="separator:a5282cb5a559d89ca2b35828234b33ca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed3c0a16ca6037b6df6e4ab96a51264f"><td class="memItemLeft" align="right" valign="top">sf::FloatRect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#aed3c0a16ca6037b6df6e4ab96a51264f">getBounds</a> () const</td></tr>
 <tr class="separator:aed3c0a16ca6037b6df6e4ab96a51264f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b4d19f121d14a07f9d32cd2b8c30a7e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#a8b4d19f121d14a07f9d32cd2b8c30a7e">contains</a> (sf::Vector2f const &amp;pos) const</td></tr>
 <tr class="separator:a8b4d19f121d14a07f9d32cd2b8c30a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf22f136f8efa0685495b922c6bc7cf9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#adf22f136f8efa0685495b922c6bc7cf9">handleEvent</a> (sf::Event const &amp;event)</td></tr>
-<tr class="separator:adf22f136f8efa0685495b922c6bc7cf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee5c7fe6f83975e4ea178a3e7c442210"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#aee5c7fe6f83975e4ea178a3e7c442210">update</a> (sf::Time dt)</td></tr>
-<tr class="separator:aee5c7fe6f83975e4ea178a3e7c442210"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a62429f0516e10b68db08f63060f710"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#a0a62429f0516e10b68db08f63060f710">render</a> (sf::RenderTarget &amp;target, sf::RenderStates states)</td></tr>
-<tr class="separator:a0a62429f0516e10b68db08f63060f710"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb46665497ea0950ac6dc7c28ce3dc12"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#acb46665497ea0950ac6dc7c28ce3dc12">handleEvent</a> (sf::Event const &amp;event, const sf::Vector2f &amp;position)</td></tr>
+<tr class="separator:acb46665497ea0950ac6dc7c28ce3dc12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a893db88743b3f3d98764f95db450fc73"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#a893db88743b3f3d98764f95db450fc73">render</a> (sf::RenderTarget &amp;target, sf::RenderStates states=sf::RenderStates())</td></tr>
+<tr class="separator:a893db88743b3f3d98764f95db450fc73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -143,6 +149,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a455100f61131118f2550d884b796ab94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64ae7080d52276976676dad512d6e7c7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#a64ae7080d52276976676dad512d6e7c7">mMouse</a></td></tr>
 <tr class="separator:a64ae7080d52276976676dad512d6e7c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae53e9c3c60d78d07c2a05761f44d8b53"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#ae53e9c3c60d78d07c2a05761f44d8b53">mBlockHorizontal</a></td></tr>
+<tr class="separator:ae53e9c3c60d78d07c2a05761f44d8b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8c9ab2d543780a7ce21f0ddb03b3a6d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_joystick.html#af8c9ab2d543780a7ce21f0ddb03b3a6d">mBlockVertical</a></td></tr>
+<tr class="separator:af8c9ab2d543780a7ce21f0ddb03b3a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9a7e3a9113e2ccff66f48b9438ed7b66"></a>
@@ -163,6 +173,42 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae348e39be837f2e4375ad6a286955129"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae348e39be837f2e4375ad6a286955129">&sect;&nbsp;</a></span>blockHorizontal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Joystick::blockHorizontal </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acc9ed85e044eb6946ad9ac7afa165eed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc9ed85e044eb6946ad9ac7afa165eed">&sect;&nbsp;</a></span>blockVertical()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Joystick::blockVertical </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a8b4d19f121d14a07f9d32cd2b8c30a7e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8b4d19f121d14a07f9d32cd2b8c30a7e">&sect;&nbsp;</a></span>contains()</h2>
 
@@ -215,8 +261,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="adf22f136f8efa0685495b922c6bc7cf9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf22f136f8efa0685495b922c6bc7cf9">&sect;&nbsp;</a></span>handleEvent()</h2>
+<a id="acb46665497ea0950ac6dc7c28ce3dc12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb46665497ea0950ac6dc7c28ce3dc12">&sect;&nbsp;</a></span>handleEvent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -228,8 +274,18 @@ Protected Attributes</h2></td></tr>
           <td class="memname">void ke::Joystick::handleEvent </td>
           <td>(</td>
           <td class="paramtype">sf::Event const &amp;&#160;</td>
-          <td class="paramname"><em>event</em></td><td>)</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
+          <td class="paramname"><em>position</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -237,6 +293,40 @@ Protected Attributes</h2></td></tr>
 <span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab6689caa9e4dfcddb2187d9b56292484"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6689caa9e4dfcddb2187d9b56292484">&sect;&nbsp;</a></span>isBlockedHorizontal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Joystick::isBlockedHorizontal </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5282cb5a559d89ca2b35828234b33ca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5282cb5a559d89ca2b35828234b33ca5">&sect;&nbsp;</a></span>isBlockedVertical()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Joystick::isBlockedVertical </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
 </div><div class="memdoc">
 
 </div>
@@ -258,8 +348,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0a62429f0516e10b68db08f63060f710"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a62429f0516e10b68db08f63060f710">&sect;&nbsp;</a></span>render()</h2>
+<a id="a893db88743b3f3d98764f95db450fc73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a893db88743b3f3d98764f95db450fc73">&sect;&nbsp;</a></span>render()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -277,7 +367,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">sf::RenderStates&#160;</td>
-          <td class="paramname"><em>states</em>&#160;</td>
+          <td class="paramname"><em>states</em> = <code>sf::RenderStates()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -384,32 +474,6 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aee5c7fe6f83975e4ea178a3e7c442210"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee5c7fe6f83975e4ea178a3e7c442210">&sect;&nbsp;</a></span>update()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ke::Joystick::update </td>
-          <td>(</td>
-          <td class="paramtype">sf::Time&#160;</td>
-          <td class="paramname"><em>dt</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="aaf237b2d571e3323439eacb2489e8895"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaf237b2d571e3323439eacb2489e8895">&sect;&nbsp;</a></span>mBackground</h2>
@@ -422,6 +486,50 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">sf::Sprite ke::Joystick::mBackground</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae53e9c3c60d78d07c2a05761f44d8b53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae53e9c3c60d78d07c2a05761f44d8b53">&sect;&nbsp;</a></span>mBlockHorizontal</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Joystick::mBlockHorizontal</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af8c9ab2d543780a7ce21f0ddb03b3a6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8c9ab2d543780a7ce21f0ddb03b3a6d">&sect;&nbsp;</a></span>mBlockVertical</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Joystick::mBlockVertical</td>
         </tr>
       </table>
   </td>

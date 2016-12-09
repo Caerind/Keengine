@@ -3,8 +3,7 @@
 
 #include <SFML/System/Time.hpp>
 
-#include "../Application/Application.hpp"
-
+#include "../System/Application.hpp"
 #include "../System/Serializable.hpp"
 #include "../System/Serializer.hpp"
 #include "../System/Type.hpp"

@@ -1,8 +1,9 @@
 #ifndef KE_DIRECTIONLIGHTCOMPONENT_HPP
 #define KE_DIRECTIONLIGHTCOMPONENT_HPP
 
-#include "../Core/SceneComponent.hpp"
 #include "../ExtLibs/LetThereBeLight.hpp"
+
+#include "../Core/SceneComponent.hpp"
 
 namespace ke
 {

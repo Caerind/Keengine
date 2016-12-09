@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.12"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Keengine: Keengine/Sources/Application/Window.hpp File Reference</title>
+<title>Keengine: Keengine/Sources/System/Window.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,23 +83,28 @@ $(document).ready(function(){initNavTree('_window_8hpp.html','');});
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
 <div class="title">Window.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_config_8hpp_source.html">../Config.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;array&gt;</code><br />
+<code>#include &lt;ctime&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;iomanip&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
 <code>#include &lt;unordered_map&gt;</code><br />
+<code>#include &lt;SFML/Graphics/Font.hpp&gt;</code><br />
 <code>#include &lt;SFML/Graphics/RectangleShape.hpp&gt;</code><br />
 <code>#include &lt;SFML/Graphics/RenderWindow.hpp&gt;</code><br />
 <code>#include &lt;SFML/Graphics/Sprite.hpp&gt;</code><br />
+<code>#include &lt;SFML/Graphics/Text.hpp&gt;</code><br />
 <code>#include &lt;SFML/Graphics/Texture.hpp&gt;</code><br />
+<code>#include &lt;SFML/Graphics/View.hpp&gt;</code><br />
+<code>#include &lt;SFML/Window/Event.hpp&gt;</code><br />
 <code>#include &lt;SFML/Window/Mouse.hpp&gt;</code><br />
 <code>#include &lt;SFML/Window/Touch.hpp&gt;</code><br />
-<code>#include &quot;<a class="el" href="_background_8hpp_source.html">../System/Background.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_log_8hpp_source.html">../System/Log.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_date_time_8hpp_source.html">../System/DateTime.hpp</a>&quot;</code><br />
 </div>
 <p><a href="_window_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -107,27 +112,20 @@ $(document).ready(function(){initNavTree('_window_8hpp.html','');});
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_window.html">ke::Window</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structke_1_1_window_1_1_command_args.html">ke::Window::CommandArgs</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceke"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceke.html">ke</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:afeb56a524bd3e164c6c74ddf95765c06"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
-<tr class="memitem:afeb56a524bd3e164c6c74ddf95765c06"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceke.html#afeb56a524bd3e164c6c74ddf95765c06">ke::Window::setDebugInfo&lt; const std::string &amp; &gt;</a> (std::string const &amp;id, const std::string &amp;value)</td></tr>
-<tr class="separator:afeb56a524bd3e164c6c74ddf95765c06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc63828073f803bb9b0bdb4f96644dc2"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
-<tr class="memitem:adc63828073f803bb9b0bdb4f96644dc2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceke.html#adc63828073f803bb9b0bdb4f96644dc2">ke::Window::setDebugInfo&lt; std::string &gt;</a> (std::string const &amp;id, std::string value)</td></tr>
-<tr class="separator:adc63828073f803bb9b0bdb4f96644dc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_f360c72d76f04ebd414f69e5744215a7.html">Keengine</a></li><li class="navelem"><a class="el" href="dir_a757a1b65b8e4b202c95169a8774ce99.html">Sources</a></li><li class="navelem"><a class="el" href="dir_c92c7bd06d35279e36823dfd3a708198.html">Application</a></li><li class="navelem"><a class="el" href="_window_8hpp.html">Window.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_f360c72d76f04ebd414f69e5744215a7.html">Keengine</a></li><li class="navelem"><a class="el" href="dir_a757a1b65b8e4b202c95169a8774ce99.html">Sources</a></li><li class="navelem"><a class="el" href="dir_bff26e7327b82dc632b70991b3e08239.html">System</a></li><li class="navelem"><a class="el" href="_window_8hpp.html">Window.hpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>

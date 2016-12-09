@@ -7,6 +7,8 @@ namespace ke
 Joystick::Joystick()
 {
     mHeld = false;
+	mBlockHorizontal = false;
+	mBlockVertical = false;
 }
 
 void Joystick::setButtonTexture(sf::Texture& texture)
@@ -36,12 +38,20 @@ void Joystick::setBackgroundRect(sf::IntRect const& rect)
 sf::Vector2f Joystick::getDelta() const
 {
     sf::Vector2f p = mButton.getPosition();
-    float r = std::sqrt(p.x*p.x + p.y*p.y);
+	if (mBlockHorizontal)
+	{
+		p.x = 0.f;
+	}
+	if (mBlockVertical)
+	{
+		p.y = 0.f;
+	}
+    float r = std::sqrt(p.x * p.x + p.y * p.y);
     if (r == 0.f)
     {
         return sf::Vector2f();
     }
-    return sf::Vector2f(p.x/r,p.y/r) * (r / mDeltaMax);
+	return (p / r) * mDeltaMax;
 }
 
 bool Joystick::isHeld() const
@@ -52,6 +62,26 @@ bool Joystick::isHeld() const
 void Joystick::setDeltaMax(float dMax)
 {
     mDeltaMax = dMax;
+}
+
+void Joystick::blockHorizontal(bool block)
+{
+	mBlockHorizontal = block;
+}
+
+bool Joystick::isBlockedHorizontal() const
+{
+	return mBlockHorizontal;
+}
+
+void Joystick::blockVertical(bool block)
+{
+	mBlockVertical = block;
+}
+
+bool Joystick::isBlockedVertical() const
+{
+	return mBlockVertical;
 }
 
 sf::FloatRect Joystick::getBounds() const
@@ -67,28 +97,34 @@ bool Joystick::contains(sf::Vector2f const& pos) const
     return Joystick::getBounds().contains(pos);
 }
 
-void Joystick::update(sf::Time dt)
+void Joystick::handleEvent(sf::Event const& event, const sf::Vector2f& position)
 {
-}
-
-void Joystick::handleEvent(sf::Event const& event)
-{
-    #ifdef ANDROID
-    if (event.type == sf::Event::TouchBegan && Joystick::contains(sf::Vector2f(event.touch.x,event.touch.y)))
+	if ((event.type == sf::Event::TouchBegan || (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)) && contains(position))
     {
         mHeld = true;
-        mFingerId = event.touch.finger;
+		if (ke::isMobile())
+		{
+			mFingerId = event.touch.finger;
+		}
         mButton.setPosition(0,0);
     }
-    if (event.type == sf::Event::TouchEnded && event.touch.finger == mFingerId)
+    if ((event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) || (event.type == sf::Event::TouchEnded && event.touch.finger == mFingerId))
     {
         mHeld = false;
         mButton.setPosition(0,0);
     }
-    if (event.type == sf::Event::TouchMoved && event.touch.finger == mFingerId && mHeld)
+    if ((event.type == sf::Event::MouseMoved || (event.type == sf::Event::TouchMoved && event.touch.finger == mFingerId)) && mHeld)
     {
-        sf::Vector2f p = sf::Vector2f(event.touch.x,event.touch.y) - getPosition();
-        float r = std::sqrt(p.x*p.x + p.y*p.y);
+        sf::Vector2f p = position - getPosition();
+		if (mBlockHorizontal)
+		{
+			p.x = 0.f;
+		}
+		if (mBlockVertical)
+		{
+			p.y = 0.f;
+		}
+        float r = std::sqrt(p.x * p.x + p.y * p.y);
         if (r >= mDeltaMax)
         {
             mButton.setPosition(mDeltaMax * sf::Vector2f(p.x/r,p.y/r));
@@ -98,31 +134,6 @@ void Joystick::handleEvent(sf::Event const& event)
             mButton.setPosition(p);
         }
     }
-    #else
-    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && Joystick::contains(sf::Vector2f((float)event.mouseButton.x, (float)event.mouseButton.y)))
-    {
-        mHeld = true;
-        mButton.setPosition(0,0);
-    }
-    if (event.type == sf::Event::MouseButtonReleased)
-    {
-        mHeld = false;
-        mButton.setPosition(0,0);
-    }
-    if (event.type == sf::Event::MouseMoved && mHeld)
-    {
-        sf::Vector2f p = sf::Vector2f((float)event.mouseMove.x, (float)event.mouseMove.y) - getPosition();
-        float r = std::sqrt(p.x*p.x + p.y*p.y);
-        if (r >= mDeltaMax)
-        {
-            mButton.setPosition(mDeltaMax * sf::Vector2f(p.x/r,p.y/r));
-        }
-        else
-        {
-            mButton.setPosition(p);
-        }
-    }
-    #endif
 }
 
 void Joystick::render(sf::RenderTarget& target, sf::RenderStates states)

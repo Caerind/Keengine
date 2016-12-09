@@ -83,10 +83,11 @@ $(document).ready(function(){initNavTree('classke_1_1_resource.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classke_1_1_resource-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">ke::Resource Class Reference</div>  </div>
+<div class="title">ke::Resource Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -97,15 +98,15 @@ Inheritance diagram for ke::Resource:</div>
  <div class="center">
   <img src="classke_1_1_resource.png" usemap="#ke::Resource_map" alt=""/>
   <map id="ke::Resource_map" name="ke::Resource_map">
-<area href="classke_1_1_font.html" alt="ke::Font" shape="rect" coords="112,56,214,80"/>
-<area href="classke_1_1_image.html" alt="ke::Image" shape="rect" coords="112,112,214,136"/>
-<area href="classke_1_1_ini_parser.html" alt="ke::IniParser" shape="rect" coords="112,168,214,192"/>
-<area href="classke_1_1_lang.html" alt="ke::Lang" shape="rect" coords="112,224,214,248"/>
-<area href="classke_1_1_shader.html" alt="ke::Shader" shape="rect" coords="112,280,214,304"/>
-<area href="classke_1_1_sound_buffer.html" alt="ke::SoundBuffer" shape="rect" coords="112,336,214,360"/>
-<area href="classke_1_1_texture.html" alt="ke::Texture" shape="rect" coords="112,392,214,416"/>
-<area href="classke_1_1_theme.html" alt="ke::Theme" shape="rect" coords="112,448,214,472"/>
-<area href="classke_1_1_tileset.html" alt="ke::Tileset" shape="rect" coords="112,504,214,528"/>
+<area href="classke_1_1_animation.html" alt="ke::Animation" shape="rect" coords="117,56,224,80"/>
+<area href="classke_1_1_configuration.html" alt="ke::Configuration" shape="rect" coords="117,112,224,136"/>
+<area href="classke_1_1_font.html" alt="ke::Font" shape="rect" coords="117,168,224,192"/>
+<area href="classke_1_1_image.html" alt="ke::Image" shape="rect" coords="117,224,224,248"/>
+<area href="classke_1_1_shader.html" alt="ke::Shader" shape="rect" coords="117,280,224,304"/>
+<area href="classke_1_1_sound_buffer.html" alt="ke::SoundBuffer" shape="rect" coords="117,336,224,360"/>
+<area href="classke_1_1_texture.html" alt="ke::Texture" shape="rect" coords="117,392,224,416"/>
+<area href="classke_1_1_theme.html" alt="ke::Theme" shape="rect" coords="117,448,224,472"/>
+<area href="classke_1_1_tileset.html" alt="ke::Tileset" shape="rect" coords="117,504,224,528"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -115,11 +116,26 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af46420b3f8cdf3f4d0936a428026f238"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0cba1042226343e9716d4cfcb246418"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#ae0cba1042226343e9716d4cfcb246418">~Resource</a> ()</td></tr>
 <tr class="separator:ae0cba1042226343e9716d4cfcb246418"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a436cf90493ecf97b6d5c7f05276d7196"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a436cf90493ecf97b6d5c7f05276d7196">getType</a> ()=0</td></tr>
+<tr class="separator:a436cf90493ecf97b6d5c7f05276d7196"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a213e0f88d8efb519cf9aa3ed6903934a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a213e0f88d8efb519cf9aa3ed6903934a">setName</a> (const std::string &amp;name)</td></tr>
+<tr class="separator:a213e0f88d8efb519cf9aa3ed6903934a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45817fcf76b1af84e515b4dbfed80790"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a45817fcf76b1af84e515b4dbfed80790">getName</a> () const</td></tr>
+<tr class="separator:a45817fcf76b1af84e515b4dbfed80790"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54e9ce66360b3498af3f8b1a93a5d982"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a54e9ce66360b3498af3f8b1a93a5d982">setLoaded</a> (bool loaded)</td></tr>
+<tr class="separator:a54e9ce66360b3498af3f8b1a93a5d982"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af20ecd72c4e61afb47d109b376cf9cab"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#af20ecd72c4e61afb47d109b376cf9cab">isLoaded</a> () const</td></tr>
 <tr class="separator:af20ecd72c4e61afb47d109b376cf9cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a7610ae55ad9fb5cc9834bba9b87c2cc2"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a7610ae55ad9fb5cc9834bba9b87c2cc2">getStaticType</a> ()</td></tr>
+<tr class="separator:a7610ae55ad9fb5cc9834bba9b87c2cc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a84b256f432bd59bd73d7a70c3692f6d2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a84b256f432bd59bd73d7a70c3692f6d2">mName</a></td></tr>
+<tr class="separator:a84b256f432bd59bd73d7a70c3692f6d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae88989bcbe7bd566673ffc4aee4856b5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#ae88989bcbe7bd566673ffc4aee4856b5">mLoaded</a></td></tr>
 <tr class="separator:ae88989bcbe7bd566673ffc4aee4856b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -167,6 +183,73 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a45817fcf76b1af84e515b4dbfed80790"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45817fcf76b1af84e515b4dbfed80790">&sect;&nbsp;</a></span>getName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; ke::Resource::getName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7610ae55ad9fb5cc9834bba9b87c2cc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7610ae55ad9fb5cc9834bba9b87c2cc2">&sect;&nbsp;</a></span>getStaticType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string ke::Resource::getStaticType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a436cf90493ecf97b6d5c7f05276d7196"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a436cf90493ecf97b6d5c7f05276d7196">&sect;&nbsp;</a></span>getType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string ke::Resource::getType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af20ecd72c4e61afb47d109b376cf9cab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af20ecd72c4e61afb47d109b376cf9cab">&sect;&nbsp;</a></span>isLoaded()</h2>
 
@@ -178,6 +261,42 @@ Protected Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a54e9ce66360b3498af3f8b1a93a5d982"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54e9ce66360b3498af3f8b1a93a5d982">&sect;&nbsp;</a></span>setLoaded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Resource::setLoaded </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>loaded</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a213e0f88d8efb519cf9aa3ed6903934a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a213e0f88d8efb519cf9aa3ed6903934a">&sect;&nbsp;</a></span>setName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ke::Resource::setName </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -207,9 +326,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a84b256f432bd59bd73d7a70c3692f6d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84b256f432bd59bd73d7a70c3692f6d2">&sect;&nbsp;</a></span>mName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string ke::Resource::mName</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Keengine/Sources/Application/<a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a></li>
-<li>Keengine/Sources/Application/<a class="el" href="_resource_manager_8cpp.html">ResourceManager.cpp</a></li>
+<li>Keengine/Sources/System/<a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a></li>
+<li>Keengine/Sources/System/<a class="el" href="_resource_manager_8cpp.html">ResourceManager.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -23,8 +23,12 @@ var dir_9208b9be03297b27d9d54e8c7384553c =
     [ "Map.hpp", "_map_8hpp.html", [
       [ "Map", "classke_1_1_map.html", "classke_1_1_map" ]
     ] ],
-    [ "Pathfinding.cpp", "_pathfinding_8cpp.html", "_pathfinding_8cpp" ],
-    [ "Pathfinding.hpp", "_pathfinding_8hpp.html", "_pathfinding_8hpp" ],
+    [ "Pathfinding.cpp", "_pathfinding_8cpp.html", null ],
+    [ "Pathfinding.hpp", "_pathfinding_8hpp.html", [
+      [ "Node", "structke_1_1priv_1_1_node.html", "structke_1_1priv_1_1_node" ],
+      [ "PathFinder", "classke_1_1priv_1_1_path_finder.html", "classke_1_1priv_1_1_path_finder" ],
+      [ "PathFinding", "classke_1_1_path_finding.html", null ]
+    ] ],
     [ "PhysicSystem.cpp", "_physic_system_8cpp.html", null ],
     [ "PhysicSystem.hpp", "_physic_system_8hpp.html", "_physic_system_8hpp" ],
     [ "Scene.cpp", "_scene_8cpp.html", null ],

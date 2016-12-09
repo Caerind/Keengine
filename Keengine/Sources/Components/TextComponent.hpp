@@ -1,9 +1,9 @@
 #ifndef KE_TEXTCOMPONENT_HPP
 #define KE_TEXTCOMPONENT_HPP
 
-#include "../Core/SceneComponent.hpp"
-
 #include <SFML/Graphics/Text.hpp>
+
+#include "../Core/SceneComponent.hpp"
 
 namespace ke
 {

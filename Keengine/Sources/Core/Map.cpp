@@ -377,7 +377,7 @@ bool Map::loadTmxFile(std::string const& filename)
 		}
 		else
 		{
-			mTileset = &getApplication().createResource<Tileset>(tilesetName, tileset, path);
+			mTileset = &getApplication().getResource<Tileset>(tilesetName, tileset, path);
 		}
 	}
 
@@ -425,7 +425,7 @@ bool Map::loadTmxFile(std::string const& filename)
 			{
 				if (!getApplication().isResourceLoaded(source))
 				{
-					getApplication().createResource<Texture>(source, path + source);
+					getApplication().getResource<Texture>(source, path + source);
 				}
 				image->setTexture(source);
 			}

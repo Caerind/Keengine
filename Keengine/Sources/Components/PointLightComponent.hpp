@@ -1,8 +1,9 @@
 #ifndef KE_POINTLIGHTCOMPONENT_HPP
 #define KE_POINTLIGHTCOMPONENT_HPP
 
-#include "../Core/SceneComponent.hpp"
 #include "../ExtLibs/LetThereBeLight.hpp"
+
+#include "../Core/SceneComponent.hpp"
 
 namespace ke
 {

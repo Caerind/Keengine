@@ -16,6 +16,8 @@ class MyActor : public ke::Actor
 		void initializeComponents();
 		void initialize();
 
+		void setVelocityX(float velx);
+
 		void update(sf::Time dt);
 
 		virtual void serialize(ke::Serializer& serializer);

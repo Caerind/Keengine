@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['warning',['Warning',['../classke_1_1_log.html#a37f226cd39ec022ede042fac488530d8a43828867ce60e9d98b4d196df866c39a',1,'ke::Log']]]
+  ['quit',['Quit',['../classke_1_1_window.html#a41a19f0d421337f46c0ceba9ae86fbcca0bd4000dfb2322da319a26c8af9d6b29',1,'ke::Window']]]
 ];

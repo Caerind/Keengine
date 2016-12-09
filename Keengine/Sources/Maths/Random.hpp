@@ -120,7 +120,7 @@ class RandomTable
 
 	private:
 		std::vector<std::pair<std::size_t, T>> mTable;
-		std::size_t mSum;
+		int mSum;
 };
 
 } // namespace ke

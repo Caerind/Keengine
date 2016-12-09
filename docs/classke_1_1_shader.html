@@ -82,88 +82,133 @@ $(document).ready(function(){initNavTree('classke_1_1_shader.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classke_1_1_shader-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ke::Shader Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_sfml_resources_8hpp_source.html">SfmlResources.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ke::Shader:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classke_1_1_shader.png" usemap="#ke::Shader_map" alt=""/>
   <map id="ke::Shader_map" name="ke::Shader_map">
-<area href="classke_1_1_resource.html" alt="ke::Resource" shape="rect" coords="95,0,180,24"/>
+<area href="classke_1_1_resource.html" alt="ke::Resource" shape="rect" coords="0,0,85,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:af1594eb09ad3c5d612e742f77deb03f0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#af1594eb09ad3c5d612e742f77deb03f0">Type</a> { <a class="el" href="classke_1_1_shader.html#af1594eb09ad3c5d612e742f77deb03f0ab17e489b88b538f40bb28032aa1b5119">None</a> = 0, 
+<a class="el" href="classke_1_1_shader.html#af1594eb09ad3c5d612e742f77deb03f0a34efccba52b19927513631ee5e939250">Vertex</a> = 1 &lt;&lt; 0, 
+<a class="el" href="classke_1_1_shader.html#af1594eb09ad3c5d612e742f77deb03f0a603891ca763951c679e3f9d433c42b1a">Fragment</a> = 1 &lt;&lt; 1, 
+<a class="el" href="classke_1_1_shader.html#af1594eb09ad3c5d612e742f77deb03f0afa6d4d63adb69cd739f1430f56bf4cbb">Geometry</a> = 1 &lt;&lt; 2
+ }</td></tr>
+<tr class="separator:af1594eb09ad3c5d612e742f77deb03f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa5935c40299833cecdcf8803d5405e7d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#aa5935c40299833cecdcf8803d5405e7d">Shader</a> ()</td></tr>
 <tr class="separator:aa5935c40299833cecdcf8803d5405e7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a561b0583b06a2a276c4f5ccc764d75bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a561b0583b06a2a276c4f5ccc764d75bd">Shader</a> (std::string const &amp;filename, sf::Shader::Type type)</td></tr>
-<tr class="separator:a561b0583b06a2a276c4f5ccc764d75bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a476ea4272f49b5d2b313ba285e4685f7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a476ea4272f49b5d2b313ba285e4685f7">Shader</a> (std::string const &amp;vertexShaderFilename, std::string const &amp;fragmentShaderFilename)</td></tr>
-<tr class="separator:a476ea4272f49b5d2b313ba285e4685f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b41afbf4e1803f4904603d23e4dc1eb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a3b41afbf4e1803f4904603d23e4dc1eb">loadFromFile</a> (std::string const &amp;filename, sf::Shader::Type type)</td></tr>
-<tr class="separator:a3b41afbf4e1803f4904603d23e4dc1eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb6c7d11852c598c97d22722d8988198"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#afb6c7d11852c598c97d22722d8988198">loadFromFile</a> (std::string const &amp;vertexShaderFilename, std::string const &amp;fragmentShaderFilename)</td></tr>
-<tr class="separator:afb6c7d11852c598c97d22722d8988198"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9348c3bba24a2a77433b81f01634e42e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a9348c3bba24a2a77433b81f01634e42e">loadFromMemory</a> (std::string const &amp;shader, sf::Shader::Type type)</td></tr>
-<tr class="separator:a9348c3bba24a2a77433b81f01634e42e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a280f843f6970038f0b3762a11dbc0d04"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a280f843f6970038f0b3762a11dbc0d04">loadFromMemory</a> (std::string const &amp;vertexShader, std::string const &amp;fragmentShader)</td></tr>
-<tr class="separator:a280f843f6970038f0b3762a11dbc0d04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a655d41a581dd5d003e52c884d57212e0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a655d41a581dd5d003e52c884d57212e0">loadFromStream</a> (sf::InputStream &amp;stream, sf::Shader::Type type)</td></tr>
-<tr class="separator:a655d41a581dd5d003e52c884d57212e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cc2f5981f0bb0633ff3fff695f8215f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a3cc2f5981f0bb0633ff3fff695f8215f">~Shader</a> ()</td></tr>
+<tr class="separator:a3cc2f5981f0bb0633ff3fff695f8215f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ed6b3643f854b4d169ca1882096ba65"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a5ed6b3643f854b4d169ca1882096ba65">loadFromFile</a> (const std::string &amp;filename, <a class="el" href="classke_1_1_shader.html#af1594eb09ad3c5d612e742f77deb03f0">Shader::Type</a> type)</td></tr>
+<tr class="separator:a5ed6b3643f854b4d169ca1882096ba65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12a625ffc884cdf4448259550e1f8035"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a12a625ffc884cdf4448259550e1f8035">loadFromFile</a> (const std::string &amp;vertexShaderFilename, const std::string &amp;fragmentShaderFilename)</td></tr>
+<tr class="separator:a12a625ffc884cdf4448259550e1f8035"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad74ca05ff01f377f5310f864e7888906"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#ad74ca05ff01f377f5310f864e7888906">loadFromFile</a> (const std::string &amp;vertexShaderFilename, const std::string &amp;geometryShaderFilename, const std::string &amp;fragmentShaderFilename)</td></tr>
+<tr class="separator:ad74ca05ff01f377f5310f864e7888906"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8f19730c8e33e55032c6d6436c43859"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#ac8f19730c8e33e55032c6d6436c43859">loadFromMemory</a> (const std::string &amp;shader, <a class="el" href="classke_1_1_shader.html#af1594eb09ad3c5d612e742f77deb03f0">Shader::Type</a> type)</td></tr>
+<tr class="separator:ac8f19730c8e33e55032c6d6436c43859"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2de10e75706463143f2b7a24a612391"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#ac2de10e75706463143f2b7a24a612391">loadFromMemory</a> (const std::string &amp;vertexShader, const std::string &amp;fragmentShader)</td></tr>
+<tr class="separator:ac2de10e75706463143f2b7a24a612391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9772847a91061a0d4c1ebaa33182f38e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a9772847a91061a0d4c1ebaa33182f38e">loadFromMemory</a> (const std::string &amp;vertexShader, const std::string &amp;geometryShader, const std::string &amp;fragmentShader)</td></tr>
+<tr class="separator:a9772847a91061a0d4c1ebaa33182f38e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97616bcae607d0d5aa2e6fd280fe8aeb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a97616bcae607d0d5aa2e6fd280fe8aeb">loadFromStream</a> (sf::InputStream &amp;stream, <a class="el" href="classke_1_1_shader.html#af1594eb09ad3c5d612e742f77deb03f0">Shader::Type</a> type)</td></tr>
+<tr class="separator:a97616bcae607d0d5aa2e6fd280fe8aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a0bcdefb77c562f755440104cc32e8a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a7a0bcdefb77c562f755440104cc32e8a">loadFromStream</a> (sf::InputStream &amp;vertexShaderStream, sf::InputStream &amp;fragmentShaderStream)</td></tr>
 <tr class="separator:a7a0bcdefb77c562f755440104cc32e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1952374802da8fd073dcb782056e571c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a1952374802da8fd073dcb782056e571c">setUniform</a> (std::string const &amp;name, float x)</td></tr>
-<tr class="separator:a1952374802da8fd073dcb782056e571c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a971496ade238d7eda46900dc1d6c1b94"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a971496ade238d7eda46900dc1d6c1b94">getUniformFloat</a> (std::string const &amp;name)</td></tr>
-<tr class="separator:a971496ade238d7eda46900dc1d6c1b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a8c0ab0244851579194a211c2a2212a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a1a8c0ab0244851579194a211c2a2212a">setUniform</a> (std::string const &amp;name, sf::Vector2f const &amp;vector)</td></tr>
-<tr class="separator:a1a8c0ab0244851579194a211c2a2212a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30e6afd03c2a07875949552c0c3a79fb"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a30e6afd03c2a07875949552c0c3a79fb">getUniformVector2f</a> (std::string const &amp;name)</td></tr>
-<tr class="separator:a30e6afd03c2a07875949552c0c3a79fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad23394d61af2ecf166c72773156a9796"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#ad23394d61af2ecf166c72773156a9796">setUniform</a> (std::string const &amp;name, sf::Vector3f const &amp;vector)</td></tr>
-<tr class="separator:ad23394d61af2ecf166c72773156a9796"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87fd6d94212fbf699c061371b3d6a188"><td class="memItemLeft" align="right" valign="top">sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a87fd6d94212fbf699c061371b3d6a188">getUniformVector3f</a> (std::string const &amp;name)</td></tr>
-<tr class="separator:a87fd6d94212fbf699c061371b3d6a188"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab98ec6d383d2b6a040ba7f8fecd1437c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#ab98ec6d383d2b6a040ba7f8fecd1437c">setUniform</a> (std::string const &amp;name, sf::Color const &amp;color)</td></tr>
-<tr class="separator:ab98ec6d383d2b6a040ba7f8fecd1437c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a620fb38a48a19964110b8dfb8cd74e1f"><td class="memItemLeft" align="right" valign="top">sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a620fb38a48a19964110b8dfb8cd74e1f">getUniformColor</a> (std::string const &amp;name)</td></tr>
-<tr class="separator:a620fb38a48a19964110b8dfb8cd74e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addb4ac44569ec8f6d082f3471aa5af7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#addb4ac44569ec8f6d082f3471aa5af7b">setUniform</a> (std::string const &amp;name, sf::Texture const &amp;texture)</td></tr>
-<tr class="separator:addb4ac44569ec8f6d082f3471aa5af7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca6125aa0e1f3719bf80b93f7de32d3a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#aca6125aa0e1f3719bf80b93f7de32d3a">loadFromStream</a> (sf::InputStream &amp;vertexShaderStream, sf::InputStream &amp;geometryShaderStream, sf::InputStream &amp;fragmentShaderStream)</td></tr>
+<tr class="separator:aca6125aa0e1f3719bf80b93f7de32d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1250595aef33fa2ada45e53aa925506"><td class="memItemLeft" align="right" valign="top">sf::Uint32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#ad1250595aef33fa2ada45e53aa925506">getShaderType</a> () const</td></tr>
+<tr class="separator:ad1250595aef33fa2ada45e53aa925506"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a416964315ef1cb7d3f717019ae29f097"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a416964315ef1cb7d3f717019ae29f097">isVertex</a> () const</td></tr>
+<tr class="separator:a416964315ef1cb7d3f717019ae29f097"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d02be5009e8f432c9a5d66769a6dde9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a9d02be5009e8f432c9a5d66769a6dde9">isFragment</a> () const</td></tr>
+<tr class="separator:a9d02be5009e8f432c9a5d66769a6dde9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14ac9780ab0fc52a1b7fba218f3f7490"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a14ac9780ab0fc52a1b7fba218f3f7490">isGeometry</a> () const</td></tr>
+<tr class="separator:a14ac9780ab0fc52a1b7fba218f3f7490"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e7f15882c0552a60855dd5cdc01e28b"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a2e7f15882c0552a60855dd5cdc01e28b">getVertexFilename</a> () const</td></tr>
+<tr class="separator:a2e7f15882c0552a60855dd5cdc01e28b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93b67ad4b8acc0045306405c6d61e9e0"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a93b67ad4b8acc0045306405c6d61e9e0">getFragmentFilename</a> () const</td></tr>
+<tr class="separator:a93b67ad4b8acc0045306405c6d61e9e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89db25c898fce85ccbba8c2729c4d649"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a89db25c898fce85ccbba8c2729c4d649">getGeometryFilename</a> () const</td></tr>
+<tr class="separator:a89db25c898fce85ccbba8c2729c4d649"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classke_1_1_resource"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classke_1_1_resource')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classke_1_1_resource.html">ke::Resource</a></td></tr>
 <tr class="memitem:af46420b3f8cdf3f4d0936a428026f238 inherit pub_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#af46420b3f8cdf3f4d0936a428026f238">Resource</a> ()</td></tr>
 <tr class="separator:af46420b3f8cdf3f4d0936a428026f238 inherit pub_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0cba1042226343e9716d4cfcb246418 inherit pub_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#ae0cba1042226343e9716d4cfcb246418">~Resource</a> ()</td></tr>
 <tr class="separator:ae0cba1042226343e9716d4cfcb246418 inherit pub_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a436cf90493ecf97b6d5c7f05276d7196 inherit pub_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a436cf90493ecf97b6d5c7f05276d7196">getType</a> ()=0</td></tr>
+<tr class="separator:a436cf90493ecf97b6d5c7f05276d7196 inherit pub_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a213e0f88d8efb519cf9aa3ed6903934a inherit pub_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a213e0f88d8efb519cf9aa3ed6903934a">setName</a> (const std::string &amp;name)</td></tr>
+<tr class="separator:a213e0f88d8efb519cf9aa3ed6903934a inherit pub_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45817fcf76b1af84e515b4dbfed80790 inherit pub_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a45817fcf76b1af84e515b4dbfed80790">getName</a> () const</td></tr>
+<tr class="separator:a45817fcf76b1af84e515b4dbfed80790 inherit pub_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54e9ce66360b3498af3f8b1a93a5d982 inherit pub_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a54e9ce66360b3498af3f8b1a93a5d982">setLoaded</a> (bool loaded)</td></tr>
+<tr class="separator:a54e9ce66360b3498af3f8b1a93a5d982 inherit pub_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af20ecd72c4e61afb47d109b376cf9cab inherit pub_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#af20ecd72c4e61afb47d109b376cf9cab">isLoaded</a> () const</td></tr>
 <tr class="separator:af20ecd72c4e61afb47d109b376cf9cab inherit pub_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:ad4dbc5b3db6e8aace4325c1a9f647ca7"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#ad4dbc5b3db6e8aace4325c1a9f647ca7">mFloats</a></td></tr>
-<tr class="separator:ad4dbc5b3db6e8aace4325c1a9f647ca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaeb91afb9d7d47ff3b0f56246418bb29"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, sf::Vector2f &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#aaeb91afb9d7d47ff3b0f56246418bb29">mVectors2f</a></td></tr>
-<tr class="separator:aaeb91afb9d7d47ff3b0f56246418bb29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf818a601b65f6281cd523ff94e21f2f"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, sf::Vector3f &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#abf818a601b65f6281cd523ff94e21f2f">mVectors3f</a></td></tr>
-<tr class="separator:abf818a601b65f6281cd523ff94e21f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a398e35670c6c731f65a43891d3eb86e4"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, sf::Color &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a398e35670c6c731f65a43891d3eb86e4">mColors</a></td></tr>
-<tr class="separator:a398e35670c6c731f65a43891d3eb86e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:aa09d0edc48b0191876b68012f8a21ce2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#aa09d0edc48b0191876b68012f8a21ce2">readFromXml</a> (<a class="el" href="classke_1_1_resource_manager.html">ResourceManager</a> *manager, const pugi::xml_node &amp;node)</td></tr>
+<tr class="separator:aa09d0edc48b0191876b68012f8a21ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9004be5628970bc58811cad833617708"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#a9004be5628970bc58811cad833617708">writeToXml</a> (<a class="el" href="classke_1_1_resource.html">Resource</a> *resource, pugi::xml_node &amp;node)</td></tr>
+<tr class="separator:a9004be5628970bc58811cad833617708"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf75c1d401c8afeb5531f2deddd5fbc8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_shader.html#abf75c1d401c8afeb5531f2deddd5fbc8">registerType</a> (<a class="el" href="classke_1_1_resource_manager.html">ResourceManager</a> &amp;manager)</td></tr>
+<tr class="separator:abf75c1d401c8afeb5531f2deddd5fbc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_classke_1_1_resource"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classke_1_1_resource')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classke_1_1_resource.html">ke::Resource</a></td></tr>
+<tr class="memitem:a7610ae55ad9fb5cc9834bba9b87c2cc2 inherit pub_static_methods_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a7610ae55ad9fb5cc9834bba9b87c2cc2">getStaticType</a> ()</td></tr>
+<tr class="separator:a7610ae55ad9fb5cc9834bba9b87c2cc2 inherit pub_static_methods_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_classke_1_1_resource"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classke_1_1_resource')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classke_1_1_resource.html">ke::Resource</a></td></tr>
+<tr class="memitem:a84b256f432bd59bd73d7a70c3692f6d2 inherit pro_attribs_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#a84b256f432bd59bd73d7a70c3692f6d2">mName</a></td></tr>
+<tr class="separator:a84b256f432bd59bd73d7a70c3692f6d2 inherit pro_attribs_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae88989bcbe7bd566673ffc4aee4856b5 inherit pro_attribs_classke_1_1_resource"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classke_1_1_resource.html#ae88989bcbe7bd566673ffc4aee4856b5">mLoaded</a></td></tr>
 <tr class="separator:ae88989bcbe7bd566673ffc4aee4856b5 inherit pro_attribs_classke_1_1_resource"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="af1594eb09ad3c5d612e742f77deb03f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1594eb09ad3c5d612e742f77deb03f0">&sect;&nbsp;</a></span>Type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classke_1_1_shader.html#af1594eb09ad3c5d612e742f77deb03f0">ke::Shader::Type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="af1594eb09ad3c5d612e742f77deb03f0ab17e489b88b538f40bb28032aa1b5119"></a>None&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af1594eb09ad3c5d612e742f77deb03f0a34efccba52b19927513631ee5e939250"></a>Vertex&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af1594eb09ad3c5d612e742f77deb03f0a603891ca763951c679e3f9d433c42b1a"></a>Fragment&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af1594eb09ad3c5d612e742f77deb03f0afa6d4d63adb69cd739f1430f56bf4cbb"></a>Geometry&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa5935c40299833cecdcf8803d5405e7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5935c40299833cecdcf8803d5405e7d">&sect;&nbsp;</a></span>Shader() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5935c40299833cecdcf8803d5405e7d">&sect;&nbsp;</a></span>Shader()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -179,137 +224,153 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a561b0583b06a2a276c4f5ccc764d75bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a561b0583b06a2a276c4f5ccc764d75bd">&sect;&nbsp;</a></span>Shader() <span class="overload">[2/3]</span></h2>
+<a id="a3cc2f5981f0bb0633ff3fff695f8215f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cc2f5981f0bb0633ff3fff695f8215f">&sect;&nbsp;</a></span>~Shader()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ke::Shader::Shader </td>
+          <td class="memname">ke::Shader::~Shader </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>filename</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">sf::Shader::Type&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a476ea4272f49b5d2b313ba285e4685f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a476ea4272f49b5d2b313ba285e4685f7">&sect;&nbsp;</a></span>Shader() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ke::Shader::Shader </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>vertexShaderFilename</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>fragmentShaderFilename</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a620fb38a48a19964110b8dfb8cd74e1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a620fb38a48a19964110b8dfb8cd74e1f">&sect;&nbsp;</a></span>getUniformColor()</h2>
+<a id="a93b67ad4b8acc0045306405c6d61e9e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93b67ad4b8acc0045306405c6d61e9e0">&sect;&nbsp;</a></span>getFragmentFilename()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">sf::Color ke::Shader::getUniformColor </td>
+          <td class="memname">const std::string &amp; ke::Shader::getFragmentFilename </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a971496ade238d7eda46900dc1d6c1b94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a971496ade238d7eda46900dc1d6c1b94">&sect;&nbsp;</a></span>getUniformFloat()</h2>
+<a id="a89db25c898fce85ccbba8c2729c4d649"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89db25c898fce85ccbba8c2729c4d649">&sect;&nbsp;</a></span>getGeometryFilename()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float ke::Shader::getUniformFloat </td>
+          <td class="memname">const std::string &amp; ke::Shader::getGeometryFilename </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a30e6afd03c2a07875949552c0c3a79fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30e6afd03c2a07875949552c0c3a79fb">&sect;&nbsp;</a></span>getUniformVector2f()</h2>
+<a id="ad1250595aef33fa2ada45e53aa925506"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1250595aef33fa2ada45e53aa925506">&sect;&nbsp;</a></span>getShaderType()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">sf::Vector2f ke::Shader::getUniformVector2f </td>
+          <td class="memname">sf::Uint32 ke::Shader::getShaderType </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a87fd6d94212fbf699c061371b3d6a188"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87fd6d94212fbf699c061371b3d6a188">&sect;&nbsp;</a></span>getUniformVector3f()</h2>
+<a id="a2e7f15882c0552a60855dd5cdc01e28b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e7f15882c0552a60855dd5cdc01e28b">&sect;&nbsp;</a></span>getVertexFilename()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">sf::Vector3f ke::Shader::getUniformVector3f </td>
+          <td class="memname">const std::string &amp; ke::Shader::getVertexFilename </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a3b41afbf4e1803f4904603d23e4dc1eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b41afbf4e1803f4904603d23e4dc1eb">&sect;&nbsp;</a></span>loadFromFile() <span class="overload">[1/2]</span></h2>
+<a id="a9d02be5009e8f432c9a5d66769a6dde9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d02be5009e8f432c9a5d66769a6dde9">&sect;&nbsp;</a></span>isFragment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Shader::isFragment </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a14ac9780ab0fc52a1b7fba218f3f7490"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14ac9780ab0fc52a1b7fba218f3f7490">&sect;&nbsp;</a></span>isGeometry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Shader::isGeometry </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a416964315ef1cb7d3f717019ae29f097"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a416964315ef1cb7d3f717019ae29f097">&sect;&nbsp;</a></span>isVertex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Shader::isVertex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5ed6b3643f854b4d169ca1882096ba65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ed6b3643f854b4d169ca1882096ba65">&sect;&nbsp;</a></span>loadFromFile() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -317,13 +378,13 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">bool ke::Shader::loadFromFile </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>filename</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::Shader::Type&#160;</td>
+          <td class="paramtype"><a class="el" href="classke_1_1_shader.html#af1594eb09ad3c5d612e742f77deb03f0">Shader::Type</a>&#160;</td>
           <td class="paramname"><em>type</em>&#160;</td>
         </tr>
         <tr>
@@ -336,8 +397,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="afb6c7d11852c598c97d22722d8988198"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb6c7d11852c598c97d22722d8988198">&sect;&nbsp;</a></span>loadFromFile() <span class="overload">[2/2]</span></h2>
+<a id="a12a625ffc884cdf4448259550e1f8035"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12a625ffc884cdf4448259550e1f8035">&sect;&nbsp;</a></span>loadFromFile() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -345,13 +406,13 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">bool ke::Shader::loadFromFile </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>vertexShaderFilename</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>fragmentShaderFilename</em>&#160;</td>
         </tr>
         <tr>
@@ -364,8 +425,42 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9348c3bba24a2a77433b81f01634e42e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9348c3bba24a2a77433b81f01634e42e">&sect;&nbsp;</a></span>loadFromMemory() <span class="overload">[1/2]</span></h2>
+<a id="ad74ca05ff01f377f5310f864e7888906"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad74ca05ff01f377f5310f864e7888906">&sect;&nbsp;</a></span>loadFromFile() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Shader::loadFromFile </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>vertexShaderFilename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>geometryShaderFilename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>fragmentShaderFilename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac8f19730c8e33e55032c6d6436c43859"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8f19730c8e33e55032c6d6436c43859">&sect;&nbsp;</a></span>loadFromMemory() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -373,13 +468,13 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">bool ke::Shader::loadFromMemory </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>shader</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::Shader::Type&#160;</td>
+          <td class="paramtype"><a class="el" href="classke_1_1_shader.html#af1594eb09ad3c5d612e742f77deb03f0">Shader::Type</a>&#160;</td>
           <td class="paramname"><em>type</em>&#160;</td>
         </tr>
         <tr>
@@ -392,8 +487,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a280f843f6970038f0b3762a11dbc0d04"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a280f843f6970038f0b3762a11dbc0d04">&sect;&nbsp;</a></span>loadFromMemory() <span class="overload">[2/2]</span></h2>
+<a id="ac2de10e75706463143f2b7a24a612391"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2de10e75706463143f2b7a24a612391">&sect;&nbsp;</a></span>loadFromMemory() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -401,13 +496,13 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">bool ke::Shader::loadFromMemory </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>vertexShader</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>fragmentShader</em>&#160;</td>
         </tr>
         <tr>
@@ -420,8 +515,42 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a655d41a581dd5d003e52c884d57212e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a655d41a581dd5d003e52c884d57212e0">&sect;&nbsp;</a></span>loadFromStream() <span class="overload">[1/2]</span></h2>
+<a id="a9772847a91061a0d4c1ebaa33182f38e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9772847a91061a0d4c1ebaa33182f38e">&sect;&nbsp;</a></span>loadFromMemory() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ke::Shader::loadFromMemory </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>vertexShader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>geometryShader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>fragmentShader</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a97616bcae607d0d5aa2e6fd280fe8aeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97616bcae607d0d5aa2e6fd280fe8aeb">&sect;&nbsp;</a></span>loadFromStream() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -435,7 +564,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::Shader::Type&#160;</td>
+          <td class="paramtype"><a class="el" href="classke_1_1_shader.html#af1594eb09ad3c5d612e742f77deb03f0">Shader::Type</a>&#160;</td>
           <td class="paramname"><em>type</em>&#160;</td>
         </tr>
         <tr>
@@ -449,7 +578,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a7a0bcdefb77c562f755440104cc32e8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a0bcdefb77c562f755440104cc32e8a">&sect;&nbsp;</a></span>loadFromStream() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a0bcdefb77c562f755440104cc32e8a">&sect;&nbsp;</a></span>loadFromStream() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -476,23 +605,29 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1952374802da8fd073dcb782056e571c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1952374802da8fd073dcb782056e571c">&sect;&nbsp;</a></span>setUniform() <span class="overload">[1/5]</span></h2>
+<a id="aca6125aa0e1f3719bf80b93f7de32d3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca6125aa0e1f3719bf80b93f7de32d3a">&sect;&nbsp;</a></span>loadFromStream() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ke::Shader::setUniform </td>
+          <td class="memname">bool ke::Shader::loadFromStream </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
+          <td class="paramtype">sf::InputStream &amp;&#160;</td>
+          <td class="paramname"><em>vertexShaderStream</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>x</em>&#160;</td>
+          <td class="paramtype">sf::InputStream &amp;&#160;</td>
+          <td class="paramname"><em>geometryShaderStream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::InputStream &amp;&#160;</td>
+          <td class="paramname"><em>fragmentShaderStream</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -504,121 +639,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1a8c0ab0244851579194a211c2a2212a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a8c0ab0244851579194a211c2a2212a">&sect;&nbsp;</a></span>setUniform() <span class="overload">[2/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ke::Shader::setUniform </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">sf::Vector2f const &amp;&#160;</td>
-          <td class="paramname"><em>vector</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad23394d61af2ecf166c72773156a9796"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad23394d61af2ecf166c72773156a9796">&sect;&nbsp;</a></span>setUniform() <span class="overload">[3/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ke::Shader::setUniform </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">sf::Vector3f const &amp;&#160;</td>
-          <td class="paramname"><em>vector</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab98ec6d383d2b6a040ba7f8fecd1437c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab98ec6d383d2b6a040ba7f8fecd1437c">&sect;&nbsp;</a></span>setUniform() <span class="overload">[4/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ke::Shader::setUniform </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">sf::Color const &amp;&#160;</td>
-          <td class="paramname"><em>color</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="addb4ac44569ec8f6d082f3471aa5af7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#addb4ac44569ec8f6d082f3471aa5af7b">&sect;&nbsp;</a></span>setUniform() <span class="overload">[5/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ke::Shader::setUniform </td>
-          <td>(</td>
-          <td class="paramtype">std::string const &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">sf::Texture const &amp;&#160;</td>
-          <td class="paramname"><em>texture</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a398e35670c6c731f65a43891d3eb86e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a398e35670c6c731f65a43891d3eb86e4">&sect;&nbsp;</a></span>mColors</h2>
+<a id="aa09d0edc48b0191876b68012f8a21ce2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa09d0edc48b0191876b68012f8a21ce2">&sect;&nbsp;</a></span>readFromXml()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -627,20 +649,34 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;std::string, sf::Color&gt; ke::Shader::mColors</td>
+          <td class="memname">void ke::Shader::readFromXml </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classke_1_1_resource_manager.html">ResourceManager</a> *&#160;</td>
+          <td class="paramname"><em>manager</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const pugi::xml_node &amp;&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ad4dbc5b3db6e8aace4325c1a9f647ca7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4dbc5b3db6e8aace4325c1a9f647ca7">&sect;&nbsp;</a></span>mFloats</h2>
+<a id="abf75c1d401c8afeb5531f2deddd5fbc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf75c1d401c8afeb5531f2deddd5fbc8">&sect;&nbsp;</a></span>registerType()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -649,20 +685,24 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;std::string, float&gt; ke::Shader::mFloats</td>
+          <td class="memname">void ke::Shader::registerType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classke_1_1_resource_manager.html">ResourceManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>manager</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aaeb91afb9d7d47ff3b0f56246418bb29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaeb91afb9d7d47ff3b0f56246418bb29">&sect;&nbsp;</a></span>mVectors2f</h2>
+<a id="a9004be5628970bc58811cad833617708"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9004be5628970bc58811cad833617708">&sect;&nbsp;</a></span>writeToXml()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -671,34 +711,26 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;std::string, sf::Vector2f&gt; ke::Shader::mVectors2f</td>
+          <td class="memname">void ke::Shader::writeToXml </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classke_1_1_resource.html">Resource</a> *&#160;</td>
+          <td class="paramname"><em>resource</em>, </td>
         </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="abf818a601b65f6281cd523ff94e21f2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf818a601b65f6281cd523ff94e21f2f">&sect;&nbsp;</a></span>mVectors3f</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;std::string, sf::Vector3f&gt; ke::Shader::mVectors3f</td>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">pugi::xml_node &amp;&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -706,8 +738,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Keengine/Sources/Application/<a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a></li>
-<li>Keengine/Sources/Application/<a class="el" href="_resource_manager_8cpp.html">ResourceManager.cpp</a></li>
+<li>Keengine/Sources/System/<a class="el" href="_sfml_resources_8hpp_source.html">SfmlResources.hpp</a></li>
+<li>Keengine/Sources/System/<a class="el" href="_sfml_resources_8cpp.html">SfmlResources.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -2,7 +2,6 @@ var searchData=
 [
   ['scene',['Scene',['../classke_1_1_scene.html',1,'ke']]],
   ['scenecomponent',['SceneComponent',['../classke_1_1_scene_component.html',1,'ke']]],
-  ['scriptmanager',['ScriptManager',['../classke_1_1_script_manager.html',1,'ke']]],
   ['serializable',['Serializable',['../classke_1_1_serializable.html',1,'ke']]],
   ['serializer',['Serializer',['../classke_1_1_serializer.html',1,'ke']]],
   ['shader',['Shader',['../classke_1_1_shader.html',1,'ke']]],

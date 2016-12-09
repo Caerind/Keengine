@@ -1,6 +1,8 @@
 #ifndef KE_CONFIG_HPP
 #define KE_CONFIG_HPP
 
+#include <sstream>
+
 #include <SFML/Config.hpp>
 
 #ifndef SFML_STATIC
@@ -24,22 +26,23 @@
 #ifdef SFML_SYSTEM_ANDROID
 	#define KEENGINE_MOBILE
 	#define KEENGINE_ANDROID
-#elif SFML_SYSTEM_IOS
+#elif defined SFML_SYSTEM_IOS
 	#define KEENGINE_MOBILE
 	#define KEENGINE_MACOS
 #else
 	#define KEENGINE_DESKTOP
 	#ifdef SFML_SYSTEM_WINDOWS
 		#define KEENGINE_WINDOWS
-	#elif SFML_SYSTEM_MACOS
+	#elif defined SFML_SYSTEM_MACOS
 		#define KEENGINE_MACOS
-	#elif SFML_SYSTEM_LINUX
+	#elif defined SFML_SYSTEM_LINUX
 		#define KEENGINE_LINUX
-	#elif SFML_SYSTEM_FREEBSD
+	#elif defined SFML_SYSTEM_FREEBSD
 		#define KEENGINE_FREEBSD
 	#endif
 #endif
 
+#define KEENGINE
 #define KEENGINE_VERSION_MAJOR 0
 #define KEENGINE_VERSION_MINOR 1
 
@@ -117,6 +120,41 @@ namespace ke
 		#endif	
 	}
 
+	inline std::string getPlatformName()
+	{
+		if (isAndroid())
+		{
+			return "Android";
+		}
+		else if (isIOS())
+		{
+			return "IOS";
+		}
+		else if (isWindows())
+		{
+			return "Windows";
+		}
+		else if (isMacOS())
+		{
+			return "MacOS";
+		}
+		else if (isLinux())
+		{
+			return "Linux";
+		}
+		else if (isFreeBSD())
+		{
+			return "FreeBSD";
+		}
+		return "Unknown";
+	}
+
+	inline std::string getVersionName()
+	{
+		std::ostringstream oss;
+		oss << KEENGINE_VERSION_MAJOR << "." << KEENGINE_VERSION_MINOR;
+		return oss.str();
+	}
 }
 
 #endif // KE_CONFIG_HPP

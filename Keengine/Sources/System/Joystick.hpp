@@ -2,11 +2,14 @@
 #define KE_JOYSTICK_HPP
 
 #include <cmath>
+
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/Transformable.hpp>
+
+#include "../Config.hpp"
 
 namespace ke
 {
@@ -27,12 +30,16 @@ class Joystick : public sf::Transformable
 
         void setDeltaMax(float dMax);
 
+		void blockHorizontal(bool block);
+		bool isBlockedHorizontal() const;
+		void blockVertical(bool block);
+		bool isBlockedVertical() const;
+
         sf::FloatRect getBounds() const;
         bool contains(sf::Vector2f const& pos) const;
 
-        virtual void handleEvent(sf::Event const& event);
-        virtual void update(sf::Time dt);
-        virtual void render(sf::RenderTarget& target, sf::RenderStates states);
+        virtual void handleEvent(sf::Event const& event, const sf::Vector2f& position);
+        virtual void render(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates());
 
     protected:
         sf::Sprite mButton;
@@ -41,6 +48,8 @@ class Joystick : public sf::Transformable
         unsigned int mFingerId;
         float mDeltaMax;
         bool mMouse;
+		bool mBlockHorizontal;
+		bool mBlockVertical;
 };
 
 } // namespace ke

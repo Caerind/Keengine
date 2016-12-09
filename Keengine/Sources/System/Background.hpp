@@ -6,7 +6,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-#include "../Application/ResourceManager.hpp"
+#include "ResourceManager.hpp"
+#include "SfmlResources.hpp"
 
 namespace ke
 {

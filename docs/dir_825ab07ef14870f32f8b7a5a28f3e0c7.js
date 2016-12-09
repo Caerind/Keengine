@@ -2,8 +2,6 @@ var dir_825ab07ef14870f32f8b7a5a28f3e0c7 =
 [
     [ "AnimatorComponent.cpp", "_animator_component_8cpp.html", null ],
     [ "AnimatorComponent.hpp", "_animator_component_8hpp.html", [
-      [ "Frame", "structke_1_1_frame.html", "structke_1_1_frame" ],
-      [ "Animation", "classke_1_1_animation.html", "classke_1_1_animation" ],
       [ "AnimatorComponent", "classke_1_1_animator_component.html", "classke_1_1_animator_component" ]
     ] ],
     [ "AudioListenerComponent.cpp", "_audio_listener_component_8cpp.html", null ],

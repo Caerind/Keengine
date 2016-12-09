@@ -3,8 +3,9 @@
 
 #include <SFML/System/Time.hpp>
 
-#include "../Application/Application.hpp"
 #include "../ExtLibs/LetThereBeLight.hpp"
+
+#include "../System/Application.hpp"
 #include "../System/Background.hpp"
 
 #include "Actor.hpp"
@@ -30,12 +31,8 @@ class Scene
 
 	public:
 		// Ctor & Dtor
-		Scene(const std::string& id = "", sf::Uint32 options = Options::None);
+		Scene(sf::Uint32 options = Options::None);
 		virtual ~Scene();
-	
-		// Id managemenent
-		const std::string& getId() const;
-		void setId(const std::string& id);
 
 		// Usage
 		void handleEvent(const sf::Event& event);
@@ -146,8 +143,8 @@ class Scene
 		static Application& getApplication();
 
 		// Serialization
-		bool loadFromXml(const std::string& filepath);
-		void saveToXml(const std::string& filepath);
+		bool loadFromXml(const std::string& filename);
+		void saveToXml(const std::string& filename);
 
 	private:
 		static bool sortActor(Actor::Ptr a, Actor::Ptr b);
@@ -158,8 +155,6 @@ class Scene
 		void renderSimple(sf::RenderTarget& target);
 
 	protected:
-		std::string mId; ///< Id of the scene
-
 		sf::Uint32 mOptions; ///< Options used by the scene
 
 		std::size_t mActorIdCounter; ///< Actor Id Counter

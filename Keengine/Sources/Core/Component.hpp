@@ -8,8 +8,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
-#include "../Application/Application.hpp"
-
+#include "../System/Application.hpp"
 #include "../System/Serializable.hpp"
 #include "../System/Serializer.hpp"
 #include "../System/Type.hpp"

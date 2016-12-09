@@ -5,12 +5,11 @@
 namespace ke
 {
 
-Scene::Scene(const std::string& id, sf::Uint32 options)
-	: mId(id)
-	, mOptions(options)
+Scene::Scene(sf::Uint32 options)
+	: mOptions(options)
 	, mActorIdCounter(1)
 	, mActors()
-	, mView(getApplication().getDefaultView())
+	, mView(getApplication().getWindow().getDefaultView()) // TODO : Default Scene View
 	, mPhysic(nullptr)
 	, mLights(nullptr)
 	, mSceneTexture(nullptr)
@@ -41,16 +40,6 @@ Scene::~Scene()
 	mSceneRoot = nullptr;
 }
 
-const std::string& Scene::getId() const
-{
-	return mId;
-}
-
-void Scene::setId(const std::string& id)
-{
-	mId = id;
-}
-
 void Scene::handleEvent(const sf::Event& event)
 {
 }
@@ -74,8 +63,8 @@ void Scene::update(sf::Time dt)
 		}
 	}
 
-	getApplication().setDebugInfo("Actors", getActorCount());
-	getApplication().setDebugInfo("MouseView", ke::toString(ke::Application::getMousePositionView(mView)));
+	getApplication().getWindow().setDebugInfo("Actors", toString(getActorCount()));
+	getApplication().getWindow().setDebugInfo("MouseView", toString(getApplication().getWindow().getMousePositionView(mView)));
 
 	if (usePhysic() && mPhysic != nullptr)
 	{
@@ -297,10 +286,9 @@ Application& Scene::getApplication()
 	return Application::instance();
 }
 
-bool Scene::loadFromXml(const std::string& filepath)
+bool Scene::loadFromXml(const std::string& filename)
 {
 	Serializer xml;
-	std::string filename = filepath + "scene" + ((mId != "") ? "-" + mId : "") + ".xml";
 	if (!xml.openDocument(filename, false, "Scene"))
 	{
 		getLog() << ke::Log::Error << "Cannot open scene : " + filename;
@@ -483,10 +471,10 @@ bool Scene::loadFromXml(const std::string& filepath)
 	return true;
 }
 
-void Scene::saveToXml(const std::string& filepath)
+void Scene::saveToXml(const std::string& filename)
 {
 	Serializer xml;
-	xml.openDocument(filepath + "scene" + ((mId != "") ? "-" + mId : "") + ".xml", true, "Scene");
+	xml.openDocument(filename, true, "Scene");
 
 	// Save Scene
 	xml.save("count", mActorIdCounter);
@@ -607,7 +595,7 @@ void Scene::initLights()
 {
 	if (!getApplication().hasResource("pointLightTexture"))
 	{
-		Texture& texture = getApplication().createResource<Texture>("pointLightTexture");
+		Texture& texture = getApplication().getResource<Texture>("pointLightTexture");
 		if (!texture.loadFromMemory(pointLightTexture, (sizeof(pointLightTexture) / sizeof(*pointLightTexture))))
 		{
 			getLog() << "World - Can't load pointLightTexture";
@@ -615,7 +603,7 @@ void Scene::initLights()
 		texture.setSmooth(true);
 	}
 	mLights = std::make_shared<ltbl::LightSystem>();
-	mLights->create({ -1000.f, -1000.f, 2000.f, 2000.f }, getApplication().getSize());
+	mLights->create({ -1000.f, -1000.f, 2000.f, 2000.f }, getApplication().getWindow().getSize());
 }
 
 void Scene::renderComplex(sf::RenderTarget& target)
