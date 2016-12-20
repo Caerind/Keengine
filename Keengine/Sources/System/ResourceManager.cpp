@@ -13,11 +13,6 @@ Resource::~Resource()
 {
 }
 
-std::string Resource::getStaticType()
-{
-	return "Resource";
-}
-
 void Resource::setName(const std::string& name)
 {
 	mName = name;

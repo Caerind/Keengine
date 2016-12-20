@@ -8,6 +8,8 @@
 #include "../System/Serializer.hpp"
 #include "../System/Type.hpp"
 
+#include "../ExtLibs/fast_dynamic_cast.hpp"
+
 #include "Component.hpp"
 #include "SceneComponent.hpp"
 #include "../Components/Components.hpp"
@@ -67,6 +69,7 @@ class Actor : public Serializable
 		virtual void initialize();
 
 		// Update & render
+		virtual void updateAll(sf::Time dt);
 		virtual void update(sf::Time dt);
 		void updateComponents(sf::Time dt);
 		virtual void render(sf::RenderTarget& target);
@@ -99,7 +102,7 @@ class Actor : public Serializable
 			{
 				return nullptr;
 			}
-			return std::dynamic_pointer_cast<T>(c);
+			return fast_dynamic_pointer_cast<T>(c);
 		}
 		template <typename T>
 		std::shared_ptr<T> getComponentT(const std::string& id)
@@ -109,7 +112,7 @@ class Actor : public Serializable
 			{
 				return nullptr;
 			}
-			return std::dynamic_pointer_cast<T>(c);
+			return fast_dynamic_pointer_cast<T>(c);
 		}
 
 		// Physic
@@ -162,7 +165,7 @@ class Actor : public Serializable
 						return nullptr;
 					}
 					serializer.end();
-					return std::dynamic_pointer_cast<T>(component);
+					return fast_dynamic_pointer_cast<T>(component);
 				}
 				serializer.end();
 			}

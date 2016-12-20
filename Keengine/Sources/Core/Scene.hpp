@@ -4,6 +4,7 @@
 #include <SFML/System/Time.hpp>
 
 #include "../ExtLibs/LetThereBeLight.hpp"
+#include "../ExtLibs/fast_dynamic_cast.hpp"
 
 #include "../System/Application.hpp"
 #include "../System/Background.hpp"
@@ -72,7 +73,7 @@ class Scene
 			{
 				return nullptr;
 			}
-			return std::dynamic_pointer_cast<T>(actor);
+			return fast_dynamic_pointer_cast<T>(actor);
 		}
 		template <typename T>
 		std::shared_ptr<T> getActorT(std::size_t index) const
@@ -82,7 +83,7 @@ class Scene
 			{
 				return nullptr;
 			}
-			return std::dynamic_pointer_cast<T>(actor);
+			return fast_dynamic_pointer_cast<T>(actor);
 		}
 		std::size_t getActorCount() const;
 
@@ -111,7 +112,7 @@ class Scene
 			auto itr = mEffects.find(order);
 			if (itr != mEffects.end())
 			{
-				return std::dynamic_pointer_cast<T>(itr->second);
+				return fast_dynamic_pointer_cast<T>(itr->second);
 			}
 			return nullptr;
 		}

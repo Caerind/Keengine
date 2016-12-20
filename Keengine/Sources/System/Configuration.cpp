@@ -1,5 +1,7 @@
 #include "Configuration.hpp"
 
+#include "../ExtLibs/fast_dynamic_cast.hpp"
+
 namespace ke
 {
 	
@@ -13,6 +15,7 @@ Configuration::~Configuration()
 
 bool Configuration::loadFromFile(const std::string& filename)
 {
+	mFilename = filename;
 	std::ifstream file(filename);
 	if (file.is_open())
 	{
@@ -30,20 +33,18 @@ bool Configuration::loadFromFile(const std::string& filename)
 					std::size_t found = line.find_first_of(" = ");
 					if (found != std::string::npos)
 					{
-						mProperties[line.substr(0, found)] = line.substr(found + 3);
+						mProperties.push_back(std::pair<std::string, Variant>(line.substr(0, found), line.substr(found + 3)));
 					}
 				}
 			}
 		}
 		file.close();
 		setLoaded(false);
-		mFilename = filename;
 		return true;
 	}
 	else
 	{
 		setLoaded(false);
-		mFilename = "";
 		return false;
 	}
 }
@@ -65,7 +66,7 @@ bool Configuration::loadFromMemory(const std::string& memory)
 				std::size_t found = line.find_first_of(" = ");
 				if (found != std::string::npos)
 				{
-					mProperties[line.substr(0, found)] = line.substr(found + 3);
+					mProperties.push_back(std::pair<std::string, Variant>(line.substr(0, found), line.substr(found + 3)));
 				}
 			}
 		}
@@ -88,9 +89,9 @@ bool Configuration::saveToFile(const std::string& filename)
 	std::ofstream file(filename);
 	if (file.is_open())
 	{
-		for (auto itr = mProperties.begin(); itr != mProperties.end(); itr++)
+		for (std::size_t i = 0; i < mProperties.size(); i++)
 		{
-			file << itr->first << " = " << itr->second << std::endl;
+			file << mProperties[i].first << " = " << mProperties[i].second << std::endl;
 		}
 		file.close();
 		return true;
@@ -106,17 +107,14 @@ const std::string& Configuration::getFilename()
 	return mFilename;
 }
 
-void Configuration::setProperty(const std::string& id, const std::string& value)
-{
-	mProperties[id] = value;
-}
-
 std::string Configuration::getProperty(const std::string& id) const
 {
-	auto itr = mProperties.find(id);
-	if (itr != mProperties.end())
+	for (std::size_t i = 0; i < mProperties.size(); i++)
 	{
-		return itr->second;
+		if (mProperties[i].first == id)
+		{
+			return mProperties[i].second;
+		}
 	}
 	return "";
 }
@@ -134,7 +132,7 @@ void Configuration::readFromXml(ResourceManager* manager, const pugi::xml_node& 
 
 void Configuration::writeToXml(Resource* resource, pugi::xml_node& node)
 {
-	Configuration* configuration = dynamic_cast<Configuration*>(resource);
+	Configuration* configuration = fast_dynamic_cast<Configuration*>(resource);
 	if (configuration != nullptr)
 	{
 		if (configuration->getFilename() != "")

@@ -4,7 +4,7 @@
 namespace ke
 {
 
-State::State() : mGui(Application::getWindow().getHandle())
+State::State()
 {
 }
 

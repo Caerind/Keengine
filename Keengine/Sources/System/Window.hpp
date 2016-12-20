@@ -1,13 +1,10 @@
 #ifndef KE_WINDOW_HPP
 #define KE_WINDOW_HPP
 
-#include <array>
 #include <ctime>
 #include <functional>
-#include <iomanip>
 #include <iostream>
 #include <sstream>
-#include <unordered_map>
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -27,10 +24,11 @@ class Window
 {
 	public:
 		Window();
+		Window(sf::VideoMode mode, const std::string& title = "", sf::Uint32 style = sf::Style::Default, const sf::ContextSettings& settings = sf::ContextSettings());
 		~Window();
 
 		void create();
-		void create(sf::VideoMode mode, const std::string& title, sf::Uint32 style = sf::Style::Default, const sf::ContextSettings& settings = sf::ContextSettings());
+		void create(sf::VideoMode mode, const std::string& title = "", sf::Uint32 style = sf::Style::Default, const sf::ContextSettings& settings = sf::ContextSettings());
 		void toFullscreen();
 		void toNonFullscreen();
 		void toggleFullscreen();
@@ -73,9 +71,10 @@ class Window
 		void display();
 
 		void setView(const sf::View& view);
-		void applyDefaultView();
 		const sf::View& getView() const;
-		const sf::View& getDefaultView() const;
+		void setMainView(const sf::View& view);
+		const sf::View& getMainView() const;
+		void applyMainView();
 		sf::IntRect getViewport(const sf::View& view) const; 
 		void mapPixelToCoords(const sf::Vector2i& point, const sf::View& view = sf::View(sf::FloatRect()));
 		void mapCoordsToPixel(const sf::Vector2f& point, const sf::View& view = sf::View(sf::FloatRect()));
@@ -179,7 +178,7 @@ class Window
 		void setInfoCallback(std::function<void(const std::string&)> infoCallback);
 		void setLostFocusCallback(std::function<void()> lostFocusCallback);
 		void setGainedFocusCallback(std::function<void()> gainedFocusCallback);
-		void setCloseCallback(std::function<bool()> closeCallback);
+		void setCloseCallback(std::function<void()> closeCallback);
 
 		enum Action { Console = 0, Screenshot, DebugInfo, Quit, Fullscreen, Count};
 		void setAction(Action action, sf::Keyboard::Key key = sf::Keyboard::Unknown);
@@ -188,11 +187,12 @@ class Window
 		sf::RenderWindow& getHandle();
 
 	private:
+		void init();
 		void onResize();
 
 		bool pollEvent(sf::Event& event);
 		bool waitEvent(sf::Event& event);
-		bool handleInternalEvent(const sf::Event& event);
+		void handleInternalEvent(const sf::Event& event);
 
 		class RWindow : public sf::RenderWindow
 		{
@@ -216,6 +216,12 @@ class Window
 			std::string man;
 		};
 
+		struct Info
+		{
+			std::string name;
+			std::string info;
+		};
+
 	private:
 		RWindow mWindow;
 
@@ -230,6 +236,7 @@ class Window
 		sf::VideoMode mFullscreenVideoMode;
 		sf::VideoMode mNonFullscreenVideoMode;
 		sf::Uint32 mNonFullscreenStyle;
+		sf::View mMainView;
 
 		sf::Image mIcon;
 		std::string mIconPath;
@@ -270,7 +277,7 @@ class Window
 		sf::Font* mDebugInfoFont;
 		bool mDebugInfoFontCreated;
 		sf::Text mDebugInfoText;
-		std::unordered_map<std::string, std::string> mDebugInfo;
+		std::vector<Info> mDebugInfo;
 
 		sf::Clock mFpsClock;
 		unsigned int mFpsCounter;
@@ -282,9 +289,9 @@ class Window
 		std::function<void(const std::string&)> mInfoCallback;
 		std::function<void()> mLostFocusCallback;
 		std::function<void()> mGainedFocusCallback;
-		std::function<bool()> mCloseCallback;
+		std::function<void()> mCloseCallback;
 
-		std::array<sf::Keyboard::Key, Action::Count> mActions;
+		sf::Keyboard::Key mActions[Action::Count];
 };
 
 } // namespace ke

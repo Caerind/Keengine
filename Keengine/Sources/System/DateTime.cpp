@@ -6,7 +6,7 @@ namespace ke
 DateTime::DateTime()
 {
 	std::time_t t = std::time(nullptr);
-	#ifdef KEENGINE_DESKTOP
+	#ifdef _MSC_VER
 		localtime_s(&mTime, &t);
 	#else
 		mTime = *localtime(&t);
@@ -87,15 +87,16 @@ void DateTime::setSeconds(int seconds)
 
 std::string DateTime::toString(const std::string& format)
 {
-	std::ostringstream oss;
-	oss << std::put_time(&mTime, format.c_str());
-	return oss.str();
+	char buffer[30];
+	strftime(buffer, 30, format.c_str(), &mTime);
+	return std::string(buffer);
 }
 
 void DateTime::fromString(const std::string& str, const std::string& format)
 {
 	std::istringstream iss(str);
 	iss >> std::get_time(&mTime, format.c_str());
+	// TODO : Find cross compile alternative (Support on MinGW)
 	update();
 }
 

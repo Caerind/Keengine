@@ -9,7 +9,7 @@ Scene::Scene(sf::Uint32 options)
 	: mOptions(options)
 	, mActorIdCounter(1)
 	, mActors()
-	, mView(getApplication().getWindow().getDefaultView()) // TODO : Default Scene View
+	, mView(getApplication().getWindow().getMainView())
 	, mPhysic(nullptr)
 	, mLights(nullptr)
 	, mSceneTexture(nullptr)
@@ -52,8 +52,7 @@ void Scene::update(sf::Time dt)
 		{
 			if (mActors[i]->isUpdatable())
 			{
-				mActors[i]->updateComponents(dt);
-				mActors[i]->update(dt);
+				mActors[i]->updateAll(dt);
 			}
 
 			if (usePhysic())
@@ -124,9 +123,9 @@ Actor::Ptr Scene::getActor(std::string const & id) const
 	std::size_t size = mActors.size();
 	for (std::size_t i = 0; i < size; i++)
 	{
-		if (mActors[i]->getId() == id)
+		if (mActors.at(i)->getId() == id)
 		{
-			return mActors[i];
+			return mActors.at(i);
 		}
 	}
 	return nullptr;

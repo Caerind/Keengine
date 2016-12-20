@@ -8,25 +8,25 @@ namespace ke
 {
 
 template <typename T>
-T clamp(T const& value, T const& min, T const& max)
+inline T clamp(T& value, const T& min, const T& max)
 {
-    return std::max(min, std::min(value, max));
+    value = std::max(min, std::min(value, max));
 }
 
 template <typename T>
-T abs(T const& value)
+inline T abs(const T& value)
 {
     return std::abs(value);
 }
 
 template <typename T>
-T sqrt(T const& value)
+inline T sqrt(const T& value)
 {
     return std::sqrt(value);
 }
 
 template <typename T>
-std::string decToHex(T decimal)
+inline std::string decToHex(const T& decimal)
 {
     std::ostringstream oss;
     oss << std::hex << decimal;
@@ -34,7 +34,7 @@ std::string decToHex(T decimal)
 }
 
 template <typename T>
-T hexToDec(std::string const& hexadecimal)
+inline T hexToDec(const std::string& hexadecimal)
 {
     std::istringstream iss(hexadecimal);
     T decimal;
@@ -43,7 +43,7 @@ T hexToDec(std::string const& hexadecimal)
 }
 
 template <typename T>
-std::string decToOct(T decimal)
+inline std::string decToOct(const T& decimal)
 {
     std::ostringstream oss;
     oss << std::oct << decimal;
@@ -51,7 +51,7 @@ std::string decToOct(T decimal)
 }
 
 template <typename T>
-T octToDec(std::string const& octal)
+inline T octToDec(const std::string& octal)
 {
     std::istringstream iss(octal);
     T decimal;
@@ -60,7 +60,7 @@ T octToDec(std::string const& octal)
 }
 
 template <typename T>
-std::string decToBin(T decimal)
+inline std::string decToBin(const T& decimal)
 {
     std::vector<bool> values;
     while (decimal > 0)
@@ -78,7 +78,7 @@ std::string decToBin(T decimal)
 }
 
 template <typename T>
-T binToDec(std::string const& binary)
+inline T binToDec(const std::string& binary)
 {
     T decimal = 0, factor = 1;
     std::string temp = binary;

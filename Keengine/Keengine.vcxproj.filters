@@ -96,9 +96,6 @@
     <ClCompile Include="Sources\ExtLibs\pugixml.cpp">
       <Filter>Sources\ExtLibs</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Maths\Trigonometry.cpp">
-      <Filter>Sources\Maths</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Maths\Vector2.cpp">
       <Filter>Sources\Maths</Filter>
     </ClCompile>
@@ -382,9 +379,6 @@
       <Filter>Sources\System</Filter>
     </ClCompile>
     <ClCompile Include="Sources\System\StateManager.cpp">
-      <Filter>Sources\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\System\Theme.cpp">
       <Filter>Sources\System</Filter>
     </ClCompile>
     <ClCompile Include="Sources\System\Tileset.cpp">
@@ -749,11 +743,11 @@
     <ClInclude Include="Sources\System\StateManager.hpp">
       <Filter>Sources\System</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\System\Theme.hpp">
-      <Filter>Sources\System</Filter>
-    </ClInclude>
     <ClInclude Include="Sources\System\Tileset.hpp">
       <Filter>Sources\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\ExtLibs\fast_dynamic_cast.hpp">
+      <Filter>Sources\ExtLibs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

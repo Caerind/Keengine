@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "../ExtLibs/pugixml.hpp"
+#include "../ExtLibs/fast_dynamic_cast.hpp"
 
 #include "Type.hpp"
 
@@ -21,8 +22,7 @@ class Resource
 		Resource();
 		virtual ~Resource();
 
-		static std::string getStaticType();
-		virtual std::string getType() = 0;
+		TYPE(Resource)
 
 		void setName(const std::string& name);
 		const std::string& getName() const;
@@ -83,14 +83,14 @@ inline T& ResourceManager::getResource(const std::string& name, Args&& ... args)
 	{
 		if (resource->getName() == name && T::getStaticType() == resource->getType())
 		{
-			return *dynamic_cast<T*>(resource);
+			return *fast_dynamic_cast<T*>(resource);
 		}
 	}
 
 	// If don't exists, create it
 	mResources.push_back(new T(std::forward<Args>(args)...));
 	mResources.back()->setName(name);
-	return *dynamic_cast<T*>(mResources.back());
+	return *fast_dynamic_cast<T*>(mResources.back());
 }
 
 } // namespace ke

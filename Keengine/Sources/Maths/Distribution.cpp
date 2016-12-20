@@ -42,6 +42,14 @@ Distribution<sf::Vector2f> rect(const sf::Vector2f& center, const sf::Vector2f& 
     });
 }
 
+Distribution<sf::Vector2f> rect(const sf::FloatRect& rect)
+{
+	return Distribution<sf::Vector2f>([=]() -> sf::Vector2f
+	{
+		return sf::Vector2f(rect.left + random(0.f, rect.width), rect.top + random(0.f, rect.height));
+	});
+}
+
 Distribution<sf::Vector2f> circle(const sf::Vector2f& center, float radius)
 {
     return Distribution<sf::Vector2f>([=] () -> sf::Vector2f
@@ -59,6 +67,25 @@ Distribution<sf::Vector2f> deflect(const sf::Vector2f& direction, float maxRotat
     {
         return rotated(direction, randomDev(0.f, maxRotation));
     });
+}
+
+Distribution<sf::Vector2f> project(const sf::Vector2f& direction, float maxRotation, float minVel, float maxVel)
+{
+	return Distribution<sf::Vector2f>([=]() -> sf::Vector2f
+	{
+		return rotated(direction * random(minVel, maxVel), randomDev(0.f, maxRotation));
+	});
+}
+
+Distribution<sf::Color> colorGrade(const sf::Color& color, float min, float max)
+{
+	return Distribution<sf::Color>([=]() -> sf::Color
+	{
+		float r = color.r * random(min, max);
+		float g = color.g * random(min, max);
+		float b = color.b * random(min, max);
+		return sf::Color(static_cast<unsigned int>(r), static_cast<unsigned int>(g), static_cast<unsigned int>(b));
+	});
 }
 
 } // namespace Distributions

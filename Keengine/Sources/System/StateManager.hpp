@@ -15,8 +15,6 @@
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
 
-#include <TGUI/TGUI.hpp>
-
 namespace ke
 {
 
@@ -46,9 +44,6 @@ class State
 		void popState();
 		void pushState(std::string const& state);
 		void clearStates();
-
-	protected:
-		tgui::Gui mGui;
 };
 
 class StateManager

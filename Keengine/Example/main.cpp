@@ -63,8 +63,8 @@ int main(int argc, char** argv)
 	sf::View defaultView(sf::FloatRect(0.f, 0.f, 800.f, 600.f));
 
 	sf::Vector2f ratio;
-	ratio.x = static_cast<float>(window.getDefaultView().getSize().x) / defaultView.getSize().x;
-	ratio.y = static_cast<float>(window.getDefaultView().getSize().y) / defaultView.getSize().y;
+	ratio.x = static_cast<float>(window.getMainView().getSize().x) / defaultView.getSize().x;
+	ratio.y = static_cast<float>(window.getMainView().getSize().y) / defaultView.getSize().y;
 
 	if (ke::isWindows())
 	{
@@ -81,14 +81,6 @@ int main(int argc, char** argv)
 	joystick.setDeltaMax(20.f);
 	joystick.blockVertical(true);
 
-	tgui::Gui gui(window.getHandle());
-	ke::Theme& theme = ke::Application::getResource<ke::Theme>("css", ke::Application::getAssetsPath() + "widgets.css");
-	tgui::Button::Ptr button = theme.create("Button");
-	button->setText("Jump");
-	button->setPosition(sf::Vector2f(100.f * ratio.x, 100.f * ratio.y));
-	button->setSize(sf::Vector2f(200.f * ratio.x, 200.f * ratio.y));
-	gui.add(button);
-
 	ke::Scene scene(ke::Scene::Physic);
 	scene.getPhysic()->setGravity();
 	scene.getPhysic()->setPixelsPerMeter(32.f);
@@ -102,11 +94,6 @@ int main(int argc, char** argv)
 	ground->setPosition(0.f, 500.f);
 	ground->setSize(800, 600);
 
-	button->connect("pressed", [&]()
-	{
-		actor->desiredImpulseY(-240.f);
-	});
-
 	ke::Application::setEventFunction([&](const sf::Event& event)
 	{
 		if (event.type == sf::Event::TouchBegan && event.touch.finger == 2)
@@ -115,7 +102,6 @@ int main(int argc, char** argv)
 		}
 
 		joystick.handleEvent(event, window.getPointerPositionView(defaultView));
-		gui.handleEvent(event);
 	});
 	ke::Application::setUpdateFunction([&](sf::Time dt)
 	{
@@ -124,14 +110,12 @@ int main(int argc, char** argv)
 			actor->setVelocityX(joystick.getDelta().x * 8);
 		}
 		scene.update(dt);
-		gui.updateTime(dt);
 	});
 	ke::Application::setRenderFunction([&](sf::RenderTarget& target)
 	{
 		scene.render(target);
 		target.setView(defaultView);
 		joystick.render(target);
-		gui.draw();
 	});
 	ke::Application::runDefault();
 

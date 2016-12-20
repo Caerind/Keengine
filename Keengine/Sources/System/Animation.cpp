@@ -2,6 +2,8 @@
 
 #include "String.hpp"
 
+#include "../ExtLibs/fast_dynamic_cast.hpp"
+
 namespace ke
 {
 
@@ -85,7 +87,7 @@ void Animation::readFromXml(ResourceManager* manager, const pugi::xml_node& node
 
 void Animation::writeToXml(Resource* resource, pugi::xml_node& node)
 {
-	Animation* animation = dynamic_cast<Animation*>(resource);
+	Animation* animation = fast_dynamic_cast<Animation*>(resource);
 	if (animation != nullptr)
 	{
 		for (const auto& frame : animation->mFrames)

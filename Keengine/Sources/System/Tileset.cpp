@@ -1,5 +1,7 @@
 #include "Tileset.hpp"
 
+#include "../ExtLibs/fast_dynamic_cast.hpp"
+
 namespace ke
 {
 
@@ -342,7 +344,7 @@ void Tileset::readFromXml(ResourceManager* manager, const pugi::xml_node& node)
 
 void Tileset::writeToXml(Resource* resource, pugi::xml_node& node)
 {
-	Tileset* tileset = dynamic_cast<Tileset*>(resource);
+	Tileset* tileset = fast_dynamic_cast<Tileset*>(resource);
 	if (tileset != nullptr)
 	{
 		node.append_attribute("firstgid") = tileset->mFirstGid;

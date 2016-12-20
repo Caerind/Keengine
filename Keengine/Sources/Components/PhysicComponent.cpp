@@ -3,6 +3,8 @@
 #include "../Core/Actor.hpp"
 #include "../Core/PhysicSystem.hpp"
 
+#include "../ExtLibs/fast_dynamic_cast.hpp"
+
 namespace ke
 {
 
@@ -172,7 +174,7 @@ b2PolygonShape* PhysicComponent::getPolygonShape()
 {
 	if (mFixture != nullptr)
 	{
-		return dynamic_cast<b2PolygonShape*>(mFixture->GetShape());
+		return fast_dynamic_cast<b2PolygonShape*>(mFixture->GetShape());
 	}
 	return nullptr;
 }

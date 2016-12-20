@@ -12,7 +12,6 @@
 #include "../Config.hpp"
 
 #include <SFML/Graphics.hpp>
-#include <TGUI/TGUI.hpp>
 
 #include "Log.hpp"
 #include "DateTime.hpp"
@@ -22,7 +21,6 @@
 #include "SfmlResources.hpp"
 #include "Animation.hpp"
 #include "Configuration.hpp"
-#include "Theme.hpp"
 #include "Tileset.hpp"
 
 namespace ke
@@ -57,6 +55,8 @@ class Application
 		static PropertiesHolder& getValues();
 		static TimeSystem& getTime();
 		static InputSystem& getInputs();
+
+		static std::string getDataPath();
 
         //
         // Audio
@@ -103,8 +103,6 @@ class Application
         static void popState();
         static void clearStates();
         static std::size_t stateCount();
-		template <typename T>
-		static std::shared_ptr<T> getActualState();
 
 		//
 		// Lang
@@ -150,12 +148,6 @@ template <typename T, typename ... Args>
 T& Application::getResource(const std::string& name, Args&& ... args)
 {
     return instance().mResources.getResource<T>(name, std::forward<Args>(args)...);
-}
-
-template <typename T>
-std::shared_ptr<T> Application::getActualState()
-{
-	return instance().mStates.getActualTypedState<T>();
 }
 
 template <typename T>

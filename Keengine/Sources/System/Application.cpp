@@ -1,5 +1,11 @@
 #include "Application.hpp"
 
+#ifdef SFML_SYSTEM_ANDROID
+#include <jni.h>
+#include <android/native_activity.h>
+#include <SFML/System/NativeActivity.hpp>
+#endif
+
 namespace ke
 {
 
@@ -13,7 +19,7 @@ void Application::init()
 
 		instance().mOpen = true;
 
-		Log::info("Keengine::Application started");
+		Log::info("Keengine::Application started (Desktop : " + Variant(sf::VideoMode::getDesktopMode().width, "x", sf::VideoMode::getDesktopMode().height, ")"));
 		Log::info("Current time is " + DateTime().toString("%b %d, %Y %I:%M:%S %p"));
 	}
 }
@@ -184,6 +190,15 @@ TimeSystem& Application::getTime()
 InputSystem& Application::getInputs()
 {
 	return instance().mInputs;
+}
+
+std::string Application::getDataPath()
+{
+	#ifdef SFML_SYSTEM_ANDROID
+		return std::string(sf::getNativeActivity()->internalDataPath) + "/";
+	#else
+		return "";
+	#endif
 }
 
 void Application::registerMusicFile(std::string const& id, std::string const& filename)
@@ -360,7 +375,6 @@ Application::Application()
 	SfmlResources::registerResources(mResources);
 	Animation::registerType(mResources);
 	Configuration::registerType(mResources);
-	Theme::registerType(mResources);
 	Tileset::registerType(mResources);
 }
 

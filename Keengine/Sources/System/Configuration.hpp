@@ -6,11 +6,10 @@
 #include <unordered_map>
 
 #include "ResourceManager.hpp"
+#include "Variant.hpp"
 
 namespace ke
 {
-
-// TODO : Maybe use Variant ?
 
 class Configuration : public Resource
 {
@@ -27,8 +26,11 @@ class Configuration : public Resource
 
 		const std::string& getFilename();
 
-		void setProperty(const std::string& id, const std::string& value);
+		template <typename T>
+		void setProperty(const std::string& id, const T& value);
 		std::string getProperty(const std::string& id) const;
+		template <typename T>
+		T getPropertyAs(const std::string& id) const;
 
 		static void readFromXml(ResourceManager* manager, const pugi::xml_node& node);
 		static void writeToXml(Resource* resource, pugi::xml_node& node);
@@ -36,8 +38,39 @@ class Configuration : public Resource
 
 	private:
 		std::string mFilename;
-		std::unordered_map<std::string, std::string> mProperties;
+		std::vector<std::pair<std::string, Variant>> mProperties;
 };
+
+template<typename T>
+inline void Configuration::setProperty(const std::string& id, const T& value)
+{
+	bool found = false;
+	for (std::size_t i = 0; i < mProperties.size(); i++)
+	{
+		if (!found && mProperties[i].first == id)
+		{
+			mProperties[i].second = Variant(value);
+			found = true;
+		}
+	}
+	if (!found)
+	{
+		mProperties.push_back(std::pair<std::string, Variant>(id, Variant(value)));
+	}
+}
+
+template<typename T>
+inline T Configuration::getPropertyAs(const std::string& id) const
+{
+	for (std::size_t i = 0; i < mProperties.size(); i++)
+	{
+		if (mProperties[i].first == id)
+		{
+			return mProperties[i].second.as<T>();
+		}
+	}
+	return T();
+}
 
 } // namespace ke
 

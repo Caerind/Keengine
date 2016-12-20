@@ -82,8 +82,9 @@ class Log
 				time = *localtime(&t);
 			#endif
 			mktime(&time);
-			std::ostringstream dateStream;
-			dateStream << std::put_time(&time, "%d-%m-%Y %H-%M-%S");
+			
+			char buffer[30];
+			strftime(buffer, 30, "%d-%m-%Y %H-%M-%S", &time);
 			
 			// Get type
 			std::string typeString;
@@ -118,7 +119,7 @@ class Log
 			// File
 			if (instance().mUseFile && instance().mFile.is_open())
 			{
-				instance().mFile << "[" + dateStream.str() + "][" + typeString + "]: " + message << std::endl;
+				instance().mFile << "[" + std::string(buffer) + "][" + typeString + "]: " + message << std::endl;
 			}
 			
 			// Online

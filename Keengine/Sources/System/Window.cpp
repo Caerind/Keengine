@@ -3,108 +3,17 @@
 namespace ke
 {
 
-Window::Window() : mWindow(*this)
+Window::Window()
+	: mWindow(*this)
 {
-	// Init render window
-	mTitle = "";
-	mVisible = false;
-	mVerticalSyncEnabled = false;
-	mKeyRepeatEnabled = true;
-	mJoystickThreshold = 0.1f;
-	mMouseCursorGrabbed = false;
-	mSettings = sf::ContextSettings();
-	mFullscreen = false;
-	mFullscreenVideoMode = sf::VideoMode();
-	mNonFullscreenVideoMode = sf::VideoMode();
-	mNonFullscreenStyle = sf::Style::Close;
-	mIconPath = "";
+	init();
+}
 
-	// Init mouse cursor
-	mMouseCursor = MouseCursor::Default;
-	mMouseCursorTexture = nullptr;
-	mMouseCursorTextureCreated = false;
-	mMouseCursorTextureData = "";
-
-	// Init screenshot
-	mScreenshotPath = "";
-
-	// Init background
-	mBackgroundUsage = BackgroundUsage::Color;
-	mBackgroundColor = sf::Color(0, 0, 0, 255);
-	mBackgroundTexture = nullptr;
-	mBackgroundTextureCreated = false;
-	mBackgroundTextureData = "";
-
-	// Init console
-	mConsoleVisible = false;
-	mConsoleFont = nullptr;
-	mConsoleFontCreated = false;
-	mConsoleFontData = "";
-	mConsoleBackground.setFillColor(sf::Color(32, 32, 32, 192));
-	mConsoleBackground.setSize(sf::Vector2f(mConsoleBackground.getSize().x, 15.f + 10.f));
-	mConsoleBackground.setOrigin(0.f, 15.f + 10.f);
-	mConsoleText.setFillColor(sf::Color::White);
-	mConsoleText.setCharacterSize(15);
-	mConsoleText.setOrigin(0.f, 15.f);
-	setConsoleCommand("help", [this](const CommandArgs& args)
-	{
-		for (std::size_t i = 0; i < mConsoleCommands.size(); i++)
-		{
-			addConsoleLine(mConsoleCommands[i].name + " : " + mConsoleCommands[i].help);
-		}
-	}, "Display informations about commands", "Usage : help");
-	setConsoleCommand("man", [this](const CommandArgs& args)
-	{
-		if (args.argsCount() >= 1)
-		{
-			std::string cmd = args[0];
-			for (std::size_t i = 0; i < mConsoleCommands.size(); i++)
-			{
-				if (mConsoleCommands[i].name == cmd)
-				{
-					addConsoleLine(cmd + "\n" + mConsoleCommands[i].help + "\n" + mConsoleCommands[i].man);
-				}
-			}
-		}
-	}, "Display the manual of a command", "Usage : man commandName");
-	mConsoleDisplayBegin = 0;
-	mConsoleDisplayLineHeight = 0.f;
-	mConsoleDisplayBackground.setFillColor(sf::Color(32, 32, 32, 128));
-	mConsoleDisplayText.setCharacterSize(15);
-	mConsoleDisplayText.setOrigin(sf::Vector2f(-5.f, -5.f));
-	addConsoleLine("Console launched, type \"help\" to display the list of commands");
-
-	// Init debug info
-	mDebugInfoVisible = false;
-	mDebugInfoFont = nullptr;
-	mDebugInfoFontCreated = false;
-	mDebugInfoFontData = "";
-	mDebugInfoText.setPosition(5.f, 5.f);
-	mDebugInfoText.setFillColor(sf::Color::White);
-	mDebugInfoText.setOutlineColor(sf::Color::Black);
-	mDebugInfoText.setOutlineThickness(1.f);
-	mDebugInfoText.setCharacterSize(12);
-
-	// Init FPS Counter
-	mFpsCounter = 0;
-	mLastFpsCounter = 0;
-	setDebugInfo("FPS", "0");
-	setDebugInfo("Mouse", "0,0");
-
-	// Init callback
-	mResizeCallback = [](const sf::Vector2u& size) {};
-	mErrorCallback = [](const std::string& message) { std::cout << "[ERROR] " << message << std::endl; };
-	mWarningCallback = [](const std::string& message) { std::cout << "[WARNING] " << message << std::endl; };
-	mInfoCallback = [](const std::string& message) { std::cout << "[INFO] " << message << std::endl; };
-	mLostFocusCallback = [](){};
-	mGainedFocusCallback = [](){};
-	mCloseCallback = []() { return true; };
-
-	// Init actions
-	for (unsigned int i = 0; i < Action::Count; i++)
-	{
-		mActions[i] = sf::Keyboard::Unknown;
-	}
+Window::Window(sf::VideoMode mode, const std::string& title, sf::Uint32 style, const sf::ContextSettings& settings)
+	: mWindow(*this)
+{
+	init();
+	create(mode, title, style, settings);
 }
 
 Window::~Window()
@@ -155,7 +64,7 @@ void Window::create(sf::VideoMode mode, const std::string& title, sf::Uint32 sty
 				{
 					mErrorCallback("Window : Invalid video mode");
 				}
-				mNonFullscreenVideoMode = sf::VideoMode();
+				mNonFullscreenVideoMode = sf::VideoMode::getDesktopMode();
 			}
 		}
 		mTitle = title;
@@ -212,16 +121,12 @@ void Window::toggleFullscreen()
 
 void Window::close()
 {
-	bool c = true;
 	if (mCloseCallback)
 	{
-		c = mCloseCallback();
+		mCloseCallback();
 	}
-	if (c)
-	{
-		mVisible = false;
-		mWindow.close();
-	}
+	mVisible = false;
+	mWindow.close();
 }
 
 bool Window::isFullscreen() const
@@ -465,14 +370,15 @@ void Window::display()
 	if (isDebugInfoVisible() || mMouseCursor == MouseCursor::Custom || isConsoleVisible())
 	{
 		sf::View oldView = mWindow.getView();
-		applyDefaultView();
+		
+		applyMainView();
 
 		if (isDebugInfoVisible())
 		{
 			std::ostringstream oss;
-			for (auto itr = mDebugInfo.begin(); itr != mDebugInfo.end(); itr++)
+			for (std::size_t i = 0; i < mDebugInfo.size(); i++)
 			{
-				oss << itr->first << ": " << itr->second << std::endl;
+				oss << mDebugInfo[i].name << " : " << mDebugInfo[i].info << std::endl;
 			}
 			mDebugInfoText.setString(oss.str());
 			mWindow.draw(mDebugInfoText);
@@ -538,19 +444,24 @@ void Window::setView(const sf::View& view)
 	mWindow.setView(view);
 }
 
-void Window::applyDefaultView()
-{
-	mWindow.setView(sf::View(sf::FloatRect(0.f, 0.f, static_cast<float>(mWindow.getSize().x), static_cast<float>(mWindow.getSize().y))));
-}
-
 const sf::View& Window::getView() const
 {
 	return mWindow.getView();
 }
 
-const sf::View& Window::getDefaultView() const
+void Window::setMainView(const sf::View& view)
 {
-	return mWindow.getDefaultView();
+	mMainView = view;
+}
+
+const sf::View& Window::getMainView() const
+{
+	return mMainView;
+}
+
+void Window::applyMainView()
+{
+	mWindow.setView(mMainView);
 }
 
 sf::IntRect Window::getViewport(const sf::View& view) const
@@ -793,18 +704,18 @@ void Window::screenshot()
 	#endif
 	mktime(&time);
 
-	std::ostringstream oss;
-	oss << mScreenshotPath << std::put_time(&time, "%Y-%m-%d_%H-%M-%S") << ".png";
+	char buffer[30];
+	strftime(buffer, 30, "%Y-%m-%d_%H-%M-%S", &time);
 
 	if (mInfoCallback)
 	{
-		mInfoCallback("Screenshot : " + oss.str());
+		mInfoCallback("Screenshot : " + std::string(buffer));
 	}
 
 	sf::Texture texture;
 	texture.create(getSize().x, getSize().y);
 	texture.update(mWindow);
-	texture.copyToImage().saveToFile(oss.str());
+	texture.copyToImage().saveToFile(std::string(buffer));
 }
 
 const std::string& Window::getScreenshotPath() const
@@ -1078,6 +989,10 @@ void Window::setConsoleFont(const std::string& font)
 	{
 		mConsoleFontData = font;
 		mConsoleText.setFont(*mConsoleFont);
+		mConsoleDisplayText.setFont(*mConsoleFont);
+		mConsoleDisplayText.setString("AZERTYUIOPQSDFGHJKLMWXCVBN");
+		mConsoleDisplayLineHeight = mConsoleDisplayText.getGlobalBounds().height;
+		mConsoleDisplayText.setString("");
 	}
 	else
 	{
@@ -1165,9 +1080,7 @@ void Window::useConsoleCommand(const std::string& name, const std::string& args)
 	{
 		if (mConsoleCommands[i].name == name && mConsoleCommands[i].command)
 		{
-			CommandArgs commandArgs;
-			commandArgs.parse(args);
-			mConsoleCommands[i].command(commandArgs);
+			mConsoleCommands[i].command(CommandArgs(args));
 		}
 	}
 }
@@ -1256,15 +1169,34 @@ unsigned int Window::getDebugInfoCharacterSize() const
 
 void Window::setDebugInfo(const std::string& id, const std::string& value)
 {
-	mDebugInfo[id] = value;
+	bool found = false;
+	for (std::size_t i = 0; i < mDebugInfo.size() && !found; i++)
+	{
+		if (mDebugInfo[i].name == id)
+		{
+			found = true;
+			mDebugInfo[i].info = value;
+		}
+	}
+	if (!found)
+	{
+		mDebugInfo.push_back(Info());
+		mDebugInfo.back().name = id;
+		mDebugInfo.back().info = value;
+	}
 }
 
 void Window::removeDebugInfo(const std::string& id)
 {
-	auto itr = mDebugInfo.find(id);
-	if (itr != mDebugInfo.end())
+	std::size_t size = mDebugInfo.size();
+	for (std::size_t i = 0; i < size; i++)
 	{
-		mDebugInfo.erase(itr);
+		if (mDebugInfo[i].name == id)
+		{
+			mDebugInfo.erase(mDebugInfo.begin() + i);
+			i--;
+			size--;
+		}
 	}
 }
 
@@ -1303,7 +1235,7 @@ void Window::setGainedFocusCallback(std::function<void()> gainedFocusCallback)
 	mGainedFocusCallback = gainedFocusCallback;
 }
 
-void Window::setCloseCallback(std::function<bool()> closeCallback)
+void Window::setCloseCallback(std::function<void()> closeCallback)
 {
 	mCloseCallback = closeCallback;
 }
@@ -1320,7 +1252,7 @@ sf::Keyboard::Key Window::getAction(Action action) const
 {
 	if (action >= 0 && action < Action::Count)
 	{
-		return mActions.at(action);
+		return mActions[action];
 	}
 	return sf::Keyboard::Unknown;
 }
@@ -1328,6 +1260,111 @@ sf::Keyboard::Key Window::getAction(Action action) const
 sf::RenderWindow& Window::getHandle()
 {
 	return mWindow;
+}
+
+void Window::init()
+{
+	// Init render window
+	mTitle = "";
+	mVisible = false;
+	mVerticalSyncEnabled = false;
+	mKeyRepeatEnabled = true;
+	mJoystickThreshold = 0.1f;
+	mMouseCursorGrabbed = false;
+	mSettings = sf::ContextSettings();
+	mFullscreen = false;
+	mFullscreenVideoMode = sf::VideoMode::getFullscreenModes()[0];
+	mNonFullscreenVideoMode = sf::VideoMode::getDesktopMode();
+	mNonFullscreenStyle = sf::Style::Close;
+	mMainView = sf::View(sf::FloatRect(0.f, 0.f, float(sf::VideoMode::getDesktopMode().width), float(sf::VideoMode::getDesktopMode().height)));
+	mIconPath = "";
+
+	// Init mouse cursor
+	mMouseCursor = MouseCursor::Default;
+	mMouseCursorTexture = nullptr;
+	mMouseCursorTextureCreated = false;
+	mMouseCursorTextureData = "";
+
+	// Init screenshot
+	mScreenshotPath = "";
+
+	// Init background
+	mBackgroundUsage = BackgroundUsage::Color;
+	mBackgroundColor = sf::Color(0, 0, 0, 255);
+	mBackgroundTexture = nullptr;
+	mBackgroundTextureCreated = false;
+	mBackgroundTextureData = "";
+
+	// Init console
+	mConsoleVisible = false;
+	mConsoleFont = nullptr;
+	mConsoleFontCreated = false;
+	mConsoleFontData = "";
+	mConsoleBackground.setFillColor(sf::Color(32, 32, 32, 192));
+	mConsoleBackground.setSize(sf::Vector2f(mConsoleBackground.getSize().x, 15.f + 10.f));
+	mConsoleBackground.setOrigin(0.f, 15.f + 10.f);
+	mConsoleText.setFillColor(sf::Color::White);
+	mConsoleText.setCharacterSize(15);
+	mConsoleText.setOrigin(0.f, 15.f);
+	setConsoleCommand("help", [this](const CommandArgs& args)
+	{
+		for (std::size_t i = 0; i < mConsoleCommands.size(); i++)
+		{
+			addConsoleLine(mConsoleCommands[i].name + " : " + mConsoleCommands[i].help);
+		}
+	}, "Display informations about commands", "Usage : help");
+	setConsoleCommand("man", [this](const CommandArgs& args)
+	{
+		if (args.argsCount() >= 1)
+		{
+			std::string cmd = args[0];
+			for (std::size_t i = 0; i < mConsoleCommands.size(); i++)
+			{
+				if (mConsoleCommands[i].name == cmd)
+				{
+					addConsoleLine(cmd + "\n" + mConsoleCommands[i].help + "\n" + mConsoleCommands[i].man);
+				}
+			}
+		}
+	}, "Display the manual of a command", "Usage : man commandName");
+	mConsoleDisplayBegin = 0;
+	mConsoleDisplayLineHeight = 0.f;
+	mConsoleDisplayBackground.setFillColor(sf::Color(32, 32, 32, 128));
+	mConsoleDisplayText.setCharacterSize(15);
+	mConsoleDisplayText.setOrigin(sf::Vector2f(-5.f, -5.f));
+	addConsoleLine("Console launched, type \"help\" to display the list of commands");
+
+	// Init debug info
+	mDebugInfoVisible = false;
+	mDebugInfoFont = nullptr;
+	mDebugInfoFontCreated = false;
+	mDebugInfoFontData = "";
+	mDebugInfoText.setPosition(5.f, 5.f);
+	mDebugInfoText.setFillColor(sf::Color::White);
+	mDebugInfoText.setOutlineColor(sf::Color::Black);
+	mDebugInfoText.setOutlineThickness(1.f);
+	mDebugInfoText.setCharacterSize(12);
+
+	// Init FPS Counter
+	mFpsCounter = 0;
+	mLastFpsCounter = 0;
+	setDebugInfo("FPS", "0");
+	setDebugInfo("Mouse", "0,0");
+
+	// Init callback
+	mResizeCallback = [](const sf::Vector2u& size) {};
+	mErrorCallback = [](const std::string& message) { std::cout << "[ERROR] " << message << std::endl; };
+	mWarningCallback = [](const std::string& message) { std::cout << "[WARNING] " << message << std::endl; };
+	mInfoCallback = [](const std::string& message) { std::cout << "[INFO] " << message << std::endl; };
+	mLostFocusCallback = []() {};
+	mGainedFocusCallback = []() {};
+	mCloseCallback = []() {};
+
+	// Init actions
+	for (unsigned int i = 0; i < Action::Count; i++)
+	{
+		mActions[i] = sf::Keyboard::Unknown;
+	}
 }
 
 void Window::onResize()
@@ -1349,34 +1386,25 @@ void Window::onResize()
 
 bool Window::pollEvent(sf::Event& event)
 {
-	bool ok = true;
-	bool ret = false;
-	do
+	if (mWindow.pollEvent(event))
 	{
-		ok = true;
-		ret = mWindow.pollEvent(event);
-		if (ret)
-		{
-			if (handleInternalEvent(event))
-			{
-				ok = false;
-			}
-		}
-	} while (!ok);
-	return ret;
+		handleInternalEvent(event);
+		return true;
+	}
+	return false;
 }
 
 bool Window::waitEvent(sf::Event& event)
 {
-	bool ret = mWindow.waitEvent(event);
-	if (ret && handleInternalEvent(event))
+	if (mWindow.waitEvent(event))
 	{
-		return false;
+		handleInternalEvent(event);
+		return true;
 	}
-	return ret;
+	return false;
 }
 
-bool Window::handleInternalEvent(const sf::Event& event)
+void Window::handleInternalEvent(const sf::Event& event)
 {
 	// Close
 	if (event.type == sf::Event::Closed)
@@ -1396,33 +1424,37 @@ bool Window::handleInternalEvent(const sf::Event& event)
 		mGainedFocusCallback();
 	}
 
-	bool action = false;
+	// Console
 	if (event.type == sf::Event::KeyPressed && event.key.code == mActions[Action::Console] && mActions[Action::Console] != sf::Keyboard::Unknown)
 	{
 		mConsoleVisible = !mConsoleVisible;
-		action = true;
 	}
+
+	// Screenshot
+	if (event.type == sf::Event::KeyPressed && event.key.code == mActions[Action::Screenshot] && mActions[Action::Screenshot] != sf::Keyboard::Unknown)
+	{
+		screenshot();
+	}
+
+	// DebugInfo
 	if (event.type == sf::Event::KeyPressed && event.key.code == mActions[Action::DebugInfo] && mActions[Action::DebugInfo] != sf::Keyboard::Unknown)
 	{
 		mDebugInfoVisible = !mDebugInfoVisible;
-		action = true;
 	}
+
+	// Quit
 	if (event.type == sf::Event::KeyPressed && event.key.code == mActions[Action::Quit] && mActions[Action::Quit] != sf::Keyboard::Unknown)
 	{
 		close();
-		action = true;
 	}
+
+	// Fullscreen
 	if (event.type == sf::Event::KeyPressed && event.key.code == mActions[Action::Fullscreen] && mActions[Action::Fullscreen] != sf::Keyboard::Unknown)
 	{
 		toggleFullscreen();
-		action = true;
 	}
 
-	if (action)
-	{
-		return true;
-	}
-
+	// If the console is visible
 	if (isConsoleVisible())
 	{
 		// MouseWheelScrolled on console
@@ -1447,7 +1479,6 @@ bool Window::handleInternalEvent(const sf::Event& event)
 			if (mConsoleContentAfter.size() >= 1)
 			{
 				mConsoleContentAfter.erase(mConsoleContentAfter.begin());
-				return true;
 			}
 		}
 		else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left)
@@ -1456,7 +1487,6 @@ bool Window::handleInternalEvent(const sf::Event& event)
 			{
 				mConsoleContentAfter.insert(mConsoleContentAfter.begin(), mConsoleContentBefore.back());
 				mConsoleContentBefore.pop_back();
-				return true;
 			}
 		}
 		else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right)
@@ -1465,7 +1495,6 @@ bool Window::handleInternalEvent(const sf::Event& event)
 			{
 				mConsoleContentBefore += mConsoleContentAfter[0];
 				mConsoleContentAfter.erase(mConsoleContentAfter.begin());
-				return true;
 			}
 		}
 		else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return)
@@ -1482,7 +1511,6 @@ bool Window::handleInternalEvent(const sf::Event& event)
 				command = command.substr(0, found);
 			}
 			useConsoleCommand(command, args);
-			return true;
 		}
 		else if (event.type == sf::Event::TextEntered && event.text.unicode < 128 && event.text.unicode != 13)
 		{
@@ -1495,7 +1523,6 @@ bool Window::handleInternalEvent(const sf::Event& event)
 					if (mConsoleContentBefore.size() >= 1)
 					{
 						mConsoleContentBefore.pop_back();
-						return true;
 					}
 				} break;
 
@@ -1505,10 +1532,7 @@ bool Window::handleInternalEvent(const sf::Event& event)
 				} break;
 			}
 		}
-
-		
 	}
-	return false;
 }
 
 Window::RWindow::RWindow(ke::Window& handle) : mHandle(handle)

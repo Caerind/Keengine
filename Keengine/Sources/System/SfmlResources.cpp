@@ -1,5 +1,7 @@
 #include "SfmlResources.hpp"
 
+#include "../ExtLibs/fast_dynamic_cast.hpp"
+
 namespace ke
 {
 
@@ -74,7 +76,7 @@ void Image::readFromXml(ResourceManager* manager, const pugi::xml_node& node)
 
 void Image::writeToXml(Resource* resource, pugi::xml_node& node)
 {
-	Image* image = dynamic_cast<Image*>(resource);
+	Image* image = fast_dynamic_cast<Image*>(resource);
 	if (image != nullptr)
 	{
 		if (image->getFilename() != "")
@@ -155,7 +157,7 @@ void Texture::readFromXml(ResourceManager* manager, const pugi::xml_node& node)
 
 void Texture::writeToXml(Resource* resource, pugi::xml_node& node)
 {
-	Texture* texture = dynamic_cast<Texture*>(resource);
+	Texture* texture = fast_dynamic_cast<Texture*>(resource);
 	if (texture != nullptr)
 	{
 		if (texture->getFilename() != "")
@@ -228,7 +230,7 @@ void Font::readFromXml(ResourceManager* manager, const pugi::xml_node& node)
 
 void Font::writeToXml(Resource* resource, pugi::xml_node& node)
 {
-	Font* font = dynamic_cast<Font*>(resource);
+	Font* font = fast_dynamic_cast<Font*>(resource);
 	if (font != nullptr)
 	{
 		if (font->getFilename() != "")
@@ -309,7 +311,7 @@ void SoundBuffer::readFromXml(ResourceManager* manager, const pugi::xml_node& no
 
 void SoundBuffer::writeToXml(Resource* resource, pugi::xml_node& node)
 {
-	SoundBuffer* soundBuffer = dynamic_cast<SoundBuffer*>(resource);
+	SoundBuffer* soundBuffer = fast_dynamic_cast<SoundBuffer*>(resource);
 	if (soundBuffer != nullptr)
 	{
 		if (soundBuffer->getFilename() != "")
@@ -514,7 +516,7 @@ void Shader::readFromXml(ResourceManager* manager, const pugi::xml_node& node)
 
 void Shader::writeToXml(Resource* resource, pugi::xml_node& node)
 {
-	Shader* shader = dynamic_cast<Shader*>(resource);
+	Shader* shader = fast_dynamic_cast<Shader*>(resource);
 	if (shader != nullptr)
 	{
 		node.append_attribute("type") = shader->mType;
