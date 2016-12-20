@@ -363,7 +363,7 @@ std::string LayerComponent::getCode()
 			data.push_back((char)(id >> 24));
 		}
 	}
-	if (!compress(data))
+	if (!compress64(data))
 	{
 		return "";
 	}
@@ -380,7 +380,7 @@ bool LayerComponent::loadFromCode(std::string const& code)
 	std::stringstream ss;
 	ss << code;
 	ss >> data;
-	if (!decompress(data))
+	if (!decompress64(data))
 	{
 		return false;
 	}

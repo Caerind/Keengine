@@ -24,8 +24,6 @@
 //
 ////////////////////////////////////////////////////////////
 
-// TODO : Use mini-z
-
 #ifndef KE_COMPRESSION_HPP
 #define KE_COMPRESSION_HPP
 
@@ -34,8 +32,6 @@
 #include <sstream>
 #include <vector>
 #include <fstream>
-
-#include <zlib.h>
 
 #include "../ExtLibs/pugixml.hpp"
 
@@ -47,10 +43,13 @@ bool base64_decode(std::string& data);
 bool decompressString(std::string& data);
 bool compressString(std::string& data);
 
-bool compress(std::string& data);
-bool decompress(std::string& data);
+bool compress64(std::string& data);
+bool decompress64(std::string& data);
 
-bool is_valid_base64(unsigned char c);
+inline bool is_valid_base64(unsigned char c)
+{
+	return (isalnum(c) || (c == '+') || (c == '/'));
+}
 
 void loadCompressedXml(std::string const& filename, pugi::xml_document& doc);
 void saveCompressedXml(std::string const& filename, pugi::xml_document const& doc);

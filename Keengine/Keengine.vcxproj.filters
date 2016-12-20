@@ -126,9 +126,6 @@
     <ClCompile Include="Sources\System\ClockedTask.cpp">
       <Filter>Sources\System</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\ExtLibs\gzstream.cpp">
-      <Filter>Sources\ExtLibs</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Core\Effect.cpp">
       <Filter>Sources\Core</Filter>
     </ClCompile>
@@ -384,6 +381,9 @@
     <ClCompile Include="Sources\System\Tileset.cpp">
       <Filter>Sources\System</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\ExtLibs\miniz.c">
+      <Filter>Sources\ExtLibs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\MyActor.hpp">
@@ -460,9 +460,6 @@
     </ClInclude>
     <ClInclude Include="Sources\System\Packet.hpp">
       <Filter>Sources\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\ExtLibs\gzstream.hpp">
-      <Filter>Sources\ExtLibs</Filter>
     </ClInclude>
     <ClInclude Include="Sources\ExtLibs\assume.hpp">
       <Filter>Sources\ExtLibs</Filter>

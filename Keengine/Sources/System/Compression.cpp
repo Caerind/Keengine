@@ -1,5 +1,8 @@
 #include "Compression.hpp"
 
+#define MINIZ_HEADER_FILE_ONLY
+#include "../ExtLibs/miniz.c"
+
 namespace ke
 {
 
@@ -66,58 +69,58 @@ bool base64_decode(std::string& data)
 
 bool decompressString(std::string& data)
 {
-    z_stream zstream;
+    mz_stream zstream;
     std::string outstring;
-    zstream.zalloc = Z_NULL;
-    zstream.zfree = Z_NULL;
-    zstream.opaque = Z_NULL;
-    zstream.next_in = const_cast<Bytef*>(reinterpret_cast<const Bytef*>(data.data()));
+    zstream.zalloc = 0;
+    zstream.zfree = 0;
+    zstream.opaque = 0;
+    zstream.next_in = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(data.data()));
     zstream.avail_in = data.size();
     int result;
-    result = inflateInit2(&zstream, 15 + 32);
+    result = mz_inflateInit(&zstream);
 	char outbuffer[32768];
-    if (result != Z_OK)
+    if (result != MZ_OK)
     {
         return false;
     }
     do
     {
-        zstream.next_out = reinterpret_cast<Bytef*>(outbuffer);
+        zstream.next_out = reinterpret_cast<unsigned char*>(outbuffer);
         zstream.avail_out = sizeof(outbuffer);
-        result = inflate(&zstream, Z_SYNC_FLUSH);
+        result = mz_inflate(&zstream, MZ_SYNC_FLUSH);
         switch (result)
         {
-            case Z_NEED_DICT:
-            case Z_STREAM_ERROR:
-                result = Z_DATA_ERROR;
-            case Z_DATA_ERROR:
-            case Z_MEM_ERROR:
-                inflateEnd(&zstream);
+            case MZ_NEED_DICT:
+            case MZ_STREAM_ERROR:
+                result = MZ_DATA_ERROR;
+            case MZ_DATA_ERROR:
+            case MZ_MEM_ERROR:
+                mz_inflateEnd(&zstream);
                 return false;
         }
         if (outstring.size() < zstream.total_out)
         {
             outstring.append(outbuffer, zstream.total_out - outstring.size());
         }
-    } while (result != Z_STREAM_END);
+    } while (result != MZ_STREAM_END);
     if (zstream.avail_in != 0)
     {
         return false;
     }
-    inflateEnd(&zstream);
+    mz_inflateEnd(&zstream);
     data = outstring;
     return true;
 }
 
 bool compressString(std::string& data)
 {
-    z_stream zs; // z_stream is zlib's control structure
+    mz_stream zs; // z_stream is zlib's control structure
     memset(&zs, 0, sizeof(zs));
-    if (deflateInit(&zs, Z_BEST_COMPRESSION) != Z_OK)
+    if (mz_deflateInit(&zs, MZ_BEST_COMPRESSION) != MZ_OK)
     {
         return false;
     }
-    zs.next_in = (Bytef*)data.data();
+    zs.next_in = (unsigned char*)data.data();
     zs.avail_in = data.size(); // set the z_stream's input
     int ret;
     char outbuffer[32768];
@@ -125,17 +128,17 @@ bool compressString(std::string& data)
     // retrieve the compressed bytes blockwise
     do
     {
-        zs.next_out = reinterpret_cast<Bytef*>(outbuffer);
+        zs.next_out = reinterpret_cast<unsigned char*>(outbuffer);
         zs.avail_out = sizeof(outbuffer);
-        ret = deflate(&zs, Z_FINISH);
+        ret = mz_deflate(&zs, MZ_FINISH);
         if (outstring.size() < zs.total_out)
         {
             // append the block to the output string
             outstring.append(outbuffer, zs.total_out - outstring.size());
         }
-    } while (ret == Z_OK);
-    deflateEnd(&zs);
-    if (ret != Z_STREAM_END) // an error occurred that was not EOF
+    } while (ret == MZ_OK);
+    mz_deflateEnd(&zs);
+    if (ret != MZ_STREAM_END) // an error occurred that was not EOF
     {
         return false;
     }
@@ -143,7 +146,7 @@ bool compressString(std::string& data)
     return true;
 }
 
-bool compress(std::string& data)
+bool compress64(std::string& data)
 {
     std::string d = data;
     if (compressString(d))
@@ -157,7 +160,7 @@ bool compress(std::string& data)
     return false;
 }
 
-bool decompress(std::string& data)
+bool decompress64(std::string& data)
 {
     std::string d = data;
     if (base64_decode(d))
@@ -171,11 +174,6 @@ bool decompress(std::string& data)
     return false;
 }
 
-bool is_valid_base64(unsigned char c)
-{
-    return (isalnum(c) || (c == '+') || (c == '/'));
-}
-
 void loadCompressedXml(std::string const& filename, pugi::xml_document& doc)
 {
     std::ifstream iFile(filename);
@@ -185,7 +183,7 @@ void loadCompressedXml(std::string const& filename, pugi::xml_document& doc)
         std::string s;
         while (std::getline(iFile,s))
         {
-            decompress(s);
+            decompress64(s);
             oFile << s << std::endl;
         }
     }
@@ -208,7 +206,7 @@ void saveCompressedXml(std::string const& filename, pugi::xml_document const& do
         std::string s;
         while (std::getline(iFile,s))
         {
-            compress(s);
+            compress64(s);
             oFile << s << std::endl;
         }
     }

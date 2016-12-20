@@ -314,20 +314,20 @@ void Window::clear(const sf::Color& color)
 	{
 		mWindow.clear(color);
 
-		sf::Vector2i size = static_cast<sf::Vector2i>(mWindow.getView().getSize()) + sf::Vector2i(1, 1);
+		sf::Vector2i size = static_cast<sf::Vector2i>(getMainView().getSize()) + sf::Vector2i(1, 1);
 
 		if (mBackgroundUsage == BackgroundUsage::Scaled)
 		{
 			sf::Transform transform;
 			transform.scale(static_cast<float>(size.x) / mBackgroundSprite.getGlobalBounds().width, static_cast<float>(size.y) / mBackgroundSprite.getGlobalBounds().height);
-			transform.translate(mWindow.getView().getCenter() - mWindow.getView().getSize() * 0.5f);
+			transform.translate(getMainView().getCenter() - getMainView().getSize() * 0.5f);
 			
 			mWindow.draw(mBackgroundSprite, transform);
 		}
 		else
 		{
 			sf::Transform transform;
-			transform.translate(mWindow.getView().getCenter() - mWindow.getView().getSize() * 0.5f);
+			transform.translate(getMainView().getCenter() - getMainView().getSize() * 0.5f);
 
 			float width = mBackgroundSprite.getGlobalBounds().width;
 			float height = mBackgroundSprite.getGlobalBounds().height;

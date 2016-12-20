@@ -112,8 +112,8 @@
     <ClCompile Include="Sources\ExtLibs\Box2D\b2World.cpp" />
     <ClCompile Include="Sources\ExtLibs\Box2D\b2WorldCallbacks.cpp" />
     <ClCompile Include="Sources\ExtLibs\ConcaveShape.cpp" />
-    <ClCompile Include="Sources\ExtLibs\gzstream.cpp" />
     <ClCompile Include="Sources\ExtLibs\LetThereBeLight.cpp" />
+    <ClCompile Include="Sources\ExtLibs\miniz.c" />
     <ClCompile Include="Sources\ExtLibs\pugixml.cpp" />
     <ClCompile Include="Sources\Maths\Distribution.cpp" />
     <ClCompile Include="Sources\Maths\Random.cpp" />
@@ -223,7 +223,6 @@
     <ClInclude Include="Sources\ExtLibs\cocoa.hpp" />
     <ClInclude Include="Sources\ExtLibs\ConcaveShape.hpp" />
     <ClInclude Include="Sources\ExtLibs\fast_dynamic_cast.hpp" />
-    <ClInclude Include="Sources\ExtLibs\gzstream.hpp" />
     <ClInclude Include="Sources\ExtLibs\json.hpp" />
     <ClInclude Include="Sources\ExtLibs\LetThereBeLight.hpp" />
     <ClInclude Include="Sources\ExtLibs\pugixml.hpp" />
@@ -342,13 +341,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\C++\Lib\SFML-2.4.0-VC14\include;D:\C++\Lib\zlib-1.2.8\include;D:\C++\Lib\TGUI-0.7.1-VC14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++\Lib\SFML-2.4.0-VC14\include;D:\C++\Lib\TGUI-0.7.1-VC14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\C++\Lib\SFML-2.4.0-VC14\lib;D:\C++\Lib\zlib-1.2.8\lib;D:\C++\Lib\TGUI-0.7.1-VC14\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-main-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;tgui-d.lib;%(AdditionalDependencies);zdll.lib;opengl32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\C++\Lib\SFML-2.4.0-VC14\lib;D:\C++\Lib\TGUI-0.7.1-VC14\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;tgui-d.lib;%(AdditionalDependencies);opengl32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
